@@ -1,0 +1,55 @@
+<template>
+   <nav class="navbar navbar-expand-lg navbar-light bg-white osahan-nav-mid px-0 border-top shadow-sm">
+    <div class="container-fluid">
+       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            
+             <li class="nav-item" v-for="category in $store.getters.getCategories" :key="category.id">
+                <router-link @click="$store.commit('setCategorySlug',category.id)" class="nav-link" :to="'/gigs?category='+category.id">{{ category.title }}</router-link>
+             </li>  
+             
+
+               <!-- DropDown      -->
+             <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolio">
+                   <a class="dropdown-item" href="#">Music & Audio</a>
+                </div>
+             </li> -->
+
+     
+          </ul>
+       </div>
+       <ul class="navbar-nav ml-auto" >
+            <li class="nav-item">
+                <router-link class="btn btn-success" to="become_seller">
+                <i class="fa fa-fw fa-trophy"></i>
+                <span>Become A Seller</span>
+                </router-link>
+            </li>
+         
+          <!-- <li class="nav-item">
+             <a class="nav-link">
+             <img class="country-flag img-fluid" src="{{asset('assets/images/flag/india.png')}}">
+             <span>English</span>
+             </a>
+          </li> -->
+       </ul>
+    </div>
+ </nav>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
