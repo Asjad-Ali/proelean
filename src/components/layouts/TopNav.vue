@@ -142,12 +142,12 @@
                 <h6 class="dropdown-header d-flex align-items-center">
                    <img class="dropdown-user-img" src="/assets/images/user/s1.png">
                    <div class="dropdown-user-details">
-                      <div class="dropdown-user-details-name">{{ userInfo.username  }}</div>
+                      <router-link to="/profile"><div class="dropdown-user-details-name">{{ userInfo.username  }}</div></router-link>
                       <div class="dropdown-user-details-email">{{ userInfo.email  }}</div>
                    </div>
                 </h6>
                 <div class="dropdown-divider"></div>
-                <router-link class="dropdown-item" to="profile">
+                <router-link class="dropdown-item" to="/profile">
                    <div class="dropdown-item-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
                          <circle cx="12" cy="12" r="3"></circle>

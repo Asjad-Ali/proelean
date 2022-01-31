@@ -1,7 +1,7 @@
 <template>
   <div class="main-page second py-5">
     <div class="container">
-      <div class="row" v-if="!$store.getters.getUserServices.length">
+      <div class="row">
         <div class="col-lg-4 left">
           <div class="profile_info">
             <div class="seller-card">
@@ -167,7 +167,7 @@
           <h2>{{ user.username }}</h2>
           <div class="recommended">
 
-               <showServices />
+               <showServices  :services="$store.getters.getUserServices"/>
 
               <!-- <div class="col-md-4">
                 <div>
@@ -576,7 +576,7 @@ export default {
     store.dispatch("userServices");
 
     return{
-      user: computed(() => store.getters.getAuthUser)
+      user: computed(() => store.getters.getAuthUser),      
     }
   },
 };

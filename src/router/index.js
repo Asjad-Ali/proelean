@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import BecomeSeller from '../views/Become-Seller.vue'
-import UserProfile from '../views/User/profile.vue'
+import Profile from '../views/User/profile.vue'
 //import Gigs from '../views/gigs-list.vue'
 
 
@@ -31,8 +31,8 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'UserProfile',
-    component: UserProfile,
+    name: 'Profile',
+    component: Profile,
   
   },
   {

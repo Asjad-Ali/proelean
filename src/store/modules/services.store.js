@@ -3,13 +3,15 @@ import Api from '@/services/API'
 
 export const state = {
     userServices:[],
-    userServicesStatus: null,
+    services: [],
+    servicesStatus: null,
     error: null,
     categorySlug : null,
   }
 
 export const getters = {
   getUserServices : state => state.userServices,
+  getServices : state => state.services,
   getUserServicesStatus : state => state.userServicesStatus,
   getCategorySlug : state => state.categorySlug,
 }
@@ -18,6 +20,9 @@ export const  mutations = {
     setUserServices(state,services){
       state.userServices=services;
     },
+    setServices(state,services){
+      state.services=services;
+    },
     setError(state,error){
       state.error=error;
     },
@@ -25,21 +30,22 @@ export const  mutations = {
       state.categorySlug=slug;
     },
     
-    setUserServicesStatus(state,status){
-      state.userServicesStatus=status;
+    setServicesStatus(state,status){
+      state.servicesStatus=status;
     },
 
   }
 
 export const  actions = {
-    async searchUserServices(context,keywords)
+    async searchServices({ commit},keywords)
     {
       const res= await Api.get('search?q='+keywords);
-      console.log(res);
+      console.log(res); 
       if(res.status===200){
-        context.commit("setUserServices",res.data);
+        commit("setServicesStatus",true);
+        commit("setServices",res.data);
       } else {
-        // set error here
+        commit("setServicesStatus",false);
       }
     },
 
@@ -55,16 +61,16 @@ export const  actions = {
         }
       },
 
-    async searchUserServicesByCategoryId({commit},categoryID)
+    async searchServicesByCategoryId({commit},categoryID)
     {
       console.log("in action id",categoryID)
       const res= await Api.get(`categories/${categoryID}/services?category=${categoryID}`);
       if(res.status ===200){
-        commit("setUserServices",res.data);
-        commit("setUserServicesStatus",true);
+        commit("setServices",res.data);
+        commit("setServicesStatus",true);
         console.log("services",res);
       } else {
-        commit("setUserServicesStatus",false);
+        commit("setServicesStatus",false);
       }
     },
 }

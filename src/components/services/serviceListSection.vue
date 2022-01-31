@@ -21,14 +21,9 @@
                         <h3>Services In {{ $route.query.q }}</h3>
                      </div>
                   </div>
-                  <Suspense>
-                     <template #default>
-                        <ShowServices />
-                     </template>
-                     <template #fallback>
-                        <Loader />
-                     </template>
-                  </Suspense>
+                  
+                        <ShowServices :services="$store.getters.getServices"/>
+                   
 
                   <servicePagination />
                   
@@ -39,26 +34,17 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from '@vue/runtime-core';
-import Loader from '@/components/loadingComponent.vue';
 import serviceFilter from '@/components/services/serviceFilter';
 import servicePagination from '@/components/services/servicePagination';
 
 
-const ShowServices=defineAsyncComponent({
-   loader:() => import('@/components/services/showServices.vue'),
-   // loadingComponent: Loader,
-   delay: 600,
-   suspensible: false
-})
-
+import ShowServices from '@/components/services/showServices.vue';
 
 export default {
    components:{
       ShowServices,
       serviceFilter,
       servicePagination,
-      Loader
    },
 };
 
