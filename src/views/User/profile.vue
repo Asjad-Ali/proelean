@@ -12,6 +12,7 @@
 <script>
 import PersonalDetail from '@/components/profile/personalDetail.vue';
 import GigsDetail from '@/components/profile/gigsDetail.vue';
+import { useStore } from 'vuex';
 
 export default {
   components:{
@@ -19,8 +20,8 @@ export default {
     GigsDetail
   },
   setup() {
-    return{
-    }
+    const store = useStore();
+    store.dispatch("userServices");
   },
 };
 </script>
