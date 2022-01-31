@@ -2,8 +2,11 @@
   <div class="col-lg-8 right">
     <h2>{{ user.username }}</h2>
     <div class="recommended">
-      {{ $store.getters.getUserServices }}
-      <ShowServices :services="$store.getters.getUserServices" />
+      <div class="card h-100">
+        {{ $store.getters.getUserServices }}
+      </div>
+
+      <!-- <ShowServices :services="$store.getters.getUserServices" /> -->
     </div>
     <ReviewSection />
   </div>
@@ -12,13 +15,13 @@
 <script>
 import { computed } from "vue";
 import store from "../../store";
-import ShowServices from "@/components/services/showServices.vue";
+//import ShowServices from "@/components/services/showServices.vue";
 import ReviewSection from "./reviewSection.vue";
 
 export default {
   components: {
-    ShowServices,
-    ReviewSection
+    //  ShowServices,
+    ReviewSection,
   },
   setup() {
     store.dispatch("userServices");
