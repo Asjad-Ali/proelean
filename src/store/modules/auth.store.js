@@ -8,29 +8,17 @@ export const state = {
     loginStatus : 1,
     registerStatus : 1,
     user: JSON.parse(localStorage.getItem("userInfo"))
-    // user: {
-    //     id:'',
-    //     name:'',
-    //     username:'',
-    //     image:'',
-    //     isFreelancer:false,
-    //     created_at:'',
-    //     address:'',
-    //     phone:'',
-    //     email:'',
-    //     description:'',
-    //     total_reviews:0,
-    //     user_rating:0,
-    //     recent_delivery:'',
-    // }
   }
 
 export const  mutations = {
+  setRegisterStatus(state,status) {
+    state.registerStatus = status;
+  },
 
-    setError(state,error){
-      state.error=error;
-    },
-  }
+  setError(state,error) {
+    state.error=error;
+  },
+}
 
 export const  actions = {
     async login({commit},payload){
