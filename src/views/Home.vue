@@ -21,10 +21,6 @@ import ProjectByFreelancer from '@/components/home/ProjectByFreelancerSection.vu
 import Quotation from '@/components/home/QuotationSection.vue';
 import FindServices from '@/components/home/FindServicesSection.vue';
 
-import { onBeforeMount } from 'vue'
-import { useStore } from 'vuex'
-// import { ref } from '@vue/reactivity'
-
 export default {
   name: 'Home',
   components: {
@@ -37,21 +33,5 @@ export default {
     Quotation,
     FindServices
   },
-
-  setup(){
-      const store=useStore();
-      // const loader=ref(true);    
-
-      onBeforeMount(()=> {
-        if(! store.getters.getCategories.length){
-          store.dispatch("getHomeList");
-        }
-
-      });
-
-      return {
-        // loader,
-      }
-  }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
 <div class="py-5">
     <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-center">
         <main class="col-md-8">
             <form>
                 <div class="shadow-sm rounded bg-white mb-3">
@@ -17,12 +17,13 @@
                                 <label id="titleLabel" class="form-label">
                                 Freelancer Title
                                 <span class="text-danger">*</span>
+                                <span class="text-danger" v-if="dataErrors.title">{{ dataErrors.title }}</span>
                                 </label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Enter your freelancer title"
                                          aria-label="Enter your freelancer title" aria-describedby="titleLabel"
                                           data-msg="Please enter a valid title." data-error-class="u-has-error"
-                                           data-success-class="u-has-success" v-model="user.freelancer_title"
+                                           data-success-class="u-has-success" v-model="data.title"
                                     >
                                 </div>
                                 </div>
@@ -38,8 +39,11 @@
                                 <span class="text-danger">*</span>
                                 </label>
                                 <div class="form-group">
-                                    <select class="custom-select w-100" name="lang">
+                                    <select class="custom-select w-100" name="lang"
+                                    v-model="data.language">
                                         <option selected>Select language</option>
+                                        <option value="english">English</option>
+                                        <option value="finish">Finish</option>
                                         <!-- @foreach ($languages as $language)
                                             <option value="{{$language->language}}">{{$language->language}}</option>
                                         @endforeach -->
@@ -54,7 +58,8 @@
                                 <span class="text-danger">*</span>
                                 </label>
                                 <div class="form-group">
-                                    <select class="custom-select" name="availability">
+                                    <select class="custom-select" name="availability"
+                                    v-model="data.availability">
                                         <option selected>Select availability</option>
                                             <option value="full_time">Full Time</option>
                                             <option value="part_time">Part Time</option>
@@ -75,7 +80,7 @@
                                     <input class="form-control" type="url" name="portfolio" placeholder="Enter your website"
                                          aria-label="Enter your website"  aria-describedby="websiteLabel"
                                           data-msg="Password enter a valid website" data-error-class="u-has-error"
-                                           data-success-class="u-has-success" v-model="user.portfolio"
+                                           data-success-class="u-has-success" v-model="data.portfolio"
                                     >
                                 </div>
                                 </div>
@@ -94,7 +99,7 @@
                         <div class="form-group mb-4">
                             <label class="mb-1">BIO</label>
                             <div class="position-relative">
-                                <textarea class="form-control" rows="4" name="description" min="15" placeholder="Enter Bio" v-model="user.description"></textarea>
+                                <textarea class="form-control" rows="4" name="description" min="15" placeholder="Enter Bio" v-model="data.bio"></textarea>
                             </div>
                         </div>
                     </div>
@@ -116,10 +121,14 @@
                             <span class="text-danger">*</span>
                             </label>
                             <div class="form-group">
-                                <select class="form-control custom-select" data-msg="Please select your gender." data-error-class="u-has-error" data-success-class="u-has-success" 
-                                    :disabled="loading"
-                                    @change="getSubCategories($event)"
-                                    v-model="user.category_id">
+                                <select
+                                    @change="handleSubCategories($event)" 
+                                    class="form-control custom-select" 
+                                    data-msg="Please select category." 
+                                    :data-error-class="data.categoryId" 
+                                    data-success-class="u-has-success" 
+                                    v-model="data.categoryId"
+                                >
                                     <option v-for="category in $store.getters.getCategories" 
                                         :value="category.id" 
                                         :key="category.id"
@@ -180,7 +189,7 @@
 
                 <div class="mb-3 text-right">
                     <button type="submit" class="btn btn-outline-success">Cancel</button>
-                    <button type="submit" class="btn btn-success" @click="handleBecomeFreelancer">Submit</button>
+                    <button type="submit" class="btn btn-success" @click.prevent="handleBecomeSeller">Submit</button>
                 </div>
             </form>
         </main>
@@ -190,40 +199,34 @@
 </template>
 
 <script>
-import { reactive, ref } from '@vue/reactivity';
-import  Api  from '@/services/API'
+import useBecomeSeller from '@/composables/useBecomeSeller';
+
 
 export default {
 
-    setup(){
-        var subCategories=ref([]);
-        let subCatLoader=ref(false);
+    setup() {
 
-        const user=reactive({
-            category_id:'',
-            portfolio:'',
-            freelancer_title:'',
-            description:''
-        });
+        const {
+            data,
+            dataErrors,
+            subCategories,
+            subCatLoader
+            } = useBecomeSeller();
 
-        const getSubCategories=(event)=>{
-            subCatLoader.value=true;
-            return Api.get(`subcategories/${event.target.value}`).then(res=>{
-                subCategories.value=res.data;
-                subCatLoader.value=false;
-            })
-
+        const handleSubCategories = () => {
+            alert('event firing');
         }
 
-        const handleBecomeFreelancer = ()=>{
-            alert(JSON.stringify(user));            
+        const handleBecomeSeller = () => {
+            alert(JSON.stringify(data.value));
         }
 
         return {
-            user,
-            handleBecomeFreelancer,
+            data,
+            dataErrors,
+            handleBecomeSeller,
+            handleSubCategories,
             subCategories,
-            getSubCategories,
             subCatLoader,
         }
     }
