@@ -50,12 +50,13 @@ export const  actions = {
     },
 
     
-      async userServices(context)
+      async userServices({ commit})
       {
         const res= await Api.get('seller/services');
+        console.log("user Services");
         console.log(res);
         if(res.status===200){
-          context.commit("setUserServices",res.data);
+          commit("setUserServices",res.data);
         } else {
           console.log(res);
         }

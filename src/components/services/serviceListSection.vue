@@ -36,8 +36,6 @@
 <script>
 import serviceFilter from '@/components/services/serviceFilter';
 import servicePagination from '@/components/services/servicePagination';
-
-
 import ShowServices from '@/components/services/showServices.vue';
 
 export default {
