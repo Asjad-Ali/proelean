@@ -1,9 +1,9 @@
 <template>
   <div class="col-lg-8 right">
     <h2>{{ user.username }}</h2>
-    <div class="recommended">
+    <div class="recommended d-flex flex-wrap justify-content-start">
       <div
-        class="card w-50 col-md-4 d-flex flex-column align-self-stretch"
+        class="card w-50 col-md-3 margin-right"
         v-for="service in $store.getters.getUserServices"
         :key="service.id"
       >
@@ -93,3 +93,10 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+.margin-right {
+  margin: 4px;
+}
+</style>
