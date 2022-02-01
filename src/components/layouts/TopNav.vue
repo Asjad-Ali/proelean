@@ -194,20 +194,15 @@
                      <div class="dropdown-item-icon">
                         
                      </div>
-                     Language -1
+                     English
                   </a>
                   <a class="dropdown-item" href="#">
                      <div class="dropdown-item-icon">
                         
                      </div>
-                     Language -1
+                     Urdu
                   </a>
-                  <a class="dropdown-item" href="#">
-                     <div class="dropdown-item-icon">
-                        
-                     </div>
-                     Language -3
-                  </a>
+                  
                </div>
             </li> 
                <!-- languages li end -->
