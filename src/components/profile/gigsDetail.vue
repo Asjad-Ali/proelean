@@ -3,7 +3,7 @@
     <h2>{{ user.username }}</h2>
     <div class="recommended d-flex flex-wrap justify-content-start">
       <div
-        class="card width margin-right"
+        class="card  width margin-right"
         v-for="service in $store.getters.getUserServices"
         :key="service.id"
       >
@@ -36,8 +36,8 @@
               </span>
             </div>
             <h3>
-              {{ service.s_description.substr(0, 125) }}
-              <!-- {{ ( service.s_description.length > 125) ? '' : new Array(125 - service.s_description.length).join('c')}} -->
+              <!-- {{ service.s_description.substr(0, 28) }} -->
+              {{service.s_description.substr(0, 28)}} {{service.s_description.length > 28 ? '...' : ''}}
             </h3>
             <div class="content-info">
               <div class="rating-wrapper">

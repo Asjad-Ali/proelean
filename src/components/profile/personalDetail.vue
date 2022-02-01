@@ -7,7 +7,7 @@
             <i class="fa fa-circle"></i>online
           </div>
         </div>
-        <div><a href="#" class="ambassadors-badge">Ambassador</a></div>
+        
         <div class="user-profile-info">
           <div>
             <div class="user-profile-image">
@@ -79,14 +79,15 @@
               </strong>
             </li>
             <li class="member-since">
-              Member since<strong>{{ user.created_at }}</strong>
+              Member since<strong>{{ (user.created_at.length > 10) ? user.created_at.substr(0, 10) : user.created_at }}</strong>
+
             </li>
             <li class="response-time">
               Avg. Response Time<strong>2 hours</strong>
             </li>
             <li class="recent-delivery">
               Recent Delivery<strong>
-                {{ user.recent_delivery }}
+                {{user.recent_delivery.substr(0, 16)}} {{user.recent_delivery.length > 16 ? '..' : ''}}
               </strong>
             </li>
           </ul>
@@ -134,9 +135,7 @@
         <h3>Skills</h3>
         <ul>
           <li>
-            {{
-              user.user_skills === null ? "nothing to show" : user.user_skills
-            }}
+            {{ ( user.user_skills.length == 0) ? '' : user.user_skills }}
           </li>
         </ul>
       </div>
