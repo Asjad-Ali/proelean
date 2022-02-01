@@ -3,7 +3,7 @@
     <h2>{{ user.username }}</h2>
     <div class="recommended d-flex flex-wrap justify-content-start">
       <div
-        class="card w-50 col-md-3 margin-right"
+        class="card width margin-right"
         v-for="service in $store.getters.getUserServices"
         :key="service.id"
       >
@@ -97,6 +97,11 @@ export default {
 
 <style scoped>
 .margin-right {
-  margin: 4px;
+  margin: 8px;
 }
+
+.width{
+  width: 225px;
+}
+
 </style>
