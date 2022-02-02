@@ -7,13 +7,13 @@
             <i class="fa fa-circle"></i>online
           </div>
         </div>
-        
+  
         <div class="user-profile-info">
           <div>
             <div class="user-profile-image">
               <label class="user-pict">
                 <img
-                  src="images/user/s10.png"
+                  :src="'https://api.dex.proelean.com/' + user.image"
                   class="img-fluid user-pict-img"
                   alt="profile_img"
                 />
@@ -25,8 +25,7 @@
                     top-rated-seller
                   "
                 >
-                  {{ user.image }}</a
-                ></label
+                </a></label
               >
             </div>
           </div>
@@ -79,15 +78,17 @@
               </strong>
             </li>
             <li class="member-since">
-              Member since<strong>{{ (user.created_at.length > 10) ? user.created_at.substr(0, 10) : user.created_at }}</strong>
+              Member since<strong>
+                <!-- {{ user.created_at.getDate() }} -->
+                {{ (user.created_at.length > 10) ? user.created_at.substr(0, 10) : user.created_at }}
+                </strong>
 
             </li>
             <li class="response-time">
               Avg. Response Time<strong>2 hours</strong>
             </li>
             <li class="recent-delivery">
-              Recent Delivery<strong>
-                {{user.recent_delivery.substr(0, 16)}} {{user.recent_delivery.length > 16 ? '..' : ''}}
+              Recent Delivery<strong>{{user.recent_delivery.substr(0, 16)}}{{user.recent_delivery.length > 16 ? '..' : ''}}
               </strong>
             </li>
           </ul>
@@ -106,8 +107,7 @@
             {{ user.user_languages }}
             <span>Fluent</span>
           </li>
-          <!-- <li>Spanish&nbsp;<strong>(español)</strong>&nbsp;- <span>Conversational</span></li>
-                           <li>French&nbsp;<strong>(français)</strong>&nbsp;- <span>Basic</span></li> -->
+          
         </ul>
       </div>
       <div class="linked-accounts">
@@ -135,6 +135,7 @@
         <h3>Skills</h3>
         <ul>
           <li>
+            <!-- {{ ( user.user_skills }} -->
             {{ ( user.user_skills.length == 0) ? '' : user.user_skills }}
           </li>
         </ul>
