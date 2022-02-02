@@ -78,7 +78,7 @@
 <script>
 import { computed } from "vue";
 import store from "../../store";
-import ReviewSection from "./reviewSection.vue";
+import ReviewSection from "@/components/profile/reviewSection.vue";
 
 export default {
   components: {
@@ -96,5 +96,6 @@ export default {
 
 
 <style scoped>
+
 
 </style>

@@ -14,19 +14,10 @@
               <label class="user-pict">
                 <img
                   :src="'https://api.dex.proelean.com/' + user.image"
-                  class="img-fluid user-pict-img"
+                  class="img-fluid img-thumbnail"
                   alt="profile_img"
                 />
-                <a
-                  href="#"
-                  class="
-                    user-badge-round user-badge-round-med
-                    locale-en-us
-                    top-rated-seller
-                  "
-                >
-                </a></label
-              >
+              </label>
             </div>
           </div>
           <div class="user-profile-label">
@@ -79,10 +70,8 @@
             </li>
             <li class="member-since">
               Member since<strong>
-                <!-- {{ user.created_at.getDate() }} -->
-                {{ (user.created_at.length > 10) ? user.created_at.substr(0, 10) : user.created_at }}
+                {{ user.created_at }}
                 </strong>
-
             </li>
             <li class="response-time">
               Avg. Response Time<strong>2 hours</strong>

@@ -7,6 +7,7 @@ export const state = {
     servicesStatus: null,
     error: null,
     categorySlug : null,
+    sellerReview:[]
   }
 
 export const getters = {
@@ -14,6 +15,7 @@ export const getters = {
   getServices : state => state.services,
   getUserServicesStatus : state => state.userServicesStatus,
   getCategorySlug : state => state.categorySlug,
+  getSellerReview: state => state.sellerReview
 }
 
 export const  mutations = {
@@ -32,6 +34,9 @@ export const  mutations = {
     
     setServicesStatus(state,status){
       state.servicesStatus=status;
+    },
+    setReviews(state,status){
+      state.sellerReview=status;
     },
 
   }
@@ -59,6 +64,18 @@ export const  actions = {
           commit("setUserServices",res.data);
         } else {
           console.log(res);
+        }
+      },
+
+      async sellerReviewsById({commit},sellerID)
+      {
+        console.log("in action id",sellerID)
+        const res= await Api.get(`seller/${sellerID}/reviews`);
+        if(res.status ===200){
+          commit("setReviews",res.data);
+          console.log("reviews",res.data);
+        } else {
+          console.log("error");
         }
       },
 
