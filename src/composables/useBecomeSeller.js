@@ -1,10 +1,10 @@
 import { ref, watch } from "vue";
-import  Api  from '@/services/API'
 
 export default function useBecomeSeller() {
 
     const subCategories = ref(null);
     let subCatLoader=ref(false);
+    const doc = ref(null);
 
     const data = ref({
         title: '',
@@ -12,6 +12,7 @@ export default function useBecomeSeller() {
         availability: '',
         portfolio: '',
         bio: '',
+        cinic: '',
         categoryId: '',
         subcategoryId: '',
         insta: '',
@@ -46,8 +47,8 @@ export default function useBecomeSeller() {
         if(!value.availability) {
             dataErrors.value.availability = 'availability is required'
         }
-        if(!value.website) {
-            dataErrors.value.website = 'website is required'
+        if(!value.portfolio) {
+            dataErrors.value.portfolio = 'portfolio is required'
         }
         if(!value.bio) {
             dataErrors.value.bio = 'bio is required'
@@ -70,23 +71,22 @@ export default function useBecomeSeller() {
 
     })
 
-    const loadSubCategories= (categoryID) => {
-        console.log(categoryID);
-        alert(categoryID);
-        subCatLoader.value=true;
-        return Api.get(`subcategories/${categoryID}`).then(res=>{
-            subCategories.value=res.data;
-            subCatLoader.value=false;
-        })
-
+    const convertFileToBase64 = (file) => {
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            doc.value = reader.result;
+            data.value.cinic = reader.result;
+        }
+        reader.readAsDataURL(file);
     }
 
     return {
         data,
+        doc,
         dataErrors,
         subCategories,
         subCatLoader,
-        loadSubCategories
+        convertFileToBase64
     }
 
 }
