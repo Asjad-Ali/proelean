@@ -5,13 +5,13 @@
             Get Inspired With Projects Made By Our Freelancers
             <a href="#" class="float-right">See More ></a>
          </h2>
-         <div class="row freelance-slider">
+         <div class="row freelance-slider" v-if="$store.getters.getFeatGigs.length > 0">
             <div class="col" v-for="gig in $store.getters.getFeatGigs" :key="gig.id">
                <div class="freelancer">
-                  <img :src="getImgUrl(gig)">
+                  <img :src="getImgUrl(gig.service_media[0].media)">
                   <div class="freelancer-footer">
                      <img src="assets/images/user/s1.png">
-                     <h5>{{ gig.service_user.user_detail.freelancer_title }}
+                     <h5>{{ gig.s_description }}
                         <span>by <i>{{ gig.service_user.username }}</i></span>
                      </h5>
                   </div>
@@ -27,11 +27,9 @@
 export default {
    setup()
    {
-      let getImgUrl=(gig)=>{
-         return "https://api.proelean.local.com/"+gig.service_media[0].media;
-      }
+
       return {
-         getImgUrl
+         getImgUrl : (banner => "https://api.dex.proelean.com/"+banner)
       }
    }
 }
