@@ -78,7 +78,7 @@
 <script>
 import { computed } from "vue";
 import store from "../../store";
-import ReviewSection from "@/components/profile/reviewSection.vue";
+import ReviewSection from "@/components/profile/ReviewSection.vue";
 
 export default {
   components: {

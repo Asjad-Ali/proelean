@@ -1,5 +1,5 @@
-import Api from '@/services/API'
-
+import Api from '@/services/API';
+var page = 1;
 
 export const state = {
     userServices:[],
@@ -7,7 +7,7 @@ export const state = {
     servicesStatus: null,
     error: null,
     categorySlug : null,
-    sellerReview:[]
+    sellerReview:[],
   }
 
 export const getters = {
@@ -15,7 +15,7 @@ export const getters = {
   getServices : state => state.services,
   getUserServicesStatus : state => state.userServicesStatus,
   getCategorySlug : state => state.categorySlug,
-  getSellerReview: state => state.sellerReview
+  getSellerReview: state => state.sellerReview,
 }
 
 export const  mutations = {
@@ -35,10 +35,9 @@ export const  mutations = {
     setServicesStatus(state,status){
       state.servicesStatus=status;
     },
-    setReviews(state,status){
-      state.sellerReview=status;
+    setReviews(state,reviews){
+      state.sellerReview = [...state.sellerReview,...reviews];
     },
-
   }
 
 export const  actions = {
@@ -67,16 +66,31 @@ export const  actions = {
         }
       },
 
-      async sellerReviewsById({commit},sellerID)
+      async sellerReviewsById({commit},payload)
       {
-        console.log("in action id",sellerID)
-        const res= await Api.get(`seller/${sellerID}/reviews`);
-        if(res.status ===200){
-          commit("setReviews",res.data);
-          console.log("reviews",res.data);
-        } else {
-          console.log("error");
-        }
+        let getData = JSON.parse(localStorage.getItem("userInfo"))
+        console.log("in action id",getData.id)
+          if(payload === ''){
+            page = 1;
+          }
+          else if(payload === 'next'){
+            page++;
+          }
+          else{
+            if(page !== 1){
+               page--;
+            }
+          }
+          const res= await Api.get(`seller/${getData.id}/reviews?page=${page}`);
+          if(res.status === 200){
+            state.sellerReview = '';
+            commit("setReviews",res.data);
+            console.log("Seller Reviews",res.data);
+          } else {
+            console.log("Seller Reviews error");
+          }  
+        
+        
       },
 
     async searchServicesByCategoryId({commit},categoryID)
