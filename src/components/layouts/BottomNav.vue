@@ -45,8 +45,20 @@
 </template>
 
 <script>
-export default {
+import { useStore } from 'vuex';
+import { onBeforeMount } from 'vue'
 
+export default {
+   setup() {
+      const store = useStore();
+
+      onBeforeMount(() => {
+         if(! store.getters.getCategories.length) {
+            store.dispatch("getHomeList");
+         }
+
+      });
+   }
 }
 </script>
 

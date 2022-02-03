@@ -14,9 +14,9 @@
             />
           </span>
           <span class="seller-name">
-            <router-link :to="'/profile'">{{
+            {{
               service.service_user.username
-            }}</router-link>
+            }}
 
             <span class="level hint--top level-one-seller">
               Level 1 Seller

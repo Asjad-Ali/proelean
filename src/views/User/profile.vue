@@ -2,28 +2,35 @@
   <div class="main-page second py-5">
     <div class="container">
       <div class="row">
-        <PersonalDetail />
+        <PersonalDetails />
         <GigsDetail />
       </div>
+      <ReviewPagination />
     </div>
   </div>
 </template>
 
 <script>
-import PersonalDetail from '@/components/profile/personalDetail.vue';
-import GigsDetail from '@/components/profile/gigsDetail.vue';
+import PersonalDetails from '@/components/profile/PersonalDetails.vue';
+import GigsDetail from '@/components/profile/GigsDetail.vue';
+import ReviewPagination from '@/components/profile/ReviewPagination.vue';
+import { useStore } from 'vuex';
 
 export default {
   components:{
-    PersonalDetail,
-    GigsDetail
+    PersonalDetails,
+    GigsDetail,
+    ReviewPagination
   },
   setup() {
-    return{
-    }
+    const store = useStore();
+    store.dispatch("userServices");
   },
 };
 </script>
 
-<style>
+<style scoped>
+.container{
+  max-width: 1200px;
+}
 </style>

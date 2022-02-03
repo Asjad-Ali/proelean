@@ -1,5 +1,5 @@
-import Api from '@/services/API'
-
+import Api from '@/services/API';
+var page = 1;
 
 export const state = {
     userServices:[],
@@ -7,6 +7,7 @@ export const state = {
     servicesStatus: null,
     error: null,
     categorySlug : null,
+    sellerReview:[],
   }
 
 export const getters = {
@@ -14,6 +15,7 @@ export const getters = {
   getServices : state => state.services,
   getUserServicesStatus : state => state.userServicesStatus,
   getCategorySlug : state => state.categorySlug,
+  getSellerReview: state => state.sellerReview,
 }
 
 export const  mutations = {
@@ -33,7 +35,9 @@ export const  mutations = {
     setServicesStatus(state,status){
       state.servicesStatus=status;
     },
-
+    setReviews(state,reviews){
+      state.sellerReview = [...state.sellerReview,...reviews];
+    },
   }
 
 export const  actions = {
@@ -60,6 +64,33 @@ export const  actions = {
         } else {
           console.log(res);
         }
+      },
+
+      async sellerReviewsById({commit},payload)
+      {
+        let getData = JSON.parse(localStorage.getItem("userInfo"))
+        console.log("in action id",getData.id)
+          if(payload === ''){
+            page = 1;
+          }
+          else if(payload === 'next'){
+            page++;
+          }
+          else{
+            if(page !== 1){
+               page--;
+            }
+          }
+          const res= await Api.get(`seller/${getData.id}/reviews?page=${page}`);
+          if(res.status === 200){
+            state.sellerReview = '';
+            commit("setReviews",res.data);
+            console.log("Seller Reviews",res.data);
+          } else {
+            console.log("Seller Reviews error");
+          }  
+        
+        
       },
 
     async searchServicesByCategoryId({commit},categoryID)

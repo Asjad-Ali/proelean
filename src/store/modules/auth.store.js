@@ -8,29 +8,17 @@ export const state = {
     loginStatus : 1,
     registerStatus : 1,
     user: JSON.parse(localStorage.getItem("userInfo"))
-    // user: {
-    //     id:'',
-    //     name:'',
-    //     username:'',
-    //     image:'',
-    //     isFreelancer:false,
-    //     created_at:'',
-    //     address:'',
-    //     phone:'',
-    //     email:'',
-    //     description:'',
-    //     total_reviews:0,
-    //     user_rating:0,
-    //     recent_delivery:'',
-    // }
   }
 
 export const  mutations = {
+  setRegisterStatus(state,status) {
+    state.registerStatus = status;
+  },
 
-    setError(state,error){
-      state.error=error;
-    },
-  }
+  setError(state,error) {
+    state.error=error;
+  },
+}
 
 export const  actions = {
     async login({commit},payload){
@@ -40,8 +28,23 @@ export const  actions = {
         if(resp.status==200){
           toaster.success(resp.message,{
             position:"top-right",
-            dismissible: true});
+            dismissible: true});     
+
+            ///////     date conversion
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                          "July", "August", "September", "October", "November", "December"];
+            const dateObj = new Date(resp.data.created_at);
+            const month = monthNames[dateObj.getMonth()];
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            const year = dateObj.getFullYear();
+            const output = day + ' ' + month  + ', ' + year;
+            ///////     date conversion end
             localStorage.setItem("userInfo",JSON.stringify(resp.data))
+
+            var userAuthDate = JSON.parse(localStorage.getItem("userInfo"))
+            userAuthDate.created_at = output;
+            localStorage.setItem("userInfo",JSON.stringify(userAuthDate))
+
             localStorage.setItem("PROELEAN_TOKEN",resp.token)
             commit('setRegisterStatus',3);
           router.go()

@@ -33,10 +33,10 @@
                  <ul class="list">
                     <li><a href="#" >Help &amp; Support</a></li>
                     <li><a href="#">Trust &amp; Safety</a></li>
-                    <li><a href="#" >Selling on Miver
+                    <li><a href="#" >Selling on ProeLean
                        </a>
                     </li>
-                    <li><a href="#">Buying on Miver
+                    <li><a href="#">Buying on ProeLean
                        </a>
                     </li>
                  </ul>
@@ -52,27 +52,27 @@
                     <li><a href="#">Affiliates</a></li>
                     <li><a href="#">Invite a Friend</a></li>
                     <li><a href="#">Become a Seller</a></li>
-                    <li><a href="#" >Miver
-                       Elevate<small>Exclusive Benefits</small></a>
+                    <li><a href="#" >ProeLean
+                       Elevate<br> <small> Exclusive Benefits </small></a>
                     </li>
                  </ul>
               </div>
               <div class="footer-list">
-                 <h4>More From Miver</h4>
+                 <h4>More From ProeLean</h4>
                  <ul class="list">
-                    <li><a href="#">Miver
+                    <li><a href="#">ProeLean
                        Pro</a>
                     </li>
-                    <li><a href="#">Miver
+                    <li><a href="#">ProeLean
                        Studios</a>
                     </li>
-                    <li><a href="#">Miver
+                    <li><a href="#">ProeLean
                        Logo Maker</a>
                     </li>
                     <li><a href="#">Get Inspired</a></li>
-                    <li><a href="#">ClearVoice<small>Content Marketing</small></a></li>
-                    <li><a href="#">AND CO<small>Invoice Software</small></a></li>
-                    <li><a href="#">Learn<small>Online Courses</small></a></li>
+                    <li><a href="#">ClearVoice<br> <small> Content Marketing </small></a></li>
+                    <li><a href="#">AND CO<br> <small> Invoice Software </small></a></li>
+                    <li><a href="#">Learn<br> <small> Online Courses </small></a></li>
                  </ul>
               </div>
            </div>
