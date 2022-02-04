@@ -5,45 +5,44 @@ export default function useBecomeSeller() {
 
     const subCategories = ref(null);
     let subCatLoader=ref(false);
-    const doc = ref(null);
+    const preview = ref(null);
 
     const data = ref({
-        title: '',
-        language: '',
+        freelancer_title: '',
+        lang: '',
         availability: '',
         portfolio: '',
-        bio: '',
+        description: '',
         cinic: '',
-        categoryId: '',
-        subcategoryId: '',
-        insta: '',
-        fb: '',
+        category_id: '',
+        sub_category_id: '',
+        country_id: '',
+        instagram: '',
+        facebook: '',
         twitter: ''
     });
 
     const dataErrors = ref({
-        title: null,
-        language: null,
+        freelancer_title: null,
+        lang: null,
         availability: null,
+        cinic:null,
+        country:null,
         portfolio: null,
-        bio: null,
-        categoryId: null,
-        subcategoryId: null,
-        insta: null,
-        fb: null,
+        description: null,
+        category_id: null,
+        sub_category_id: null,
+        instagram: null,
+        facebook: null,
         twitter: null
     });
 
     watch(data.value,(value) => {
-        if(!value.title) {
-            dataErrors.value.title = 'title is required'
-        } else if(value.title.length < 6) {
-            dataErrors.value.title = 'title is required'
-        } else {
-            dataErrors.value.title = null
+        if(!value.freelancer_title) {
+            dataErrors.value.freelancer_title = 'title is required'
         }
-        if(!value.language) {
-            dataErrors.value.language = 'language is required'
+        if(!value.lang) {
+            dataErrors.value.lang = 'language is required'
         }
         if(!value.availability) {
             dataErrors.value.availability = 'availability is required'
@@ -54,20 +53,23 @@ export default function useBecomeSeller() {
         if(!value.bio) {
             dataErrors.value.bio = 'bio is required'
         }
-        if(!value.categoryId) {
-            dataErrors.value.categoryId = 'category is required'
+        if(!value.category_id) {
+            dataErrors.value.category_id = 'category is required'
         }
-        if(!value.subcategoryId) {
-            dataErrors.value.subcategoryId = 'subcategory is required'
+        if(!value.country) {
+            dataErrors.value.country = 'country is required'
         }
-        if(!value.insta) {
-            dataErrors.value.insta = 'insta is required'
+        if(!value.sub_category_id) {
+            dataErrors.value.sub_category_id = 'subcategory is required'
         }
-        if(!value.fb) {
-            dataErrors.value.fb = 'fb is required'
+        if(value.instagram && value.instagram.length < 10) {
+            dataErrors.value.instagram = 'incorrect url'
         }
-        if(!value.twitter) {
-            dataErrors.value.twitter = 'twitter is required'
+        if(value.facebook && value.facebook.length < 10) {
+            dataErrors.value.facebook = 'incorrect url'
+        }
+        if(value.twitter && value.twitter.length < 10) {
+            dataErrors.value.twitter = 'incorrect url'
         }
 
     })
@@ -75,7 +77,7 @@ export default function useBecomeSeller() {
     const convertFileToBase64 = (file) => {
         const reader = new FileReader();
         reader.onloadend = function() {
-            doc.value = reader.result;
+            preview.value = reader.result;
             data.value.cinic = reader.result;
         }
         reader.readAsDataURL(file);
@@ -129,7 +131,7 @@ export default function useBecomeSeller() {
 
     return {
         data,
-        doc,
+        preview,
         dataErrors,
         subCategories,
         subCatLoader,
