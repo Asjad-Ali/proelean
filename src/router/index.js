@@ -3,9 +3,9 @@ import Home from '../views/Home.vue'
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import BecomeSeller from '../views/Become-Seller.vue'
-import Profile from '../views/User/profile.vue'
+import Profile from '../views/User/Profile.vue'
 import createGig from '../views/Seller/CreateGig.vue'
-//import Gigs from '../views/gigs-list.vue'
+import JobCreation from '../views/Buyer/JobCreation.vue'
 
 
 const routes = [
@@ -41,6 +41,12 @@ const routes = [
     component: Profile,
   
   },
+  {
+    path: '/Job_Creation',
+    name: 'JobCreation',
+    component: JobCreation,
+  },
+
   {
     path: '/seller_gigs',
     name: 'sellerGigs',
