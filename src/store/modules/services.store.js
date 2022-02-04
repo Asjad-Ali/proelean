@@ -1,4 +1,5 @@
 import Api from '@/services/API';
+import { createToaster } from '@meforma/vue-toaster';
 var page = 1;
 
 export const state = {
@@ -8,9 +9,12 @@ export const state = {
     error: null,
     categorySlug : null,
     sellerReview:[],
+    userNotifications:{},
+    createGigData:''
   }
 
 export const getters = {
+  getUserNotifications : state => state.userNotifications,
   getUserServices : state => state.userServices,
   getServices : state => state.services,
   getUserServicesStatus : state => state.userServicesStatus,
@@ -38,6 +42,12 @@ export const  mutations = {
     setReviews(state,reviews){
       state.sellerReview = [...state.sellerReview,...reviews];
     },
+    setNotification(state,notification){
+      state.userNotifications=notification;
+    },
+    setCreateGig(state,createGigD){
+      state.createGigData=createGigD;
+    },
   }
 
 export const  actions = {
@@ -63,6 +73,33 @@ export const  actions = {
           commit("setUserServices",res.data);
         } else {
           console.log(res);
+        }
+      },
+
+      async getNotification({commit}){
+        const res = await Api.get('notification');
+        if(res.status === 200){
+          commit("setNotification",res.notifications)
+        }
+        else{
+          commit("setNotification",res.message)
+        }
+      },
+
+      async createGig({commit},payload){
+        const toaster = createToaster()
+        const res = await Api.formData('seller/services',payload);
+        if(res.status === 200){
+          console.log("Create Gig Response",res)
+          toaster.success(res.message,{
+            position:"top-right",
+            dismissible: true});
+          commit("setCreateGig",res)
+        }
+        else{
+          toaster.error(res.message,{
+            position:"top-right",
+            dismissible: true});
         }
       },
 
