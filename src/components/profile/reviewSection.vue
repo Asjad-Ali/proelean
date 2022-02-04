@@ -99,17 +99,21 @@
           </li>
         </ul>
       </div>
-
   </div>
+  <ReviewPagination />
 </template>
 
 <script>
+import ReviewPagination from '@/components/profile/ReviewPagination.vue';
 import { computed, onMounted } from "vue";
 import store from "../../store";
 
 export default {
+  components:{
+    ReviewPagination
+  },
   setup() {
-    onMounted(store.dispatch("sellerReviewsById"));
+    onMounted(store.dispatch("sellerReviewsById",''));
     return {
       user: computed(() => store.getters.getAuthUser),
       review: computed(() => store.getters.getSellerReview),

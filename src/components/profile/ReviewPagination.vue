@@ -1,6 +1,6 @@
 <template>
   <nav aria-label="Page navigation example">
-    <ul class="pagination">
+    <ul class="pagination d-flex justify-content-center">
       <li class="page-item">
         <a class="page-link" @click="prev()" href="#"> Previous</a>
       </li>
