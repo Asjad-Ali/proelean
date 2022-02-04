@@ -1,20 +1,21 @@
 <template>
   <div class="col-lg-8 right">
     <h2>{{ user.username }}</h2>
+
     <div class="recommended d-flex flex-wrap justify-content-start">
       <div
         class="col-md-4"
         v-for="service in $store.getters.getUserServices"
         :key="service.id"
       >
+      <router-link to="gig-detail">
         <a href="#">
           <img
             class="img-fluid"
-            :src="
-              'https://api.dex.proelean.com/' + service.service_media[0].media
-            "
+            :src="'https://api.dex.proelean.com/' + service.service_media[0].media"
           />
         </a>
+        </router-link>
         <div class="inner-slider">
           <div class="inner-wrapper d-flex flex-column align-content-between">
             <div class="d-flex align-items-center">

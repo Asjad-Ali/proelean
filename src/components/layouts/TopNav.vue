@@ -36,7 +36,7 @@
                 </form>
              </div>
           </li>
-          <router-link to="/createGig">Create Gig</router-link>
+          <router-link to="/seller/gigs">Create Gig</router-link>
       <ul class="navbar-nav align-items-center ml-auto" v-if="$store.state.isLoggedIn">
           <!-- @if(isset($user) && !is_null($user)) -->
           <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">

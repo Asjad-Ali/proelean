@@ -123,15 +123,21 @@
                     <div class="row">
                       <div class="form-group col-md-6">
                         <select
-                          id="category_id"
+                          id="category"
                           class="form-control"
                           name="category_id"
                           v-model="createGig.category_id"
+                          data-msg="Please select category."
+                          :onchange="onChange"
                           required
                         >
-                          <option selected disabled>Select...</option>
-                          <option value="cU1VOWVkQVVpVElJdll4eThYOXpBZz09">Graphic Designing</option>
-                          <option value="d3JkUHdCcEZRMGdseTBvNXFOVXNGUT09">Programming</option>
+                          <option
+                            v-for="category in $store.getters.getCategories"
+                            :value="category.id"
+                            :key="category.id"
+                          >
+                            {{ category.title }}
+                          </option>
 
                           <!-- @foreach ($categories as $category)
                                        <option value="{{$category->id}}">{{$categorytitle}}</option>                                       
@@ -146,9 +152,16 @@
                           v-model="createGig.sub_category_id"
                           required
                         >
-                          <option selected disabled>Select...</option>
-                          <option value="cU1VOWVkQVVpVElJdll4eThYOXpBZz09">Graphic Designing</option>
-                          <option value="cU1VOWVkQVVpVElJdll4eThYOXpBZz09">Website</option>
+                          <option value="SubCatSelect1" selected disabled>
+                            Select Sub Category
+                          </option>
+                          <option
+                            v-for="subCategory in $store.getters.getSubCategories"
+                            :value="subCategory.id"
+                            :key="subCategory.id"
+                          >
+                            {{ subCategory.title }}
+                          </option>
 
                           <!-- @foreach ($categories as $category)
                                        <option value="{{$category->id}}">{{$categorytitle}}</option>                                       
@@ -168,11 +181,9 @@
                         required
                       >
                         <option selected disabled>Select day</option>
-                        <option value="2">1 day</option>
-                        <option value="2">2 day</option>
-                        <option value="3">3 day</option>
-                        <option value="4">4 day</option>
-                        <option value="5">5 day</option>
+                        <option value="2" v-for="day in 30" :key="day.index"
+                        >{{ day }} day</option>
+
                         <!-- @foreach($days as $day)
                                     <option>{{$day->days}}</option>                                    
                                     @endforeach -->
@@ -200,7 +211,7 @@
                       class="btn btn-success btn-lg font-weight-bold"
                       @click.prevent="gigCreation"
                     >
-                      Submit Request
+                      {{registerStatus == 2 ? 'Loading...' : 'Create'}}
                     </button>
                   </div>
                 </div>
@@ -215,17 +226,31 @@
 
 <script>
 import useBecomeSeller from '@/composables/useBecomeSeller.js'
+import store from '../../store';
+import { computed } from '@vue/runtime-core';
 export default {
   setup() {
 const { createGig,
+        data,
         bannersBase64,
         gigCreation,
         selectThumbnail,
         removeImage,
         encodeImageFileAsURL } = useBecomeSeller();
 
+        const onChange = () => {
+      data.value.categoryId = document.getElementById("category").value;
+      store.dispatch("loadSubCategories", data.value.categoryId);
+    };
+
+        const registerStatus = computed( () => {
+      return   store.getters.getRegisterStatus;
+    });
+
     return {
+      registerStatus,
       createGig,
+      onChange,
       gigCreation,
       selectThumbnail,
       bannersBase64,
