@@ -4,7 +4,6 @@ import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import BecomeSeller from '../views/Become-Seller.vue'
 import Profile from '../views/User/profile.vue'
-import createGig from '../views/Seller/CreateGig.vue'
 //import Gigs from '../views/gigs-list.vue'
 
 
@@ -20,9 +19,15 @@ const routes = [
     component: Login
   },
   {
-    path: '/createGig',
+    path: '/seller/create_gig',
     name: 'createGig',
-    component: createGig
+    component: () => import('../views/Seller/CreateGig.vue'),
+  },
+  {
+    path: '/seller/gigs',
+    name: 'sellerGigs',
+    component: () => import('../views/Seller/Gigs.vue'),
+   
   },
   {
     path: '/register',
@@ -41,18 +46,14 @@ const routes = [
     component: Profile,
   
   },
-  {
-    path: '/seller_gigs',
-    name: 'sellerGigs',
-    component: () => import('../views/gigs-list.vue'),
-   
-  },
+  
   {
     path: '/gigs',
     name: 'Gigs',
     component: () => import('../views/serviceList.vue'),
    
   },
+ 
   {
     path: '/gig-detail',
     name: 'gigDetail',

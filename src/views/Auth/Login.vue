@@ -13,8 +13,6 @@
                 your professional world.
               </p>
             </div>
-
-
             <form id="login">
               <div class="form-group mb-1">
                 <label class="mb-1">Email</label>
