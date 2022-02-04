@@ -77,7 +77,7 @@
 
 <script>
 import { computed } from "vue";
-import store from "../../store";
+import { useStore } from "vuex";
 import ReviewSection from "@/components/profile/ReviewSection.vue";
 
 export default {
@@ -85,12 +85,13 @@ export default {
     ReviewSection,
   },
   setup() {
+    const store = useStore();
     store.dispatch("userServices");
 
     return {
       user: computed(() => store.getters.getAuthUser),
     };
-  },
+  }
 };
 </script>
 
