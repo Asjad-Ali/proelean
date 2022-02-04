@@ -4,6 +4,7 @@ import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import BecomeSeller from '../views/Become-Seller.vue'
 import Profile from '../views/User/profile.vue'
+import createGig from '../views/Seller/CreateGig.vue'
 //import Gigs from '../views/gigs-list.vue'
 
 
@@ -17,6 +18,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/createGig',
+    name: 'createGig',
+    component: createGig
   },
   {
     path: '/register',

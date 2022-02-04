@@ -1,4 +1,5 @@
 import { ref, watch } from "vue";
+import { useStore } from "vuex";
 
 export default function useBecomeSeller() {
 
@@ -80,13 +81,66 @@ export default function useBecomeSeller() {
         reader.readAsDataURL(file);
     }
 
+
+    const store = useStore();
+    const createGig = ref({
+        s_description: "",
+        description: "",
+        banner: [],
+        category_id: "d3JkUHdCcEZRMGdseTBvNXFOVXNGUT09",
+        sub_category_id: "cU1VOWVkQVVpVElJdll4eThYOXpBZz09",
+        delivery_time: "20 days",
+        price: "",
+      });
+
+      
+      const  gigCreation = () => {
+          store.dispatch('createGig',createGig.value)
+          console.log("Create Gig Value", createGig.value);
+        }
+        
+      const bannersBase64= ref([]);
+      const selectThumbnail = (e) => {
+        const files = e.target.files;
+        for (let i = 0; i < files.length; i++) {
+          createGig.value.banner.push(files[i]);
+        }
+        document.querySelector('#bannerInput').value='';
+        console.log(createGig.value);
+  
+        bannersBase64.value=[];
+        createGig.value.banner.forEach(img => {
+            encodeImageFileAsURL(img);
+        });
+      };
+
+      const removeImage = index => {
+        bannersBase64.value.splice(index, 1);
+        createGig.value.banner.splice(index, 1);
+    }
+
+    const encodeImageFileAsURL =file => {    
+        const reader = new FileReader();  
+        reader.onloadend = function() {  
+            bannersBase64.value.push(reader.result);  
+        }  
+        reader.readAsDataURL(file);  
+    }
+
     return {
         data,
         doc,
         dataErrors,
         subCategories,
         subCatLoader,
-        convertFileToBase64
+        convertFileToBase64,
+
+        createGig,
+        bannersBase64,
+        gigCreation,
+        selectThumbnail,
+        removeImage,
+        encodeImageFileAsURL
     }
 
 }
