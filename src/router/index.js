@@ -48,7 +48,7 @@ const routes = [
   },
 
   {
-    path: '/seller_gigs',
+    path: '/seller/gigs',
     name: 'sellerGigs',
     component: () => import('../views/gigs-list.vue'),
    
@@ -60,7 +60,7 @@ const routes = [
    
   },
   {
-    path: '/gig-detail',
+    path: '/gig-detail/:title',
     name: 'gigDetail',
     component: () => import('../views/serviceDetail.vue'),
     
