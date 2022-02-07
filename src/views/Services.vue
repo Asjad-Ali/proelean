@@ -25,6 +25,14 @@
                         <h3>Services In {{ $route.query.q }}</h3>
                      </div>
                   </div>
+<<<<<<< HEAD
+                     
+                  <ServiceSection v-for="service in $store.getters.getServices" :key="service.id" :service="service" />
+
+                  <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
+
+                  
+=======
                   <div class="row" ref="scrollComponent">
                      <div
                         class="service-col col-md-4 d-flex flex-column align-self-stretch"
@@ -35,6 +43,7 @@
                      <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'"/>
                   </div>
                   <servicePagination />
+>>>>>>> 9c18a068d92f93d24d39203163844950a8b6c499
                   
                </div>
             </div>
@@ -48,19 +57,26 @@
 import ServiceNavSection from '@/components/services/ServiceNavSection.vue';
 import ServiceSection from '@/components/services/ServiceSection.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
-import ServicePagination from '@/components/services/ServicePagination';
 import Loader from '@/components/loadingComponent.vue';
 import { useRoute } from 'vue-router';
 import { onBeforeMount, onMounted, onUnmounted, ref, watch } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 export default {
+<<<<<<< HEAD
+  components:{
+    ServiceNavSection,
+    ServiceSection,
+    ServiceFilterSection,
+    Loader,
+=======
   components: {
       ServiceNavSection,
       ServiceSection,
       ServiceFilterSection,
       ServicePagination,
       Loader,
+>>>>>>> 9c18a068d92f93d24d39203163844950a8b6c499
   },
   setup() {
       const store = useStore();
