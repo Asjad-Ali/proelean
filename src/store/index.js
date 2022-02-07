@@ -3,7 +3,7 @@ import * as auth from './modules/auth.store'
 import * as home from './modules/home.store'
 import * as services from './modules/services.store'
 import * as categories from './modules/categories.store'
-import * as becomeSeller from './modules/becomeFreelancer.store'
+import * as buyer from './modules/buyer.store'
 
 export default createStore({
   state: {
@@ -18,6 +18,6 @@ export default createStore({
     home,
     services,
     categories,
-    becomeSeller
+    buyer
   }
 })
