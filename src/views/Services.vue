@@ -25,11 +25,15 @@
                         <h3>Services In {{ $route.query.q }}</h3>
                      </div>
                   </div>
-                     
-                  <ServiceSection v-for="service in $store.getters.getServices" :key="service.id" :service="service" />
-
-                  <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
-
+                  <div class="row" ref="scrollComponent">
+                     <div
+                        class="service-col col-md-4 d-flex flex-column align-self-stretch"
+                        v-for="service in $store.getters.getServices" :key="service.id"
+                     >                     
+                        <ServiceSection :service="service" />
+                     </div>
+                     <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'"/>
+                  </div>
                   <servicePagination />
                   
                </div>
@@ -46,17 +50,57 @@ import ServiceSection from '@/components/services/ServiceSection.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
 import ServicePagination from '@/components/services/ServicePagination';
 import Loader from '@/components/loadingComponent.vue';
+import { useRoute } from 'vue-router';
+import { onBeforeMount, onMounted, onUnmounted, ref, watch } from '@vue/runtime-core';
+import { useStore } from 'vuex';
 
 export default {
-  components:{
-    ServiceNavSection,
-    ServiceSection,
-    ServiceFilterSection,
-    ServicePagination,
-    Loader,
+  components: {
+      ServiceNavSection,
+      ServiceSection,
+      ServiceFilterSection,
+      ServicePagination,
+      Loader,
   },
   setup() {
+      const store = useStore();
+      const route = useRoute();
+      const scrollComponent = ref(null);
+      const params = ref(route.query.category)
 
+      watch(params.value, function(){
+         console.log(params.value);
+      })
+
+      onBeforeMount(() => {
+         if('q' in route.query) {
+            store.dispatch('searchServices',`search?q=${route.query.q}`)
+         } else {
+            store.dispatch('searchServices',`categories/${route.query.category}/services`)
+         }
+      })
+
+      onMounted(() => {
+         window.addEventListener("scroll", handleScroll)
+      })
+
+      onUnmounted(() => {
+         window.removeEventListener("scroll", handleScroll)
+      })
+
+      const handleScroll = () => {
+         let element = scrollComponent.value;
+         console.log(store.getters.getCurrentPage);
+         
+         if (store.getters.getCurrentPage > 1 && store.getters.getLoadingStatus === 'COMPLETED' && element.getBoundingClientRect().bottom <= window.innerHeight) {
+            let page = store.getters.getCurrentPage;
+            store.dispatch('handlePagination',`&page=${page}`)
+         }
+      }
+
+      return {
+         scrollComponent
+      }
   }
 }
 </script>
