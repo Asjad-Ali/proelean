@@ -1085,11 +1085,16 @@
 <script>
 import { onMounted } from '@vue/runtime-core'
 import store from '../../store'
+import { useRoute } from 'vue-router';
 export default {
       setup(){
+    const route = useRoute();
+
+    console.log("ID Params",route.params.title);
       onMounted(
          store.dispatch('userServices')
       )
+      
     }
 }
 </script>

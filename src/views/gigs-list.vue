@@ -296,6 +296,7 @@
 </template>
 
 <script>
+
 export default {
     name:"Gigs"
 

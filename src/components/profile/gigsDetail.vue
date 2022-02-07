@@ -8,13 +8,11 @@
         v-for="service in $store.getters.getUserServices"
         :key="service.id"
       >
-      <router-link to="gig-detail">
-        <a href="#">
+      <router-link :to="`/gig-detail/${service.id}`" >
           <img
             class="img-fluid"
             :src="'https://api.dex.proelean.com/' + service.service_media[0].media"
           />
-        </a>
         </router-link>
         <div class="inner-slider">
           <div class="inner-wrapper d-flex flex-column align-content-between">
@@ -87,13 +85,14 @@ export default {
   },
   setup() {
     const store = useStore();
-    
     store.dispatch("userServices");
-
+    
     return {
       user: computed(() => store.getters.getAuthUser),
     };
   }
+
+
 };
 </script>
 
