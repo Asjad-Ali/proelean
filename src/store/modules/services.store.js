@@ -9,6 +9,9 @@ export const state = {
     error: null,
     categorySlug : null,
     sellerReview:[],
+    page: 1,
+    url: '',
+    loadingStatus: '',
     userNotifications:{},
     createGigData:''
   }
@@ -20,6 +23,8 @@ export const getters = {
   getUserServicesStatus : state => state.userServicesStatus,
   getCategorySlug : state => state.categorySlug,
   getSellerReview: state => state.sellerReview,
+  getLoadingStatus: state => state.loadingStatus,
+  getCurrentPage: state => state.page,
 }
 
 export const  mutations = {
@@ -29,46 +34,74 @@ export const  mutations = {
     setServices(state,services){
       state.services=services;
     },
-    setError(state,error){
+    setError(state,error) {
       state.error=error;
     },
-    setCategorySlug(state,slug){
+    setCategorySlug(state,slug) {
       state.categorySlug=slug;
     },
-    
-    setServicesStatus(state,status){
-      state.servicesStatus=status;
+    setNextPage(state,page) {
+      state.page = page;
     },
-    setReviews(state,reviews){
+    appendPaginatedServices(state,services) {
+      services.forEach(service => state.services.push(service))
+    },
+    setLoadingStatus(state,status) {
+      state.loadingStatus=status;
+    },
+    setInitialUrl(state,url) {
+      state.url = url;
+    },
+    setReviews(state,reviews) {
       state.sellerReview = [...state.sellerReview,...reviews];
     },
-    setNotification(state,notification){
+    setNotification(state,notification) {
       state.userNotifications=notification;
     },
-    setCreateGig(state,createGigD){
+    setCreateGig(state,createGigD) {
       state.createGigData=createGigD;
     },
   }
 
 export const  actions = {
-    async searchServices({ commit},keywords)
-    {
-      const res= await Api.get('search?q='+keywords);
+
+    async searchServices({ commit, state },search) {
+      commit('setLoadingStatus','LOADING');
+      const res= await Api.get(search);
       console.log(res.data); 
-      if(res.status===200){
-        commit("setServicesStatus",true);
+      if(res.status===200) {
         commit("setServices",res.data);
-      } else {
-        commit("setServicesStatus",false);
+
+        if(res.links && res.links.next) {
+          commit('setNextPage',state.page+1);
+          commit('setInitialUrl',search);
+        } else {
+          commit('setNextPage',1);
+        }
+
+        commit('setLoadingStatus','COMPLETED');
       }
     },
 
+    async handlePagination ({ commit, state }, page) {
+      state.loadingStatus = 'LOADING';
+      console.log(page)
+      const res = await Api.get(`${state.url}${page}`);
+
+      console.log(res.data);
+
+      commit('appendPaginatedServices',res.data);
+      if(res.links && res.links.next) {
+          commit('setNextPage',state.page+1);
+      } else {
+          commit('setNextPage', 1);
+      }
+      state.loadingStatus = 'COMPLETED';
+  },
     
-      async userServices({ commit})
+    async userServices({ commit})
       {
         const res= await Api.get('seller/services');
-        console.log("user Services");
-        console.log(res);
         if(res.status===200){
           commit("setUserServices",res.data);
         } else {
