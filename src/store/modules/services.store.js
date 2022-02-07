@@ -54,7 +54,7 @@ export const  actions = {
     async searchServices({ commit},keywords)
     {
       const res= await Api.get('search?q='+keywords);
-      console.log(res); 
+      console.log(res.data); 
       if(res.status===200){
         commit("setServicesStatus",true);
         commit("setServices",res.data);
@@ -87,6 +87,7 @@ export const  actions = {
       },
 
       async createGig({commit},payload){
+        commit('setRegisterStatus',2);
         const toaster = createToaster()
         const res = await Api.formData('seller/services',payload);
         if(res.status === 200){
@@ -95,11 +96,13 @@ export const  actions = {
             position:"top-right",
             dismissible: true});
           commit("setCreateGig",res)
+          commit('setRegisterStatus',3);
         }
         else{
           toaster.error(res.message,{
             position:"top-right",
             dismissible: true});
+            commit('setRegisterStatus',4); 
         }
       },
 

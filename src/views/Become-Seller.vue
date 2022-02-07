@@ -18,7 +18,7 @@
                       <label id="titleLabel" class="form-label">
                         Freelancer Title
                         <span class="text-danger">*</span>
-                        <span class="text-danger" v-if="dataErrors.title">{{
+                        <span class="text-danger" v-if="dataErrors.freelancer_title">{{
                           dataErrors.title
                         }}</span>
                       </label>
@@ -32,7 +32,7 @@
                           data-msg="Please enter a valid title."
                           data-error-class="u-has-error"
                           data-success-class="u-has-success"
-                          v-model="data.title"
+                          v-model="data.freelancer_title"
                         />
                       </div>
                     </div>
@@ -43,7 +43,7 @@
                       <label class="form-label">
                         Preferred language
                         <span class="text-danger">*</span>
-                        <span class="text-danger" v-if="dataErrors.language">{{
+                        <span class="text-danger" v-if="dataErrors.lang">{{
                           dataErrors.language
                         }}</span>
                       </label>
@@ -51,15 +51,10 @@
                         <select
                           class="custom-select w-100"
                           id="language"
-                          name="lang"
-                          v-model="data.language"
+                          v-model="data.lang"
                         >
                           <option selected>Select language</option>
-                          <option value="english">English</option>
-                          <option value="finish">Finish</option>
-                          <!-- @foreach ($languages as $language)
-                                            <option value="{{$language->language}}">{{$language->language}}</option>
-                                        @endforeach -->
+                          <option v-for="language in $store.getters.getLanguages" :key="language" :value="language">{{ language }}</option>
                         </select>
                       </div>
                     </div>
@@ -69,44 +64,48 @@
 
                 <div class="row">
                   <div class="col-sm-6 mb-2">
-                    <label class="form-label" for="avaialabilityInout">
-                      Availability
-                      <span class="text-danger">*</span>
-                    </label>
-                    <div class="form-group1">
-                      <select
-                        id="avaialabilityInout"
-                        v-model="data.availability"
-                      >
-                        <option selected disabled>Select availability</option>
-                        <option value="full_time">Full Time</option>
-                        <option value="part_time">Part Time</option>
-                      </select>
+                    <div class="js-form-message">
+                      <label class="form-label">
+                        Availability
+                        <span class="text-danger">*</span>
+                        <span class="text-danger" v-if="dataErrors.availability">{{
+                          dataErrors.availability
+                        }}</span>
+                      </label>
+                      <div class="form-group">
+                        <select
+                          class="custom-select w-100"
+                          id="availability"
+                          v-model="data.availability"
+                        >
+                          <option selected>Select availability</option>
+                          <option value="full time">Full Time</option>
+                          <option value="part time">Part Time</option>
+                         
+                        </select>
+                      </div>
                     </div>
                   </div>
 
                   <div class="col-sm-6 mb-2">
                     <div class="js-form-message">
-                      <label id="websiteLabel" class="form-label">
-                        Website
+                      <label class="form-label">
+                        Country
                         <span class="text-danger">*</span>
-                        <span class="text-danger" v-if="dataErrors.portfolio">{{
-                          dataErrors.portfolio
+                        <span class="text-danger" v-if="dataErrors.country">{{
+                          dataErrors.country
                         }}</span>
                       </label>
                       <div class="form-group">
-                        <input
-                          class="form-control"
-                          type="url"
-                          name="portfolio"
-                          placeholder="Enter your website"
-                          aria-label="Enter your website"
-                          aria-describedby="websiteLabel"
-                          data-msg="Password enter a valid website"
-                          data-error-class="u-has-error"
-                          data-success-class="u-has-success"
-                          v-model="data.portfolio"
-                        />
+                        <select
+                          class="custom-select w-100"
+                          id="country"
+                          name="lang"
+                          v-model="data.country_id"
+                        >
+                          <option selected>Select country</option>
+                          <option v-for="country in $store.getters.getCountries" :value="country.id" :key="country.id">{{ country.name }}</option>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -126,6 +125,9 @@
                 <div class="p-3">
                   <div class="form-group mb-4">
                     <label class="mb-1">BIO</label>
+                      <span class="text-danger" v-if="dataErrors.description">
+                        {{ dataErrors.description }}
+                      </span>
                     <div class="position-relative">
                       <textarea
                         class="form-control"
@@ -133,7 +135,7 @@
                         name="description"
                         min="15"
                         placeholder="Enter Bio"
-                        v-model="data.bio"
+                        v-model="data.description"
                       ></textarea>
                     </div>
                   </div>
@@ -143,7 +145,7 @@
 
 
               <div class="upload-cnic d-flex align-items-center justify-content-center mx-auto" 
-              :style="doc && `background: url(${doc})`"
+              :style="preview && `background: url(${preview})`"
               >
                 <i @click="$refs.cnicInput.click()"  class="fa fa-file-image-o" style="font-size:20px; cursor:pointer"></i>
                 <input type="file" ref="cnicInput" @change="handleCinic($event)" style="display:none" />
@@ -205,8 +207,7 @@
                             Select Sub Category
                           </option>
                           <option
-                            v-for="subCategory in $store.getters
-                              .getSubCategories"
+                            v-for="subCategory in $store.getters.getSubCategories"
                             :value="subCategory.id"
                             :key="subCategory.id"
                           >
@@ -229,6 +230,17 @@
               </div>
               <div class="box-body">
                 <div class="p-3">
+                  <div class="position-relative icon-form-control mb-2">
+                    <i
+                      class="mdi mdi-instagram position-absolute text-muted"
+                    ></i>
+                    <input
+                      placeholder="Enter your website"
+                      type="text"
+                      name="instagram"
+                      class="form-control"
+                    />
+                  </div>
                   <div class="position-relative icon-form-control mb-2">
                     <i
                       class="mdi mdi-instagram position-absolute text-muted"
@@ -286,22 +298,29 @@
 <script>
 import useBecomeSeller from "@/composables/useBecomeSeller";
 import { useStore } from "vuex";
+import { onBeforeMount } from '@vue/runtime-core';
 
 export default {
   setup() {
+
     const {
       data,
       dataErrors,
       subCategories,
       subCatLoader,
-      doc,
+      preview,
       convertFileToBase64,
     } = useBecomeSeller();
 
     const store = useStore();
+
+    onBeforeMount(()=>{
+      store.dispatch('getCountriesLanguage')
+    });
+
     const onChange = () => {
-      data.value.categoryId = document.getElementById("category").value;
-      store.dispatch("loadSubCategories", data.value.categoryId);
+      data.value.category_id = document.getElementById("category").value;
+      store.dispatch("loadSubCategories", data.value.category_id);
     };
 
     const handleCinic = (e) => {
@@ -309,14 +328,17 @@ export default {
     };
 
     const handleBecomeSeller = () => {
-      data.value.subcategoryId = document.getElementById("subcategoryID").value;
-      data.value.language = document.getElementById("language").value;
-      alert(JSON.stringify(data.value));
+      data.value.sub_category_id = document.getElementById("subcategoryID").value;
+      data.value.lang = document.getElementById("language").value;
+      data.value.country_id = document.getElementById("country").value;
+      data.value.availability = document.getElementById("availability").value;
+      console.log(JSON.stringify(data.value.country_id));
+      store.dispatch('handleBecomeSeller',data.value);
     };
 
     return {
       data,
-      doc,
+      preview,
       dataErrors,
       handleBecomeSeller,
       onChange,
