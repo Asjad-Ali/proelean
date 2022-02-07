@@ -1,8 +1,12 @@
 <template>
-   <section class="py-5 p-list-two">
+  <div>
+    <ServiceNavSection />    
+
+    <section class="py-5 p-list-two">
          <div class="container">
             <div class="row">
-                  <serviceFilter />
+
+              <ServiceFilterSection />
 
                <div class="col-lg-9 view_slider recommended">
                   <div class="row">
@@ -21,9 +25,10 @@
                         <h3>Services In {{ $route.query.q }}</h3>
                      </div>
                   </div>
-                  
-                        <ShowServices :services="$store.getters.getServices"/>
-                   
+                     
+                  <ServiceSection v-for="service in $store.getters.getServices" :key="service.id" :service="service" />
+
+                  <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
 
                   <servicePagination />
                   
@@ -31,23 +36,27 @@
             </div>
          </div>
    </section>
+
+  </div>
 </template>
 
 <script>
-import serviceFilter from '@/components/services/serviceFilter';
-import servicePagination from '@/components/services/servicePagination';
-import ShowServices from '@/components/services/showServices.vue';
+import ServiceNavSection from '@/components/services/ServiceNavSection.vue';
+import ServiceSection from '@/components/services/ServiceSection.vue';
+import ServiceFilterSection from '@/components/services/ServiceFilterSection';
+import ServicePagination from '@/components/services/ServicePagination';
+import Loader from '@/components/loadingComponent.vue';
 
 export default {
-   components:{
-      ShowServices,
-      serviceFilter,
-      servicePagination,
-   },
-};
+  components:{
+    ServiceNavSection,
+    ServiceSection,
+    ServiceFilterSection,
+    ServicePagination,
+    Loader,
+  },
+  setup() {
 
+  }
+}
 </script>
-
-<style>
-
-</style>
