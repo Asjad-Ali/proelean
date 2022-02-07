@@ -30,7 +30,7 @@
 
                   <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
 
-                  <servicePagination />
+                  
                   
                </div>
             </div>
@@ -44,7 +44,6 @@
 import ServiceNavSection from '@/components/services/ServiceNavSection.vue';
 import ServiceSection from '@/components/services/ServiceSection.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
-import ServicePagination from '@/components/services/ServicePagination';
 import Loader from '@/components/loadingComponent.vue';
 
 export default {
@@ -52,7 +51,6 @@ export default {
     ServiceNavSection,
     ServiceSection,
     ServiceFilterSection,
-    ServicePagination,
     Loader,
   },
   setup() {
