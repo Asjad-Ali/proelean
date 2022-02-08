@@ -4,12 +4,12 @@
       <div class="row">
         <div class="col-md-12">
           <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-            <h2 class="mb-0 p-0">Jobs</h2>
+            <h2 class="mb-0 p-0">Orders</h2>
             <router-link
               class="btn btn-sm btn-success ml-auto light"
               to="/create_job"
             >
-              Create a new job
+              Place New Order
             </router-link>
           </div>
 
@@ -29,39 +29,33 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>JOB DESCRIPTION</th>
+                      <th>USERNAME</th>
+                      <th>ORDER DESCRIPTION</th>
                       <th>POSTED DATE</th>
                       <th>DURATION</th>
                       <th>BUDGET</th>
-                      <th>OFFERS</th>
-                      <th>ACTION</th>
+                      <th>STATUS</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="job in jobs" :key="job.id">
+                    <tr
+                      v-for="order in orders"
+                      :key="order.buyer_id"
+                    >
+                      <td>
+                        {{ order.username }}
+                      </td>
                       <td>
                         <a href="#" class="make-black">
                           <p class="order-proposal-title">
-                            {{ job.description }}
+                            {{ order.description }}
                           </p>
                         </a>
                       </td>
-                      <td>{{ job.created_at }}</td>
-                      <td>{{ job.delivery_time }} days</td>
-                      <td>${{ job.budget }}</td>
-                      <td>
-                        <button class="btn btn-sm btn-success">
-                          {{ job.total_offers }}
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          class="btn btn-sm btn-success"
-                          @click="deleteJob(job.id)"
-                        >
-                          Delete
-                        </button>
-                      </td>
+                      <td>{{ order.created_at }}</td>
+                      <td>{{ order.delivery_time }}</td>
+                      <td>{{ order.amount }}.0{{ order.currency }}</td>
+                      <td> <button class="btn btn-sm btn-success"> Active </button> </td>
                     </tr>
                   </tbody>
                 </table>
@@ -75,20 +69,23 @@
 </template>
 
 <script>
-import { onMounted, computed } from "@vue/runtime-core";
-import store from "../../store";
+import { onMounted, computed } from '@vue/runtime-core'
+import store from '../../store'
 export default {
-  setup() {
-    onMounted(store.dispatch("showAllJobs"));
-    function deleteJob(id) {
-      store.dispatch("deleteAJob", id);
-    }
-    return {
-      jobs: computed(() => store.getters.getAllJobs),
-      deleteJob,
+    setup(){
+        onMounted(
+            store.dispatch('showAllOrders')
+        )
+        // function deleteJob(id){
+        // store.dispatch("deleteAJob",id);
+        // }
+      return {
+      orders: computed(() => store.getters.getAllOrders),
+      //deleteJob
     };
-  },
-};
+    }
+
+}
 </script>
 
 <style>

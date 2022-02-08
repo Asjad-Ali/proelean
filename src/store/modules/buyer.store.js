@@ -4,13 +4,15 @@ import { createToaster } from '@meforma/vue-toaster';
 export const state = {
     createJob:[],
     allJobs:[],
-    deleteJob:[]
+    deleteJob:[],
+    allOrders:[]
   }
 
 export const getters = {
   getCreateJob : state => state.createJob,
   getAllJobs : state => state.allJobs,
-  getDeleteJob : state => state.deleteJob
+  getDeleteJob : state => state.deleteJob,
+  getAllOrders : state => state.allOrders
 }
 
 export const  mutations = {
@@ -22,12 +24,15 @@ export const  mutations = {
     },
     setDeleteJob(state,job){
       state.deleteJob=job;
+    },
+    setAllOrders(state,order){
+      state.allOrders=order;
     }
   }
 
 export const  actions = {
     
-      async createJob({commit},payload){
+      async createAJob({commit},payload){
         const toaster = createToaster()
         const res = await Api.post('buyer/jobs',payload);
         if(res.status === 201){
@@ -44,7 +49,7 @@ export const  actions = {
         }
       },
 
-      async allJobs({commit}){
+      async showAllJobs({commit}){
         const res = await Api.get('buyer/jobs');
         if(res.status === 200){
           console.log("All Jobs Response",res.data)
@@ -70,6 +75,17 @@ export const  actions = {
           toaster.error(res.message,{
             position:"top-right",
             dismissible: true});
+        }
+      },
+
+      async showAllOrders({commit}){
+        const res = await Api.get('buyer/orders');
+        if(res.status === 200){
+          console.log("All Orders Response",res.data)
+          commit("setAllOrders",res.data);
+        }
+        else{
+          console.log("Error All Orders");
         }
       },
 
