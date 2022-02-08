@@ -1,11 +1,11 @@
 <template>
-<create-services />
+<createGig />
 </template>
 
 <script>
-import CreateServices from '../../components/services/CreateServices.vue'
+import createGig from '../../components/gigs/CreateGig.vue'
 export default {
-  components: { CreateServices },
+  components: { createGig },
 }
 
 </script>

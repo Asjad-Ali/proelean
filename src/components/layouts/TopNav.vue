@@ -94,54 +94,16 @@
                    </svg>
                    Alerts Center
                 </h6>
-                <a class="dropdown-item dropdown-notifications-item" href="#!">
-                   <div class="dropdown-notifications-item-icon bg-warning">
+                <a class="dropdown-item dropdown-notifications-item" href="#!" v-for="notification in userNotification" :key="notification.index">
+                     <div class="dropdown-notifications-item-icon bg-warning">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
                          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                       </svg>
                    </div>
-                   <div class="dropdown-notifications-item-content">
-                      <div class="dropdown-notifications-item-content-details">December 29, 2020</div>
-                      <div class="dropdown-notifications-item-content-text">This is an alert message. It's nothing serious, but it requires your attention.</div>
-                   </div>
-                </a>
-                <a class="dropdown-item dropdown-notifications-item" href="#!">
-                   <div class="dropdown-notifications-item-icon bg-info">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart">
-                         <line x1="12" y1="20" x2="12" y2="10"></line>
-                         <line x1="18" y1="20" x2="18" y2="4"></line>
-                         <line x1="6" y1="20" x2="6" y2="16"></line>
-                      </svg>
-                   </div>
-                   <div class="dropdown-notifications-item-content">
-                      <div class="dropdown-notifications-item-content-details">December 22, 2020</div>
-                      <div class="dropdown-notifications-item-content-text">A new monthly report is ready. Click here to view!</div>
-                   </div>
-                </a>
-                <a class="dropdown-item dropdown-notifications-item" href="#!">
-                   <div class="dropdown-notifications-item-icon bg-danger">
-                      <svg class="svg-inline--fa fa-exclamation-triangle fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exclamation-triangle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
-                         <path fill="currentColor" d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"></path>
-                      </svg>
-                      <!-- <i class="fas fa-exclamation-triangle"></i> -->
-                   </div>
-                   <div class="dropdown-notifications-item-content">
-                      <div class="dropdown-notifications-item-content-details">December 8, 2020</div>
-                      <div class="dropdown-notifications-item-content-text">Critical system failure, systems shutting down.</div>
-                   </div>
-                </a>
-                <a class="dropdown-item dropdown-notifications-item" href="#!">
-                   <div class="dropdown-notifications-item-icon bg-success">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
-                         <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                         <circle cx="8.5" cy="7" r="4"></circle>
-                         <line x1="20" y1="8" x2="20" y2="14"></line>
-                         <line x1="23" y1="11" x2="17" y2="11"></line>
-                      </svg>
-                   </div>
-                   <div class="dropdown-notifications-item-content">
-                      <div class="dropdown-notifications-item-content-details">December 2, 2020</div>
-                      <div class="dropdown-notifications-item-content-text">New user request. Woody has requested access to the organization.</div>
+                   <div class="dropdown-notifications-item-content" >
+                      <div class="dropdown-notifications-item-content-text">{{ notification.name }}</div>
+                      <div>{{ notification.body }}</div>
+                      <div class="dropdown-notifications-item-content-details">{{ $filters.timeAgo( notification.created_at ) }}</div>
                    </div>
                 </a>
                 <a class="dropdown-item dropdown-notifications-footer" href="alerts.html">View All Alerts</a>
@@ -263,24 +225,28 @@
 <script>
 import Api from "@/services/API";
 import { useRouter } from "vue-router";
-import { computed } from "@vue/runtime-core";
+import { computed, onMounted } from "@vue/runtime-core";
 import store from "../../store";
 
 export default {
-  setup() {
-    const router = useRouter();
-    const handleLogout = async () => {
-      const response = await Api.post("logout");
-      if (response.status == 200) {
-        localStorage.removeItem("PROELEAN_TOKEN");
-        router.go();
+   setup(){
+      const router = useRouter();
+      const handleLogout = async() => {
+         const response = await Api.post("logout");
+         if(response.status==200){
+            localStorage.removeItem('PROELEAN_TOKEN');
+            router.go()
+         }
       }
-    };
-    return {
-      handleLogout,
-      userInfo: computed(() => store.getters.getAuthUser),
-    };
-  },
+      onMounted(
+         store.dispatch('getNotification')
+      )
+      return {
+         handleLogout,
+         userInfo: computed( () => store.getters.getAuthUser),
+         userNotification: computed( () => store.getters.getUserNotifications)
+          }
+   }
 };
 </script>
 
