@@ -51,7 +51,7 @@ import ServiceFilterSection from '@/components/services/ServiceFilterSection';
 import ServicePagination from '@/components/services/ServicePagination';
 import Loader from '@/components/loadingComponent.vue';
 import { useRoute } from 'vue-router';
-import { onBeforeMount, onMounted, onUnmounted, ref, watch } from '@vue/runtime-core';
+import { onBeforeMount, ref, watch } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 export default {
@@ -65,7 +65,6 @@ export default {
   setup() {
       const store = useStore();
       const route = useRoute();
-      const scrollComponent = ref(null);
       const params = ref(route.query.category)
 
       watch(params.value, function(){
@@ -79,28 +78,6 @@ export default {
             store.dispatch('searchServices',`categories/${route.query.category}/services`)
          }
       })
-
-      onMounted(() => {
-         window.addEventListener("scroll", handleScroll)
-      })
-
-      onUnmounted(() => {
-         window.removeEventListener("scroll", handleScroll)
-      })
-
-      const handleScroll = () => {
-         let element = scrollComponent.value;
-         console.log(store.getters.getCurrentPage);
-         
-         if (store.getters.getCurrentPage > 1 && store.getters.getLoadingStatus === 'COMPLETED' && element.getBoundingClientRect().bottom <= window.innerHeight) {
-            let page = store.getters.getCurrentPage;
-            store.dispatch('handlePagination',`&page=${page}`)
-         }
-      }
-
-      return {
-         scrollComponent
-      }
   }
 }
 </script>
