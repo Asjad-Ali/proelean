@@ -54,7 +54,7 @@
                       <td>{{ order.amount }}.0{{ order.currency }}</td>
                       <td>
                         <button
-                          class="btn btn-sm btn-info w-100"
+                          class="btn btn-sm btn-primary w-100"
                           v-if="order.status_id == 1"
                         >
                           Active
