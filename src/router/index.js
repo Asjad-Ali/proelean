@@ -83,11 +83,14 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {  
   var isAuthenticated = false;
+  let user = JSON.parse(localStorage.getItem('userInfo'));
   if (localStorage.getItem('PROELEAN_TOKEN'))
     isAuthenticated = true;
   else
     isAuthenticated = false;
 
+  if(['/become_seller'].includes(to.path) && user.isFreelancer)
+    next('/')
   if (['/login', '/register', ].includes(to.path) || isAuthenticated) {
     next(); // allow to enter route
   } else {

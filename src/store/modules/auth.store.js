@@ -18,6 +18,12 @@ export const  mutations = {
   setError(state,error) {
     state.error=error;
   },
+
+  setUserAsSeller(state) {
+    if(!state.user.isFreelancer) {
+      state.user.isFreelancer = 1;
+    }
+  }
 }
 
 export const  actions = {
@@ -51,7 +57,7 @@ export const  actions = {
         }
         else
         {
-          commit('setRegisterStatus',4); 
+          commit('setRegisterStatus',4);
           toaster.error(resp.message,{
             position:"top-right",
             dismissible: true});

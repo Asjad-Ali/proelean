@@ -1,18 +1,21 @@
 import { ref, watch } from "vue";
 import { useStore } from "vuex";
+import { onBeforeMount } from '@vue/runtime-core';
 
 export default function useBecomeSeller() {
 
+    const store = useStore();
     const subCategories = ref(null);
     let subCatLoader=ref(false);
+    const bannersBase64= ref([]);
     const preview = ref(null);
 
     const data = ref({
-        freelancer_title: '',
-        lang: '',
+        freelancer_title: 'asfd asdsadas asdas',
+        lang: 'sadad',
         availability: '',
         portfolio: '',
-        description: '',
+        description: 'asfasfasfasfasf asf asf',
         cinic: '',
         category_id: '',
         sub_category_id: '',
@@ -27,7 +30,7 @@ export default function useBecomeSeller() {
         lang: null,
         availability: null,
         cinic:null,
-        country:null,
+        country_id:null,
         portfolio: null,
         description: null,
         category_id: null,
@@ -75,16 +78,14 @@ export default function useBecomeSeller() {
     })
 
     const convertFileToBase64 = (file) => {
+        data.value.cinic = file;
         const reader = new FileReader();
         reader.onloadend = function() {
             preview.value = reader.result;
-            data.value.cinic = reader.result;
         }
         reader.readAsDataURL(file);
     }
 
-
-    const store = useStore();
     const createGig = ref({
         s_description: "",
         description: "",
@@ -101,7 +102,6 @@ export default function useBecomeSeller() {
           console.log("Create Gig Value", createGig.value);
         }
         
-      const bannersBase64= ref([]);
       const selectThumbnail = (e) => {
         const files = e.target.files;
         for (let i = 0; i < files.length; i++) {
@@ -129,20 +129,47 @@ export default function useBecomeSeller() {
         reader.readAsDataURL(file);  
     }
 
+    onBeforeMount(()=>{
+        store.dispatch('getCountriesLanguage')
+    });
+
+    const onCategorySelected = () => {
+        data.value.category_id = document.getElementById("category").value;
+        store.dispatch("loadSubCategories", data.value.category_id);
+    };
+
+    const handleCinic = (e) => {
+        convertFileToBase64(e.target.files[0]);
+    };
+
+    const handleBecomeSeller = () => {
+        data.value.sub_category_id = document.querySelector("#subcategoryID").value;
+        data.value.lang = document.querySelector("#language").value;
+        data.value.country_id = document.querySelector("#country").value;
+        data.value.availability = document.querySelector("#availability").value;
+        console.log(data.value)
+        store.dispatch('handleBecomeSeller',data.value);
+        // if(!dataErrors.value) {
+        //     store.dispatch('handleBecomeSeller',data.value);
+        // }
+    };
+
     return {
         data,
         preview,
         dataErrors,
         subCategories,
         subCatLoader,
-        convertFileToBase64,
-
         createGig,
         bannersBase64,
+        convertFileToBase64,
         gigCreation,
         selectThumbnail,
         removeImage,
-        encodeImageFileAsURL
+        encodeImageFileAsURL,
+        handleBecomeSeller,
+        onCategorySelected,
+        handleCinic
     }
 
 }

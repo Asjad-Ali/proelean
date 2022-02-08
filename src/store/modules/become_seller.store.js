@@ -1,11 +1,13 @@
 import Api from '@/services/API'
-// import { createToaster } from '@meforma/vue-toaster';
+import { createToaster } from '@meforma/vue-toaster';
+import { useRouter } from 'vue-router';
 
 
 export const state = {
     countries: [],
     languages: [],
     deliveryDays: [],
+    submitLoader: false,
     error: null,
   }
 
@@ -28,6 +30,7 @@ export const getters = {
   getCountries: state => state.countries,
   getLanguages: state => state.languages,
   getDeliveryDays: state => state.deliveryDays,
+  getSubmitStatus: state => state.submitLoader,
 }
 
 export const  actions = {
@@ -53,26 +56,25 @@ export const  actions = {
       }
     },
 
-    async handleBecomeSeller(payload) {
-      console.log("payload: "+ JSON.stringify(payload))
-      // const res = await Api.post('become_freelancer',payload)
-      // if(res.status === 200) {
-      //   const toaster = createToaster()
-      //   toaster.success(res.message,{
-      //     position:"top-right",
-      //     dismissible: true});
-      // }
-    },
-
-    register(state,payload) {
-        return Api.post('register',payload).then(
-          resp=>{
-          //   this.commit('LOGIN_SUCCESS');
-            return Promise.resolve(resp);
-        },
-        error=>{
-          // this.commit('LOGIN_FAILED');
-          return Promise.reject(error);
+    async handleBecomeSeller({ commit, state }, payload) {
+      console.log(payload)
+      state.submitLoader = true;
+      const res = await Api.formData('become_freelancer',payload);
+      const toaster = createToaster();
+      if(res.status === 201) {
+        commit('setUserAsSeller');
+        toaster.success(res.message,{
+          position:"top-right",
+          dismissible: true
+        });
+        const router = useRouter();
+        router.push("/")
+      } else {
+        toaster.error(res.message,{
+          position:"top-right",
+          dismissible: true
         });
       }
+      state.submitLoader = false;
+    },
   }

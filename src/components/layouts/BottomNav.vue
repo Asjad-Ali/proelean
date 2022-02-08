@@ -25,20 +25,13 @@
      
           </ul>
        </div>
-       <ul class="navbar-nav ml-auto" >
+       <ul class="navbar-nav ml-auto" v-if="!$store.state.isSeller">
             <li class="nav-item">
                 <router-link class="btn btn-success" to="become_seller">
                 <i class="fa fa-fw fa-trophy"></i>
                 <span>Become A Seller</span>
                 </router-link>
             </li>
-         
-          <!-- <li class="nav-item">
-             <a class="nav-link">
-             <img class="country-flag img-fluid" src="{{asset('assets/images/flag/india.png')}}">
-             <span>English</span>
-             </a>
-          </li> -->
        </ul>
     </div>
  </nav>
