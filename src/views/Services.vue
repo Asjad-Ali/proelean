@@ -25,17 +25,16 @@
                         <h3>Services In {{ $route.query.q }}</h3>
                      </div>
                   </div>
-                  <NotFoundSection v-if="!$store.getters.getServices.length" />
                   <div class="row">
                      <div
-                           class="service-col col-md-4 d-flex flex-column align-self-stretch"
-                           v-for="service in $store.getters.getServices"
-                           :key="service.id"
+                        class="service-col col-md-4 d-flex flex-column align-self-stretch"
+                        v-for="service in $store.getters.getServices"
+                        :key="service.id"
                      >  
                         <ServiceSection :service="service" />
                      </div>
                      <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
-
+                     <NotFoundSection v-if="!$store.getters.getServices.length && $store.gettters.getLoadingStatus==='COMPLETED'" />
                      <PaginationSection />
                   </div>
                </div>
