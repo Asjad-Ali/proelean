@@ -1,19 +1,15 @@
 <template>
-  <div>
-      <serviceDetailNav />
-      <serviceDetailSection />
-  </div>
+
+    <DetailSection />
 </template>
 
 <script>
-import serviceDetailNav from '@/components/services/serviceDetailNavSection'
-import serviceDetailSection from '@/components/services/serviceDetailSection'
+import DetailSection from '@/components/single-service/DetailSection.vue'
 
 export default {
-
+    name:"gigDetail",
     components: {
-        serviceDetailNav,
-        serviceDetailSection
+        DetailSection
     }
 }
 </script>

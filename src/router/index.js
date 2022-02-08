@@ -4,9 +4,11 @@ import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import BecomeSeller from '../views/Become-Seller.vue'
 import Profile from '../views/Profile.vue'
-import createGig from '../views/Seller/CreateGig.vue'
+import ManageGig from '../views/Seller/ManageGig.vue'
+import ServiceDetail from '../views/ServiceDetail.vue'
 import ManageJob from '../views/Buyer/ManageJob.vue'
 import CreateJob from '../components/manageJob/CreateJob.vue'
+// import ManageOrder from '../views/Buyer/ManageOrder.vue'
 
 const routes = [
   {
@@ -14,15 +16,16 @@ const routes = [
     name: 'Home',
     component: Home,
   },
+
   {
     path: '/login',
     name: 'Login',
     component: Login
   },
   {
-    path: '/createGig',
-    name: 'createGig',
-    component: createGig
+    path: '/manage_gig',
+    name: 'ManageGig',
+    component: ManageGig
   },
   {
     path: '/register',
@@ -41,16 +44,23 @@ const routes = [
     component: Profile,
   
   },
+
   {
-    path: '/CreateJob',
+    path: '/create_job',
     name: 'CreateJob',
     component: CreateJob,
   },
   {
-    path: '/ManageJob',
+    path: '/manage_job',
     name: 'ManageJob',
     component: ManageJob,
   },
+  // {
+  //   path: '/manage_order',
+  //   name: 'ManageOrder',
+  //   component: ManageOrder,
+  // },
+
   {
     path: '/gigs',
     name: 'Gigs',
@@ -58,9 +68,9 @@ const routes = [
    
   },
   {
-    path: '/gig-detail/:title',
+    path: '/gig-detail/:id',
     name: 'gigDetail',
-    component: () => import('../views/ServiceDetail.vue'),
+    component: ServiceDetail,
     
   },
 ]

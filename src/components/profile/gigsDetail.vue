@@ -8,7 +8,7 @@
         v-for="service in $store.getters.getUserServices"
         :key="service.id"
       >
-      <router-link :to="`/gig-detail/${service.id}`" >
+      <router-link :to="{name:'gigDetail', params:{id:service.id}}" >
           <img
             class="img-fluid"
             :src="'https://api.dex.proelean.com/' + service.service_media[0].media"
