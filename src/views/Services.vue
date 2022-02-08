@@ -25,13 +25,19 @@
                         <h3>Services In {{ $route.query.q }}</h3>
                      </div>
                   </div>
-                     
-                  <ServiceSection v-for="service in $store.getters.getServices" :key="service.id" :service="service" />
+                  <NotFoundSection v-if="!$store.getters.getServices.length" />
+                  <div class="row">
+                     <div
+                           class="service-col col-md-4 d-flex flex-column align-self-stretch"
+                           v-for="service in $store.getters.getServices"
+                           :key="service.id"
+                     >  
+                        <ServiceSection :service="service" />
+                     </div>
+                     <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
 
-                  <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
-
-                  
-                  
+                     <PaginationSection />
+                  </div>
                </div>
             </div>
          </div>
@@ -56,6 +62,8 @@ export default {
     ServiceNavSection,
     ServiceSection,
     ServiceFilterSection,
+    PaginationSection,
+    NotFoundSection,
     Loader,
   },
   setup() {
