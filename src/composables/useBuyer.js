@@ -90,7 +90,7 @@ export default function useBecomeSeller() {
     }
 
     const jobCreation = () => {
-        store.dispatch('createJob',createJob.value)
+        store.dispatch('createAJob',createJob.value)
         console.log("Create Job Value", createJob.value);
     }
 
