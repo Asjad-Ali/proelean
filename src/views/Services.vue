@@ -25,15 +25,8 @@
                         <h3>Services In {{ $route.query.q }}</h3>
                      </div>
                   </div>
-<<<<<<< HEAD
-                     
-                  <ServiceSection v-for="service in $store.getters.getServices" :key="service.id" :service="service" />
-
-                  <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
-
-                  
-=======
-                  <div class="row" ref="scrollComponent">
+                  <div class="row">
+                     <NotFoundSection v-if="!$store.getters.getServices.length" />
                      <div
                         class="service-col col-md-4 d-flex flex-column align-self-stretch"
                         v-for="service in $store.getters.getServices" :key="service.id"
@@ -42,8 +35,8 @@
                      </div>
                      <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'"/>
                   </div>
-                  <servicePagination />
->>>>>>> 9c18a068d92f93d24d39203163844950a8b6c499
+
+                  <PaginationSection />
                   
                </div>
             </div>
@@ -56,32 +49,26 @@
 <script>
 import ServiceNavSection from '@/components/services/ServiceNavSection.vue';
 import ServiceSection from '@/components/services/ServiceSection.vue';
+import PaginationSection from '@/components/services/ServicePagination.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
+import NotFoundSection from '@/components/services/ServiceNotFoundSection.vue';
 import Loader from '@/components/loadingComponent.vue';
 import { useRoute } from 'vue-router';
-import { onBeforeMount, onMounted, onUnmounted, ref, watch } from '@vue/runtime-core';
+import { onBeforeMount, ref, watch } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 export default {
-<<<<<<< HEAD
-  components:{
-    ServiceNavSection,
-    ServiceSection,
-    ServiceFilterSection,
-    Loader,
-=======
   components: {
       ServiceNavSection,
       ServiceSection,
       ServiceFilterSection,
-      ServicePagination,
+      NotFoundSection,
+      PaginationSection,
       Loader,
->>>>>>> 9c18a068d92f93d24d39203163844950a8b6c499
   },
   setup() {
       const store = useStore();
       const route = useRoute();
-      const scrollComponent = ref(null);
       const params = ref(route.query.category)
 
       watch(params.value, function(){
@@ -95,28 +82,6 @@ export default {
             store.dispatch('searchServices',`categories/${route.query.category}/services`)
          }
       })
-
-      onMounted(() => {
-         window.addEventListener("scroll", handleScroll)
-      })
-
-      onUnmounted(() => {
-         window.removeEventListener("scroll", handleScroll)
-      })
-
-      const handleScroll = () => {
-         let element = scrollComponent.value;
-         console.log(store.getters.getCurrentPage);
-         
-         if (store.getters.getCurrentPage > 1 && store.getters.getLoadingStatus === 'COMPLETED' && element.getBoundingClientRect().bottom <= window.innerHeight) {
-            let page = store.getters.getCurrentPage;
-            store.dispatch('handlePagination',`&page=${page}`)
-         }
-      }
-
-      return {
-         scrollComponent
-      }
   }
 }
 </script>

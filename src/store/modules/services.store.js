@@ -43,9 +43,6 @@ export const  mutations = {
     setNextPage(state,page) {
       state.page = page;
     },
-    appendPaginatedServices(state,services) {
-      services.forEach(service => state.services.push(service))
-    },
     setLoadingStatus(state,status) {
       state.loadingStatus=status;
     },
@@ -82,22 +79,6 @@ export const  actions = {
         commit('setLoadingStatus','COMPLETED');
       }
     },
-
-    async handlePagination ({ commit, state }, page) {
-      state.loadingStatus = 'LOADING';
-      console.log(page)
-      const res = await Api.get(`${state.url}${page}`);
-
-      console.log(res.data);
-
-      commit('appendPaginatedServices',res.data);
-      if(res.links && res.links.next) {
-          commit('setNextPage',state.page+1);
-      } else {
-          commit('setNextPage', 1);
-      }
-      state.loadingStatus = 'COMPLETED';
-  },
     
     async userServices({ commit})
       {
