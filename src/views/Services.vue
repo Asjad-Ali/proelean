@@ -25,18 +25,12 @@
                         <h3>Services In {{ $route.query.q }}</h3>
                      </div>
                   </div>
-                  <div class="row">
-                     <NotFoundSection v-if="!$store.getters.getServices.length" />
-                     <div
-                        class="service-col col-md-4 d-flex flex-column align-self-stretch"
-                        v-for="service in $store.getters.getServices" :key="service.id"
-                     >                     
-                        <ServiceSection :service="service" />
-                     </div>
-                     <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'"/>
-                  </div>
+                     
+                  <ServiceSection v-for="service in $store.getters.getServices" :key="service.id" :service="service" />
 
-                  <PaginationSection />
+                  <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
+
+                  
                   
                </div>
             </div>
@@ -58,13 +52,11 @@ import { onBeforeMount, ref, watch } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 export default {
-  components: {
-      ServiceNavSection,
-      ServiceSection,
-      ServiceFilterSection,
-      NotFoundSection,
-      PaginationSection,
-      Loader,
+  components:{
+    ServiceNavSection,
+    ServiceSection,
+    ServiceFilterSection,
+    Loader,
   },
   setup() {
       const store = useStore();
