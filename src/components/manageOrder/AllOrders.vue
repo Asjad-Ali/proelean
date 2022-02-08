@@ -38,10 +38,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr
-                      v-for="order in orders"
-                      :key="order.buyer_id"
-                    >
+                    <tr v-for="order in orders" :key="order.buyer_id">
                       <td>
                         {{ order.username }}
                       </td>
@@ -55,10 +52,26 @@
                       <td>{{ order.created_at }}</td>
                       <td>{{ order.delivery_time }}</td>
                       <td>{{ order.amount }}.0{{ order.currency }}</td>
-                      <td> <button class="btn btn-sm btn-info w-100" v-if="order.status_id==1"> Active </button>
-                        <button class="btn btn-sm btn-danger w-100" v-if="order.status_id==5"> Disputed </button>
-                        <button class="btn btn-sm btn-success w-100" v-if="order.status_id==4"> Complete </button>
-                       </td>
+                      <td>
+                        <button
+                          class="btn btn-sm btn-info w-100"
+                          v-if="order.status_id == 1"
+                        >
+                          Active
+                        </button>
+                        <button
+                          class="btn btn-sm btn-danger w-100"
+                          v-if="order.status_id == 5"
+                        >
+                          Disputed
+                        </button>
+                        <button
+                          class="btn btn-sm btn-success w-100"
+                          v-if="order.status_id == 4"
+                        >
+                          Complete
+                        </button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -72,23 +85,20 @@
 </template>
 
 <script>
-import { onMounted, computed } from '@vue/runtime-core'
-import store from '../../store'
+import { onMounted, computed } from "@vue/runtime-core";
+import store from "../../store";
 export default {
-    setup(){
-        onMounted(
-            store.dispatch('showAllOrders')
-        )
-        // function deleteJob(id){
-        // store.dispatch("deleteAJob",id);
-        // }
-      return {
+  setup() {
+    onMounted(store.dispatch("showAllOrders"));
+    // function deleteJob(id){
+    // store.dispatch("deleteAJob",id);
+    // }
+    return {
       orders: computed(() => store.getters.getAllOrders),
       //deleteJob
     };
-    }
-
-}
+  },
+};
 </script>
 
 <style>
