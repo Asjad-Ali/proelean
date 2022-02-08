@@ -11,6 +11,7 @@ class API {
     let options = {
       method: method,
       headers: {
+        "Content-Type" : contentType=='application/json' ? contentType : '',
         "Accept": 'application/json',
         "Authorization": `Bearer ${TOKEN}`,
       },
