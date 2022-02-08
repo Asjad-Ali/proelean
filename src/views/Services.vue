@@ -34,7 +34,7 @@
                         <ServiceSection :service="service" />
                      </div>
                      <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
-                     <NotFoundSection v-if="!$store.getters.getServices.length && $store.gettters.getLoadingStatus==='COMPLETED'" />
+                     <NotFoundSection v-if="!$store.getters.getServices.length && $store.getters.getLoadingStatus==='COMPLETED'" />
                      <PaginationSection />
                   </div>
                </div>
@@ -52,26 +52,27 @@ import PaginationSection from '@/components/services/ServicePagination.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
 import NotFoundSection from '@/components/services/ServiceNotFoundSection.vue';
 import Loader from '@/components/loadingComponent.vue';
-import { useRoute } from 'vue-router';
-import { onBeforeMount, ref, watch } from '@vue/runtime-core';
+import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+import { onBeforeMount } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 export default {
-  components:{
-    ServiceNavSection,
-    ServiceSection,
-    ServiceFilterSection,
-    PaginationSection,
-    NotFoundSection,
-    Loader,
-  },
-  setup() {
+   components: {
+      ServiceNavSection,
+      ServiceSection,
+      ServiceFilterSection,
+      PaginationSection,
+      NotFoundSection,
+      Loader,
+   },
+   setup() {
       const store = useStore();
       const route = useRoute();
-      const params = ref(route.query.category)
 
-      watch(params.value, function(){
-         console.log(params.value);
+      onBeforeRouteUpdate((to, from) => {
+         if(to.query.category !== from.query.category) {
+            store.dispatch('searchServices',`categories/${to.query.category}/services`)
+         }
       })
 
       onBeforeMount(() => {
@@ -81,6 +82,6 @@ export default {
             store.dispatch('searchServices',`categories/${route.query.category}/services`)
          }
       })
-  }
+   }
 }
 </script>
