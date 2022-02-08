@@ -25,15 +25,8 @@
                         <h3>Services In {{ $route.query.q }}</h3>
                      </div>
                   </div>
-<<<<<<< HEAD
-                     
-                  <ServiceSection v-for="service in $store.getters.getServices" :key="service.id" :service="service" />
-
-                  <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
-
-                  
-=======
-                  <div class="row" ref="scrollComponent">
+                  <div class="row">
+                     <NotFoundSection v-if="!$store.getters.getServices.length" />
                      <div
                         class="service-col col-md-4 d-flex flex-column align-self-stretch"
                         v-for="service in $store.getters.getServices" :key="service.id"
@@ -42,8 +35,8 @@
                      </div>
                      <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'"/>
                   </div>
-                  <servicePagination />
->>>>>>> 9c18a068d92f93d24d39203163844950a8b6c499
+
+                  <PaginationSection />
                   
                </div>
             </div>
@@ -56,27 +49,22 @@
 <script>
 import ServiceNavSection from '@/components/services/ServiceNavSection.vue';
 import ServiceSection from '@/components/services/ServiceSection.vue';
+import PaginationSection from '@/components/services/ServicePagination.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
+import NotFoundSection from '@/components/services/ServiceNotFoundSection.vue';
 import Loader from '@/components/loadingComponent.vue';
 import { useRoute } from 'vue-router';
 import { onBeforeMount, ref, watch } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 export default {
-<<<<<<< HEAD
-  components:{
-    ServiceNavSection,
-    ServiceSection,
-    ServiceFilterSection,
-    Loader,
-=======
   components: {
       ServiceNavSection,
       ServiceSection,
       ServiceFilterSection,
-      ServicePagination,
+      NotFoundSection,
+      PaginationSection,
       Loader,
->>>>>>> 9c18a068d92f93d24d39203163844950a8b6c499
   },
   setup() {
       const store = useStore();
