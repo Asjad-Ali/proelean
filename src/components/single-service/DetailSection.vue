@@ -1,5 +1,6 @@
 <template>
-  <div class="main-page py-5">
+  <div class="main-page py-5" v-if="service">
+
          <div class="container">
             <div class="row">
                <div class="col-lg-8 left">
@@ -9,13 +10,13 @@
                         <li class="breadcrumb-item active" aria-current="page">Library</li>
                      </ol>
                   </nav>
-                  <h2>I will do mobile and website wireframes and prototyping</h2>
                   <div id="overview" class="seller-overview d-flex align-items-center">
                      <div class="user-profile-image d-flex">
                         <label class="profile-pict" for="profile_image">
                         <img
-                           src="images/user/s2.png"
-                           class="profile-pict-img img-fluid" alt="">
+                           class="img-fluid"
+                           :src="'https://api.dex.proelean.com/' + service.service_user.image"
+                        />
                         </label>
                         <div class="profile-name">
                            <span class="user-status">
@@ -35,68 +36,36 @@
                         </span>
                         <span class="orders-in-queue">2 Orders in Queue</span>
                      </div>
+                     <div>
+                     </div>
                   </div>
+                        <h2> {{ service.s_description }}  </h2>
                   <div class="slider mt-4">
                      <div id="aniimated-thumbnials" class="slider-for slick-slider-single">
                         <a href="images/list/v1.png">
-                        <img class="img-fluid" src="{{asset('images/list/v1.png')}}" />
-                        </a>
-                        <a href="images/list/v2.png">
-                        <img class="img-fluid" src="{{asset('images/list/v2.png')}}" />
-                        </a>
-                        <a href="images/list/v3.png">
-                        <img class="img-fluid" src="{{asset('images/list/v3.png')}}" />
-                        </a>
-                        <a href="images/list/v4.png">
-                        <img class="img-fluid" src="{{asset('images/list/v4.png')}}" />
-                        </a>
-                        <a href="images/list/v5.png">
-                        <img class="img-fluid" src="{{asset('images/list/v5.png')}}" />
+                        <img class="img-fluid" 
+                           :src="'https://api.dex.proelean.com/' + service.service_media[0].media"
+                         />
                         </a>
                      </div>
                      <div class="slider-nav slick-slider-single">
                         <div class="item-slick">
-                           <img class="img-fluid" src="{{asset('images/list/v1.png')}}"
-                              alt="Alt">
-                        </div>
-                        <div class="item-slick">
-                           <img class="img-fluid" src="{{asset('images/list/v2.png')}}"
-                              alt="Alt">
-                        </div>
-                        <div class="item-slick">
-                           <img class="img-fluid" src="{{asset('images/list/v3.png')}}"
-                              alt="Alt">
-                        </div>
-                        <div class="item-slick">
-                           <img class="img-fluid" src="{{asset('images/list/v4.png')}}"
-                              alt="Alt">
-                        </div>
-                        <div class="item-slick">
-                           <img class="img-fluid" src="{{asset('images/list/v5.png')}}"
-                              alt="Alt">
+                        <img class="img-fluid" 
+                           :src="'https://api.dex.proelean.com/' + service.service_media[0].media"
+                         />
                         </div>
                      </div>
                   </div>
                   <div id="description" class="description">
                      <h3>About This Gig</h3>
-                     <p>I have 7+ years of experience in Mobile App & Web Wireframing & Mobile app UI</p>
-                     <p>I will create a Clickable Mobile App Wireframe in the Marvel app. Marvel is the best platform to
-                        create Mobile App Interactive Wireframes
-                     </p>
-                     <p>We specialize in UX Design, UI Design, Usability Testing, Wireframing, and Prototyping. In our work
-                        we try to transform highly complex concepts into simple, approachable applications. I believe that
-                        it is important to create things that look and feel great.
-                     </p>
-                     <p>It'll help you to demonstrate your idea to your developers or Investors. Why don't we do something
-                        together?
-                     </p>
+                     <p> {{ service.description }} </p>
+                     <p> {{ service.additional_info }} </p>
                   </div>
                   <ul class="metadata">
                      <li class="metadata-attribute">
                         <p>Main Type</p>
                         <ul>
-                           <li>Websites</li>
-                           <li>Mobile Apps</li>
+                           <li> {{ service.category.title }} </li>
                         </ul>
                      </li>
                      <li class="metadata-attribute">
@@ -109,19 +78,20 @@
                      </li>
                   </ul>
                   <h3 id="aboutSeller">About The Seller</h3>
+                  
                   <div class="profile-card">
                      <div class="user-profile-image d-flex">
                         <label class="profile-pict" for="profile_image">
                         <img
-                           src="images/user/s2.png"
+                           :src="'https://api.dex.proelean.com/' + service.service_user.image"
                            class="profile-pict-img img-fluid" alt="">
                         </label>
                         <div class="right">
                            <div class="profile-name">
                               <span class="user-status">
-                              <a href="#" class="seller-link">Askbootstrap</a>
+                              <a href="#" class="seller-link">{{service.service_user.name}}</a>
                               </span>
-                              <div class="seller-level">Website and mobile wireframes UI UX </div>
+                              <div class="seller-level">{{service.s_description}} </div>
                            </div>
                            <div class="user-info">
                               <span class="user-info-rating d-flex align-items-center">
@@ -163,7 +133,7 @@
                            </div>
                         </article>
                      </div>
-                     <div id="packagesTable" class="table-package">
+                     <!-- <div id="packagesTable" class="table-package">
                         <h3>Compare Packages</h3>
                         <table>
                            <colgroup>
@@ -309,20 +279,20 @@
                               </tr>
                            </tbody>
                         </table>
-                     </div>
+                     </div> -->
                      <div id="recommendations" class="recommended">
                         <h3>Recommended For You</h3>
                         <div class="recommended-slider recommend">
                            <div>
                               <a href="#">
-                              <img class="img-fluid" src="images/list/v1.png" />
+                              <img class="img-fluid" src="/assets/images/list/v1.png" />
                               </a>
                               <div class="inner-slider">
                                  <div class="inner-wrapper">
                                     <div class="d-flex align-items-center">
                                        <span class="seller-image">
                                        <img class="img-fluid"
-                                          src="images/user/s1.png"
+                                          src="/assets/images/user/s1.png"
                                           alt='' />
                                        </span>
                                        <span class="seller-name">
@@ -359,14 +329,14 @@
                            </div>
                            <div>
                               <a href="#">
-                              <img class="img-fluid" src="images/list/v2.png" />
+                              <img class="img-fluid" src="/assets/images/list/v2.png" />
                               </a>
                               <div class="inner-slider">
                                  <div class="inner-wrapper">
                                     <div class="d-flex align-items-center">
                                        <span class="seller-image">
                                        <img class="img-fluid"
-                                          src="images/user/s2.png"
+                                          src="/assets/images/user/s2.png"
                                           alt='' />
                                        </span>
                                        <span class="seller-name">
@@ -403,14 +373,14 @@
                            </div>
                            <div>
                               <a href="#">
-                              <img class="img-fluid" src="images/list/v3.png" />
+                              <img class="img-fluid" src="/assets/images/list/v3.png" />
                               </a>
                               <div class="inner-slider">
                                  <div class="inner-wrapper">
                                     <div class="d-flex align-items-center">
                                        <span class="seller-image">
                                        <img class="img-fluid"
-                                          src="images/user/s3.png"
+                                          src="/assets/images/user/s3.png"
                                           alt='' />
                                        </span>
                                        <span class="seller-name">
@@ -642,7 +612,7 @@
                               <div class="left">
                                  <span>
                                  <img
-                                    src="images/user/s5.png"
+                                    src="/assets/images/user/s5.png"
                                     class="profile-pict-img img-fluid" alt="">
                                  </span>
                               </div>
@@ -662,7 +632,7 @@
                                  <div class="country d-flex align-items-center">
                                     <span>
                                     <img class="country-flag img-fluid"
-                                       src="images/flag/india.png">
+                                       src="/assets/images/flag/india.png">
                                     </span>
                                     <div class="country-name font-accent">India</div>
                                  </div>
@@ -701,7 +671,7 @@
                                     <div class="left">
                                        <span>
                                        <img
-                                          src="images/user/s1.png"
+                                          src="/assets/images/user/s1.png"
                                           class="profile-pict-img img-fluid" alt="">
                                        </span>
                                     </div>
@@ -757,7 +727,7 @@
                      </ul>
                   </div>
                </div>
-               <div class="col-lg-4 right">
+               <!-- <div class="col-lg-4 right">
                   <div class="sticky">
                      <ul class="nav nav-tabs">
                         <li><a class="active" data-toggle="tab" href="#basic">Basic</a></li>
@@ -849,7 +819,7 @@
                         <a class="fit-button" href="#">Contact Seller</a>
                      </div>
                   </div>
-               </div>
+               </div> -->
             </div>
          </div>
          <div class="container mt-5">
@@ -1083,19 +1053,28 @@
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core'
-import store from '../../store'
+import { onMounted, ref } from '@vue/runtime-core';
 import { useRoute } from 'vue-router';
+import API from '../../services/API.js';
 export default {
-      setup(){
-    const route = useRoute();
+   setup() {
+      const route = useRoute();
+      const service = ref()
+      onMounted ( async ()=>{
+         console.log(route.params.id)
+         const resp = await API.get(`seller/services/${route.params.id}`)
+         if(resp.status===200){
+            console.log("Services DAta",resp.data)
+            service.value=resp.data
+         }
+      })
 
-    console.log("ID Params",route.params.title);
-      onMounted(
-         store.dispatch('userServices')
-      )
-      
-    }
+      return{
+         service
+      }
+
+   }
+
 }
 </script>
 

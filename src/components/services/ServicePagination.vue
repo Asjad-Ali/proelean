@@ -15,7 +15,7 @@
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next">
                     <span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-                                       <span class="sr-only"></span>
+                    <span class="sr-only"></span>
                 </a>
             </li>
         </ul>
