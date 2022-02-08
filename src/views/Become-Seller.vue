@@ -26,6 +26,7 @@
                         <input
                           type="text"
                           class="form-control"
+                          name="freelancer_title"
                           placeholder="Enter your freelancer title"
                           aria-label="Enter your freelancer title"
                           aria-describedby="titleLabel"
@@ -100,8 +101,6 @@
                         <select
                           class="custom-select w-100"
                           id="country"
-                          name="lang"
-                          v-model="data.country_id"
                         >
                           <option selected>Select country</option>
                           <option v-for="country in $store.getters.getCountries" :value="country.id" :key="country.id">{{ country.name }}</option>
@@ -148,7 +147,7 @@
               :style="preview && `background: url(${preview})`"
               >
                 <i @click="$refs.cnicInput.click()"  class="fa fa-file-image-o" style="font-size:20px; cursor:pointer"></i>
-                <input type="file" ref="cnicInput" @change="handleCinic($event)" style="display:none" />
+                <input type="file" ref="cnicInput" accept="image/*" @change="handleCinic($event)" style="display:none" />
               </div>
 
             </div>
@@ -174,7 +173,7 @@
                           data-msg="Please select category."
                           :data-error-class="dataErrors.categoryId"
                           data-success-class="u-has-success"
-                          :onchange="onChange"
+                          :onchange="onCategorySelected"
                         >
                           <option
                             v-for="category in $store.getters.getCategories"
@@ -283,8 +282,10 @@
               <button
                 type="submit"
                 class="btn btn-success ml-2"
+                :disabled="$store.getters.getSubmitStatus"
                 @click.prevent="handleBecomeSeller"
               >
+              <i class="fa fa-spinner fa-spin" v-if="$store.getters.getSubmitStatus"></i>
                 Submit
               </button>
             </div>
@@ -297,8 +298,6 @@
 
 <script>
 import useBecomeSeller from "@/composables/useBecomeSeller";
-import { useStore } from "vuex";
-import { onBeforeMount } from '@vue/runtime-core';
 
 export default {
   setup() {
@@ -306,42 +305,20 @@ export default {
     const {
       data,
       dataErrors,
+      onCategorySelected,
       subCategories,
       subCatLoader,
       preview,
-      convertFileToBase64,
+      handleCinic,
+      handleBecomeSeller
     } = useBecomeSeller();
-
-    const store = useStore();
-
-    onBeforeMount(()=>{
-      store.dispatch('getCountriesLanguage')
-    });
-
-    const onChange = () => {
-      data.value.category_id = document.getElementById("category").value;
-      store.dispatch("loadSubCategories", data.value.category_id);
-    };
-
-    const handleCinic = (e) => {
-      convertFileToBase64(e.target.files[0]);
-    };
-
-    const handleBecomeSeller = () => {
-      data.value.sub_category_id = document.getElementById("subcategoryID").value;
-      data.value.lang = document.getElementById("language").value;
-      data.value.country_id = document.getElementById("country").value;
-      data.value.availability = document.getElementById("availability").value;
-      console.log(JSON.stringify(data.value.country_id));
-      store.dispatch('handleBecomeSeller',data.value);
-    };
 
     return {
       data,
       preview,
       dataErrors,
       handleBecomeSeller,
-      onChange,
+      onCategorySelected,
       subCategories,
       subCatLoader,
       handleCinic,
@@ -357,5 +334,6 @@ export default {
     border:1px solid grey;
     margin-bottom: 10px;
     background-size: cover;
+    background-position: center;
 }
 </style>

@@ -58,16 +58,18 @@
                </div>
             </li> 
 
-               <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2">
+               <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2"
+                  v-if="$store.state.isSeller"
+               >
                   <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      Seller
                </a>
                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                   <div>
-                     <router-link class="dropdown-item" to="/manage_gig">Create Gig</router-link>
+                     <router-link class="dropdown-item" to="/manage_gig">Create service</router-link>
                   </div>
                   <div>
-                     <router-link class="dropdown-item" to="/manage_gig">Edit Gig</router-link>
+                     <router-link class="dropdown-item" to="/manage_gig">Edit service</router-link>
                   </div>
                </div>
             </li> 
