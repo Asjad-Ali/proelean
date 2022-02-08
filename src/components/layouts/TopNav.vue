@@ -52,6 +52,9 @@
                   <div>
                      <router-link class="dropdown-item" to="/manage_job">Manage Job</router-link>
                   </div>
+                  <div>
+                     <router-link class="dropdown-item" to="/manage_order">Manage Order</router-link>
+                  </div>
                </div>
             </li> 
 

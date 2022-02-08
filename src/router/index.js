@@ -8,7 +8,7 @@ import ManageGig from '../views/Seller/ManageGig.vue'
 import ServiceDetail from '../views/ServiceDetail.vue'
 import ManageJob from '../views/Buyer/ManageJob.vue'
 import CreateJob from '../components/manageJob/CreateJob.vue'
-// import ManageOrder from '../views/Buyer/ManageOrder.vue'
+import ManageOrder from '../views/Buyer/ManageOrder.vue'
 
 const routes = [
   {
@@ -55,11 +55,11 @@ const routes = [
     name: 'ManageJob',
     component: ManageJob,
   },
-  // {
-  //   path: '/manage_order',
-  //   name: 'ManageOrder',
-  //   component: ManageOrder,
-  // },
+  {
+    path: '/manage_order',
+    name: 'ManageOrder',
+    component: ManageOrder,
+  },
 
   {
     path: '/gigs',
