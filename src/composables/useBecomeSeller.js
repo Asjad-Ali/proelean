@@ -1,6 +1,7 @@
 import { ref, watch } from "vue";
 import { useStore } from "vuex";
 import { onBeforeMount } from '@vue/runtime-core';
+import router from "../router";
 
 export default function useBecomeSeller() {
 
@@ -9,10 +10,11 @@ export default function useBecomeSeller() {
     let subCatLoader=ref(false);
     const bannersBase64= ref([]);
     const preview = ref(null);
+    const user = JSON.parse(localStorage.getItem('userInfo'));
 
     const data = ref({
         freelancer_title: '',
-        lang: '',
+        lang: 'language',
         availability: '',
         portfolio: '',
         description: '',
@@ -24,6 +26,7 @@ export default function useBecomeSeller() {
         facebook: '',
         twitter: ''
     });
+    console.log(data.value.lang);
 
     const dataErrors = ref({
         freelancer_title: null,
@@ -130,7 +133,12 @@ export default function useBecomeSeller() {
     }
 
     onBeforeMount(()=>{
-        store.dispatch('getCountriesLanguage')
+        // check if user is already seller
+        if(user.isFreelancer) {
+            router.push('/')
+        } else {
+            store.dispatch('getCountriesLanguage')
+        }
     });
 
     const onCategorySelected = () => {
@@ -143,10 +151,6 @@ export default function useBecomeSeller() {
     };
 
     const handleBecomeSeller = () => {
-        data.value.sub_category_id = document.querySelector("#subcategoryID").value;
-        data.value.lang = document.querySelector("#language").value;
-        data.value.country_id = document.querySelector("#country").value;
-        data.value.availability = document.querySelector("#availability").value;
         console.log(data.value)
         store.dispatch('handleBecomeSeller',data.value);
         // if(!dataErrors.value) {

@@ -235,19 +235,24 @@ export default {
       const router = useRouter();
       const handleLogout = async() => {
          const response = await Api.post("logout");
-         if(response.status==200){
+         if(response.status===200){
             localStorage.removeItem('PROELEAN_TOKEN');
+            localStorage.removeItem('userInfo');
             router.go()
          }
       }
-      onMounted(
-         store.dispatch('getNotification')
-      )
+      onMounted(() => {
+         const isLoggedIn = localStorage.getItem('PROELEAN_TOKEN');
+         if(isLoggedIn)
+            store.dispatch('getNotification')         
+      })
+
+      
       return {
          handleLogout,
          userInfo: computed( () => store.getters.getAuthUser),
          userNotification: computed( () => store.getters.getUserNotifications)
-          }
+      }
    }
 };
 </script>
