@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import createGig from '@/components/manageGigs/CreateGig.vue'
+import createGig from '@/components/seller/CreateGig.vue'
 export default {
   components: { createGig },
 }
