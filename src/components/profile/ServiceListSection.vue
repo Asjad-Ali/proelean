@@ -10,7 +10,7 @@
       >
       <router-link :to="{name:'gigDetail', params:{id:service.id}}" >
           <img
-            class="img-fluid"
+            class="img-fluid positi"
             :src="(service.service_media.length && service.service_media[0].media) ? `https://api.dex.proelean.com/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />
         </router-link>
         <div class="inner-slider">
@@ -56,7 +56,16 @@
               </div>
             </div>
             <div class="footer">
-              <i class="fa fa-heart" aria-hidden="true"></i>
+              <a id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <i class="fa fa-heart"  aria-hidden="true"></i></a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownUserImage">
+                  <div >
+                    <a class="dropdown-item" @click="deleteGig(service.id)" href="#">Delete</a>
+                  </div>
+                  <div >
+                    <a class="dropdown-item" href="#">Delete</a>
+                  </div>
+               </div>
               <div class="price">
                 <a href="#">
                   Starting At <span> ${{ service.price }}</span>
@@ -76,16 +85,20 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 import ReviewSection from "@/components/profile/ReviewSection.vue";
-
+// import { useRoute } from 'vue-router';
 export default {
   components: {
     ReviewSection,
   },
   setup() {
+
     const store = useStore();
     store.dispatch("userServices");
-    
+    const deleteGig = async (id) =>{
+      store.dispatch('deleteGig',id)
+    }
     return {
+      deleteGig,
       user: computed(() => store.getters.getAuthUser),
     };
   }

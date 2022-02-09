@@ -11,7 +11,7 @@
 
 <script>
 import PersonalDetails from '@/components/profile/PersonalDetails.vue';
-import GigsDetail from '@/components/profile/GigsDetail.vue';
+import GigsDetail from '@/components/profile/ServiceListSection.vue';
 import { useStore } from 'vuex';
 
 export default {

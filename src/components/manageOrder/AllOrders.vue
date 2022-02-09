@@ -5,12 +5,43 @@
         <div class="col-md-12">
           <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
             <h2 class="mb-0 p-0">Orders</h2>
-            <router-link
-              class="btn btn-sm btn-success ml-auto light"
-              to="/create_job"
-            >
-              Place New Order
-            </router-link>
+            
+            
+            <!---------------    Button trigger modal    ------------->
+            <button type="button" class="btn btn-sm btn-success ml-auto light" data-toggle="modal" data-target="#exampleModalCenter">
+              Use Filter
+            </button>
+
+            <!------------------      Modal     ---------------->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Filter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <input type="radio" id="all" name="filter" class="close" @change="showAll()" value="">
+                    <label>All</label><br>
+                    <input type="radio" id="active" name="filter" class="close" @change="showFilter(1)" value="1">
+                    <label>Active</label><br>
+                    <input type="radio" id="delivered" name="filter" class="close" @change="showFilter(2)" value="2">
+                    <label>Delivered</label><br>
+                    <input type="radio" id="revision" name="filter" class="close" @change="showFilter(3)" value="3">
+                    <label>Revision</label><br>
+                    <input type="radio" id="complete" name="filter" class="close" @change="showFilter(4)" value="4">
+                    <label>Complete</label><br>
+                    <input type="radio" id="disputed" name="filter" class="close" @change="showFilter(5)" value="5">
+                    <label>Disputed</label><br>
+                    <input type="radio" id="late" name="filter" class="close" @change="showFilter(6)" value="6">
+                    <label>Late</label><br>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!------------------      Modal End     ---------------->
           </div>
 
           <div
@@ -78,12 +109,19 @@ import store from "../../store";
 export default {
   setup() {
     onMounted(store.dispatch("showAllOrders"));
-    // function deleteJob(id){
-    // store.dispatch("deleteAJob",id);
-    // }
+
+    function showAll(){
+      store.dispatch("showAllOrders");
+    }
+
+    function showFilter(value){
+      store.dispatch("showFilteredOrders",value);
+    }
+
     return {
       orders: computed(() => store.getters.getAllOrders),
-      //deleteJob
+      showFilter,
+      showAll
     };
   },
 };

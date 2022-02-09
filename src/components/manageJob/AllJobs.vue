@@ -50,13 +50,13 @@
                       <td>{{ job.delivery_time }} days</td>
                       <td>${{ job.budget }}</td>
                       <td>
-                        <button class="btn btn-sm btn-success">
+                        <button class="btn btn-sm btn-primary">
                           {{ job.total_offers }}
                         </button>
                       </td>
                       <td>
                         <button
-                          class="btn btn-sm btn-success"
+                          class="btn btn-sm btn-danger"
                           @click="deleteJob(job.id)"
                         >
                           Delete
