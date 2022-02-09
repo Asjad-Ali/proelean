@@ -11,8 +11,7 @@
       <router-link :to="{name:'gigDetail', params:{id:service.id}}" >
           <img
             class="img-fluid"
-            :src="'https://api.dex.proelean.com/' + service.service_media[0].media"
-          />
+            :src="(service.service_media.length && service.service_media[0].media) ? `https://api.dex.proelean.com/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />
         </router-link>
         <div class="inner-slider">
           <div class="inner-wrapper d-flex flex-column align-content-between">
@@ -28,7 +27,6 @@
               </span>
               <span class="seller-name">
                 <p>{{ service.service_user.username }}</p>
-
                 <span class="level hint--top level-one-seller">
                   Level 1 Seller
                 </span>
