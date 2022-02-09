@@ -63,7 +63,7 @@
                     <a class="dropdown-item" @click="deleteGig(service.id)" href="#">Delete</a>
                   </div>
                   <div >
-                    <a class="dropdown-item" href="#">Delete</a>
+                    <a class="dropdown-item" href="#">Edit</a>
                   </div>
                </div>
               <div class="price">
