@@ -151,15 +151,15 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 import useAuth from "@/composables/useAuth";
-import { computed, onBeforeMount } from "vue";
+import { computed } from "vue";
 import store from "../../store";
 
 export default {
   name: "Login",
   setup() {
-    const router = useRouter();
+    // const router = useRouter();
     const {
       toggleVisibility,
       eyeIcon,
