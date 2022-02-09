@@ -52,9 +52,10 @@
                         <select
                           class="custom-select w-100"
                           id="language"
+                          :onchange="selectLanguage"
                           v-model="data.lang"
                         >
-                          <option selected>Select language</option>
+                          <option :value="selectedValue" selected>Select language</option>
                           <option v-for="language in $store.getters.getLanguages" :key="language" :value="language">{{ language }}</option>
                         </select>
                       </div>
@@ -77,7 +78,7 @@
                         <select
                           class="custom-select w-100"
                           id="availability"
-                          v-model="data.availability"
+                          :onchange="selectAvailability"
                         >
                           <option selected>Select availability</option>
                           <option value="full time">Full Time</option>
@@ -101,6 +102,7 @@
                         <select
                           class="custom-select w-100"
                           id="country"
+                          :onchange="selectCountry"
                         >
                           <option selected>Select country</option>
                           <option v-for="country in $store.getters.getCountries" :value="country.id" :key="country.id">{{ country.name }}</option>
@@ -200,6 +202,7 @@
                           data-msg="Please select your gender."
                           data-error-class="u-has-error"
                           data-success-class="u-has-success"
+                          :onchange="selectSubCategory"
                           :disabled="subCatLoader"
                         >
                           <option value="SubCatSelect1" selected="">
@@ -313,6 +316,19 @@ export default {
       handleBecomeSeller
     } = useBecomeSeller();
 
+    const selectSubCategory = () => {
+      data.value.sub_category_id = document.querySelector('#subcategoryID').value
+    }
+    const selectLanguage = () => {
+      data.value.lang = document.querySelector('#language').value
+    }
+    const selectCountry = () => {
+      data.value.country_id = document.querySelector('#country').value
+    }
+    const selectAvailability = () => {
+      data.value.availability = document.querySelector('#availability').value
+    }
+
     return {
       data,
       preview,
@@ -322,6 +338,10 @@ export default {
       subCategories,
       subCatLoader,
       handleCinic,
+      selectLanguage,
+      selectCountry,
+      selectAvailability,
+      selectSubCategory
     };
   },
 };

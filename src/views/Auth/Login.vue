@@ -176,6 +176,13 @@ export default {
       loginLoading.value = false;
    }
 
+    onBeforeMount(() => {
+      // if user already login return back to '/'
+      if (localStorage.getItem("PROELEAN_TOKEN")) {
+        router.push({ name: "Home" });
+      }
+    });
+
     const registerStatus = computed( () => {
       return   store.getters.getRegisterStatus;
     });
