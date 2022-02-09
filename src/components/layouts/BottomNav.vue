@@ -9,23 +9,10 @@
             
              <li class="nav-item" v-for="category in $store.getters.getCategories" :key="category.id">
                 <router-link @click="$store.commit('setCategorySlug',category.id)" class="nav-link" :to="'/gigs?category='+category.id">{{ category.title }}</router-link>
-             </li>  
-             
-
-               <!-- DropDown      -->
-             <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Categories
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolio">
-                   <a class="dropdown-item" href="#">Music & Audio</a>
-                </div>
-             </li> -->
-
-     
+             </li>       
           </ul>
        </div>
-       <ul class="navbar-nav ml-auto" v-if="!$store.state.isSeller">
+       <ul class="navbar-nav ml-auto" v-if="!$store.state.isSeller || !$store.state.isLoggedIn">
             <li class="nav-item">
                 <router-link class="btn btn-success" to="become_seller">
                 <i class="fa fa-fw fa-trophy"></i>

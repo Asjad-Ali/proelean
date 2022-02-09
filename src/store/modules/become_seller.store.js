@@ -1,6 +1,6 @@
 import Api from '@/services/API'
 import { createToaster } from '@meforma/vue-toaster';
-import { useRouter } from 'vue-router';
+import router from '@/router';
 
 
 export const state = {
@@ -42,7 +42,7 @@ export const  actions = {
         return Promise.resolve(resp);
       },
       error=>{
-        this.commit('setError',error);
+        commit('setError',error);
         return Promise.reject(error);
       });
     },
@@ -67,8 +67,7 @@ export const  actions = {
           position:"top-right",
           dismissible: true
         });
-        const router = useRouter();
-        router.push("/")
+        router.go()
       } else {
         toaster.error(res.message,{
           position:"top-right",

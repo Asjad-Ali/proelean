@@ -20,9 +20,9 @@ export const  mutations = {
   },
 
   setUserAsSeller(state) {
-    if(!state.user.isFreelancer) {
-      state.user.isFreelancer = 1;
-    }
+    state.user.isFreelancer = 1;
+    console.log(state.user)
+    localStorage.setItem("userInfo",JSON.stringify(state.user))
   }
 }
 
