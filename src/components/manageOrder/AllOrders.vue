@@ -9,7 +9,7 @@
             
             <!---------------    Button trigger modal    ------------->
             <button type="button" class="btn btn-sm btn-success ml-auto light" data-toggle="modal" data-target="#exampleModalCenter">
-              Filteration
+              Use Filter
             </button>
 
             <!------------------      Modal     ---------------->
