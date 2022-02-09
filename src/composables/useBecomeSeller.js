@@ -11,11 +11,11 @@ export default function useBecomeSeller() {
     const preview = ref(null);
 
     const data = ref({
-        freelancer_title: 'asfd asdsadas asdas',
-        lang: 'sadad',
+        freelancer_title: '',
+        lang: '',
         availability: '',
         portfolio: '',
-        description: 'asfasfasfasfasf asf asf',
+        description: '',
         cinic: '',
         category_id: '',
         sub_category_id: '',

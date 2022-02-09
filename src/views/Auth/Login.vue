@@ -176,13 +176,6 @@ export default {
       loginLoading.value = false;
    }
 
-    onBeforeMount(() => {
-      // get user state here instead of token
-      if (localStorage.getItem("PROELEAN_TOKEN")) {
-        router.push({ name: "Home" });
-      }
-    });
-
     const registerStatus = computed( () => {
       return   store.getters.getRegisterStatus;
     });
