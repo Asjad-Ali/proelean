@@ -11,16 +11,16 @@
                      </ol>
                   </nav>
                   <div id="overview" class="seller-overview d-flex align-items-center">
-                     <div class="user-profile-image d-flex">
+                     <div class="user-profile-image d-flex align-items-center">
                         <label class="profile-pict" for="profile_image">
                         <img
-                           class="img-fluid"
+                           class="img-fluid "
                            :src="'https://api.dex.proelean.com/' + service.service_user.image"
                         />
                         </label>
                         <div class="profile-name">
                            <span class="user-status">
-                           <a href="#" class="seller-link">Askbootstrap</a>
+                           <a href="#" class="seller-link"> {{ service.service_user.name }} </a>
                            </span>
                            <div class="seller-level">Level 1 Seller</div>
                         </div>
@@ -43,14 +43,14 @@
                   <div class="slider mt-4">
                      <div id="aniimated-thumbnials" class="slider-for slick-slider-single">
                         <a href="images/list/v1.png">
-                        <img class="img-fluid" 
+                        <img class="img-fluid img-thumbnail" 
                            :src="'https://api.dex.proelean.com/' + service.service_media[0].media"
                          />
                         </a>
                      </div>
                      <div class="slider-nav slick-slider-single">
                         <div class="item-slick">
-                        <img class="img-fluid" 
+                        <img class="img-thumbnail" 
                            :src="'https://api.dex.proelean.com/' + service.service_media[0].media"
                          />
                         </div>

@@ -1,34 +1,8 @@
 <template>
   <div>
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="bg-white rounded shadow-sm py-3 sidebar-fix">
-              <div class="dropdown-menu-show">
-                <a class="dropdown-item py-2 active" href="customer-order.html"
-                  >Customer Order</a
-                >
-                <a class="dropdown-item py-2" href="overview.html">Overview</a>
-                <a class="dropdown-item py-2" href="business.html">Business</a>
-                <a class="dropdown-item py-2" href="edit-account.html"
-                  >Edit Account</a
-                >
-                <a class="dropdown-item py-2" href="edit-security.html"
-                  >Edit Security</a
-                >
-                <a class="dropdown-item py-2" href="edit-notifications.html"
-                  >Edit Notification</a
-                >
-                <a class="dropdown-item py-2" href="edit-billing.html"
-                  >Edit Billing</a
-                >
-                <a class="dropdown-item py-2" href="edit-payment.html"
-                  >Edit Payment</a
-                >
-              </div>
-            </div>
-          </div>
+    <section class="py-5 ">
+      <div class="container ">
+        <div class="row d-flex justify-content-center">
           <div class="col-lg-9">
             <h4 class="font-weight-bold pb-3">Create Serivce</h4>
             <form>
@@ -217,7 +191,7 @@
                 </div>
               </div>
             </form>
-          </div>''
+          </div>
         </div>
       </div>
     </section>
