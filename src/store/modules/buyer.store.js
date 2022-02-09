@@ -89,5 +89,16 @@ export const  actions = {
         }
       },
 
+      async showFilteredOrders({commit}, value){
+        const res = await Api.get(`buyer/orders?status=${value}`);
+        if(res.status === 200){
+          console.log("Filtered Orders Response",res.data)
+          commit("setAllOrders",res.data);
+        }
+        else{
+          console.log("Error Filtered Orders");
+        }
+      },
+
       
 }
