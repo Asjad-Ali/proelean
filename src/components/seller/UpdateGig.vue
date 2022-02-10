@@ -4,15 +4,12 @@
       <div class="container ">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-9">
-            <h4 class="font-weight-bold pb-3">Create Serivce</h4>
+            <h4 class="font-weight-bold pb-3">Update Serivce</h4>
             <form>
               <div class="bg-white rounded shadow-sm sidebar-page-right">
                 <div class="bg-white rounded p-0">
                   <div class="border-bottom p-3">
                     <label>Enter Your Title</label>
-                    <!-- @error('s_description')
-                           <span style="color:red">{{$message}}</span>
-                           @enderror -->
                     <div class="form-group">
                       <input
                         type="text"
@@ -24,9 +21,6 @@
                       />
                     </div>
                     <label>Describe your service</label>
-                    <!-- @error('description')
-                              <span style="color:red">{{$message}}</span>
-                              @enderror -->
                     <div class="form-group">
                       <textarea
                         class="form-control"
@@ -112,10 +106,6 @@
                           >
                             {{ category.title }}
                           </option>
-
-                          <!-- @foreach ($categories as $category)
-                                       <option value="{{$category->id}}">{{$categorytitle}}</option>                                       
-                                    @endforeach -->
                         </select>
                       </div>
                       <div class="form-group col-md-6">
@@ -136,10 +126,6 @@
                           >
                             {{ subCategory.title }}
                           </option>
-
-                          <!-- @foreach ($categories as $category)
-                                       <option value="{{$category->id}}">{{$categorytitle}}</option>                                       
-                                    @endforeach -->
                         </select>
                       </div>
                     </div>
@@ -157,10 +143,6 @@
                         <option selected disabled>Select day</option>
                         <option value="2" v-for="day in 30" :key="day.index"
                         >{{ day }} day</option>
-
-                        <!-- @foreach($days as $day)
-                                    <option>{{$day->days}}</option>                                    
-                                    @endforeach -->
                       </select>
                     </div>
                   </div>
@@ -183,7 +165,7 @@
                   <div class="p-3 d-flex justify-content-end">
                     <button
                       class="btn btn-success btn-lg font-weight-bold"
-                      @click.prevent="gigCreation"
+                      @click.prevent="gigUpdated"
                     >
                       {{registerStatus == 2 ? 'Loading...' : 'Create'}}
                     </button>
@@ -199,33 +181,33 @@
 </template>
 
 <script>
-import useSeller from '@/composables/useSeller.js'
+import useBecomeSeller from '@/composables/useBecomeSeller.js'
 import store from '../../store';
 import { computed } from '@vue/runtime-core';
 export default {
   setup() {
-const { createGig,
+const { updateGig,
         data,
         bannersBase64,
-        gigCreation,
+        gigUpdated,
         selectThumbnail,
         removeImage,
-        encodeImageFileAsURL } = useSeller();
+        encodeImageFileAsURL } = useBecomeSeller();
 
-        const onChange = () => {
+      const onChange = () => {
       data.value.categoryId = document.getElementById("category").value;
       store.dispatch("loadSubCategories", data.value.categoryId);
     };
 
-        const registerStatus = computed( () => {
+    const registerStatus = computed( () => {
       return   store.getters.getRegisterStatus;
     });
 
     return {
       registerStatus,
-      createGig,
+      updateGig,
       onChange,
-      gigCreation,
+      gigUpdated,
       selectThumbnail,
       bannersBase64,
       removeImage,
