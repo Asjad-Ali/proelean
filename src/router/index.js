@@ -25,7 +25,7 @@ const routes = [
     component: Login
   },
   {
-    path: '/manage_gig',
+    path: '/seller/manage_gig',
     name: 'ManageGig',
     component: ManageGig
   },
@@ -53,17 +53,17 @@ const routes = [
   },
 
   {
-    path: '/create_job',
+    path: '/buyer/create_job',
     name: 'CreateJob',
     component: CreateJob,
   },
   {
-    path: '/manage_job',
+    path: '/buyer/manage_job',
     name: 'ManageJob',
     component: ManageJob,
   },
   {
-    path: '/manage_order',
+    path: '/buyer/manage_order',
     name: 'ManageOrder',
     component: ManageOrder,
   },
