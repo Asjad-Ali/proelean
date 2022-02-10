@@ -200,6 +200,8 @@
 
 <script>
 import useSeller from '@/composables/useSeller.js'
+import { computed } from '@vue/runtime-core';
+import store from '../../store';
 export default {
   setup() {
 const { createGig,
@@ -208,12 +210,11 @@ const { createGig,
         gigCreation,
         selectThumbnail,
         removeImage,
-        registerStatus,
         onChange,
         encodeImageFileAsURL } = useSeller();
 
     return {
-      registerStatus,
+      registerStatus: computed(() => store.getters.getRegisterStatus),
       createGig,
       onChange,
       data,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="py-5">
+    <section class="py-5" v-if="updateGig">
       <div class="container">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-9">
@@ -190,32 +190,24 @@
 
 <script>
 import useSeller from "@/composables/useSeller.js";
-import { onMounted } from '@vue/runtime-core';
+import { computed } from '@vue/runtime-core';
+import store from '../../store';
 
 export default {
   setup() {
     const {
-      updateGig,
       data,
       bannersBase64,
       gigCreation,
       selectThumbnail,
       removeImage,
-      registerStatus,
       onChange,
       encodeImageFileAsURL,
     } = useSeller();
 
- 
-    onMounted(() => {
- 
-    })
-
-
-
     return {
-      registerStatus,
-      updateGig,
+      registerStatus: computed(() => store.getters.getRegisterStatus),
+      updateGig: computed(() => store.getters.getSingleService),
       onChange,
       data,
       gigCreation,
