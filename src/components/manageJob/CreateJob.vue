@@ -1,9 +1,8 @@
 <template>
   <div class="container py-3">
-    <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-11">
-        <h4 class="font-weight-bold pb-3">post a Job</h4>
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-10">
+        <h4 class="font-weight-bold pb-2">Create a Job</h4>
         <form>
           <div class="bg-white rounded shadow-sm sidebar-page-right">
             <div class="bg-white rounded p-0">
@@ -71,20 +70,27 @@
                     v-model="createJob.delivery_time"
                     required
                   >
-                    <option selected disabled>Select day</option>
-                    <option value="2">1 day</option>
+                    <option selected>Select day</option>
+                    <option value="1">1 day</option>
                     <option value="2">2 day</option>
                     <option value="3">3 day</option>
                     <option value="4">4 day</option>
                     <option value="5">5 day</option>
                     <option value="6">6 day</option>
                     <option value="7">7 day</option>
+                    <!-- <option
+                        v-for="day in 30"
+                        :value="day"
+                        :key="day"
+                      >
+                        {{ day }} day
+                      </option> -->
                     
                   </select>
                 </div>
               </div>
               <div class="border-bottom p-3">
-                <label>What's your budget?</label>
+                <label>What's your budget? </label>
                 <div class="input-group mb-2 col-md-5 p-0">
                   <div class="input-group-prepend">
                     <div class="btn btn-success">$</div>
@@ -136,7 +142,7 @@ export default {
       createJob,
       jobCreation,
       handleCredentials,
-      onChange
+      onChange,
     };
   },
 };
