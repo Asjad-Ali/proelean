@@ -1,11 +1,9 @@
-import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { ref } from "vue";
 import { useStore } from "vuex";
 
 export default function seller() {
 
   const store = useStore();
-  const route = useRoute();
   const bannersBase64 = ref([]);
   const preview = ref(null);
 
@@ -36,20 +34,7 @@ export default function seller() {
   });
 
   const updateGig = ref({})
-  const singleGigData = ref({})
 
-
-  onMounted(() => {
-    if(store.getters.getUserServices)
-    {
-      singleGigData.value = ( store.getters.getUserServices.find( service => service.id === route.params.id));
-      store.commit('setSingleService',singleGigData.value)
-    }
-    else{
-      store.dispatch("userSingleServices",route.params.id);
-    }
-
-  })
 
   const gigCreation = () => {
     store.dispatch('createGig', createGig.value)

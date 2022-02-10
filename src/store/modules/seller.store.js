@@ -57,15 +57,20 @@ export const  actions = {
     }
   },
 
-  async userSingleServices({commit},id)
+  async userSingleService({commit, state},id)
   {
-    const res= await Api.get(`seller/services/${id}`);
-    if(res.status===200){
-      commit("setSingleService",res.data);
-      console.log(res.data)
+    if(!state.userServices) {
+      const res= await Api.get(`seller/services/${id}`);
+      if(res.status===200) {
+        commit("setSingleService",res.data);
+        console.log(res.data)
+      } else {
+        console.log(res);
+      }      
     } else {
-      console.log(res);
+      commit("setSingleService",state.userServices.find(service => service.id === id));
     }
+
   },
   async sellerReviewsById({commit},payload)
       {
