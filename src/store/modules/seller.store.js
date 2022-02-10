@@ -4,8 +4,9 @@ var page = 1;
 
 
 export const state = {
-  userServices:[],
   sellerReview:[],
+  userServices:'',
+  userSingleService:{},
   createGigData:'',
   deleteGig:'',
   error: null,
@@ -13,14 +14,20 @@ export const state = {
 
 export const getters = {
   getUserServices : state => state.userServices,
+  getSingleService : state => state.userSingleService,
   getUserServicesStatus : state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
 }
 
 
 export const  mutations = {
+
   setUserServices(state,services){
     state.userServices=services;
+  },
+  setSingleService(state,service){
+    console.log(service)
+    state.userSingleService=service;
   },
   setReviews(state,reviews) {
     state.sellerReview = [...state.sellerReview,...reviews];
@@ -45,6 +52,17 @@ export const  actions = {
     const res= await Api.get('seller/services');
     if(res.status===200){
       commit("setUserServices",res.data);
+    } else {
+      console.log(res);
+    }
+  },
+
+  async userSingleServices({commit},id)
+  {
+    const res= await Api.get(`seller/services/${id}`);
+    if(res.status===200){
+      commit("setSingleService",res.data);
+      console.log(res.data)
     } else {
       console.log(res);
     }
@@ -75,6 +93,8 @@ export const  actions = {
         
         
       },
+
+      
     
       async deleteGig({commit, state},serviceID){
         const toaster = createToaster()

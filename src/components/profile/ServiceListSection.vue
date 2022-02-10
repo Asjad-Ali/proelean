@@ -57,7 +57,7 @@
             </div>
             <div class="footer">
               <a id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                <i class="fa fa-heart"  aria-hidden="true"></i></a>
+                <i class="fa fa-ellipsis-h"  aria-hidden="true"></i></a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownUserImage">
                   <div >
                     <a class="dropdown-item" @click="deleteGig(service.id)" href="#">Delete</a>
@@ -91,9 +91,9 @@ export default {
     ReviewSection,
   },
   setup() {
-
     const store = useStore();
     store.dispatch("userServices");
+    
     const deleteGig = async (id) =>{
       store.dispatch('deleteGig',id)
     }

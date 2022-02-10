@@ -1,6 +1,6 @@
 <template>
   <div class="main-page py-5" v-if="service">
-
+<h3>{{service}}</h3>
          <div class="container">
             <div class="row">
                <div class="col-lg-8 left">
@@ -1053,28 +1053,45 @@
 </template>
 
 <script>
-import { onMounted, ref } from '@vue/runtime-core';
+import { computed, onMounted, ref} from '@vue/runtime-core';
 import { useRoute } from 'vue-router';
-import API from '../../services/API.js';
+// import API from '../../services/API.js';
+import store from '../../store/index.js';
+
 export default {
    setup() {
       const route = useRoute();
-      const service = ref()
-      onMounted ( async ()=>{
-         console.log(route.params.id)
-         const resp = await API.get(`seller/services/${route.params.id}`)
-         if(resp.status===200){
-            console.log("Services DAta",resp.data)
-            service.value=resp.data
-         }
-      })
+      
+      // const service = ref()
+      // onMounted ( async ()=>{
+      //    console.log(route.params.id)
+      //    const resp = await API.get(`seller/services/${route.params.id}`)
+      //    if(resp.status===200){
+      //       console.log("Services DAta",resp.data)
+      //       service.value=resp.data
+      //    }
+      // })
+      const singleServiceData = ref({})
+      
+      onMounted(() => {
+      if(store.getters.getUserServices)
+      {
+         console.log("route params",route.params.id)
+         singleServiceData.value = store.getters.getUserServices.find( sService => sService.id === route.params.id)
+         console.log("Single Data",singleServiceData.value)
+         store.commit('setSingleService',singleServiceData.value)
+      }
+      else{
+         store.dispatch("userSingleServices",route.params.id);
+      }})
+
+      const service = ref( computed(() => store.getters.getSingleService))
 
       return{
          service
       }
-
-   }
-
+      }
+   
 }
 </script>
 

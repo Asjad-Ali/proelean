@@ -66,7 +66,7 @@
                </a>
                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                   <div>
-                     <router-link class="dropdown-item" to="//seller/manage_gig">Create service </router-link>
+                     <router-link class="dropdown-item" to="/seller/manage_gig">Create service </router-link>
                   </div>
                </div>
             </li> 
@@ -145,7 +145,7 @@
                    </div>
                 </h6>
                 <div class="dropdown-divider"></div>
-                <router-link class="dropdown-item" to="profile">
+                <router-link class="dropdown-item" to="/profile">
                    <div class="dropdown-item-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">
                          <circle cx="12" cy="12" r="3"></circle>
