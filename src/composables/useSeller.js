@@ -1,9 +1,11 @@
 import { ref } from "vue";
+import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
 export default function seller(){
 
     const store = useStore();
+    const route = useRoute();
     const bannersBase64= ref([]);
     const preview = ref(null);
 
@@ -33,6 +35,9 @@ export default function seller(){
         price: "",
       });
 
+    const updateGig = ref(store.state.getUserServices.filter( service => (
+        service.id === route.params.id)));
+
       const  gigCreation = () => {
         store.dispatch('createGig',createGig.value)
         console.log("Create Gig Value", createGig.value);
@@ -59,20 +64,32 @@ export default function seller(){
         reader.readAsDataURL(file);  
     }
 
+    const registerStatus = () => {
+        return   store.getters.getRegisterStatus;
+      };
+
     const removeImage = index => {
         bannersBase64.value.splice(index, 1);
         createGig.value.banner.splice(index, 1);
     }
 
+    const onChange = () => {
+        data.value.categoryId = document.getElementById("category").value;
+        store.dispatch("loadSubCategories", data.value.categoryId);
+      };
+
     return{
         data,
+        onChange,
         gigCreation,
         selectThumbnail,
         removeImage,
         encodeImageFileAsURL,
         createGig,
+        updateGig,
         bannersBase64,
         convertFileToBase64,
+        registerStatus
 
     }
 }

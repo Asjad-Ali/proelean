@@ -47,38 +47,29 @@
                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">                     
 
                   <div>
-                     <router-link class="dropdown-item" to="/create_job">Create Job</router-link>
+                     <router-link class="dropdown-item" to="/buyer/create_job">Create Job</router-link>
                   </div>
                   <div>
-                     <router-link class="dropdown-item" to="/manage_job">Manage Job</router-link>
+                     <router-link class="dropdown-item" to="/buyer/manage_job">Manage Job</router-link>
                   </div>
                   <div>
-                     <router-link class="dropdown-item" to="/manage_order">Manage Order</router-link>
+                     <router-link class="dropdown-item" to="/buyer/manage_order">Manage Order</router-link>
                   </div>
                </div>
             </li> 
 
-               <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2"
-                  v-if="$store.state.isSeller"
+               <li  class="nav-item dropdown no-arrow no-caret dropdown-user mx-2"
+                  v-if="userInfo.isFreelancer"
                >
                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     Seller
+                     Seller 
                </a>
                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                   <div>
-                     <router-link class="dropdown-item" to="/manage_gig">Create service</router-link>
-                  </div>
-                  <div>
-                     <router-link class="dropdown-item" to="/manage_gig">Edit service</router-link>
+                     <router-link class="dropdown-item" to="/manage_gig">Create service </router-link>
                   </div>
                </div>
             </li> 
-
-
-
-
-
-
 
           <!-- @if(isset($user) && !is_null($user)) -->
           <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">

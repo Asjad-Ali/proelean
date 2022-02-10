@@ -12,14 +12,13 @@ export const state = {
 }
 
 export const getters = {
-  
   getUserServices : state => state.userServices,
   getUserServicesStatus : state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
 }
 
-export const  mutations = {
 
+export const  mutations = {
   setUserServices(state,services){
     state.userServices=services;
   },

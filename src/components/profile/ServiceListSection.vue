@@ -63,7 +63,7 @@
                     <a class="dropdown-item" @click="deleteGig(service.id)" href="#">Delete</a>
                   </div>
                   <div >
-                    <a class="dropdown-item" href="#">Edit</a>
+                    <router-link class="dropdown-item" :to="{name:'UpdateGig', params:{id:service.id}}">Edit</router-link>
                   </div>
                </div>
               <div class="price">
