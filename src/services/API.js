@@ -11,11 +11,15 @@ class API {
     let options = {
       method: method,
       headers: {
-        // "Content-Type" : contentType=='application/json' ? contentType : 'multipart/form-data',
+        // "Content-Type" : contentType=='application/json' ? contentType : delete headers['Content-Type'],
         "Accept": 'application/json',
         "Authorization": `Bearer ${TOKEN}`,
       },
     };
+
+    if(contentType=='application/json') {
+      options.headers['Content-Type'] = contentType;
+    }
 
     //payload will be sent as form data if content type is multipart/form-data
     if (options.method !== "GET") {
