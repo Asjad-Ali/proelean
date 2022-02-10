@@ -190,11 +190,13 @@
 
 <script>
 import useSeller from "@/composables/useSeller.js";
-import { computed } from '@vue/runtime-core';
+import { computed, onMounted} from '@vue/runtime-core';
 import store from '../../store';
+import { useRoute } from 'vue-router';
 
 export default {
   setup() {
+    const route = useRoute()
     const {
       data,
       bannersBase64,
@@ -204,6 +206,23 @@ export default {
       onChange,
       encodeImageFileAsURL,
     } = useSeller();
+
+    // const singleGigData = ref({})
+
+    // onMounted(() => {
+    //   if(store.getters.getUserServices)
+    //   {
+    //     singleGigData.value = ( store.getters.getUserServices.find( service => service.id === route.params.id));
+    //     store.commit('setSingleService',singleGigData.value)
+    //   }
+    //   else{
+    //     store.dispatch("userSingleServices",route.params.id);
+    //   }
+    // })
+
+    onMounted(() => {
+      store.dispatch("userSingleService",route.params.id);
+    })
 
     return {
       registerStatus: computed(() => store.getters.getRegisterStatus),

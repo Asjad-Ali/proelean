@@ -1053,7 +1053,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref} from '@vue/runtime-core';
+import { onBeforeMount } from '@vue/runtime-core';
 import { useRoute } from 'vue-router';
 // import API from '../../services/API.js';
 import store from '../../store/index.js';
@@ -1071,26 +1071,14 @@ export default {
       //       service.value=resp.data
       //    }
       // })
-      const singleServiceData = ref({})
+   console.log(route.params.id)
       
-      onMounted(() => {
-      if(store.getters.getUserServices)
-      {
-         console.log("route params",route.params.id)
-         singleServiceData.value = store.getters.getUserServices.find( sService => sService.id === route.params.id)
-         console.log("Single Data",singleServiceData.value)
-         store.commit('setSingleService',singleServiceData.value)
-      }
-      else{
-         store.dispatch("userSingleServices",route.params.id);
-      }})
+    onBeforeMount(store.dispatch("userSingleService",route.params.id))
 
-      const service = ref( computed(() => store.getters.getSingleService))
-
-      return{
-         service
-      }
-      }
+   return{
+      service: store.getters.getSingleService,
+   }
+}
    
 }
 </script>
