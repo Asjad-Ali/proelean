@@ -1,6 +1,8 @@
 const apiBaseURL = "https://api.dex.proelean.com/api";
 // const csrfToken = document.head.querySelector('meta[name="csrf-token"]');
 const TOKEN = localStorage.getItem('PROELEAN_TOKEN') || null;
+const DEVICE_ID = localStorage.getItem('DEVICE_ID') || getRandomString(32);
+
 class API {
   async request(
     route,
@@ -14,6 +16,8 @@ class API {
         // "Content-Type" : contentType=='application/json' ? contentType : delete headers['Content-Type'],
         "Accept": 'application/json',
         "Authorization": `Bearer ${TOKEN}`,
+        "Device-Id": DEVICE_ID,
+        "Device-Type": 'web'
       },
     };
 
@@ -92,6 +96,16 @@ class API {
       apiBaseURL && apiBaseURL.slice(apiBaseURL.length - 1) == "/" ? "" : "/"
     }${route}`;
   }
+}
+
+function getRandomString(length) {
+  var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var result = '';
+  for ( var i = 0; i < length; i++ ) {
+    result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+  }
+  localStorage.setItem('DEVICE_ID',result)
+  return result;
 }
 
 export default new API();

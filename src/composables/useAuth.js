@@ -8,7 +8,8 @@ export default function useAuth() {
 
    const login = ref({
       email: '',
-      password: ''
+      password: '',
+      fcm_token: localStorage.getItem('FCM_TOKEN')
    });
 
    const loginErrors = ref({

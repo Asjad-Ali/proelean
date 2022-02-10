@@ -172,6 +172,7 @@ export default {
     const handleLogin = async (e) => {
       e.preventDefault();
       loginLoading.value = true;
+      console.log("login data:- " + JSON.stringify(login.value))
       store.dispatch('login', login.value)
       loginLoading.value = false;
    }

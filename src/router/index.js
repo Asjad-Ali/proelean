@@ -88,6 +88,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {  
   var isAuthenticated = localStorage.getItem('PROELEAN_TOKEN') ? true : false;
+
   if (['/login', '/register', ].includes(to.path) || isAuthenticated) {
     next(); // allow to enter route
   } else {
