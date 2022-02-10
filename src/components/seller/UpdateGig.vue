@@ -1,7 +1,7 @@
 <template>
   <div>
-    <section class="py-5 ">
-      <div class="container ">
+    <section class="py-5">
+      <div class="container">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-9">
             <h4 class="font-weight-bold pb-3">Update Serivce</h4>
@@ -13,7 +13,7 @@
                     <div class="form-group">
                       <input
                         type="text"
-                        v-model="createGig.s_description"
+                        v-model="updateGig.s_description"
                         name="s_description"
                         class="form-control"
                         placeholder="I will create"
@@ -24,7 +24,7 @@
                     <div class="form-group">
                       <textarea
                         class="form-control"
-                        v-model="createGig.description"
+                        v-model="updateGig.description"
                         name="description"
                         rows="7"
                         placeholder="Describe About Your Serivce"
@@ -68,20 +68,26 @@
                         :key="index"
                       >
                         <div
-                          class="
-                            cursor-pointer
-                            position-relative
-                          "
+                          class="cursor-pointer position-relative"
                           style="
                             height: 80px;
                             width: 80px;
                             border: 1px solid grey;
-                            margin-left:20px;
-                            background-size:cover;
+                            margin-left: 20px;
+                            background-size: cover;
                           "
                           :style="`background-image: url(${banner});`"
                         >
-                          <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                          <i
+                            @click="removeImage(index)"
+                            class="fa fa-close position-absolute"
+                            style="
+                              top: 1%;
+                              right: 1%;
+                              font-size: 16px;
+                              color: red;
+                            "
+                          ></i>
                         </div>
                       </div>
                     </div>
@@ -94,7 +100,7 @@
                           id="category"
                           class="form-control"
                           name="category_id"
-                          v-model="createGig.category_id"
+                          v-model="updateGig.category_id"
                           data-msg="Please select category."
                           :onchange="onChange"
                           required
@@ -113,14 +119,15 @@
                           id="category_id"
                           class="form-control"
                           name="category_id"
-                          v-model="createGig.sub_category_id"
+                          v-model="updateGig.sub_category_id"
                           required
                         >
                           <option value="SubCatSelect1" selected disabled>
                             Select Sub Category
                           </option>
                           <option
-                            v-for="subCategory in $store.getters.getSubCategories"
+                            v-for="subCategory in $store.getters
+                              .getSubCategories"
                             :value="subCategory.id"
                             :key="subCategory.id"
                           >
@@ -137,12 +144,13 @@
                         id="inputState"
                         class="form-control"
                         name="delivery_time"
-                        v-model="createGig.delivery_time"
+                        v-model="updateGig.delivery_time"
                         required
                       >
                         <option selected disabled>Select day</option>
-                        <option value="2" v-for="day in 30" :key="day.index"
-                        >{{ day }} day</option>
+                        <option value="2" v-for="day in 30" :key="day.index">
+                          {{ day }} day
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -156,7 +164,7 @@
                         type="number"
                         class="form-control"
                         name="price"
-                        v-model="createGig.price"
+                        v-model="updateGig.price"
                         id="inlineFormInputGroup"
                         required
                       />
@@ -167,7 +175,7 @@
                       class="btn btn-success btn-lg font-weight-bold"
                       @click.prevent="gigUpdated"
                     >
-                      {{registerStatus == 2 ? 'Loading...' : 'Create'}}
+                      {{ registerStatus == 2 ? "Loading..." : "Update" }}
                     </button>
                   </div>
                 </div>
@@ -181,37 +189,40 @@
 </template>
 
 <script>
-import useBecomeSeller from '@/composables/useBecomeSeller.js'
-import store from '../../store';
-import { computed } from '@vue/runtime-core';
+import useSeller from "@/composables/useSeller.js";
+import { onMounted } from '@vue/runtime-core';
+
 export default {
   setup() {
-const { updateGig,
-        data,
-        bannersBase64,
-        gigUpdated,
-        selectThumbnail,
-        removeImage,
-        encodeImageFileAsURL } = useBecomeSeller();
+    const {
+      updateGig,
+      data,
+      bannersBase64,
+      gigCreation,
+      selectThumbnail,
+      removeImage,
+      registerStatus,
+      onChange,
+      encodeImageFileAsURL,
+    } = useSeller();
 
-      const onChange = () => {
-      data.value.categoryId = document.getElementById("category").value;
-      store.dispatch("loadSubCategories", data.value.categoryId);
-    };
+ 
+    onMounted(() => {
+ 
+    })
 
-    const registerStatus = computed( () => {
-      return   store.getters.getRegisterStatus;
-    });
+
 
     return {
       registerStatus,
       updateGig,
       onChange,
-      gigUpdated,
+      data,
+      gigCreation,
       selectThumbnail,
       bannersBase64,
       removeImage,
-      encodeImageFileAsURL
+      encodeImageFileAsURL,
     };
   },
 };

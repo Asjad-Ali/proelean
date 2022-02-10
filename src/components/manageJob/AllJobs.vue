@@ -7,7 +7,7 @@
             <h2 class="mb-0 p-0">Jobs</h2>
             <router-link
               class="btn btn-sm btn-success ml-auto light"
-              to="/create_job"
+              to="/buyer/create_job"
             >
               Create a new job
             </router-link>

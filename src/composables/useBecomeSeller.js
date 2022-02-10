@@ -77,7 +77,6 @@ export default function useBecomeSeller() {
         if(value.twitter && value.twitter.length < 10) {
             dataErrors.value.twitter = 'incorrect url'
         }
-
     })
 
     const convertFileToBase64 = (file) => {
