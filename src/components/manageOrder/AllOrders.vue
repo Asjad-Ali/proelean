@@ -57,43 +57,53 @@
           >
             <div class="tab-pane active" id="active">
               <div class="table-responsive box-table mt-3">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>USERNAME</th>
-                      <th>ORDER DESCRIPTION</th>
-                      <th>POSTED DATE</th>
-                      <th>DURATION</th>
-                      <th>BUDGET</th>
-                      <th>STATUS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="order in orders" :key="order.buyer_id">
-                      <td>
-                        {{ order.username }}
-                      </td>
-                      <td>
-                        <a href="#" class="make-black">
-                          <p class="order-proposal-title">
-                            {{ order.description }}
-                          </p>
-                        </a>
-                      </td>
-                      <td>{{ order.created_at }}</td>
-                      <td>{{ order.delivery_time }}</td>
-                      <td>{{ order.amount }}.0{{ order.currency }}</td>
-                      <td>
-                        <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 1"> Active </button>
-                        <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
-                        <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 3"> Revision </button>
-                        <button class="btn btn-sm btn-success w-100" v-if="order.status_id == 4"> Complete </button>
-                        <button class="btn btn-sm btn-danger w-100" v-if="order.status_id == 5"> Disputed </button>
-                        <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 6"> Late </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+
+                <div v-if="loader" class="text-center loader">
+                  <div class="spinner-border text-primary m-2" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+
+                <div v-else>
+                  <table class="table table-bordered" >
+                    <thead>
+                      <tr>
+                        <th> USERNAME </th>
+                        <th>ORDER DESCRIPTION</th>
+                        <th>POSTED DATE</th>
+                        <th>DURATION</th>
+                        <th>BUDGET</th>
+                        <th>STATUS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="order in orders" :key="order.buyer_id">
+                        <td>
+                          {{ order.username }}
+                        </td>
+                        <td>
+                          <a href="#" class="make-black">
+                            <p class="order-proposal-title">
+                              {{ order.description }}
+                            </p>
+                          </a>
+                        </td>
+                        <td>{{ order.created_at }}</td>
+                        <td>{{ order.delivery_time }}</td>
+                        <td>{{ order.amount }}.0{{ order.currency }}</td>
+                        <td>
+                          <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 1"> Active </button>
+                          <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
+                          <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 3"> Revision </button>
+                          <button class="btn btn-sm btn-success w-100" v-if="order.status_id == 4"> Complete </button>
+                          <button class="btn btn-sm btn-danger w-100" v-if="order.status_id == 5"> Disputed </button>
+                          <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 6"> Late </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
               </div>
             </div>
           </div>
@@ -108,7 +118,9 @@ import { onMounted, computed } from "@vue/runtime-core";
 import store from "../../store";
 export default {
   setup() {
-    onMounted(store.dispatch("showAllOrders"));
+    onMounted(() => {
+      store.dispatch("showAllOrders");
+    })
 
     function showAll(){
       store.dispatch("showAllOrders");
@@ -120,6 +132,7 @@ export default {
 
     return {
       orders: computed(() => store.getters.getAllOrders),
+      loader: computed(() => store.getters.getLoaderVal),
       showFilter,
       showAll
     };
@@ -127,5 +140,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.loader{
+  display: block;
+  position: relative;
+}
+.spinner-border{
+  width: 4rem;
+  height: 4rem;
+}
 </style>

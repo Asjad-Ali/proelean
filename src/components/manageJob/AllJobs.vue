@@ -26,45 +26,55 @@
           >
             <div class="tab-pane active" id="active">
               <div class="table-responsive box-table mt-3">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>JOB DESCRIPTION</th>
-                      <th>POSTED DATE</th>
-                      <th>DURATION</th>
-                      <th>BUDGET</th>
-                      <th>OFFERS</th>
-                      <th>ACTION</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="job in jobs" :key="job.id">
-                      <td>
-                        <a href="#" class="make-black">
-                          <p class="order-proposal-title">
-                            {{ job.description }}
-                          </p>
-                        </a>
-                      </td>
-                      <td>{{ job.created_at }}</td>
-                      <td>{{ job.delivery_time }} days</td>
-                      <td>${{ job.budget }}</td>
-                      <td>
-                        <button class="btn btn-sm btn-primary">
-                          {{ job.total_offers }}
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          class="btn btn-sm btn-danger"
-                          @click="deleteJob(job.id)"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+
+                <div v-if="loader" class="text-center loader">
+                  <div class="spinner-border text-primary m-2" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+
+                <div v-else>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>JOB DESCRIPTION</th>
+                        <th>POSTED DATE</th>
+                        <th>DURATION</th>
+                        <th>BUDGET</th>
+                        <th>OFFERS</th>
+                        <th>ACTION</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="job in jobs" :key="job.id">
+                        <td>
+                          <a href="#" class="make-black">
+                            <p class="order-proposal-title">
+                              {{ job.description }}
+                            </p>
+                          </a>
+                        </td>
+                        <td>{{ job.created_at }}</td>
+                        <td>{{ job.delivery_time }} days</td>
+                        <td>${{ job.budget }}</td>
+                        <td>
+                          <button class="btn btn-sm btn-primary">
+                            {{ job.total_offers }}
+                          </button>
+                        </td>
+                        <td>
+                          <button
+                            class="btn btn-sm btn-danger"
+                            @click="deleteJob(job.id)"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
               </div>
             </div>
           </div>
@@ -85,11 +95,19 @@ export default {
     }
     return {
       jobs: computed(() => store.getters.getAllJobs),
+      loader: computed(() => store.getters.getLoaderVal),
       deleteJob,
     };
   },
 };
 </script>
 
-<style>
+<style scoped>
+.loader{
+  display: block;
+}
+.spinner-border{
+  width: 4rem;
+  height: 4rem;
+}
 </style>

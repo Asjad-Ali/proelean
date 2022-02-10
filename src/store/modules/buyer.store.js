@@ -1,18 +1,22 @@
 import Api from '@/services/API';
+import { ref } from "vue";
 import { createToaster } from '@meforma/vue-toaster';
+
 
 export const state = {
     createJob:[],
     allJobs:[],
     deleteJob:[],
-    allOrders:[]
+    allOrders:[],
+    loader: null
   }
 
 export const getters = {
   getCreateJob : state => state.createJob,
   getAllJobs : state => state.allJobs,
   getDeleteJob : state => state.deleteJob,
-  getAllOrders : state => state.allOrders
+  getAllOrders : state => state.allOrders,
+  getLoaderVal : state => state.loader
 }
 
 export const  mutations = {
@@ -27,6 +31,9 @@ export const  mutations = {
     },
     setAllOrders(state,order){
       state.allOrders=order;
+    },
+    setLoader(state,loader){
+      state.loader=loader;
     }
   }
 
@@ -50,10 +57,12 @@ export const  actions = {
       },
 
       async showAllJobs({commit}){
+        commit('setLoader',1);
         const res = await Api.get('buyer/jobs');
         if(res.status === 200){
           console.log("All Jobs Response",res.data)
           commit("setAllJobs",res.data);
+          commit('setLoader',0);
         }
         else{
           console.log("Error All Jobs");
@@ -79,10 +88,12 @@ export const  actions = {
       },
 
       async showAllOrders({commit}){
+        commit('setLoader',1);
         const res = await Api.get('buyer/orders');
         if(res.status === 200){
           console.log("All Orders Response",res.data)
           commit("setAllOrders",res.data);
+          commit('setLoader',0);
         }
         else{
           console.log("Error All Orders");
