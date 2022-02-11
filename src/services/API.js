@@ -13,7 +13,6 @@ class API {
     let options = {
       method: method,
       headers: {
-        // "Content-Type" : contentType=='application/json' ? contentType : delete headers['Content-Type'],
         "Accept": 'application/json',
         "Authorization": `Bearer ${TOKEN}`,
         "Device-Id": DEVICE_ID,

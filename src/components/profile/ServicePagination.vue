@@ -4,11 +4,11 @@
       <li class="page-item">
         <a class="page-link" @click="prev()" href="#"> Previous</a>
       </li>
-      <li class="page-item"><a class="page-link" @click="empty()" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" @click="next()" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" @click="next()" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" @click="next()" href="#">4</a></li>
-      <li class="page-item"><a class="page-link" @click="next()" href="#">5</a></li>
+      <li class="page-item"><a class="page-link" @click.prevent="empty()" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" @click.prevent="next()" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" @click.prevent="next()" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" @click.prevent="next()" href="#">4</a></li>
+      <li class="page-item"><a class="page-link" @click.prevent="next()" href="#">5</a></li>
       <li class="page-item">
         <a class="page-link" @click="next()" href="#"> Next</a>
       </li>
@@ -23,14 +23,14 @@ import store from "../../store";
 export default {
   setup() {
     function next(){
-        store.dispatch("sellerReviewsById","next");
+      store.dispatch("userServices","next");
     }
     function prev(){
-        store.dispatch("sellerReviewsById","prev");
+        store.dispatch("userServices","prev");
     }
     
     function empty(){
-        store.dispatch("sellerReviewsById","");
+        store.dispatch("userServices","");
     }
     return {
       review: computed(() => store.getters.getSellerReview),

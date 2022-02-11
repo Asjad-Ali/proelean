@@ -49,13 +49,13 @@
           </div>
         </div>
         <div class="buttons-wrapper">
-          <a
-            href="#"
+          <router-link
+            to="/chat"
             class="
               btn-lrg-standard btn-contact-me
               js-contact-me js-open-popup-join
             "
-            >Contact Me</a
+            >Contact Me</router-link
           >
           <div class="btn-lrg-standard btn-white btn-custom-order">
             Get a Quote
