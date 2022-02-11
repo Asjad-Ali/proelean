@@ -52,7 +52,7 @@
       </ul>
     </div>
   </div>
-  <div class="" v-for="view in review" :key="view">
+  <div class="" v-for="(review,index) in reviews" :key="index">
       <div class="review-list">
         <ul>
           <li>
@@ -68,7 +68,7 @@
               </div>
               <div class="right">
                 <h4>
-                  {{ view.user.username }}
+                  {{ review.user.username }}
                   <span class="gig-rating text-body-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -81,13 +81,13 @@
                         d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
                       ></path>
                     </svg>
-                    {{ view.rating }}
+                    {{ review.rating }}
                   </span>
                 </h4>
 
                 <div class="review-description">
                   <p>
-                    {{ view.description }}
+                    {{ review.description }}
                   </p>
                 </div>
                 <span class="publish py-3 d-inline-block w-100"
@@ -96,28 +96,37 @@
                 >
               </div>
             </div>
+            <span class="publish d-inline-block w-100 d-flex justify-content-center" 
+              v-if="reviews.length-1===index && $store.state.reviewsHasNextPage"
+              >
+              <a class="see_more" href="#" @click.prevent="handleReviews">See More</a></span>
           </li>
         </ul>
       </div>
   </div>
-  <ReviewPagination />
+
 </template>
 
 <script>
-import ReviewPagination from '@/components/profile/ReviewPagination.vue';
+
 import { computed, onMounted } from "vue";
 import store from "../../store";
 
 export default {
-  components:{
-    ReviewPagination
-  },
   setup() {
-    onMounted(store.dispatch("sellerReviewsById",''));
+    onMounted(store.dispatch("getSellerReviews"));
+    const handleReviews = () => {store.dispatch("getSellerReviews")}
     return {
       user: computed(() => store.getters.getAuthUser),
-      review: computed(() => store.getters.getSellerReview),
+      reviews: computed(() => store.getters.getSellerReview),
+      handleReviews
     };
   },
 };
 </script>
+
+<style scoped>
+.see_more{
+  cursor: pointer;
+}
+</style>

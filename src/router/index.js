@@ -78,6 +78,11 @@ const routes = [
     name: 'gigDetail',
     component: ServiceDetail,
   },
+  {
+    path: '/chat',
+    name: 'Chat',
+    component: () => import('../views/Chat.vue'),
+  },
 ]
 
 const router = createRouter({
