@@ -23,19 +23,19 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <input type="radio" id="all" name="filter" class="close" @change="showAll()" value="">
+                    <input type="radio" id="all" name="filter" class="close" data-dismiss="modal" @click="showAll()" value="">
                     <label>All</label><br>
-                    <input type="radio" id="active" name="filter" class="close" @change="showFilter(1)" value="1">
+                    <input type="radio" id="active" name="filter" class="close" data-dismiss="modal" @click="showFilter(1)" value="1">
                     <label>Active</label><br>
-                    <input type="radio" id="delivered" name="filter" class="close" @change="showFilter(2)" value="2">
+                    <input type="radio" id="delivered" name="filter" class="close" data-dismiss="modal" @click="showFilter(2)" value="2">
                     <label>Delivered</label><br>
-                    <input type="radio" id="revision" name="filter" class="close" @change="showFilter(3)" value="3">
+                    <input type="radio" id="revision" name="filter" class="close" data-dismiss="modal" @click="showFilter(3)" value="3">
                     <label>Revision</label><br>
-                    <input type="radio" id="complete" name="filter" class="close" @change="showFilter(4)" value="4">
+                    <input type="radio" id="complete" name="filter" class="close" data-dismiss="modal" @click="showFilter(4)" value="4">
                     <label>Complete</label><br>
-                    <input type="radio" id="disputed" name="filter" class="close" @change="showFilter(5)" value="5">
+                    <input type="radio" id="disputed" name="filter" class="close" data-dismiss="modal" @click="showFilter(5)" value="5">
                     <label>Disputed</label><br>
-                    <input type="radio" id="late" name="filter" class="close" @change="showFilter(6)" value="6">
+                    <input type="radio" id="late" name="filter" class="close" data-dismiss="modal" @click="showFilter(6)" value="6">
                     <label>Late</label><br>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
                   <table class="table table-bordered" >
                     <thead>
                       <tr>
-                        <th> USERNAME </th>
+                        <th>USERNAME</th>
                         <th>ORDER DESCRIPTION</th>
                         <th>POSTED DATE</th>
                         <th>DURATION</th>
@@ -103,7 +103,6 @@
                     </tbody>
                   </table>
                 </div>
-
               </div>
             </div>
           </div>

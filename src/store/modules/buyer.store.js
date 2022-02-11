@@ -1,11 +1,11 @@
 import Api from '@/services/API';
 import { createToaster } from '@meforma/vue-toaster';
+import { ref } from 'vue';
 
 
 export const state = {
     createJob:[],
     allJobs:[],
-    deleteJob:[],
     allOrders:[],
     loader: null
   }
@@ -13,7 +13,6 @@ export const state = {
 export const getters = {
   getCreateJob : state => state.createJob,
   getAllJobs : state => state.allJobs,
-  getDeleteJob : state => state.deleteJob,
   getAllOrders : state => state.allOrders,
   getLoaderVal : state => state.loader
 }
@@ -24,9 +23,6 @@ export const  mutations = {
       },
     setAllJobs(state,job){
       state.allJobs=job;
-    },
-    setDeleteJob(state,job){
-      state.deleteJob=job;
     },
     setAllOrders(state,order){
       state.allOrders=order;
@@ -68,7 +64,7 @@ export const  actions = {
         }
       },
 
-      async deleteAJob({commit},id){
+      async deleteAJob({commit,state},id){
         const toaster = createToaster()
         const res = await Api.delete(`buyer/jobs/${id}`);
         if(res.status === 200){
@@ -76,7 +72,8 @@ export const  actions = {
           toaster.success(res.message,{
             position:"top-right",
             dismissible: true});
-          commit("setDeleteJob",res.message);
+          const afterRemoveJob = ref(state.allJobs.filter(job => job.id !== id))
+          commit("setAllJobs",afterRemoveJob.value);
         }
         else{
           console.log("Error delete Job");
