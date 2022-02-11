@@ -63,18 +63,34 @@
                           </button>
                         </td>
                         <td>
-                          <button
-                            class="btn btn-sm btn-danger"
-                            @click="deleteJob(job.id)"
-                          >
+                          <!---------------------    Button trigger modal    -------------------->
+                          <button type="button" @click="getJobId(job.id)" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
                             Delete
                           </button>
+                          <!---------------------    Modal     --------------------->
+                          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header d-flex justify-content-center">
+                                  <h5 class="modal-title" id="exampleModalLongTitle">Delete Job</h5> 
+                                </div>
+                                <div class="modal-body text-center">
+                                  Are you sure you want to delete the job?
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal" @click="deleteJob()">Yes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!---------------------    Modal End     --------------------->
+
                         </td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table>              
                 </div>
-
               </div>
             </div>
           </div>
@@ -85,18 +101,27 @@
 </template>
 
 <script>
-import { onMounted, computed } from "@vue/runtime-core";
+import { onMounted, computed, ref } from "@vue/runtime-core";
 import store from "../../store";
 export default {
   setup() {
     onMounted(store.dispatch("showAllJobs"));
-    function deleteJob(id) {
-      store.dispatch("deleteAJob", id);
+    
+    const jobId = ref('');
+    const getJobId = (id) => {
+      jobId.value = id
+    };
+
+    function deleteJob() {
+      store.dispatch("deleteAJob", jobId.value);
+      console.log("delete job id: ",jobId.value)
     }
     return {
       jobs: computed(() => store.getters.getAllJobs),
       loader: computed(() => store.getters.getLoaderVal),
       deleteJob,
+      getJobId,
+      jobId
     };
   },
 };
