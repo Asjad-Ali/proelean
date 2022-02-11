@@ -106,9 +106,8 @@ import store from "../../store";
 export default {
   setup() {
     onMounted(store.dispatch("showAllJobs"));
-
-    const jobId = ref('');
     
+    const jobId = ref('');
     const getJobId = (id) => {
       jobId.value = id
     };
