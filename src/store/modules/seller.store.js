@@ -20,6 +20,7 @@ export const getters = {
   getSingleService : state => state.userSingleService,
   getUserServicesStatus : state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
+  servicesHasNextPage: state => state.servicesHasNextPage
 }
 
 
