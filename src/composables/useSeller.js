@@ -47,9 +47,8 @@ export default function seller() {
     }
     document.querySelector('#bannerInput').value = '';
     console.log(createGig.value);
-
     bannersBase64.value = [];
-    createGig.value.banner.forEach(img => {
+    createGig.value.banner.forEach( img => {
       encodeImageFileAsURL(img);
     });
   };
