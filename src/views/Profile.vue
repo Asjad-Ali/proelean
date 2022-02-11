@@ -9,7 +9,7 @@
             <Loader v-if="$store.loadingStatus==='LOADING'" />
             <ServiceList v-else />
           </div>
-          <ServicePagination v-if="$store.state.servicesHasNextPage !== '' " />
+          <ServicePagination v-if="$store.state.servicesHasNextPage !== ''" />
 
           <ReviewSection />
         </div>
