@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 
 export default function seller() {
@@ -34,13 +34,15 @@ export default function seller() {
   });
 
 
+  const updateGig = ref(computed(() => store.getters.getSingleService))
 
-  const updateGig = ref({})
 
+  const getBanners = computed(() =>
+    updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
 
   const gigCreation = () => {
-      createGig.value.sub_category_id = document.getElementById("subCategory").value
-  createGig.value.delivery_time = document.getElementById("deliveryTime").value
+    createGig.value.sub_category_id = document.getElementById("subCategory").value
+    createGig.value.delivery_time = document.getElementById("deliveryTime").value
     console.log(createGig.value)
     store.dispatch('createGig', createGig.value)
   }
@@ -53,7 +55,7 @@ export default function seller() {
     document.querySelector('#bannerInput').value = '';
     console.log(createGig.value);
     bannersBase64.value = [];
-    createGig.value.banner.forEach( img => {
+    createGig.value.banner.forEach(img => {
       encodeImageFileAsURL(img);
     });
   };
@@ -72,12 +74,12 @@ export default function seller() {
 
   const getCategory = () => {
     data.value.category_id = document.getElementById("category").value;
-    console.log("Catogry id",data.value.category_id)
+    console.log("Catogry id", data.value.category_id)
     createGig.value.category_id = data.value.category_id;
     store.dispatch("loadSubCategories", data.value.category_id);
   };
 
-  
+
   return {
     data,
     getCategory,
@@ -88,6 +90,7 @@ export default function seller() {
     createGig,
     updateGig,
     bannersBase64,
+    getBanners,
     convertFileToBase64
 
   }
