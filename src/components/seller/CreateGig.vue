@@ -100,11 +100,13 @@
                           id="category"
                           class="form-control"
                           name="category_id"
-                          v-model="createGig.category_id"
                           data-msg="Please select category."
-                          :onchange="onChange"
+                          :onchange="getCategory"
                           required
                         >
+                          <option selected >
+                            Select Category
+                          </option>
                           <option
                             v-for="category in $store.getters.getCategories"
                             :value="category.id"
@@ -112,21 +114,17 @@
                           >
                             {{ category.title }}
                           </option>
-
-                          <!-- @foreach ($categories as $category)
-                                       <option value="{{$category->id}}">{{$categorytitle}}</option>                                       
-                                    @endforeach -->
                         </select>
                       </div>
                       <div class="form-group col-md-6">
                         <select
-                          id="category_id"
+                          id="subCategory"
                           class="form-control"
                           name="category_id"
                           v-model="createGig.sub_category_id"
                           required
                         >
-                          <option value="SubCatSelect1" selected disabled>
+                          <option selected disabled>
                             Select Sub Category
                           </option>
                           <option
@@ -136,10 +134,6 @@
                           >
                             {{ subCategory.title }}
                           </option>
-
-                          <!-- @foreach ($categories as $category)
-                                       <option value="{{$category->id}}">{{$categorytitle}}</option>                                       
-                                    @endforeach -->
                         </select>
                       </div>
                     </div>
@@ -148,19 +142,17 @@
                     <label>Delivery Time</label>
                     <div class="form-group col-md-6">
                       <select
-                        id="inputState"
+                        id="deliveryTime"
                         class="form-control"
                         name="delivery_time"
-                        v-model="createGig.delivery_time"
                         required
                       >
                         <option selected disabled>Select day</option>
-                        <option value="2" v-for="day in 30" :key="day.index"
-                        >{{ day }} day</option>
-
-                        <!-- @foreach($days as $day)
-                                    <option>{{$day->days}}</option>                                    
-                                    @endforeach -->
+                        <option  
+                        v-for="day in $store.getters.getDeliveryDays"
+                        :value="day" 
+                        :key="day.index"
+                        >{{ day }} </option>
                       </select>
                     </div>
                   </div>
@@ -200,7 +192,7 @@
 
 <script>
 import useSeller from '@/composables/useSeller.js'
-import { computed } from '@vue/runtime-core';
+import { computed, onBeforeMount } from '@vue/runtime-core';
 import store from '../../store';
 export default {
   setup() {
@@ -210,13 +202,18 @@ const { createGig,
         gigCreation,
         selectThumbnail,
         removeImage,
-        onChange,
+        getCategory,
         encodeImageFileAsURL } = useSeller();
+
+        onBeforeMount(() => store.dispatch("getCountriesLanguage"))
+        // createGig.value.sub_category_id = document.getElementById("subCategory").value
+        // createGig.value.delivery_time = document.getElementById("deliveryTime").value
+        
 
     return {
       registerStatus: computed(() => store.getters.getRegisterStatus),
       createGig,
-      onChange,
+      getCategory,
       data,
       gigCreation,
       selectThumbnail,
