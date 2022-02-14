@@ -30,6 +30,7 @@
                       :onchange="onChange"
                       required
                     >
+                    <option selected>Select Category</option>
                       <option
                         v-for="category in $store.getters.getCategories"
                         :value="category.id"
@@ -68,6 +69,7 @@
                     class="form-control"
                     name="delivery_time"
                     v-model="createJob.delivery_time"
+                    :onchange="onChange"
                     required
                   >
                     <option selected>Select day</option>
@@ -80,8 +82,8 @@
                     <option value="7">7 day</option>
                     <!-- <option
                         v-for="day in 30"
-                        :value="day"
-                        :key="day"
+                        :value='day'
+                        :key='day'
                       >
                         {{ day }} day
                       </option> -->
