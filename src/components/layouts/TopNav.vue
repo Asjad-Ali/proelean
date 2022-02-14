@@ -4,11 +4,11 @@
        <!-- Sidebar Toggle (Topbar) -->
        <a class="navbar-brand"><router-link to="/"><img src="assets/images/Pro-eLean-.png" alt=""> </router-link></a>
        <!-- Topbar Search -->
-       <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
+       <form @submit.prevent="handleSearch" class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
           <div class="input-group">
-             <input type="text" class="form-control bg-white small" placeholder="Find Services..." aria-label="Search" aria-describedby="basic-addon2">
+             <input type="text" v-model="keywords" class="form-control bg-white small" placeholder="Find Services..." aria-label="Search" aria-describedby="basic-addon2">
              <div class="input-group-append">
-                <button class="btn btn-success" type="button">
+                <button class="btn btn-success" @click.prevent="handleSearch" type="button">
                 <i class="fa fa-search fa-sm"></i>
                 </button>
              </div>
@@ -24,9 +24,9 @@
              <div class="dropdown-menu dropdown-menu-right p-3 shadow-sm animated--grow-in" aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                    <div class="input-group">
-                      <input type="text" class="form-control bg-light border-0 small" placeholder="Find Services..." aria-label="Search" aria-describedby="basic-addon2">
+                      <input type="text"  class="form-control bg-light border-0 small" placeholder="Find Services..." aria-label="Search" aria-describedby="basic-addon2">
                       <div class="input-group-append">
-                         <button class="btn btn-primary" type="button">
+                         <button class="btn btn-primary"  type="button">
                          <i class="fa fa-search fa-sm"></i>
                          </button>
                       </div>
@@ -35,9 +35,6 @@
              </div>
           </li>
 
-
-          
-          
       <ul class="navbar-nav align-items-center ml-auto" v-if="$store.state.isLoggedIn">
 
          <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2">
@@ -218,12 +215,13 @@
 <script>
 import Api from "@/services/API";
 import { useRouter } from "vue-router";
-import { computed, onMounted } from "@vue/runtime-core";
+import { computed, onMounted, ref } from "@vue/runtime-core";
 import store from "../../store";
 
 export default {
    setup(){
       const router = useRouter();
+      const keywords = ref(null);
       const handleLogout = async() => {
          const response = await Api.post("logout");
          if(response.status===200){
@@ -238,9 +236,15 @@ export default {
             store.dispatch('getNotification')         
       })
 
+      const handleSearch = () => {
+         router.push(`gigs?q=${keywords.value}`)
+      }
+
       
       return {
          handleLogout,
+         handleSearch,
+         keywords,
          userInfo: computed( () => store.getters.getAuthUser),
          userNotification: computed( () => store.getters.getUserNotifications)
       }

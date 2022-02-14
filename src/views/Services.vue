@@ -34,7 +34,14 @@
                         <ServiceSection :service="service" />
                      </div>
                      <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
-                     <NotFoundSection v-if="!$store.getters.getServices.length && $store.getters.getLoadingStatus==='COMPLETED'" />
+                     <div
+                        class="container"
+                        v-if="!$store.getters.getServices.length && $store.getters.getLoadingStatus==='COMPLETED'" 
+                     >
+                     <div class="d-flex justify-content-center align-item-center">
+                        No service found against {{ $route.query.q ?? $route.query.category }}
+                     </div>
+                     </div>
                      <PaginationSection />
                   </div>
                </div>
@@ -50,7 +57,6 @@ import ServiceNavSection from '@/components/services/ServiceNavSection.vue';
 import ServiceSection from '@/components/services/ServiceSection.vue';
 import PaginationSection from '@/components/services/ServicePagination.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
-import NotFoundSection from '@/components/services/ServiceNotFoundSection.vue';
 import Loader from '@/components/loadingComponent.vue';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 import { onBeforeMount } from '@vue/runtime-core';
@@ -62,7 +68,6 @@ export default {
       ServiceSection,
       ServiceFilterSection,
       PaginationSection,
-      NotFoundSection,
       Loader,
    },
    setup() {
@@ -72,6 +77,9 @@ export default {
       onBeforeRouteUpdate((to, from) => {
          if(to.query.category !== from.query.category) {
             store.dispatch('searchServices',`categories/${to.query.category}/services`)
+         }
+         if('q'in to.query) {
+            store.dispatch('searchServices',`search?q=${to.query.q}`)            
          }
       })
 
