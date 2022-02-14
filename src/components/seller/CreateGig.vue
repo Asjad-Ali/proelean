@@ -205,10 +205,7 @@ const { createGig,
         getCategory,
         encodeImageFileAsURL } = useSeller();
 
-        onBeforeMount(() => store.dispatch("getCountriesLanguage"))
-        // createGig.value.sub_category_id = document.getElementById("subCategory").value
-        // createGig.value.delivery_time = document.getElementById("deliveryTime").value
-        
+      onBeforeMount(() => store.dispatch("getCountriesLanguage"))
 
     return {
       registerStatus: computed(() => store.getters.getRegisterStatus),
