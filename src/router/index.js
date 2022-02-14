@@ -10,6 +10,7 @@ import ManageJob from '../views/Buyer/ManageJob.vue'
 import CreateJob from '../components/manageJob/CreateJob.vue'
 import ManageOrder from '../views/Buyer/ManageOrder.vue'
 import UpdateGig from '../components/seller/UpdateGig.vue'
+import BuyerRequests from '../views/Seller/BuyerRequests.vue'
 
 
 const routes = [
@@ -28,6 +29,11 @@ const routes = [
     path: '/seller/manage_gig',
     name: 'ManageGig',
     component: ManageGig
+  },
+  {
+    path: '/seller/buyer_requests',
+    name: 'BuyerRequests',
+    component: BuyerRequests
   },
   {
     path: '/update_gig/:id',
