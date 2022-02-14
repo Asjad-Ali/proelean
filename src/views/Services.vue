@@ -78,7 +78,7 @@ export default {
          if(to.query.category !== from.query.category) {
             store.dispatch('searchServices',`categories/${to.query.category}/services`)
          }
-         if('q'in to.query) {
+         if(to.query.q !== from.query.q) {
             store.dispatch('searchServices',`search?q=${to.query.q}`)            
          }
       })
