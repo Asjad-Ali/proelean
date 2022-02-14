@@ -27,16 +27,21 @@ export default function seller() {
     s_description: "",
     description: "",
     banner: [],
-    category_id: "d3JkUHdCcEZRMGdseTBvNXFOVXNGUT09",
-    sub_category_id: "cU1VOWVkQVVpVElJdll4eThYOXpBZz09",
-    delivery_time: "20 days",
+    category_id: "",
+    sub_category_id: "",
+    delivery_time: '',
     price: "",
   });
+
+
 
   const updateGig = ref({})
 
 
   const gigCreation = () => {
+      createGig.value.sub_category_id = document.getElementById("subCategory").value
+  createGig.value.delivery_time = document.getElementById("deliveryTime").value
+    console.log(createGig.value)
     store.dispatch('createGig', createGig.value)
   }
 
@@ -65,14 +70,17 @@ export default function seller() {
     createGig.value.banner.splice(index, 1);
   }
 
-  const onChange = () => {
-    data.value.categoryId = document.getElementById("category").value;
-    store.dispatch("loadSubCategories", data.value.categoryId);
+  const getCategory = () => {
+    data.value.category_id = document.getElementById("category").value;
+    console.log("Catogry id",data.value.category_id)
+    createGig.value.category_id = data.value.category_id;
+    store.dispatch("loadSubCategories", data.value.category_id);
   };
 
+  
   return {
     data,
-    onChange,
+    getCategory,
     gigCreation,
     selectThumbnail,
     removeImage,

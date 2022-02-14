@@ -47,12 +47,14 @@ export const  actions = {
       });
     },
 
-    async getCountriesLanguage({ commit }) {
-      const response = await Api.get('countries&categories');
-      if(response.status === 200) {
-        commit('setCountries',response.data.countries);
-        commit('setLanguages',response.data.languages);
-        commit('setDeliveryDays',response.data.delivery_days);
+    async getCountriesLanguage({ commit, state }) {
+      if(!state.getDeliveryDays){
+        const response = await Api.get('countries&categories');
+        if(response.status === 200) {
+          commit('setCountries',response.data.countries);
+          commit('setLanguages',response.data.languages);
+          commit('setDeliveryDays',response.data.delivery_days);
+        }
       }
     },
 
