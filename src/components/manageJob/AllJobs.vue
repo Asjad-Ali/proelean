@@ -17,81 +17,76 @@
             class="
               tab-content
               osahan-table
-              bg-white
               rounded
-              shadow-sm
               px-3
-              pt-1
             "
           >
             <div class="tab-pane active" id="active">
-              <div class="table-responsive box-table mt-3">
-
-                <div v-if="loader" class="text-center loader">
+                <div v-if="loader" class="text-center loader vh-100">
                   <div class="spinner-border text-primary m-2" role="status">
                     <span class="sr-only">Loading...</span>
                   </div>
                 </div>
-
                 <div v-else>
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>JOB DESCRIPTION</th>
-                        <th>POSTED DATE</th>
-                        <th>DURATION</th>
-                        <th>BUDGET</th>
-                        <th>OFFERS</th>
-                        <th>ACTION</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="job in jobs" :key="job.id">
-                        <td>
-                          <a href="#" class="make-black">
-                            <p class="order-proposal-title">
-                              {{ job.description }}
-                            </p>
-                          </a>
-                        </td>
-                        <td>{{ job.created_at }}</td>
-                        <td>{{ job.delivery_time }} days</td>
-                        <td>${{ job.budget }}</td>
-                        <td>
-                          <button class="btn btn-sm btn-primary">
-                            {{ job.total_offers }}
-                          </button>
-                        </td>
-                        <td>
-                          <!---------------------    Button trigger modal    -------------------->
-                          <button type="button" @click="getJobId(job.id)" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-                            Delete
-                          </button>
-                          <!---------------------    Modal     --------------------->
-                          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header d-flex justify-content-center">
-                                  <h5 class="modal-title" id="exampleModalLongTitle">Delete Job</h5> 
-                                </div>
-                                <div class="modal-body text-center">
-                                  Are you sure you want to delete the job?
-                                </div>
-                                <div class="modal-footer d-flex justify-content-center">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                  <button type="button" class="btn btn-danger" data-dismiss="modal" @click="deleteJob()">Yes</button>
+                  <div class="table-responsive box-table mt-3 bg-white">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>JOB DESCRIPTION</th>
+                          <th>POSTED DATE</th>
+                          <th>DURATION</th>
+                          <th>BUDGET</th>
+                          <th>OFFERS</th>
+                          <th>ACTION</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="job in jobs" :key="job.id">
+                          <td>
+                            <a href="#" class="make-black">
+                              <p class="order-proposal-title">
+                                {{ job.description }}
+                              </p>
+                            </a>
+                          </td>
+                          <td>{{ job.created_at }}</td>
+                          <td>{{ job.delivery_time }} days</td>
+                          <td>${{ job.budget }}</td>
+                          <td>
+                            <button class="btn btn-sm btn-primary">
+                              {{ job.total_offers }}
+                            </button>
+                          </td>
+                          <td>
+                            <!---------------------    Button trigger modal    -------------------->
+                            <button type="button" @click="getJobId(job.id)" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                              Delete
+                            </button>
+                            <!---------------------    Modal     --------------------->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header d-flex justify-content-center">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Job</h5> 
+                                  </div>
+                                  <div class="modal-body text-center">
+                                    Are you sure you want to delete the job?
+                                  </div>
+                                  <div class="modal-footer d-flex justify-content-center">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" @click="deleteJob()">Yes</button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <!---------------------    Modal End     --------------------->
+                            <!---------------------    Modal End     --------------------->
 
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>              
-                </div>
-              </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>              
+                  </div>
+               </div>
             </div>
           </div>
         </div>
