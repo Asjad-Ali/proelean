@@ -7,6 +7,37 @@
             <h2 class="mb-0 p-0">Services</h2>
             <router-link
               class="btn btn-sm btn-success ml-auto light"
+              to="/seller/create_service">
+              Create New Service
+            </router-link>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="..." class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>
+  <!-- <div class="main-page second py-5">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+            <h2 class="mb-0 p-0">Services</h2>
+            <router-link
+              class="btn btn-sm btn-success ml-auto light"
               to="/seller/create_service"
             >
               Create New Service
@@ -36,37 +67,54 @@
                           <th>SERVICE DESCRIPTION</th>
                           <th>DURATION</th>
                           <th>BUDGET</th>
-                          <th>OFFERS</th>
                           <th>ACTION</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr v-for="service in $store.getters.getUserServices" :key="service.id">
                           <td>
-                              <img
-                              class="img-fluid positi"
-                              :src="(service.service_media.length && service.service_media[0].media) ? `https://api.dex.proelean.com/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />
+                            <img style="height:120px; width:220px"  class="img-thumbnail" 
+                              :src="(service.service_media.length && service.service_media[0].media) ? 
+                              `https://api.dex.proelean.com/${service.service_media[0].media}` : 
+                              `/assets/images/sample-gig.png`" />
                           </td>
                           <td>
-                            <a href="#" class="make-black">
-                              <p class="order-proposal-title">
-                                {{ service.description }}
-                              </p>
-                            </a>
+                            <div >
+                              <div class="row">
+                                <div class="col col-12">
+                                  <p class="order-proposal-title">
+                                  {{ service.s_description }}
+                                  </p>
+                                </div>
+                                <div class="col col-12">
+                                  <p class="order-proposal-title">
+                                  {{ service.description }}
+                                  </p>
+                                </div>
+                              </div>
+                                <div class="row">
+                                <div class="col-lg-2 col-sm-4">
+                                Ratings  {{ service.service_rating }}
+                                </div>
+                                <div class="col-lg-2 col-sm-4">
+                                Clicks  {{ service.total_clicks }}
+                                </div>
+                                <div class="col-lg-2 col-sm-4">
+                                Orders  {{ service.total_orders }}
+                                </div>
+                              </div>
+                            </div>
                           </td>
-                          <td>{{ service.delivery_time }} days</td>
-                          <td>${{ service.budget }}</td>
-                          <td>
-                            <button class="btn btn-sm btn-primary">
-                              {{ service.total_offers }}
-                            </button>
-                          </td>
-                          <td>
-                            <!---------------------    Button trigger modal    -------------------->
-                            <button type="button" @click="getJobId(service.id)" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                          <td style="text-align: center;">{{ service.delivery_time }}</td>
+                          <td >${{ service.price }}</td>
+                          <td style="text-align: center;">
+                            <button type="button"  class="btn btn-success mb-1 w-75" >
+                              Edit
+                            </button>                           
+                            <button type="button" @click="getJobId(service.id)" class="btn btn-danger w-75" data-toggle="modal" data-target="#exampleModalCenter">
                               Delete
                             </button>
-                            <!---------------------    Modal     --------------------->
+
                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -83,7 +131,6 @@
                                 </div>
                               </div>
                             </div>
-                            <!---------------------    Modal End     --------------------->
 
                           </td>
                         </tr>
@@ -96,7 +143,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
