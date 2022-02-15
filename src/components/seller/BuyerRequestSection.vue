@@ -57,10 +57,13 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import store from "../../store";
 export default {
   setup() {
+    onMounted(() => {
+      store.dispatch("showBuyerRequests");
+    });
     return {
       requests: computed(() => store.getters.getBuyerRequests),
     };
