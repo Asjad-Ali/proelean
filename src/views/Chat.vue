@@ -333,3 +333,11 @@
          </div>
       </div>
 </template>
+
+<script>
+export default {
+   setup() {
+      console.log(process.env.VUE_APP_URL)     
+   },
+}
+</script>
