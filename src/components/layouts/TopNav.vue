@@ -240,7 +240,8 @@ export default {
       })
 
       const handleSearch = () => {
-         router.push(`gigs?q=${keywords.value}`)
+         router.push(`/gigs?q=${keywords.value}`)
+         keywords.value=''
       }
 
       

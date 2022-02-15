@@ -13,6 +13,7 @@ export const state = {
   servicesHasNextPage:'',
   reviewsHasNextPage:'',
   error: null,
+  buyerRequests:[]
 }
 
 export const getters = {
@@ -20,7 +21,8 @@ export const getters = {
   getSingleService : state => state.userSingleService,
   getUserServicesStatus : state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
-  servicesHasNextPage: state => state.servicesHasNextPage
+  servicesHasNextPage: state => state.servicesHasNextPage,
+  getBuyerRequests: state => state.buyerRequests
 }
 
 
@@ -52,6 +54,9 @@ export const  mutations = {
   },
   setDeleteGig(state,deletGig) {
     state.deleteGig=deletGig;
+  },
+  setRequests(state,request) {
+    state.buyerRequests=request;
   },
 }
 
@@ -150,5 +155,18 @@ export const  actions = {
         commit('setRegisterStatus',4); 
     }
   },
-        
+
+  async showBuyerRequests({commit})
+  {
+    let getData = JSON.parse(localStorage.getItem("userInfo"))
+    console.log("in action id: ",getData.id)
+    const res= await Api.get(`seller/buyer_requests`);
+    if(res.status === 200) {
+      commit("setRequests",res.data);
+      console.log("Buyer Requests",res.data);
+    } else {
+      console.log("Buyer Requests error");
+    }      
+  },
+
 }
