@@ -5,7 +5,7 @@ var page = 1;
 
 export const state = {
   sellerReview:[],
-  userServices:'',
+  userServices:[],
   userSingleService:{},
   createGigData:'',
   deleteGig:'',
@@ -30,7 +30,6 @@ export const  mutations = {
     state.userServices=services;
   },
   setSingleService(state,service){
-    console.log(service)
     state.userSingleService=service;
   },
   setReviews(state,reviews) {
@@ -82,18 +81,22 @@ export const  actions = {
     }
   },
 
-  async userSingleService({commit, state},id)
+  async userSingleService({commit, state, dispatch},payload)
   {
-    if(!state.userServices) {
-      const res= await Api.get(`seller/services/${id}`);
+    var service = null;
+    if(!state.userServices.length) {
+      const res = await Api.get(`seller/services/${payload.id}`);
       if(res.status===200) {
-        commit("setSingleService",res.data);
-        console.log(res.data)
+        service = res.data;
       } else {
         console.log(res);
       }      
     } else {
-      commit("setSingleService",state.userServices.find(service => service.id === id));
+      service = state.userServices.find(service => service.id === payload.id);
+    }
+    commit("setSingleService",service);
+    if(payload.type==="ONUPDATE") {
+      dispatch("loadSubCategories", service.category_id);
     }
 
   },

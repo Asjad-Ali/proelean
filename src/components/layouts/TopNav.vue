@@ -47,7 +47,7 @@
                      <router-link class="dropdown-item" to="/buyer/create_job">Create Job</router-link>
                   </div>
                   <div>
-                     <router-link class="dropdown-item" to="/buyer/manage_job">Manage Job</router-link>
+                     <router-link class="dropdown-item" to="/buyer/jobs">Manage Job</router-link>
                   </div>
                   <div>
                      <router-link class="dropdown-item" to="/buyer/manage_order">Manage Order</router-link>
@@ -64,6 +64,9 @@
                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                   <div>
                      <router-link class="dropdown-item" to="/seller/manage_gig">Create service </router-link>
+                  </div>
+                  <div>
+                     <router-link class="dropdown-item" to="/seller/manage_gig">Manage service </router-link>
                   </div>
                </div>
             </li> 

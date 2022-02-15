@@ -6,6 +6,7 @@ export default function seller() {
   const store = useStore();
   const bannersBase64 = ref([]);
   const preview = ref(null);
+  const updateGig = computed(()=>store.getters.getSingleService);
 
   const data = ref({
     description: '',
@@ -32,10 +33,6 @@ export default function seller() {
     delivery_time: '',
     price: "",
   });
-
-
-  const updateGig = ref(computed(() => store.getters.getSingleService))
-
 
   const getBanners = computed(() =>
     updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);

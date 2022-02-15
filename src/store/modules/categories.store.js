@@ -13,6 +13,9 @@ export const  mutations = {
   setSubCategories(state,subcategories) {
     state.subcategories = subcategories;
   },
+  setSelectedSubCategories(state,subcategories) {
+    state.selectedSubCategories = subcategories;
+  },
   setError(state,error){
     state.error=error;
   }
