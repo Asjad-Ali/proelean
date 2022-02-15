@@ -4,7 +4,7 @@
       <div class="card">
         <h5 class="card-header bg-white">
           <div class="row">
-            <div class="col-lg-6 d-flex justify-content-start">
+            <div class="col-lg-6 col-md-6 d-flex justify-content-start">
               <img
                 class="img-fluid bg-info rounded-circle mr-3"
                 style="width: 60px; height: 55px"
@@ -18,7 +18,7 @@
                 <div style="font-size: 12px">{{ request.created_at }}</div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-12 d-flex justify-content-end">
+            <div class="col-lg-6 col-md-6 d-none d-md-flex justify-content-end">
               <div class="d-flex flex-column my-1">
                 <span class="mb-2" style="font-size: 14px"
                   >Duration: {{ request.delivery_time }}</span
@@ -35,6 +35,8 @@
             {{ request.description }}
           </p>
           <div class="d-flex justify-content-start flex-column my-1">
+            <div class="mb-2 d-md-none">Duration: {{ request.delivery_time }}</div>
+            <div class="mb-2 d-md-none">budget: {{ request.budget }}$</div>
             <div class="mb-2">Document: No Attachment</div>
           </div>
           <div class="d-flex justify-content-end">
