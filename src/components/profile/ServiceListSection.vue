@@ -56,7 +56,7 @@
               <i class="fa fa-ellipsis-h"  aria-hidden="true"></i></a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownUserImage">
                 <div >
-                  <a class="dropdown-item" @click="deleteGig(service.id)" href="#">Delete</a>
+                  <a class="dropdown-item" @click.prevent="deleteGig(service.id)" href="#">Delete</a>
                 </div>
                 <div >
                   <router-link class="dropdown-item" :to="{name:'UpdateGig', params:{id:service.id}}">Edit</router-link>

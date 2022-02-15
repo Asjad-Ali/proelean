@@ -1,7 +1,6 @@
 <template>
   <div>
     <section class="py-5" v-if="updateGig">
-      {{getBanners}}
       <div class="container">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-9">
@@ -86,7 +85,7 @@
                             margin-left:20px;
                             background-size:cover;
                           "
-                          :style="`background-image: url(${banner.media ? 'https://api.dex.proelean.com/'+banner.media : banner});`"
+                          :style="`background-image: url(${banner.media ? 'https://api.dex.proelean.com/'+banner.media : '/assets/images/banner.png'});`"
                         >
                           <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                         </div>
@@ -192,7 +191,7 @@
 
 <script>
 import useSeller from "@/composables/useSeller.js";
-import { computed, onBeforeMount} from '@vue/runtime-core';
+import { computed, onMounted} from '@vue/runtime-core';
 import store from '../../store';
 import { useRoute } from 'vue-router';
 
@@ -211,12 +210,15 @@ export default {
       encodeImageFileAsURL,
     } = useSeller();
 
-    onBeforeMount(() => {
-      store.dispatch("userSingleService",route.params.id),
-      store.dispatch("getCountriesLanguage")
-      })
+  const payload = {
+    "id" : route.params.id,
+    "type" : "ONUPDATE"
+  };
 
-
+  onMounted(() => {
+    store.dispatch("userSingleService",payload)
+    store.dispatch("getCountriesLanguage")
+  })
 
     return {
       registerStatus: computed(() => store.getters.getRegisterStatus),

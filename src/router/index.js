@@ -6,10 +6,14 @@ import BecomeSeller from '../views/Become-Seller.vue'
 import Profile from '../views/Profile.vue'
 import ManageGig from '../views/Seller/ManageGig.vue'
 import ServiceDetail from '../views/ServiceDetail.vue'
-import ManageJob from '../views/Buyer/ManageJob.vue'
-import CreateJob from '../components/manageJob/CreateJob.vue'
-import ManageOrder from '../views/Buyer/ManageOrder.vue'
+
+import Buyer from '../views/Buyer.vue'
+import CreateJob from '../components/buyer/CreateJob.vue'
+import Jobs from '../components/buyer/AllJobs.vue'
+import AllOrders from '../components/buyer/AllOrders.vue'
+
 import UpdateGig from '../components/seller/UpdateGig.vue'
+import CreateGig from '@/components/seller/CreateGig.vue'
 import BuyerRequests from '../views/Seller/BuyerRequests.vue'
 
 
@@ -41,6 +45,11 @@ const routes = [
     component: UpdateGig
   },
   {
+    path: '/seller/create_gig',
+    name: 'CreateGig',
+    component: CreateGig
+  },
+  {
     path: '/register',
     name: 'Register',
     component: Register
@@ -59,20 +68,30 @@ const routes = [
   },
 
   {
-    path: '/buyer/create_job',
-    name: 'CreateJob',
-    component: CreateJob,
+    path: '/buyer',
+    name: 'Buyer',
+    component: Buyer,
+    children:[
+      {
+        path: 'create_job',
+        name: 'CreateJob',
+        component: CreateJob,
+      },
+      {
+        path: 'jobs',
+        name: 'Jobs',
+        component: Jobs,
+      },
+      {
+        path: 'manage_order',
+        name: 'ManageOrder',
+        component: AllOrders,
+      },
+    ]
   },
-  {
-    path: '/buyer/manage_job',
-    name: 'ManageJob',
-    component: ManageJob,
-  },
-  {
-    path: '/buyer/manage_order',
-    name: 'ManageOrder',
-    component: ManageOrder,
-  },
+
+
+  
 
   {
     path: '/gigs',
