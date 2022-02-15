@@ -1,5 +1,6 @@
 import Api from '@/services/API';
 import { createToaster } from '@meforma/vue-toaster';
+import { ref } from 'vue';
 var page = 1;
 
 
@@ -13,7 +14,8 @@ export const state = {
   servicesHasNextPage:'',
   reviewsHasNextPage:'',
   error: null,
-  buyerRequests:[]
+  buyerRequests:[],
+  loader: null
 }
 
 export const getters = {
@@ -22,7 +24,8 @@ export const getters = {
   getUserServicesStatus : state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
   servicesHasNextPage: state => state.servicesHasNextPage,
-  getBuyerRequests: state => state.buyerRequests
+  getBuyerRequests: state => state.buyerRequests,
+  getLoader : state => state.loader
 }
 
 
@@ -55,9 +58,12 @@ export const  mutations = {
   setDeleteGig(state,deletGig) {
     state.deleteGig=deletGig;
   },
-  setRequests(state,request) {
+  setBuyerRequests(state,request) {
     state.buyerRequests=request;
   },
+  setLoader(state,loader){
+    state.loader=loader;
+  }
 }
 
 export const  actions = {
@@ -80,6 +86,7 @@ export const  actions = {
         commit("setUserServices",res.data);
         commit('setServicesNextPage',res.links.next ?? '');
         commit('setServicesLoadingStatus','COMPLETED');
+        console.log("User Services",res.data);
       } else {
         console.log(res);
       }
@@ -158,20 +165,41 @@ export const  actions = {
 
   async showBuyerRequests({commit,state})
   {
+    commit('setLoader',1);
     let getData = JSON.parse(localStorage.getItem("userInfo"))
     console.log("in action id: ",getData.id)
     if(!state.buyerRequests.length){
       console.log("Buyer Requests State is null");
       const res= await Api.get(`seller/buyer_requests`);
       if(res.status === 200) {
-        commit("setRequests",res.data);
+        commit("setBuyerRequests",res.data);
         console.log("Buyer Requests",res.data);
+        commit('setLoader',0);
       } else {
         console.log("Buyer Requests error");
       }      
     }
     else{
       commit("setRequests",state.buyerRequests);
+    }
+  },
+
+  async deleteBuyerJob({commit,state},id){
+    const toaster = createToaster()
+    const res = await Api.delete(`seller/cancel_offer/${id}`);
+    if(res.status === 200){
+      console.log("delete Buyer Job successfully",res.message)
+      toaster.success(res.message,{
+        position:"top-right",
+        dismissible: true});
+      const afterRemoveJob = ref(state.buyerRequests.filter(job => job.id !== id))
+      commit("setBuyerRequests",afterRemoveJob.value);
+    }
+    else{
+      console.log("Error delete Job");
+      toaster.error(res.message,{
+        position:"top-right",
+        dismissible: true});
     }
   },
 
