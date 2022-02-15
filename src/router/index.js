@@ -4,7 +4,6 @@ import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import BecomeSeller from '../views/Become-Seller.vue'
 import Profile from '../views/Profile.vue'
-import ManageGig from '../views/Seller/ManageGig.vue'
 import ServiceDetail from '../views/ServiceDetail.vue'
 
 import Buyer from '../views/Buyer.vue'
@@ -12,9 +11,12 @@ import CreateJob from '../components/buyer/CreateJob.vue'
 import Jobs from '../components/buyer/AllJobs.vue'
 import AllOrders from '../components/buyer/AllOrders.vue'
 
-import UpdateGig from '../components/seller/UpdateGig.vue'
-import CreateGig from '@/components/seller/CreateGig.vue'
-import BuyerRequests from '../views/Seller/BuyerRequests.vue'
+import Seller from '@/views/Seller.vue'
+import CreateService from '@/components/seller/CreateService.vue'
+import ManageService from '@/components/seller/ManageService.vue'
+import UpdateService from '@/components/seller/UpdateService.vue'
+import BuyerRequests from '@/components/seller/BuyerRequestSection.vue'
+
 
 
 const routes = [
@@ -30,25 +32,34 @@ const routes = [
     component: Login
   },
   {
-    path: '/seller/manage_gig',
-    name: 'ManageGig',
-    component: ManageGig
+    path: '/seller',
+    name: 'Seller',
+    component: Seller,
+    children:[
+      {
+        path: 'create_service',
+        name: 'CreateService',
+        component: CreateService
+      },
+      {
+        path: 'manage_service',
+        name: 'ManageService',
+        component: ManageService
+      },
+      {
+        path: 'update_service/:id',
+        name: 'UpdateService',
+        component: UpdateService
+      },
+      {
+        path: 'buyer_requests',
+        name: 'BuyerRequests',
+        component: BuyerRequests
+      },
+
+    ]
   },
-  {
-    path: '/seller/buyer_requests',
-    name: 'BuyerRequests',
-    component: BuyerRequests
-  },
-  {
-    path: '/update_gig/:id',
-    name: 'UpdateGig',
-    component: UpdateGig
-  },
-  {
-    path: '/seller/create_gig',
-    name: 'CreateGig',
-    component: CreateGig
-  },
+ 
   {
     path: '/register',
     name: 'Register',
