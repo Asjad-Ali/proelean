@@ -227,8 +227,11 @@ export default{
 },
     setup() {
     const route = useRoute();
-    store.dispatch("userSingleService",route.params.id)
-    onMounted(store.dispatch("userSingleService",route.params.id))
+    const payload = {
+       "id": route.params.id,
+       "type": ""
+    }
+    onMounted(store.dispatch("userSingleService",payload))
 
     return {
         service: computed(()=>store.getters.getSingleService),
