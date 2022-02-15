@@ -40,15 +40,15 @@
             <div class="mb-2">Document: No Attachment</div>
           </div>
           <div class="d-flex justify-content-end">
-            <btn class="btn btn-dark"
-              >{{ request.total_offers }} Offers Sent</btn
+            <button class="btn btn-dark"
+              >{{ request.total_offers }} Offers Sent</button
             >
-            <btn
+            <button
               class="btn btn-primary ml-2"
               :style="{ 'pointer-events': request.is_applied ? 'none' : '' }"
-              >{{ request.is_applied ? "Applied" : "Send Offer" }}</btn
+              >{{ request.is_applied ? "Applied" : "Send Offer" }}</button
             >
-            <btn class="btn btn-success ml-2">Cancel Offer</btn>
+            <button class="btn btn-success ml-2">Cancel Offer</button>
           </div>
         </div>
       </div>
