@@ -64,13 +64,10 @@
                </a>
                <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                   <div>
-                     <router-link class="dropdown-item" to="/seller/create_service">Create service </router-link>
+                     <router-link class="dropdown-item" to="/seller/manage_service">Manage services </router-link>
                   </div>
                   <div>
-                     <router-link class="dropdown-item" to="/seller/manage_service">Manage service </router-link>
-                  </div>
-                  <div>
-                     <router-link class="dropdown-item" to="/buyer/buyer_requests">Buyer Requests</router-link>
+                     <router-link class="dropdown-item" to="/seller/buyer_requests">Buyer Requests</router-link>
                   </div>
                </div>
             </li> 

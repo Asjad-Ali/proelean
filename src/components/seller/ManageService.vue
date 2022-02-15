@@ -7,9 +7,9 @@
             <h2 class="mb-0 p-0">Services</h2>
             <router-link
               class="btn btn-sm btn-success ml-auto light"
-              to="/seller/create_gig"
+              to="/seller/create_service"
             >
-              Create New Gig
+              Create New Service
             </router-link>
           </div>
 
@@ -107,6 +107,7 @@ export default {
     };
 
     onMounted(() => {
+      store.dispatch("userServices");
       store.dispatch("showAllJobs");
     });
 
