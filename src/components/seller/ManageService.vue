@@ -32,8 +32,8 @@
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th>JOB DESCRIPTION</th>
-                          <th>POSTED DATE</th>
+                          <th>THUMBNAIL</th>
+                          <th>SERVICE DESCRIPTION</th>
                           <th>DURATION</th>
                           <th>BUDGET</th>
                           <th>OFFERS</th>
@@ -41,25 +41,29 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="job in jobs" :key="job.id">
+                        <tr v-for="service in $store.getters.getUserServices" :key="service.id">
+                          <td>
+                              <img
+                              class="img-fluid positi"
+                              :src="(service.service_media.length && service.service_media[0].media) ? `https://api.dex.proelean.com/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />
+                          </td>
                           <td>
                             <a href="#" class="make-black">
                               <p class="order-proposal-title">
-                                {{ job.description }}
+                                {{ service.description }}
                               </p>
                             </a>
                           </td>
-                          <td>{{ job.created_at }}</td>
-                          <td>{{ job.delivery_time }} days</td>
-                          <td>${{ job.budget }}</td>
+                          <td>{{ service.delivery_time }} days</td>
+                          <td>${{ service.budget }}</td>
                           <td>
                             <button class="btn btn-sm btn-primary">
-                              {{ job.total_offers }}
+                              {{ service.total_offers }}
                             </button>
                           </td>
                           <td>
                             <!---------------------    Button trigger modal    -------------------->
-                            <button type="button" @click="getJobId(job.id)" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                            <button type="button" @click="getJobId(service.id)" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
                               Delete
                             </button>
                             <!---------------------    Modal     --------------------->
@@ -70,7 +74,7 @@
                                     <h5 class="modal-title" id="exampleModalLongTitle">Delete Job</h5> 
                                   </div>
                                   <div class="modal-body text-center">
-                                    Are you sure you want to delete the job?
+                                    Are you sure you want to delete the service?
                                   </div>
                                   <div class="modal-footer d-flex justify-content-center">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -107,13 +111,12 @@ export default {
     };
 
     onMounted(() => {
-      store.dispatch("userServices");
-      store.dispatch("showAllJobs");
+      store.dispatch("userServices",'');
     });
 
     function deleteJob() {
       store.dispatch("deleteAJob", jobId.value);
-      console.log("delete job id: ",jobId.value)
+      console.log("delete service id: ",jobId.value)
     }
     return {
       jobs: computed(() => store.getters.getAllJobs),
