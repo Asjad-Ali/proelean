@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import { computed, ref } from "@vue/runtime-core";
+import { computed, onMounted, ref } from "@vue/runtime-core";
 import store from "../../store";
 export default {
   setup() {
@@ -105,6 +105,10 @@ export default {
     const getJobId = (id) => {
       jobId.value = id
     };
+
+    onMounted(() => {
+      store.dispatch("showAllJobs");
+    });
 
     function deleteJob() {
       store.dispatch("deleteAJob", jobId.value);
