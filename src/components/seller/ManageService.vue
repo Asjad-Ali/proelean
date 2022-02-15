@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-            <h2 class="mb-0 p-0">Gigs</h2>
+            <h2 class="mb-0 p-0">Services</h2>
             <router-link
               class="btn btn-sm btn-success ml-auto light"
               to="/seller/create_gig"
@@ -96,11 +96,10 @@
 </template>
 
 <script>
-import { onMounted, computed, ref } from "@vue/runtime-core";
+import { computed, ref } from "@vue/runtime-core";
 import store from "../../store";
 export default {
   setup() {
-    onMounted(store.dispatch("showAllJobs"));
     
     const jobId = ref('');
     const getJobId = (id) => {
