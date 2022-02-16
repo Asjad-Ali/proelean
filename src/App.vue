@@ -26,4 +26,16 @@ export default {
 .cursor-pointer{
   cursor: pointer;
 }
+.gig-img-outer {
+    height: 200px;
+    width: 100%;
+}
+
+.img-full{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  object-fit: cover;
+}
+
 </style>
