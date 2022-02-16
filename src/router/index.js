@@ -6,9 +6,9 @@ import BecomeSeller from '../views/Become-Seller.vue'
 import Profile from '../views/Profile.vue'
 import ServiceDetail from '../views/ServiceDetail.vue'
 
-import CreateJob from '../components/buyer/CreateJob.vue'
-import Jobs from '../components/buyer/AllJobs.vue'
-import AllOrders from '../components/buyer/AllOrders.vue'
+import CreateJob from '@/components/buyer/CreateJob.vue'
+import Jobs from '@/components/buyer/AllJobs.vue'
+import AllOrders from '@/components/buyer/AllOrders.vue'
 
 import CreateService from '@/components/seller/CreateService.vue'
 import ManageService from '@/components/seller/ManageService.vue'
@@ -64,7 +64,6 @@ const routes = [
     component: BuyerRequests
   },
 
- 
 
   {
     path: '/buyer/create_job',
