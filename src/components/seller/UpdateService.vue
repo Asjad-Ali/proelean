@@ -174,7 +174,7 @@
                   <div class="p-3 d-flex justify-content-end">
                     <button
                       class="btn btn-success btn-lg font-weight-bold"
-                      @click.prevent="gigCreation"
+                      @click.prevent="updateService"
                     >
                       {{registerStatus == 2 ? 'Loading...' : 'Create'}}
                     </button>
@@ -201,7 +201,7 @@ export default {
     const {
       data,
       bannersBase64,
-      gigCreation,
+      updateService,
       selectThumbnail,
       removeImage,
       updateGig,
@@ -225,7 +225,7 @@ export default {
       updateGig,
       getCategory,
       data,
-      gigCreation,
+      updateService,
       selectThumbnail,
       bannersBase64,
       removeImage,

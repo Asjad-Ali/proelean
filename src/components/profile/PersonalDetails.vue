@@ -14,7 +14,7 @@
               <label class="user-pict">
                 <img
                   :src="'https://api.dex.proelean.com/' + user.image"
-                  class="img-fluid img-thumbnail"
+                  class="img-full"
                   alt="profile_img"
                 />
               </label>
@@ -156,4 +156,23 @@ export default {
   },
 };
 </script>
+<style scoped>
 
+.user-profile-image{
+    height: 120px;
+    width: 120px;
+
+}
+.img-full{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.user-profile-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+</style>

@@ -72,8 +72,8 @@ export default function useAuth() {
    })
 
    const matchPassword = ref(null)
-   const usernameRegex = /^[a-zA-Z0-9_.]{3,30}$/;
-   const nameRegex = /^[a-zA-Z]{3,20}$/;
+   const usernameRegex = /^[a-zA-Z_.]{3,30}$/;
+   const nameRegex = /^[a-zA-Z ]{3,20}$/;
 
    watch(signup.value,(current /*old*/) => {
       if(!current.name){

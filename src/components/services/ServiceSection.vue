@@ -78,5 +78,9 @@ export default {
 };
 </script>
 
-<style>
+
+<style scoped>
+.inner-slider {
+ margin-bottom:0px !important;
+}
 </style>
