@@ -6,7 +6,7 @@
     >
     <router-link :to="{name:'gigDetail', params:{id:service.id}}" >
         <img
-          class="img-fluid positi"
+          class="img-fluid"
           :src="(service.service_media.length && service.service_media[0].media) ? `https://api.dex.proelean.com/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />
       </router-link>
       <div class="inner-slider">

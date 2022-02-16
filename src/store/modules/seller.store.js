@@ -9,7 +9,7 @@ export const state = {
   userServices:[],
   userSingleService:{},
   createGigData:'',
-  deleteGig:'',
+  deleteService:'',
   loadingStatus:'',
   servicesHasNextPage:'',
   reviewsHasNextPage:'',
@@ -56,7 +56,7 @@ export const  mutations = {
     state.createGigData=createGigD;
   },
   setDeleteGig(state,deletGig) {
-    state.deleteGig=deletGig;
+    state.deleteService=deletGig;
   },
   setBuyerRequests(state,request) {
     state.buyerRequests=request;
@@ -70,6 +70,7 @@ export const  actions = {
 
   async userServices({commit,state},action)
   {
+    commit('setLoader',1);
     commit('setServicesLoadingStatus','LOADING');
     if(!state.userServices || page>=1) {
       if(action === ''){
@@ -83,6 +84,7 @@ export const  actions = {
       }
       const res= await Api.get(`seller/services?page=${page}`);
       if(res.status===200) {
+        commit('setLoader',0);
         commit("setUserServices",res.data);
         commit('setServicesNextPage',res.links.next ?? '');
         commit('setServicesLoadingStatus','COMPLETED');
@@ -126,7 +128,7 @@ export const  actions = {
     }      
   },
 
-  async deleteGig({commit, state},serviceID){
+  async deleteService({commit, state},serviceID){
     const toaster = createToaster()
     console.log("Delete ID",serviceID)
     const res = await Api.delete(`seller/services/${serviceID}`)
@@ -135,13 +137,14 @@ export const  actions = {
         position:"top-right",
         dismissible: true
       });
-      let tmpServices = state.userServices.filter(service => service.id !== serviceID)
-      commit("setUserServices",tmpServices)
-    } else{
+      const tmpServices = ref(state.userServices.filter(service => service.id !== serviceID))
+      commit("setUserServices",tmpServices.value)
+    } 
+    else{
         toaster.error(res.message,{
           position:"top-right",
           dismissible: true});
-      }
+    }
   },
 
   async createGig({commit},payload){
