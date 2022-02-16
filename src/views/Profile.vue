@@ -39,11 +39,8 @@ export default {
     const store = useStore();
     onMounted(store.dispatch("userServices",''));
     
-    const deleteGig = async (id) => {
-      store.dispatch('deleteGig',id)
-    }
+
     return {
-      deleteGig,
       user: computed(() => store.getters.getAuthUser),
     };
   }
