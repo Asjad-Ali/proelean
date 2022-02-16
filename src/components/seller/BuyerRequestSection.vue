@@ -53,32 +53,88 @@
                 >
 
                 <button type="button" class="btn btn-primary ml-2"
-                  :style="{ 'pointer-events': request.is_applied ? 'none' : '' }">
-                   {{ request.is_applied ? "Applied" : "Send Offer" }}
+                  :style="{ 'pointer-events': request.is_applied ? 'none' : '' }"
+                  data-toggle="modal"
+                  @click="defineOffer(request.id)"
+                  data-target="#sendOffer"
+                  >
+                    {{ request.is_applied ? "Applied" : "Send Offer" }}
                 </button>
 
-                <!---------------------    Button trigger modal (Send Offer)    -------------------->
-                <!-- <button type="button" class="btn btn-primary ml-2"
-                  :style="{ 'pointer-events': request.is_applied ? 'none' : '' }" data-toggle="modal" data-target="#exampleModalCenter">
-                   {{ request.is_applied ? "Applied" : "Send Offer" }}
-                </button> -->
-                <!---------------------    Modal (Send Offer)     --------------------->
-                <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+                 <!---------------------    Modal (Send Offer)     --------------------->
+                <div class="modal fade" id="sendOffer" tabindex="-1" role="dialog" aria-labelledby="sendOfferTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header d-flex justify-content-center">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Send Offer</h5> 
+                          <h5 class="modal-title" id="exampleModalLongTitle">Send Offer</h5> 
                       </div>
                       <div class="modal-body text-center">
-                        ...
+                          <div class="text-left font">Describe your offer</div>
+                          <textarea
+                              type="text"
+                              class="form-control"
+                              name="description"
+                              v-model="payload.description"
+                              id="description"
+                              placeholder="Describe your offer"
+                              required
+                            />
+                            <div class="text-left font mt-2">Total Price</div>
+                          <input
+                              type="number"
+                              class="form-control"
+                              name="price"
+                              v-model="payload.price"
+                              id="price"
+                              placeholder="Total Offer(EUR)"
+                              required
+                            />
+                            <div class="text-left font mt-2">Delivery Time</div>
+                          <select
+                              id="deliveryTime"
+                              class="form-control"
+                              name="delivery_time"
+                              v-model="payload.delivery_time"
+                              required
+                            >
+                              <option selected>Select day</option>
+                              <option  
+                              v-for="day in $store.getters.getDeliveryDays"
+                              :value="day" 
+                              :key="day.index"
+                              >{{ day }} </option>
+                            </select>
+
+                            <div class="text-left font mt-2">Service</div>
+                            <select
+                              id="services"
+                              class="form-control"
+                              name="service"
+                              v-model="payload.service_id"
+                              required
+                            >
+                              <option selected disabled>Select Service</option>
+                              <option  
+                              v-for="service in $store.getters.getUserServices"
+                              :value="service.id" 
+                              :key="service.id"
+                              >{{ service.s_description }} </option>
+                            </select>
                       </div>
-                    </div>
+                      <div class="modal-footer d-flex justify-content-center">
+                          <button type="button" class="btn btn-success" data-dismiss="modal" @click.prevent="sendOffer()" >
+                           {{ getBtnStatus == 2 ? "Loading..." : "Send Offer"  }} 
+                            </button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      </div>
                   </div>
-                </div> -->
+                </div>
+                </div>
                 <!---------------------    Modal End     --------------------->
 
 
-                <!---------------------    Button trigger modal (Cancel Offer)    -------------------->
+                <!---------------------    Button trigger modal    -------------------->
                 <button type="button" @click="getJobId(request.id)" class="btn btn-success ml-2"
                   data-toggle="modal" data-target="#exampleModalCenter2">
                   Cancel Offer
@@ -117,12 +173,28 @@ export default {
   setup() {
     onMounted(() => {
       store.dispatch("showBuyerRequests");
-      //store.dispatch("userServices");
     });
     const jobId = ref('');
+    const payload = ref({
+      job_id:'',
+      service_id:'',
+      description:'',
+      price:'',
+      delivery_time:''
+    });
     const getJobId = (id) => {
       jobId.value = id
     };
+
+    function defineOffer(jobID) {
+      payload.value.job_id = jobID;
+      store.dispatch("getCountriesLanguage");
+      store.dispatch("userServices");
+    }
+
+    function sendOffer() {
+      store.dispatch("sendOffer",payload.value);
+    }
 
     function deleteJob() {
       store.dispatch("deleteBuyerJob", jobId.value);
@@ -130,14 +202,22 @@ export default {
     }
     return {
       requests: computed(() => store.getters.getBuyerRequests),
-      loader: computed(() => store.getters.getLoader),
+      loader: computed(() => store.getters.getLoaderVal),
+      getBtnStatus: computed(() => store.getters.getRegisterStatus),
+      payload,
+      defineOffer,
+      sendOffer,
       deleteJob,
       getJobId,
-      jobId
+      jobId,
     };
   },
 };
 </script>
 
-<style>
+<style scoped>
+.spinner-border{
+  width: 4rem;
+  height: 4rem;
+}
 </style>
