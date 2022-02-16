@@ -97,10 +97,12 @@ export const  actions = {
 
   async userSingleService({commit, state, dispatch},payload)
   {
+    console.log("In 200 Response",payload)
     var service = null;
     if(!state.userServices.length) {
       const res = await Api.get(`seller/services/${payload.id}`);
       if(res.status===200) {
+        console.log("In 200 Response",payload)
         service = res.data;
       } else {
         console.log(res);
@@ -111,6 +113,7 @@ export const  actions = {
     commit("setSingleService",service);
     if(payload.type==="ONUPDATE") {
       dispatch("loadSubCategories", service.category_id);
+
     }
 
   },

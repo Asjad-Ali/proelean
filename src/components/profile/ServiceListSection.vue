@@ -58,9 +58,6 @@
                 <div >
                   <a class="dropdown-item" @click.prevent="deleteGig(service.id)" href="#">Delete</a>
                 </div>
-                <div >
-                  <router-link class="dropdown-item" :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link>
-                </div>
             </div>
             <div class="price">
               <a href="#">
