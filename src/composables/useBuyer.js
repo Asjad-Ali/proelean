@@ -76,7 +76,7 @@ export default function useBecomeSeller() {
         description: "",
         category_id: "cU1VOWVkQVVpVElJdll4eThYOXpBZz09",
         sub_category_id: "cU1VOWVkQVVpVElJdll4eThYOXpBZz09",
-        delivery_time: "5 days",
+        delivery_time: "",
         budget:"",
     });
 

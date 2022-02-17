@@ -49,7 +49,7 @@
                             </a>
                           </td>
                           <td>{{ job.created_at }}</td>
-                          <td>{{ job.delivery_time }} days</td>
+                          <td>{{ job.delivery_time }}</td>
                           <td>${{ job.budget }}</td>
                           <td>
                             <button class="btn btn-sm btn-primary">
