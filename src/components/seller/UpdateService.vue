@@ -70,7 +70,7 @@
                       </div>
 
                       <div
-                        v-for="(banner, index) in getBanners"
+                        v-for="(banner, index) in bannersBase64"
                         :key="index"
                       >
                         <div
@@ -206,7 +206,7 @@ export default {
       removeImage,
       updateGig,
       getCategory,
-      getBanners,
+      // getBanners,
       encodeImageFileAsURL,
     } = useSeller();
 
@@ -230,7 +230,7 @@ export default {
       bannersBase64,
       removeImage,
       encodeImageFileAsURL,
-      getBanners
+      // getBanners
     };
   },
 };
