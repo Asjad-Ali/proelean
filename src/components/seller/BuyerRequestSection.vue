@@ -2,6 +2,7 @@
   <div class="container pt-3">
     <div class="row d-flex justify-content-center">
       <div class="col-lg-10">   
+        <h4 class="font-weight-bold mb-3">Buyer Requests</h4>
         <div>
           <div v-if="loader" class="text-center loader vh-100">
             <div class="spinner-border text-primary m-5" role="status">
