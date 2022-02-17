@@ -7,6 +7,7 @@ var page = 1;
 export const state = {
   sellerReview:[],
   userServices:[],
+  setLoader:'',
   userSingleService:{},
   createGigData:'',
   deleteService:'',
@@ -19,6 +20,7 @@ export const state = {
 
 export const getters = {
   getUserServices : state => state.userServices,
+  getSellerLoader : state => state.setLoader,
   getSingleService : state => state.userSingleService,
   getUserServicesStatus : state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
@@ -59,6 +61,9 @@ export const  mutations = {
   setBuyerRequests(state,request) {
     state.buyerRequests=request;
   },
+  setSellerLoader(state,loaderVal){
+    state.setLoader = loaderVal
+  }
 }
 
 export const  actions = {
@@ -79,7 +84,7 @@ export const  actions = {
       }
       const res= await Api.get(`seller/services?page=${page}`);
       if(res.status===200) {
-        commit('setLoader',0);
+        commit('setSellerLoader',0);
         commit("setUserServices",res.data);
         commit('setServicesNextPage',res.links.next ?? '');
         commit('setServicesLoadingStatus','COMPLETED');
