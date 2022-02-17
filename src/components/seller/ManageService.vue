@@ -266,7 +266,7 @@ export default {
     }
     return {
       jobs: computed(() => store.getters.getAllJobs),
-      loader: computed(() => store.getters.getLoaderVal),
+      loader: computed(() => store.getters.getSellerLoader),
       services: computed(() => store.getters.getUserServices),
       deleteService,
       getServiceId,
