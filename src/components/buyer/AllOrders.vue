@@ -52,7 +52,7 @@
             "
           >
             <div class="tab-pane active" id="active">
-                <div v-if="loader" class="text-center loader vh-100">
+                <div v-if="loader" class="text-center vh-100">
                   <div class="spinner-border text-primary m-2" role="status">
                     <span class="sr-only">Loading...</span>
                   </div>
