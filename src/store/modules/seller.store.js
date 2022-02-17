@@ -15,7 +15,6 @@ export const state = {
   reviewsHasNextPage:'',
   error: null,
   buyerRequests:[],
-  loader: null
 }
 
 export const getters = {
@@ -25,7 +24,6 @@ export const getters = {
   getSellerReview: state => state.sellerReview,
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
-  getLoader : state => state.loader
 }
 
 
@@ -61,9 +59,6 @@ export const  mutations = {
   setBuyerRequests(state,request) {
     state.buyerRequests=request;
   },
-  setLoader(state,loader){
-    state.loader=loader;
-  }
 }
 
 export const  actions = {
@@ -184,7 +179,7 @@ export const  actions = {
       }      
     }
     else{
-      commit("setRequests",state.buyerRequests);
+      commit("setBuyerRequests",state.buyerRequests);
     }
   },
 
@@ -206,5 +201,26 @@ export const  actions = {
         dismissible: true});
     }
   },
+
+  async sendOffer({commit},payload){
+    commit('setRegisterStatus',2);
+      const toaster = createToaster()
+      const resp= await Api.post('seller/send_offer',payload);
+      if(resp.status==200){
+        console.log("In success")
+        toaster.success(resp.message,{
+          position:"top-right",
+          dismissible: true});
+        commit('setRegisterStatus',3);
+      }
+      else
+      {
+        console.log("In fail")
+        commit('setRegisterStatus',4);
+        toaster.error(resp.message,{
+          position:"top-right",
+          dismissible: true});
+      }
+    },
 
 }

@@ -64,7 +64,6 @@ const routes = [
     component: BuyerRequests
   },
 
- 
 
   {
     path: '/buyer/create_job',

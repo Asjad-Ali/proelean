@@ -29,6 +29,7 @@ export const  mutations = {
     },
     setLoader(state,loader){
       state.loader=loader;
+      console.log("loader",state.loader)
     }
   }
 
