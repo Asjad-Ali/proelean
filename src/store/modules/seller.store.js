@@ -20,7 +20,7 @@ export const state = {
 
 export const getters = {
   getUserServices : state => state.userServices,
-  getSellerLoader : state => state.setLoader,
+  getSellerLoader : state => state.s_Loader,
   getSingleService : state => state.userSingleService,
   getUserServicesStatus : state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,

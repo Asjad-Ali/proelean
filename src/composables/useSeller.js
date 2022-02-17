@@ -33,8 +33,8 @@ export default function seller() {
     price: "",
   });
 
-  const getBanners = computed(() =>
-    updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
+  // const getBanners = computed(() =>
+  //   updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
 
   const gigCreation = () => {
     createGig.value.sub_category_id = document.getElementById("subCategory").value
@@ -46,7 +46,6 @@ export default function seller() {
   }
 
   const updateService = () => {
-    console.log("Picture",getBanners.value)
     updateGig.value.delivery_time = document.getElementById("deliveryTime").value
     console.log("Update Value",updateGig.value)
   }
@@ -63,7 +62,7 @@ export default function seller() {
         createGig.value.banner.push(files[i]);
       }
     }
-
+    
     document.querySelector('#bannerInput').value = '';
     bannersBase64.value = [];
     if(updateGig.value.id){
@@ -112,7 +111,7 @@ export default function seller() {
     createGig,
     updateGig,
     bannersBase64,
-    getBanners,
+    // getBanners,
     convertFileToBase64
 
   }

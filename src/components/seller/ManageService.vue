@@ -16,7 +16,6 @@
         </div>
       </div>
 
-
         <div class="tab-pane d-md-none active" id="active">
           <div v-if="loader" class="text-center loader">
             <div class="spinner-border  text-primary m-2" role="status">
@@ -47,7 +46,7 @@
                 </p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row my-2">
                   <div class="col-3">
                     <strong class="text-muted">Rating: {{service.service_rating}}</strong>
                   </div>
@@ -77,7 +76,7 @@
                     aria-hidden="true"
                     style="font-size: 17px"
                     @click.prevent="getServiceId(service.id)"
-                    class="fa fa-trash cursor-pointer text-danger"
+                    class="fa fa-trash cursor-pointer text-danger mt-1"
                     data-toggle="modal"
                     data-target="#exampleModalCenter"
                   >
@@ -92,7 +91,7 @@
 
 
 
-      <div v-if="service" class="tab-content d-none d-md-block osahan-table container rounded px-3">
+      <div v-if="services" class="tab-content d-none d-md-block osahan-table container rounded px-3">
         <div class="tab-pane active" id="active">
           <div v-if="loader" class="text-center loader vh-100">
             <div class="spinner-border text-primary m-2" role="status">
@@ -124,11 +123,10 @@
                           service.service_media.length &&
                           service.service_media[0].media
                             ? `https://api.dex.proelean.com/${service.service_media[0].media}`
-                            : `/assets/images/sample-gig.png`
-                        "
+                            : `/assets/images/sample-gig.png`"
                       />
                     </td>
-                    <td>
+                    <td class="ps-1">
                       <div>
                         <div class="row">
                           <div class="col col-12">
@@ -239,7 +237,7 @@
         </div>
       </div> 
 
-        <div v-if="!service" class="container text-center py-5">
+        <div v-if="!services" class="container text-center py-5">
         <h2>No Any Service Available</h2>
       </div>
     </div>

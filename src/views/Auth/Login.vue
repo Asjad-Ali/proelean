@@ -79,10 +79,10 @@
                 type="button"
                 class="btn btn-success btn-block text-uppercase"
                 id="loginBtn"
-                :disabled="!Object.values(loginErrors).every((value) => !value)"
-                @click="handleLogin">
-                <i class="fa fa-spinner fa-spin" v-show="loginLoading"></i>
-                {{registerStatus == 2 ? 'Loading...' : 'login'}}
+                :disabled="!Object.values(loginErrors).every((value) => !value) || registerStatus == 2"
+                @click="handleLogin"
+                >                
+                {{registerStatus == 2 ? ' Loading...' : ' login'}}
               </button>
               <div class="text-center mt-3 border-bottom pb-3">
                 <p class="small text-muted">Or login with</p>
@@ -171,10 +171,8 @@ export default {
 
     const handleLogin = async (e) => {
       e.preventDefault();
-      loginLoading.value = true;
       console.log("login data:- " + JSON.stringify(login.value))
       store.dispatch('login', login.value)
-      loginLoading.value = false;
    }
 
     onBeforeMount(() => {
