@@ -14,7 +14,6 @@ export default function seller() {
     sub_category_id: '',
   });
 
-
   const convertFileToBase64 = (file) => {
     data.value.cinic = file;
     const reader = new FileReader();
@@ -40,21 +39,46 @@ export default function seller() {
   const gigCreation = () => {
     createGig.value.sub_category_id = document.getElementById("subCategory").value
     createGig.value.delivery_time = document.getElementById("deliveryTime").value
+    createGig.value.delivery_time = document.getElementById("deliveryTime").value
+
     console.log(createGig.value)
     store.dispatch('createGig', createGig.value)
   }
 
+  const updateService = () => {
+    console.log("Picture",getBanners.value)
+    updateGig.value.delivery_time = document.getElementById("deliveryTime").value
+    console.log("Update Value",updateGig.value)
+  }
+
   const selectThumbnail = (e) => {
     const files = e.target.files;
-    for (let i = 0; i < files.length; i++) {
-      createGig.value.banner.push(files[i]);
+    console.log(e.target.files);
+
+    for (let i = 0; i < files.length; i++) {    
+      if(updateGig.value.id){
+        updateGig.value.service_media.push(files[i]);
+      }
+      else{
+        createGig.value.banner.push(files[i]);
+      }
     }
+
     document.querySelector('#bannerInput').value = '';
-    console.log(createGig.value);
     bannersBase64.value = [];
-    createGig.value.banner.forEach(img => {
-      encodeImageFileAsURL(img);
-    });
+    if(updateGig.value.id){
+      updateGig.value.service_media.forEach(img => {
+        if (typeof img === 'string' && img instanceof String){
+          encodeImageFileAsURL(img);
+        }
+      });
+    }
+    else{
+      createGig.value.banner.forEach(img => {
+        encodeImageFileAsURL(img);
+      });
+    }
+    
   };
   const encodeImageFileAsURL = file => {
     const reader = new FileReader();
@@ -81,6 +105,7 @@ export default function seller() {
     data,
     getCategory,
     gigCreation,
+    updateService,
     selectThumbnail,
     removeImage,
     encodeImageFileAsURL,

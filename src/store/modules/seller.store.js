@@ -105,7 +105,8 @@ export const  actions = {
     }
     commit("setSingleService",service);
     if(payload.type==="ONUPDATE") {
-      dispatch("loadSubCategories", service.category_id);
+      dispatch("loadSubCategories", service.category.id);
+
     }
 
   },

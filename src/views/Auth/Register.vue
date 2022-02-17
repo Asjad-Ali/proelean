@@ -106,13 +106,11 @@
                 >
               </div>
               <button
-                
                 class="btn btn-success btn-block text-uppercase"
                 type="submit"
                 @click="handleRegister"
                 :disabled="!Object.values(signupErrors).every(value => !value) || registerStatus==2"
                 >
-                <p>{{!Object.values(signupErrors).every(value => {("Error value",!value)})}}</p>
               {{registerStatus == 2 ? 'Loading...' : 'Agree & Joins'}} 
               </button>
               <div class="text-center mt-3 border-bottom pb-3">

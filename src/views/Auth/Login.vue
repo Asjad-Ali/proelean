@@ -115,7 +115,7 @@
             </form>
           </div>
 
-          <div class="container">
+          <!-- <div class="container">
             <button type="button" class="btn btn-primary" id="liveToastBtn">
               Show live toast
             </button>
@@ -143,7 +143,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

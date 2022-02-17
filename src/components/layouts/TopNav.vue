@@ -194,19 +194,19 @@
                      <div class="dropdown-item-icon">
                         
                      </div>
-                     Language -1
+                    English
                   </a>
                   <a class="dropdown-item" href="#">
                      <div class="dropdown-item-icon">
                         
                      </div>
-                     Language -1
+                     Suomalainen
                   </a>
                   <a class="dropdown-item" href="#">
                      <div class="dropdown-item-icon">
                         
                      </div>
-                     Language -3
+                   Türkçe
                   </a>
                </div>
             </li> 

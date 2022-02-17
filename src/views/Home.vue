@@ -18,7 +18,7 @@ import PopularGigs from '@/components/home/PopularGigsSection.vue';
 import BoostBussiness from '@/components/home/BoostBussinessSection.vue';
 import ExploreMarket from '@/components/home/ExploreMarketSection.vue';
 import ProjectByFreelancer from '@/components/home/ProjectByFreelancerSection.vue';
-import Quotation from '@/components/home/QuotationSection.vue';
+// import Quotation from '@/components/home/QuotationSection.vue';
 import FindServices from '@/components/home/FindServicesSection.vue';
 
 export default {
@@ -30,7 +30,7 @@ export default {
     BoostBussiness,
     ExploreMarket,
     ProjectByFreelancer,
-    Quotation,
+    // Quotation,
     FindServices
   },
 }

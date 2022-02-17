@@ -62,18 +62,20 @@
                 <strong>Price $100</strong>
               </div>
               <div class="col-2">
+                  <router-link class="dropdown-item" :to="{name:'UpdateService', params:{id:service.id}}">
                   <i
-                    class="fa fa-pencil-square-o cursor-pointer"
+                    class="fa fa-pencil-square-o mb-2 cursor-pointer"
                     style="font-size: 15px"
                     aria-hidden="true"
                   >
                   </i>
+                  </router-link>
               </div>
               <div class="col-2">
                   <i
                     aria-hidden="true"
                     style="font-size: 17px"
-                    @click="getJobId(service.id)"
+                    @click.prevent="getServiceId(service.id)"
                     class="fa fa-trash cursor-pointer text-danger"
                     data-toggle="modal"
                     data-target="#exampleModalCenter"
@@ -156,12 +158,14 @@
                     <td style="text-align: center">${{ service.price }}</td>
                     <td style="text-align: center">
                       <div>
+                        <router-link class="dropdown-item" :to="{name:'UpdateService', params:{id:service.id}}">
                         <i
                           class="fa fa-pencil-square-o mb-2 cursor-pointer"
                           style="font-size: 15px"
                           aria-hidden="true"
                         >
                         </i>
+                        </router-link>
                       </div>
                       <div>
                         <i

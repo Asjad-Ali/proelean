@@ -4,11 +4,15 @@
       v-for="service in $store.getters.getUserServices"
       :key="service.id"
     >
+     <div class="gig-img-outer">
     <router-link :to="{name:'gigDetail', params:{id:service.id}}" >
+       
         <img
-          class="img-fluid"
+          class="img-full"
           :src="(service.service_media.length && service.service_media[0].media) ? `https://api.dex.proelean.com/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />
+         
       </router-link>
+    </div>
       <div class="inner-slider">
         <div class="inner-wrapper d-flex flex-column align-content-between">
           <div class="d-flex align-items-center">
@@ -57,9 +61,6 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownUserImage">
                 <div >
                   <a class="dropdown-item" @click.prevent="deleteGig(service.id)" href="#">Delete</a>
-                </div>
-                <div >
-                  <router-link class="dropdown-item" :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link>
                 </div>
             </div>
             <div class="price">
