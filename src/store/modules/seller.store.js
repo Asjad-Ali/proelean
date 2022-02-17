@@ -167,7 +167,7 @@ export const  actions = {
     }
   },
 
-  async showBuyerRequests({commit,state})
+  async showBuyerRequests({commit})
   {
     commit('setLoader',1);
     let getData = JSON.parse(localStorage.getItem("userInfo"))
