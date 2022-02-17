@@ -16,13 +16,14 @@
         </div>
       </div>
 
+
         <div class="tab-pane d-md-none active" id="active">
           <div v-if="loader" class="text-center loader">
             <div class="spinner-border  text-primary m-2" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
-        <div v-for="service in $store.getters.getUserServices" :key="service.id"
+        <div v-for="service in services" :key="service.id"
         class="card d-md-none shadow-sm border-primary  p-2">
           <div class="container">
             <div class="text-center">
@@ -89,7 +90,9 @@
       </div>
 
 
-      <div class="tab-content d-none d-md-block osahan-table container rounded px-3">
+
+
+      <div v-if="service" class="tab-content d-none d-md-block osahan-table container rounded px-3">
         <div class="tab-pane active" id="active">
           <div v-if="loader" class="text-center loader vh-100">
             <div class="spinner-border text-primary m-2" role="status">
@@ -110,7 +113,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="service in $store.getters.getUserServices"
+                    v-for="service in services"
                     :key="service.id"
                   >
                     <td>
@@ -235,6 +238,10 @@
           </div>
         </div>
       </div> 
+
+        <div v-if="!service" class="container text-center py-5">
+        <h2>No Any Service Available</h2>
+      </div>
     </div>
 </template>
 
@@ -260,6 +267,7 @@ export default {
     return {
       jobs: computed(() => store.getters.getAllJobs),
       loader: computed(() => store.getters.getLoaderVal),
+      services: computed(() => store.getters.getUserServices),
       deleteService,
       getServiceId,
       serviceId,
