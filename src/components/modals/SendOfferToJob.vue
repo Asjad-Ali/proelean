@@ -54,7 +54,7 @@
         </div>
         <div class="modal-footer d-flex justify-content-center">
           <button type="button" class="btn btn-success" data-dismiss="modal">
-            Send Offer
+
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Cancel

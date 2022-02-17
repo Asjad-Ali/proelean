@@ -188,6 +188,17 @@ export const  actions = {
     }
   },
 
+  async addBuyerRequests({commit})
+  {
+    const res= await Api.get(`seller/buyer_requests`);
+    if(res.status === 200) {
+      commit("setBuyerRequests",res.data);
+      console.log("Buyer Requests",res.data);
+    } else {
+      console.log("Buyer Requests error");
+    }
+  },
+
   async deleteBuyerJob({commit,state},id){
     const toaster = createToaster()
     const res = await Api.delete(`seller/cancel_offer/${id}`);
@@ -207,20 +218,19 @@ export const  actions = {
     }
   },
 
-  async sendOffer({commit},payload){
+  async sendOffer({commit,dispatch},payload){
     commit('setRegisterStatus',2);
       const toaster = createToaster()
       const resp= await Api.post('seller/send_offer',payload);
       if(resp.status==200){
-        console.log("In success")
         toaster.success(resp.message,{
           position:"top-right",
           dismissible: true});
         commit('setRegisterStatus',3);
+        dispatch("addBuyerRequests")
       }
       else
       {
-        console.log("In fail")
         commit('setRegisterStatus',4);
         toaster.error(resp.message,{
           position:"top-right",
