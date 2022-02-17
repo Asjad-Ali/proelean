@@ -7,7 +7,7 @@ var page = 1;
 export const state = {
   sellerReview:[],
   userServices:[],
-  setLoader:'',
+  s_Loader:'',
   userSingleService:{},
   createGigData:'',
   deleteService:'',
@@ -62,7 +62,7 @@ export const  mutations = {
     state.buyerRequests=request;
   },
   setSellerLoader(state,loaderVal){
-    state.setLoader = loaderVal
+    state.s_Loader = loaderVal
   }
 }
 
@@ -70,7 +70,7 @@ export const  actions = {
 
   async userServices({commit,state},action)
   {
-    commit('setLoader',1);
+    commit('setSellerLoader',1);
     commit('setServicesLoadingStatus','LOADING');
     if(!state.userServices || page>=1) {
       if(action === ''){
