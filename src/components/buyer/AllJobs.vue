@@ -1,10 +1,10 @@
 <template>
-  <div class="main-page second py-5">
+  <div class="main-page second py-3">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-            <h2 class="mb-0 p-0">Jobs</h2>
+          <div class="d-flex align-items-center mb-3 border-bottom">
+            <h4 class="font-weight-bold mb-3">Jobs</h4>
             <router-link
               class="btn btn-sm btn-success ml-auto light"
               to="/buyer/create_job"
@@ -18,7 +18,6 @@
               tab-content
               osahan-table
               rounded
-              px-3
             "
           >
             <div class="tab-pane active" id="active">
