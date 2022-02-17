@@ -14,7 +14,7 @@
        </div>
        <ul class="navbar-nav ml-auto" v-if="!$store.state.isSeller || !$store.state.isLoggedIn">
             <li class="nav-item">
-                <router-link class="btn btn-success" to="become_seller">
+                <router-link class="btn btn-success" to="/become_seller">
                 <i class="fa fa-fw fa-trophy"></i>
                 <span>Become A Seller</span>
                 </router-link>
