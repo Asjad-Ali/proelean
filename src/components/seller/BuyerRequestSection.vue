@@ -4,7 +4,7 @@
       <div class="col-lg-10">   
         <h4 class="font-weight-bold mb-3">Buyer Requests</h4>
         <div>
-          <div v-if="loader" class="text-center vh-100">
+          <div v-if="loader" class="d-flex justify-content-center s-margin">
             <div class="spinner-border text-primary m-5" role="status">
               <span class="sr-only">Loading...</span>
             </div>
@@ -228,4 +228,9 @@ export default {
   width: 4rem;
   height: 4rem;
 }
+.s-margin{
+  margin-bottom: 8rem;
+  margin-top: 5rem ;
+}
+
 </style>
