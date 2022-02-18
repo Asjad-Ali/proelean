@@ -70,7 +70,7 @@
                       </div>
 
                       <div
-                        v-for="(banner, index) in bannersBase64"
+                        v-for="(banner, index) in getBanners"
                         :key="index"
                       >
                         <div
@@ -176,7 +176,7 @@
                       class="btn btn-success btn-lg font-weight-bold"
                       @click.prevent="updateService"
                     >
-                      {{registerStatus == 2 ? 'Loading...' : 'Create'}}
+                      {{registerStatus == 2 ? 'Loading...' : 'Update'}}
                     </button>
                   </div>
                 </div>
@@ -190,7 +190,7 @@
 </template>
 
 <script>
-import useSeller from "@/composables/useSeller.js";
+import useUpdateService from '@/composables/useSeller/useUpdateService'
 import { computed, onMounted} from '@vue/runtime-core';
 import store from '../../store';
 import { useRoute } from 'vue-router';
@@ -206,9 +206,9 @@ export default {
       removeImage,
       updateGig,
       getCategory,
-      // getBanners,
+      getBanners,
       encodeImageFileAsURL,
-    } = useSeller();
+    } = useUpdateService();
 
   const payload = {
     "id" : route.params.id,
@@ -230,7 +230,7 @@ export default {
       bannersBase64,
       removeImage,
       encodeImageFileAsURL,
-      // getBanners
+      getBanners
     };
   },
 };

@@ -4,8 +4,8 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-            <h2 class="mb-0 p-0">Services</h2>
+          <div class="d-flex align-items-center pb-2 border-bottom">
+            <h3 class="mb-0 p-0">Services</h3>
             <router-link
               class="btn btn-sm btn-success ml-auto light"
               to="/seller/create_service"
@@ -17,7 +17,7 @@
       </div>
 
         <div class="tab-pane d-md-none active" id="active">
-          <div v-if="loader" class="text-center loader">
+          <div v-if="loader" class="text-center">
             <div class="spinner-border  text-primary m-2" role="status">
               <span class="sr-only">Loading...</span>
             </div>
@@ -59,7 +59,7 @@
               </div>
             <div class="row">
               <div class="col-8">
-                <strong>Price $100</strong>
+                <strong>{{service.price}}</strong>
               </div>
               <div class="col-2">
                   <router-link class="dropdown-item" :to="{name:'UpdateService', params:{id:service.id}}">
@@ -78,9 +78,59 @@
                     @click.prevent="getServiceId(service.id)"
                     class="fa fa-trash cursor-pointer text-danger mt-1"
                     data-toggle="modal"
-                    data-target="#exampleModalCenter"
+                    data-target="#exampleModalSmall"
                   >
                   </i>
+                  <div class="d-flex justify-content-center">
+                      <div
+                        class="modal fade w-75"
+                        id="exampleModalSmall"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalCenterTitle"
+                        aria-hidden="true"
+                      >
+                        <div
+                          class="modal-dialog modal-dialog-centered"
+                          role="document"
+                        >
+                          <div class="modal-content">
+                            <div
+                              class="modal-header d-flex justify-content-center"
+                            >
+                              <h5
+                                class="modal-title"
+                                id="exampleModalLongTitle"
+                              >
+                                Delete Service
+                              </h5>
+                            </div>
+                            <div class="modal-body text-center">
+                              Are you sure you want to delete the service?
+                            </div>
+                            <div
+                              class="modal-footer d-flex justify-content-center"
+                            >
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                              >
+                                No
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-danger"
+                                data-dismiss="modal"
+                                @click="deleteService()"
+                              >
+                                Yes
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
               </div>
             </div>
             </div>
@@ -88,10 +138,7 @@
         </div>
       </div>
 
-
-
-
-      <div v-if="services" class="tab-content d-none d-md-block osahan-table container rounded px-3">
+      <div  class="tab-content d-none d-md-block osahan-table container rounded px-3">
         <div class="tab-pane active" id="active">
           <div v-if="loader" class="text-center loader vh-100">
             <div class="spinner-border text-primary m-2" role="status">
@@ -99,7 +146,7 @@
             </div>
           </div>
           <div v-else>
-            <div class="table-responsive box-table mt-3 bg-white">
+            <div v-if="services.length" class="table-responsive box-table mt-3 bg-white">
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -237,8 +284,8 @@
         </div>
       </div> 
 
-        <div v-if="!services" class="container text-center py-5">
-        <h2>No Any Service Available</h2>
+        <div v-show="!loader" v-if="!services.length" class="container text-center py-5">
+        <h3>No Any Service Available</h3>
       </div>
     </div>
 </template>
