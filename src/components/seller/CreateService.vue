@@ -191,7 +191,7 @@
 </template>
 
 <script>
-import useSeller from '@/composables/useSeller.js'
+import useCreateService from '@/composables/useSeller/useCreateService'
 import { computed, onBeforeMount } from '@vue/runtime-core';
 import store from '../../store';
 export default {
@@ -203,7 +203,7 @@ const { createGig,
         selectThumbnail,
         removeImage,
         getCategory,
-        encodeImageFileAsURL } = useSeller();
+        encodeImageFileAsURL } = useCreateService();
 
       onBeforeMount(() => store.dispatch("getCountriesLanguage"))
 

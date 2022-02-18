@@ -1,12 +1,11 @@
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { useStore } from "vuex";
 
-export default function seller() {
+export default function useCreateService() {
 
   const store = useStore();
   const bannersBase64 = ref([]);
   const preview = ref(null);
-  const updateGig = computed(()=>store.getters.getSingleService);
 
   const data = ref({
     description: '',
@@ -33,52 +32,30 @@ export default function seller() {
     price: "",
   });
 
-  // const getBanners = computed(() =>
-  //   updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
-
+ 
   const gigCreation = () => {
     createGig.value.sub_category_id = document.getElementById("subCategory").value
     createGig.value.delivery_time = document.getElementById("deliveryTime").value
     createGig.value.delivery_time = document.getElementById("deliveryTime").value
-
     console.log(createGig.value)
     store.dispatch('createGig', createGig.value)
   }
 
-  const updateService = () => {
-    updateGig.value.delivery_time = document.getElementById("deliveryTime").value
-    console.log("Update Value",updateGig.value)
-  }
 
   const selectThumbnail = (e) => {
     const files = e.target.files;
     console.log(e.target.files);
 
-    for (let i = 0; i < files.length; i++) {    
-      if(updateGig.value.id){
-        updateGig.value.service_media.push(files[i]);
-      }
-      else{
+    for (let i = 0; i < files.length; i++)
         createGig.value.banner.push(files[i]);
-      }
-    }
-    
+
     document.querySelector('#bannerInput').value = '';
     bannersBase64.value = [];
-    if(updateGig.value.id){
-      updateGig.value.service_media.forEach(img => {
-        if (typeof img === 'string' && img instanceof String){
-          encodeImageFileAsURL(img);
-        }
-      });
-    }
-    else{
-      createGig.value.banner.forEach(img => {
+      createGig.value.banner.forEach( img => {
         encodeImageFileAsURL(img);
-      });
-    }
+      })
+  }
     
-  };
   const encodeImageFileAsURL = file => {
     const reader = new FileReader();
     reader.onloadend = function () {
@@ -104,15 +81,11 @@ export default function seller() {
     data,
     getCategory,
     gigCreation,
-    updateService,
     selectThumbnail,
     removeImage,
     encodeImageFileAsURL,
     createGig,
-    updateGig,
     bannersBase64,
-    // getBanners,
     convertFileToBase64
-
   }
 }
