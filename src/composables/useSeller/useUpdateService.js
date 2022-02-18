@@ -15,25 +15,28 @@ export default function useCreateService() {
   });
 
 
-  // const updateGig = ref({
-  //   s_description: "",
-  //   description: "",
-  //   banner: [],
-  //   category_id: "",
-  //   sub_category_id: "",
-  //   delivery_time: '',
-  //   price: "",
-  // });
+  const getUpdateGig = ref({
+    s_description: "",
+    description: "",
+    // banner: [],
+    category_id: "",
+    sub_category_id: "",
+    delivery_time: '',
+    price: "",
+    id:""
+  });
 
 
-
- 
   const updateService = () => {
-    updateGig.value.sub_category_id = document.getElementById("subCategory").value
-    updateGig.value.delivery_time = document.getElementById("deliveryTime").value
-    updateGig.value.delivery_time = document.getElementById("deliveryTime").value
-    console.log(updateGig.value)
-    // store.dispatch('updateGig', updateGig.value)
+    getUpdateGig.value.sub_category_id = document.getElementById("subCategory").value
+    getUpdateGig.value.category_id = document.getElementById("category").value
+    getUpdateGig.value.delivery_time = document.getElementById("deliveryTime").value
+    getUpdateGig.value.s_description = updateGig.value.s_description
+    getUpdateGig.value.description = updateGig.value.description
+    getUpdateGig.value.price = updateGig.value.price
+    getUpdateGig.value.id = updateGig.value.id
+    console.log(getUpdateGig.value)
+    store.dispatch('updateService', getUpdateGig.value)
   }
 
   const getBanners = computed(() =>
@@ -43,26 +46,29 @@ export default function useCreateService() {
 
   const selectThumbnail = (e) => {
     const files = e.target.files;
-    console.log("Image",e.target.files);
-
     for (let i = 0; i < files.length; i++)
-      updateGig.value.service_media.push(files[i]);
+      {
+        console.log("pic",files)
+        getUpdateGig.value.banner.push(files[i]);
+      }
 
     document.querySelector('#bannerInput').value = '';
     bannersBase64.value = [];
-      updateGig.value.service_media.forEach( img => {
-        console.log("Image", img)
+      getUpdateGig.value.banner.forEach( img => {
         encodeImageFileAsURL(img);
       })
   }
-    
+
   const encodeImageFileAsURL = file => {
     const reader = new FileReader();
     reader.onloadend = function () {
-      updateGig.value.service_media.value.push(reader.result);
+      // updateGig.value.service_media.value.push(reader.result);
+      bannersBase64.value.push(reader.result)
     }
     reader.readAsDataURL(file);
+
   }
+
 
   const removeImage = index => {
     bannersBase64.value.splice(index, 1);
@@ -71,8 +77,6 @@ export default function useCreateService() {
 
   const getCategory = () => {
     data.value.category_id = document.getElementById("category").value;
-    console.log("Catogry id", data.value.category_id)
-    updateGig.value.category_id = data.value.category_id;
     store.dispatch("loadSubCategories", data.value.category_id);
   };
 
