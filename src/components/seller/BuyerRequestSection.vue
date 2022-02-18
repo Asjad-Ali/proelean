@@ -12,21 +12,21 @@
           <div v-if="requests">
             <div v-for="request in requests" :key="request.id">
               <div class="card shadow-none">
-                <h5 class="card-header bg-white">
+                <div class="card-body">
                   <div class="row">
-                    <div class="col-lg-6 col-md-6 d-flex justify-content-start">
+                    <div class="col-lg-6 col-md-6 d-flex justify-content-between">
+                      <div class="d-flex justify-content-start mb-3">
                       <img
-                        class="img-fluid bg-info rounded-circle mr-3"
-                        style="width: 60px; height: 55px"
+                        class="img-fluid bg-info rounded-circle mr-2"
+                        style="width: 45px; height: 45px"
                         :src="'https://api.dex.proelean.com/' + request.user.image"
                         alt=""
                       />
-                      <div class="d-flex flex-column">
-                        <span class="seller-name">
-                          <p>{{ request.user.username }}</p>
-                        </span>
-                        <div style="font-size: 12px">{{ request.created_at }}</div>
+                        
+                          <p class="seller-name mt-2" style="font-size:15px">{{ request.user.username }}</p>
+                        
                       </div>
+                       <div class="mt-2 d-md-none" style="font-size: 12px">{{ request.created_at }}</div>
                     </div>
                     <div class="col-lg-6 col-md-6 d-none d-md-flex justify-content-end">
                       <div class="d-flex flex-column my-1">
@@ -39,12 +39,11 @@
                       </div>
                     </div>
                   </div>
-                </h5>
-                <div class="card-body">
                   <p class="card-text bg-light">
                     {{ request.description }}
                   </p>
                   <div class="d-flex justify-content-start flex-column my-1">
+                    <div class="my-2 d-none d-md-flex" style="font-size: 12px">Posted Date: {{ request.created_at }}</div>
                     <div class="mb-2 d-md-none">Duration: {{ request.delivery_time }}</div>
                     <div class="mb-2 d-md-none">budget: {{ request.budget }}$</div>
                     <div class="mb-2">Document: No Attachment</div>
