@@ -17,7 +17,7 @@
 
       <div class="tab-content osahan-table rounded d-sm-none">
         <div class="tab-pane active" id="active">
-          <div v-if="loader" class="text-center vh-100">
+          <div v-if="loader" class="d-flex justify-content-center s-margin">
             <div class="spinner-border text-primary m-2" role="status">
               <span class="sr-only">Loading...</span>
             </div>
@@ -27,24 +27,27 @@
             :key="job.id"
             class="card d-md-none shadow-sm border-primary "
           >
-            <div class="card-header text-center">
-              Job
-            </div>
             <div class="card-body">
-              <h5 class="card-title">{{ job.description }}</h5>
-              <div>Posted Date: {{ job.created_at }}</div>
-              <div>Delivery Time: {{ job.delivery_time }}</div>
-              <div>Budget: {{ job.budget }}</div>
-              <div>Total Offers: {{ job.total_offers }}</div>
-              <div class="d-flex justify-content-end w-100">
+              <div class="d-flex justify-content-between">
+              <div>{{ job.created_at }}</div>
+                <i
+                  class="fa fa-times"
+                  aria-hidden="true"
+                  @click="getJobId(job.id)"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenterSmall"
+                >
+                </i>
+            </div>
+              <h5 class="card-title bg-light">{{ job.description }}</h5>
+              <span class="text-muted"> <i class="fa fa-clock-o"></i>  Duration: </span> <span> {{ job.delivery_time }}</span>
+              <span class="text-muted ml-5"> <i class="fa fa-usd"></i>  Budget: </span> <span> {{ job.budget }}</span>
+              <div class="d-flex justify-content-end ">
                 <button
                         type="button"
-                        @click="getJobId(job.id)"
-                        class="btn btn-danger"
-                        data-toggle="modal"
-                        data-target="#exampleModalCenterSmall"
-                      >
-                  Delete
+                        class="btn btn-primary mt-2"
+                >
+                  Total Offers: {{ job.total_offers }}
                 </button>
               </div>
                <!---------------------    Modal     --------------------->
@@ -101,14 +104,13 @@
           </div>
         </div>
       </div>
+
     </div>
 
 
-    <div
-      class="tab-content d-none d-sm-block osahan-table container rounded px-3"
-    >
+    <div class="tab-content d-none d-sm-block osahan-table container rounded px-3">
       <div class="tab-pane active" id="active">
-        <div v-if="loader" class="text-center loader vh-100">
+        <div v-if="loader" class="d-flex justify-content-center l-margin">
           <div class="spinner-border text-primary m-2" role="status">
             <span class="sr-only">Loading...</span>
           </div>
@@ -132,11 +134,9 @@
               <tbody>
                 <tr v-for="job in jobs" :key="job.id">
                   <td>
-                    <a href="#" class="make-black">
                       <p class="order-proposal-title">
                         {{ job.description }}
                       </p>
-                    </a>
                   </td>
                   <td class="text-center">{{ job.created_at }}</td>
                   <td class="text-center">{{ job.delivery_time }}</td>
@@ -214,10 +214,12 @@
     </div>
 
     <div v-if="!jobs.length" v-show="!loader" class="container text-center py-5">
-      <h2>No Any Service Available</h2>
+      <h2>No Any Job Available</h2>
     </div>
+
   </div>
 </template>
+
 
 <script>
 import { onMounted, computed, ref } from "@vue/runtime-core";
@@ -246,6 +248,7 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .loader {
   display: block;
@@ -254,4 +257,13 @@ export default {
   width: 4rem;
   height: 4rem;
 }
+.l-margin{
+  margin-bottom: 10rem;
+  margin-top: 8rem ;
+}
+.s-margin{
+  margin-bottom: 8rem;
+  margin-top: 5rem ;
+}
+
 </style>
