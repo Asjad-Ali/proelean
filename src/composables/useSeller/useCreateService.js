@@ -36,7 +36,6 @@ export default function useCreateService() {
   const gigCreation = () => {
     createGig.value.sub_category_id = document.getElementById("subCategory").value
     createGig.value.delivery_time = document.getElementById("deliveryTime").value
-    createGig.value.delivery_time = document.getElementById("deliveryTime").value
     console.log(createGig.value)
     store.dispatch('createGig', createGig.value)
   }
@@ -44,7 +43,6 @@ export default function useCreateService() {
 
   const selectThumbnail = (e) => {
     const files = e.target.files;
-    console.log(e.target.files);
 
     for (let i = 0; i < files.length; i++)
         createGig.value.banner.push(files[i]);
@@ -53,7 +51,9 @@ export default function useCreateService() {
     bannersBase64.value = [];
       createGig.value.banner.forEach( img => {
         encodeImageFileAsURL(img);
+        
       })
+
   }
     
   const encodeImageFileAsURL = file => {

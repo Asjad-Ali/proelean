@@ -85,7 +85,7 @@
                             margin-left:20px;
                             background-size:cover;
                           "
-                          :style="`background-image: url(${banner.media ? 'https://api.dex.proelean.com/'+banner.media : '/assets/images/banner.png'});`"
+                          :style="`background-image: url(${banner.id ? 'https://api.dex.proelean.com/'+ banner.media : banner.media });`"
                         >
                           <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                         </div>
@@ -173,6 +173,7 @@
                   </div>
                   <div class="p-3 d-flex justify-content-end">
                     <button
+                      :disabled="registerStatus === 2"
                       class="btn btn-success btn-lg font-weight-bold"
                       @click.prevent="updateService"
                     >
@@ -200,14 +201,12 @@ export default {
     const route = useRoute()
     const {
       data,
-      bannersBase64,
       updateService,
       selectThumbnail,
       removeImage,
       updateGig,
       getCategory,
       getBanners,
-      encodeImageFileAsURL,
     } = useUpdateService();
 
   const payload = {
@@ -227,9 +226,7 @@ export default {
       data,
       updateService,
       selectThumbnail,
-      bannersBase64,
       removeImage,
-      encodeImageFileAsURL,
       getBanners
     };
   },
