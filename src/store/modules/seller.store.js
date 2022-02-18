@@ -167,13 +167,11 @@ export const  actions = {
     }
   },
 
-  async showBuyerRequests({commit,state})
+  async showBuyerRequests({commit})
   {
     commit('setLoader',1);
     let getData = JSON.parse(localStorage.getItem("userInfo"))
     console.log("in action id: ",getData.id)
-    if(!state.buyerRequests.length){
-      console.log("Buyer Requests State is null");
       const res= await Api.get(`seller/buyer_requests`);
       if(res.status === 200) {
         commit("setBuyerRequests",res.data);
@@ -182,10 +180,7 @@ export const  actions = {
       } else {
         console.log("Buyer Requests error");
       }      
-    }
-    else{
-      commit("setBuyerRequests",state.buyerRequests);
-    }
+    
   },
 
   async addBuyerRequests({commit})

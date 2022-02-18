@@ -2,13 +2,14 @@
   <div class="container pt-3">
     <div class="row d-flex justify-content-center">
       <div class="col-lg-10">   
+        <h4 class="font-weight-bold mb-3">Buyer Requests</h4>
         <div>
-          <div v-if="loader" class="text-center loader vh-100">
+          <div v-if="loader" class="text-center vh-100">
             <div class="spinner-border text-primary m-5" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
-          <div v-else>
+          <div v-if="requests">
             <div v-for="request in requests" :key="request.id">
               <div class="card shadow-none">
                 <h5 class="card-header bg-white">
@@ -163,7 +164,10 @@
                 </div>
               </div>
             </div>
-          </div>  
+          </div>
+           <div v-if="!requests" class="container text-center py-5">
+            <h2>No Any Service Available</h2>
+           </div>
         </div>
       </div>
     </div>

@@ -73,20 +73,11 @@
                     required
                   >
                     <option selected>Select day</option>
-                    <option value="1">1 day</option>
-                    <option value="2">2 day</option>
-                    <option value="3">3 day</option>
-                    <option value="4">4 day</option>
-                    <option value="5">5 day</option>
-                    <option value="6">6 day</option>
-                    <option value="7">7 day</option>
-                    <!-- <option
-                        v-for="day in 30"
-                        :value='day'
-                        :key='day'
-                      >
-                        {{ day }} day
-                      </option> -->
+                    <option  
+                      v-for="day in $store.getters.getDeliveryDays"
+                      :value="day" 
+                      :key="day.index"
+                    > {{ day }} </option>
                     
                   </select>
                 </div>
@@ -126,6 +117,7 @@
 <script>
 import useBuyer from "@/composables/useBuyer.js";
 import store from '../../store'
+import { onMounted } from '@vue/runtime-core';
 export default {
   setup() {
     const {
@@ -134,6 +126,10 @@ export default {
       jobCreation,
       handleCredentials
     } = useBuyer();
+
+    onMounted(() => {
+      store.dispatch("getCountriesLanguage");
+    });
 
     const onChange = () => {
       data.value.categoryId = document.getElementById("category").value;
