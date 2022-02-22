@@ -16,7 +16,7 @@
                     <div class="form-group">
                       <input
                         type="text"
-                        v-model="createGig.s_description"
+                        v-model="createService.s_description"
                         name="s_description"
                         class="form-control"
                         placeholder="I will create"
@@ -24,13 +24,10 @@
                       />
                     </div>
                     <label>Describe your service</label>
-                    <!-- @error('description')
-                              <span style="color:red">{{$message}}</span>
-                              @enderror -->
                     <div class="form-group">
                       <textarea
                         class="form-control"
-                        v-model="createGig.description"
+                        v-model="createService.description"
                         name="description"
                         rows="7"
                         placeholder="Describe About Your Serivce"
@@ -100,13 +97,12 @@
                           id="category"
                           class="form-control"
                           name="category_id"
+                          placeholder="Select Category"
                           data-msg="Please select category."
                           :onchange="getCategory"
                           required
                         >
-                          <option selected >
-                            Select Category
-                          </option>
+                        <option value="" selected disabled>Select category</option>
                           <option
                             v-for="category in $store.getters.getCategories"
                             :value="category.id"
@@ -121,10 +117,10 @@
                           id="subCategory"
                           class="form-control"
                           name="category_id"
-                          v-model="createGig.sub_category_id"
+                          v-model="createService.sub_category_id"
                           required
                         >
-                          <option selected disabled>
+                          <option value="" selected disabled>
                             Select Sub Category
                           </option>
                           <option
@@ -147,7 +143,7 @@
                         name="delivery_time"
                         required
                       >
-                        <option selected disabled>Select day</option>
+                        <option value="" selected disabled>Select day</option>
                         <option  
                         v-for="day in $store.getters.getDeliveryDays"
                         :value="day" 
@@ -166,7 +162,7 @@
                         type="number"
                         class="form-control"
                         name="price"
-                        v-model="createGig.price"
+                        v-model="createService.price"
                         id="inlineFormInputGroup"
                         required
                       />
@@ -196,7 +192,7 @@ import { computed, onBeforeMount } from '@vue/runtime-core';
 import store from '../../store';
 export default {
   setup() {
-const { createGig,
+const { createService,
         data,
         bannersBase64,
         gigCreation,
@@ -209,7 +205,7 @@ const { createGig,
 
     return {
       registerStatus: computed(() => store.getters.getRegisterStatus),
-      createGig,
+      createService,
       getCategory,
       data,
       gigCreation,

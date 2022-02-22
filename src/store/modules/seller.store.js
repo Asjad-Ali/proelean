@@ -148,7 +148,7 @@ export const  actions = {
     }
   },
 
-  async createGig({commit},payload){
+  async createService({commit},payload){
     commit('setRegisterStatus',2);
     const toaster = createToaster()
     const res = await Api.formData('seller/services',payload);
@@ -157,6 +157,26 @@ export const  actions = {
         position:"top-right",
         dismissible: true});
       commit("setCreateGig",res)
+      commit('setRegisterStatus',3);
+    }
+    else{
+      toaster.error(res.message,{
+        position:"top-right",
+        dismissible: true});
+        commit('setRegisterStatus',4); 
+    }
+  },
+
+  async updateService({commit},updateServiceData){
+    commit('setRegisterStatus',2);
+    console.log("id",updateServiceData)
+    const toaster = createToaster()
+    const res = await Api.put(`seller/services/${updateServiceData.id}`,updateServiceData);
+    if(res.status === 200){
+      toaster.success("Service has been Updated Successfully",{
+        position:"top-right",
+        dismissible: true});
+        console.log
       commit('setRegisterStatus',3);
     }
     else{
