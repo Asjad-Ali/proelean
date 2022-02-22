@@ -24,9 +24,6 @@
                       />
                     </div>
                     <label>Describe your service</label>
-                    <!-- @error('description')
-                              <span style="color:red">{{$message}}</span>
-                              @enderror -->
                     <div class="form-group">
                       <textarea
                         class="form-control"

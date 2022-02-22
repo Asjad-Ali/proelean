@@ -51,9 +51,7 @@ export default function useCreateService() {
     bannersBase64.value = [];
       createGig.value.banner.forEach( img => {
         encodeImageFileAsURL(img);
-        
       })
-
   }
     
   const encodeImageFileAsURL = file => {
