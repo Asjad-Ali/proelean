@@ -70,7 +70,7 @@
                       </div>
 
                       <div
-                        v-for="(banner, index) in getBanners"
+                        v-for="(banner, index) in updateGig.service_media"
                         :key="index"
                       >
                         <div
@@ -87,10 +87,10 @@
                           "
                           :style="`background-image: url(${banner.media ? 'https://api.dex.proelean.com/'+ banner.media : banner });`"
                         >
-                          <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                          <i @click="removeOldImage(index, banner.media)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                         </div>
                       </div>
-<!-- 
+
                       <div
                         v-for="(banner, index) in bannersBase64"
                         :key="index"
@@ -109,9 +109,10 @@
                           "
                           :style="`background-image: url(${banner});`"
                         >
-                          <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                          <i @click="removeNewImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                         </div>
-                      </div> -->
+                      </div>
+
 
                     </div>
                   </div>
@@ -227,7 +228,8 @@ export default {
       updateService,
       selectThumbnail,
       bannersBase64,
-      removeImage,
+      removeNewImage,
+      removeOldImage,
       updateGig,
       getCategory,
       getBanners,
@@ -251,7 +253,8 @@ export default {
       updateService,
       selectThumbnail,
       bannersBase64,
-      removeImage,
+      removeNewImage,
+      removeOldImage,
       getBanners
     };
   },

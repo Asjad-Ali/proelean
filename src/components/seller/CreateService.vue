@@ -10,9 +10,6 @@
                 <div class="bg-white rounded p-0">
                   <div class="border-bottom p-3">
                     <label>Enter Your Title</label>
-                    <!-- @error('s_description')
-                           <span style="color:red">{{$message}}</span>
-                           @enderror -->
                     <div class="form-group">
                       <input
                         type="text"
@@ -172,8 +169,9 @@
                     <button
                       class="btn btn-success btn-lg font-weight-bold"
                       @click.prevent="gigCreation"
+                      :disabled="registerStatus === 2"
                     >
-                      {{registerStatus == 2 ? 'Loading...' : 'Create'}}
+                      {{registerStatus === 2 ? 'Loading...' : 'Create'}}
                     </button>
                   </div>
                 </div>
