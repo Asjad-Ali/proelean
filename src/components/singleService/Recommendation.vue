@@ -1,8 +1,10 @@
 <template>
    <div id="recommendations" class="recommended">
-      <h3>Recommended For You</h3>
+      <h3>Other Services I Offer</h3>
       <div class="recommended-slider recommend">
-         <div>
+         <div class="row">
+            <div class="col-md-4">
+                 <div>
             <a href="#">
             <img class="img-fluid" src="/assets/images/list/v1.png" />
             </a>
@@ -46,7 +48,9 @@
                </div>
             </div>
          </div>
-         <div>
+            </div>
+            <div class="col-md-4">
+                  <div>
             <a href="#">
             <img class="img-fluid" src="/assets/images/list/v2.png" />
             </a>
@@ -90,7 +94,9 @@
                </div>
             </div>
          </div>
-         <div>
+            </div>
+            <div class="col-md-4">
+                   <div>
             <a href="#">
             <img class="img-fluid" src="/assets/images/list/v3.png" />
             </a>
@@ -134,6 +140,11 @@
                </div>
             </div>
          </div>
+            </div>
+         </div>
+       
+      
+     
       </div>
    </div>
 </template>
