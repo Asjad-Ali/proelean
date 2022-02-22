@@ -5,7 +5,7 @@ export default function useCreateService() {
 
   const store = useStore();
   const bannersBase64 = ref([]);
-  const updateGig = ref( computed(()=>store.getters.getSingleService));
+  const updateGig = computed(()=>store.getters.getSingleService);
 
 
   const data = ref({
@@ -18,7 +18,7 @@ export default function useCreateService() {
   const getUpdateGig = ref({
     s_description: "",
     description: "",
-    // banner: [],
+    banner: [],
     category_id: "",
     sub_category_id: "",
     delivery_time: '',
@@ -43,18 +43,16 @@ export default function useCreateService() {
   updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
 
 
-
   const selectThumbnail = (e) => {
     const files = e.target.files;
+
     for (let i = 0; i < files.length; i++)
-      {
-        console.log("pic",files)
-        getUpdateGig.value.banner.push(files[i]);
-      }
+      getUpdateGig.value.banner.push(files[i]);
+
 
     document.querySelector('#bannerInput').value = '';
     bannersBase64.value = [];
-      getUpdateGig.value.banner.forEach( img => {
+    getUpdateGig.value.banner.forEach( img => {
         encodeImageFileAsURL(img);
       })
   }
@@ -62,17 +60,20 @@ export default function useCreateService() {
   const encodeImageFileAsURL = file => {
     const reader = new FileReader();
     reader.onloadend = function () {
-      // updateGig.value.service_media.value.push(reader.result);
-      bannersBase64.value.push(reader.result)
+      bannersBase64.value.push(reader.result);
     }
     reader.readAsDataURL(file);
 
+    // console.log("All Image",getBanners)
   }
 
-
   const removeImage = index => {
-    bannersBase64.value.splice(index, 1);
-    updateGig.value.service_media.splice(index, 1);
+    console.log("Index",index)
+    // bannersBase64.value.splice(index, 1);
+    updateGig.value.service_media.splice(index,1)
+    // getUpdateGig.value.banner.splice(index, 1);
+    // getBanners.value.splice(index, 1)
+    console.log("All picture",getBanners)
   }
 
   const getCategory = () => {

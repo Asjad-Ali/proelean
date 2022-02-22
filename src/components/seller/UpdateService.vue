@@ -85,11 +85,34 @@
                             margin-left:20px;
                             background-size:cover;
                           "
-                          :style="`background-image: url(${banner.id ? 'https://api.dex.proelean.com/'+ banner.media : banner.media });`"
+                          :style="`background-image: url(${banner.media ? 'https://api.dex.proelean.com/'+ banner.media : banner });`"
                         >
                           <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                         </div>
                       </div>
+<!-- 
+                      <div
+                        v-for="(banner, index) in bannersBase64"
+                        :key="index"
+                      >
+                        <div
+                          class="
+                            cursor-pointer
+                            position-relative
+                          "
+                          style="
+                            height: 80px;
+                            width: 80px;
+                            border: 1px solid grey;
+                            margin-left:20px;
+                            background-size:cover;
+                          "
+                          :style="`background-image: url(${banner});`"
+                        >
+                          <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                        </div>
+                      </div> -->
+
                     </div>
                   </div>
                   <div class="border-bottom p-3">
@@ -203,6 +226,7 @@ export default {
       data,
       updateService,
       selectThumbnail,
+      bannersBase64,
       removeImage,
       updateGig,
       getCategory,
@@ -226,6 +250,7 @@ export default {
       data,
       updateService,
       selectThumbnail,
+      bannersBase64,
       removeImage,
       getBanners
     };
