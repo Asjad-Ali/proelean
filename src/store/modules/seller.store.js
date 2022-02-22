@@ -171,7 +171,7 @@ export const  actions = {
     commit('setRegisterStatus',2);
     console.log("id",updateServiceData)
     const toaster = createToaster()
-    const res = await Api.put(`seller/services/${updateServiceData.id}`,updateServiceData);
+    const res = await Api.formData(`seller/services/${updateServiceData.id}`,updateServiceData);
     if(res.status === 200){
       toaster.success("Service has been Updated Successfully",{
         position:"top-right",
@@ -200,7 +200,6 @@ export const  actions = {
       } else {
         console.log("Buyer Requests error");
       }      
-    
   },
 
   async addBuyerRequests({commit})

@@ -22,7 +22,7 @@ export default function useCreateService() {
     reader.readAsDataURL(file);
   }
 
-  const createGig = ref({
+  const createService = ref({
     s_description: "",
     description: "",
     banner: [],
@@ -34,10 +34,10 @@ export default function useCreateService() {
 
  
   const gigCreation = () => {
-    createGig.value.sub_category_id = document.getElementById("subCategory").value
-    createGig.value.delivery_time = document.getElementById("deliveryTime").value
-    console.log(createGig.value)
-    store.dispatch('createGig', createGig.value)
+    createService.value.sub_category_id = document.getElementById("subCategory").value
+    createService.value.delivery_time = document.getElementById("deliveryTime").value
+    console.log(createService.value)
+    store.dispatch('createService', createService.value)
   }
 
 
@@ -45,11 +45,11 @@ export default function useCreateService() {
     const files = e.target.files;
 
     for (let i = 0; i < files.length; i++)
-        createGig.value.banner.push(files[i]);
+        createService.value.banner.push(files[i]);
 
     document.querySelector('#bannerInput').value = '';
     bannersBase64.value = [];
-      createGig.value.banner.forEach( img => {
+      createService.value.banner.forEach( img => {
         encodeImageFileAsURL(img);
       })
   }
@@ -64,13 +64,13 @@ export default function useCreateService() {
 
   const removeImage = index => {
     bannersBase64.value.splice(index, 1);
-    createGig.value.banner.splice(index, 1);
+    createService.value.banner.splice(index, 1);
   }
 
   const getCategory = () => {
     data.value.category_id = document.getElementById("category").value;
     console.log("Catogry id", data.value.category_id)
-    createGig.value.category_id = data.value.category_id;
+    createService.value.category_id = data.value.category_id;
     store.dispatch("loadSubCategories", data.value.category_id);
   };
 
@@ -82,7 +82,7 @@ export default function useCreateService() {
     selectThumbnail,
     removeImage,
     encodeImageFileAsURL,
-    createGig,
+    createService,
     bannersBase64,
     convertFileToBase64
   }
