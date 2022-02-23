@@ -5,7 +5,7 @@
         <div class="row d-flex justify-content-center">
           <div class="col-lg-9">
             <h4 class="font-weight-bold pb-3">Update Serivce</h4>
-                        <form>
+              <form>
               <div class="bg-white rounded shadow-sm sidebar-page-right">
                 <div class="bg-white rounded p-0">
                   <div class="border-bottom p-3">
@@ -70,7 +70,7 @@
                       </div>
 
                       <div
-                        v-for="(banner, index) in getBanners"
+                        v-for="(banner, index) in updateGig.service_media"
                         :key="index"
                       >
                         <div
@@ -85,11 +85,34 @@
                             margin-left:20px;
                             background-size:cover;
                           "
-                          :style="`background-image: url(${banner.media ? 'https://api.dex.proelean.com/'+banner.media : '/assets/images/banner.png'});`"
+                          :style="`background-image: url(${banner.media ? 'https://api.dex.proelean.com/'+ banner.media : banner });`"
                         >
-                          <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                          <i v-show="getBanners.length > 1" @click="removeOldImage(index, banner.media)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                         </div>
                       </div>
+
+                      <div
+                        v-for="(banner, index) in bannersBase64"
+                        :key="index"
+                      >
+                        <div
+                          class="
+                            cursor-pointer
+                            position-relative
+                          "
+                          style="
+                            height: 80px;
+                            width: 80px;
+                            border: 1px solid grey;
+                            margin-left:20px;
+                            background-size:cover;
+                          "
+                          :style="`background-image: url(${banner});`"
+                        >
+                          <i v-show="getBanners.length > 1" @click="removeNewImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                   <div class="border-bottom p-3">
@@ -173,10 +196,11 @@
                   </div>
                   <div class="p-3 d-flex justify-content-end">
                     <button
+                      :disabled="registerStatus === 2"
                       class="btn btn-success btn-lg font-weight-bold"
-                      @click.prevent="gigCreation"
+                      @click.prevent="updateService"
                     >
-                      {{registerStatus == 2 ? 'Loading...' : 'Create'}}
+                      {{registerStatus == 2 ? 'Loading...' : 'Update'}}
                     </button>
                   </div>
                 </div>
@@ -190,25 +214,26 @@
 </template>
 
 <script>
-import useSeller from "@/composables/useSeller.js";
+import useUpdateService from '@/composables/useSeller/useUpdateService'
 import { computed, onMounted} from '@vue/runtime-core';
-import store from '../../store';
+import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 
 export default {
   setup() {
+    const store = useStore()
     const route = useRoute()
     const {
       data,
-      bannersBase64,
-      gigCreation,
+      updateService,
       selectThumbnail,
-      removeImage,
+      bannersBase64,
+      removeNewImage,
+      removeOldImage,
       updateGig,
       getCategory,
       getBanners,
-      encodeImageFileAsURL,
-    } = useSeller();
+    } = useUpdateService();
 
   const payload = {
     "id" : route.params.id,
@@ -225,11 +250,11 @@ export default {
       updateGig,
       getCategory,
       data,
-      gigCreation,
+      updateService,
       selectThumbnail,
       bannersBase64,
-      removeImage,
-      encodeImageFileAsURL,
+      removeNewImage,
+      removeOldImage,
       getBanners
     };
   },

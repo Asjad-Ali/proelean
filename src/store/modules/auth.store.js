@@ -5,6 +5,7 @@ import router from '@/router';
 export const state = {
     status: {isLoggedIn:false},
     error: null,
+    setPasswordSection:false,
     loginStatus : 1,
     registerStatus : 1,
     user: JSON.parse(localStorage.getItem("userInfo"))
@@ -17,6 +18,10 @@ export const  mutations = {
 
   setError(state,error) {
     state.error=error;
+  },
+
+  setForgotPasswordSection(state, value){
+    state.setPasswordSection = value
   },
 
   setUserAsSeller(state) {
@@ -84,11 +89,18 @@ export const  actions = {
         }
         return resp;
       },
+
+      async forgot({commit},email){
+        console.log(email)
+        commit('setForgotPasswordSection',true)
+
+      }
   }
 
   export const getters = {
     getAuthUser: (state) => state.user,
     getRegisterStatus : state => state.registerStatus,
+    getPasswordSection : state => state.setPasswordSection,
   }
 
 

@@ -1,14 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Auth/Login.vue'
-import Register from '../views/Auth/Register.vue'
-import BecomeSeller from '../views/Become-Seller.vue'
-import Profile from '../views/Profile.vue'
-import ServiceDetail from '../views/ServiceDetail.vue'
+import Home from '@/views/Home.vue'
+import Login from '@/views/Auth/Login.vue'
+import Register from '@/views/Auth/Register.vue'
+import Forgot from '@/views/Auth/Forgot.vue'
+import BecomeSeller from '@/views/Become-Seller.vue'
+import Profile from '@/views/Profile.vue'
+import ServiceDetail from '@/views/ServiceDetail.vue'
 
-import CreateJob from '../components/buyer/CreateJob.vue'
-import Jobs from '../components/buyer/AllJobs.vue'
-import AllOrders from '../components/buyer/AllOrders.vue'
+import CreateJob from '@/components/buyer/CreateJob.vue'
+import Jobs from '@/components/buyer/AllJobs.vue'
+import AllOrders from '@/components/buyer/AllOrders.vue'
 
 import CreateService from '@/components/seller/CreateService.vue'
 import ManageService from '@/components/seller/ManageService.vue'
@@ -32,6 +33,12 @@ const routes = [
     name: 'Register',
     component: Register
   },
+  {
+    path: '/forgot',
+    name: 'Forgot',
+    component: Forgot
+  },
+
   {
     path: '/become_seller',
     name: 'BecomeSeller',
@@ -64,7 +71,6 @@ const routes = [
     component: BuyerRequests
   },
 
- 
 
   {
     path: '/buyer/create_job',
@@ -108,7 +114,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {  
   var isAuthenticated = localStorage.getItem('PROELEAN_TOKEN') ? true : false;
 
-  if (['/login', '/register', ].includes(to.path) || isAuthenticated) {
+  if (['/login', '/register', '/forgot'].includes(to.path) || isAuthenticated) {
     next(); // allow to enter route
   } else {
     next('/login'); // go to '/login';

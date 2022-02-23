@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light topbar static-top shadow-sm bg-white osahan-nav-top px-0">
-    <div class="container">
+    <div class="container-fluid">
        <!-- Sidebar Toggle (Topbar) -->
-       <a class="navbar-brand"><router-link to="/"><img src="assets/images/Pro-eLean-.png" alt=""> </router-link></a>
+       <a class="navbar-brand"><router-link to="/"><img src="/assets/images/Pro-eLean-.png" alt=""> </router-link></a>
        <!-- Topbar Search -->
        <form @submit.prevent="handleSearch" class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
           <div class="input-group">
@@ -37,7 +37,7 @@
 
       <ul class="navbar-nav align-items-center ml-auto" v-if="$store.state.isLoggedIn">
 
-         <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2">
+         <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2 d-none d-sm-block">
             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                Buyer
             </a>
@@ -56,7 +56,7 @@
                </div>
             </li> 
 
-               <li  class="nav-item dropdown no-arrow no-caret dropdown-user mx-2"
+               <li  class="nav-item dropdown no-arrow no-caret dropdown-user mx-2 d-none d-sm-block"
                   v-if="userInfo.isFreelancer"
                >
                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,7 +70,7 @@
                      <router-link class="dropdown-item" to="/seller/buyer_requests">Buyer Requests</router-link>
                   </div>
                </div>
-            </li> 
+              </li> 
 
           <!-- @if(isset($user) && !is_null($user)) -->
           <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
@@ -136,10 +136,19 @@
              </div>
           </li>
           <li class="nav-item dropdown no-arrow no-caret dropdown-user">
-             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="/assets/images/user/s1.png"></a>
+             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                <img
+                  :src="'https://api.dex.proelean.com/' + user.image"
+                  class="dropdown-user-img img-full"
+                  alt="profile_img"
+                /> </a>
              <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                 <h6 class="dropdown-header d-flex align-items-center">
-                   <img class="dropdown-user-img" src="/assets/images/user/s1.png">
+                   <img
+                  :src="'https://api.dex.proelean.com/' + user.image"
+                  class="dropdown-user-img img-full"
+                  alt="profile_img"
+                />
                    <div class="dropdown-user-details">
                       <div class="dropdown-user-details-name">{{ userInfo.username  }}</div>
                       <div class="dropdown-user-details-email">{{ userInfo.email  }}</div>
@@ -155,6 +164,34 @@
                    </div>
                    Account
                 </router-link>
+
+                  <div class="d-sm-none">
+                     <router-link class="dropdown-item" to="/buyer/jobs">
+                     <i class="fa fa-briefcase mr-2 text-muted" aria-hidden="true"></i>
+                     Manage Job
+                     </router-link>
+                  </div>
+                  <div class="d-sm-none">
+                     <router-link class="dropdown-item" to="/buyer/manage_order">
+                     <i class="fa fa-first-order text-muted mr-2" aria-hidden="true"></i>
+                     Manage Order
+                     </router-link>
+                  </div>
+                  <div v-if="userInfo.isFreelancer">
+                    <div class="d-sm-none">
+                       <router-link class="dropdown-item" to="/seller/manage_service">
+                       <i class="fa fa-cogs text-muted mr-2" aria-hidden="true"></i>
+                       Manage services
+                       </router-link>
+                    </div>
+                    <div class="d-sm-none">
+                       <router-link class="dropdown-item" to="/seller/buyer_requests">
+                       <i class="fa fa-cart-arrow-down text-muted mr-2" aria-hidden="true"></i>
+                       Buyer Requests
+                       </router-link>
+                    </div>
+                  </div>
+              
                 <button class="dropdown-item" @click="handleLogout">
                    <div class="dropdown-item-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
@@ -194,19 +231,19 @@
                      <div class="dropdown-item-icon">
                         
                      </div>
-                     Language -1
+                    English
                   </a>
                   <a class="dropdown-item" href="#">
                      <div class="dropdown-item-icon">
                         
                      </div>
-                     Language -1
+                     Suomalainen
                   </a>
                   <a class="dropdown-item" href="#">
                      <div class="dropdown-item-icon">
                         
                      </div>
-                     Language -3
+                   Türkçe
                   </a>
                </div>
             </li> 
@@ -220,10 +257,11 @@
 import Api from "@/services/API";
 import { useRouter } from "vue-router";
 import { computed, onMounted, ref } from "@vue/runtime-core";
-import store from "../../store";
+import { useStore } from 'vuex';
 
 export default {
    setup(){
+      const store = useStore()
       const router = useRouter();
       const keywords = ref(null);
       const handleLogout = async() => {
@@ -251,7 +289,8 @@ export default {
          handleSearch,
          keywords,
          userInfo: computed( () => store.getters.getAuthUser),
-         userNotification: computed( () => store.getters.getUserNotifications)
+         userNotification: computed( () => store.getters.getUserNotifications),
+         user: computed(() => store.getters.getAuthUser),
       }
    }
 };

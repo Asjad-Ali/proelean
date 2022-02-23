@@ -1,7 +1,7 @@
 <template>
   <div>
     <TopNav />
-    <BottomNav  />
+    <BottomNav v-if="isAuthenticated" />
     <router-view/>
     <Footer />
   </div>
@@ -18,6 +18,13 @@ export default {
     TopNav,
     BottomNav,
     Footer
+  },
+  setup() {
+    return {
+      isAuthenticated: localStorage.getItem("PROELEAN_TOKEN"),
+      
+    }
+    
   }
 }
 </script>
@@ -26,4 +33,16 @@ export default {
 .cursor-pointer{
   cursor: pointer;
 }
+.gig-img-outer {
+    height: 200px;
+    width: 100%;
+}
+
+.img-full{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  object-fit: cover;
+}
+
 </style>

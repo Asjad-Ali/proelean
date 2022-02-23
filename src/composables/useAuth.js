@@ -71,9 +71,10 @@ export default function useAuth() {
       password_confirmation: null
    })
 
-   const matchPassword = ref(null)
-   const usernameRegex = /^[a-zA-Z0-9_.]{3,30}$/;
-   const nameRegex = /^[a-zA-Z]{3,20}$/;
+
+   const usernameRegex = /^[a-zA-Z_.]{3,30}$/;
+   const nameRegex = /^[a-zA-Z ]{3,20}$/;
+   const tokenRegex = /^[0-9 ]{6}$/;
 
    watch(signup.value,(current /*old*/) => {
       if(!current.name){
@@ -109,13 +110,12 @@ export default function useAuth() {
       } else if (current.password.length < 6) {
          signupErrors.value.password = "Password must be atleast 6 characters";
       } else {
-         matchPassword.value = current.password
          signupErrors.value.password = null;
       }
 
       if (!current.password_confirmation) {
          signupErrors.value.password_confirmation = "Confirm Password is required";
-      } else if (current.password_confirmation != matchPassword.value ) {
+      } else if (current.password_confirmation != current.password ) {
          signupErrors.value.password_confirmation = "Confirm Password dosn't match";
       } else {
          signupErrors.value.password_confirmation = null;
@@ -137,6 +137,57 @@ export default function useAuth() {
       }
    }
 
+   // Forgot
+
+   const forgot = ref({
+      email: '',
+      token:'',
+      password:'',
+      confirmation_password:''
+   });
+
+   const forgotErrors = ref({
+      email: null,
+      token:null,
+      password:null,
+      confirmation_password:null
+   })
+
+   watch(forgot.value,(current)  => {
+      if (!current.email) {
+         forgotErrors.value.email = "Email is required";
+      } else if (!current.email.match(emailRegex)) {
+         forgotErrors.value.email = "Email is not valid";
+      } else {
+         forgotErrors.value.email = null;
+      }
+
+      if (!current.token) {
+         forgotErrors.value.token = "Token is required";
+      } else if (!current.token.match(tokenRegex)) {
+         forgotErrors.value.token = "Token is not valid";
+      } else {
+         forgotErrors.value.token = null;
+      }
+
+      if (!current.password) {
+         forgotErrors.value.password = "Password is required";
+      } else if (current.password.length < 6) {
+         forgotErrors.value.password = "Password must be atleast 6 characters";
+      } else {
+         forgotErrors.value.password = null;
+      }
+
+      if (!current.password_confirmation) {
+         forgotErrors.value.password_confirmation = "Confirm Password is required";
+      } else if (current.password_confirmation != current.password ) {
+         forgotErrors.value.password_confirmation = "Confirm Password dosn't match";
+      } else {
+         forgotErrors.value.password_confirmation = null;
+      }
+   })
+
+
    return {
       signup,
       signupErrors,
@@ -151,7 +202,9 @@ export default function useAuth() {
       passwordRef,
       loginErrors,
       login,
-      
-      loginLoading
+      loginLoading,
+
+      forgotErrors,
+      forgot
    }
 }

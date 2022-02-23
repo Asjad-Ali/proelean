@@ -4,8 +4,8 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-            <h2 class="mb-0 p-0">Services</h2>
+          <div class="d-flex align-items-center pb-2 border-bottom">
+            <h3 class="mb-0 p-0">Services</h3>
             <router-link
               class="btn btn-sm btn-success ml-auto light"
               to="/seller/create_service"
@@ -17,26 +17,27 @@
       </div>
 
         <div class="tab-pane d-md-none active" id="active">
-          <div v-if="loader" class="text-center loader">
+          <div v-if="loader" class="text-center spinnerInden">
             <div class="spinner-border  text-primary m-2" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
-        <div v-for="service in $store.getters.getUserServices" :key="service.id"
-        class="card d-md-none shadow-sm border-primary  p-2">
-          <div class="container">
-            <div class="text-center">
+        <div v-for="service in services" :key="service.id"
+        class="card d-md-none shadow-sm border-primary">
+          <div>
+            <div class="gig-img-outer text-center">
               <img
                 :src="
                   service.service_media.length &&
                   service.service_media[0].media
                     ? `https://api.dex.proelean.com/${service.service_media[0].media}`
                     : `/assets/images/sample-gig.png`"
-                class="img-fluid rounded-start mb-2"
+                class="img-full mb-2"
                 alt="..."
               />
             </div>
-            <div class="row ">
+            <div class="container">
+              <div class="row my-3">
                 <div class="col-12">
                   <h5 class="card-title">{{service.s_description}}</h5>
                 </div>
@@ -46,7 +47,7 @@
                 </p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row my-2">
                   <div class="col-3">
                     <strong class="text-muted">Rating: {{service.service_rating}}</strong>
                   </div>
@@ -59,43 +60,95 @@
               </div>
             <div class="row">
               <div class="col-8">
-                <strong>Price $100</strong>
+                <strong>{{service.price}}</strong>
               </div>
               <div class="col-2">
+                  <router-link class="dropdown-item" :to="{name:'UpdateService', params:{id:service.id}}">
                   <i
-                    class="fa fa-pencil-square-o cursor-pointer"
+                    class="fa fa-pencil-square-o mb-2 cursor-pointer"
                     style="font-size: 15px"
                     aria-hidden="true"
                   >
                   </i>
+                  </router-link>
               </div>
               <div class="col-2">
                   <i
                     aria-hidden="true"
                     style="font-size: 17px"
-                    @click="getJobId(service.id)"
-                    class="fa fa-trash cursor-pointer text-danger"
+                    @click.prevent="getServiceId(service.id)"
+                    class="fa fa-trash cursor-pointer text-danger mt-1"
                     data-toggle="modal"
-                    data-target="#exampleModalCenter"
+                    data-target="#exampleModalSmall"
                   >
                   </i>
+                  <div class="d-flex justify-content-center">
+                      <div
+                        class="modal fade w-75"
+                        id="exampleModalSmall"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalCenterTitle"
+                        aria-hidden="true"
+                      >
+                        <div
+                          class="modal-dialog modal-dialog-centered"
+                          role="document"
+                        >
+                          <div class="modal-content">
+                            <div
+                              class="modal-header d-flex justify-content-center"
+                            >
+                              <h5
+                                class="modal-title"
+                                id="exampleModalLongTitle"
+                              >
+                                Delete Service
+                              </h5>
+                            </div>
+                            <div class="modal-body text-center">
+                              Are you sure you want to delete the service?
+                            </div>
+                            <div
+                              class="modal-footer d-flex justify-content-center"
+                            >
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                              >
+                                No
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-danger"
+                                data-dismiss="modal"
+                                @click="deleteService()"
+                              >
+                                Yes
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
               </div>
+            </div>
             </div>
             </div>
           </div>
         </div>
       </div>
 
-
-      <div class="tab-content d-none d-md-block osahan-table container rounded px-3">
+      <div  class="tab-content d-none d-md-block osahan-table container rounded px-3">
         <div class="tab-pane active" id="active">
-          <div v-if="loader" class="text-center loader vh-100">
+          <div v-if="loader" class="text-center spinnerInden vh-100">
             <div class="spinner-border text-primary m-2" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
           <div v-else>
-            <div class="table-responsive box-table mt-3 bg-white">
+            <div v-if="services.length" class="table-responsive box-table mt-3 bg-white">
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -108,7 +161,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="service in $store.getters.getUserServices"
+                    v-for="service in services"
                     :key="service.id"
                   >
                     <td>
@@ -119,11 +172,10 @@
                           service.service_media.length &&
                           service.service_media[0].media
                             ? `https://api.dex.proelean.com/${service.service_media[0].media}`
-                            : `/assets/images/sample-gig.png`
-                        "
+                            : `/assets/images/sample-gig.png`"
                       />
                     </td>
-                    <td>
+                    <td class="ps-1">
                       <div>
                         <div class="row">
                           <div class="col col-12">
@@ -155,13 +207,16 @@
                     </td>
                     <td style="text-align: center">${{ service.price }}</td>
                     <td style="text-align: center">
+                      <div class="d-flex pt-3">
                       <div>
+                        <router-link class="dropdown-item px-2 pt-0" :to="{name:'UpdateService', params:{id:service.id}}">
                         <i
-                          class="fa fa-pencil-square-o mb-2 cursor-pointer"
-                          style="font-size: 15px"
+                          class="fa fa-pencil-square-o editIcon mb-2 cursor-pointer "
+                          
                           aria-hidden="true"
                         >
                         </i>
+                        </router-link>
                       </div>
                       <div>
                         <i
@@ -173,6 +228,7 @@
                           data-target="#exampleModalCenter"
                         >
                         </i>
+                      </div>
                       </div>
 
                       <div
@@ -231,14 +287,20 @@
           </div>
         </div>
       </div> 
+
+        <div v-show="!loader" v-if="!services.length" class="container text-center py-5">
+        <h3>No Any Service Available</h3>
+      </div>
     </div>
 </template>
 
 <script>
 import { computed, onMounted, ref } from "@vue/runtime-core";
-import store from "../../store";
+import { useStore } from 'vuex';
+
 export default {
   setup() {
+    const store = useStore()
     const serviceId = ref("");
     const getServiceId = (id) => {
       serviceId.value = id;
@@ -255,7 +317,8 @@ export default {
     }
     return {
       jobs: computed(() => store.getters.getAllJobs),
-      loader: computed(() => store.getters.getLoaderVal),
+      loader: computed(() => store.getters.getSellerLoader),
+      services: computed(() => store.getters.getUserServices),
       deleteService,
       getServiceId,
       serviceId,
@@ -271,6 +334,14 @@ export default {
 .spinner-border {
   width: 4rem;
   height: 4rem;
+}
+.spinnerInden{
+  margin-top: 8rem;
+  margin-bottom: 5rem;
+}
+.editIcon{
+  font-size: 17px;
+  padding-top: 1px;
 }
 .table td {
   padding: 5px;

@@ -7,6 +7,7 @@ var page = 1;
 export const state = {
   sellerReview:[],
   userServices:[],
+  s_Loader:'',
   userSingleService:{},
   createGigData:'',
   deleteService:'',
@@ -15,17 +16,16 @@ export const state = {
   reviewsHasNextPage:'',
   error: null,
   buyerRequests:[],
-  loader: null
 }
 
 export const getters = {
   getUserServices : state => state.userServices,
+  getSellerLoader : state => state.s_Loader,
   getSingleService : state => state.userSingleService,
   getUserServicesStatus : state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
-  getLoader : state => state.loader
 }
 
 
@@ -61,8 +61,8 @@ export const  mutations = {
   setBuyerRequests(state,request) {
     state.buyerRequests=request;
   },
-  setLoader(state,loader){
-    state.loader=loader;
+  setSellerLoader(state,loaderVal){
+    state.s_Loader = loaderVal
   }
 }
 
@@ -70,7 +70,7 @@ export const  actions = {
 
   async userServices({commit,state},action)
   {
-    commit('setLoader',1);
+    commit('setSellerLoader',1);
     commit('setServicesLoadingStatus','LOADING');
     if(!state.userServices || page>=1) {
       if(action === ''){
@@ -84,7 +84,7 @@ export const  actions = {
       }
       const res= await Api.get(`seller/services?page=${page}`);
       if(res.status===200) {
-        commit('setLoader',0);
+        commit('setSellerLoader',0);
         commit("setUserServices",res.data);
         commit('setServicesNextPage',res.links.next ?? '');
         commit('setServicesLoadingStatus','COMPLETED');
@@ -110,7 +110,8 @@ export const  actions = {
     }
     commit("setSingleService",service);
     if(payload.type==="ONUPDATE") {
-      dispatch("loadSubCategories", service.category_id);
+      dispatch("loadSubCategories", service.category.id);
+
     }
 
   },
@@ -147,12 +148,12 @@ export const  actions = {
     }
   },
 
-  async createGig({commit},payload){
+  async createService({commit},payload){
     commit('setRegisterStatus',2);
     const toaster = createToaster()
     const res = await Api.formData('seller/services',payload);
-    if(res.status === 200){
-      toaster.success(res.message,{
+    if(res.status === 201){
+      toaster.success("Service has been Created",{
         position:"top-right",
         dismissible: true});
       commit("setCreateGig",res)
@@ -166,13 +167,31 @@ export const  actions = {
     }
   },
 
-  async showBuyerRequests({commit,state})
+  async updateService({commit},updateServiceData){
+    commit('setRegisterStatus',2);
+    console.log("id",updateServiceData)
+    const toaster = createToaster()
+    const res = await Api.formData(`seller/services/${updateServiceData.id}`,updateServiceData);
+    if(res.status === 200){
+      toaster.success("Service has been Updated Successfully",{
+        position:"top-right",
+        dismissible: true});
+        console.log
+      commit('setRegisterStatus',3);
+    }
+    else{
+      toaster.error(res.message,{
+        position:"top-right",
+        dismissible: true});
+        commit('setRegisterStatus',4); 
+    }
+  },
+
+  async showBuyerRequests({commit})
   {
     commit('setLoader',1);
     let getData = JSON.parse(localStorage.getItem("userInfo"))
     console.log("in action id: ",getData.id)
-    if(!state.buyerRequests.length){
-      console.log("Buyer Requests State is null");
       const res= await Api.get(`seller/buyer_requests`);
       if(res.status === 200) {
         commit("setBuyerRequests",res.data);
@@ -181,9 +200,16 @@ export const  actions = {
       } else {
         console.log("Buyer Requests error");
       }      
-    }
-    else{
-      commit("setRequests",state.buyerRequests);
+  },
+
+  async addBuyerRequests({commit})
+  {
+    const res= await Api.get(`seller/buyer_requests`);
+    if(res.status === 200) {
+      commit("setBuyerRequests",res.data);
+      console.log("Buyer Requests",res.data);
+    } else {
+      console.log("Buyer Requests error");
     }
   },
 
@@ -205,5 +231,25 @@ export const  actions = {
         dismissible: true});
     }
   },
+
+  async sendOffer({commit,dispatch},payload){
+    commit('setRegisterStatus',2);
+      const toaster = createToaster()
+      const resp= await Api.post('seller/send_offer',payload);
+      if(resp.status==200){
+        toaster.success(resp.message,{
+          position:"top-right",
+          dismissible: true});
+        commit('setRegisterStatus',3);
+        dispatch("addBuyerRequests")
+      }
+      else
+      {
+        commit('setRegisterStatus',4);
+        toaster.error(resp.message,{
+          position:"top-right",
+          dismissible: true});
+      }
+    },
 
 }

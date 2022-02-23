@@ -80,10 +80,10 @@
                 type="button"
                 class="btn btn-success btn-block text-uppercase"
                 id="loginBtn"
-                :disabled="!Object.values(loginErrors).every((value) => !value)"
-                @click="handleLogin">
-                <i class="fa fa-spinner fa-spin" v-show="loginLoading"></i>
-                {{registerStatus == 2 ? 'Loading...' : 'login'}}
+                :disabled="!Object.values(loginErrors).every((value) => !value) || registerStatus == 2"
+                @click="handleLogin"
+                >                
+                {{registerStatus == 2 ? ' Loading...' : ' login'}}
               </button>
               <div class="text-center mt-3 border-bottom pb-3">
                 <p class="small text-muted">Or login with</p>
@@ -107,7 +107,7 @@
                 </div>
               </div>
               <div class="py-3 d-flex align-item-center">
-                <a href="forgot-password.html">Forgot password?</a>
+                <router-link to="/">Forgot Password</router-link>
                 <span class="ml-auto">
                   New to Proelean?
                   <router-link to="/register">Join now</router-link></span
@@ -116,7 +116,10 @@
             </form>
           </div>
 
-          <div class="container">
+          <!-- <div class="container">
+            <button type="button" class="btn btn-primary" id="liveToastBtn">
+              Show live toast
+            </button>
 
             <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
               <div
@@ -141,7 +144,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -152,11 +155,12 @@
 import { useRouter } from "vue-router";
 import useAuth from "@/composables/useAuth";
 import { computed, onBeforeMount } from "vue";
-import store from "../../store";
+import { useStore } from 'vuex';
 
 export default {
   name: "Login",
   setup() {
+    const store = useStore()
     const router = useRouter();
     const {
       toggleVisibility,
@@ -169,10 +173,8 @@ export default {
 
     const handleLogin = async (e) => {
       e.preventDefault();
-      loginLoading.value = true;
       console.log("login data:- " + JSON.stringify(login.value))
       store.dispatch('login', login.value)
-      loginLoading.value = false;
    }
 
     onBeforeMount(() => {

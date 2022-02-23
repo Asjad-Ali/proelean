@@ -1,6 +1,6 @@
 <template>
   <div class="main-page second py-5">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <PersonalDetails />
         <div class="col-lg-8 right">

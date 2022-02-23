@@ -1,10 +1,10 @@
 <template>
-  <div class="main-page second py-5">
+  <div class="main-page second py-3">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-            <h2 class="mb-0 p-0">Orders</h2>
+          <div class="d-flex align-items-center mb-3 border-bottom">
+            <h3 class="font-weight-bold mb-3">Orders</h3>
             
             
             <!----------------------    Button trigger modal    --------------------->
@@ -43,49 +43,102 @@
             </div>
             <!------------------------      Modal End     -------------------------->
           </div>
+        </div>
+      </div>
 
+
+       <div class="tab-content osahan-table rounded d-sm-none">
+        <div class="tab-pane active" id="active">
+          <div v-if="loader" class="d-flex justify-content-center s-margin">
+            <div class="spinner-border text-primary m-2" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
           <div
-            class="
-              tab-content
-              osahan-table
-              rounded
-              px-3
-            "
+            v-for="order in orders"
+            :key="order.id"
+            class="card d-md-none shadow-sm border-primary"
           >
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+              <span>
+                <img
+                   class="img-fluid bg-info rounded-circle mr-2"
+                   style="width: 35px; height: 35px; object-fit:cover;"
+                   :src="'https://api.dex.proelean.com/' + order.image"
+                   alt="user-image"
+                  />
+                <span> {{ order.username }} </span>
+                </span>
+                <span class="mt-2">{{ order.created_at }}</span>
+              </div>
+              <h5 class="card-title bg-light mt-3">{{ order.description }}</h5>
+              <span class="text-muted"> <i class="fa fa-clock-o"></i>  Duration: </span> <span> {{ order.delivery_time }}</span>
+              <span class="text-muted ml-5"> <i class="fa fa-usd"></i>  Budget: </span> <span> {{ order.amount }}</span>
+              <div class="d-flex justify-content-end mt-2">
+                <td>
+                    <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 1"> Active </button>
+                    <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
+                    <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 3"> Revision </button>
+                    <button class="btn btn-sm btn-success w-100" v-if="order.status_id == 4"> Complete </button>
+                    <button class="btn btn-sm btn-danger w-100" v-if="order.status_id == 5"> Disputed </button>
+                    <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 6"> Late </button>
+                </td>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+          <div class="tab-content osahan-table rounded d-none d-sm-block container">
             <div class="tab-pane active" id="active">
-                <div v-if="loader" class="text-center loader vh-100">
+                <div v-if="loader" class="d-flex justify-content-center s-margin">
                   <div class="spinner-border text-primary m-2" role="status">
                     <span class="sr-only">Loading...</span>
                   </div>
                 </div>
                 <div v-else>
-                  <div class="table-responsive box-table mt-3 bg-white">
+                  <div
+                  v-if="orders.length"
+                  class="table-responsive box-table mt-3 bg-white" 
+                  >
                       <table class="table table-bordered" >
                         <thead>
                           <tr>
-                            <th>USERNAME</th>
+                            <th class="text-center">USERNAME</th>
                             <th>ORDER DESCRIPTION</th>
-                            <th>POSTED DATE</th>
-                            <th>DURATION</th>
-                            <th>BUDGET</th>
-                            <th>STATUS</th>
+                            <th class="text-center">POSTED DATE</th>
+                            <th class="text-center">DURATION</th>
+                            <th class="text-center">BUDGET</th>
+                            <th class="text-center">STATUS</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr v-for="order in orders" :key="order.buyer_id">
-                            <td>
+                            <td class="text-center">
+                              <div>
+                                <img
+                                  class="img-fluid bg-info rounded-circle mb-1"
+                                  style="width: 35px; height: 35px; object-fit:cover;"
+                                  :src="'https://api.dex.proelean.com/' + order.image"
+                                  alt="img"
+                                />
+                              </div>
+                              <div>
                               {{ order.username }}
+                              </div>
                             </td>
                             <td>
-                              <a href="#" class="make-black">
                                 <p class="order-proposal-title">
                                   {{ order.description }}
                                 </p>
-                              </a>
                             </td>
-                            <td>{{ order.created_at }}</td>
-                            <td>{{ order.delivery_time }}</td>
-                            <td>{{ order.amount }}.0{{ order.currency }}</td>
+                            <td class="text-center">{{ order.created_at }}</td>
+                            <td class="text-center">{{ order.delivery_time }}</td>
+                            <td class="text-center">{{ order.amount }}.0{{ order.currency }}</td>
                             <td>
                               <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 1"> Active </button>
                               <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
@@ -101,17 +154,22 @@
                 </div>
             </div>
           </div>
-        </div>
+      
+
+      <div v-if="!orders.length" v-show="!loader" class="container text-center py-5">
+        <h2>No Any Order Available</h2>
       </div>
-    </div>
+
   </div>
 </template>
 
 <script>
 import { onMounted, computed } from "@vue/runtime-core";
-import store from "../../store";
+import { useStore } from 'vuex';
+
 export default {
   setup() {
+    const store = useStore()
     onMounted(() => {
       store.dispatch("showAllOrders");
     })
@@ -142,5 +200,9 @@ export default {
 .spinner-border{
   width: 4rem;
   height: 4rem;
+}
+.s-margin{
+  margin-bottom: 8rem;
+  margin-top: 5rem ;
 }
 </style>
