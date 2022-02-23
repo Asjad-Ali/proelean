@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light topbar static-top shadow-sm bg-white osahan-nav-top px-0">
     <div class="container-fluid">
        <!-- Sidebar Toggle (Topbar) -->
-       <a class="navbar-brand"><router-link to="/"><img src="assets/images/Pro-eLean-.png" alt=""> </router-link></a>
+       <a class="navbar-brand"><router-link to="/"><img src="/assets/images/Pro-eLean-.png" alt=""> </router-link></a>
        <!-- Topbar Search -->
        <form @submit.prevent="handleSearch" class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
           <div class="input-group">

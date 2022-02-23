@@ -2415,12 +2415,12 @@ footer div ul li a {
     font-weight: 700;
     color: #fff;
     border: 1px solid transparent;
-    background: #2cdd9b;
-    background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
-    background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
-    background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-    background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-    background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+    background: #007bff;
+    background: -webkit-linear-gradient(legacy-direction(to right), #007bff 0%, #0905ea 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#007bff), to(#0905ea));
+    background: -webkit-linear-gradient(left, #007bff 0%, #0905ea 100%);
+    background: -o-linear-gradient(left, #007bff 0%, #0905ea 100%);
+    background: linear-gradient(to right, #007bff 0%, #0905ea 100%);
     flex: 1 1;
     margin: 0;
     display: inline-block;
