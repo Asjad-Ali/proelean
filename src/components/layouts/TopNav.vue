@@ -166,17 +166,29 @@
                 </router-link>
 
                   <div class="d-sm-none">
-                     <router-link class="dropdown-item" to="/buyer/jobs">Manage Job</router-link>
+                     <router-link class="dropdown-item" to="/buyer/jobs">
+                     <i class="fa fa-briefcase mr-2 text-muted" aria-hidden="true"></i>
+                     Manage Job
+                     </router-link>
                   </div>
                   <div class="d-sm-none">
-                     <router-link class="dropdown-item" to="/buyer/manage_order">Manage Order</router-link>
+                     <router-link class="dropdown-item" to="/buyer/manage_order">
+                     <i class="fa fa-first-order text-muted mr-2" aria-hidden="true"></i>
+                     Manage Order
+                     </router-link>
                   </div>
                   <div v-if="userInfo.isFreelancer">
                     <div class="d-sm-none">
-                       <router-link class="dropdown-item" to="/seller/manage_service">Manage services </router-link>
+                       <router-link class="dropdown-item" to="/seller/manage_service">
+                       <i class="fa fa-cogs text-muted mr-2" aria-hidden="true"></i>
+                       Manage services
+                       </router-link>
                     </div>
                     <div class="d-sm-none">
-                       <router-link class="dropdown-item" to="/seller/buyer_requests">Buyer Requests</router-link>
+                       <router-link class="dropdown-item" to="/seller/buyer_requests">
+                       <i class="fa fa-cart-arrow-down text-muted mr-2" aria-hidden="true"></i>
+                       Buyer Requests
+                       </router-link>
                     </div>
                   </div>
               

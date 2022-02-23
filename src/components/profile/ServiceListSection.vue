@@ -31,8 +31,8 @@
             </span>
           </div>
           <h3>
-            <!-- {{ service.s_description.substr(0, 28) }} -->
-            {{service.s_description.substr(0, 28)}} {{service.s_description.length > 28 ? '...' : ''}}
+            <!-- {{ service.s_description.substr(0, 25) }} -->
+            {{service.s_description.substr(0, 25)}} {{service.s_description.length > 25 ? '...' : ''}}
           </h3>
           <div class="content-info">
             <div class="rating-wrapper">
