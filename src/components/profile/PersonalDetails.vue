@@ -146,10 +146,11 @@
 
 <script>
 import { computed } from "vue";
-import store from "../../store";
+import { useStore } from 'vuex';
 
 export default {
   setup() {
+    const store = useStore()
     return {
       user: computed(() => store.getters.getAuthUser),
     };

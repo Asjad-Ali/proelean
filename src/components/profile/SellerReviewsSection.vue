@@ -110,10 +110,11 @@
 <script>
 
 import { computed, onMounted } from "vue";
-import store from "../../store";
+import { useStore } from 'vuex';
 
 export default {
   setup() {
+    const store = useStore()
     onMounted(store.dispatch("getSellerReviews"));
     const handleReviews = () => {store.dispatch("getSellerReviews")}
     return {

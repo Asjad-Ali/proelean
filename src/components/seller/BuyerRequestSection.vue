@@ -175,9 +175,11 @@
 
 <script>
 import { computed, onMounted, ref } from "vue";
-import store from "../../store";
+import { useStore } from 'vuex';
+
 export default {
   setup() {
+    const store = useStore()
     onMounted(() => {
       store.dispatch("showBuyerRequests");
     });

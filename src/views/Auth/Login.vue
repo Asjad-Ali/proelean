@@ -154,11 +154,12 @@
 import { useRouter } from "vue-router";
 import useAuth from "@/composables/useAuth";
 import { computed, onBeforeMount } from "vue";
-import store from "../../store";
+import { useStore } from 'vuex';
 
 export default {
   name: "Login",
   setup() {
+    const store = useStore()
     const router = useRouter();
     const {
       toggleVisibility,

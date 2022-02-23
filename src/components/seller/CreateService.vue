@@ -187,10 +187,12 @@
 <script>
 import useCreateService from '@/composables/useSeller/useCreateService'
 import { computed, onBeforeMount } from '@vue/runtime-core';
-import store from '../../store';
+import { useStore } from 'vuex';
+
 export default {
   setup() {
-const { createService,
+        const store = useStore()
+        const { createService,
         data,
         bannersBase64,
         gigCreation,

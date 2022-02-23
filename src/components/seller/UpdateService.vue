@@ -217,11 +217,12 @@
 <script>
 import useUpdateService from '@/composables/useSeller/useUpdateService'
 import { computed, onMounted} from '@vue/runtime-core';
-import store from '../../store';
+import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 
 export default {
   setup() {
+    const store = useStore()
     const route = useRoute()
     const {
       data,
