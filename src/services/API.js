@@ -20,18 +20,14 @@ class API {
       },
     };
 
-    if(contentType=='application/json') {
+    if (contentType == 'application/json') {
       options.headers['Content-Type'] = contentType;
     }
 
     //payload will be sent as form data if content type is multipart/form-data
     if (options.method !== "GET") {
       if (contentType.toLowerCase() == "multipart/form-data") {
-        const formData = new FormData();
-        for (const key in payload) {
-          formData.append(key, payload[key]);
-        }
-        options.body = formData;
+        options.body = convertToFormData(payload);
       } else if (payload && typeof payload === "object") {
         options.body = JSON.stringify(payload);
       }
@@ -91,20 +87,34 @@ class API {
   }
 
   url(route) {
-    return `${apiBaseURL}${
-      apiBaseURL && apiBaseURL.slice(apiBaseURL.length - 1) == "/" ? "" : "/"
-    }${route}`;
+    return `${apiBaseURL}${apiBaseURL && apiBaseURL.slice(apiBaseURL.length - 1) == "/" ? "" : "/"
+      }${route}`;
   }
 }
 
 function getRandomString(length) {
   var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var result = '';
-  for ( var i = 0; i < length; i++ ) {
+  for (var i = 0; i < length; i++) {
     result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
   }
-  localStorage.setItem('DEVICE_ID',result)
+  localStorage.setItem('DEVICE_ID', result)
   return result;
+}
+
+
+function convertToFormData(payload) {
+  const formData = new FormData();
+  for (const key in payload) {
+    if (Array.isArray(payload[key])) {
+      for (let i = 0; i < payload[key].length; i++) {
+        formData.append(key + "[]", payload[key][i]);
+      }
+    }
+    else
+      formData.append(key, payload[key]);
+  }
+  return formData;
 }
 
 export default new API();

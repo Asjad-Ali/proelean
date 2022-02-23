@@ -24,6 +24,7 @@
                     class="form-control border-10 shadow-none position-relative"
                     name="email"
                     v-model="forgot.email"
+                    :readonly="passwordSectionVisibility"
                     required
                   />
                   <i
@@ -36,21 +37,19 @@
                 </div>
               </div>
 
-              <div v-show="passwordSectionVisibility">
 
+              <div v-show="passwordSectionVisibility">
                 <div class="form-group">
                 <label class="mb-1">Token</label>
                 <div class="position-relative icon-form-control">
                   <input
-                    ref="passwordRef"
-                    type="password"
+                    ref="tokenRef"
+                    type="number"
                     class="form-control userForm position-relative"
-                    :class="[{ 'border-danger ': forgotErrors.token },{'border-success': !signupErrors.password}]"
+                    :class="[{ 'border-danger ': forgotErrors.token },{'border-success': !forgotErrors.password}]"
                     v-model="forgot.token"
                   />
-                  <i class="mdi mdi-key-variant position-absolute" style="left:0"></i>
-                  <i @click="toggleVisibility"  class="mdi position-absolute cursor-pointer" 
-                     :class="`${eyeIcon}`" style="right:0"></i>
+                  <i class="mdi mdi-onepassword position-absolute" style="left:0"></i>
                 </div>
                 
                   <div class="text-danger mt-1" v-show="forgotErrors.token">
@@ -58,37 +57,37 @@
                   </div>
               </div>
 
-                <div class="form-group">
+                <div>
                 <label class="mb-1">Password (6 or more characters)</label>
                 <div class="position-relative icon-form-control">
                   <input
                     ref="passwordRef"
                     type="password"
                     class="form-control userForm position-relative"
-                    :class="[{ 'border-danger ': forgotErrors.password },{'border-success': !signupErrors.password}]"
+                    :class="[{ 'border-danger ': forgotErrors.password },{'border-success': !forgotErrors.password}]"
                     v-model="forgot.password"
                   />
-                  <i class="mdi mdi-key-variant position-absolute" style="left:0"></i>
+                  <i class="mdi mdi-lock position-absolute" style="left:0"></i>
                   <i @click="toggleVisibility"  class="mdi position-absolute cursor-pointer" 
                      :class="`${eyeIcon}`" style="right:0"></i>
                 </div>
-                
                   <div class="text-danger mt-1" v-show="forgotErrors.password">
                      {{ forgotErrors.password }}
                   </div>
               </div>
-              <div class="form-group">
+
+              <div>
                 <label class="mb-1">Confirm Password</label>
                 <div class="position-relative icon-form-control">
                   <i class="mdi mdi-key-variant position-absolute"></i>
                   <input
                     ref="passwordConRef"
                     type="password"
-                    :class="[{ 'border-danger ': forgotErrors.confirmation_password },{'border-success': !signupErrors.confirmation_password}]"
+                    :class="[{ 'border-danger ': forgotErrors.confirmation_password },{'border-success': !forgotErrors.confirmation_password}]"
                     class="form-control userForm position-relative"
                     v-model="forgot.confirmation_password"
                   />
-                  <i class="mdi mdi-key-variant position-absolute" style="left:0"></i>
+                  <i class="mdi mdi-lock position-absolute" style="left:0"></i>
                   <i @click="toggleVisSignupConPass"  class="mdi position-absolute cursor-pointer" 
                      :class="`${eyeIcon2}`" style="right:0"></i>                  
                 </div>
@@ -182,9 +181,11 @@ export default {
     const {
       toggleVisibility,
       eyeIcon,
+      eyeIcon2,
       passwordRef,
       loginErrors,
       forgotErrors,
+      toggleVisSignupConPass,
       forgot,
       login,
       loginLoading,
@@ -203,10 +204,12 @@ export default {
       forgotPassword,
       loginLoading,
       loginErrors,
+      toggleVisSignupConPass,
       passwordRef,
       forgotErrors,
       forgot,
       eyeIcon,
+      eyeIcon2,
       toggleVisibility,
     };
   },

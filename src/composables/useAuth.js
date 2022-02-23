@@ -163,11 +163,11 @@ export default function useAuth() {
       }
 
       if (!current.token) {
-         forgotErrors.value.email = "Email is required";
-      } else if (!current.email.match(tokenRegex)) {
-         forgotErrors.value.email = "Email is not valid";
+         forgotErrors.value.token = "Token is required";
+      } else if (!current.token.match(tokenRegex)) {
+         forgotErrors.value.token = "Token is not valid";
       } else {
-         forgotErrors.value.email = null;
+         forgotErrors.value.token = null;
       }
 
       if (!current.password) {

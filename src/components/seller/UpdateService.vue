@@ -5,7 +5,7 @@
         <div class="row d-flex justify-content-center">
           <div class="col-lg-9">
             <h4 class="font-weight-bold pb-3">Update Serivce</h4>
-                        <form>
+              <form>
               <div class="bg-white rounded shadow-sm sidebar-page-right">
                 <div class="bg-white rounded p-0">
                   <div class="border-bottom p-3">
@@ -87,7 +87,7 @@
                           "
                           :style="`background-image: url(${banner.media ? 'https://api.dex.proelean.com/'+ banner.media : banner });`"
                         >
-                          <i @click="removeOldImage(index, banner.media)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                          <i v-show="getBanners.length > 1" @click="removeOldImage(index, banner.media)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                         </div>
                       </div>
 
@@ -109,10 +109,9 @@
                           "
                           :style="`background-image: url(${banner});`"
                         >
-                          <i @click="removeNewImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                          <i v-show="getBanners.length > 1" @click="removeNewImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                         </div>
                       </div>
-
 
                     </div>
                   </div>
