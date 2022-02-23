@@ -1,17 +1,15 @@
 <template>
     <div
-      class="col-md-4"
+      class="col-md-4 mb-3"
       v-for="service in $store.getters.getUserServices"
       :key="service.id"
     >
      <div class="gig-img-outer">
     <router-link :to="{name:'gigDetail', params:{id:service.id}}" >
-       
         <img
           class="img-full"
           :src="(service.service_media.length && service.service_media[0].media) ? `https://api.dex.proelean.com/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />
-         
-      </router-link>
+    </router-link>
     </div>
       <div class="inner-slider">
         <div class="inner-wrapper d-flex flex-column align-content-between">
@@ -56,13 +54,7 @@
             </div>
           </div>
           <div class="footer">
-            <a id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-              <i class="fa fa-ellipsis-h"  aria-hidden="true"></i></a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownUserImage">
-                <div >
-                  <a class="dropdown-item" @click.prevent="deleteGig(service.id)" href="#">Delete</a>
-                </div>
-            </div>
+              <i class="fa fa-heart"  aria-hidden="true"></i>
             <div class="price">
               <a href="#">
                 Starting At <span> ${{ service.price }}</span>
@@ -71,6 +63,7 @@
           </div>
         </div>
       </div>
+      
     </div>
 </template>
 

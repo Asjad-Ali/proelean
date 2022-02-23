@@ -3,7 +3,12 @@
          <div class="container">
             <div class="row">
                <div class="col-lg-8 left">
-                   <Nav />
+                       <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                     </nav>
    
                     <h2 class="h2-cutom-font"> {{ service.s_description }}  </h2>
                     <Gallery :serviceMedia="service.service_media" />
@@ -19,7 +24,7 @@
                <ServiceCard />
             </div>
          </div>
-         <PeopleViewdProfile />
+         <PeopleViewProfile />
       </div>
 </template>
 
@@ -36,8 +41,7 @@ import Recommendation from '../components/singleService/Recommendation.vue';
 import Faq from '../components/singleService/Faq.vue';
 import Reviews from '../components/singleService/Reviews.vue';
 import ServiceCard from '../components/singleService/ServiceCard.vue';
-import PeopleViewdProfile from '../components/singleService/PeopleViewdProfile.vue';
-import Nav from '../components/singleService/Nav.vue';
+import PeopleViewProfile from '../components/singleService/PeopleViewProfile.vue';
 
 export default{
     name:"gigDetail",
@@ -49,8 +53,7 @@ export default{
     Faq,
     Reviews,
     ServiceCard,
-    PeopleViewdProfile,
-    Nav
+    PeopleViewProfile,
 },
     setup() {
     const route = useRoute();
@@ -69,4 +72,4 @@ export default{
 
 <style>
 
-</style>
+</style>../components/singleService/PeopleViewProfile.vue

@@ -152,8 +152,8 @@ export const  actions = {
     commit('setRegisterStatus',2);
     const toaster = createToaster()
     const res = await Api.formData('seller/services',payload);
-    if(res.status === 200){
-      toaster.success(res.message,{
+    if(res.status === 201){
+      toaster.success("Service has been Created",{
         position:"top-right",
         dismissible: true});
       commit("setCreateGig",res)

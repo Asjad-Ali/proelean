@@ -7,7 +7,6 @@ export default function useCreateService() {
   const bannersBase64 = ref([]);
   const updateGig = computed(()=>store.getters.getSingleService);
 
-
   const data = ref({
     description: '',
     category_id: '',
@@ -42,8 +41,8 @@ export default function useCreateService() {
     store.dispatch('updateService', getUpdateGig.value)
   }
 
-  // const getBanners = computed(() =>
-  // updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
+  const getBanners = computed(() =>
+  updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
 
 
   const selectThumbnail = (e) => {
@@ -51,7 +50,6 @@ export default function useCreateService() {
 
     for (let i = 0; i < files.length; i++)
       getUpdateGig.value.banner.push(files[i]);
-
 
     document.querySelector('#bannerInput').value = '';
     bannersBase64.value = [];
@@ -72,7 +70,6 @@ export default function useCreateService() {
     getUpdateGig.value.delete.push(path)
     updateGig.value.service_media.splice(index,1)
   }
-
 
 
   const removeNewImage = (index) => {
@@ -104,6 +101,7 @@ export default function useCreateService() {
     removeOldImage,
     encodeImageFileAsURL,
     updateGig,
+    getBanners,
     removeNewImage,
     bannersBase64
   }

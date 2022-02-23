@@ -17,26 +17,27 @@
       </div>
 
         <div class="tab-pane d-md-none active" id="active">
-          <div v-if="loader" class="text-center">
+          <div v-if="loader" class="text-center spinnerInden">
             <div class="spinner-border  text-primary m-2" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
         <div v-for="service in services" :key="service.id"
-        class="card d-md-none shadow-sm border-primary  p-2">
-          <div class="container">
-            <div class="text-center">
+        class="card d-md-none shadow-sm border-primary">
+          <div>
+            <div class="gig-img-outer text-center">
               <img
                 :src="
                   service.service_media.length &&
                   service.service_media[0].media
                     ? `https://api.dex.proelean.com/${service.service_media[0].media}`
                     : `/assets/images/sample-gig.png`"
-                class="img-fluid rounded-start mb-2"
+                class="img-full mb-2"
                 alt="..."
               />
             </div>
-            <div class="row ">
+            <div class="container">
+              <div class="row my-3">
                 <div class="col-12">
                   <h5 class="card-title">{{service.s_description}}</h5>
                 </div>
@@ -134,13 +135,14 @@
               </div>
             </div>
             </div>
+            </div>
           </div>
         </div>
       </div>
 
       <div  class="tab-content d-none d-md-block osahan-table container rounded px-3">
         <div class="tab-pane active" id="active">
-          <div v-if="loader" class="text-center loader vh-100">
+          <div v-if="loader" class="text-center spinnerInden vh-100">
             <div class="spinner-border text-primary m-2" role="status">
               <span class="sr-only">Loading...</span>
             </div>
@@ -205,11 +207,12 @@
                     </td>
                     <td style="text-align: center">${{ service.price }}</td>
                     <td style="text-align: center">
+                      <div class="d-flex pt-3">
                       <div>
-                        <router-link class="dropdown-item" :to="{name:'UpdateService', params:{id:service.id}}">
+                        <router-link class="dropdown-item px-2 pt-0" :to="{name:'UpdateService', params:{id:service.id}}">
                         <i
-                          class="fa fa-pencil-square-o mb-2 cursor-pointer"
-                          style="font-size: 15px"
+                          class="fa fa-pencil-square-o editIcon mb-2 cursor-pointer "
+                          
                           aria-hidden="true"
                         >
                         </i>
@@ -225,6 +228,7 @@
                           data-target="#exampleModalCenter"
                         >
                         </i>
+                      </div>
                       </div>
 
                       <div
@@ -328,6 +332,14 @@ export default {
 .spinner-border {
   width: 4rem;
   height: 4rem;
+}
+.spinnerInden{
+  margin-top: 8rem;
+  margin-bottom: 5rem;
+}
+.editIcon{
+  font-size: 17px;
+  padding-top: 1px;
 }
 .table td {
   padding: 5px;
