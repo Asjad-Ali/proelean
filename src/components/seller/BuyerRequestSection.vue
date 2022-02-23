@@ -125,7 +125,7 @@
                                 </select>
                           </div>
                           <div class="modal-footer d-flex justify-content-center">
-                              <button type="button" class="btn btn-success" data-dismiss="modal" @click.prevent="sendOffer()" >
+                              <button type="button" class="btn btn-success" :disabled="getBtnStatus == 2" data-dismiss="modal" @click.prevent="sendOffer()" >
                               {{ getBtnStatus == 2 ? "Loading..." : "Send Offer"  }} 
                                 </button>
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
