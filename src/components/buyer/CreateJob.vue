@@ -101,9 +101,10 @@
               <div class="p-3 d-flex justify-content-end">
                 <button
                   class="btn btn-success btn-lg font-weight-bold"
+                  :disabled="getBtnStatus == 2"
                   @click.prevent="jobCreation"
                 >
-                  Submit Request
+                  {{ getBtnStatus == 2 ? "Loading..." : "Submit Request"  }}
                 </button>
               </div>
             </div>
@@ -117,7 +118,7 @@
 <script>
 import useBuyer from "@/composables/useBuyer.js";
 import store from '../../store'
-import { onMounted } from '@vue/runtime-core';
+import { computed, onMounted } from '@vue/runtime-core';
 export default {
   setup() {
     const {
@@ -137,6 +138,7 @@ export default {
     };
 
     return {
+      getBtnStatus: computed(() => store.getters.getRegisterStatus),
       createJob,
       jobCreation,
       handleCredentials,

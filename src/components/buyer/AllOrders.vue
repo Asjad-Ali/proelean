@@ -46,6 +46,7 @@
         </div>
       </div>
 
+
        <div class="tab-content osahan-table rounded d-sm-none">
         <div class="tab-pane active" id="active">
           <div v-if="loader" class="d-flex justify-content-center s-margin">
