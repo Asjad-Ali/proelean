@@ -136,10 +136,19 @@
              </div>
           </li>
           <li class="nav-item dropdown no-arrow no-caret dropdown-user">
-             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="/assets/images/user/s1.png"></a>
+             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                <img
+                  :src="'https://api.dex.proelean.com/' + user.image"
+                  class="dropdown-user-img img-full"
+                  alt="profile_img"
+                /> </a>
              <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                 <h6 class="dropdown-header d-flex align-items-center">
-                   <img class="dropdown-user-img" src="/assets/images/user/s1.png">
+                   <img
+                  :src="'https://api.dex.proelean.com/' + user.image"
+                  class="dropdown-user-img img-full"
+                  alt="profile_img"
+                />
                    <div class="dropdown-user-details">
                       <div class="dropdown-user-details-name">{{ userInfo.username  }}</div>
                       <div class="dropdown-user-details-email">{{ userInfo.email  }}</div>
@@ -252,7 +261,8 @@ export default {
          handleSearch,
          keywords,
          userInfo: computed( () => store.getters.getAuthUser),
-         userNotification: computed( () => store.getters.getUserNotifications)
+         userNotification: computed( () => store.getters.getUserNotifications),
+         user: computed(() => store.getters.getAuthUser),
       }
    }
 };
