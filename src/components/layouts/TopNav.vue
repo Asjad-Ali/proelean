@@ -37,7 +37,7 @@
 
       <ul class="navbar-nav align-items-center ml-auto" v-if="$store.state.isLoggedIn">
 
-         <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2">
+         <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2 d-none d-sm-block">
             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                Buyer
             </a>
@@ -56,7 +56,7 @@
                </div>
             </li> 
 
-               <li  class="nav-item dropdown no-arrow no-caret dropdown-user mx-2"
+               <li  class="nav-item dropdown no-arrow no-caret dropdown-user mx-2 d-none d-sm-block"
                   v-if="userInfo.isFreelancer"
                >
                <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,7 +70,7 @@
                      <router-link class="dropdown-item" to="/seller/buyer_requests">Buyer Requests</router-link>
                   </div>
                </div>
-            </li> 
+              </li> 
 
           <!-- @if(isset($user) && !is_null($user)) -->
           <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
@@ -164,6 +164,22 @@
                    </div>
                    Account
                 </router-link>
+
+                  <div class="d-sm-none">
+                     <router-link class="dropdown-item" to="/buyer/jobs">Manage Job</router-link>
+                  </div>
+                  <div class="d-sm-none">
+                     <router-link class="dropdown-item" to="/buyer/manage_order">Manage Order</router-link>
+                  </div>
+                  <div v-if="userInfo.isFreelancer">
+                    <div class="d-sm-none">
+                       <router-link class="dropdown-item" to="/seller/manage_service">Manage services </router-link>
+                    </div>
+                    <div class="d-sm-none">
+                       <router-link class="dropdown-item" to="/seller/buyer_requests">Buyer Requests</router-link>
+                    </div>
+                  </div>
+              
                 <button class="dropdown-item" @click="handleLogout">
                    <div class="dropdown-item-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
