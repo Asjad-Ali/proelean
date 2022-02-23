@@ -18,7 +18,7 @@
                       <div class="d-flex justify-content-start mb-3">
                       <img
                         class="img-fluid bg-info rounded-circle mr-2"
-                        style="width: 45px; height: 45px"
+                        style="width: 45px; height: 45px; object-fit:cover;"
                         :src="'https://api.dex.proelean.com/' + request.user.image"
                         alt=""
                       />

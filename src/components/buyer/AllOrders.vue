@@ -64,7 +64,7 @@
               <span>
                 <img
                    class="img-fluid bg-info rounded-circle mr-2"
-                   style="width: 35px; height: 35px"
+                   style="width: 35px; height: 35px; object-fit:cover;"
                    :src="'https://api.dex.proelean.com/' + order.image"
                    alt="user-image"
                   />
@@ -122,9 +122,9 @@
                               <div>
                                 <img
                                   class="img-fluid bg-info rounded-circle mb-1"
-                                  style="width: 35px; height: 35px"
+                                  style="width: 35px; height: 35px; object-fit:cover;"
                                   :src="'https://api.dex.proelean.com/' + order.image"
-                                  alt="user-image"
+                                  alt="img"
                                 />
                               </div>
                               <div>
