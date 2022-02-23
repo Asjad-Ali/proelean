@@ -4,14 +4,15 @@
       <li class="page-item">
         <a class="page-link" @click.prevent="prev()" href="#"> Previous</a>
       </li>
+       <li class="page-item">
+        <a class="page-link" @click.prevent="next()" href="#" :style="{'pointer-events': hasNextPage==='' ? 'none' : ''}"> Next</a>
+      </li>
       <!-- <li class="page-item"><a class="page-link" @click.prevent="empty()" href="#">1</a></li>
       <li class="page-item"><a class="page-link" @click.prevent="next()" href="#">2</a></li>
       <li class="page-item"><a class="page-link" @click.prevent="next()" href="#">3</a></li>
       <li class="page-item"><a class="page-link" @click.prevent="next()" href="#">4</a></li>
       <li class="page-item"><a class="page-link" @click.prevent="next()" href="#">5</a></li> -->
-      <li class="page-item">
-        <a class="page-link" @click.prevent="next()" href="#" :style="{'pointer-events': hasNextPage==='' ? 'none' : ''}"> Next</a>
-      </li>
+     
     </ul>
   </nav>
 </template>
