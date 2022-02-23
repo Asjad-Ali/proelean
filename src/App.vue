@@ -21,8 +21,10 @@ export default {
   },
   setup() {
     return {
-      isAuthenticated: localStorage.getItem("PROELEAN_TOKEN")
+      isAuthenticated: localStorage.getItem("PROELEAN_TOKEN"),
+      
     }
+    
   }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
     <div class="slider mt-4" v-if="serviceMedia">
+        {{"appUrl "+appUrl}}
         <div class="gallery-container">
         <div id="aniimated-thumbnials" class="slider-for slick-slider-single">
         <a href="images/list/v1.png">
