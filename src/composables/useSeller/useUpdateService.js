@@ -19,6 +19,7 @@ export default function useCreateService() {
     s_description: "",
     description: "",
     banner: [],
+    delete: [],
     category_id: "",
     sub_category_id: "",
     delivery_time: '',
@@ -35,12 +36,14 @@ export default function useCreateService() {
     getUpdateGig.value.description = updateGig.value.description
     getUpdateGig.value.price = updateGig.value.price
     getUpdateGig.value.id = updateGig.value.id
+    getUpdateGig.value._method= 'PUT'
+    
     console.log(getUpdateGig.value)
     store.dispatch('updateService', getUpdateGig.value)
   }
 
-  const getBanners = computed(() =>
-  updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
+  // const getBanners = computed(() =>
+  // updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
 
 
   const selectThumbnail = (e) => {
@@ -63,18 +66,29 @@ export default function useCreateService() {
       bannersBase64.value.push(reader.result);
     }
     reader.readAsDataURL(file);
-
-    // console.log("All Image",getBanners)
   }
 
-  const removeImage = index => {
-    console.log("Index",index)
-    // bannersBase64.value.splice(index, 1);
+  const removeOldImage = (index, path) => {
+    getUpdateGig.value.delete.push(path)
     updateGig.value.service_media.splice(index,1)
-    // getUpdateGig.value.banner.splice(index, 1);
-    // getBanners.value.splice(index, 1)
-    console.log("All picture",getBanners)
   }
+
+
+
+  const removeNewImage = (index) => {
+    console.log(index)
+    bannersBase64.value.splice(index, 1);
+    getUpdateGig.value.banner.splice(index, 1);
+  }
+
+  // const removeImage = index => {
+  //   console.log("Index",index)
+  //   // bannersBase64.value.splice(index, 1);
+  //   updateGig.value.service_media.splice(index,1)
+  //   // getUpdateGig.value.banner.splice(index, 1);
+  //   // getBanners.value.splice(index, 1)
+  //   console.log("All picture",getBanners)
+  // }
 
   const getCategory = () => {
     data.value.category_id = document.getElementById("category").value;
@@ -87,10 +101,10 @@ export default function useCreateService() {
     getCategory,
     updateService,
     selectThumbnail,
-    removeImage,
+    removeOldImage,
     encodeImageFileAsURL,
     updateGig,
-    getBanners,
+    removeNewImage,
     bannersBase64
   }
 }
