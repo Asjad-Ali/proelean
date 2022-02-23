@@ -1,6 +1,6 @@
 <template>
     <div
-      class="col-md-4 mb-3"
+      class="col-md-4 mb-3 service-list-section"
       v-for="service in $store.getters.getUserServices"
       :key="service.id"
     >
@@ -70,3 +70,10 @@
 <script>
 
 </script>
+
+<style scoped>
+.service-list-section{
+  padding-right: 5px !important;
+  padding-left: 10px !important;
+}
+</style>
