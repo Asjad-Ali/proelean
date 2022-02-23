@@ -34,9 +34,10 @@ export const  mutations = {
   }
 
 export const  actions = {
-    
+  
       async createAJob({commit},payload){
         const toaster = createToaster()
+        commit('setRegisterStatus',2);
         const res = await Api.post('buyer/jobs',payload);
         if(res.status === 201){
           console.log("Create Job Response",res.data)
@@ -44,11 +45,13 @@ export const  actions = {
             position:"top-right",
             dismissible: true});
           commit("setCreateJob",res)
+          commit('setRegisterStatus',3);
         }
         else{
           toaster.error(res.message,{
             position:"top-right",
             dismissible: true});
+            commit('setRegisterStatus',4);
         }
       },
 
