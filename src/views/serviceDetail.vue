@@ -28,7 +28,7 @@
 import { computed } from '@vue/runtime-core';
 import { onMounted } from '@vue/runtime-core';
 import { useRoute } from 'vue-router';
-import store from '../store';
+import { useStore } from 'vuex';
 import Gallery from '../components/singleService/Gallery.vue';
 import AboutService from '../components/singleService/AboutService.vue';
 import AboutSeller from '../components/singleService/AboutSeller.vue';
@@ -53,6 +53,7 @@ export default{
     Nav
 },
     setup() {
+    const store = useStore()
     const route = useRoute();
     const payload = {
        "id": route.params.id,

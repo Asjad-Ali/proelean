@@ -18,10 +18,11 @@
 
 <script>
 import { computed } from "vue";
-import store from "../../store";
+import { useStore } from 'vuex';
 
 export default {
   setup() {
+    const store = useStore()
     function next(){
       store.dispatch("userServices","next");
     }

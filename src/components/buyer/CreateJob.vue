@@ -117,10 +117,11 @@
 
 <script>
 import useBuyer from "@/composables/useBuyer.js";
-import store from '../../store'
+import { useStore } from 'vuex';
 import { computed, onMounted } from '@vue/runtime-core';
 export default {
   setup() {
+    const store = useStore()
     const {
       data,
       createJob,

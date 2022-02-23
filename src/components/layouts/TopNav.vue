@@ -220,10 +220,11 @@
 import Api from "@/services/API";
 import { useRouter } from "vue-router";
 import { computed, onMounted, ref } from "@vue/runtime-core";
-import store from "../../store";
+import { useStore } from 'vuex';
 
 export default {
    setup(){
+      const store = useStore()
       const router = useRouter();
       const keywords = ref(null);
       const handleLogout = async() => {

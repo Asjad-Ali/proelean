@@ -292,9 +292,11 @@
 
 <script>
 import { computed, onMounted, ref } from "@vue/runtime-core";
-import store from "../../store";
+import { useStore } from 'vuex';
+
 export default {
   setup() {
+    const store = useStore()
     const serviceId = ref("");
     const getServiceId = (id) => {
       serviceId.value = id;

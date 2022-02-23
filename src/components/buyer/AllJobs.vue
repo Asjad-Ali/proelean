@@ -223,9 +223,11 @@
 
 <script>
 import { onMounted, computed, ref } from "@vue/runtime-core";
-import store from "../../store";
+import { useStore } from 'vuex';
+
 export default {
   setup() {
+    const store = useStore()
     onMounted(store.dispatch("showAllJobs"));
 
     const jobId = ref("");
