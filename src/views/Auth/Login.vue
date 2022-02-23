@@ -106,7 +106,7 @@
                 </div>
               </div>
               <div class="py-3 d-flex align-item-center">
-                <router-link to="/forgot">Forgot Password</router-link>
+                <router-link to="/">Forgot Password</router-link>
                 <span class="ml-auto">
                   New to Proelean?
                   <router-link to="/register">Join now</router-link></span

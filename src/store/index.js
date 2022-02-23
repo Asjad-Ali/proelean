@@ -13,6 +13,7 @@ let user = JSON.parse(localStorage.getItem('userInfo'));
 
 export default createStore({
   state: {
+
     isLoggedIn: localStorage.getItem('PROELEAN_TOKEN') ? true : false,
     isSeller: user && user.isFreelancer ? true : false,  
     userNotifications:{},
@@ -24,6 +25,7 @@ export default createStore({
     setNotification(state,notification) {
       state.userNotifications=notification;
     },
+
   },
   actions: {
     async getNotification({commit}){
@@ -35,6 +37,7 @@ export default createStore({
         commit("setNotification",res.message)
       }
     },
+
   },
   modules: {
     auth,
