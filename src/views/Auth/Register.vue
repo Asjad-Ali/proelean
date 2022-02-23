@@ -20,6 +20,7 @@
                         type="text"
                         :class="[{ 'border-danger ': signupErrors.name },{'border-success': !signupErrors.name}]"
                         class="form-control userForm"
+                        placeholder="Enter name"
                         v-model="signup.name"
                       />
                     </div>
@@ -36,6 +37,7 @@
                         type="text"
                         :class="[{ 'border-danger ': signupErrors.username },{'border-success': !signupErrors.username}]"
                         class="form-control userForm"
+                        placeholder="Enter username"
                         v-model="signup.username"
                       />
                     </div>
@@ -53,6 +55,7 @@
                     type="email"
                     :class="[{ 'border-danger ': signupErrors.email },{'border-success': !signupErrors.email}]"
                     class="form-control userForm"
+                    placeholder="Enter email"
                     v-model="signup.email"
                   />
                 </div>
@@ -68,6 +71,7 @@
                     type="password"
                     class="form-control userForm position-relative"
                     :class="[{ 'border-danger ': signupErrors.password },{'border-success': !signupErrors.password}]"
+                    placeholder="Enter password"
                     v-model="signup.password"
                   />
                   <i class="mdi mdi-key-variant position-absolute" style="left:0"></i>
@@ -88,6 +92,7 @@
                     type="password"
                     :class="[{ 'border-danger ': signupErrors.password_confirmation },{'border-success': !signupErrors.password_confirmation}]"
                     class="form-control userForm position-relative"
+                    placeholder="Confirm password"
                     v-model="signup.password_confirmation"
                   />
                   <i class="mdi mdi-key-variant position-absolute" style="left:0"></i>
