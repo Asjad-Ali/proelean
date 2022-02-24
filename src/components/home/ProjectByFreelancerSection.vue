@@ -23,13 +23,14 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
 
 export default {
    setup()
    {
-
+      // const imgURL = 
       return {
-         getImgUrl : (banner => "https://api.dex.proelean.com/"+banner)
+         getImgUrl :computed(( banner => "{process.env.VUE_APP_URL}"+banner))
       }
    }
 }

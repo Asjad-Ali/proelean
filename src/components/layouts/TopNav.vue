@@ -138,14 +138,14 @@
           <li class="nav-item dropdown no-arrow no-caret dropdown-user">
              <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                 <img
-                  :src="'https://api.dex.proelean.com/' + user.image"
+                  :src="`${imgURL}/${user.image}`"
                   class="dropdown-user-img img-full"
                   alt="profile_img"
                 /> </a>
              <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                 <h6 class="dropdown-header d-flex align-items-center">
                    <img
-                  :src="'https://api.dex.proelean.com/' + user.image"
+                  :src="`${imgURL}/${user.image}`"
                   class="dropdown-user-img img-full"
                   alt="profile_img"
                 />
@@ -291,6 +291,7 @@ export default {
          userInfo: computed( () => store.getters.getAuthUser),
          userNotification: computed( () => store.getters.getUserNotifications),
          user: computed(() => store.getters.getAuthUser),
+         imgURL: process.env.VUE_APP_URL,
       }
    }
 };

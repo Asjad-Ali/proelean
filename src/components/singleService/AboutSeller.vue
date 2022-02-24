@@ -3,7 +3,7 @@
       <div class="user-profile-image d-flex">
          <label class="profile-pict" for="profile_image">
          <img
-            :src="'https://api.dex.proelean.com/' + service.service_user.image"
+            :src="`${imgURL}/${service.service_user.image}`"
             class="profile-pict-img img-fluid" alt="">
          </label>
          <div class="right">
@@ -62,6 +62,11 @@ export default {
       service: {
          type: Object,
          required: true
+      }
+   },
+   setup(){
+      return {
+        imgURL: process.env.VUE_APP_URL
       }
    }
 }

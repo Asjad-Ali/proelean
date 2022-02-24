@@ -85,7 +85,7 @@
                             margin-left:20px;
                             background-size:cover;
                           "
-                          :style="`background-image: url(${banner.media ? 'https://api.dex.proelean.com/'+ banner.media : banner });`"
+                          :style="`background-image: url(${banner.media ? `${imgURL}/${banner.media}` : banner });`"
                         >
                           <i v-show="getBanners.length > 1" @click="removeOldImage(index, banner.media)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                         </div>
@@ -247,6 +247,7 @@ export default {
 
     return {
       registerStatus: computed(() => store.getters.getRegisterStatus),
+      imgURL: process.env.VUE_APP_URL,
       updateGig,
       getCategory,
       data,
