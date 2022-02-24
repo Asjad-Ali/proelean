@@ -65,7 +65,7 @@
                 <img
                    class="img-fluid bg-info rounded-circle mr-2"
                    style="width: 35px; height: 35px; object-fit:cover;"
-                   :src="'https://api.dex.proelean.com/' + order.image"
+                   :src="`${imgURL}/${order.image}`"
                    alt="user-image"
                   />
                 <span> {{ order.username }} </span>
@@ -123,7 +123,7 @@
                                 <img
                                   class="img-fluid bg-info rounded-circle mb-1"
                                   style="width: 35px; height: 35px; object-fit:cover;"
-                                  :src="'https://api.dex.proelean.com/' + order.image"
+                                  :src="`${imgURL}/${order.image}`"
                                   alt="img"
                                 />
                               </div>
@@ -183,6 +183,7 @@ export default {
     }
 
     return {
+      imgURL: process.env.VUE_APP_URL,
       orders: computed(() => store.getters.getAllOrders),
       loader: computed(() => store.getters.getLoaderVal),
       showFilter,

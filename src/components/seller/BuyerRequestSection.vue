@@ -19,7 +19,7 @@
                       <img
                         class="img-fluid bg-info rounded-circle mr-2"
                         style="width: 45px; height: 45px; object-fit:cover;"
-                        :src="'https://api.dex.proelean.com/' + request.user.image"
+                        :src="`${imgURL}/${request.user.image}`"
                         alt=""
                       />
                         
@@ -213,6 +213,7 @@ export default {
       requests: computed(() => store.getters.getBuyerRequests),
       loader: computed(() => store.getters.getLoaderVal),
       getBtnStatus: computed(() => store.getters.getRegisterStatus),
+      imgURL: process.env.VUE_APP_URL,
       payload,
       defineOffer,
       sendOffer,
