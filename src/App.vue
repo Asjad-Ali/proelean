@@ -4,6 +4,8 @@
     <BottomNav v-if="isAuthenticated" />
     <router-view/>
     <Footer />
+    <MobileBottomNav />
+
   </div>
 </template>
 
@@ -12,12 +14,14 @@
 import TopNav from './components/layouts/TopNav.vue';
 import BottomNav from './components/layouts/BottomNav.vue';
 import Footer from './components/layouts/Footer.vue';
+import MobileBottomNav from './components/layouts/MobileBottomNav.vue';
 export default {
   name: "App",
   components:{
     TopNav,
     BottomNav,
-    Footer
+    Footer,
+    MobileBottomNav
   },
   setup() {
     
