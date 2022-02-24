@@ -20,11 +20,12 @@ export default {
     Footer
   },
   setup() {
+    
     return {
       isAuthenticated: localStorage.getItem("PROELEAN_TOKEN"),
-      
     }
-    
+
+
   }
 }
 </script>
