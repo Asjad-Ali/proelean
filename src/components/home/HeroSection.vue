@@ -51,8 +51,22 @@ export default {
    setup(){
       const keywords=ref('');
       const handleSearch=()=>{
+         keywords.value = slugify(keywords.value)
          router.push('gigs?q='+keywords.value)
       }
+      // /* Encode string to slug */
+      /* eslint-disable */
+      function slugify(text) {
+         return text
+            .toString()                           // Cast to string (optional)
+            .normalize('NFKD')            // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
+            .toLowerCase()                  // Convert the string to lowercase letters
+            .trim()                                  // Remove whitespace from both sides of a string (optional)
+            .replace(/\s+/g, '-')            // Replace spaces with -
+            .replace(/[^\w\-]+/g, '')     // Remove all non-word chars
+            .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+      }
+
       return {
          keywords,
          handleSearch,

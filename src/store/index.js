@@ -17,15 +17,19 @@ export default createStore({
     isLoggedIn: localStorage.getItem('PROELEAN_TOKEN') ? true : false,
     isSeller: user && user.isFreelancer ? true : false,  
     userNotifications:{},
+    usermode:'BUYER'
   },
   getters: {
     getUserNotifications : state => state.userNotifications,
+    isBuyerMode : state => state.usermode == 'BUYER' ? true : false
   },
   mutations: {
     setNotification(state,notification) {
       state.userNotifications=notification;
     },
-
+    toggleUserMode(state){
+      state.usermode = state.usermode =='BUYER' ? "SELLER" : "BUYER"
+    }
   },
   actions: {
     async getNotification({commit}){
