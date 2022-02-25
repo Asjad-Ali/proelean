@@ -1,6 +1,6 @@
 <template>
     <div
-      class="col-md-4 mb-3"
+      class="col-md-4 mb-3 service-list-section"
       v-for="service in $store.getters.getUserServices"
       :key="service.id"
     >
@@ -8,7 +8,7 @@
     <router-link :to="{name:'gigDetail', params:{id:service.id}}" >
         <img
           class="img-full"
-          :src="(service.service_media.length && service.service_media[0].media) ? `https://api.dex.proelean.com/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />
+          :src="(service.service_media.length && service.service_media[0].media) ? `${imgURL}/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />
     </router-link>
     </div>
       <div class="inner-slider">
@@ -17,10 +17,8 @@
             <span class="seller-image">
               <img
                 class="img-fluid"
-                :src="
-                  'https://api.dex.proelean.com/' + service.service_user.image
-                "
-                alt=""
+                :src="`${imgURL}/${service.service_user.image}`"
+                alt="img"
               />
             </span>
             <span class="seller-name">
@@ -68,5 +66,18 @@
 </template>
 
 <script>
-
+export default {
+  setup() {
+    return {
+      imgURL: process.env.VUE_APP_URL,
+    };
+  },
+};
 </script>
+
+<style scoped>
+.service-list-section{
+  padding-right: 5px !important;
+  padding-left: 10px !important;
+}
+</style>

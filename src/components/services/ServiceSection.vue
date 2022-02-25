@@ -1,5 +1,6 @@
 <template>
   <div class="card h-100">
+    <!-- {{imgURL}} -->
     <a href="#">
       <img class="img-fluid" :src="'https://api.dex.proelean.com/'+service.service_media[0].media"  />
     </a>
@@ -9,8 +10,9 @@
           <span class="seller-image">
             <img
               class="img-fluid"
-              :src="'https://api.dex.proelean.com/'+service.service_user.image" 
-              alt=""
+              
+              :src="'https://api.dex.proelean.com/'+service.service_user.image"
+              alt="img"
             />
           </span>
           <span class="seller-name">
@@ -60,18 +62,18 @@
 </template>
 
 <script>
-import useMedia from "@/composables/useMedia";
+// import { onMounted } from '@vue/runtime-core';
+
 export default {
   props: {
     service: {
       type: Object,
       required: true,
     },
-    async setup() {
-      const { getMediaUrl } = useMedia();
-
+     setup() {
+      //onMounted(console.log(process.env));
       return {
-        getMediaUrl,
+        imgURL: process.env.VUE_APP_URL
       };
     },
   },

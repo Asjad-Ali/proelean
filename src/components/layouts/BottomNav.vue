@@ -8,7 +8,7 @@
           <ul class="navbar-nav">
             
              <li class="nav-item" v-for="category in $store.getters.getCategories" :key="category.id">
-                <router-link @click="$store.commit('setCategorySlug',category.id)" class="nav-link" :to="'/gigs?category='+category.id">{{ category.title }}</router-link>
+                <router-link  class="nav-link" :to="'/gigs?category='+category.slug">{{ category.title }}</router-link>
              </li>       
           </ul>
        </div>

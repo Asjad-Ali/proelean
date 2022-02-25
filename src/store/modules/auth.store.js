@@ -43,7 +43,7 @@ export const  actions = {
 
             ///////     date conversion
             const monthNames = ["January", "February", "March", "April", "May", "June",
-                          "July", "August", "September", "October", "November", "December"];
+            "July", "August", "September", "October", "November", "December"];
             const dateObj = new Date(resp.data.created_at);
             const month = monthNames[dateObj.getMonth()];
             const day = String(dateObj.getDate()).padStart(2, '0');
@@ -90,10 +90,45 @@ export const  actions = {
         return resp;
       },
 
-      async forgot({commit},email){
-        console.log(email)
-        commit('setForgotPasswordSection',true)
-
+      async forgotPassword({commit},payload){
+        console.log("Email",payload)
+        commit('setRegisterStatus',2);
+        const toaster = createToaster()
+        const resp = await Api.post('forgot_password',payload)
+        if(resp.status==200){
+          toaster.success(resp.message,{
+            position:"top-right",
+            dismissible: true});
+          commit('setRegisterStatus',3);
+          commit('setForgotPasswordSection',true)
+        }
+        else
+        {
+          commit('setRegisterStatus',4);
+          toaster.error(resp.message,{
+            position:"top-right",
+            dismissible: true});
+        }
+      },
+      async changePassword({commit},payload){
+        console.log("Email",payload)
+        commit('setRegisterStatus',2);
+        const toaster = createToaster()
+        const resp = await Api.post('change_password',payload)
+        if(resp.status==200){
+          toaster.success(resp.message,{
+            position:"top-right",
+            dismissible: true});
+          commit('setRegisterStatus',3);
+          router.push('login');
+        }
+        else
+        {
+          commit('setRegisterStatus',4);
+          toaster.error(resp.message,{
+            position:"top-right",
+            dismissible: true});
+        }
       }
   }
 

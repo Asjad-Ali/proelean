@@ -13,7 +13,7 @@
             <div class="user-profile-image">
               <label class="user-pict">
                 <img
-                  :src="'https://api.dex.proelean.com/' + user.image"
+                  :src="`${imgURL}/${user.image}`"
                   class="img-full"
                   alt="profile_img"
                 />
@@ -153,6 +153,7 @@ export default {
     const store = useStore()
     return {
       user: computed(() => store.getters.getAuthUser),
+      imgURL: process.env.VUE_APP_URL,
     };
   },
 };

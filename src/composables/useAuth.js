@@ -36,6 +36,7 @@ export default function useAuth() {
       }
    });
 
+   
    const passwordRef = ref(null)
    const eyeIcon = ref('mdi-eye');
    const toggleVisibility = () => {
@@ -74,7 +75,7 @@ export default function useAuth() {
 
    const usernameRegex = /^[a-zA-Z_.]{3,30}$/;
    const nameRegex = /^[a-zA-Z ]{3,20}$/;
-   const tokenRegex = /^[0-9 ]{6}$/;
+   // const tokenRegex = /^[0-9]{6}$/;
 
    watch(signup.value,(current /*old*/) => {
       if(!current.name){
@@ -153,7 +154,7 @@ export default function useAuth() {
       confirmation_password:null
    })
 
-   watch(forgot.value,(current)  => {
+   watch(forgot.value, (current)  => {
       if (!current.email) {
          forgotErrors.value.email = "Email is required";
       } else if (!current.email.match(emailRegex)) {
@@ -164,9 +165,12 @@ export default function useAuth() {
 
       if (!current.token) {
          forgotErrors.value.token = "Token is required";
-      } else if (!current.token.match(tokenRegex)) {
-         forgotErrors.value.token = "Token is not valid";
-      } else {
+      } 
+      // else if (!current.token.length.match(tokenRegex)) {
+      //    console.log(current.token)
+      //    forgotErrors.value.token = "Token is not valid";
+      // } 
+      else {
          forgotErrors.value.token = null;
       }
 
@@ -178,12 +182,12 @@ export default function useAuth() {
          forgotErrors.value.password = null;
       }
 
-      if (!current.password_confirmation) {
-         forgotErrors.value.password_confirmation = "Confirm Password is required";
-      } else if (current.password_confirmation != current.password ) {
-         forgotErrors.value.password_confirmation = "Confirm Password dosn't match";
+      if (!current.confirmation_password) {
+         forgotErrors.value.confirmation_password = "Confirm Password is required";
+      } else if (current.confirmation_password != current.password ) {
+         forgotErrors.value.confirmation_password = "Confirm Password dosn't match";
       } else {
-         forgotErrors.value.password_confirmation = null;
+         forgotErrors.value.confirmation_password = null;
       }
    })
 

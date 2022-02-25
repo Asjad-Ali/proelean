@@ -4,7 +4,6 @@ export const state = {
     services: [],
     servicesStatus: null,
     error: null,
-    categorySlug : null,
     page: 1,
     url: '',
     loadingStatus: ''
@@ -12,7 +11,6 @@ export const state = {
 
 export const getters = {
   getServices : state => state.services,
-  getCategorySlug : state => state.categorySlug,
   getLoadingStatus: state => state.loadingStatus,
   getCurrentPage: state => state.page,
 }
@@ -24,9 +22,6 @@ export const  mutations = {
     },
     setError(state,error) {
       state.error=error;
-    },
-    setCategorySlug(state,slug) {
-      state.categorySlug=slug;
     },
     setNextPage(state,page) {
       state.page = page;
@@ -62,7 +57,7 @@ export const  actions = {
     async searchServicesByCategoryId({commit},categoryID)
     {
       console.log("in action id",categoryID)
-      const res= await Api.get(`categories/${categoryID}/services?category=${categoryID}`);
+      const res= await Api.get(`categories/${categoryID}/services`);
       if(res.status ===200){
         commit("setServices",res.data);
         commit("setServicesStatus",true);

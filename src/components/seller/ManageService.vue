@@ -30,7 +30,7 @@
                 :src="
                   service.service_media.length &&
                   service.service_media[0].media
-                    ? `https://api.dex.proelean.com/${service.service_media[0].media}`
+                    ? `${imgURL}/${service.service_media[0].media}`
                     : `/assets/images/sample-gig.png`"
                 class="img-full mb-2"
                 alt="..."
@@ -171,7 +171,7 @@
                         :src="
                           service.service_media.length &&
                           service.service_media[0].media
-                            ? `https://api.dex.proelean.com/${service.service_media[0].media}`
+                            ? `${imgURL}/${service.service_media[0].media}`
                             : `/assets/images/sample-gig.png`"
                       />
                     </td>
@@ -319,6 +319,7 @@ export default {
       jobs: computed(() => store.getters.getAllJobs),
       loader: computed(() => store.getters.getSellerLoader),
       services: computed(() => store.getters.getUserServices),
+      imgURL: process.env.VUE_APP_URL,
       deleteService,
       getServiceId,
       serviceId,

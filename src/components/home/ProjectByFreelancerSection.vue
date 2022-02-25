@@ -27,7 +27,7 @@
 export default {
    setup()
    {
-
+      // const imgURL = process.env.VUE_APP_URL
       return {
          getImgUrl : (banner => "https://api.dex.proelean.com/"+banner)
       }

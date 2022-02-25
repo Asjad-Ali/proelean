@@ -14,9 +14,8 @@
               </p>
             </div>
             <form id="login">
-              <div class="form-group mb-3">
+              <div>
                 <label class="mb-1">Email</label>
-
                 <div class="position-relative icon-form-control">
                   <input
                     type="email"
@@ -37,21 +36,18 @@
                 </div>
               </div>
 
-
               <div v-show="passwordSectionVisibility">
-                <div class="form-group">
+                <div>
                 <label class="mb-1">Token</label>
                 <div class="position-relative icon-form-control">
                   <input
-                    ref="tokenRef"
                     type="number"
                     class="form-control userForm position-relative"
-                    :class="[{ 'border-danger ': forgotErrors.token },{'border-success': !forgotErrors.password}]"
+                    :class="[{ 'border-danger ': forgotErrors.token },{'border-success': !forgotErrors.token}]"
                     v-model="forgot.token"
                   />
                   <i class="mdi mdi-onepassword position-absolute" style="left:0"></i>
                 </div>
-                
                   <div class="text-danger mt-1" v-show="forgotErrors.token">
                      {{ forgotErrors.token }}
                   </div>
@@ -79,12 +75,11 @@
               <div>
                 <label class="mb-1">Confirm Password</label>
                 <div class="position-relative icon-form-control">
-                  <i class="mdi mdi-key-variant position-absolute"></i>
                   <input
                     ref="passwordConRef"
                     type="password"
-                    :class="[{ 'border-danger ': forgotErrors.confirmation_password },{'border-success': !forgotErrors.confirmation_password}]"
                     class="form-control userForm position-relative"
+                    :class="[{ 'border-danger ': forgotErrors.confirmation_password },{'border-success': !forgotErrors.confirmation_password}]"
                     v-model="forgot.confirmation_password"
                   />
                   <i class="mdi mdi-lock position-absolute" style="left:0"></i>
@@ -98,36 +93,23 @@
 
               </div>
 
-              <div class="custom-control custom-checkbox mb-3">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  name="remember"
-                  id="customCheck1"
-                />
-                <label class="custom-control-label" for="customCheck1"
-                  >Remember password</label
-                >
-              </div>
-
               <!-- errors bag -->
               <button
               v-if="!passwordSectionVisibility"
                 type="button"
-                class="btn btn-success btn-block text-uppercase"
-                id="loginBtn"
+                class="btn btn-success btn-block text-uppercase mt-2"
                 :disabled="forgotErrors.email || registerStatus == 2 || forgot.email === ''"
-                @click.prevent="forgotPassword(forgot.email)"
+                @click.prevent="forgotPassword()"
                 >                
                 {{registerStatus == 2 ? ' Loading...' : ' forgot'}}
               </button>
+
               <button
                 v-else
                 type="button"
-                class="btn btn-success btn-block text-uppercase"
-                id="loginBtn"
+                class="btn btn-success btn-block text-uppercase mt-2"
                 :disabled="forgotErrors.email || registerStatus == 2 || forgot.email === ''"
-                @click.prevent="forgotPassword(forgot.email)"
+                @click.prevent="changePassword()"
                 >                
                 {{registerStatus == 2 ? ' Loading...' : ' Set Password'}}
               </button>
@@ -175,7 +157,7 @@ import { computed } from "vue";
 import { useStore } from 'vuex';
 
 export default {
-  name: "Login",
+  name: "Forgot",
   setup() {
     const store = useStore()
     const {
@@ -183,29 +165,30 @@ export default {
       eyeIcon,
       eyeIcon2,
       passwordRef,
-      loginErrors,
+      passwordConRef,
       forgotErrors,
       toggleVisSignupConPass,
       forgot,
-      login,
-      loginLoading,
     } = useAuth();
 
 
-    const forgotPassword = async (email) => {
-      store.dispatch('forgot',email)
+    function forgotPassword() {
+      store.dispatch('forgotPassword',forgot.value)
+   }
+    function changePassword() {
+      console.log(forgot.value)
+      store.dispatch('changePassword',forgot.value)
    }
 
 
     return {
       registerStatus: computed(() => store.getters.getRegisterStatus),
       passwordSectionVisibility: computed(() => store.getters.getPasswordSection),
-      login,
       forgotPassword,
-      loginLoading,
-      loginErrors,
+      changePassword,
       toggleVisSignupConPass,
       passwordRef,
+      passwordConRef,
       forgotErrors,
       forgot,
       eyeIcon,
@@ -219,5 +202,9 @@ export default {
 <style scoped>
 .cursor-pointer {
   cursor: pointer;
+}
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>
