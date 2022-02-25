@@ -1,69 +1,68 @@
 import Api from '@/services/API';
 
 export const state = {
-    services: [],
-    servicesStatus: null,
-    error: null,
-    page: 1,
-    url: '',
-    loadingStatus: ''
-  }
+  services: [],
+  servicesStatus: null,
+  error: null,
+  page: 1,
+  url: '',
+  loadingStatus: ''
+}
 
 export const getters = {
-  getServices : state => state.services,
+  getServices: state => state.services,
   getLoadingStatus: state => state.loadingStatus,
   getCurrentPage: state => state.page,
 }
 
-export const  mutations = {
+export const mutations = {
 
-    setServices(state,services){
-      state.services=services;
-    },
-    setError(state,error) {
-      state.error=error;
-    },
-    setNextPage(state,page) {
-      state.page = page;
-    },
-    setLoadingStatus(state,status) {
-      state.loadingStatus=status;
-    },
-    setInitialUrl(state,url) {
-      state.url = url;
-    },
-    
+  setServices(state, services) {
+    state.services = services;
+  },
+  setError(state, error) {
+    state.error = error;
+  },
+  setNextPage(state, page) {
+    state.page = page;
+  },
+  setLoadingStatus(state, status) {
+    state.loadingStatus = status;
+  },
+  setInitialUrl(state, url) {
+    state.url = url;
+  },
+
 }
 
-export const  actions = {
+export const actions = {
 
-    async searchServices({ commit, state },search) {
-      commit('setLoadingStatus','LOADING');
-      const res= await Api.get(search);
-      console.log(res.data); 
-      if(res.status===200) {
-        commit("setServices",res.data);
+  async searchServices({ commit, state }, search) {
+    state.services = [];
+    commit('setLoadingStatus', 'LOADING');
+    const res = await Api.get(search);
+    if (res.status === 200) {
+      commit("setServices", res.data);
 
-        if(res.links && res.links.next) {
-          commit('setNextPage',state.page+1);
-          commit('setInitialUrl',search);
-        } else {
-          commit('setNextPage',1);
-        }
-        commit('setLoadingStatus','COMPLETED');
-      }
-    },
-
-    async searchServicesByCategoryId({commit},categoryID)
-    {
-      console.log("in action id",categoryID)
-      const res= await Api.get(`categories/${categoryID}/services`);
-      if(res.status ===200){
-        commit("setServices",res.data);
-        commit("setServicesStatus",true);
-        console.log("services",res);
+      if (res.links && res.links.next) {
+        commit('setNextPage', state.page + 1);
+        commit('setInitialUrl', search);
       } else {
-        commit("setServicesStatus",false);
+        commit('setNextPage', 1);
       }
-    },
+      commit('setLoadingStatus', 'COMPLETED');
+    }
+  },
+
+  async searchServicesByCategoryId({ commit }, categoryID) {
+    console.log("in action id", categoryID)
+    const res = await Api.get(`categories/${categoryID}/services`);
+    if (res.status === 200) {
+      commit("setServices", res.data);
+      commit("setServicesStatus", true);
+      console.log("services", res);
+    } else {
+      commit("setServicesStatus", false);
+    }
+  },
 }
