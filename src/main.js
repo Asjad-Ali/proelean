@@ -50,10 +50,6 @@ getToken(messaging, { vapidKey: vapidKey }).then((currentToken) => {
     console.log('Message received. ', payload);
   });
 
-
-
-//createApp(App).use(Toaster,{timeout: 4000}).use(store).use(router).mount('#app')
-
 app.config.globalProperties.$filters = {
     timeAgo(date) {
         return moment(date).fromNow()
