@@ -23,7 +23,7 @@
                     class="form-control border-10 shadow-none position-relative"
                     name="email"
                     v-model="forgot.email"
-                    :readonly="passwordSectionVisibility"
+                    once:readonly="passwordSectionVisibility"
                     required
                   />
                   <i
@@ -143,8 +143,6 @@
               </div>
             </form>
           </div>
-
-        
         </div>
       </div>
     </div>

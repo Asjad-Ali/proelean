@@ -14,19 +14,18 @@ export default function useBecomeSeller() {
 
     const data = ref({
         freelancer_title: '',
-        lang: 'language',
+        lang: '',
         availability: '',
-        portfolio: '',
         description: '',
         cinic: '',
         category_id: '',
         sub_category_id: '',
         country_id: '',
+        portfolio:'',
         instagram: '',
         facebook: '',
         twitter: ''
     });
-    console.log(data.value.lang);
 
     const dataErrors = ref({
         freelancer_title: null,
@@ -34,48 +33,78 @@ export default function useBecomeSeller() {
         availability: null,
         cinic:null,
         country_id:null,
-        portfolio: null,
         description: null,
         category_id: null,
         sub_category_id: null,
+        portfolio: null,
         instagram: null,
         facebook: null,
         twitter: null
     });
 
     watch(data.value,(value) => {
-        if(!value.freelancer_title) {
-            dataErrors.value.freelancer_title = 'title is required'
+
+        if(!value.freelancer_title) {  
+        dataErrors.value.freelancer_title = 'Title is required'                               
+        } else{
+        dataErrors.value.freelancer_title = null                               
         }
+
         if(!value.lang) {
-            dataErrors.value.lang = 'language is required'
+            dataErrors.value.lang = 'Language is required'
+        } else{
+            dataErrors.value.lang  = null                               
         }
+        
         if(!value.availability) {
-            dataErrors.value.availability = 'availability is required'
+            dataErrors.value.availability = 'Availability is required'
+        } else{
+            dataErrors.value.availability  = null                               
         }
-        if(!value.portfolio) {
-            dataErrors.value.portfolio = 'portfolio is required'
+
+        if(!value.country_id) {
+            dataErrors.value.country_id = 'Country is required'
+        } else{
+            dataErrors.value.country_id = null                               
         }
-        if(!value.bio) {
-            dataErrors.value.bio = 'bio is required'
+
+        if(!value.description) {
+            dataErrors.value.description = ' Description is required'
+        } else{
+            dataErrors.value.description  = null                               
         }
+
+
         if(!value.category_id) {
-            dataErrors.value.category_id = 'category is required'
+            dataErrors.value.category_id = 'Category is required'
+        } else{
+            dataErrors.value.category_id  = null                               
         }
-        if(!value.country) {
-            dataErrors.value.country = 'country is required'
-        }
+
+
+
         if(!value.sub_category_id) {
-            dataErrors.value.sub_category_id = 'subcategory is required'
+            dataErrors.value.sub_category_id = 'Subcategory is required'
+        }else{
+            dataErrors.value.sub_category_id  = null                               
         }
+
         if(value.instagram && value.instagram.length < 10) {
-            dataErrors.value.instagram = 'incorrect url'
+            dataErrors.value.instagram = 'Incorrect URL'
+        }else{
+            dataErrors.value.instagram  = null                               
         }
+
         if(value.facebook && value.facebook.length < 10) {
-            dataErrors.value.facebook = 'incorrect url'
+            dataErrors.value.facebook = 'Incorrect URL'
+        }else{
+            dataErrors.value.facebook  = null                               
         }
+
         if(value.twitter && value.twitter.length < 10) {
-            dataErrors.value.twitter = 'incorrect url'
+            dataErrors.value.twitter = 'Incorrect URL'
+        }else{
+            dataErrors.value.twitter  = null                               
         }
     })
 
@@ -88,40 +117,15 @@ export default function useBecomeSeller() {
         reader.readAsDataURL(file);
     }
 
-    const createGig = ref({
-        s_description: "",
-        description: "",
-        banner: [],
-        category_id: "d3JkUHdCcEZRMGdseTBvNXFOVXNGUT09",
-        sub_category_id: "cU1VOWVkQVVpVElJdll4eThYOXpBZz09",
-        delivery_time: "20 days",
-        price: "",
-      });
-
+ 
       
-      const  gigCreation = () => {
-          store.dispatch('createGig',createGig.value)
-          console.log("Create Gig Value", createGig.value);
-        }
         
-      const selectThumbnail = (e) => {
-        const files = e.target.files;
-        for (let i = 0; i < files.length; i++) {
-          createGig.value.banner.push(files[i]);
-        }
-        document.querySelector('#bannerInput').value='';
-        console.log(createGig.value);
-  
-        bannersBase64.value=[];
-        createGig.value.banner.forEach(img => {
-            encodeImageFileAsURL(img);
-        });
-      };
 
-      const removeImage = index => {
-        bannersBase64.value.splice(index, 1);
-        createGig.value.banner.splice(index, 1);
-    }
+
+    //   const removeImage = index => {
+    //     bannersBase64.value.splice(index, 1);
+    //     createGig.value.banner.splice(index, 1);
+    // }
 
     const encodeImageFileAsURL =file => {    
         const reader = new FileReader();  
@@ -150,8 +154,28 @@ export default function useBecomeSeller() {
     };
 
     const handleBecomeSeller = () => {
-        console.log(data.value)
-        store.dispatch('handleBecomeSeller',data.value);
+        
+        if(!data.value.freelancer_title) {  
+        dataErrors.value.freelancer_title = 'Title is required'                               
+        } else if(!data.value.lang) {
+            dataErrors.value.lang = 'Language is required'
+        } else if(!data.value.availability) {
+            dataErrors.value.availability = 'Availability is required'
+        } else if(!data.value.description) {
+            dataErrors.value.description = 'description is required'
+        }  else if(!data.value.category_id) {
+            dataErrors.value.category_id = 'Category is required'
+        } else if(!data.value.country_id) {
+            dataErrors.value.country_id = 'Country is required'
+        } else if(!data.value.sub_category_id) {
+            dataErrors.value.sub_category_id = 'Subcategory is required'
+        }else{
+            console.log(data.value)
+            store.dispatch('handleBecomeSeller',data.value);                               
+        }
+
+
+        // 
         // if(!dataErrors.value) {
         //     store.dispatch('handleBecomeSeller',data.value);
         // }
@@ -163,12 +187,9 @@ export default function useBecomeSeller() {
         dataErrors,
         subCategories,
         subCatLoader,
-        createGig,
         bannersBase64,
         convertFileToBase64,
-        gigCreation,
-        selectThumbnail,
-        removeImage,
+        // removeImage,
         encodeImageFileAsURL,
         handleBecomeSeller,
         onCategorySelected,
