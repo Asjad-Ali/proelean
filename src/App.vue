@@ -1,11 +1,15 @@
 <template>
   <div>
     <TopNav />
+    <div class="d-none d-lg-block">
+
     <BottomNav v-if="isAuthenticated" />
+    </div>
     <router-view/>
     <Footer />
+    <div class="d-lg-none">
     <MobileBottomNav />
-
+</div>
   </div>
 </template>
 
