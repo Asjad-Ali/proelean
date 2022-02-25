@@ -279,25 +279,24 @@ export default {
       })
 
       const handleSearch = () => {
-         // keywords.value = convertToSlug(keywords.value);
+         keywords.value = slugify(keywords.value);
 
          router.push(`gigs?q=${keywords.value}`)
          keywords.value=''
       }
 
       // /* Encode string to slug */
-      // function convertToSlug( str ) {         
-      //    //replace all special characters | symbols with a space
-      //    str = str.replace(/[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g, ' ')
-      //             .toLowerCase();
-            
-      //    // trim spaces at start and end of string
-      //    str = str.replace(/^\s+|\s+$/gm,'');
-            
-      //    // replace space with dash/hyphen
-      //    str = str.replace(/\s+/g, '-');
-      //    return str;
-      // }
+      /* eslint-disable */
+      function slugify(text) {
+         return text
+            .toString()                           // Cast to string (optional)
+            .normalize('NFKD')            // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
+            .toLowerCase()                  // Convert the string to lowercase letters
+            .trim()                                  // Remove whitespace from both sides of a string (optional)
+            .replace(/\s+/g, '-')            // Replace spaces with -
+            .replace(/[^\w\-]+/g, '')     // Remove all non-word chars
+            .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+      }
 
       
       return {
