@@ -76,6 +76,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.services-wrapper.bg-white.py-5 {
+    overflow-x: hidden;
+}
 </style>

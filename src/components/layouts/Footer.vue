@@ -76,7 +76,7 @@
                  </ul>
               </div>
            </div>
-           <div class="copyright">
+           <div class="copyright mb-5 mb-lg-0">
               <div class="logo">
                  <a href="index.html">
                  <img src="assets/images/Pro-eLean-.png">
