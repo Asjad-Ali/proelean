@@ -9,6 +9,7 @@ import Toaster from '@meforma/vue-toaster';
 import moment from 'moment'
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
+
 const app = createApp(App)
 
 // Firebase configuration options
