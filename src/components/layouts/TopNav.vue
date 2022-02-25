@@ -35,46 +35,91 @@
              </div>
           </li>
 
-      <ul class="navbar-nav align-items-center ml-auto" v-if="$store.state.isLoggedIn">
 
-         <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2 d-none d-sm-block">
-            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Buyer
-            </a>
-               <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">                     
+   <!-- <div class="custom-control custom-switch d-none d-lg-block">
+  <input type="checkbox" class="custom-control-input" id="customSwitch1">
+  <label class="custom-control-label mr-2" for="customSwitch1">Switch to Buying</label>
+</div> -->
+ <span class="mr-2">
+    <router-link to="/">
+    Switch to Buying
+    </router-link>
+ </span>
 
-                  <div>
-                     <router-link class="dropdown-item" to="/buyer/create_job">Create Job</router-link>
-                  </div>
-                  <div>
-                     <router-link class="dropdown-item" to="/buyer/jobs">Manage Job</router-link>
-                  </div>
-                  <div>
-                     <router-link class="dropdown-item" to="/buyer/manage_order">Manage Order</router-link>
-                  </div>
+<ul class="navbar-nav align-items-center ml-auto" v-if="$store.state.isLoggedIn">
+<!-- Manage Services -->
+<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications show d-none d-lg-block" v-if="userInfo.isFreelancer">
+   <router-link  to="/seller/manage_service" class="btn btn-icon btn-transparent-dark dropdown-toggle" 
+    data-bs-toggle="tooltip" data-bs-placement="top" title="Manage Services"
+   >
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+  <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+  <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+</svg>
+   </router-link>
 
-               </div>
-            </li> 
+</li>
+<!-- Buyer Requests-->
+<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications show d-none d-lg-block" v-if="userInfo.isFreelancer">
+   <router-link  to="/seller/buyer_requests" class="btn btn-icon btn-transparent-dark dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="top" title="Buyer Requests">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+</svg>
+</router-link>
 
-               <li  class="nav-item dropdown no-arrow no-caret dropdown-user mx-2 d-none d-sm-block"
-                  v-if="userInfo.isFreelancer"
-               >
-               <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     Seller 
-               </a>
-               <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
-                  <div>
-                     <router-link class="dropdown-item" to="/seller/manage_service">Manage services </router-link>
-                  </div>
-                  <div>
-                     <router-link class="dropdown-item" to="/seller/buyer_requests">Buyer Requests</router-link>
-                  </div>
-               </div>
-              </li> 
+
+
+</li>
+<!-- Manage Jobs -->
+<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications show d-none d-lg-block">
+   <router-link  to="/buyer/jobs" class="btn btn-icon btn-transparent-dark dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="top" title="Manage Jobs">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-wide-connected" viewBox="0 0 16 16">
+  <path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z"/>
+</svg>
+   </router-link>
+
+</li>
+<!-- Manage Order -->
+<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications show d-none d-lg-block">
+  <router-link  to="/buyer/manage_order" class="btn btn-icon btn-transparent-dark dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="top" title="Manage order">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+</svg>
+  </router-link>
+
+</li>
+<!-- Post a Job -->
+<li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications show d-none d-lg-block">
+ <router-link  to="/buyer/create_job" class="btn btn-icon btn-transparent-dark dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="top" title="Post a job">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/>
+  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+</svg>
+ </router-link>
+
+</li>
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
 
           <!-- @if(isset($user) && !is_null($user)) -->
           <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
-             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+              data-bs-toggle="tooltip" data-bs-placement="top" title="Notifications"
+             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
@@ -103,8 +148,10 @@
                 <a class="dropdown-item dropdown-notifications-footer" href="alerts.html">View All Alerts</a>
              </div>
           </li>
-          <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
-             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications d-none d-lg-block">
+             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              data-bs-toggle="tooltip" data-bs-placement="top" title="Inbox"
+             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                    <polyline points="22,6 12,13 2,6"></polyline>
@@ -135,8 +182,41 @@
                 <a class="dropdown-item dropdown-notifications-footer" href="messages.html">Read All Messages</a>
              </div>
           </li>
-          <li class="nav-item dropdown no-arrow no-caret dropdown-user">
-             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+          <!-- languages li start -->
+          <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2 d-none d-lg-block">
+                  <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title="Languages"
+                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+  <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+</svg>
+               </a>
+               <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">                     
+                  <a class="dropdown-item" href="#">
+                     <div class="dropdown-item-icon">
+                        
+                     </div>
+                    English
+                  </a>
+                  <a class="dropdown-item" href="#">
+                     <div class="dropdown-item-icon">
+                        
+                     </div>
+                     Suomalainen
+                  </a>
+                  <a class="dropdown-item" href="#">
+                     <div class="dropdown-item-icon">
+                        
+                     </div>
+                   Türkçe
+                  </a>
+               </div>
+            </li> 
+               <!-- languages li end -->
+          <li class="nav-item dropdown no-arrow no-caret dropdown-user d-none d-lg-block">
+             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              data-bs-toggle="tooltip" data-bs-placement="top" title="Profile"
+             > 
                 <img
                   :src="`${imgURL}/${user.image}`"
                   class="dropdown-user-img img-full"
@@ -206,6 +286,7 @@
           </li>
       </ul>
 
+      <!-- Before Login Nav Start -->
       <ul class="navbar-nav align-items-center ml-auto" v-else>
           <!-- @else -->
                <!-- login Button -->
@@ -219,35 +300,9 @@
                </li>
           <!-- @endif -->
       </ul>
+      <!-- Before Login Nav End -->
 
-          <li class="nav-item dropdown no-arrow no-caret dropdown-user mx-2">
-                  <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
-  <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
-</svg>
-               </a>
-               <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">                     
-                  <a class="dropdown-item" href="#">
-                     <div class="dropdown-item-icon">
-                        
-                     </div>
-                    English
-                  </a>
-                  <a class="dropdown-item" href="#">
-                     <div class="dropdown-item-icon">
-                        
-                     </div>
-                     Suomalainen
-                  </a>
-                  <a class="dropdown-item" href="#">
-                     <div class="dropdown-item-icon">
-                        
-                     </div>
-                   Türkçe
-                  </a>
-               </div>
-            </li> 
-               <!-- languages li end -->
+      
        </ul>
     </div>
  </nav>
@@ -274,19 +329,29 @@ export default {
       }
       onMounted(() => {
          const isLoggedIn = localStorage.getItem('PROELEAN_TOKEN');
-         if(isLoggedIn)
-            store.dispatch('getNotification')         
+         if(isLoggedIn){
+             store.dispatch('getNotification') 
+         }
+             // tooltip
+         const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return  new window.bootstrap.Tooltip(tooltipTriggerEl)
+         });
       })
 
       const handleSearch = () => {
-         router.push(`/gigs?q=${keywords.value}`)
+         // keywords.value = convertToSlug(keywords.value);
+
+         router.push(`gigs?q=${keywords.value}`)
          keywords.value=''
       }
 
+     
       
       return {
          handleLogout,
          handleSearch,
+        
          keywords,
          userInfo: computed( () => store.getters.getAuthUser),
          userNotification: computed( () => store.getters.getUserNotifications),
