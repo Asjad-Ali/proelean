@@ -1,9 +1,9 @@
 <template>
   <div class="card h-100">
     <!-- {{imgURL}} -->
-    <a href="#">
+    <router-link :to="{name:'gigDetail', params:{id:service.id}}">
       <img class="img-fluid" :src="'https://api.dex.proelean.com/'+service.service_media[0].media"  />
-    </a>
+    </router-link>
     <div class="inner-slider">
       <div class="inner-wrapper d-flex flex-column align-content-between">
         <div class="d-flex align-items-center">
@@ -20,9 +20,9 @@
               service.service_user.username
             }}
 
-            <span class="level hint--top level-one-seller">
+            <!-- <span class="level hint--top level-one-seller">
               Level 1 Seller
-            </span>
+            </span> -->
           </span>
         </div>
         <h3>

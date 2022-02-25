@@ -12,17 +12,18 @@
                   <div class="row">
                      <div class="col-lg-12">
                         <div class="sorting-div d-flex align-items-center justify-content-between">
-                           <p class="mb-2">463 Services available</p>
-                           <div class="sorting d-flex align-items-center">
+                           <!-- <p class="mb-2">463 Services available</p> -->
+                           <!-- <div class="sorting d-flex align-items-center">
                               <p>Sortby</p>
                               <select class="custom-select custom-select-sm border-0 shadow-sm ml-2">
                                  <option>Best Selling</option>
                                  <option>Recommended</option>
                                  <option>Newest Arrivals</option>
                               </select>
-                           </div>
+                           </div> -->
                         </div>
-                        <h3>Services In {{ $route.query.q }}</h3>
+                        <h3 v-if="$route.query.q">Services In {{ $route.query.q }}</h3>
+                        <h3 v-else>Services In {{ $route.query.category }}</h3>
                      </div>
                   </div>
                   <div class="row">
