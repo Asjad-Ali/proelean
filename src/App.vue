@@ -3,7 +3,7 @@
     <TopNav />
     <div class="d-none d-lg-block">
 
-    <BottomNav v-if="isAuthenticated" />
+      <BottomNav v-if="isAuthenticated" />
     </div>
     <router-view/>
     <Footer />

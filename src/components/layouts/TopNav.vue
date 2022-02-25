@@ -47,6 +47,7 @@
  </span>
 
 <ul class="navbar-nav align-items-center ml-auto" v-if="$store.state.isLoggedIn">
+
 <!-- Manage Services -->
 <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications show d-none d-lg-block" v-if="userInfo.isFreelancer">
    <router-link  to="/seller/manage_service" class="btn btn-icon btn-transparent-dark dropdown-toggle" 
@@ -68,10 +69,9 @@
   <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
 </svg>
 </router-link>
-
-
-
 </li>
+
+<!--===================== Buyer Module============== -->
 <!-- Manage Jobs -->
 <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications show d-none d-lg-block">
    <router-link  to="/buyer/jobs" class="btn btn-icon btn-transparent-dark dropdown-toggle" data-bs-toggle="tooltip" data-bs-placement="top" title="Manage Jobs">
@@ -104,14 +104,6 @@
 
 
 
-
-
-
-
-
-
-
- 
 
  
 
