@@ -92,6 +92,10 @@ export default function useBecomeSeller() {
     const jobCreation = () => {
         store.dispatch('createAJob',createJob.value)
         console.log("Create Job Value", createJob.value);
+        createJob.value = '';
+        document.getElementById("sub_category_id").value = '';
+        document.getElementById("delivery_time").value = '';
+
     }
 
     return {

@@ -24,6 +24,7 @@
                     class="form-control border-10 shadow-none position-relative"
                     name="email"
                     v-model="login.email"
+                    placeholder="Enter your email"
                     required
                   />
                   <i
@@ -45,7 +46,7 @@
                     :class="[{ 'border-danger ': loginErrors.password },{'border-success': !loginErrors.password}]"
                     class="form-control shadow-none position-relative"
                     v-model="login.password"
-                    placeholder="Enter Your password"
+                    placeholder="Enter your password"
                     required
                   />
                   <i
