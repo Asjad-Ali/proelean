@@ -21,9 +21,9 @@
                     <div class="custom-control custom-radio" 
                         v-for="category in $store.getters.getCategories" :key="category.id"
                         >
-                        <input type="radio" class="custom-control-input" :id="category.id" 
-                            @click.prevent="handleCategoriesFilter(category.slug)"
-                            :checked="'category' in $route.query && $route.query.category === category.slug">
+                        <input type="radio" class="custom-control-input" name="customRadio" :id="category.id" 
+                            @change="handleCategoriesFilter(category.slug)"
+                            >
                         <label class="custom-control-label" :for="category.id">{{ category.title }} </label>
                     </div>
                     </div>
@@ -40,8 +40,8 @@
                 <div id="collapseCategory" class="collapse" aria-labelledby="headingCategory" data-parent="#accordion">
                     <div class="filters-card-body card-shop-filters">
                         <div class="custom-control custom-radio" v-for="(budget,index) in budgetArr" :key="index">
-                            <input type="radio" :id="index" name="customRadio" class="custom-control-input" checked=""
-                                @click.prevent="handleBugdetFilter(index)"
+                            <input type="radio" :id="index" name="customRadio" class="custom-control-input"
+                                @change="handleBugdetFilter(index)"
                             >
                             <label class="custom-control-label" :for="index">{{ budget.label }}</label>
                         </div>
@@ -58,14 +58,14 @@
 </template>
 
 <script>
-import Filter from '@/composables/useFilter'
+import useFilter from '@/composables/useFilter'
 
 export default {
     setup() {
         const { budgetArr,
           handleBugdetFilter,
           loadCategories, 
-          handleCategoriesFilter } = Filter();
+          handleCategoriesFilter } = useFilter();
         
         return {
             budgetArr,

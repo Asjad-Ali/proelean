@@ -52,7 +52,8 @@ export default {
       const keywords=ref('');
       const handleSearch=()=>{
          keywords.value = slugify(keywords.value)
-         router.push('gigs?q='+keywords.value)
+         let url = keywords.value ? `/gigs/${keywords.value}` : '/gigs';
+         router.push(url)
       }
       // /* Encode string to slug */
       /* eslint-disable */

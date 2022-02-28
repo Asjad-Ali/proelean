@@ -38,14 +38,14 @@ export default function Filter() {
     const handleBugdetFilter = (index) => {
         let budget = budgetArr.value[index];
         let url = `filter=${budget.filter}&filter_value=${budget.filter_value}`
-        let query = route.query.q ?? route.query.category;
+        let query = route.params.slug ?? '';
         url = url.concat(`&q=${query}`)
 
         store.dispatch('searchServices',`search?${url}`)
     }
 
     const handleCategoriesFilter = (slug) => {
-        router.push(`/gigs?category=${slug}`)
+        router.push(`/gigs/${slug}`)
     }
 
     const loadCategories = () => {

@@ -22,8 +22,7 @@
                               </select>
                            </div> -->
                         </div>
-                        <h3 v-if="$route.query.q">Services In {{ $route.query.q }}</h3>
-                        <h3 v-else>Services In {{ $route.query.category }}</h3>
+                        <h3 v-if="$route.params.slug">Services In {{ $route.params.slug }}</h3>
                      </div>
                   </div>
                   <div class="row">
@@ -59,8 +58,8 @@ import ServiceSection from '@/components/services/ServiceSection.vue';
 import PaginationSection from '@/components/services/ServicePagination.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
 import Loader from '@/components/loadingComponent.vue';
-import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
-import { onBeforeMount } from '@vue/runtime-core';
+import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+import { onMounted } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 export default {
@@ -76,24 +75,11 @@ export default {
       const route = useRoute();
 
       onBeforeRouteUpdate((to, from) => {
-         if(to.query.category !== from.query.category) {
-            store.dispatch('searchServices',`categories/${to.query.category}/services`)
-         }
-         if(to.query.q !== from.query.q) {
-            store.dispatch('searchServices',`search?q=${to.query.q}`)            
+         if(to.params && to.params.slug !== from.params.slug) {
+            store.dispatch('searchServices',`search?q=${ to.params.slug ? to.params.slug : ''}`)
          }
       })
-
-      onBeforeMount(() => {
-         if('q' in route.query) {
-            store.dispatch('searchServices',`search?q=${route.query.q}`)
-         } else if('category' in route.query){
-            store.dispatch('searchServices',`categories/${route.query.category}/services`)
-         } else {
-            const router = useRouter();
-            router.push('/')
-         }
-      })
+      onMounted(store.dispatch('searchServices',`search?q=${ route.params.slug ? route.params.slug : ''}`))
    }
 }
 </script>
