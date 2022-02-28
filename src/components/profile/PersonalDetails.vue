@@ -84,6 +84,7 @@
         </div>
       </div>
     </div>
+             <!----------------   for Mobile Screen   ------------------>
     <div class="d-lg-none card shadow-none mb-3 py-3">
        <div class="container routes">
          <!-- buyer Modes -->
@@ -165,6 +166,8 @@
           </div>
         </div>
     </div>
+            <!----------------   Mobile Screen end   ------------------>
+
     <div class="seller-profile">
       <div v-if="user.description.length > 0" class="description">
         <h3>Description</h3>
@@ -220,21 +223,47 @@
         </ul>
       </div>
     </div>
+
+    <div class="d-lg-none card shadow-none mb-3 py-3">
+       <div class="container routes">
+         <div class="text-muted mx-2 mb-3" style="font-size:14px;font-family:inter,sans-serif;"> General</div>
+          <div @click="handleLogout" class="px-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
+                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                         <polyline points="16 17 21 12 16 7"></polyline>
+                         <line x1="21" y1="12" x2="9" y2="12"></line>
+                      </svg>
+                    <span class="ml-2"> Logout </span>
+                </div>
+            </div>
+    </div>
   </div>
 </template>
 
 
 
 <script>
+import Api from "@/services/API";
 import { computed } from "vue";
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default {
   setup() {
-    const store = useStore()
+    const store = useStore();
+    const router = useRouter();
+    const handleLogout = async() => {
+         const response = await Api.post("logout");
+         if(response.status===200){
+            localStorage.removeItem('PROELEAN_TOKEN');
+            localStorage.removeItem('userInfo');
+            router.go()
+         }
+      }
     return {
       user: computed(() => store.getters.getAuthUser),
       imgURL: process.env.VUE_APP_URL,
+      handleLogout
     };
   },
 };
