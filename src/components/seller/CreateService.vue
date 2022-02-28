@@ -132,8 +132,9 @@
                     </div>
                   </div>
                   <div class="border-bottom p-3">
-                    <label>Delivery Time</label>
+                    <div class="row">
                     <div class="form-group col-md-6">
+                    <label>Delivery Time</label>
                       <select
                         id="deliveryTime"
                         class="form-control"
@@ -148,10 +149,9 @@
                         >{{ day }} </option>
                       </select>
                     </div>
-                  </div>
-                  <div class="border-bottom p-3">
+                    <div class="form-group col-md-6">
                     <label>What is your budget for this service?</label>
-                    <div class="input-group mb-2 col-md-4 p-0">
+                    <div class="input-group ">
                       <div class="input-group-prepend">
                         <div class="btn btn-success">$</div>
                       </div>
@@ -165,6 +165,10 @@
                       />
                     </div>
                   </div>
+
+                    </div>
+                  </div>
+
                   <div class="p-3 d-flex justify-content-end">
                     <button
                       class="btn btn-success btn-lg font-weight-bold"

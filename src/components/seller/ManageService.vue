@@ -151,12 +151,12 @@
             <div v-if="services.length" class="table-responsive box-table mt-3 bg-white">
               <table class="table table-bordered">
                 <thead>
-                  <tr>
-                    <th>THUMBNAIL</th>
-                    <th>SERVICE DESCRIPTION</th>
-                    <th>DURATION</th>
-                    <th>BUDGET</th>
-                    <th>ACTION</th>
+                  <tr >
+                    <th>Thumbnail</th>
+                    <th>Service Description</th>
+                    <th>Duration</th>
+                    <th>Budget</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -167,7 +167,7 @@
                     <td>
                       <img
                         style="height: 120px; width: 220px"
-                        class="img-thumbnail"
+                        class="img-thumbnail border-0"
                         :src="
                           service.service_media.length &&
                           service.service_media[0].media
@@ -189,16 +189,11 @@
                             </p>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-2 col-sm-4">
-                            Ratings {{ service.service_rating }}
-                          </div>
-                          <div class="col-lg-2 col-sm-4">
-                            Clicks {{ service.total_clicks }}
-                          </div>
-                          <div class="col-lg-2 col-sm-4">
-                            Orders {{ service.total_orders }}
-                          </div>
+                        <div class="row d-flex justify-content-center ">
+                          <div class="bg-secondary text-white p-2">Ratings {{ service.service_rating }} |</div>
+                          <div class="bg-secondary text-white p-2"> Clicks {{ service.total_clicks }} |</div>
+                          <div class="bg-secondary text-white p-2">Orders {{ service.total_orders }} </div>
+                    
                         </div>
                       </div>
                     </td>

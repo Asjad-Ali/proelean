@@ -9,7 +9,7 @@
         </a>
         </div>
         </div>
-        <div class="slider-nav slick-slider-single d-flex flex-row py-3">
+        <div v-if="serviceMedia[1]" class="slider-nav slick-slider-single d-flex flex-row py-3">
         <div class="item-slick" v-for="(banner,index) in serviceMedia" :key="banner.id">
         <img @click="setImageIndex(index)"  class="img-thumbnail cursor-pointer" 
             :src="`${imgURL}/${banner.media}` ?? '/assets/images/banner.png'"
