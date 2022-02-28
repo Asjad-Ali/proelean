@@ -17,7 +17,7 @@
        <!-- Topbar Navbar -->
        <ul class="navbar-nav align-items-center ml-auto">
           <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications d-sm-none">
-             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <a class="btn btn-icon btn-transparent-dark dropdown-toggle d-none d-sm-block" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              <i class="fa fa-search fa-fw"></i>
              </a>
              <!-- Dropdown - Messages -->
