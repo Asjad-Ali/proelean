@@ -89,7 +89,7 @@ const routes = [
   },
 
   {
-    path: '/gigs',
+    path: '/gigs/:slug?',
     name: 'Gigs',
     component: () => import('../views/Services.vue'),
   },
