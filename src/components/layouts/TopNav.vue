@@ -36,10 +36,6 @@
           </li>
 
 
-   <!-- <div class="custom-control custom-switch d-none d-lg-block">
-  <input type="checkbox" class="custom-control-input" id="customSwitch1">
-  <label class="custom-control-label mr-2" for="customSwitch1">Switch to Buying</label>
-</div> -->
  <span class="mr-2">
     <a class="cursor-pointer" @click="$store.commit('toggleUserMode')">
     Switch to {{isBuyerMode ? 'Seller' : 'Buyer'}}
