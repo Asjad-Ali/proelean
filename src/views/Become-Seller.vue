@@ -1,15 +1,15 @@
 <template>
-  <div class="py-5">
+  <div class="py-4">
     <div class="container">
       <div class="row d-flex justify-content-center">
         <main class="col-md-8">
+          <div>
+            <h3>Become a Seller</h3>
+          </div>
           <form>
             <div class="shadow-sm rounded bg-white mb-3">
               <div class="box-title border-bottom p-3">
                 <h6 class="m-0">Basic Info</h6>
-                <p class="mb-0 mt-0 small">
-                  Tell about your basic personal info.
-                </p>
               </div>
               <div class="box-body p-3">
                 <div class="row">
@@ -115,11 +115,8 @@
               </div>
             </div>
             <div class="shadow-sm rounded bg-white mb-3">
-              <div class="box-title border-bottom p-3">
+              <div class="box-title border-bottom p-3 pb-2">
                 <h6 class="m-0">About</h6>
-                <p class="mb-0 mt-0 small">
-                  Tell about yourself in two sentences.
-                </p>
               </div>
 
               <div class="box-body">
@@ -141,24 +138,26 @@
                       ></textarea>
                     </div>
                   </div>
+                  <div class="d-flex justify-content-center">
+                    <label for="cnin">CNIC Front Image</label>
+                    <span class="text-danger">*</span>
+                    <span class="text-danger" v-if="dataErrors.cinic">{{
+                      dataErrors.cinic
+                    }}</span>
+                  </div>
+                  <div class="upload-cnic cursor-pointer d-flex position-relative align-items-center justify-content-center mx-auto" 
+                  :style="`background-image: url(${preview})`" @click="$refs.cnicInput.click()"
+                  >
+                    <i v-if="!data.cinic"  class="fa fa-file-image-o" style="font-size:20px; "></i>
+                    <input type="file" ref="cnicInput" accept="image/*" @change="handleCinic($event)" style="display:none" />
+                    <i v-if="data.cinic" @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                  </div>
                 </div>
               </div>
-
-              
-              <div class="upload-cnic position-relative d-flex align-items-center justify-content-center mx-auto" 
-              :style="preview && `background: url(${preview})`"
-              >
-                <i @click="$refs.cnicInput.click()"  class="fa fa-file-image-o" style="font-size:20px; cursor:pointer"></i>
-                <input type="file" ref="cnicInput" accept="image/*" @change="handleCinic($event)" style="display:none" />
-              </div>
-
             </div>
             <div class="shadow-sm rounded bg-white mb-3">
-              <div class="box-title border-bottom p-3">
+              <div class="box-title border-bottom p-3 ">
                 <h6 class="m-0">Category</h6>
-                <p class="mb-0 mt-0 small">
-                  Tell about your work, job, and other experiences.
-                </p>
               </div>
               <div class="box-body px-3 pt-3 pb-0">
                 <div class="row">
@@ -229,7 +228,7 @@
               </div>
             </div>
 
-            <div class="shadow-sm rounded bg-white mb-3">
+            <!-- <div class="shadow-sm rounded bg-white mb-3">
               <div class="box-title border-bottom p-3">
                 <h6 class="m-0">Social profiles</h6>
                 <p class="mb-0 mt-0 small">
@@ -250,6 +249,9 @@
                       class="form-control"
                     />
                   </div>
+                  <div class="text-danger" v-if="dataErrors.portfolio">
+                      {{ dataErrors.portfolio }}
+                    </div>
                   <div class="position-relative icon-form-control mb-2">
                     <i
                       class="mdi mdi-instagram position-absolute text-muted"
@@ -262,6 +264,9 @@
                       class="form-control"
                     />
                   </div>
+                    <div class="text-danger" v-if="dataErrors.instagram">
+                      {{ dataErrors.instagram }}
+                    </div>
                   <div class="position-relative icon-form-control mb-2">
                     <i
                       class="mdi mdi-facebook position-absolute text-muted"
@@ -274,6 +279,9 @@
                       class="form-control"
                     />
                   </div>
+                    <div class="text-danger" v-if="dataErrors.facebook">
+                      {{ dataErrors.facebook }}
+                    </div>
                   <div class="position-relative icon-form-control mb-2">
                     <i class="mdi mdi-twitter position-absolute text-muted"></i>
                     <input
@@ -284,15 +292,14 @@
                       class="form-control"
                     />
                   </div>
+                    <div class="text-danger" v-if="dataErrors.twitter">
+                      {{ dataErrors.twitter }}
+                    </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="mb-3 text-right">
-              <button type="submit" class="btn btn-outline-success">
-                Cancel
-              </button>
-              <!-- !Object.values(dataErrors).every(value => !value) ||"" -->
               <button
                 type="submit"
                 class="btn btn-success ml-2"
@@ -324,6 +331,7 @@ export default {
       subCatLoader,
       preview,
       handleCinic,
+      
       handleBecomeSeller
     } = useBecomeSeller();
 
@@ -349,6 +357,7 @@ export default {
       subCategories,
       subCatLoader,
       handleCinic,
+      // removeImage,
       selectLanguage,
       selectCountry,
       selectAvailability,

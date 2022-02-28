@@ -11,9 +11,6 @@
                     <li><a href="#">Video &amp; Animation</a></li>
                     <li><a href="#">Music &amp; Audio</a></li>
                     <li><a href="#">Programming &amp; Tech</a></li>
-                    <li><a href="#">Business</a></li>
-                    <li><a href="#">Lifestyle</a></li>
-                    <li><a href="#">Sitemap</a></li>
                  </ul>
               </div>
               <div class="footer-list">
@@ -21,11 +18,9 @@
                  <ul class="list">
                     <li><a href="#">Careers</a></li>
                     <li><a href="about">About</a></li>
-                    <li><a href="#">Partnerships</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms of Service</a></li>
                     <li><a href="#">Intellectual Property Claims</a></li>
-                    <li><a href="#" target="_blank">Investor Relations</a></li>
                  </ul>
               </div>
               <div class="footer-list">
@@ -45,34 +40,10 @@
                  <h4>Community</h4>
                  <ul class="list">
                     <li><a href="#">Events</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Forum</a></li>
                     <li><a href="#">Community Standards</a></li>
-                    <li><a href="#">Podcast</a></li>
                     <li><a href="#">Affiliates</a></li>
                     <li><a href="#">Invite a Friend</a></li>
                     <li><a href="#">Become a Seller</a></li>
-                    <li><a href="#" >ProeLean
-                       Elevate<br> <small> Exclusive Benefits </small></a>
-                    </li>
-                 </ul>
-              </div>
-              <div class="footer-list">
-                 <h4>More From ProeLean</h4>
-                 <ul class="list">
-                    <li><a href="#">ProeLean
-                       Pro</a>
-                    </li>
-                    <li><a href="#">ProeLean
-                       Studios</a>
-                    </li>
-                    <li><a href="#">ProeLean
-                       Logo Maker</a>
-                    </li>
-                    <li><a href="#">Get Inspired</a></li>
-                    <li><a href="#">ClearVoice<br> <small> Content Marketing </small></a></li>
-                    <li><a href="#">AND CO<br> <small> Invoice Software </small></a></li>
-                    <li><a href="#">Learn<br> <small> Online Courses </small></a></li>
                  </ul>
               </div>
            </div>

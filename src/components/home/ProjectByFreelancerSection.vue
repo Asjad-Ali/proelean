@@ -1,8 +1,8 @@
 <template>
-   <div class="freelance-projects py-5">
+   <div class="freelance-projects pt-2 pb-5">
       <div class="container">
          <h2>
-            Get Inspired With Projects Made By Our Freelancers
+            Top Pics For You
             <a href="#" class="float-right">See More ></a>
          </h2>
          <div class="row freelance-slider" v-if="$store.getters.getFeatGigs.length > 0">
