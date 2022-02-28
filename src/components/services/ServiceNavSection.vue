@@ -31,7 +31,6 @@ export default {
    const router = useRouter();
    const keywords = ref('');
    const handleSearch = () => {
-         // keywords.value = convertToSlug(keywords.value);
          router.push(`gigs?q=${keywords.value}`)
          keywords.value=''
       }
