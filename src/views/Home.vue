@@ -2,7 +2,6 @@
   <div>
    <HeroSection />
     <SocialSection />
-    <PopularGigs />
     <BoostBussiness />
     <ExploreMarket />
     <ProjectByFreelancer />
@@ -14,7 +13,6 @@
 <script>
 import HeroSection from '@/components/home/HeroSection.vue';
 import SocialSection from '@/components/home/SocialListSection.vue';
-import PopularGigs from '@/components/home/PopularGigsSection.vue';
 import BoostBussiness from '@/components/home/BoostBussinessSection.vue';
 import ExploreMarket from '@/components/home/ExploreMarketSection.vue';
 import ProjectByFreelancer from '@/components/home/ProjectByFreelancerSection.vue';
@@ -26,7 +24,6 @@ export default {
   components: {
     HeroSection,
     SocialSection,
-    PopularGigs,
     BoostBussiness,
     ExploreMarket,
     ProjectByFreelancer,

@@ -4,7 +4,6 @@
       <div class="row">
         <PersonalDetails />
         <div class="col-lg-8 right">
-          <h3 class="text-capitalize">{{ user.username }}</h3>
           <div class="recommended d-flex flex-wrap justify-content-start">
             <Loader v-if="$store.loadingStatus==='LOADING'" />
             <ServiceList v-else />

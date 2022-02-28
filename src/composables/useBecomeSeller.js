@@ -42,6 +42,9 @@ export default function useBecomeSeller() {
         twitter: null
     });
 
+
+    // const instagram = /^\s*(http\:\/\/)?instagram\.com\/[a-z\d-_]{1,255}\s*$/;
+    
     watch(data.value,(value) => {
 
         if(!value.freelancer_title) {  
@@ -73,34 +76,38 @@ export default function useBecomeSeller() {
         } else{
             dataErrors.value.description  = null                               
         }
-
-
         if(!value.category_id) {
             dataErrors.value.category_id = 'Category is required'
         } else{
             dataErrors.value.category_id  = null                               
         }
-
-
-
         if(!value.sub_category_id) {
             dataErrors.value.sub_category_id = 'Subcategory is required'
         }else{
             dataErrors.value.sub_category_id  = null                               
         }
+        if(!value.cinic) {
+            dataErrors.value.cinic = 'CNIC image is required'
+        }else{
+            dataErrors.value.cinic  = null                               
+        }
 
+
+        if(value.portfolio && value.portfolio.length < 10) {
+            dataErrors.value.portfolio = 'Incorrect URL'
+        }else{
+            dataErrors.value.portfolio  = null                               
+        }
         if(value.instagram && value.instagram.length < 10) {
             dataErrors.value.instagram = 'Incorrect URL'
         }else{
             dataErrors.value.instagram  = null                               
         }
-
         if(value.facebook && value.facebook.length < 10) {
             dataErrors.value.facebook = 'Incorrect URL'
         }else{
             dataErrors.value.facebook  = null                               
         }
-
         if(value.twitter && value.twitter.length < 10) {
             dataErrors.value.twitter = 'Incorrect URL'
         }else{
@@ -116,6 +123,10 @@ export default function useBecomeSeller() {
         }
         reader.readAsDataURL(file);
     }
+
+    // const removeImage = (e) => {
+    //     data.value.cinic.indexOf(index,0)
+    // }
 
  
       

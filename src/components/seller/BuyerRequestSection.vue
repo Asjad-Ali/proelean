@@ -17,7 +17,7 @@
                     <div class="col-lg-6 col-md-6 d-flex justify-content-between">
                       <div class="d-flex justify-content-start mb-3">
                       <img
-                        class="img-fluid bg-info rounded-circle mr-2"
+                        class="img-fluid rounded-circle mr-2"
                         style="width: 45px; height: 45px; object-fit:cover;"
                         :src="`${imgURL}/${request.user.image}`"
                         alt=""
@@ -39,7 +39,7 @@
                       </div>
                     </div>
                   </div>
-                  <p class="card-text bg-light">
+                  <p class="card-text">
                     {{ request.description }}
                   </p>
                   <div class="d-flex justify-content-start flex-column my-1">
