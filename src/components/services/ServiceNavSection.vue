@@ -31,9 +31,24 @@ export default {
    const router = useRouter();
    const keywords = ref('');
    const handleSearch = () => {
-         router.push(`gigs?q=${keywords.value}`)
+         let url = keywords.value ? `/gigs/${slugify(keywords.value)}` : '/gigs';
+         router.push(url)
          keywords.value=''
       }
+
+     // /* Encode string to slug */
+      /* eslint-disable */
+      function slugify(text) {
+         return text
+            .toString()                           
+            .normalize('NFKD')           
+            .toLowerCase()                  
+            .trim()                                
+            .replace(/\s+/g, '-')           
+            .replace(/[^\w\-]+/g, '')     
+            .replace(/\-\-+/g, '-');
+      }
+      
       return{
          handleSearch,
          keywords
