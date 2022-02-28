@@ -6,9 +6,9 @@
           <form>
             <div class="shadow-sm rounded bg-white mb-3">
               <div class="box-title border-bottom p-3">
-                <h6 class="m-0">Edit Basic Info</h6>
+                <h6 class="m-0">Basic Info</h6>
                 <p class="mb-0 mt-0 small">
-                  Lorem ipsum dolor sit amet, consecteturs.
+                  Tell about your basic personal info.
                 </p>
               </div>
               <div class="box-body p-3">
@@ -18,13 +18,14 @@
                       <label id="titleLabel" class="form-label">
                         Freelancer Title
                         <span class="text-danger">*</span>
-                        <span class="text-danger" v-if="dataErrors.freelancer_title">{{
-                          dataErrors.title
+                        <span class="text-danger " v-if="dataErrors.freelancer_title">{{
+                          dataErrors.freelancer_title
                         }}</span>
                       </label>
                       <div class="form-group">
                         <input
                           type="text"
+                          required
                           class="form-control"
                           name="freelancer_title"
                           placeholder="Enter your freelancer title"
@@ -45,7 +46,7 @@
                         Preferred language
                         <span class="text-danger">*</span>
                         <span class="text-danger" v-if="dataErrors.lang">{{
-                          dataErrors.language
+                          dataErrors.lang
                         }}</span>
                       </label>
                       <div class="form-group">
@@ -53,9 +54,8 @@
                           class="custom-select w-100"
                           id="language"
                           :onchange="selectLanguage"
-                          v-model="data.lang"
                         >
-                          <option :value="selectedValue" selected>Select language</option>
+                          <option selected>Select language</option>
                           <option v-for="language in $store.getters.getLanguages" :key="language" :value="language">{{ language }}</option>
                         </select>
                       </div>
@@ -94,8 +94,8 @@
                       <label class="form-label">
                         Country
                         <span class="text-danger">*</span>
-                        <span class="text-danger" v-if="dataErrors.country">{{
-                          dataErrors.country
+                        <span class="text-danger" v-if="dataErrors.country_id">{{
+                          dataErrors.country_id
                         }}</span>
                       </label>
                       <div class="form-group">
@@ -126,6 +126,7 @@
                 <div class="p-3">
                   <div class="form-group mb-4">
                     <label class="mb-1">BIO</label>
+                    <span class="text-danger">*</span>
                       <span class="text-danger" v-if="dataErrors.description">
                         {{ dataErrors.description }}
                       </span>
@@ -143,9 +144,8 @@
                 </div>
               </div>
 
-
-
-              <div class="upload-cnic d-flex align-items-center justify-content-center mx-auto" 
+              
+              <div class="upload-cnic position-relative d-flex align-items-center justify-content-center mx-auto" 
               :style="preview && `background: url(${preview})`"
               >
                 <i @click="$refs.cnicInput.click()"  class="fa fa-file-image-o" style="font-size:20px; cursor:pointer"></i>
@@ -167,6 +167,9 @@
                       <label class="form-label">
                         Category
                         <span class="text-danger">*</span>
+                      <span class="text-danger" v-if="dataErrors.category_id">
+                        {{ dataErrors.category_id }}
+                      </span> 
                       </label>
                       <div class="form-group">
                         <select
@@ -194,6 +197,9 @@
                       <label class="form-label">
                         Sub Category
                         <span class="text-danger">*</span>
+                      <span class="text-danger" v-if="dataErrors.sub_category_id">
+                        {{ dataErrors.sub_category_id }}
+                      </span>
                       </label>
                       <div class="form-group">
                         <select
@@ -234,12 +240,13 @@
                 <div class="p-3">
                   <div class="position-relative icon-form-control mb-2">
                     <i
-                      class="mdi mdi-instagram position-absolute text-muted"
+                      class="mdi mdi-web position-absolute text-muted"
                     ></i>
                     <input
                       placeholder="Enter your website"
                       type="text"
-                      name="instagram"
+                      name="portfolio"
+                      v-model="data.portfolio"
                       class="form-control"
                     />
                   </div>
@@ -251,6 +258,7 @@
                       placeholder="Add Instagram link"
                       type="text"
                       name="instagram"
+                      v-model="data.instagram"
                       class="form-control"
                     />
                   </div>
@@ -262,6 +270,7 @@
                       placeholder="Add Facebook link"
                       type="text"
                       name="facebook"
+                      v-model="data.facebook"
                       class="form-control"
                     />
                   </div>
@@ -271,6 +280,7 @@
                       placeholder="Add Twitter link"
                       type="text"
                       name="twitter"
+                      v-model="data.twitter"
                       class="form-control"
                     />
                   </div>
@@ -282,6 +292,7 @@
               <button type="submit" class="btn btn-outline-success">
                 Cancel
               </button>
+              <!-- !Object.values(dataErrors).every(value => !value) ||"" -->
               <button
                 type="submit"
                 class="btn btn-success ml-2"
