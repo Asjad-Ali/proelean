@@ -189,16 +189,11 @@
                             </p>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-2 col-sm-4">
-                            Ratings {{ service.service_rating }}
-                          </div>
-                          <div class="col-lg-2 col-sm-4">
-                            Clicks {{ service.total_clicks }}
-                          </div>
-                          <div class="col-lg-2 col-sm-4">
-                            Orders {{ service.total_orders }}
-                          </div>
+                        <div class="row d-flex justify-content-center ">
+                          <div class="bg-secondary text-white p-2">Ratings {{ service.service_rating }} |</div>
+                          <div class="bg-secondary text-white p-2"> Clicks {{ service.total_clicks }} |</div>
+                          <div class="bg-secondary text-white p-2">Orders {{ service.total_orders }} </div>
+                    
                         </div>
                       </div>
                     </td>
