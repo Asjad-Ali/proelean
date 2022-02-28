@@ -11,15 +11,15 @@
     <span class="nav__text">Inbox</span>
   </router-link>
 
+  <router-link v-if="$store.getters.isBuyerMode" to="/gigs?q=" class="nav__link" active-link="nav__link--active">
+    <i class="material-icons nav__icon">search</i>
+    <span class="nav__text">Search</span>
+  </router-link>
+
   <router-link to="/buyer/manage_order" class="nav__link" active-link="nav__link--active">
     <i class="material-icons nav__icon">shopping_bag</i>
     <span class="nav__text">Orders</span>
   </router-link>
-
-  <!-- <a href="#" class="nav__link">
-    <i class="material-icons nav__icon">language</i>
-    <span class="nav__text">language</span>
-  </a> -->
 
   <router-link to="/profile" class="nav__link" active-link="nav__link--active">
     <i class="material-icons nav__icon">person</i>
