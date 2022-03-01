@@ -49,7 +49,11 @@
           </div>
         </div>
         <div class="footer">
-          <i class="fa fa-heart" aria-hidden="true"></i>
+          <a
+          @click="handleWishlist(service.id)" >
+              <i class="fa fa-heart cursor-pointer" :class="{ redIcon : service.favourite}"   aria-hidden="true"></i>
+          </a>
+
           <div class="price">
             <a href="#">
               Starting At <span> ${{ service.price }}</span>
@@ -62,20 +66,27 @@
 </template>
 
 <script>
-// import { onMounted } from '@vue/runtime-core';
-
+import { useStore } from 'vuex';
 export default {
   props: {
     service: {
       type: Object,
       required: true,
-    },
-     setup() {
-      //onMounted(console.log(process.env));
-      return {
-        imgURL: process.env.VUE_APP_URL
-      };
-    },
+    }
+  },
+  setup() {
+    const store = useStore()
+    function handleWishlist (id) {
+      console.log(id)
+      let payload = {
+        'service_id': id
+      }
+      store.dispatch('wishlist',payload)
+    }
+    return {
+      handleWishlist,
+      imgURL: process.env.VUE_APP_URL
+    };
   },
 };
 </script>
@@ -84,5 +95,8 @@ export default {
 <style scoped>
 .inner-slider {
  margin-bottom:0px !important;
+}
+.redIcon{
+  color: red !important;
 }
 </style>

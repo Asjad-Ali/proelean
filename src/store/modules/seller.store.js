@@ -1,12 +1,15 @@
 import Api from '@/services/API';
-import { createToaster } from '@meforma/vue-toaster';
 import { ref } from 'vue';
+import showToast from '@/composables/showToast.js'
+import { createToaster } from '@meforma/vue-toaster';
+
 var page = 1;
 
 
 export const state = {
   sellerReview:[],
   userServices:[],
+  wishlistServices:[],
   s_Loader:'',
   userSingleService:{},
   createGigData:'',
@@ -26,6 +29,7 @@ export const getters = {
   getSellerReview: state => state.sellerReview,
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
+  getWishlist: state => state.wishlistServices,
 }
 
 
@@ -63,6 +67,9 @@ export const  mutations = {
   },
   setSellerLoader(state,loaderVal){
     state.s_Loader = loaderVal
+  },
+  setWishlist(state,data){
+    state.wishlistServices = data
   }
 }
 
@@ -184,6 +191,31 @@ export const  actions = {
         position:"top-right",
         dismissible: true});
         commit('setRegisterStatus',4); 
+    }
+  },
+
+
+
+  async wishlist({commit},payload){
+    const resp = await Api.post('wishlist',payload)
+    if(resp.status == 200 ){
+      showToast(resp.message,'success');
+        commit('toggleFavourite',payload.service_id);
+      }
+    else{
+      showToast(resp.message);
+    }
+    
+  },
+
+  async showWishlist({commit}){
+    const resp = await Api.get('get_wishlist')
+    if(resp.status == 200){
+      commit('setWishlist',resp.data)
+      console.log("Wishlist Service",resp.data)
+    }
+    else{
+      console.log(resp.message)
     }
   },
 

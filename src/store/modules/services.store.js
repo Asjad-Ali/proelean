@@ -32,6 +32,13 @@ export const mutations = {
   setInitialUrl(state, url) {
     state.url = url;
   },
+  toggleFavourite(state,serviceId){
+    state.services.forEach(service => {
+      if(service.id==serviceId){
+        service.favourite = service.favourite == 1 ? 0 : 1;
+      }
+    });
+  },
 
 }
 
