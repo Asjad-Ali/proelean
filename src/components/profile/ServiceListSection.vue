@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="footer">
-              <i class="fa fa-heart"  aria-hidden="true"></i>
+              <i @click="wishlistAction(service.id)" class="fa fa-heart cursor-pointer" :class="{ redIcon : service.favourite}"   aria-hidden="true"></i>
             <div class="price">
               <a href="#">
                 Starting At <span> ${{ service.price }}</span>
@@ -86,5 +86,8 @@ export default {
 .service-list-section{
   padding-right: 5px !important;
   padding-left: 10px !important;
+}
+.redIcon{
+  color: red !important;
 }
 </style>
