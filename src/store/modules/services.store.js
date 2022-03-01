@@ -5,14 +5,18 @@ export const state = {
   servicesStatus: null,
   error: null,
   page: 1,
-  url: '',
+  currentPage:0,
+  lastPage:0,
+  preUrl: '',
   loadingStatus: ''
 }
 
 export const getters = {
   getServices: state => state.services,
   getLoadingStatus: state => state.loadingStatus,
-  getCurrentPage: state => state.page,
+  getCurrentPage: state => state.currentPage,
+  getNextPage: state => state.page,
+  getLastPage: state => state.lastPage,
 }
 
 export const mutations = {
@@ -26,12 +30,18 @@ export const mutations = {
   setNextPage(state, page) {
     state.page = page;
   },
+  setCurrentPage(state) {
+    state.currentPage++;
+  },
+  setLastPage(state, status) {
+    state.lastPage = status
+  },
+  setPreUrl(state, url) {
+    state.preUrl = url;
+  },
   setLoadingStatus(state, status) {
     state.loadingStatus = status;
-  },
-  setInitialUrl(state, url) {
-    state.url = url;
-  },
+  }
 
 }
 
@@ -43,15 +53,15 @@ export const actions = {
     const res = await Api.get(search);
     if (res.status === 200) {
       commit("setServices", res.data);
-
+      
       if (res.links && res.links.next) {
         commit('setNextPage', state.page + 1);
-        commit('setInitialUrl', search);
       } else {
-        commit('setNextPage', 1);
+        commit('setLastPage', 1);
       }
-      commit('setLoadingStatus', 'COMPLETED');
+      commit('setCurrentPage');
     }
+    commit('setLoadingStatus', 'COMPLETED');
   },
 
   async searchServicesByCategoryId({ commit }, categoryID) {
@@ -60,9 +70,12 @@ export const actions = {
     if (res.status === 200) {
       commit("setServices", res.data);
       commit("setServicesStatus", true);
-      console.log("services", res);
     } else {
       commit("setServicesStatus", false);
     }
   },
+
+  setPage({commit},page) {
+    commit('setNextPage',page)
+  }
 }
