@@ -6,7 +6,7 @@
         <div class="col-lg-8 right">
           <div class="recommended d-flex flex-wrap justify-content-start">
             <Loader v-if="$store.loadingStatus==='LOADING'" />
-            <ServiceList v-else />
+            <ServiceList :services="userServices" v-else />
           </div>
           <ServicePagination v-if="$store.state.servicesHasNextPage !== ''" />
 
@@ -41,6 +41,7 @@ export default {
 
     return {
       user: computed(() => store.getters.getAuthUser),
+      userServices: computed(() => store.getters.getUserServices)
     };
   }
 

@@ -1,12 +1,16 @@
 import Api from '@/services/API';
-import { createToaster } from '@meforma/vue-toaster';
 import { ref } from 'vue';
+import showToast from '@/composables/showToast.js'
+import { createToaster } from '@meforma/vue-toaster';
+
 var page = 1;
 
 
 export const state = {
   sellerReview:[],
   userServices:[],
+  wishlistServices:[],
+  userOtherServices:[],
   s_Loader:'',
   userSingleService:{},
   createGigData:'',
@@ -20,12 +24,14 @@ export const state = {
 
 export const getters = {
   getUserServices : state => state.userServices,
+  getUserOtherServices : state => state.userOtherServices,
   getSellerLoader : state => state.s_Loader,
   getSingleService : state => state.userSingleService,
   getUserServicesStatus : state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
+  getWishlist: state => state.wishlistServices,
 }
 
 
@@ -33,6 +39,9 @@ export const  mutations = {
 
   setUserServices(state,services){
     state.userServices=services;
+  },
+  setUserOtherServices(state,services){
+    state.userOtherServices=services;
   },
   setSingleService(state,service){
     state.userSingleService=service;
@@ -63,6 +72,9 @@ export const  mutations = {
   },
   setSellerLoader(state,loaderVal){
     state.s_Loader = loaderVal
+  },
+  setWishlist(state,data){
+    state.wishlistServices = data
   }
 }
 
@@ -97,7 +109,12 @@ export const  actions = {
 
   async userSingleService({commit, state, dispatch},payload)
   {
-    var service = null;
+    const tmpServices = ref(state.userServices.filter(service => service.id !== payload.id))
+    tmpServices.value = tmpServices.value.slice(0,3)
+    console.log("other services",tmpServices.value);
+    commit("setUserOtherServices",tmpServices.value);
+  
+    let service = null;
     if(!state.userServices.length) {
       const res = await Api.get(`seller/services/${payload.id}`);
       if(res.status===200) {
@@ -108,17 +125,17 @@ export const  actions = {
     } else {
       service = state.userServices.find(service => service.id === payload.id);
     }
+    
     commit("setSingleService",service);
     if(payload.type==="ONUPDATE") {
       dispatch("loadSubCategories", service.category.id);
-
     }
-
   },
+
   async getSellerReviews({commit})
   {
     let getData = JSON.parse(localStorage.getItem("userInfo"))
-    console.log("in action id",getData.id)
+    console.log("reviews, in action id",getData.id)
     const res= await Api.get(`seller/${getData.id}/reviews?page=${page}`);
     if(res.status === 200) {
       commit("setReviews",res.data);
@@ -184,6 +201,31 @@ export const  actions = {
         position:"top-right",
         dismissible: true});
         commit('setRegisterStatus',4); 
+    }
+  },
+
+
+
+  async wishlist({commit},payload){
+    const resp = await Api.post('wishlist',payload)
+    if(resp.status == 200 ){
+      showToast(resp.message,'success');
+        commit('toggleFavourite',payload.service_id);
+      }
+    else{
+      showToast(resp.message);
+    }
+    
+  },
+
+  async showWishlist({commit}){
+    const resp = await Api.get('get_wishlist')
+    if(resp.status == 200){
+      commit('setWishlist',resp.data)
+      console.log("Wishlist Service",resp.data)
+    }
+    else{
+      console.log(resp.message)
     }
   },
 

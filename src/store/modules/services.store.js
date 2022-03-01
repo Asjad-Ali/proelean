@@ -4,10 +4,8 @@ export const state = {
   services: [],
   servicesStatus: null,
   error: null,
-  page: 1,
-  currentPage:0,
-  lastPage:0,
-  preUrl: '',
+  hasNextpage: false,
+  currentPage: 0,
   loadingStatus: ''
 }
 
@@ -15,8 +13,7 @@ export const getters = {
   getServices: state => state.services,
   getLoadingStatus: state => state.loadingStatus,
   getCurrentPage: state => state.currentPage,
-  getNextPage: state => state.page,
-  getLastPage: state => state.lastPage,
+  getNextPage: state => state.hasNextpage,
 }
 
 export const mutations = {
@@ -27,21 +24,22 @@ export const mutations = {
   setError(state, error) {
     state.error = error;
   },
-  setNextPage(state, page) {
-    state.page = page;
+  setNextPage(state, hasNextpage) {
+    state.hasNextpage = hasNextpage;
   },
-  setCurrentPage(state) {
-    state.currentPage++;
-  },
-  setLastPage(state, status) {
-    state.lastPage = status
-  },
-  setPreUrl(state, url) {
-    state.preUrl = url;
+  setCurrentPage(state,page) {
+    state.currentPage = page;
   },
   setLoadingStatus(state, status) {
     state.loadingStatus = status;
-  }
+  },
+  toggleFavourite(state,serviceId){
+    state.services.forEach(service => {
+      if(service.id==serviceId){
+        service.favourite = service.favourite == 1 ? 0 : 1;
+      }
+    });
+  },
 
 }
 
@@ -53,13 +51,8 @@ export const actions = {
     const res = await Api.get(search);
     if (res.status === 200) {
       commit("setServices", res.data);
-      
-      if (res.links && res.links.next) {
-        commit('setNextPage', state.page + 1);
-      } else {
-        commit('setLastPage', 1);
-      }
-      commit('setCurrentPage');
+      commit('setCurrentPage', res.meta.current_page ?? state.currentPage);
+      commit('setNextPage', res.links.next ? true : false);
     }
     commit('setLoadingStatus', 'COMPLETED');
   },
@@ -75,7 +68,7 @@ export const actions = {
     }
   },
 
-  setPage({commit},page) {
-    commit('setNextPage',page)
+  setPage({ commit }, page) {
+    commit('setNextPage', page)
   }
 }

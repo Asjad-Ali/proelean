@@ -2,7 +2,7 @@
 
     <div
       class="col-md-4 mb-3 service-list-section"
-      v-for="service in $store.getters.getUserServices"
+      v-for="service in services"
       :key="service.id"
     >
      <div class="gig-img-outer">
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="footer">
-              <i class="fa fa-heart"  aria-hidden="true"></i>
+              <i @click="wishlistAction(service.id)" class="fa fa-heart cursor-pointer" :class="{ redIcon : service.favourite}"   aria-hidden="true"></i>
             <div class="price">
               <a href="#">
                 Starting At <span> ${{ service.price }}</span>
@@ -68,6 +68,12 @@
 
 <script>
 export default {
+    props :{
+      services:{
+        type: Array,
+        required: true
+      }
+    },
   setup() {
     return {
       imgURL: process.env.VUE_APP_URL,
@@ -80,5 +86,8 @@ export default {
 .service-list-section{
   padding-right: 5px !important;
   padding-left: 10px !important;
+}
+.redIcon{
+  color: red !important;
 }
 </style>
