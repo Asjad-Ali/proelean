@@ -9,11 +9,8 @@ var page = 1;
 export const state = {
   sellerReview:[],
   userServices:[],
-<<<<<<< HEAD
   wishlistServices:[],
-=======
   userOtherServices:[],
->>>>>>> ad168fa988bc479faa90572124852a80e7a0dbf1
   s_Loader:'',
   userSingleService:{},
   createGigData:'',
