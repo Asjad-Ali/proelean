@@ -2,7 +2,7 @@
 
     <div
       class="col-md-4 mb-3 service-list-section"
-      v-for="service in $store.getters.getUserServices"
+      v-for="service in services"
       :key="service.id"
     >
      <div class="gig-img-outer">
@@ -68,6 +68,12 @@
 
 <script>
 export default {
+    props :{
+      services:{
+        type: Array,
+        required: true
+      }
+    },
   setup() {
     return {
       imgURL: process.env.VUE_APP_URL,
