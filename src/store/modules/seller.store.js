@@ -5,7 +5,8 @@ import useToast from '@/composables/useToast.js'
 var page = 1;
 
 export const state = {
-  sellerReview: [],
+  sellerReviews: [],
+  serviceReviews:[],
   userServices: [],
   s_Loader: '',
   userSingleService: {},
@@ -24,7 +25,8 @@ export const getters = {
   getServiceLoader: state => state.loadingStatus,
   getSingleService: state => state.userSingleService,
   getUserServicesStatus: state => state.userServicesStatus,
-  getSellerReview: state => state.sellerReview,
+  getSellerReviews: state => state.sellerReviews,
+  getServiceReviews: state => state.serviceReviews,
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
 }
@@ -38,8 +40,11 @@ export const mutations = {
   setSingleService(state, service) {
     state.userSingleService = service;
   },
-  setReviews(state, reviews) {
-    reviews.forEach(review => state.sellerReview.push(review));
+  setSellerReviews(state, reviews) {
+    reviews.forEach(review => state.sellerReviews.push(review))
+  },
+  setServiceReviews(state, reviews) {
+    reviews.forEach(review => state.serviceReviews.push(review))
   },
   setServicesLoadingStatus(state, status) {
     state.loadingStatus = status
@@ -96,7 +101,6 @@ export const actions = {
   },
 
   async userSingleService({ commit, dispatch }, payload) {
-
     commit('setServicesLoadingStatus', 'LOADING');
     // if (!state.userServices.length) {
       const res = await Api.get(`seller/services/${payload.id}?from=web`);
@@ -114,12 +118,15 @@ export const actions = {
     commit('setServicesLoadingStatus', 'COMPLETED');
   },
 
-  async getSellerReviews({ commit },payload) {
-    //payload = state.userSingleService.service_user.id;
-    console.log("reviews, in action id", payload.id);
-    const res = await Api.get(`seller/${payload.id}/reviews?page=${page}`);
+
+  async getReviews({ commit },payload) {
+    console.log("reviews, in action id", payload);
+    const res = await Api.get(`${payload.type}/${payload.id}/reviews?page=${page}`);
     if (res.status === 200) {
-      commit("setReviews", res.data);
+      payload.type === 'seller' 
+      ? commit("setSellerReviews",res.data)
+      : commit("setServiceReviews",res.data); 
+
       commit('setReviewsNextPage', res.links.next ?? '')
       console.log("Seller Reviews", res.data);
     } else {
