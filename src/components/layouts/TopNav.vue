@@ -36,13 +36,13 @@
           </li>
 
 
- <span class="mr-2">
+<ul class="navbar-nav align-items-center ml-auto" v-if="$store.state.isLoggedIn">
+
+   <span class="mr-2">
     <a class="cursor-pointer" @click="$store.commit('toggleUserMode')">
     Switch to {{isBuyerMode ? 'Seller' : 'Buyer'}}
     </a>
- </span>
-
-<ul class="navbar-nav align-items-center ml-auto" v-if="$store.state.isLoggedIn">
+   </span>
 
 <!-- Manage Services -->
 <li v-if="!isBuyerMode" class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications show d-none d-lg-block" :disabled="userInfo.isFreelancer">
