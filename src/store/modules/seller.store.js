@@ -114,10 +114,10 @@ export const actions = {
     commit('setServicesLoadingStatus', 'COMPLETED');
   },
 
-  async getSellerReviews({ commit }) {
-    let getData = JSON.parse(localStorage.getItem("userInfo"))
-    console.log("reviews, in action id", getData.id)
-    const res = await Api.get(`seller/${getData.id}/reviews?page=${page}`);
+  async getSellerReviews({ commit },payload) {
+    //payload = state.userSingleService.service_user.id;
+    console.log("reviews, in action id", payload.id);
+    const res = await Api.get(`seller/${payload.id}/reviews?page=${page}`);
     if (res.status === 200) {
       commit("setReviews", res.data);
       commit('setReviewsNextPage', res.links.next ?? '')
