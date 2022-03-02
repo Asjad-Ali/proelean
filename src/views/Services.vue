@@ -26,14 +26,16 @@
                      </div>
                   </div>
                   <div class="row">
+                     <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
                      <div
                         class="service-col col-md-4 d-flex flex-column align-self-stretch"
                         v-for="service in $store.getters.getServices"
                         :key="service.id"
+                        v-else
                      >  
                         <ServiceSection :service="service" />
                      </div>
-                     <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
+
                      <div
                         class="container"
                         v-if="!$store.getters.getServices.length && $store.getters.getLoadingStatus==='COMPLETED'" 
@@ -54,7 +56,7 @@
 
 <script>
 import ServiceNavSection from '@/components/services/ServiceNavSection.vue';
-import ServiceSection from '@/components/services/ServiceSection.vue';
+import ServiceSection from '@/components/Service.vue';
 import PaginationSection from '@/components/services/ServicePagination.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
 import Loader from '@/components/loadingComponent.vue';

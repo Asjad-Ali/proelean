@@ -2,6 +2,7 @@ import Api from '@/services/API';
 
 export const state = {
   services: [],
+  sellerOfferedServices: [],
   servicesStatus: null,
   error: null,
   hasNextpage: false,
@@ -11,6 +12,7 @@ export const state = {
 
 export const getters = {
   getServices: state => state.services,
+  getSellerOfferedServices: state => state.sellerOfferedServices,
   getLoadingStatus: state => state.loadingStatus,
   getCurrentPage: state => state.currentPage,
   getNextPage: state => state.hasNextpage,
@@ -32,6 +34,9 @@ export const mutations = {
   },
   setLoadingStatus(state, status) {
     state.loadingStatus = status;
+  },
+  setSellerOfferedServices(state, services) {
+    state.sellerOfferedServices = services;
   },
   toggleFavourite(state,serviceId){
     state.services.forEach(service => {
@@ -64,14 +69,6 @@ export const actions = {
       commit("setServicesStatus", true);
     } else {
       commit("setServicesStatus", false);
-    }
-  },
-
-  async getSellerServices({ commit }, sellerID)
-  {
-    const res = await Api.get(`seller/services?seller=${sellerID}`);
-    if(res.status === 200) {
-      commit("setUserOtherServices",res.data)
     }
   },
 

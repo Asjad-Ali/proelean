@@ -7,7 +7,6 @@ var page = 1;
 export const state = {
   sellerReview: [],
   userServices: [],
-  userOtherServices: [],
   s_Loader: '',
   userSingleService: {},
   createGigData: '',
@@ -21,8 +20,8 @@ export const state = {
 
 export const getters = {
   getUserServices: state => state.userServices,
-  getUserOtherServices: state => state.userOtherServices,
   getSellerLoader: state => state.s_Loader,
+  getServiceLoader: state => state.loadingStatus,
   getSingleService: state => state.userSingleService,
   getUserServicesStatus: state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
@@ -35,9 +34,6 @@ export const mutations = {
 
   setUserServices(state, services) {
     state.userServices = services;
-  },
-  setUserOtherServices(state, services) {
-    state.userOtherServices = services;
   },
   setSingleService(state, service) {
     state.userSingleService = service;
@@ -99,26 +95,23 @@ export const actions = {
     }
   },
 
-  async userSingleService({ commit, state, dispatch }, payload) {
-    let service = null;
-    if (!state.userServices.length) {
-      const res = await Api.get(`seller/services/${payload.id}`);
+  async userSingleService({ commit, dispatch }, payload) {
+
+    commit('setServicesLoadingStatus', 'LOADING');
+    // if (!state.userServices.length) {
+      const res = await Api.get(`seller/services/${payload.id}?from=web`);
       if (res.status === 200) {
-        service = res.data;
+        commit("setSingleService", res.data);
+        if (payload.type === "ONUPDATE") {
+          dispatch("loadSubCategories", res.data.category.id);
+        }
       } else {
         console.log(res);
       }
-    } else {
-      service = state.userServices.find(service => service.id === payload.id);
-    }
-
-    commit("setSingleService", service);
-    if (payload.type === "ONUPDATE") {
-      dispatch("loadSubCategories", service.category.id);
-    }
-    if (payload.type === 'SERVICE_DETAIL') {
-      setTimeout(dispatch('getSellerServices', state.userSingleService.service_user.id), 1500);
-    }
+    // } else {
+    //   service = state.userServices.find(service => service.id === payload.id);
+    // }
+    commit('setServicesLoadingStatus', 'COMPLETED');
   },
 
   async getSellerReviews({ commit }) {

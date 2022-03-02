@@ -16,10 +16,18 @@
                   <div class="profile-card">
                     <AboutSeller :service="service" />
 
-                   <h3>Other Services I Offer</h3>
-                   <div class="recommended d-flex flex-wrap justify-content-start">
-                    <ServiceList :services="sellerOfferedServices" />
-                   </div>
+                   <h3 v-if="service.offered_services.length">Other Services I Offer</h3>
+                  <div class="recommended d-flex flex-wrap justify-content-start">
+                     <Loader v-if="$store.getters.getServiceLoader==='LOADING' && service.offered_services.length" />
+                     <div
+                     class="col-md-4 mb-3 service-list-section"
+                     v-for="offeredService in service.offered_services"
+                     :key="offeredService.id"
+                     v-else
+                     >
+                     <ServiceList :service="offeredService" />
+                     </div>
+                  </div>
 
                   </div>
                   <Faq />
@@ -28,7 +36,9 @@
                <ServiceCard />
             </div>
          </div>
-         <PeopleViewProfile />
+         
+         <TopPicSection />
+         <!-- <PeopleViewProfile /> -->
       </div>
 </template>
 
@@ -41,11 +51,13 @@ import { useStore } from 'vuex';
 import Gallery from '@/components/singleService/Gallery.vue';
 import AboutService from '@/components/singleService/AboutService.vue';
 import AboutSeller from '@/components/singleService/AboutSeller.vue';
-import ServiceList from '@/components/profile/ServiceListSection.vue';
+import ServiceList from '@/components/Service.vue';
 import Faq from '@/components/singleService/Faq.vue';
 import ReviewSection from "@/components/profile/SellerReviewsSection.vue";
 import ServiceCard from '@/components/singleService/ServiceCard.vue';
-import PeopleViewProfile from '@/components/singleService/PeopleViewProfile.vue';
+// import PeopleViewProfile from '@/components/singleService/PeopleViewProfile.vue';
+import TopPicSection from '@/components/home/TopPicSection.vue';
+
 
 export default{
     name:"gigDetail",
@@ -57,7 +69,8 @@ export default{
     Faq,
     ReviewSection,
     ServiceCard,
-    PeopleViewProfile,
+   //  PeopleViewProfile,
+   TopPicSection
 },
     setup() {
     const store = useStore()
@@ -66,14 +79,11 @@ export default{
        "id": route.params.id,
        "type": "SERVICE_DETAIL"
     }
-    onMounted(() => {
-      store.dispatch("userSingleService",payload);      
-
-    })
+   onMounted(store.dispatch("userSingleService",payload))
 
     return {
-        service: computed(()=>store.getters.getSingleService),
-        sellerOfferedServices: computed(() => store.getters.getUserOtherServices)
+      service: computed(()=>store.getters.getSingleService),
+      // sellerOfferedServices: computed(() => store.getters.getSellerOfferedServices.filter(service => service.id!=route.params.id).slice(0,3))
     }
 }
 }
@@ -81,4 +91,4 @@ export default{
 
 <style>
 
-</style>../components/singleService/PeopleViewProfile.vue
+</style>
