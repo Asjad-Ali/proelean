@@ -109,11 +109,6 @@ export const  actions = {
 
   async userSingleService({commit, state, dispatch},payload)
   {
-    const tmpServices = ref(state.userServices.filter(service => service.id !== payload.id))
-    tmpServices.value = tmpServices.value.slice(0,3)
-    console.log("other services",tmpServices.value);
-    commit("setUserOtherServices",tmpServices.value);
-  
     let service = null;
     if(!state.userServices.length) {
       const res = await Api.get(`seller/services/${payload.id}`);
@@ -130,6 +125,13 @@ export const  actions = {
     if(payload.type==="ONUPDATE") {
       dispatch("loadSubCategories", service.category.id);
     }
+    setTimeout(function() {
+      const tmpServices = ref(state.userServices.filter(service => service.id !== payload.id))
+      tmpServices.value = tmpServices.value.slice(0,3)
+      console.log("other services",tmpServices.value);
+      commit("setUserOtherServices",tmpServices.value)
+    }, 1500);
+  
   },
 
   async getSellerReviews({commit})

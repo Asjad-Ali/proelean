@@ -67,8 +67,8 @@ export default{
        "type": ""
     }
     onMounted(() => {
-      store.dispatch("userSingleService",payload);
-      // store.dispatch("userServices",'');
+      store.dispatch("userServices",'');
+      store.dispatch("userSingleService",payload);      
 
     })
 
