@@ -1,6 +1,6 @@
 import Api from '@/services/API';
-import { createToaster } from '@meforma/vue-toaster';
 import { ref } from 'vue';
+import useToast from '@/composables/useToast.js'
 
 
 export const state = {
@@ -36,21 +36,16 @@ export const  mutations = {
 export const  actions = {
   
       async createAJob({commit},payload){
-        const toaster = createToaster()
         commit('setRegisterStatus',2);
         const res = await Api.post('buyer/jobs',payload);
         if(res.status === 201){
           console.log("Create Job Response",res.data)
-          toaster.success("Your request is submitted",{
-            position:"top-right",
-            dismissible: true});
+          useToast("Your request is submitted",'success');
           commit("setCreateJob",res)
           commit('setRegisterStatus',3);
         }
         else{
-          toaster.error(res.message,{
-            position:"top-right",
-            dismissible: true});
+          useToast(res.message);
             commit('setRegisterStatus',4);
         }
       },
@@ -69,21 +64,16 @@ export const  actions = {
       },
 
       async deleteAJob({commit,state},id){
-        const toaster = createToaster()
         const res = await Api.delete(`buyer/jobs/${id}`);
         if(res.status === 200){
           console.log("delete Job successfully",res.message)
-          toaster.success(res.message,{
-            position:"top-right",
-            dismissible: true});
+          useToast(res.message,'success');
           const afterRemoveJob = ref(state.allJobs.filter(job => job.id !== id))
           commit("setAllJobs",afterRemoveJob.value);
         }
         else{
           console.log("Error delete Job");
-          toaster.error(res.message,{
-            position:"top-right",
-            dismissible: true});
+          useToast(res.message);
         }
       },
 
