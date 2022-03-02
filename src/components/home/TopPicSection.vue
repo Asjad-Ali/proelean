@@ -1,14 +1,15 @@
 <template>
-   <div class="freelance-projects py-5">
       <div class="container">
          <h2>
-            Get Inspired With Projects Made By Our Freelancers
-            <a href="#" class="float-right">See More ></a>
+            Top Pics For You
+            <!-- <a href="#"  class="float-right ">See More ></a> -->
          </h2>
          <div class="row freelance-slider" v-if="$store.getters.getFeatGigs.length > 0">
             <div class="col" v-for="gig in $store.getters.getFeatGigs" :key="gig.id">
                <div class="freelancer">
-                  <img :src="getImgUrl(gig.service_media[0].media)">
+                  <router-link :to="{name:'gigDetail', params:{id:gig.id}}">
+                  <img class="curser-pointer" :src="getImgUrl(gig.service_media[0].media)">
+                  </router-link>
                   <div class="freelancer-footer">
                      <img src="assets/images/user/s1.png">
                      <h5>{{ gig.s_description }}
@@ -17,7 +18,7 @@
                   </div>
                </div>
             </div>
-         </div>
+      </div>
 
          <!-- New Slider -->
        <!-- <div class="owl-carousel owl-theme ">
@@ -33,7 +34,6 @@
         </div> -->
          
       </div>
-   </div>
 </template>
 
 <script>

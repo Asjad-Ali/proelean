@@ -5,7 +5,7 @@
 
       <BottomNav v-if="isAuthenticated" />
     </div>
-    <router-view />
+    <router-view :key="$route.fullPath" />
     <Footer />
     <div class="d-lg-none">
       <MobileBottomNav/>

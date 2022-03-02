@@ -8,43 +8,14 @@
 <section>
     <div class="row">
       <!--ADD CLASSES HERE d-flex align-items-stretch-->
-      <div class="col-lg-3  mb-3 d-flex align-items-stretch">
-        <div class="card cursor-pointer">
-          <img src="https://i.postimg.cc/28PqLLQC/dotonburi-canal-osaka-japan-700.jpg" class="card-img-top" alt="Card Image">
+      <div class="col-lg-3  mb-3 d-flex align-items-stretch" v-for="category in $store.getters.getCategories" :key="category.id">
+        <div class="card">
+          <router-link :to="{name:'Gigs', params:{slug: category.slug}}">
+          <img :src="`${category.banner.includes('https') || category.banner.includes('http') ? category.banner : imgURL+'/'+category.banner}`" class="card-img-top" alt="Card Image">
           <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Graphics &amp; Design</h5>
-
+            <h5 class="card-title">{{ category.title }}</h5>
           </div>
-        </div>
-      </div>
-      <!--ADD CLASSES HERE d-flex align-items-stretch-->
-      <div class="col-lg-3  mb-3 d-flex align-items-stretch">
-        <div class="card cursor-pointer">
-          <img src="https://i.postimg.cc/4xVY64PV/porto-timoni-double-beach-corfu-greece-700.jpg" class="card-img-top" alt="Card Image">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Digital Marketing</h5>
-        
-          </div>
-        </div>
-      </div>
-      <!--ADD CLASSES HERE d-flex align-items-stretch-->
-      <div class="col-lg-3  mb-3 d-flex align-items-stretch">
-        <div class="card cursor-pointer">
-          <img src="https://i.postimg.cc/TYyLPJWk/tritons-fountain-valletta-malta-700.jpg" class="card-img-top" alt="Card Image">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Music &amp; Audio</h5>
-    
-          </div>
-        </div>
-      </div>
-      <!--ADD CLASSES HERE d-flex align-items-stretch-->
-      <div class="col-lg-3  mb-3 d-flex align-items-stretch">
-        <div class="card cursor-pointer">
-          <img src="https://i.postimg.cc/TYyLPJWk/tritons-fountain-valletta-malta-700.jpg" class="card-img-top" alt="Card Image">
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title">Writing &amp; Translation</h5>
-    
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -95,10 +66,8 @@
    </div>
 </template>
 
-<script>
-export default {
-
-}
+<script setup>
+ const imgURL = process.env.VUE_APP_URL;
 </script>
 
 <style scoped>

@@ -3,15 +3,15 @@
         <div class="gallery-container">
         <div id="aniimated-thumbnials" class="slider-for slick-slider-single">
         <a href="images/list/v1.png">
-        <img  class="img-fluid img-thumbnail" 
+        <img  class="img-fluid img-thumbnail gm-image" 
             :src="`${imgURL}/${serviceMedia[imageIndex].media}` ?? '/assets/images/banner.png'"
             />
         </a>
         </div>
         </div>
-        <div class="slider-nav slick-slider-single d-flex flex-row py-3">
+        <div v-if="serviceMedia[1]" class="slider-nav slick-slider-single d-flex flex-row py-3">
         <div class="item-slick" v-for="(banner,index) in serviceMedia" :key="banner.id">
-        <img @click="setImageIndex(index)"  class="img-thumbnail cursor-pointer" 
+        <img @click="setImageIndex(index)"  class="img-thumbnail g-image cursor-pointer" 
             :src="`${imgURL}/${banner.media}` ?? '/assets/images/banner.png'"
             />
         </div>
@@ -44,4 +44,13 @@ export default {
 }
 </script>
 <style scoped>
+.gm-image{
+    object-fit: cover;
+    height: 350px;
+    width:650px;
+}
+
+.g-image{
+    max-height: 230px;
+}
 </style>

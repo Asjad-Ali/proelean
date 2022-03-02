@@ -4,10 +4,16 @@
       <div class="row">
         <PersonalDetails />
         <div class="col-lg-8 right">
-          <h3 class="text-capitalize">{{ user.username }}</h3>
           <div class="recommended d-flex flex-wrap justify-content-start">
-            <Loader v-if="$store.loadingStatus==='LOADING'" />
-            <ServiceList v-else />
+
+            <div
+              class="col-md-4 mb-3 service-list-section"
+              v-for="service in userServices"
+              :key="service.id"
+              >
+              <Loader v-if="$store.loadingStatus==='LOADING'" />
+              <ServiceList :service="service" v-else />
+            </div>
           </div>
           <ServicePagination v-if="$store.state.servicesHasNextPage !== ''" />
 
@@ -20,7 +26,7 @@
 
 <script>
 import PersonalDetails from '@/components/profile/PersonalDetails.vue';
-import ServiceList from '@/components/profile/ServiceListSection.vue';
+import ServiceList from '@/components/Service.vue';
 import ReviewSection from "@/components/profile/SellerReviewsSection.vue";
 import ServicePagination from '@/components/profile/ServicePagination.vue';
 import Loader from '@/components/loadingComponent.vue';
@@ -42,6 +48,7 @@ export default {
 
     return {
       user: computed(() => store.getters.getAuthUser),
+      userServices: computed(() => store.getters.getUserServices)
     };
   }
 

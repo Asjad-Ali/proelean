@@ -11,7 +11,7 @@
     <span class="nav__text">Inbox</span>
   </router-link>
 
-  <router-link v-if="$store.getters.isBuyerMode" to="/gigs?q=" class="nav__link" active-link="nav__link--active">
+  <router-link v-if="$store.getters.isBuyerMode" to="/gigs" class="nav__link" active-link="nav__link--active">
     <i class="material-icons nav__icon">search</i>
     <span class="nav__text">Search</span>
   </router-link>

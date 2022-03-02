@@ -49,55 +49,57 @@
                       v-model="createJob.sub_category_id"
                       required
                     >
-                          <option
-                            v-for="subCategory in $store.getters.getSubCategories"
-                            :value="subCategory.id"
-                            :key="subCategory.id"
-                          >
-                            {{ subCategory.title }}
-                          </option>
-                      
+                      <option selected>Select Sub Category</option>
+                      <option
+                        v-for="subCategory in $store.getters.getSubCategories"
+                        :value="subCategory.id"
+                        :key="subCategory.id"
+                      >
+                        {{ subCategory.title }}
+                      </option>
                     </select>
                   </div>
                 </div>
               </div>
-              <div class="border-bottom p-3">
-                <label>Delivery Time</label>
-                <div class="form-group col-md-5">
-                  <select
-                    id="inputState"
-                    class="form-control"
-                    name="delivery_time"
-                    v-model="createJob.delivery_time"
-                    :onchange="onChange"
-                    required
-                  >
-                    <option selected>Select day</option>
-                    <option  
-                      v-for="day in $store.getters.getDeliveryDays"
-                      :value="day" 
-                      :key="day.index"
-                    > {{ day }} </option>
-                    
-                  </select>
-                </div>
-              </div>
-              <div class="border-bottom p-3">
-                <label>What's your budget? </label>
-                <div class="input-group mb-2 col-md-5 p-0">
-                  <div class="input-group-prepend">
-                    <div class="btn btn-success">$</div>
-                  </div>
-                  <input
-                    type="number"
-                    class="form-control"
-                    name="price"
-                    v-model="createJob.budget"
-                    id="inlineFormInputGroup"
-                    required
-                  />
-                </div>
-              </div>
+               <div class="border-bottom p-3">
+                 <div class="row">
+                    <div class="form-group col-md-6">
+                    <label>Delivery Time</label>
+                      <select
+                        id="inputState"
+                        class="form-control"
+                        name="delivery_time"
+                        v-model="createJob.delivery_time"
+                        :onchange="onChange"
+                        required
+                      >
+                        <option selected>Select day</option>
+                        <option  
+                          v-for="day in $store.getters.getDeliveryDays"
+                          :value="day" 
+                          :key="day.index"
+                        > {{ day }} </option>
+                        
+                      </select>
+                   </div>
+                    <div class="form-group col-md-6">
+                      <label>What's your budget? </label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="btn btn-success">$</div>
+                          </div>
+                          <input
+                            type="number"
+                            class="form-control"
+                            name="price"
+                            v-model="createJob.budget"
+                            id="inlineFormInputGroup"
+                            required
+                          />
+                        </div>
+                   </div>
+                 </div>
+               </div>
               <div class="p-3 d-flex justify-content-end">
                 <button
                   class="btn btn-success btn-lg font-weight-bold"

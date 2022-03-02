@@ -21,7 +21,7 @@ export const  actions = {
         commit("setCategories",response.data.categories);
         commit("setFeatGigs",response.data.featGigs);
       } else{
-        // set error here
+        console.log("HomeList error");
       }
     },
 

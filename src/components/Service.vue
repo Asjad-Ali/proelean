@@ -2,7 +2,7 @@
   <div class="card h-100">
     <!-- {{imgURL}} -->
     <router-link :to="{name:'gigDetail', params:{id:service.id}}">
-      <img class="img-fluid" :src="'https://api.dex.proelean.com/'+service.service_media[0].media"  />
+      <img class="img-fluid" :src="imgURL+'/'+service.service_media[0].media"  />
     </router-link>
     <div class="inner-slider">
       <div class="inner-wrapper d-flex flex-column align-content-between">
@@ -11,7 +11,7 @@
             <img
               class="img-fluid"
               
-              :src="'https://api.dex.proelean.com/'+service.service_user.image"
+              :src="`${imgURL}/${service.service_user ? service.service_user.image : '/assets/images/avator.png'}`"
               alt="img"
             />
           </span>
@@ -50,6 +50,7 @@
         </div>
         <div class="footer">
           <a
+          :class="{'disable': service.service_user.id === $store.getters.getAuthUser.id}"
           @click="handleWishlist(service.id)" >
               <i class="fa fa-heart cursor-pointer" :class="{ redIcon : service.favourite}"   aria-hidden="true"></i>
           </a>
@@ -98,5 +99,8 @@ export default {
 }
 .redIcon{
   color: red !important;
+}
+.disable{
+visibility: hidden
 }
 </style>
