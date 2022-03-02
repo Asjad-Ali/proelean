@@ -5,240 +5,225 @@ import useToast from '@/composables/useToast.js'
 var page = 1;
 
 export const state = {
-  sellerReview:[],
-  userServices:[],
-  wishlistServices:[],
-  userOtherServices:[],
-  s_Loader:'',
-  userSingleService:{},
-  createGigData:'',
-  deleteService:'',
-  loadingStatus:'',
-  servicesHasNextPage:'',
-  reviewsHasNextPage:'',
+  sellerReview: [],
+  userServices: [],
+  userOtherServices: [],
+  s_Loader: '',
+  userSingleService: {},
+  createGigData: '',
+  deleteService: '',
+  loadingStatus: '',
+  servicesHasNextPage: '',
+  reviewsHasNextPage: '',
   error: null,
-  buyerRequests:[],
+  buyerRequests: [],
 }
 
 export const getters = {
-  getUserServices : state => state.userServices,
-  getUserOtherServices : state => state.userOtherServices,
-  getSellerLoader : state => state.s_Loader,
-  getSingleService : state => state.userSingleService,
-  getUserServicesStatus : state => state.userServicesStatus,
+  getUserServices: state => state.userServices,
+  getUserOtherServices: state => state.userOtherServices,
+  getSellerLoader: state => state.s_Loader,
+  getSingleService: state => state.userSingleService,
+  getUserServicesStatus: state => state.userServicesStatus,
   getSellerReview: state => state.sellerReview,
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
-  getWishlist: state => state.wishlistServices,
 }
 
 
-export const  mutations = {
+export const mutations = {
 
-  setUserServices(state,services){
-    state.userServices=services;
+  setUserServices(state, services) {
+    state.userServices = services;
   },
-  setUserOtherServices(state,services){
-    state.userOtherServices=services;
+  setUserOtherServices(state, services) {
+    state.userOtherServices = services;
   },
-  setSingleService(state,service){
-    state.userSingleService=service;
+  setSingleService(state, service) {
+    state.userSingleService = service;
   },
-  setReviews(state,reviews) {
+  setReviews(state, reviews) {
     reviews.forEach(review => state.sellerReview.push(review));
   },
-  setServicesLoadingStatus(state,status) {
+  setServicesLoadingStatus(state, status) {
     state.loadingStatus = status
   },
-  setServicesNextPage(state,nextPage) {
+  setServicesNextPage(state, nextPage) {
     state.servicesHasNextPage = nextPage
   },
-  setReviewsNextPage(state,nextPage) {
+  setReviewsNextPage(state, nextPage) {
     state.reviewsHasNextPage = nextPage
   },
-  setError(state,error) {
-    state.error=error;
+  setError(state, error) {
+    state.error = error;
   },
-  setCreateGig(state,createGigD) {
-    state.createGigData=createGigD;
+  setCreateGig(state, createGigD) {
+    state.createGigData = createGigD;
   },
-  setDeleteGig(state,deletGig) {
-    state.deleteService=deletGig;
+  setDeleteGig(state, deletGig) {
+    state.deleteService = deletGig;
   },
-  setBuyerRequests(state,request) {
-    state.buyerRequests=request;
+  setBuyerRequests(state, request) {
+    state.buyerRequests = request;
   },
-  setSellerLoader(state,loaderVal){
+  setSellerLoader(state, loaderVal) {
     state.s_Loader = loaderVal
-  },
-  setWishlist(state,data){
-    state.wishlistServices = data
   }
 }
 
-export const  actions = {
+export const actions = {
 
-  async userServices({commit,state},action)
-  {
-    commit('setSellerLoader',1);
-    commit('setServicesLoadingStatus','LOADING');
-    if(!state.userServices || page>=1) {
-      if(action === ''){
+  async userServices({ commit, state }, action) {
+    commit('setSellerLoader', 1);
+    commit('setServicesLoadingStatus', 'LOADING');
+    if (!state.userServices || page >= 1) {
+      if (action === '') {
         page = 1;
       }
-      else if(action === 'next') {
+      else if (action === 'next') {
         page++;
       }
-      else{
-          page--;
+      else {
+        page--;
       }
-      const res= await Api.get(`seller/services?page=${page}`);
-      if(res.status===200) {
-        commit('setSellerLoader',0);
-        commit("setUserServices",res.data);
-        commit('setServicesNextPage',res.links.next ?? '');
-        commit('setServicesLoadingStatus','COMPLETED');
-        console.log("User Services",res.data);
+      const res = await Api.get(`seller/services?page=${page}`);
+      if (res.status === 200) {
+        commit('setSellerLoader', 0);
+        commit("setUserServices", res.data);
+        commit('setServicesNextPage', res.links.next ?? '');
+        commit('setServicesLoadingStatus', 'COMPLETED');
+        console.log("User Services", res.data);
       } else {
         console.log(res);
       }
     }
   },
 
-  async userSingleService({commit, state, dispatch},payload)
-  {
+  async userSingleService({ commit, state, dispatch }, payload) {
     let service = null;
-    if(!state.userServices.length) {
+    if (!state.userServices.length) {
       const res = await Api.get(`seller/services/${payload.id}`);
-      if(res.status===200) {
+      if (res.status === 200) {
         service = res.data;
       } else {
         console.log(res);
-      }      
+      }
     } else {
       service = state.userServices.find(service => service.id === payload.id);
     }
-    
-    commit("setSingleService",service);
-    if(payload.type==="ONUPDATE") {
+
+    commit("setSingleService", service);
+    if (payload.type === "ONUPDATE") {
       dispatch("loadSubCategories", service.category.id);
     }
-    setTimeout(function() {
-      const tmpServices = ref(state.userServices.filter(service => service.id !== payload.id))
-      tmpServices.value = tmpServices.value.slice(0,3)
-      console.log("other services",tmpServices.value);
-      commit("setUserOtherServices",tmpServices.value)
-    }, 1500);
-  
+    if (payload.type === 'SERVICE_DETAIL') {
+      setTimeout(dispatch('getSellerServices', state.userSingleService.service_user.id), 1500);
+    }
   },
 
-  async getSellerReviews({commit})
-  {
+  async getSellerReviews({ commit }) {
     let getData = JSON.parse(localStorage.getItem("userInfo"))
-    console.log("reviews, in action id",getData.id)
-    const res= await Api.get(`seller/${getData.id}/reviews?page=${page}`);
-    if(res.status === 200) {
-      commit("setReviews",res.data);
-      commit('setReviewsNextPage',res.links.next ?? '')
-      console.log("Seller Reviews",res.data);
+    console.log("reviews, in action id", getData.id)
+    const res = await Api.get(`seller/${getData.id}/reviews?page=${page}`);
+    if (res.status === 200) {
+      commit("setReviews", res.data);
+      commit('setReviewsNextPage', res.links.next ?? '')
+      console.log("Seller Reviews", res.data);
     } else {
       console.log("Seller Reviews error");
-    }      
+    }
   },
 
-  async deleteService({commit, state},serviceID){
-    console.log("Delete ID",serviceID)
+  async deleteService({ commit, state }, serviceID) {
+    console.log("Delete ID", serviceID)
     const res = await Api.delete(`seller/services/${serviceID}`)
-    if(res.status === 200){
-      useToast(res.message,'success');  
+    if (res.status === 200) {
+      useToast(res.message, 'success');
       const tmpServices = ref(state.userServices.filter(service => service.id !== serviceID))
-      commit("setUserServices",tmpServices.value)
-    } 
-    else{
+      commit("setUserServices", tmpServices.value)
+    }
+    else {
       useToast(res.message);
     }
   },
 
-  async createService({commit},payload){
-    commit('setRegisterStatus',2);
-    const res = await Api.formData('seller/services',payload);
-    if(res.status === 201){
-      useToast("Service has been Created",'success');
-      commit("setCreateGig",res)
-      commit('setRegisterStatus',3);
+  async createService({ commit }, payload) {
+    commit('setRegisterStatus', 2);
+    const res = await Api.formData('seller/services', payload);
+    if (res.status === 201) {
+      useToast("Service has been Created", 'success');
+      commit("setCreateGig", res)
+      commit('setRegisterStatus', 3);
     }
-    else{
+    else {
       useToast(res.message);
-      commit('setRegisterStatus',4); 
+      commit('setRegisterStatus', 4);
     }
   },
 
-  async updateService({commit},updateServiceData){
-    commit('setRegisterStatus',2);
-    console.log("id",updateServiceData)
-    const res = await Api.formData(`seller/services/${updateServiceData.id}`,updateServiceData);
-    if(res.status === 200){
-      useToast("Service has been Updated Successfully",'success');
+  async updateService({ commit }, updateServiceData) {
+    commit('setRegisterStatus', 2);
+    console.log("id", updateServiceData)
+    const res = await Api.formData(`seller/services/${updateServiceData.id}`, updateServiceData);
+    if (res.status === 200) {
+      useToast("Service has been Updated Successfully", 'success');
       console.log
-      commit('setRegisterStatus',3);
+      commit('setRegisterStatus', 3);
     }
-    else{
+    else {
       useToast(res.message);
-      commit('setRegisterStatus',4); 
+      commit('setRegisterStatus', 4);
     }
   },
 
-  async showBuyerRequests({commit})
-  {
-    commit('setLoader',1);
+  async showBuyerRequests({ commit }) {
+    commit('setLoader', 1);
     let getData = JSON.parse(localStorage.getItem("userInfo"))
-    console.log("in action id: ",getData.id)
-      const res= await Api.get(`seller/buyer_requests`);
-      if(res.status === 200) {
-        commit("setBuyerRequests",res.data);
-        console.log("Buyer Requests",res.data);
-        commit('setLoader',0);
-      } else {
-        console.log("Buyer Requests error");
-      }      
-  },
-
-  async addBuyerRequests({commit})
-  {
-    const res= await Api.get(`seller/buyer_requests`);
-    if(res.status === 200) {
-      commit("setBuyerRequests",res.data);
-      console.log("Buyer Requests",res.data);
+    console.log("in action id: ", getData.id)
+    const res = await Api.get(`seller/buyer_requests`);
+    if (res.status === 200) {
+      commit("setBuyerRequests", res.data);
+      console.log("Buyer Requests", res.data);
+      commit('setLoader', 0);
     } else {
       console.log("Buyer Requests error");
     }
   },
 
-  async deleteBuyerJob({commit,state},id){
-    const res = await Api.delete(`seller/cancel_offer/${id}`);
-    if(res.status === 200){
-      useToast(res.message,'success');
-      const afterRemoveJob = ref(state.buyerRequests.filter(job => job.id !== id))
-      commit("setBuyerRequests",afterRemoveJob.value);
+  async addBuyerRequests({ commit }) {
+    const res = await Api.get(`seller/buyer_requests`);
+    if (res.status === 200) {
+      commit("setBuyerRequests", res.data);
+      console.log("Buyer Requests", res.data);
+    } else {
+      console.log("Buyer Requests error");
     }
-    else{
+  },
+
+  async deleteBuyerJob({ commit, state }, id) {
+    const res = await Api.delete(`seller/cancel_offer/${id}`);
+    if (res.status === 200) {
+      useToast(res.message, 'success');
+      const afterRemoveJob = ref(state.buyerRequests.filter(job => job.id !== id))
+      commit("setBuyerRequests", afterRemoveJob.value);
+    }
+    else {
       useToast(res.message);
     }
   },
 
-  async sendOffer({commit,dispatch},payload){
-    commit('setRegisterStatus',2);
-      const resp= await Api.post('seller/send_offer',payload);
-      if(resp.status==200){
-        useToast(resp.message,'success');
-        commit('setRegisterStatus',3);
-        dispatch("addBuyerRequests")
-      }
-      else
-      {
-        commit('setRegisterStatus',4);
-        useToast(resp.message);
-      }
-    },
+  async sendOffer({ commit, dispatch }, payload) {
+    commit('setRegisterStatus', 2);
+    const resp = await Api.post('seller/send_offer', payload);
+    if (resp.status == 200) {
+      useToast(resp.message, 'success');
+      commit('setRegisterStatus', 3);
+      dispatch("addBuyerRequests")
+    }
+    else {
+      commit('setRegisterStatus', 4);
+      useToast(resp.message);
+    }
+  },
 
 }
