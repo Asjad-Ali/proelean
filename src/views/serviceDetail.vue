@@ -18,7 +18,7 @@
 
                    <h3>Other Services I Offer</h3>
                    <div class="recommended d-flex flex-wrap justify-content-start">
-                    <ServiceList :services="otherServices" />
+                    <ServiceList :services="sellerOfferedServices" />
                    </div>
 
                   </div>
@@ -38,14 +38,14 @@ import { computed } from '@vue/runtime-core';
 import { onMounted } from '@vue/runtime-core';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
-import Gallery from '../components/singleService/Gallery.vue';
-import AboutService from '../components/singleService/AboutService.vue';
-import AboutSeller from '../components/singleService/AboutSeller.vue';
+import Gallery from '@/components/singleService/Gallery.vue';
+import AboutService from '@/components/singleService/AboutService.vue';
+import AboutSeller from '@/components/singleService/AboutSeller.vue';
 import ServiceList from '@/components/profile/ServiceListSection.vue';
-import Faq from '../components/singleService/Faq.vue';
+import Faq from '@/components/singleService/Faq.vue';
 import ReviewSection from "@/components/profile/SellerReviewsSection.vue";
-import ServiceCard from '../components/singleService/ServiceCard.vue';
-import PeopleViewProfile from '../components/singleService/PeopleViewProfile.vue';
+import ServiceCard from '@/components/singleService/ServiceCard.vue';
+import PeopleViewProfile from '@/components/singleService/PeopleViewProfile.vue';
 
 export default{
     name:"gigDetail",
@@ -64,17 +64,16 @@ export default{
     const route = useRoute();
     const payload = {
        "id": route.params.id,
-       "type": ""
+       "type": "SERVICE_DETAIL"
     }
     onMounted(() => {
-      store.dispatch("userServices",'');
       store.dispatch("userSingleService",payload);      
 
     })
 
     return {
         service: computed(()=>store.getters.getSingleService),
-        otherServices: computed(() => store.getters.getUserOtherServices)
+        sellerOfferedServices: computed(() => store.getters.getUserOtherServices)
     }
 }
 }

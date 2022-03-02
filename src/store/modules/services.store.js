@@ -1,5 +1,4 @@
 import Api from '@/services/API';
-import useToast from '@/composables/useToast.js'
 
 export const state = {
   services: [],
@@ -68,26 +67,13 @@ export const actions = {
     }
   },
 
-  async wishlist({commit},payload){
-    const resp = await Api.post('wishlist',payload)
-    if(resp.status == 200 ){
-      useToast(resp.message,'success');
-        commit('toggleFavourite',payload.service_id);
-      }
-    else{
-      useToast(resp.message);
+  async getSellerServices({ commit }, sellerID)
+  {
+    const res = await Api.get(`seller/services?seller=${sellerID}`);
+    if(res.status === 200) {
+      commit("setUserOtherServices",res.data)
     }
-    
   },
 
-  async showWishlist({commit}){
-    const resp = await Api.get('get_wishlist')
-    if(resp.status == 200){
-      commit('setWishlist',resp.data)
-      console.log("Wishlist Service",resp.data)
-    }
-    else{
-      console.log(resp.message)
-    }
-  },
+
 }

@@ -43,7 +43,7 @@
                      </div>
                      </div>
                   </div>
-                  <PaginationSection v-if="$store.getters.getCurrentPage > 0" />
+                  <PaginationSection v-if="$store.getters.getServices.length" />
                </div>
             </div>
          </div>
