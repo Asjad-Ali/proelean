@@ -79,7 +79,9 @@ export default{
        "id": route.params.id,
        "type": "SERVICE_DETAIL"
     }
-   onMounted(store.dispatch("userSingleService",payload))
+   onMounted(() => {
+    store.dispatch("userSingleService",payload)})
+
 
     return {
       service: computed(()=>store.getters.getSingleService),
