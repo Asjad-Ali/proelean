@@ -1,6 +1,6 @@
 import Api from '@/services/API'
-import { createToaster } from '@meforma/vue-toaster';
 import router from '@/router';
+import useToast from '@/composables/useToast.js'
 
 export const state = {
   status: { isLoggedIn: false },
@@ -34,13 +34,9 @@ export const mutations = {
 export const actions = {
   async login({ commit }, payload) {
     commit('setRegisterStatus', 2);
-    const toaster = createToaster()
     const resp = await Api.post('login', payload)
     if (resp.status == 200) {
-      toaster.success(resp.message, {
-        position: "top-right",
-        dismissible: true
-      });
+      useToast(resp.message,'success');
 
       ///////     date conversion
       const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -63,31 +59,22 @@ export const actions = {
     }
     else {
       commit('setRegisterStatus', 4);
-      toaster.error(resp.message, {
-        position: "top-right",
-        dismissible: true
-      });
+      useToast(resp.message);
+
     }
     return resp;
   },
   async register({ commit }, payload) {
     commit('setRegisterStatus', 2);
-    const toaster = createToaster()
     const resp = await Api.post('register', payload);
     if (resp.status == 201) {
-      toaster.success(resp.message, {
-        position: "top-right",
-        dismissible: true
-      });
+      useToast(resp.message,'success');
       commit('setRegisterStatus', 3);
       router.push('login');
     }
     else {
       commit('setRegisterStatus', 4);
-      toaster.error(resp.message, {
-        position: "top-right",
-        dismissible: true
-      });
+      useToast(resp.message);
     }
     return resp;
   },
@@ -95,42 +82,28 @@ export const actions = {
   async forgotPassword({ commit }, payload) {
     console.log("Email", payload)
     commit('setRegisterStatus', 2);
-    const toaster = createToaster()
     const resp = await Api.post('forgot_password', payload)
     if (resp.status == 200) {
-      toaster.success(resp.message, {
-        position: "top-right",
-        dismissible: true
-      });
+      useToast(resp.message,'success');
       commit('setRegisterStatus', 3);
       commit('setForgotPasswordSection', true)
     }
     else {
       commit('setRegisterStatus', 4);
-      toaster.error(resp.message, {
-        position: "top-right",
-        dismissible: true
-      });
+      useToast(resp.message);
     }
   },
   async changePassword({ commit }, payload) {
     console.log("Email", payload)
     commit('setRegisterStatus', 2);
-    const toaster = createToaster()
     const resp = await Api.post('change_password', payload)
     if (resp.status == 200) {
-      toaster.success(resp.message, {
-        position: "top-right",
-        dismissible: true
-      });
+      useToast(resp.message,'success');
       commit('setRegisterStatus', 3);
       router.push('login');
     } else {
       commit('setRegisterStatus', 4);
-      toaster.error(resp.message, {
-        position: "top-right",
-        dismissible: true
-      });
+      useToast(resp.message,'success');
     }
   }
 }
