@@ -1,5 +1,5 @@
 import Api from '@/services/API'
-import { createToaster } from '@meforma/vue-toaster';
+import useToast from '@/composables/useToast.js'
 import router from '@/router';
 
 
@@ -62,19 +62,12 @@ export const  actions = {
       console.log(payload)
       state.submitLoader = true;
       const res = await Api.formData('become_freelancer',payload);
-      const toaster = createToaster();
       if(res.status === 201) {
         commit('setUserAsSeller');
-        toaster.success(res.message,{
-          position:"top-right",
-          dismissible: true
-        });
+        useToast(res.message,'success');
         router.go()
       } else {
-        toaster.error(res.message,{
-          position:"top-right",
-          dismissible: true
-        });
+        useToast(res.message);
       }
       state.submitLoader = false;
     },
