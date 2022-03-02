@@ -39,11 +39,11 @@
                         v-if="!$store.getters.getServices.length && $store.getters.getLoadingStatus==='COMPLETED'" 
                      >
                      <div class="d-flex justify-content-center align-item-center">
-                        No service found against {{ $route.query.q ?? $route.query.category }}
+                        No service found against {{ $route.params.slug }}
                      </div>
                      </div>
-                     <PaginationSection />
                   </div>
+                  <PaginationSection v-if="$store.getters.getCurrentPage > 0" />
                </div>
             </div>
          </div>
@@ -59,7 +59,7 @@ import PaginationSection from '@/components/services/ServicePagination.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
 import Loader from '@/components/loadingComponent.vue';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-import { onMounted } from '@vue/runtime-core';
+import { computed, onMounted } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 
 export default {
@@ -75,11 +75,15 @@ export default {
       const route = useRoute();
 
       onBeforeRouteUpdate((to, from) => {
-         if(to.params && to.params.slug !== from.params.slug) {
+         if(to.params.slug !== from.params.slug) {
             store.dispatch('searchServices',`search?q=${ to.params.slug ? to.params.slug : ''}`)
+            store.dispatch('setPage',1);
          }
       })
       onMounted(store.dispatch('searchServices',`search?q=${ route.params.slug ? route.params.slug : ''}`))
+      return {
+         isNextPage: computed(()=>store.getters.getNextPage)
+      }
    }
 }
 </script>

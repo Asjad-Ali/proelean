@@ -5,15 +5,16 @@ export const state = {
   services: [],
   servicesStatus: null,
   error: null,
-  page: 1,
-  url: '',
+  hasNextpage: false,
+  currentPage: 0,
   loadingStatus: ''
 }
 
 export const getters = {
   getServices: state => state.services,
   getLoadingStatus: state => state.loadingStatus,
-  getCurrentPage: state => state.page,
+  getCurrentPage: state => state.currentPage,
+  getNextPage: state => state.hasNextpage,
 }
 
 export const mutations = {
@@ -24,14 +25,14 @@ export const mutations = {
   setError(state, error) {
     state.error = error;
   },
-  setNextPage(state, page) {
-    state.page = page;
+  setNextPage(state, hasNextpage) {
+    state.hasNextpage = hasNextpage;
+  },
+  setCurrentPage(state,page) {
+    state.currentPage = page;
   },
   setLoadingStatus(state, status) {
     state.loadingStatus = status;
-  },
-  setInitialUrl(state, url) {
-    state.url = url;
   },
   toggleFavourite(state,serviceId){
     state.services.forEach(service => {
@@ -50,15 +51,10 @@ export const actions = {
     const res = await Api.get(search);
     if (res.status === 200) {
       commit("setServices", res.data);
-
-      if (res.links && res.links.next) {
-        commit('setNextPage', state.page + 1);
-        commit('setInitialUrl', search);
-      } else {
-        commit('setNextPage', 1);
-      }
-      commit('setLoadingStatus', 'COMPLETED');
+      commit('setCurrentPage', res.meta.current_page ?? state.currentPage);
+      commit('setNextPage', res.links.next ? true : false);
     }
+    commit('setLoadingStatus', 'COMPLETED');
   },
 
   async searchServicesByCategoryId({ commit }, categoryID) {
@@ -67,7 +63,6 @@ export const actions = {
     if (res.status === 200) {
       commit("setServices", res.data);
       commit("setServicesStatus", true);
-      console.log("services", res);
     } else {
       commit("setServicesStatus", false);
     }
