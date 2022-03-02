@@ -21,13 +21,16 @@ export const mutations = {
 
 export const actions = {
   async wishlist({ commit }, payload) {
+    commit('setRegisterStatus', payload.service_id);
     const resp = await Api.post('wishlist', payload)
     if (resp.status == 200) {
       useToast(resp.message, 'success');
       commit('toggleFavourite', payload.service_id);
+      commit('setRegisterStatus', 3);
     }
     else {
       useToast(resp.message);
+      commit('setRegisterStatus', 4);
     }
 
   },
