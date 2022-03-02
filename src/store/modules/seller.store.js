@@ -1,10 +1,8 @@
 import Api from '@/services/API';
 import { ref } from 'vue';
-import showToast from '@/composables/showToast.js'
-import { createToaster } from '@meforma/vue-toaster';
+import useToast from '@/composables/useToast.js'
 
 var page = 1;
-
 
 export const state = {
   sellerReview:[],
@@ -147,60 +145,44 @@ export const  actions = {
   },
 
   async deleteService({commit, state},serviceID){
-    const toaster = createToaster()
     console.log("Delete ID",serviceID)
     const res = await Api.delete(`seller/services/${serviceID}`)
-    if(res.status === 200){  
-      toaster.success(res.message,{
-        position:"top-right",
-        dismissible: true
-      });
+    if(res.status === 200){
+      useToast(res.message,'success');  
       const tmpServices = ref(state.userServices.filter(service => service.id !== serviceID))
       commit("setUserServices",tmpServices.value)
     } 
     else{
-        toaster.error(res.message,{
-          position:"top-right",
-          dismissible: true});
+      useToast(res.message);
     }
   },
 
   async createService({commit},payload){
     commit('setRegisterStatus',2);
-    const toaster = createToaster()
     const res = await Api.formData('seller/services',payload);
     if(res.status === 201){
-      toaster.success("Service has been Created",{
-        position:"top-right",
-        dismissible: true});
+      useToast("Service has been Created",'success');
       commit("setCreateGig",res)
       commit('setRegisterStatus',3);
     }
     else{
-      toaster.error(res.message,{
-        position:"top-right",
-        dismissible: true});
-        commit('setRegisterStatus',4); 
+      useToast(res.message);
+      commit('setRegisterStatus',4); 
     }
   },
 
   async updateService({commit},updateServiceData){
     commit('setRegisterStatus',2);
     console.log("id",updateServiceData)
-    const toaster = createToaster()
     const res = await Api.formData(`seller/services/${updateServiceData.id}`,updateServiceData);
     if(res.status === 200){
-      toaster.success("Service has been Updated Successfully",{
-        position:"top-right",
-        dismissible: true});
-        console.log
+      useToast("Service has been Updated Successfully",'success');
+      console.log
       commit('setRegisterStatus',3);
     }
     else{
-      toaster.error(res.message,{
-        position:"top-right",
-        dismissible: true});
-        commit('setRegisterStatus',4); 
+      useToast(res.message);
+      commit('setRegisterStatus',4); 
     }
   },
 
@@ -209,11 +191,11 @@ export const  actions = {
   async wishlist({commit},payload){
     const resp = await Api.post('wishlist',payload)
     if(resp.status == 200 ){
-      showToast(resp.message,'success');
+      useToast(resp.message,'success');
         commit('toggleFavourite',payload.service_id);
       }
     else{
-      showToast(resp.message);
+      useToast(resp.message);
     }
     
   },
@@ -256,41 +238,29 @@ export const  actions = {
   },
 
   async deleteBuyerJob({commit,state},id){
-    const toaster = createToaster()
     const res = await Api.delete(`seller/cancel_offer/${id}`);
     if(res.status === 200){
-      console.log("delete Buyer Job successfully",res.message)
-      toaster.success(res.message,{
-        position:"top-right",
-        dismissible: true});
+      useToast(res.message,'success');
       const afterRemoveJob = ref(state.buyerRequests.filter(job => job.id !== id))
       commit("setBuyerRequests",afterRemoveJob.value);
     }
     else{
-      console.log("Error delete Job");
-      toaster.error(res.message,{
-        position:"top-right",
-        dismissible: true});
+      useToast(res.message);
     }
   },
 
   async sendOffer({commit,dispatch},payload){
     commit('setRegisterStatus',2);
-      const toaster = createToaster()
       const resp= await Api.post('seller/send_offer',payload);
       if(resp.status==200){
-        toaster.success(resp.message,{
-          position:"top-right",
-          dismissible: true});
+        useToast(resp.message,'success');
         commit('setRegisterStatus',3);
         dispatch("addBuyerRequests")
       }
       else
       {
         commit('setRegisterStatus',4);
-        toaster.error(resp.message,{
-          position:"top-right",
-          dismissible: true});
+        useToast(resp.message);
       }
     },
 
