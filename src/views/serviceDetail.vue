@@ -25,7 +25,7 @@
                      :key="offeredService.id"
                      v-else
                      >
-                     <ServiceList :service="offeredService" />
+                     <Service :service="offeredService" />
                      </div>
                   </div>
 
@@ -51,7 +51,7 @@ import { useStore } from 'vuex';
 import Gallery from '@/components/singleService/Gallery.vue';
 import AboutService from '@/components/singleService/AboutService.vue';
 import AboutSeller from '@/components/singleService/AboutSeller.vue';
-import ServiceList from '@/components/Service.vue';
+import Service from '@/components/Service.vue';
 import Faq from '@/components/singleService/Faq.vue';
 import ReviewSection from "@/components/profile/SellerReviewsSection.vue";
 import ServiceCard from '@/components/singleService/ServiceCard.vue';
@@ -65,7 +65,7 @@ export default{
     Gallery,
     AboutService,
     AboutSeller,
-    ServiceList,
+    Service,
     Faq,
     ReviewSection,
     ServiceCard,
@@ -79,7 +79,14 @@ export default{
        "id": route.params.id,
        "type": "SERVICE_DETAIL"
     }
-   onMounted(store.dispatch("userSingleService",payload))
+   onMounted(() => {
+         window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+         })
+      store.dispatch("userSingleService",payload)
+   })
 
     return {
       service: computed(()=>store.getters.getSingleService),

@@ -2,11 +2,9 @@
     <div class="slider mt-4" v-if="serviceMedia">
         <div class="gallery-container">
         <div id="aniimated-thumbnials" class="slider-for slick-slider-single">
-        <a href="images/list/v1.png">
         <img  class="img-fluid img-thumbnail gm-image" 
             :src="`${imgURL}/${serviceMedia[imageIndex].media}` ?? '/assets/images/banner.png'"
             />
-        </a>
         </div>
         </div>
         <div v-if="serviceMedia[1]" class="slider-nav slick-slider-single d-flex flex-row py-3">

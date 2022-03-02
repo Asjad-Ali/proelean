@@ -25,9 +25,9 @@
             </span> -->
           </span>
         </div>
-        <h3>
-          {{ service.s_description.substr(0, 125) }}
-          <!-- {{ ( service.s_description.length > 125) ? '' : new Array(125 - service.s_description.length).join('c')}} -->
+        <h3 style="overflow: hidden; height: 3rem;">
+          <!-- {{ service.s_description.substr(0, 125) }} -->
+          {{service.s_description.substr(0, 75)}}{{service.s_description.length > 20 ? '...' : ''}}
         </h3>
         <div class="content-info">
           <div class="rating-wrapper">
@@ -52,7 +52,9 @@
           <a
           :class="{'disable': service.service_user.id === $store.getters.getAuthUser.id}"
           @click="handleWishlist(service.id)" >
-              <i class="fa fa-heart cursor-pointer" :class="{ redIcon : service.favourite}"   aria-hidden="true"></i>
+              <i class="fa fa-spinner fa-spin" v-if="loader==service.id"></i>
+              <i v-else  class="fa fa-heart cursor-pointer" :class="{ redIcon : service.favourite}"
+              :disabled="loader===service.id"   aria-hidden="true"></i>
           </a>
 
           <div class="price">
@@ -68,6 +70,7 @@
 
 <script>
 import { useStore } from 'vuex';
+import { onMounted, computed } from 'vue';
 export default {
   props: {
     service: {
@@ -82,10 +85,11 @@ export default {
       let payload = {
         'service_id': id
       }
-      store.dispatch('wishlist',payload)
+      onMounted(store.dispatch('wishlist',payload))
     }
     return {
       handleWishlist,
+      loader: computed(() => store.getters.getRegisterStatus),
       imgURL: process.env.VUE_APP_URL
     };
   },
