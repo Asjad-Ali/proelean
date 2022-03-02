@@ -17,11 +17,19 @@ import UpdateService from '@/components/seller/UpdateService.vue'
 import BuyerRequests from '@/components/seller/BuyerRequestSection.vue'
 
 
+import SellerDashboard from '@/components/SellerDashboard.vue'
+
+
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/seller-dashboard',
+    name: 'SellerDashboard',
+    component: SellerDashboard,
   },
   {
     path: '/login',
