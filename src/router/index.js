@@ -17,7 +17,10 @@ import UpdateService from '@/components/seller/UpdateService.vue'
 import BuyerRequests from '@/components/seller/BuyerRequestSection.vue'
 
 
-import SellerDashboard from '@/components/SellerDashboard.vue'
+// import SellerOldDashboard from '@/components/SellerDashboard.vue'
+import SellerDashboard from '@/views/Seller/Dashboard.vue'
+import SellerGigs from '@/views/Seller/Gigs.vue'
+import SellerOrders from '@/views/Seller/Orders.vue'
 
 
 const routes = [
@@ -27,9 +30,20 @@ const routes = [
     component: Home,
   },
   {
+    path: '/seller-orders',
+    name: 'SellerOrders',
+    component: SellerOrders,
+  },
+ 
+  {
     path: '/seller-dashboard',
     name: 'SellerDashboard',
     component: SellerDashboard,
+  },
+  {
+    path: '/seller-gigs',
+    name: 'SellerGigs',
+    component: SellerGigs,
   },
   {
     path: '/login',

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <TopNav />
+  <div v-if=" $route.path!=='/dashboard' || $store.getters.isBuyerMode">
+    <TopNav/>
     <div class="d-none d-lg-block">
 
       <BottomNav v-if="isAuthenticated" />
@@ -11,6 +11,10 @@
       <MobileBottomNav/>
     </div>
   </div>
+
+  <div v-else>
+    <SellerHeader />
+  </div>
 </template>
 
 
@@ -20,17 +24,21 @@ import BottomNav from "./components/layouts/BottomNav.vue";
 import Footer from "./components/layouts/Footer.vue";
 import MobileBottomNav from "./components/layouts/MobileBottomNav.vue";
 
+import SellerHeader from "./components/layouts/Seller/Header.vue";
+
 export default {
   name: "App",
   components: {
     TopNav,
     BottomNav,
     Footer,
-    MobileBottomNav
+    MobileBottomNav,
+    SellerHeader
   },
   setup() {
     return {
       isAuthenticated: localStorage.getItem("PROELEAN_TOKEN"),
+
     };
   },
 };
