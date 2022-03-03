@@ -8,11 +8,11 @@
 <section>
     <div class="row">
       <!--ADD CLASSES HERE d-flex align-items-stretch-->
-      <div class="col-lg-3  mb-3 d-flex align-items-stretch" v-for="category in $store.getters.getCategories" :key="category.id">
-        <div class="card">
+      <div class="col-lg-3 d-flex align-items-stretch justify-content-center" v-for="category in $store.getters.getCategories" :key="category.id">
+        <div class="card shadow-none">
           <router-link :to="{name:'Gigs', params:{slug: category.slug}}">
           <img :src="`${category.banner.includes('https') || category.banner.includes('http') ? category.banner : imgURL+'/'+category.banner}`" class="card-img-top" alt="Card Image">
-          <div class="card-body d-flex flex-column">
+          <div class="card-body d-flex flex-column margn">
             <h5 class="card-title">{{ category.title }}</h5>
           </div>
           </router-link>
@@ -72,8 +72,11 @@
 
 <style scoped>
 .card img{
-   max-height: 200px;
-   width: 100%;
+   height: 200px;
+   width: 280px;
    object-fit: cover;
+}
+.margn{
+   margin-bottom: -10px;
 }
 </style>

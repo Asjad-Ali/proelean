@@ -86,11 +86,6 @@ export default {
       type: "SERVICE_DETAIL",
     };
     onMounted(() => {
-      window.scroll({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
       store.dispatch("userSingleService", payload);
     });
 
