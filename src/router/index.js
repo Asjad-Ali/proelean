@@ -91,7 +91,7 @@ const routes = [
   {
     path: '/gigs/:slug?',
     name: 'Gigs',
-    component: () => import('../views/Services.vue'),
+    component: () => import(/* webpackChunkName: "services" */'@/views/Services.vue'),
   },
   {
     path: '/gig-detail/:id',
@@ -99,9 +99,14 @@ const routes = [
     component: ServiceDetail,
   },
   {
+    path:'/notifications',
+    name: 'Notification',
+    component: () => import(/* webpackChunkName: "notifications" */ '@/views/Notification.vue')
+  },
+  {
     path: '/chat',
     name: 'Chat',
-    component: () => import('../views/Chat.vue'),
+    component: () => import(/* webpackChunkName: "chat" */'@/views/Chat.vue'),
   },
 ]
 
