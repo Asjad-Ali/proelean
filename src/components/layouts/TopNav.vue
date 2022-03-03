@@ -128,7 +128,7 @@
                       <div class="dropdown-notifications-item-content-details">{{ $filters.timeAgo( notification.created_at ) }}</div>
                    </div>
                 </a>
-                <a class="dropdown-item dropdown-notifications-footer" href="alerts.html">View All Alerts</a>
+                <router-link class="dropdown-item dropdown-notifications-footer" to="/notifications">View All Notification</router-link>
              </div>
           </li>
           <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications d-none d-lg-block">
