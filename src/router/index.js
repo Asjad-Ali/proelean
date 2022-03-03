@@ -7,14 +7,14 @@ import BecomeSeller from '@/views/Become-Seller.vue'
 import Profile from '@/views/Profile.vue'
 import ServiceDetail from '@/views/ServiceDetail.vue'
 
-import CreateJob from '@/components/buyer/CreateJob.vue'
-import Jobs from '@/components/buyer/AllJobs.vue'
-import AllOrders from '@/components/buyer/AllOrders.vue'
+import CreateJob from '@/views/Buyer/CreateJob.vue'
+import Jobs from '@/views/Buyer/AllJobs.vue'
+import AllOrders from '@/views/Buyer/AllOrders.vue'
 
-import CreateService from '@/components/seller/CreateService.vue'
-import ManageService from '@/components/seller/ManageService.vue'
-import UpdateService from '@/components/seller/UpdateService.vue'
-import BuyerRequests from '@/components/seller/BuyerRequestSection.vue'
+import CreateService from '@/views/Seller/CreateService.vue'
+import ManageService from '@/views/Seller/ManageService.vue'
+import UpdateService from '@/views/Seller/UpdateService.vue'
+import BuyerRequests from '@/views/Seller/BuyerRequestSection.vue'
 
 
 // import SellerOldDashboard from '@/components/SellerDashboard.vue'
@@ -113,7 +113,7 @@ const routes = [
   {
     path: '/gigs/:slug?',
     name: 'Gigs',
-    component: () => import('../views/Services.vue'),
+    component: () => import(/* webpackChunkName: "services" */'@/views/Services.vue'),
   },
   {
     path: '/gig-detail/:id',
@@ -121,9 +121,14 @@ const routes = [
     component: ServiceDetail,
   },
   {
+    path:'/notifications',
+    name: 'Notification',
+    component: () => import(/* webpackChunkName: "notifications" */ '@/views/Notification.vue')
+  },
+  {
     path: '/chat',
     name: 'Chat',
-    component: () => import('../views/Chat.vue'),
+    component: () => import(/* webpackChunkName: "chat" */'@/views/Chat.vue'),
   },
 ]
 
@@ -134,8 +139,13 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {  
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+  
   var isAuthenticated = localStorage.getItem('PROELEAN_TOKEN') ? true : false;
-
   if (['/login', '/register', '/forgot'].includes(to.path) || isAuthenticated) {
     next(); // allow to enter route
   } else {

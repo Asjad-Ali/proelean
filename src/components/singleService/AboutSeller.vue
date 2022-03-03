@@ -4,7 +4,7 @@
          <label class="profile-pict" for="profile_image">
          <img
             :src="`${imgURL}/${service.service_user.image}`"
-            class="profile-pict-img img-fluid" alt="">
+            class="profile-pict-img img-fluid" alt="img">
          </label>
          <div class="right">
             <div class="profile-name">
@@ -24,8 +24,8 @@
                      <i class="fa fa-star" aria-hidden="true"></i>
                      </span>
                   </div>
-                  <span class="total-rating-out-five">5.0</span>
-                  <span class="total-rating">(36 reviews)</span>
+                  <span class="total-rating-out-five">{{service.service_rating}}</span>
+                  <span class="total-rating">({{service.total_reviews}})</span>
                </span>
                <a href="#">Contact Me</a>
             </div>
