@@ -41,10 +41,12 @@ export const mutations = {
     state.userSingleService = service;
   },
   setSellerReviews(state, reviews) {
-    reviews.forEach(review => state.sellerReviews.push(review))
+    state.sellerReviews = reviews;
+    //reviews.forEach(review => state.sellerReviews.push(review))
   },
   setServiceReviews(state, reviews) {
-    reviews.forEach(review => state.serviceReviews.push(review))
+    state.serviceReviews = reviews;
+    //reviews.forEach(review => state.serviceReviews.push(review))
   },
   setServicesLoadingStatus(state, status) {
     state.loadingStatus = status

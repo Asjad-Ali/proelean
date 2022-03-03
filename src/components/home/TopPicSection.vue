@@ -1,7 +1,7 @@
 <template>
       <div class="container">
          <h2>
-            Top Pics For You
+            Top Picks For You
             <!-- <a href="#"  class="float-right ">See More ></a> -->
          </h2>
          <div class="row freelance-slider" v-if="$store.getters.getFeatGigs.length > 0">
@@ -14,8 +14,8 @@
                   </router-link>
                   <div class="freelancer-footer">
                      <img
-                        :src="`${imgURL}/${service.service_user.image}`"
-                        class="profile-pict-img img-fluid" alt="">
+                        :src="`${imgURL}/${service.service_user.image ? service.service_user.image : '/assets/images/avator.png'}`"
+                        class="profile-pict-img img-fluid" alt="img">
                      <h5>{{ service.s_description }}
                         <span>by <i>{{ service.service_user.username }}</i></span>
                      </h5>
