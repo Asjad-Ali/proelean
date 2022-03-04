@@ -1,12 +1,13 @@
 import Api from '@/services/API';
 import { ref } from 'vue';
 import useToast from '@/composables/useToast.js'
-
+//import { loadStripe } from '@stripe/stripe-js'
 
 export const state = {
     createJob:[],
     allJobs:[],
     allOrders:[],
+    service:{},
     loader: null
   }
 
@@ -14,7 +15,8 @@ export const getters = {
   getCreateJob : state => state.createJob,
   getAllJobs : state => state.allJobs,
   getAllOrders : state => state.allOrders,
-  getLoaderVal : state => state.loader
+  getService : state => state.service,
+  getLoaderVal : state => state.loader,
 }
 
 export const  mutations = {
@@ -26,6 +28,9 @@ export const  mutations = {
     },
     setAllOrders(state,order){
       state.allOrders=order;
+    },
+    setService(state,service){
+      state.service=service;
     },
     setLoader(state,loader){
       state.loader=loader;
@@ -87,6 +92,22 @@ export const  actions = {
         }
         else{
           console.log("Error All Orders");
+        }
+      },
+
+      async purchaseService({commit},payload){
+
+        const res = await Api.post('token',payload);
+        if(res.status === 200){
+          console.log("Service",res.data)
+          console.log("Service token:",res.token)
+          // const token = res.token;
+          commit("setService",res.data);
+          useToast('You purchased the service','success');
+        }
+        else{
+          useToast(res.message);
+          console.log("Error Service");
         }
       },
 
