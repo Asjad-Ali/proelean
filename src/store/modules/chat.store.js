@@ -1,56 +1,79 @@
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, where, onSnapshot } from "firebase/firestore";
 
 export const state = {
-    messages: [
-        {name: 'Waheed', photo: '/assets/images/user/s2.png', body: 'hey! wait a minute i am on it', sent_at: '04:52pm'},
-        {name: 'Jenkins', photo: '/assets/images/user/s1.png', body: 'why so serious larkay?', sent_at: '04:52am'},
-    ],
-    selectedChat:[],
+    selectedChat: {},
     error: null,
-    conversations:[],
+    conversations: [],
+    c_loadingStatus: ''
 }
 
 export const mutations = {
     setMessages(state, messages) {
         messages.forEach(msg => state.messages.push(msg));
     },
-    setSelectedChat(state,chat) {
-        state.selectedChat.push(chat)
+    setSelectedConversation(state, conversation) {
+        state.selectedChat = conversation
     },
     setError(state, error) {
         state.error = error;
     },
-    setConversations(state,conversations){
-        state.conversations= conversations;
+    setConversation(state, conversation) {
+        state.conversations.push(conversation);
+    },
+    updateConversation(state,updatedConv){
+        const conversations=state.conversations;
+        const index=conversations.findIndex(conv=>conv.id==updatedConv.id);
+        conversations.splice(index, 1);
+        conversations.unshift(updatedConv);
+       state.conversations=conversations;
+    },
+    setConversationLoadingStatus(state, status) {
+        state.c_loadingStatus = status;
     }
+
 }
 
 export const actions = {
-    async openSelectedChat({ commit, state },index) {
-        commit('setSelectedChat', state.messages[index])
+    async openSelectedChat({ commit, getters }, conversationID) {
+        const selectedConversation = getters.getConversations.find(conversation => conversation.id === conversationID)
+        commit('setSelectedConversation', selectedConversation)
     },
     async sendMessage({ commit }, msg) {
         // send msg to selected user
         commit("setSelectedChat", msg);
     },
-    async lookForConversationChanges ({ commit, state, getters }) {
+    async lookForConversationChanges({ commit, getters }) {
+        commit('setConversationLoadingStatus', 'LOADING');
         const db = getFirestore();
         const user = getters.getAuthUser;
         const conversationRef = collection(db, "Conversations");
         const q = query(conversationRef, where('members', 'array-contains', user.id));
-        const querySnapshot = await getDocs(q);
-        const conversations=[];
-        querySnapshot.forEach((doc) => {
-            const id=doc.id;
-            conversations.push({id , ...doc.data()});
-        });
 
-        commit('setConversations',conversations);
+
+        /*const unsubscribe = */ onSnapshot(q, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                const id=change.doc.id;
+                const convesation={id,...change.doc.data()};
+              if (change.type === "added") {
+                commit('setConversation', convesation);
+              }
+              if (change.type === "modified") {
+                  console.log("Modified Conversation: ", change.doc.data());
+                  commit('updateConversation', convesation);
+              }
+              if (change.type === "removed") {
+                  console.log("Removed Conversation: ", convesation);
+              }
+            });
+          });
+
+        commit('setConversationLoadingStatus', 'COMPLETED');
     }
 }
 
 export const getters = {
     getMessages: (state) => state.messages,
-    getSelectedUserChat: (state) => state.selectedChat,
-    getConversations: state=> state.conversations
+    getSelectedConversation: (state) => state.selectedChat,
+    getConversations: state => state.conversations,
+    getConversationListStatus: state => state.c_loadingStatus
 }
