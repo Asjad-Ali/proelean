@@ -2,13 +2,12 @@
   <div>
     <TopNav />
     <div class="d-none d-lg-block">
-
       <BottomNav v-if="isAuthenticated" />
     </div>
     <router-view :key="$route.fullPath" />
     <Footer />
     <div class="d-lg-none">
-      <MobileBottomNav/>
+      <MobileBottomNav />
     </div>
   </div>
 </template>
@@ -19,6 +18,9 @@ import TopNav from "./components/layouts/TopNav.vue";
 import BottomNav from "./components/layouts/BottomNav.vue";
 import Footer from "./components/layouts/Footer.vue";
 import MobileBottomNav from "./components/layouts/MobileBottomNav.vue";
+import { onMounted } from "@vue/runtime-core";
+import useFirebaseAuth from  '@/composables/Auth/useFirebaseAuth'
+import { useStore } from 'vuex'
 
 export default {
   name: "App",
@@ -26,9 +28,19 @@ export default {
     TopNav,
     BottomNav,
     Footer,
-    MobileBottomNav
+    MobileBottomNav,
   },
   setup() {
+    const store= useStore();
+    onMounted(() => {
+      const firebaseAuth= useFirebaseAuth();
+      firebaseAuth.checkAuthStatus();
+      
+      if(!store.getters.amILoggedInOnFirebase){
+        firebaseAuth.loginAnonymously();
+      }
+      
+    });
     return {
       isAuthenticated: localStorage.getItem("PROELEAN_TOKEN"),
     };
