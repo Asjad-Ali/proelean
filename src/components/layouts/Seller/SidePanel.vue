@@ -3,7 +3,7 @@
     id="app-sidepanel"
     class="app-sidepanel"
     :class="`${
-      sidePanelOpen || $store.getters.getScreenWidth > 500
+      sidePanelOpen || $store.getters.getScreenWidth > 1200
         ? 'sidepanel-visible'
         : 'sidepanel-hidden'
     }`"

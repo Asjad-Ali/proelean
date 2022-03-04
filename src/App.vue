@@ -48,6 +48,7 @@ export default {
   setup() {
     const store= useStore();
     onMounted(() => {
+      store.dispatch('updateScreenWidthOnResize');
       const firebaseAuth= useFirebaseAuth();
       firebaseAuth.checkAuthStatus();
       

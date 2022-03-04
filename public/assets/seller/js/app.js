@@ -20,30 +20,30 @@ const sidePanel = document.getElementById('app-sidepanel');
 const sidePanelDrop = document.getElementById('sidepanel-drop'); 
 const sidePanelClose = document.getElementById('sidepanel-close'); 
 
-window.addEventListener('load', function(){
-	responsiveSidePanel(); 
-});
+// window.addEventListener('load', function(){
+// 	responsiveSidePanel(); 
+// });
 
-window.addEventListener('resize', function(){
-	responsiveSidePanel(); 
-});
+// window.addEventListener('resize', function(){
+// 	responsiveSidePanel(); 
+// });
 
 
-function responsiveSidePanel() {
-    let w = window.innerWidth;
-	if(w >= 1200) {
-	    // if larger 
-	    //console.log('larger');
-		sidePanel.classList.remove('sidepanel-hidden');
-		sidePanel.classList.add('sidepanel-visible');
+// function responsiveSidePanel() {
+//     let w = window.innerWidth;
+// 	if(w >= 1200) {
+// 	    // if larger 
+// 	    //console.log('larger');
+// 		sidePanel.classList.remove('sidepanel-hidden');
+// 		sidePanel.classList.add('sidepanel-visible');
 		
-	} else {
-	    // if smaller
-	    //console.log('smaller');
-	    sidePanel.classList.remove('sidepanel-visible');
-		sidePanel.classList.add('sidepanel-hidden');
-	}
-};
+// 	} else {
+// 	    // if smaller
+// 	    //console.log('smaller');
+// 	    sidePanel.classList.remove('sidepanel-visible');
+// 		sidePanel.classList.add('sidepanel-hidden');
+// 	}
+// };
 
 
 // sidePanelToggler.addEventListener('click', () => {
@@ -76,22 +76,19 @@ function responsiveSidePanel() {
 const searchMobileTrigger = document.querySelector('.search-mobile-trigger');
 const searchBox = document.querySelector('.app-search-box');
 
-searchMobileTrigger.addEventListener('click', () => {
+// searchMobileTrigger.addEventListener('click', () => {
 
-	searchBox.classList.toggle('is-visible');
+// 	searchBox.classList.toggle('is-visible');
 	
-	let searchMobileTriggerIcon = document.querySelector('.search-mobile-trigger-icon');
+// 	let searchMobileTriggerIcon = document.querySelector('.search-mobile-trigger-icon');
 	
-	if(searchMobileTriggerIcon.classList.contains('fa-search')) {
-		searchMobileTriggerIcon.classList.remove('fa-search');
-		searchMobileTriggerIcon.classList.add('fa-times');
-	} else {
-		searchMobileTriggerIcon.classList.remove('fa-times');
-		searchMobileTriggerIcon.classList.add('fa-search');
-	}
-	
-		
-	
-});
+// 	if(searchMobileTriggerIcon.classList.contains('fa-search')) {
+// 		searchMobileTriggerIcon.classList.remove('fa-search');
+// 		searchMobileTriggerIcon.classList.add('fa-times');
+// 	} else {
+// 		searchMobileTriggerIcon.classList.remove('fa-times');
+// 		searchMobileTriggerIcon.classList.add('fa-search');
+// 	}	
+// });
 
 
