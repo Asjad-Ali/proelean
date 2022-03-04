@@ -8,12 +8,16 @@ export const state = {
   setPasswordSection: false,
   loginStatus: 1,
   registerStatus: 1,
-  user: JSON.parse(localStorage.getItem("userInfo"))
+  user: JSON.parse(localStorage.getItem("userInfo")),
+  firebaseUID: localStorage.getItem('proelean_firebase_uid'),
 }
 
 export const mutations = {
   setRegisterStatus(state, status) {
     state.registerStatus = status;
+  },
+  setFirebaseUID(state,uid){
+    state.firebaseUID = uid;
   },
 
   setError(state, error) {
@@ -112,6 +116,7 @@ export const getters = {
   getAuthUser: (state) => state.user,
   getRegisterStatus: state => state.registerStatus,
   getPasswordSection: state => state.setPasswordSection,
+  amILoggedInOnFirebase: state => state.firebaseUID ? true : false,
 }
 
 
