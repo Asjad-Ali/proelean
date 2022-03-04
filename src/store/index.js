@@ -8,6 +8,7 @@ import * as categories from './modules/categories.store'
 import * as buyer from './modules/buyer.store'
 import * as become_seller from './modules/become_seller.store'
 import * as wishlist from './modules/wishlist.store'
+import * as chat from './modules/chat.store'
 
 
 let user = JSON.parse(localStorage.getItem('userInfo'));
@@ -24,10 +25,21 @@ export default createStore({
     getUserNotifications : state => state.userNotifications,
     isBuyerMode : state => state.usermode == 'BUYER' ? true : false,
     getScreenWidth: state => state.screenWidth,
+    recentNotifications:[],
+    allNotifications:[],
+    usermode:'BUYER'
+  },
+  getters: {
+    getRecentNotifications : state => state.recentNotifications,
+    getAllNotifications : state => state.allNotifications,
+    isBuyerMode : state => state.usermode == 'BUYER' ? true : false
   },
   mutations: {
-    setNotification(state,notification) {
-      state.userNotifications=notification;
+    setRecentNotification(state,notification) {
+      state.recentNotifications=notification;
+    },
+    setAllNotification(state,notification) {
+      state.allNotifications=notification;
     },
     setScreenWidth(state,width) {
       state.screenWidth=width
@@ -40,7 +52,8 @@ export default createStore({
     async getNotification({commit}){
       const res = await Api.get('notification');
       if(res.status === 200){
-        commit("setNotification",res.notifications)
+        commit("setRecentNotification",res.notifications.slice(0,4))
+        commit("setAllNotification",res.notifications)
       }
       else{
         commit("setNotification",res.message)
@@ -56,6 +69,7 @@ export default createStore({
     categories,
     buyer,
     become_seller,
-    wishlist
+    wishlist,
+    chat
   }
 })

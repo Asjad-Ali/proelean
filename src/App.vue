@@ -28,6 +28,9 @@ import TopNav from "./components/layouts/TopNav.vue";
 import BottomNav from "./components/layouts/BottomNav.vue";
 import Footer from "./components/layouts/Footer.vue";
 import MobileBottomNav from "./components/layouts/MobileBottomNav.vue";
+import { onMounted } from "@vue/runtime-core";
+import useFirebaseAuth from  '@/composables/Auth/useFirebaseAuth'
+import { useStore } from 'vuex'
 
 import SellerHeader from "./components/layouts/Seller/Header.vue";
 import SellerFooter from "./components/layouts/Seller/Footer.vue";
@@ -43,6 +46,16 @@ export default {
     SellerFooter,
   },
   setup() {
+    const store= useStore();
+    onMounted(() => {
+      const firebaseAuth= useFirebaseAuth();
+      firebaseAuth.checkAuthStatus();
+      
+      if(!store.getters.amILoggedInOnFirebase){
+        firebaseAuth.loginAnonymously();
+      }
+      
+    });
     return {
       isAuthenticated: localStorage.getItem("PROELEAN_TOKEN"),
     };

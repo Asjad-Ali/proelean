@@ -116,17 +116,19 @@
                    </svg>
                    Alerts Center
                 </h6>
-                <a class="dropdown-item dropdown-notifications-item" href="#!" v-for="notification in userNotification" :key="notification.index">
+                <a class="dropdown-item dropdown-notifications-item d-flex justify-content-between" href="#!" v-for="notification in userNotification" :key="notification.index">
+                     <div class="d-flex justify-content-start">
                      <div class="dropdown-notifications-item-icon bg-warning">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
                          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                       </svg>
                    </div>
                    <div class="dropdown-notifications-item-content" >
-                      <div class="dropdown-notifications-item-content-text">{{ notification.name }}</div>
-                      <div>{{ notification.body }}</div>
-                      <div class="dropdown-notifications-item-content-details">{{ $filters.timeAgo( notification.created_at ) }}</div>
+                      <div >{{ notification.name }}</div>
+                      <div class="text-muted small">{{ notification.body }}</div>
                    </div>
+                    </div>
+                     <div class="text-muted small ml-2">{{ $filters.timeAgo( notification.created_at ) }}</div>
                 </a>
                 <router-link class="dropdown-item dropdown-notifications-footer" to="/notifications">View All Notification</router-link>
              </div>
@@ -344,10 +346,9 @@ export default {
       return {
          handleLogout,
          handleSearch,
-        
          keywords,
          userInfo: computed( () => store.getters.getAuthUser),
-         userNotification: computed( () => store.getters.getUserNotifications),
+         userNotification: computed( () => store.getters.getRecentNotifications),
          user: computed(() => store.getters.getAuthUser),
          imgURL: process.env.VUE_APP_URL,
          isBuyerMode: computed(() => store.getters.isBuyerMode),
