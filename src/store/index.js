@@ -8,6 +8,7 @@ import * as categories from './modules/categories.store'
 import * as buyer from './modules/buyer.store'
 import * as become_seller from './modules/become_seller.store'
 import * as wishlist from './modules/wishlist.store'
+import * as chat from './modules/chat.store'
 
 
 let user = JSON.parse(localStorage.getItem('userInfo'));
@@ -52,6 +53,7 @@ export default createStore({
     categories,
     buyer,
     become_seller,
-    wishlist
+    wishlist,
+    chat
   }
 })
