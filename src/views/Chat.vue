@@ -13,13 +13,15 @@
                                  <i class="fa fa-search position-absolute"></i>
                                  <input placeholder="Search messages" type="text" class="form-control">
                               </div>
-                              <div class="osahan-chat-list">
-                                 <!-- INBOX LIST -->
+                              <div class="osahan-chat-list" v-if="$store.getters.getConversationListStatus==='COMPLETED'">
                                  <ConversationList 
                                     v-for="conversation in $store.getters.getConversations" :conversation="conversation" :key="conversation.id" 
-                                    @click.prevent="handleSelectedChat(index)"
+                                    @click.prevent="handleSelectedChat(conversation.id)"
                                     style="cursor: pointer;"
                                  />
+                              </div>
+                              <div v-else>
+                                 <p>Loading...</p>
                               </div>
                            </div>
                         </div>
@@ -48,8 +50,8 @@ export default {
          store.dispatch('lookForConversationChanges');
       });
 
-      const handleSelectedChat = (index) => {
-         store.dispatch('openSelectedChat',index)
+      const handleSelectedChat = (conversationID) => {
+         store.dispatch('openSelectedChat',conversationID)
       }
       return {
          handleSelectedChat
