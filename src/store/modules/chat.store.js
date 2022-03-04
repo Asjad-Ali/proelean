@@ -33,7 +33,7 @@ export const actions = {
         // send msg to selected user
         commit("setSelectedChat", msg);
     },
-    async lookForConversationChanges ({ commit, state, getters }) {
+    async lookForConversationChanges ({ commit, getters }) {
         const db = getFirestore();
         const user = getters.getAuthUser;
         const conversationRef = collection(db, "Conversations");

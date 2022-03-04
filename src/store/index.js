@@ -18,16 +18,21 @@ export default createStore({
 
     isLoggedIn: localStorage.getItem('PROELEAN_TOKEN') ? true : false,
     isSeller: user && user.isFreelancer ? true : false,  
-    userNotifications:{},
+    recentNotifications:[],
+    allNotifications:[],
     usermode:'BUYER'
   },
   getters: {
-    getUserNotifications : state => state.userNotifications,
+    getRecentNotifications : state => state.recentNotifications,
+    getAllNotifications : state => state.allNotifications,
     isBuyerMode : state => state.usermode == 'BUYER' ? true : false
   },
   mutations: {
-    setNotification(state,notification) {
-      state.userNotifications=notification;
+    setRecentNotification(state,notification) {
+      state.recentNotifications=notification;
+    },
+    setAllNotification(state,notification) {
+      state.allNotifications=notification;
     },
     toggleUserMode(state){
       state.usermode = state.usermode =='BUYER' ? "SELLER" : "BUYER"
@@ -37,7 +42,8 @@ export default createStore({
     async getNotification({commit}){
       const res = await Api.get('notification');
       if(res.status === 200){
-        commit("setNotification",res.notifications)
+        commit("setRecentNotification",res.notifications.slice(0,4))
+        commit("setAllNotification",res.notifications)
       }
       else{
         commit("setNotification",res.message)
