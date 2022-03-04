@@ -44,9 +44,58 @@
                            <span class="ml-auto my-auto">
                               <div class="d-flex">
                               <div class="text-right text-muted ml-2">{{ $filters.timeAgo( notification.created_at ) }}</div>
-                              <!-- <div class="text-right text-muted ml-2">{{ notification.created_at  }}</div> -->
                                  <div>
-                                    <i class="mdi text-danger cursor-pointer mdi-delete fa-lg p-1 m-2"></i>
+                                    <i class="mdi text-danger cursor-pointer mdi-delete fa-lg p-1 m-2"
+                                       data-toggle="modal"
+                                       data-target="#exampleModalCenter"></i>
+                                 </div>
+                              <div
+                                 class="modal fade"
+                                 id="exampleModalCenter"
+                                 tabindex="-1"
+                                 role="dialog"
+                                 aria-labelledby="exampleModalCenterTitle"
+                                 aria-hidden="true"
+                              >
+                                 <div
+                                 class="modal-dialog modal-dialog-centered"
+                                 role="document"
+                                 >
+                                 <div class="modal-content">
+                                    <div
+                                       class="modal-header d-flex justify-content-center"
+                                    >
+                                       <h5
+                                       class="modal-title"
+                                       id="exampleModalLongTitle"
+                                       >
+                                       Delete Notification
+                                       </h5>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                       Are you sure you want to delete the service?
+                                    </div>
+                                    <div
+                                       class="modal-footer d-flex justify-content-center"
+                                    >
+                                       <button
+                                       type="button"
+                                       class="btn btn-secondary"
+                                       data-dismiss="modal"
+                                       >
+                                       No
+                                       </button>
+                                       <button
+                                       type="button"
+                                       class="btn btn-danger"
+                                       data-dismiss="modal"
+                                       @click="deleteNotification"
+                                       >
+                                       Yes
+                                       </button>
+                                    </div>
+                                 </div>
+                                 </div>
                               </div>
                               </div>
                            </span>
@@ -60,19 +109,16 @@
 </template>
 
 <script>
-
 import { computed } from "vue"
 import { useStore } from 'vuex'
 export default {
    setup(){
       const store = useStore()
-      // const timeNow= Date.now();
-      // const oneDay = 24 * 60 * 60 * 1000;
+      function deleteNotification () {
+         console.log("Deleted Successfully")
+      }
       return{
-         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-         // recentNotification: computed( () => store.getters.getUserNotifications.slice(0,5)),
-         // earlierNotification: computed( () => store.getters.getUserNotifications.map((n) => ({...n, created_at:(filters(n.created_at)) })))
-         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+         deleteNotification,
          earlierNotification: computed( () => store.getters.getAllNotifications),
       }
    }
