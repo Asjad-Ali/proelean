@@ -647,7 +647,7 @@ header .banner-img {
     padding-bottom: 0;
     width: calc(100% - 1.5rem);
     right: 0.75rem;
-    max-height: 19rem;
+    max-height: 29rem;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -773,7 +773,7 @@ header .banner-img {
     }
     .dropdown-notifications .dropdown-menu {
         width: auto;
-        min-width: 18.75rem;
+        min-width: 22.75rem;
         right: 0;
     }
     .dropdown-notifications
