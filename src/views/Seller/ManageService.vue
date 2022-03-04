@@ -22,19 +22,21 @@
               <span class="sr-only">Loading...</span>
             </div>
           </div>
-        <div v-for="service in services" :key="service.id"
+        <div v-else v-for="service in services" :key="service.id"
         class="card d-md-none shadow-sm border-primary">
           <div>
             <div class="gig-img-outer text-center">
-              <img
-                :src="
-                  service.service_media.length &&
-                  service.service_media[0].media
-                    ? `${imgURL}/${service.service_media[0].media}`
-                    : `/assets/images/sample-gig.png`"
-                class="img-full mb-2"
-                alt="..."
-              />
+              <router-link :to="{name:'gigDetail', params:{id:service.id}}">
+                <img
+                  :src="
+                    service.service_media.length &&
+                    service.service_media[0].media
+                      ? `${imgURL}/${service.service_media[0].media}`
+                      : `/assets/images/sample-gig.png`"
+                  class="img-full mb-2"
+                  alt="..."
+                />
+              </router-link>
             </div>
             <div class="container">
               <div class="row my-3">
@@ -165,15 +167,17 @@
                     :key="service.id"
                   >
                     <td>
-                      <img
-                        style="height: 120px; width: 220px"
-                        class="img-thumbnail border-0"
-                        :src="
-                          service.service_media.length &&
-                          service.service_media[0].media
-                            ? `${imgURL}/${service.service_media[0].media}`
-                            : `/assets/images/sample-gig.png`"
-                      />
+                      <router-link :to="{name:'gigDetail', params:{id:service.id}}">
+                        <img
+                          style="height: 120px; width: 220px"
+                          class="img-thumbnail border-0"
+                          :src="
+                            service.service_media.length &&
+                            service.service_media[0].media
+                              ? `${imgURL}/${service.service_media[0].media}`
+                              : `/assets/images/sample-gig.png`"
+                        />
+                      </router-link>
                     </td>
                     <td class="ps-1">
                       <div>
@@ -323,7 +327,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .loader {
   display: block;
 }

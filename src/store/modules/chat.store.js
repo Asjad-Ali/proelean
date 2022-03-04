@@ -42,7 +42,7 @@ export const actions = {
         // send msg to selected user
         commit("setSelectedChat", msg);
     },
-    async lookForConversationChanges({ commit, getters }) {
+    async lookForConversationChanges ({ commit, getters }) {
         commit('setConversationLoadingStatus', 'LOADING');
         const db = getFirestore();
         const user = getters.getAuthUser;
