@@ -14,19 +14,23 @@ let user = JSON.parse(localStorage.getItem('userInfo'));
 
 export default createStore({
   state: {
-
     isLoggedIn: localStorage.getItem('PROELEAN_TOKEN') ? true : false,
     isSeller: user && user.isFreelancer ? true : false,  
     userNotifications:{},
-    usermode:'BUYER'
+    usermode:'BUYER',
+    screenWidth: screen.width,
   },
   getters: {
     getUserNotifications : state => state.userNotifications,
-    isBuyerMode : state => state.usermode == 'BUYER' ? true : false
+    isBuyerMode : state => state.usermode == 'BUYER' ? true : false,
+    getScreenWidth: state => state.screenWidth,
   },
   mutations: {
     setNotification(state,notification) {
       state.userNotifications=notification;
+    },
+    setScreenWidth(state,width) {
+      state.screenWidth=width
     },
     toggleUserMode(state){
       state.usermode = state.usermode =='BUYER' ? "SELLER" : "BUYER"

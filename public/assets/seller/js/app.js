@@ -45,29 +45,30 @@ function responsiveSidePanel() {
 	}
 };
 
-sidePanelToggler.addEventListener('click', () => {
-	if (sidePanel.classList.contains('sidepanel-visible')) {
-		console.log('visible');
-		sidePanel.classList.remove('sidepanel-visible');
-		sidePanel.classList.add('sidepanel-hidden');
+
+// sidePanelToggler.addEventListener('click', () => {
+// 	if (sidePanel.classList.contains('sidepanel-visible')) {
+// 		console.log('visible');
+// 		sidePanel.classList.remove('sidepanel-visible');
+// 		sidePanel.classList.add('sidepanel-hidden');
 		
-	} else {
-		console.log('hidden');
-		sidePanel.classList.remove('sidepanel-hidden');
-		sidePanel.classList.add('sidepanel-visible');
-	}
-});
+// 	} else {
+// 		console.log('hidden');
+// 		sidePanel.classList.remove('sidepanel-hidden');
+// 		sidePanel.classList.add('sidepanel-visible');
+// 	}
+// });
 
 
 
-sidePanelClose.addEventListener('click', (e) => {
-	e.preventDefault();
-	sidePanelToggler.click();
-});
+// sidePanelClose.addEventListener('click', (e) => {
+// 	e.preventDefault();
+// 	sidePanelToggler.click();
+// });
 
-sidePanelDrop.addEventListener('click', (e) => {
-	sidePanelToggler.click();
-});
+// sidePanelDrop.addEventListener('click', (e) => {
+// 	sidePanelToggler.click();
+// });
 
 
 

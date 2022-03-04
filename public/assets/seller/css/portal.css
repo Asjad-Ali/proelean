@@ -577,6 +577,7 @@
 }
 
 .seller-app .app-sidepanel.sidepanel-hidden {
+   
     left: -400px
 }
 
@@ -810,7 +811,7 @@
     overflow-x: hidden
 }
 
-.seller-app .app-footer .copyright {
+.seller-app .app-footer .copyrights {
     font-size: .8125rem
 }
 
@@ -825,9 +826,17 @@
 }
 
 .seller-app .app-page-title {
-    font-size: 1.5rem;
-    font-weight: bolder;
-    margin-bottom: 1.5rem
+    font-size: 1.5rem !important;
+    font-weight: bolder !important;
+    margin-bottom: 1.5rem;
+}
+
+.seller-app .alert-dismissible .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: 1.25rem 1rem;
 }
 
 .seller-app .app-card {

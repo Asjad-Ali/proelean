@@ -1,5 +1,4 @@
 <template>
-  <div class="seller-app">
     <header class="app-header fixed-top">
     <div class="app-header-inner">
       <div class="container-fluid py-2">
@@ -9,8 +8,11 @@
               <a
                 id="sidepanel-toggler"
                 class="sidepanel-toggler d-inline-block d-xl-none"
+                @click="sidePanelOpened= !sidePanelOpened"
+                
                 href="#"
-              >
+              > 
+              {{$store.getters.getScreenWidth}}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30"
@@ -103,7 +105,7 @@
                         <div class="col-auto">
                           <img
                             class="profile-image"
-                            src="assets/images/profiles/profile-1.png"
+                            src="/assets/seller/images/profiles/profile-1.png"
                             alt=""
                           />
                         </div>
@@ -120,7 +122,7 @@
                         <!--//col-->
                       </div>
                       <!--//row-->
-                      <a class="link-mask" href="notifications.html"></a>
+                      <router-link class="link-mask" to="/dashboard/notifications"></router-link>
                     </div>
                     <!--//item-->
                     <div class="item p-3">
@@ -166,7 +168,7 @@
                         <!--//col-->
                       </div>
                       <!--//row-->
-                      <a class="link-mask" href="notifications.html"></a>
+                      <router-link class="link-mask" to="/dashboard/notifications"></router-link>
                     </div>
                     <!--//item-->
                     <div class="item p-3">
@@ -208,7 +210,7 @@
                         <!--//col-->
                       </div>
                       <!--//row-->
-                      <a class="link-mask" href="notifications.html"></a>
+                      <router-link class="link-mask" to="/dashboard/notifications"></router-link>
                     </div>
                     <!--//item-->
                     <div class="item p-3">
@@ -223,7 +225,7 @@
                         <div class="col-auto">
                           <img
                             class="profile-image"
-                            src="assets/images/profiles/profile-2.png"
+                            src="/assets/seller/images/profiles/profile-2.png"
                             alt=""
                           />
                         </div>
@@ -239,21 +241,21 @@
                         <!--//col-->
                       </div>
                       <!--//row-->
-                      <a class="link-mask" href="notifications.html"></a>
+                      <router-link class="link-mask" to="/dashboard/notifications"></router-link>
                     </div>
                     <!--//item-->
                   </div>
                   <!--//dropdown-menu-content-->
 
                   <div class="dropdown-menu-footer p-2 text-center">
-                    <a href="notifications.html">View all</a>
+                    <router-link to="/dashboard/notifications">View all</router-link>
                   </div>
                 </div>
                 <!--//dropdown-menu-->
               </div>
               <!--//app-utility-item-->
               <div class="app-utility-item">
-                <a href="settings.html" title="Settings">
+                <router-link to="/dashboard/settings" title="Settings">
                   <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                   <svg
                     width="1em"
@@ -272,7 +274,7 @@
                       d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"
                     />
                   </svg>
-                </a>
+                </router-link>
               </div>
               <!--//app-utility-item-->
 
@@ -284,21 +286,21 @@
                   href="#"
                   role="button"
                   aria-expanded="false"
-                  ><img src="assets/seller/images/user.png" alt="user profile"
+                  ><img src="/assets/seller/images/user.png" alt="user profile"
                 /></a>
                 <ul
                   class="dropdown-menu"
                   aria-labelledby="user-dropdown-toggle"
                 >
                   <li>
-                    <a class="dropdown-item" href="account.html">Account</a>
+                    <router-link class="dropdown-item" to="/dashboard/account">Account</router-link>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <router-link class="dropdown-item" to="/dashboard/settings">Settings</router-link>
                   </li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
-                    <a class="dropdown-item" href="login.html">Log Out</a>
+                    <router-link class="dropdown-item" to="/login">Log Out</router-link>
                   </li>
                 </ul>
               </div>
@@ -313,19 +315,26 @@
       <!--//container-fluid-->
     </div>
    
-    <SidePanel />
+    <SidePanel :sidePanelOpen="sidePanelOpened"    @sidPanelClose="sidePanelOpened=false"/>
   
   </header>
-  </div>
 </template>
 
 <script>
 import SidePanel from "./SidePanel.vue";
+import {ref} from 'vue'
 export default {
    components:{SidePanel},
+   setup(){
+      const sidePanelOpened=ref(false);
+      return {sidePanelOpened}
+   }
 };
 </script>
 
 <style scoped>
- 
+.app-utilities{
+  display: flex;
+  align-items: center;
+}
 </style>
