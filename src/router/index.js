@@ -17,11 +17,93 @@ import UpdateService from '@/views/Seller/UpdateService.vue'
 import BuyerRequests from '@/views/Seller/BuyerRequestSection.vue'
 
 
+// import SellerOldDashboard from '@/components/SellerDashboard.vue'
+import SellerDashboard from '@/views/Seller/Dashboard.vue'
+import SellerGigs from '@/views/Seller/Gigs.vue'
+import SellerOrders from '@/views/Seller/Orders.vue'
+import SellersGigs from '@/views/Seller/Gigs.vue'
+import OrdersNew from '@/views/Seller/OrdersNew.vue'
+import Notifications from '@/views/Seller/Notifications.vue'
+import Account from '@/views/Seller/Account.vue'
+import Settings from '@/views/Seller/Settings.vue'
+import Charts from '@/views/Seller/Charts.vue'
+import Analytics from '@/views/Seller/Analytics.vue'
+import BuyerRequestsnew from '@/views/Seller/BuyerRequestsnew.vue'
+import CreateGig from '@/views/Seller/CreateGig.vue'
+
+
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/dashboard/sellers-gigs',
+    name: 'SellersGigs',
+    component: SellersGigs,
+  },
+  {
+    path: '/dashboard/create-gig',
+    name: 'CreateGig',
+    component: CreateGig,
+  },
+  {
+    path: '/dashboard/BuyerRequestsnew',
+    name: 'BuyerRequestsnew',
+    component:BuyerRequestsnew,
+  },
+  {
+    path: '/dashboard/analytics',
+    name: 'Analytics',
+    component: Analytics,
+  },
+  {
+    path: '/dashboard/charts',
+    name: 'Charts',
+    component: Charts,
+  },
+  {
+    path: '/dashboard/settings',
+    name: 'Settings',
+    component: Settings,
+  },
+  {
+    path: '/dashboard/account',
+    name: 'Account',
+    component: Account,
+  },
+  {
+    path: '/dashboard/notifications',
+    name: 'Notifications',
+    component: Notifications,
+  },
+  {
+    path: '/dashboard/orders-new',
+    name: 'OrdersNew',
+    component: OrdersNew,
+  },
+  {
+    path: '/seller-orders',
+    name: 'SellerOrders',
+    component: SellerOrders,
+  },
+
+  {
+    path: '/dashboard',
+    name: 'sellerDashboard',
+    component: SellerDashboard,
+  },
+ 
+  {
+    path: '/seller-dashboard',
+    name: 'SellerDashboard',
+    component: SellerDashboard,
+  },
+  {
+    path: '/seller-gigs',
+    name: 'SellerGigs',
+    component: SellerGigs,
   },
   {
     path: '/login',
