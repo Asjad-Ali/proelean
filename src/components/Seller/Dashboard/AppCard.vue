@@ -49,7 +49,7 @@
         <!--//row-->
         <button
           type="button"
-          class="btn-close"
+          class="btn-close btn-lrg-standard"
           data-bs-dismiss="alert"
           aria-label="Close"
         >

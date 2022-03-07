@@ -27,6 +27,9 @@ import Notifications from '@/views/Seller/Notifications.vue'
 import Account from '@/views/Seller/Account.vue'
 import Settings from '@/views/Seller/Settings.vue'
 import Charts from '@/views/Seller/Charts.vue'
+import Analytics from '@/views/Seller/Analytics.vue'
+import BuyerRequestsnew from '@/views/Seller/BuyerRequestsnew.vue'
+import CreateGig from '@/views/Seller/CreateGig.vue'
 
 
 const routes = [
@@ -39,6 +42,21 @@ const routes = [
     path: '/dashboard/sellers-gigs',
     name: 'SellersGigs',
     component: SellersGigs,
+  },
+  {
+    path: '/dashboard/create-gig',
+    name: 'CreateGig',
+    component: CreateGig,
+  },
+  {
+    path: '/dashboard/BuyerRequestsnew',
+    name: 'BuyerRequestsnew',
+    component:BuyerRequestsnew,
+  },
+  {
+    path: '/dashboard/analytics',
+    name: 'Analytics',
+    component: Analytics,
   },
   {
     path: '/dashboard/charts',

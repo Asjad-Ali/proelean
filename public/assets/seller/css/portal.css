@@ -20,6 +20,13 @@
     color: #15a362;
     text-decoration: none;
 }
+
+.seller-app .text-body-2 {
+    font: 400 14px/22px "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #e87856;
+}
+
+
 .seller-app  .bg-success {
     background-color: #5cb377 !important;
 }

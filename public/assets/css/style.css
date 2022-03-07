@@ -2480,7 +2480,7 @@ footer div ul li a {
     font-size: 12px;
 }
 .seller-card .user-online-indicator .fa-circle {
-    font-size: 4px;
+    /* font-size: 4px; */
     vertical-align: middle;
     padding-right: 4px;
 }
