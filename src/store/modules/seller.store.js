@@ -116,9 +116,6 @@ export const actions = {
       } else {
         console.log(res);
       }
-    // } else {
-    //   service = state.userServices.find(service => service.id === payload.id);
-    // }
     commit('setServicesLoadingStatus', 'COMPLETED');
   },
 
