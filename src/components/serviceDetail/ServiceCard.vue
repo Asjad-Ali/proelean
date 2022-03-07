@@ -152,7 +152,7 @@ export default {
   },
 };
 </script>
-
+ 
 <style scoped>
 .width{
     width:140px;

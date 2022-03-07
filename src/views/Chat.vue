@@ -16,7 +16,6 @@
                               <div class="osahan-chat-list" v-if="$store.getters.getConversationListStatus==='COMPLETED'">
                                  <ConversationList 
                                     v-for="conversation in $store.getters.getConversations" :conversation="conversation" :key="conversation.id" 
-                                    @click.prevent="handleSelectedChat(conversation.id)"
                                     style="cursor: pointer;"
                                  />
                               </div>
@@ -26,7 +25,7 @@
                            </div>
                         </div>
                         <!-- CHAT SECTION -->
-                        <InboxSection />
+                        <MessagesSection />
                      </div>
                   </div>
                </main>
@@ -38,11 +37,11 @@
 
 <script>
 import ConversationList from "../components/chat/ConversationList.vue"
-import InboxSection from "../components/chat/InboxSection.vue"
+import MessagesSection from "../components/chat/MessagesSection.vue"
 import { useStore } from 'vuex'
 import { onBeforeMount } from '@vue/runtime-core'
 export default {
-   components: { ConversationList, InboxSection },
+   components: { ConversationList, MessagesSection },
    setup() {
       const store = useStore();
 

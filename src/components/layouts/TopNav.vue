@@ -164,7 +164,7 @@
                       <div class="dropdown-notifications-item-content-details">Diane Chambers · 2d</div>
                    </div>
                 </a>
-                <a class="dropdown-item dropdown-notifications-footer" href="messages.html">Read All Messages</a>
+                <router-link class="dropdown-item dropdown-notifications-footer" to="/chat">Read All Messages</router-link>
              </div>
           </li>
           <!-- languages li start -->
