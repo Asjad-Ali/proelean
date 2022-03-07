@@ -5,17 +5,15 @@
         <PersonalDetails />
         <div class="col-lg-8 right">
           <div class="recommended d-flex flex-wrap justify-content-start">
-
+            <Loader v-if="$store.getters.getLoadingStatus==='LOADING'"/>
             <div
               class="col-md-4 mb-3 service-list-section"
               v-for="service in userServices"
-              :key="service.id"
+              :key="service.id" v-else
               >
-              <Loader v-if="$store.loadingStatus==='LOADING'" />
-              <ServiceList :service="service" v-else />
+              <Service :service="service" />
             </div>
           </div>
-          <ServicePagination v-if="$store.state.servicesHasNextPage !== ''" />
 
           <ReviewSection />
         </div>
@@ -26,9 +24,8 @@
 
 <script>
 import PersonalDetails from '@/components/profile/PersonalDetails.vue';
-import ServiceList from '@/components/Service.vue';
+import Service from '@/components/Service.vue';
 import ReviewSection from "@/components/profile/SellerReviewsSection.vue";
-import ServicePagination from '@/components/profile/ServicePagination.vue';
 import Loader from '@/components/loadingComponent.vue';
 import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
@@ -36,9 +33,8 @@ import { useStore } from "vuex";
 export default {
   components:{
     PersonalDetails,
-    ServiceList,
+    Service,
     ReviewSection,
-    ServicePagination,
     Loader
   },
   setup() {

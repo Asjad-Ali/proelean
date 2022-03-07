@@ -1492,7 +1492,8 @@ header {
     font-size: 14px;
 }
 .slider-nav .item-slick img {
-    width: 170px;
+    width: 150px;
+    height: 115px;
     border-radius: 4px;
     margin: 0 6px 0 0px;
 }

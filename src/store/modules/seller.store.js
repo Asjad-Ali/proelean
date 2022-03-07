@@ -78,6 +78,7 @@ export const actions = {
 
   async userServices({ commit, state }, action) {
     commit('setSellerLoader', 1);
+    commit('setLoadingStatus', 'LOADING');
     commit('setServicesLoadingStatus', 'LOADING');
     if (!state.userServices || page >= 1) {
       if (action === '') {
@@ -100,6 +101,7 @@ export const actions = {
         console.log(res);
       }
     }
+    commit('setLoadingStatus', 'COMPLETED');
   },
 
   async userSingleService({ commit, dispatch }, payload) {
@@ -114,9 +116,6 @@ export const actions = {
       } else {
         console.log(res);
       }
-    // } else {
-    //   service = state.userServices.find(service => service.id === payload.id);
-    // }
     commit('setServicesLoadingStatus', 'COMPLETED');
   },
 

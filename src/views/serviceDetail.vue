@@ -1,6 +1,11 @@
 <template>
   <div class="main-page py-3" v-if="service && service.service_user">
-    <div class="container">
+    <div v-if="$store.getters.getServiceLoader === 'LOADING'" class="text-center spinnerInden vh-100">
+      <div class="spinner-border text-primary m-2" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div v-else class="container">
       <div class="row">
         <div class="col-lg-8 left">
           <nav aria-label="breadcrumb">
@@ -11,7 +16,6 @@
               </li>
             </ol>
           </nav>
-
           <h2 class="h2-cutom-font">{{ service.s_description }}</h2>
           <Gallery :serviceMedia="service.service_media" />
           <AboutService :service="service" />
@@ -28,6 +32,7 @@
                   service.offered_services.length
                 "
               />
+              
               <div
                 class="col-md-4 mb-3 service-list-section"
                 v-for="offeredService in service.offered_services"
@@ -55,14 +60,14 @@ import { computed } from "@vue/runtime-core";
 import { onMounted } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import Gallery from "@/components/singleService/Gallery.vue";
-import AboutService from "@/components/singleService/AboutService.vue";
-import AboutSeller from "@/components/singleService/AboutSeller.vue";
+import Gallery from "@/components/serviceDetail/Gallery.vue";
+import AboutService from "@/components/serviceDetail/AboutService.vue";
+import AboutSeller from "@/components/serviceDetail/AboutSeller.vue";
 import Service from "@/components/Service.vue";
-import Faq from "@/components/singleService/Faq.vue";
+import Faq from "@/components/serviceDetail/Faq.vue";
 import ReviewSection from "@/components/profile/SellerReviewsSection.vue";
-import ServiceCard from "@/components/singleService/ServiceCard.vue";
-// import PeopleViewProfile from '@/components/singleService/PeopleViewProfile.vue';
+import ServiceCard from "@/components/serviceDetail/ServiceCard.vue";
+// import PeopleViewProfile from '@/components/serviceDetail/PeopleViewProfile.vue';
 import TopPicSection from "@/components/home/TopPicSection.vue";
 
 export default {
