@@ -42,10 +42,10 @@
           <ReviewSection />
         </div>
         <ServiceCard />
+    <TopPicSection />
       </div>
     </div>
 
-    <TopPicSection />
     <!-- <PeopleViewProfile /> -->
   </div>
 </template>

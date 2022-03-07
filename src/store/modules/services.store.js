@@ -5,7 +5,8 @@ export const state = {
   sellerOfferedServices: [],
   servicesStatus: null,
   error: null,
-  hasNextpage: false,
+  pages: [],
+  links:{},
   currentPage: 0,
   loadingStatus: ''
 }
@@ -15,7 +16,8 @@ export const getters = {
   getSellerOfferedServices: state => state.sellerOfferedServices,
   getLoadingStatus: state => state.loadingStatus,
   getCurrentPage: state => state.currentPage,
-  getNextPage: state => state.hasNextpage,
+  getPages: state => state.pages,
+  getLinks: state => state.links,
 }
 
 export const mutations = {
@@ -26,8 +28,11 @@ export const mutations = {
   setError(state, error) {
     state.error = error;
   },
-  setNextPage(state, hasNextpage) {
-    state.hasNextpage = hasNextpage;
+  setLinks(state, links) {
+    state.links = links;
+  },
+  setPagination(state, pages) {
+    state.pages = pages;
   },
   setCurrentPage(state,page) {
     state.currentPage = page;
@@ -55,8 +60,9 @@ export const actions = {
     const res = await Api.get(search);
     if (res.status === 200) {
       commit("setServices", res.data);
-      commit('setCurrentPage', res.meta.current_page ?? state.currentPage);
-      commit('setNextPage', res.links.next ? true : false);
+      commit('setCurrentPage', res.meta.current_page);
+      commit('setLinks', res.links);
+      commit('setPagination', res.meta);
     }
     commit('setLoadingStatus', 'COMPLETED');
   },
