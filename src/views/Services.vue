@@ -33,7 +33,7 @@
                         :key="service.id"
                         v-else
                      >  
-                        <ServiceSection :service="service" />
+                        <Service :service="service" />
                      </div>
 
                      <div
@@ -56,7 +56,7 @@
 
 <script>
 import ServiceNavSection from '@/components/services/ServiceNavSection.vue';
-import ServiceSection from '@/components/Service.vue';
+import Service from '@/components/Service.vue';
 import PaginationSection from '@/components/services/ServicePagination.vue';
 import ServiceFilterSection from '@/components/services/ServiceFilterSection';
 import Loader from '@/components/loadingComponent.vue';
@@ -67,7 +67,7 @@ import { useStore } from 'vuex';
 export default {
    components: {
       ServiceNavSection,
-      ServiceSection,
+      Service,
       ServiceFilterSection,
       PaginationSection,
       Loader,
