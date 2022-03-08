@@ -278,6 +278,7 @@
               <!--//app-utility-item-->
 
               <div class="app-utility-item app-user-dropdown dropdown">
+                
                 <a
                   class="dropdown-toggle"
                   id="user-dropdown-toggle"
@@ -285,7 +286,10 @@
                   href="#"
                   role="button"
                   aria-expanded="false"
-                  ><img src="/assets/seller/images/user.png" alt="user profile"
+                  ><img
+                  :src="`${imgURL}/${user.image}`"
+                  class="dropdown-user-img img-full rounded-circle"
+                  alt="profile_img"
                 /></a>
                 <ul
                   class="dropdown-menu"
@@ -321,12 +325,18 @@
 
 <script>
 import SidePanel from "./SidePanel.vue";
-import {ref} from 'vue'
+import {computed, ref} from 'vue'
+import { useStore } from 'vuex';
 export default {
    components:{SidePanel},
    setup(){
+     const store = useStore();
       const sidePanelOpened=ref(false);
-      return {sidePanelOpened}
+      return {
+        sidePanelOpened,
+        user: computed(() => store.getters.getAuthUser),
+        imgURL: process.env.VUE_APP_URL,
+      }
    }
 };
 </script>

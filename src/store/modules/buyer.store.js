@@ -19,7 +19,7 @@ export const getters = {
   getAllOrders : state => state.allOrders,
   getService : state => state.service,
   getCardStripe : state => state.cardStripe,
-  getLoaderStatus : state => state.loader,
+  getLoaderVal : state => state.loader,
   getCardSection : state => state.cardSection,
   getOrderType : state => state.orderType
 }
