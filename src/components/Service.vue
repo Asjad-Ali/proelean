@@ -1,6 +1,5 @@
 <template>
   <div class="card h-100">
-    <!-- {{imgURL}} -->
     <router-link :to="{name:'gigDetail', params:{id:service.id}}">
       <img class="img-fluid" :src="imgURL+'/'+service.service_media[0].media"  />
     </router-link>
@@ -10,7 +9,6 @@
           <span class="seller-image">
             <img
               class="img-fluid"
-              
               :src="`${imgURL}/${service.service_user ? service.service_user.image : '/assets/images/avator.png'}`"
               alt="img"
             />
@@ -70,7 +68,8 @@
 
 <script>
 import { useStore } from 'vuex';
-import { onMounted, computed } from 'vue';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 export default {
   props: {
     service: {
@@ -80,12 +79,14 @@ export default {
   },
   setup() {
     const store = useStore()
+    const route = useRoute();
+
     function handleWishlist (id) {
-      console.log(id)
       let payload = {
-        'service_id': id
+        'service_id': id,
+        'type': route.name === 'Gigs' ? 'gigs' : 'offered'
       }
-      onMounted(store.dispatch('wishlist',payload))
+      store.dispatch('wishlist',payload)
     }
     return {
       handleWishlist,
