@@ -194,14 +194,8 @@ export default {
 </script>
 
 <style scoped>
-.loader{
-  display: block;
-  position: relative;
-}
-.spinner-border{
-  width: 4rem;
-  height: 4rem;
-}
+
+
 .s-margin{
   margin-bottom: 8rem;
   margin-top: 5rem ;

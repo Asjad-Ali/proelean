@@ -86,6 +86,7 @@ export default {
         'service_id': id,
         'type': route.name === 'Gigs' ? 'gigs' : 'offered'
       }
+      console.log("Click")
       store.dispatch('wishlist',payload)
     }
     return {

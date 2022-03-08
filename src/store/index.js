@@ -9,6 +9,7 @@ import * as buyer from "./modules/buyer.store";
 import * as become_seller from "./modules/become_seller.store";
 import * as wishlist from "./modules/wishlist.store";
 import * as chat from "./modules/chat.store";
+import * as order from "./modules/order.store";
 
 let user = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -72,5 +73,6 @@ export default createStore({
     become_seller,
     wishlist,
     chat,
+    order
   },
 });
