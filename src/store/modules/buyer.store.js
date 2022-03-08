@@ -5,21 +5,21 @@ import useToast from '@/composables/useToast.js'
 export const state = {
     createJob:[],
     allJobs:[],
-    allOrders:[],
     service:{},
     cardStripe:{},
     loader: null,
-    cardSection: false
+    cardSection: false,
+    orderType:{}
   }
 
 export const getters = {
   getCreateJob : state => state.createJob,
   getAllJobs : state => state.allJobs,
-  getAllOrders : state => state.allOrders,
   getService : state => state.service,
   getCardStripe : state => state.cardStripe,
-  getLoaderVal : state => state.loader,
+  getLoaderStatus : state => state.loader,
   getCardSection : state => state.cardSection,
+  getOrderType : state => state.orderType
 }
 
 export const  mutations = {
@@ -29,8 +29,8 @@ export const  mutations = {
     setAllJobs(state,job){
       state.allJobs=job;
     },
-    setAllOrders(state,order){
-      state.allOrders=order;
+    setOrderType(state,order){
+      state.orderType=order;
     },
     setService(state,service){
       state.service=service;
@@ -91,16 +91,14 @@ export const  actions = {
         }
       },
 
-      async showAllOrders({commit}){
-        commit('setLoader',1);
-        const res = await Api.get('buyer/orders');
+      async manageOrder({commit},payload){
+        const res = await Api.post('buyer/manage_order',payload);
         if(res.status === 200){
-          console.log("All Orders Response",res.data)
-          commit("setAllOrders",res.data);
-          commit('setLoader',0);
+          console.log("Type of Order:",res.data);
+          commit("setOrderType",res.data);
         }
         else{
-          console.log("Error All Orders");
+          console.log("Error Order Type");
         }
       },
 
@@ -131,16 +129,6 @@ export const  actions = {
         }
       },
 
-      async showFilteredOrders({commit}, value){
-        const res = await Api.get(`buyer/orders?status=${value}`);
-        if(res.status === 200){
-          console.log("Filtered Orders Response",res.data)
-          commit("setAllOrders",res.data);
-        }
-        else{
-          console.log("Error Filtered Orders");
-        }
-      },
 
       
 }
