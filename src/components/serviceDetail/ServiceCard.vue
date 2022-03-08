@@ -93,7 +93,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" @click.prevent="atmCardApproval()">Proceed</button>
+                        <button type="button" class="btn btn-success" @click="atmCardApproval()">Proceed</button>
                     </div>
                 </div>
                 <div class="modal-content" v-else>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-center mt-3">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal" @click.prevent="purchaseService()">Purchase</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" @click="purchaseService()">Purchase</button>
                     </div>
                 </div>
             </div>
