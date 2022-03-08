@@ -47,6 +47,7 @@
       </div>
     </div>
 
+        <!-- for mobile screen -->
        <div class="container tab-content osahan-table rounded d-sm-none">
         <div class="tab-pane active" id="active">
           <div v-if="loader" class="d-flex justify-content-center s-margin">
@@ -184,7 +185,7 @@ export default {
     return {
       imgURL: process.env.VUE_APP_URL,
       orders: computed(() => store.getters.getAllOrders),
-      loader: computed(() => store.getters.getLoaderVal),
+      loader: computed(() => store.getters.getLoaderStatus),
       showFilter,
       showAll
     };
