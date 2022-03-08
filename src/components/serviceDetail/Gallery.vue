@@ -1,5 +1,5 @@
 <template>
-    <div class="slider mt-4" v-if="serviceMedia">
+    <div class="slider" v-if="serviceMedia">
         <div class="gallery-container">
         <div id="aniimated-thumbnials" class="slider-for slick-slider-single">
         <img  class="img-fluid img-thumbnail gm-image" 

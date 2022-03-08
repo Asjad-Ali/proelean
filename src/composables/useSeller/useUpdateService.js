@@ -39,6 +39,7 @@ export default function useCreateService() {
     
     console.log(getUpdateGig.value)
     store.dispatch('updateService', getUpdateGig.value)
+    getUpdateGig.value.banner=[]
   }
 
   const getBanners = computed(() =>

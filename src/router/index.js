@@ -15,6 +15,7 @@ import CreateService from '@/views/Seller/CreateService.vue'
 import ManageService from '@/views/Seller/ManageService.vue'
 import UpdateService from '@/views/Seller/UpdateService.vue'
 import BuyerRequests from '@/views/Seller/BuyerRequestSection.vue'
+import FavouriteService from '@/views/Seller/FavouriteService.vue'
 
 
 const routes = [
@@ -69,6 +70,11 @@ const routes = [
     path: '/seller/buyer_requests',
     name: 'BuyerRequests',
     component: BuyerRequests
+  },
+  {
+    path: '/seller/favourite_service',
+    name: 'FavouriteService',
+    component: FavouriteService
   },
 
 

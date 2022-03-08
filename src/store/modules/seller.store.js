@@ -9,7 +9,7 @@ export const state = {
   serviceReviews:[],
   userServices: [],
   s_Loader: '',
-  userSingleService: {},
+  userSingleService: [],
   createGigData: '',
   deleteService: '',
   loadingStatus: '',
@@ -71,7 +71,16 @@ export const mutations = {
   },
   setSellerLoader(state, loaderVal) {
     state.s_Loader = loaderVal
-  }
+  },
+  
+  toggleOfferedService(state,serviceId){
+      console.log("in offerd service",serviceId)
+      state.userSingleService.offered_services.forEach(service => {
+        if(service.id==serviceId){
+          service.favourite = service.favourite == 1 ? 0 : 1;
+        }
+      });
+    }
 }
 
 export const actions = {
