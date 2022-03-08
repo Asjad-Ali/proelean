@@ -91,37 +91,74 @@
         role="tab"
         aria-controls="orders-all"
         aria-selected="true"
+        @click="showAll()"
         >All</a
       >
       <a
         class="flex-sm-fill text-sm-center nav-link"
         id="orders-paid-tab"
         data-bs-toggle="tab"
-        href="#orders-paid"
+        href="#orders-all"
         role="tab"
         aria-controls="orders-paid"
         aria-selected="false"
-        >Paid</a
+        @click="showFilter(4)"
+        >Completed</a
       >
       <a
         class="flex-sm-fill text-sm-center nav-link"
         id="orders-pending-tab"
         data-bs-toggle="tab"
-        href="#orders-pending"
+        href="#orders-all"
         role="tab"
         aria-controls="orders-pending"
         aria-selected="false"
-        >Pending</a
+        @click="showFilter(1)"
+        >Active</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="orders-pending-tab"
+        data-bs-toggle="tab"
+        href="#orders-all"
+        role="tab"
+        aria-controls="orders-pending"
+        aria-selected="false"
+        @click="showFilter(2)"
+        >Delivered</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="orders-pending-tab"
+        data-bs-toggle="tab"
+        href="#orders-all"
+        role="tab"
+        aria-controls="orders-pending"
+        aria-selected="false"
+        @click="showFilter(3)"
+        >Revision</a
+      >
+      <a
+        class="flex-sm-fill text-sm-center nav-link"
+        id="orders-pending-tab"
+        data-bs-toggle="tab"
+        href="#orders-all"
+        role="tab"
+        aria-controls="orders-pending"
+        aria-selected="false"
+        @click="showFilter(6)"
+        >Late</a
       >
       <a
         class="flex-sm-fill text-sm-center nav-link"
         id="orders-cancelled-tab"
         data-bs-toggle="tab"
-        href="#orders-cancelled"
+        href="#orders-all"
         role="tab"
         aria-controls="orders-cancelled"
         aria-selected="false"
-        >Cancelled</a
+        @click="showFilter(5)"
+        >Disputed</a
       >
     </nav>
 
@@ -132,41 +169,61 @@
         role="tabpanel"
         aria-labelledby="orders-all-tab"
       >
-        <div class="app-card app-card-orders-table shadow-sm mb-5">
+        <div v-if="loader" class="d-flex justify-content-center s-margin">
+          <div class="spinner-border text-primary m-2" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div v-else class="app-card app-card-orders-table shadow-sm mb-5">
           <div class="app-card-body">
             <div class="table-responsive">
-              <table class="table app-table-hover mb-0 text-left">
+              <table class="table app-table-hover mb-0 p-1 text-left">
                 <thead>
                   <tr>
-                    <th class="cell">Order</th>
-                    <th class="cell">Product</th>
-                    <th class="cell">Customer</th>
-                    <th class="cell">Date</th>
+                    <th class="cell">User</th>
+                    <th class="cell">Order Description</th>
+                    <th class="cell">Duration</th>
+                    <th class="cell">Post Date</th>
+                    <th class="cell">Budget</th>
                     <th class="cell">Status</th>
-                    <th class="cell">Total</th>
                     <th class="cell"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="cell">#15346</td>
+                  <tr v-for="(order) in orders" :key="order.id">
+                      <td class="text-center cell">
+                        <div>
+                          <img
+                            class="img-fluid bg-info rounded-circle mb-1"
+                            style="width: 35px; height: 35px; object-fit:cover;"
+                            :src="`${imgURL}/${order.image}`"
+                            alt="img"
+                          />
+                        </div>
+                        <div>
+                        {{ order.username }}
+                        </div>
+                      </td>
                     <td class="cell">
                       <span class="truncate"
-                        >Lorem ipsum dolor sit amet eget volutpat erat</span
-                      >
+                        >{{order.description.substr(0,50)}}</span>
                     </td>
-                    <td class="cell">John Sanders</td>
-                    <td class="cell">
-                      <span>17 Oct</span><span class="note">2:16 PM</span>
+                      <td class="cell"><span class="truncate">{{ order.created_at }}</span> </td>
+                      <td class="text-center cell"><span class="truncate">{{ order.delivery_time }}</span> </td>
+                      <td class="text-center cell"><span class="truncate">${{ order.amount }}</span> </td>
+                    <td class="text-center cell">
+                      <a href="#"><span class="badge bg-success" v-if="order.status_id == 1">Active</span></a>
+                      <a href="#"><span class="badge bg-secondary" v-if="order.status_id == 2">Delivered</span></a>
+                      <a href="#"><span class="badge bg-info" v-if="order.status_id == 3">Revision</span></a>
+                      <a href="#"><span class="badge bg-primary" v-if="order.status_id == 4">Completed</span></a>
+                      <a href="#"><span class="badge bg-danger" v-if="order.status_id == 5">Disputed</span></a>
+                      <a href="#"><span class="badge bg-warning" v-if="order.status_id == 6">Late</span></a>
                     </td>
-                    <td class="cell">
-                      <span class="badge bg-success">Paid</span>
-                    </td>
-                    <td class="cell">$259.35</td>
                     <td class="cell">
                       <a class="btn-sm app-btn-secondary" href="#">View</a>
                     </td>
                   </tr>
+<!--                   
                   <tr>
                     <td class="cell">#15345</td>
                     <td class="cell">
@@ -263,7 +320,7 @@
                     <td class="cell">
                       <a class="btn-sm app-btn-secondary" href="#">View</a>
                     </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -271,8 +328,11 @@
           </div>
           <!--//app-card-body-->
         </div>
+
+
+
         <!--//app-card-->
-        <nav class="app-pagination">
+        <!-- <nav class="app-pagination">
           <ul class="pagination justify-content-center">
             <li class="page-item disabled">
               <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
@@ -288,12 +348,12 @@
               <a class="page-link" href="#">Next</a>
             </li>
           </ul>
-        </nav>
+        </nav> -->
         <!--//app-pagination-->
       </div>
       <!--//tab-pane-->
 
-      <div
+      <!-- <div
         class="tab-pane fade"
         id="orders-paid"
         role="tabpanel"
@@ -398,15 +458,12 @@
                 </tbody>
               </table>
             </div>
-            <!--//table-responsive-->
           </div>
-          <!--//app-card-body-->
         </div>
-        <!--//app-card-->
-      </div>
-      <!--//tab-pane-->
+      </div> -->
 
-      <div
+      <!--//tab-pane-->
+      <!-- <div
         class="tab-pane fade"
         id="orders-pending"
         role="tabpanel"
@@ -449,14 +506,13 @@
                 </tbody>
               </table>
             </div>
-            <!--//table-responsive-->
           </div>
-          <!--//app-card-body-->
+
         </div>
-        <!--//app-card-->
-      </div>
-      <!--//tab-pane-->
-      <div
+
+      </div> -->
+
+      <!-- <div
         class="tab-pane fade"
         id="orders-cancelled"
         role="tabpanel"
@@ -499,21 +555,48 @@
                 </tbody>
               </table>
             </div>
-            <!--//table-responsive-->
+
           </div>
-          <!--//app-card-body-->
         </div>
-        <!--//app-card-->
-      </div>
-      <!--//tab-pane-->
+      </div> -->
     </div>
-    <!--//tab-content-->
   </div>
 </template>
 
 <script>
-export default {};
+import { onMounted, computed } from "@vue/runtime-core";
+import { useStore } from 'vuex';
+
+export default {
+  setup() {
+    const store = useStore()
+    onMounted(() => {
+      store.dispatch("myOrders");
+    })
+
+    function showAll(){
+      store.dispatch("myOrders");
+    }
+
+    function showFilter(value){
+      console.log(value)
+      store.dispatch("showFilteredOrders",value);
+    }
+
+    return {
+      imgURL: process.env.VUE_APP_URL,
+      orders: computed(() => store.getters.myOrders),
+      loader: computed(() => store.getters.getLoaderVal),
+      showFilter,
+      showAll
+    };
+  },
+};
 </script>
 
-<style>
+<style scoped>
+.s-margin{
+  margin-bottom: 8rem;
+  margin-top: 5rem ;
+}
 </style>

@@ -14,7 +14,6 @@ export const state = {
 export const getters = {
   getCreateJob : state => state.createJob,
   getAllJobs : state => state.allJobs,
-  getAllOrders : state => state.allOrders,
   getService : state => state.service,
   getLoaderVal : state => state.loader,
 }
@@ -82,19 +81,6 @@ export const  actions = {
         }
       },
 
-      async showAllOrders({commit}){
-        commit('setLoader',1);
-        const res = await Api.get('buyer/orders');
-        if(res.status === 200){
-          console.log("All Orders Response",res.data)
-          commit("setAllOrders",res.data);
-          commit('setLoader',0);
-        }
-        else{
-          console.log("Error All Orders");
-        }
-      },
-
       async purchaseService({commit},payload){
 
         const res = await Api.post('token',payload);
@@ -108,17 +94,6 @@ export const  actions = {
         else{
           useToast(res.message);
           console.log("Error Service");
-        }
-      },
-
-      async showFilteredOrders({commit}, value){
-        const res = await Api.get(`buyer/orders?status=${value}`);
-        if(res.status === 200){
-          console.log("Filtered Orders Response",res.data)
-          commit("setAllOrders",res.data);
-        }
-        else{
-          console.log("Error Filtered Orders");
         }
       },
 
