@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script>
+<script>  
 import AppCard from "../../components/Seller/Dashboard/AppCard.vue";
 import AnalyticBoxes from "../../components/Seller/Dashboard/AnalyticBoxes.vue";
 import Charts from "../../components/Seller/Dashboard/Charts.vue";
