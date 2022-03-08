@@ -211,7 +211,7 @@ export default {
     }
     return {
       requests: computed(() => store.getters.getBuyerRequests),
-      loader: computed(() => store.getters.getLoaderStatus),
+      loader: computed(() => store.getters.getLoaderVal),
       getBtnStatus: computed(() => store.getters.getRegisterStatus),
       imgURL: process.env.VUE_APP_URL,
       payload,

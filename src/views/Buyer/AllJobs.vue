@@ -241,7 +241,7 @@ export default {
     }
     return {
       jobs: computed(() => store.getters.getAllJobs),
-      loader: computed(() => store.getters.getLoaderStatus),
+      loader: computed(() => store.getters.getLoaderVal),
       deleteJob,
       getJobId,
       jobId,

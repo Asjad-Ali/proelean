@@ -185,7 +185,7 @@ export default {
     return {
       imgURL: process.env.VUE_APP_URL,
       orders: computed(() => store.getters.getAllOrders),
-      loader: computed(() => store.getters.getLoaderStatus),
+      loader: computed(() => store.getters.getLoaderVal),
       showFilter,
       showAll
     };

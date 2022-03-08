@@ -5,6 +5,7 @@ import useToast from '@/composables/useToast.js'
 export const state = {
     createJob:[],
     allJobs:[],
+    allOrders:[],
     service:{},
     cardStripe:{},
     loader: null,
@@ -15,6 +16,7 @@ export const state = {
 export const getters = {
   getCreateJob : state => state.createJob,
   getAllJobs : state => state.allJobs,
+  getAllOrders : state => state.allOrders,
   getService : state => state.service,
   getCardStripe : state => state.cardStripe,
   getLoaderStatus : state => state.loader,
@@ -28,6 +30,9 @@ export const  mutations = {
       },
     setAllJobs(state,job){
       state.allJobs=job;
+    },
+    setAllOrders(state,order){
+      state.allOrders=order;
     },
     setOrderType(state,order){
       state.orderType=order;
@@ -88,6 +93,19 @@ export const  actions = {
         else{
           console.log("Error delete Job");
           useToast(res.message);
+        }
+      },
+
+      async showAllOrders({commit}){
+        commit('setLoader',1);
+        const res = await Api.get('buyer/orders');
+        if(res.status === 200){
+          console.log("All Orders Response",res.data)
+          commit("setAllOrders",res.data);
+          commit('setLoader',0);
+        }
+        else{
+          console.log("Error All Orders");
         }
       },
 
