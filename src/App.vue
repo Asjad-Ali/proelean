@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!$route.path.includes('/dashboard')">
     <TopNav />
     <div class="d-none d-lg-block">
       <BottomNav v-if="isAuthenticated" />
@@ -8,6 +8,16 @@
     <Footer />
     <div class="d-lg-none">
       <MobileBottomNav />
+    </div>
+  </div>
+
+  <div v-else class="seller-app">
+    <SellerHeader />
+    <div class="app-wrapper">
+      <div class="app-content pt-3 p-md-3 p-lg-4">
+        <router-view :key="$route.fullPath" />
+      </div>
+      <SellerFooter />
     </div>
   </div>
 </template>
@@ -22,6 +32,9 @@ import { onMounted } from "@vue/runtime-core";
 import useFirebaseAuth from  '@/composables/Auth/useFirebaseAuth'
 import { useStore } from 'vuex'
 
+import SellerHeader from "./components/layouts/Seller/Header.vue";
+import SellerFooter from "./components/layouts/Seller/Footer.vue";
+
 export default {
   name: "App",
   components: {
@@ -29,10 +42,13 @@ export default {
     BottomNav,
     Footer,
     MobileBottomNav,
+    SellerHeader,
+    SellerFooter,
   },
   setup() {
     const store= useStore();
     onMounted(() => {
+      store.dispatch('updateScreenWidthOnResize');
       const firebaseAuth= useFirebaseAuth();
       firebaseAuth.checkAuthStatus();
       

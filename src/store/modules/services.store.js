@@ -44,12 +44,12 @@ export const mutations = {
     state.sellerOfferedServices = services;
   },
   toggleFavourite(state,serviceId){
-    state.services.forEach(service => {
-      if(service.id==serviceId){
-        service.favourite = service.favourite == 1 ? 0 : 1;
-      }
-    });
-  },
+      state.services.forEach(service => {
+        if(service.id==serviceId){
+          service.favourite = service.favourite == 1 ? 0 : 1;
+        }
+      });
+  }
 }
 
 export const actions = {

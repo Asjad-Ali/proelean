@@ -213,6 +213,17 @@ p.help-block li {
     background-color: #f45a2a;
     border-color: #f45a2a;
 }
+.loader {
+    display: block;
+  }
+  .spinner-border {
+    width: 4rem;
+    height: 4rem;
+  }
+  .spinnerInden{
+    margin-top: 8rem;
+    margin-bottom: 5rem;
+  }
 .text-success {
     color: #368fee !important;
 }
@@ -1492,7 +1503,8 @@ header {
     font-size: 14px;
 }
 .slider-nav .item-slick img {
-    width: 170px;
+    width: 150px;
+    height: 115px;
     border-radius: 4px;
     margin: 0 6px 0 0px;
 }
@@ -2480,7 +2492,7 @@ footer div ul li a {
     font-size: 12px;
 }
 .seller-card .user-online-indicator .fa-circle {
-    font-size: 4px;
+    /* font-size: 4px; */
     vertical-align: middle;
     padding-right: 4px;
 }
