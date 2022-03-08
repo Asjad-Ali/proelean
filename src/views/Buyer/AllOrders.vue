@@ -45,9 +45,10 @@
           </div>
         </div>
       </div>
+    </div>
 
-
-       <div class="tab-content osahan-table rounded d-sm-none">
+        <!-- for mobile screen -->
+       <div class="container tab-content osahan-table rounded d-sm-none">
         <div class="tab-pane active" id="active">
           <div v-if="loader" class="d-flex justify-content-center s-margin">
             <div class="spinner-border text-primary m-2" role="status">
@@ -80,7 +81,7 @@
                     <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 1"> Active </button>
                     <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
                     <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 3"> Revision </button>
-                    <button class="btn btn-sm btn-success w-100" v-if="order.status_id == 4"> Complete </button>
+                    <button class="btn btn-sm btn-success w-100" v-if="order.status_id == 4"> Completed </button>
                     <button class="btn btn-sm btn-danger w-100" v-if="order.status_id == 5"> Disputed </button>
                     <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 6"> Late </button>
                 </td>
@@ -90,7 +91,6 @@
         </div>
       </div>
 
-    </div>
 
 
           <div class="tab-content osahan-table rounded d-none d-sm-block container">
@@ -185,7 +185,7 @@ export default {
     return {
       imgURL: process.env.VUE_APP_URL,
       orders: computed(() => store.getters.getAllOrders),
-      loader: computed(() => store.getters.getLoaderVal),
+      loader: computed(() => store.getters.getLoaderStatus),
       showFilter,
       showAll
     };
