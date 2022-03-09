@@ -47,6 +47,17 @@
           </div>
         </div>
         <div class="footer">
+          <div class="dropdown">
+            <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown">
+               <i class="material-icons">list</i>
+            </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><router-link :to="{name:'gigDetail', params:{id:service.id}}">Open</router-link></li>
+              <li><router-link :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link></li>
+              <li><router-link to="">Delete</router-link></li>
+            </ul>
+          </div>
           <a
           :class="{'disable': service.service_user.id === $store.getters.getAuthUser.id}"
           @click="handleWishlist(service.id)" >
@@ -108,5 +119,12 @@ export default {
 }
 .disable{
 visibility: hidden
+}
+.dropdown-toggle::after {
+    display:none;
+}
+
+.card{
+  margin-bottom: 0px;
 }
 </style>

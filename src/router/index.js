@@ -31,6 +31,7 @@ import Charts from '@/views/Seller/Charts.vue'
 import Analytics from '@/views/Seller/Analytics.vue'
 import BuyerRequestsnew from '@/views/Seller/BuyerRequestsnew.vue'
 import CreateGig from '@/views/Seller/CreateGig.vue'
+import Payments from '@/views/Seller/Payments.vue'
 
 
 const routes = [
@@ -43,6 +44,11 @@ const routes = [
     path: '/dashboard/sellers-gigs',
     name: 'SellersGigs',
     component: SellersGigs,
+  },
+  {
+    path: '/dashboard/payments',
+    name: 'Payments',
+    component: Payments,
   },
   {
     path: '/dashboard/create-gig',
@@ -144,7 +150,7 @@ const routes = [
     component: ManageService
   },
   {
-    path: '/seller/update_service/:id',
+    path: '/dashboard/update_service/:id',
     name: 'UpdateService',
     component: UpdateService
   },
@@ -185,11 +191,6 @@ const routes = [
     path: '/gig-detail/:id',
     name: 'gigDetail',
     component: ServiceDetail,
-  },
-  {
-    path:'/notifications',
-    name: 'Notification',
-    component: () => import(/* webpackChunkName: "notifications" */ '@/views/Notification.vue')
   },
   {
     path: '/chat',
