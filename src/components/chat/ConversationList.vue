@@ -1,5 +1,6 @@
 <template>
   <div
+  @click="$store.dispatch('openSelectedConversation',conversation.id)"
     class="
       p-3
       d-flex

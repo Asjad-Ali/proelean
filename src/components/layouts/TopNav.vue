@@ -519,7 +519,7 @@
               <a class="dropdown-item dropdown-notifications-item" href="#!">
                 <img
                   class="dropdown-notifications-item-img"
-                  src="assets/images/user/s7.png"
+                  src="/assets/images/user/s7.png"
                 />
                 <div class="dropdown-notifications-item-content">
                   <div class="dropdown-notifications-item-content-text">
@@ -540,7 +540,7 @@
               <a class="dropdown-item dropdown-notifications-item" href="#!">
                 <img
                   class="dropdown-notifications-item-img"
-                  src="assets/images/user/s8.png"
+                  src="/assets/images/user/s8.png"
                 />
                 <div class="dropdown-notifications-item-content">
                   <div class="dropdown-notifications-item-content-text">
@@ -558,10 +558,10 @@
                   </div>
                 </div>
               </a>
-              <a
+              <router-link
                 class="dropdown-item dropdown-notifications-footer"
-                href="messages.html"
-                >Read All Messages</a
+                to="/chat"
+                >Read All Messages</router-link
               >
             </div>
           </li>

@@ -1,10 +1,13 @@
-import { getFirestore, collection, query, where, onSnapshot } from "firebase/firestore";
+import { getFirestore, collection, query, where, onSnapshot, orderBy,limit } from "firebase/firestore";
 
 export const state = {
-    selectedChat: {},
+    selectedConversation: {},
     error: null,
     conversations: [],
-    c_loadingStatus: ''
+    conversationLoadingStatus: null,
+    chatLoadingStatus: null,
+    selectedChatListenerRef: null,
+    messages: [],
 }
 
 export const mutations = {
@@ -12,7 +15,7 @@ export const mutations = {
         messages.forEach(msg => state.messages.push(msg));
     },
     setSelectedConversation(state, conversation) {
-        state.selectedChat = conversation
+        state.selectedConversation = conversation
     },
     setError(state, error) {
         state.error = error;
@@ -20,52 +23,93 @@ export const mutations = {
     setConversation(state, conversation) {
         state.conversations.push(conversation);
     },
-    updateConversation(state,updatedConv){
-        const conversations=state.conversations;
-        const index=conversations.findIndex(conv=>conv.id==updatedConv.id);
+    updateConversation(state, updatedConv) {
+        const conversations = state.conversations;
+        const index = conversations.findIndex(conv => conv.id == updatedConv.id);
         conversations.splice(index, 1);
         conversations.unshift(updatedConv);
-       state.conversations=conversations;
+        state.conversations = conversations;
     },
     setConversationLoadingStatus(state, status) {
-        state.c_loadingStatus = status;
+        state.conversationLoadingStatus = status;
+    },
+    setChatLoadingStatus(state, status) {
+        state.chatLoadingStatus = status;
+    },
+    setSelectedChatListenerRef(state,ref){
+        state.selectedChatListenerRef = ref;
+    },
+    resetMessages(state){
+        state.messages=[];
+    },
+    setMessage(state,message){
+        state.messages.push(message);
     }
-
 }
 
 export const actions = {
-    async openSelectedChat({ commit, getters }, conversationID) {
-        const selectedConversation = getters.getConversations.find(conversation => conversation.id === conversationID)
+    openSelectedConversation({ commit, getters }, conversationID) {
+        const selectedConversation = getters.getConversations.find(conversation => conversation.id == conversationID)
         commit('setSelectedConversation', selectedConversation)
+        commit('setChatLoadingStatus', 'LOADING');
+        commit('resetMessages');
+        
+        //unsubscribe old chat listener
+        if(getters.getSelectedChatListenerRef){
+            getters.getSelectedChatListenerRef();
+        }
+
+        const db = getFirestore();
+
+        const chatRef = collection(db, `Conversations/${selectedConversation.id}/Messages`);
+        const q = query(chatRef, orderBy("sentAt",'desc'), limit(10));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                const id = change.doc.id;
+                const message = { id, ...change.doc.data() };
+                if (change.type === "added") {
+                    console.log(message)
+                    commit('setMessage',message);
+                }
+                if (change.type === "modified") {
+                    console.log("Modified Message: ", message);
+                }
+                if (change.type === "removed") {
+                    console.log("Removed Message: ", message);
+                }
+            });
+        });
+
+        commit('setSelectedChatListenerRef',unsubscribe);
     },
-    async sendMessage({ commit }, msg) {
+    sendMessage({ commit }, msg) {
         // send msg to selected user
-        commit("setSelectedChat", msg);
+        commit("setSelectedConversation", msg);
     },
-    async lookForConversationChanges ({ commit, getters }) {
+    lookForConversationChanges({ commit, getters }) {
         commit('setConversationLoadingStatus', 'LOADING');
         const db = getFirestore();
         const user = getters.getAuthUser;
         const conversationRef = collection(db, "Conversations");
-        const q = query(conversationRef, where('members', 'array-contains', user.id));
+        const q = query(conversationRef, where('members', 'array-contains', user.id) , orderBy("createdAt",'desc'));
 
 
         /*const unsubscribe = */ onSnapshot(q, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
-                const id=change.doc.id;
-                const convesation={id,...change.doc.data()};
-              if (change.type === "added") {
-                commit('setConversation', convesation);
-              }
-              if (change.type === "modified") {
-                  console.log("Modified Conversation: ", change.doc.data());
-                  commit('updateConversation', convesation);
-              }
-              if (change.type === "removed") {
-                  console.log("Removed Conversation: ", convesation);
-              }
+                const id = change.doc.id;
+                const convesation = { id, ...change.doc.data() };
+                if (change.type === "added") {
+                    commit('setConversation', convesation);
+                }
+                if (change.type === "modified") {
+                    console.log("Modified Conversation: ", change.doc.data());
+                    commit('updateConversation', convesation);
+                }
+                if (change.type === "removed") {
+                    console.log("Removed Conversation: ", convesation);
+                }
             });
-          });
+        });
 
         commit('setConversationLoadingStatus', 'COMPLETED');
     }
@@ -73,7 +117,10 @@ export const actions = {
 
 export const getters = {
     getMessages: (state) => state.messages,
-    getSelectedConversation: (state) => state.selectedChat,
+    getSelectedConversation: (state) => state.selectedConversation,
     getConversations: state => state.conversations,
-    getConversationListStatus: state => state.c_loadingStatus
+    getConversationListStatus: state => state.conversationLoadingStatus,
+    getChatLoadingStatus: state => state.chatLoadingStatus,
+    getSelectedChatListenerRef: state => state.selectedChatListenerRef,
+    getChatMessages:  state => state.messages,
 }

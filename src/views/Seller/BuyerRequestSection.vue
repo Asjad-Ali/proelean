@@ -22,9 +22,7 @@
                         :src="`${imgURL}/${request.user.image}`"
                         alt=""
                       />
-                        
-                          <p class="seller-name mt-2" style="font-size:15px">{{ request.user.username }}</p>
-                        
+                        <p class="seller-name mt-2" style="font-size:15px">{{ request.user.username }}</p>
                       </div>
                        <div class="mt-2 d-md-none" style="font-size: 12px">{{ request.created_at }}</div>
                     </div>

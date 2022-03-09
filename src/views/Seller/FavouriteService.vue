@@ -1,28 +1,21 @@
 <template>
-  <div class="py-5">
+  <div class="py-3">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="d-flex align-items-center pb-2 border-bottom">
-            <h3 class="mb-0 p-0">Favourite Services</h3>
-            <router-link
-              class="btn btn-sm btn-success ml-auto light"
-              to="/seller/create_service"
-            >
-              Create New Service
-            </router-link>
+        <div class="mb-3">
+          <div class="d-flex mb-2 align-items-center border-bottom">
+            <h3 >Favourite Services</h3>
           </div>
         </div>
-        <div class="row" v-if="favouriteServices">
+        <div class="row g-4 recommended d-flex flex-wrap justify-content-start" v-if="favouriteServices">
           <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'" />
           <div
-            class="service-col col-md-4 d-flex flex-column align-self-stretch"
+            class="col-6 col-md-4 mb-3 col-xxl-3 service-list-section"
             v-for="favouriteService in favouriteServices"
             :key="favouriteService.id"
             v-else
           >
             {{ Service }}
-            <div class="row">
+            <div>
               <Service :service="favouriteService" />
             </div>
           </div>
@@ -30,7 +23,6 @@
         <div v-else class="container text-center py-5">
           <h3>No Any Service Available</h3>
         </div>
-      </div>
     </div>
   </div>
 </template>
