@@ -1,5 +1,5 @@
 <template>
-    <header class="app-header fixed-top">
+  <header class="app-header fixed-top">
     <div class="app-header-inner">
       <div class="container-fluid py-2">
         <div class="app-header-content">
@@ -8,10 +8,9 @@
               <a
                 id="sidepanel-toggler"
                 class="sidepanel-toggler d-inline-block d-xl-none"
-                @click="sidePanelOpened= !sidePanelOpened"
-                
+                @click="sidePanelOpened = !sidePanelOpened"
                 href="#"
-              > 
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30"
@@ -55,6 +54,11 @@
             <!--//app-search-box-->
 
             <div class="app-utilities col-auto">
+              <span class="mr-2">
+                <a class="cursor-pointer" @click="handleUserMode">
+                  Switch to {{ isBuyerMode ? "Seller" : "Buyer" }}
+                </a>
+              </span>
               <div class="app-utility-item app-notifications-dropdown dropdown">
                 <a
                   class="dropdown-toggle no-toggle-arrow"
@@ -91,31 +95,60 @@
                     <h5 class="dropdown-menu-title mb-0">Notifications</h5>
                   </div>
                   <!--//dropdown-menu-title-->
-                  <div class="dropdown-menu-content" data-v-777096b7=""
+                  <div class="dropdown-menu-content" data-v-777096b7="">
+                    <div
+                      class="item p-3"
+                      data-v-777096b7=""
+                      v-for="notification in userNotification"
+                      :key="notification.index"
                     >
-                    <div class="item p-3" data-v-777096b7=""
-                    v-for="notification in userNotification"
-                    :key="notification.index">
-                        <div class="row gx-2 justify-content-between align-items-center" data-v-777096b7="">
-                          <div class="col-auto" data-v-777096b7=""><img class="profile-image" src="/assets/seller/images/profiles/profile-1.png" alt="" data-v-777096b7=""></div>
-                          <!--//col-->
-                          <div class="col" data-v-777096b7="">
-                              <div class="info" data-v-777096b7="">
-                                <div class="desc" data-v-777096b7=""><b> {{ notification.name }} </b></div>
-                                <div class="desc" data-v-777096b7=""> {{ notification.body }} </div>
-                                <div class="meta align-baseline" data-v-777096b7="">{{ $filters.timeAgo(notification.created_at) }}</div>
-                              </div>
-                          </div>
-                          <!--//col-->
+                      <div
+                        class="
+                          row
+                          gx-2
+                          justify-content-between
+                          align-items-center
+                        "
+                        data-v-777096b7=""
+                      >
+                        <div class="col-auto" data-v-777096b7="">
+                          <img
+                            class="profile-image"
+                            src="/assets/seller/images/profiles/profile-1.png"
+                            alt=""
+                            data-v-777096b7=""
+                          />
                         </div>
-                        <!--//row-->
-                        <a href="/dashboard/notifications" class="link-mask" data-v-777096b7=""></a>
+                        <!--//col-->
+                        <div class="col" data-v-777096b7="">
+                          <div class="info" data-v-777096b7="">
+                            <div class="desc" data-v-777096b7="">
+                              <b> {{ notification.name }} </b>
+                            </div>
+                            <div class="desc" data-v-777096b7="">
+                              {{ notification.body }}
+                            </div>
+                            <div class="meta align-baseline" data-v-777096b7="">
+                              {{ $filters.timeAgo(notification.created_at) }}
+                            </div>
+                          </div>
+                        </div>
+                        <!--//col-->
+                      </div>
+                      <!--//row-->
+                      <a
+                        href="/dashboard/notifications"
+                        class="link-mask"
+                        data-v-777096b7=""
+                      ></a>
                     </div>
                   </div>
                   <!--//dropdown-menu-content-->
 
                   <div class="dropdown-menu-footer p-2 text-center">
-                    <router-link to="/dashboard/notifications">View all</router-link>
+                    <router-link to="/dashboard/notifications"
+                      >View all</router-link
+                    >
                   </div>
                 </div>
                 <!--//dropdown-menu-->
@@ -146,7 +179,6 @@
               <!--//app-utility-item-->
 
               <div class="app-utility-item app-user-dropdown dropdown">
-                
                 <a
                   class="dropdown-toggle"
                   id="user-dropdown-toggle"
@@ -155,23 +187,29 @@
                   role="button"
                   aria-expanded="false"
                   ><img
-                  :src="`${imgURL}/${user.image}`"
-                  class="dropdown-user-img img-full rounded-circle"
-                  alt="profile_img"
+                    :src="`${imgURL}/${user.image}`"
+                    class="dropdown-user-img img-full rounded-circle"
+                    alt="profile_img"
                 /></a>
                 <ul
                   class="dropdown-menu"
                   aria-labelledby="user-dropdown-toggle"
                 >
                   <li>
-                    <router-link class="dropdown-item" to="/dashboard/account">Account</router-link>
+                    <router-link class="dropdown-item" to="/dashboard/account"
+                      >Account</router-link
+                    >
                   </li>
                   <li>
-                    <router-link class="dropdown-item" to="/dashboard/settings">Settings</router-link>
+                    <router-link class="dropdown-item" to="/dashboard/settings"
+                      >Settings</router-link
+                    >
                   </li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
-                    <router-link class="dropdown-item" to="/login">Log Out</router-link>
+                    <router-link class="dropdown-item" to="/login"
+                      >Log Out</router-link
+                    >
                   </li>
                 </ul>
               </div>
@@ -185,32 +223,55 @@
       </div>
       <!--//container-fluid-->
     </div>
-   
-    <SidePanel :sidePanelOpen="sidePanelOpened"    @sidPanelClose="sidePanelOpened=false"/>
-  
+
+    <SidePanel
+      :sidePanelOpen="sidePanelOpened"
+      @sidPanelClose="sidePanelOpened = false"
+    />
   </header>
 </template>
 
 <script>
 import SidePanel from "./SidePanel.vue";
-import {computed, ref} from 'vue'
-import { useStore } from 'vuex';
+import { onMounted, computed, ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from 'vue-router';
 export default {
-   components:{SidePanel},
-   setup(){
-     const store = useStore();
-      const sidePanelOpened=ref(false);
-      return {
-        sidePanelOpened,
-        userNotification: computed(() => store.getters.getRecentNotifications),        user: computed(() => store.getters.getAuthUser),
-        imgURL: process.env.VUE_APP_URL,
+  components: { SidePanel },
+  setup() {
+    const store = useStore();
+    const router = useRouter()
+    const sidePanelOpened = ref(false);
+
+    const isBuyerMode = computed(() => store.getters.isBuyerMode);
+    onMounted(()=>{
+      if(isBuyerMode.value) {
+        store.commit("toggleUserMode");
       }
-   }
+    })
+    const handleUserMode = () => {
+      store.commit("toggleUserMode");
+      if (isBuyerMode.value) {
+        router.push({name: 'Home'});
+      } else {
+        router.push({name: 'sellerDashboard'});
+      }
+    };
+
+    return {
+      sidePanelOpened,
+      userNotification: computed(() => store.getters.getRecentNotifications),
+      user: computed(() => store.getters.getAuthUser),
+      imgURL: process.env.VUE_APP_URL,
+      isBuyerMode,
+      handleUserMode
+    };
+  },
 };
 </script>
 
 <style scoped>
-.app-utilities{
+.app-utilities {
   display: flex;
   align-items: center;
 }

@@ -13,14 +13,14 @@
                                  <i class="fa fa-search position-absolute"></i>
                                  <input placeholder="Search messages" type="text" class="form-control">
                               </div>
-                              <div class="osahan-chat-list" v-if="$store.getters.getConversationListStatus==='COMPLETED'">
+                              <div v-if="$store.getters.getConversationListStatus==='LOADING'">
+                                 <p>Loading...</p>
+                              </div>
+                              <div class="osahan-chat-list" v-else>
                                  <ConversationList 
                                     v-for="conversation in $store.getters.getConversations" :conversation="conversation" :key="conversation.id" 
                                     style="cursor: pointer;"
                                  />
-                              </div>
-                              <div v-else>
-                                 <p>Loading...</p>
                               </div>
                            </div>
                         </div>
