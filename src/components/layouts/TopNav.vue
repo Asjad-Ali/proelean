@@ -109,7 +109,7 @@
           v-if="$store.state.isLoggedIn"
         >
           <span class="mr-2">
-            <a class="cursor-pointer" @click="$store.commit('toggleUserMode')">
+            <a class="cursor-pointer" @click="handleUserMode">
               Switch to {{ isBuyerMode ? "Seller" : "Buyer" }}
             </a>
           </span>
@@ -516,53 +516,12 @@
                 </svg>
                 Message Center
               </h6>
-              <a class="dropdown-item dropdown-notifications-item" href="#!">
-                <img
-                  class="dropdown-notifications-item-img"
-                  src="/assets/images/user/s7.png"
-                />
-                <div class="dropdown-notifications-item-content">
-                  <div class="dropdown-notifications-item-content-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </div>
-                  <div class="dropdown-notifications-item-content-details">
-                    Emily Fowler · 58m
-                  </div>
-                </div>
-              </a>
-              <a class="dropdown-item dropdown-notifications-item" href="#!">
-                <img
-                  class="dropdown-notifications-item-img"
-                  src="/assets/images/user/s8.png"
-                />
-                <div class="dropdown-notifications-item-content">
-                  <div class="dropdown-notifications-item-content-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </div>
-                  <div class="dropdown-notifications-item-content-details">
-                    Diane Chambers · 2d
-                  </div>
-                </div>
-              </a>
-              <router-link
-                class="dropdown-item dropdown-notifications-footer"
-                to="/chat"
-                >Read All Messages</router-link
-              >
+
+              <MessageCenter
+                v-for="conversation in $store.getters.getConversations"
+                :conversation="conversation"
+                :key="conversation.id"
+              />
             </div>
           </li>
           <!-- languages li start -->
@@ -794,7 +753,7 @@
 
 <script>
 import Api from "@/services/API";
-import { useRouter } from "vue-router";
+import {  useRouter } from "vue-router";
 import { computed, onMounted, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 
@@ -803,6 +762,9 @@ export default {
     const store = useStore();
     const router = useRouter();
     const keywords = ref(null);
+
+    const isBuyerMode = computed(() => store.getters.isBuyerMode);
+
     const handleLogout = async () => {
       const response = await Api.post("logout");
       if (response.status === 200) {
@@ -831,6 +793,15 @@ export default {
       keywords.value = "";
     };
 
+    const handleUserMode = () => {
+      store.commit("toggleUserMode");
+      if (isBuyerMode.value) {
+        router.push({name: 'Home'});
+      } else {
+        router.push({name: 'sellerDashboard'});
+      }
+    };
+
     // /* Encode string to slug */
     /* eslint-disable */
     function slugify(text) {
@@ -852,7 +823,8 @@ export default {
       userNotification: computed(() => store.getters.getRecentNotifications),
       user: computed(() => store.getters.getAuthUser),
       imgURL: process.env.VUE_APP_URL,
-      isBuyerMode: computed(() => store.getters.isBuyerMode),
+      handleUserMode,
+      isBuyerMode,
     };
   },
 };
