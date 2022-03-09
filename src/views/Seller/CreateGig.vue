@@ -17,27 +17,14 @@
                     data-trigger="hover"
                     data-placement="top"
                     data-content="This is a Bootstrap popover example. You can use popover to provide extra info."
-                    ><svg
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 16 16"
-                      class="bi bi-info-circle"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                      />
-                      <path
-                        d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"
-                      />
-                      <circle cx="8" cy="4.5" r="1" /></svg></span
-                ></label>
+                    ></span>
+                    </label>
                 <input
                   type="text"
                   class="form-control"
                   id="setting-input-1"
+                  v-model="createService.s_description"
+                  name="s_description"
                   placeholder="I will create"
                   required
                 />
@@ -49,19 +36,49 @@
                 <div class="form-group">
                   <textarea
                     class="form-control"
+                    v-model="createService.description"
                     name="description"
                     rows="7"
                     placeholder="Describe About Your Serivce"
-                    required=""
-                    spellcheck="false"
+                    required
                   ></textarea>
                 </div>
               </div>
-              <div class="mb-3">
+              <div class="mb-3 d-flex flex-start">
                 <div class="wrapper">
-                  <div class="file-upload">
-                    <input type="file" />
+                  <div class="file-upload mr-2" @click="$refs.bannerInput.click()">
                     <i class="fa fa-arrow-up"></i>
+                      <input
+                        type="file"
+                        multiple
+                        ref="bannerInput"
+                        id="bannerInput"
+                        style="display: none"
+                        @change="selectThumbnail"
+                        required
+                      />
+                    
+                  </div>
+                  <div
+                    v-for="(banner, index) in bannersBase64"
+                    :key="index"
+                  >
+                    <div
+                      class="
+                        cursor-pointer
+                        position-relative
+                      "
+                      style="
+                        height: 90px;
+                        width: 90px;
+                        border: 1px solid grey;
+                        margin-left:10px;
+                        background-size:cover;
+                      "
+                      :style="`background-image: url(${banner});`"
+                    >
+                      <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -77,35 +94,16 @@
                       name="category_id"
                       placeholder="Select Category"
                       data-msg="Please select category."
+                      :onchange="getCategory"
                       required=""
                     >
-                      <option disabled="" value="">Select category</option>
-                      <option value="cU1VOWVkQVVpVElJdll4eThYOXpBZz09">
-                        Graphic &amp; Design
-                      </option>
-                      <option value="d3JkUHdCcEZRMGdseTBvNXFOVXNGUT09">
-                        Digital Marketing
-                      </option>
-                      <option value="S2ZRcEpwa2FBZkV6UnpUV0xUYlAvQT09">
-                        Writing &amp; Translation
-                      </option>
-                      <option value="czlPZ2tiNVpDSHJRdWo4dGtqWUJodz09">
-                        Video &amp; Animation
-                      </option>
-                      <option value="WE96NU9EZTlZc3VrdGtEZFZqRDB1dz09">
-                        Music &amp; Audio
-                      </option>
-                      <option value="K0N2WTlQN3dkbE9rTE40cDdzZVZqQT09">
-                        Programming &amp; Tech
-                      </option>
-                      <option value="L25HN2crTFhRd2hqQzRDU2hGdGNSdz09">
-                        Data
-                      </option>
-                      <option value="SytDL1pNdmpKVG84VENnZ3RBYnZ6UT09">
-                        Bussiness
-                      </option>
-                      <option value="WFpGRnJhMGNWcmNrMjRwRjR6SFByZz09">
-                        Lifestyle
+                      <option disabled="" value="">Select Category</option>
+                      <option
+                        v-for="category in $store.getters.getCategories"
+                        :value="category.id"
+                        :key="category.id"
+                      >
+                        {{ category.title }}
                       </option>
                     </select>
                   </div>
@@ -117,27 +115,17 @@
                       id="subCategory"
                       class="form-control"
                       name="category_id"
-                      required=""
+                      v-model="createService.sub_category_id"
+                      required
                     >
                       <option disabled="" value="">Select Sub Category</option>
-                      <option value="czlPZ2tiNVpDSHJRdWo4dGtqWUJodz09">
-                        Video &amp; Animation
-                      </option>
-                      <option value="WE96NU9EZTlZc3VrdGtEZFZqRDB1dz09">
-                        Music &amp; Audio
-                      </option>
-                      <option value="K0N2WTlQN3dkbE9rTE40cDdzZVZqQT09">
-                        Programming &amp; Tech
-                      </option>
-                      <option value="L25HN2crTFhRd2hqQzRDU2hGdGNSdz09">
-                        Data
-                      </option>
-                      <option value="SytDL1pNdmpKVG84VENnZ3RBYnZ6UT09">
-                        Bussiness
-                      </option>
-                      <option value="WFpGRnJhMGNWcmNrMjRwRjR6SFByZz09">
-                        Lifestyle
-                      </option>
+                        <option
+                          v-for="subCategory in $store.getters.getSubCategories"
+                          :value="subCategory.id"
+                          :key="subCategory.id"
+                        >
+                          {{ subCategory.title }}
+                        </option>
                     </select>
                   </div>
                 </div>
@@ -149,46 +137,24 @@
                       >Delivery Time</label
                     >
                     <select
-                      id="category"
+                      id="deliveryTime"
                       class="form-control"
-                      name="category_id"
+                      name="delivery_time"
                       placeholder="Select Category"
                       data-msg="Please select category."
                       required=""
                     >
                       <option disabled="" value="">Select Days</option>
-                      <option value="cU1VOWVkQVVpVElJdll4eThYOXpBZz09">
-                        Graphic &amp; Design
-                      </option>
-                      <option value="d3JkUHdCcEZRMGdseTBvNXFOVXNGUT09">
-                        Digital Marketing
-                      </option>
-                      <option value="S2ZRcEpwa2FBZkV6UnpUV0xUYlAvQT09">
-                        Writing &amp; Translation
-                      </option>
-                      <option value="czlPZ2tiNVpDSHJRdWo4dGtqWUJodz09">
-                        Video &amp; Animation
-                      </option>
-                      <option value="WE96NU9EZTlZc3VrdGtEZFZqRDB1dz09">
-                        Music &amp; Audio
-                      </option>
-                      <option value="K0N2WTlQN3dkbE9rTE40cDdzZVZqQT09">
-                        Programming &amp; Tech
-                      </option>
-                      <option value="L25HN2crTFhRd2hqQzRDU2hGdGNSdz09">
-                        Data
-                      </option>
-                      <option value="SytDL1pNdmpKVG84VENnZ3RBYnZ6UT09">
-                        Bussiness
-                      </option>
-                      <option value="WFpGRnJhMGNWcmNrMjRwRjR6SFByZz09">
-                        Lifestyle
-                      </option>
+                      <option  
+                        v-for="day in $store.getters.getDeliveryDays"
+                        :value="day" 
+                        :key="day.index"
+                        >{{ day }} </option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="setting-input-2" class="form-label"
-                      >Choose subcategory</label
+                      >What is your budget for this service?</label
                     >
                     <div class="input-group">
                       <div class="input-group-prepend d-flex align-items-center">
@@ -198,6 +164,7 @@
                         type="number"
                         class="form-control"
                         name="price"
+                        v-model="createService.price"
                         id="inlineFormInputGroup"
                         required=""
                       />
@@ -205,22 +172,49 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn app-btn-primary">
-                Create
+              <button  class="btn app-btn-primary"
+                @click.prevent="gigCreation"
+                :disabled="registerStatus === 2">
+                {{registerStatus === 2 ? 'Loading...' : 'Create'}}
               </button>
             </form>
           </div>
-          <!--//app-card-body-->
         </div>
-        <!--//app-card-->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import useCreateService from '@/composables/useSeller/useCreateService'
+import { computed, onBeforeMount } from '@vue/runtime-core';
+import { useStore } from 'vuex';
+
 export default {
-  components: {},
+  setup() {
+        const store = useStore()
+        const { createService,
+        data,
+        bannersBase64,
+        gigCreation,
+        selectThumbnail,
+        removeImage,
+        getCategory,
+        encodeImageFileAsURL } = useCreateService();
+
+      onBeforeMount(() => store.dispatch("getCountriesLanguage"))
+
+    return {
+      registerStatus: computed(() => store.getters.getRegisterStatus),
+      createService,
+      getCategory,
+      data,
+      gigCreation,
+      selectThumbnail,
+      bannersBase64,
+      removeImage,
+      encodeImageFileAsURL
+    };  },
 };
 </script>
 

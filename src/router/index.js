@@ -154,7 +154,7 @@ const routes = [
     component: BuyerRequests
   },
   {
-    path: '/seller/favourite_service',
+    path: '/dashboard/favourite_service',
     name: 'FavouriteService',
     component: FavouriteService
   },
