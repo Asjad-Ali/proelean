@@ -15,8 +15,8 @@
         <div class="row gx-5 gy-3">
           <div class="col-12 col-lg-9">
             <div>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's
+            Get work done faster and with confidence on Pro eLean.
+            Inspired with projects made by our eFreelancers.
             </div>
           </div>
           <!--//col-->
