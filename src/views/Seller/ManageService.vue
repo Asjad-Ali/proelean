@@ -328,17 +328,6 @@ export default {
 </script>
 
 <style>
-.loader {
-  display: block;
-}
-.spinner-border {
-  width: 4rem;
-  height: 4rem;
-}
-.spinnerInden{
-  margin-top: 8rem;
-  margin-bottom: 5rem;
-}
 .editIcon{
   font-size: 17px;
   padding-top: 1px;

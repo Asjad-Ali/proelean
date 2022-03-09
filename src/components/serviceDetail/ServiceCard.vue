@@ -38,28 +38,18 @@
         </div>
         <div class="contact-seller-wrapper d-flex justify-content-center">
             <!-- Button trigger modal -->
-            <button type="button" @click.prevent="getServiceId(service.service_user.id)" class="btn btn-success width" data-toggle="modal" data-target="#staticBackdrop">
+            <button type="button" @click.prevent="getServiceId(service.id)" class="btn btn-success width" data-toggle="modal" data-target="#staticBackdrop">
             Purchase
             </button>
 
             <!---------------------     Modal    ---------------------->
             <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" v-if="!cardSection">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Purchase Service</h5> 
                     </div>
-                    <div class="modal-body text-center">      
-                        <!-- <div class="text-left font ">Description</div> -->
-                        <!-- <textarea
-                        type="text"
-                        class="form-control"
-                        name="description"
-                        v-model="paymentElements.description"
-                        id="description"
-                        placeholder="Describe your request"
-                        required
-                        /> -->
+                    <div class="modal-body text-center">
                         <div class="text-left font">ATM Number</div>
                         <input
                         type="number"
@@ -70,7 +60,7 @@
                         placeholder="Enter 16 characters of your ATM Number "
                         required
                         />
-                        <div class="text-left font mt-2">Card Expiry Month</div>
+                        <div class="text-left font mt-3">Card Expiry Month</div>
                         <input
                         type="number"
                         class="form-control"
@@ -80,7 +70,7 @@
                         placeholder="Enter Card Expiry Month"
                         required
                         />
-                        <div class="text-left font mt-2">Card Expiry Year</div>
+                        <div class="text-left font mt-3">Card Expiry Year</div>
                         <input
                         type="number"
                         class="form-control"
@@ -90,7 +80,7 @@
                         placeholder="Enter Card Expiry Year"
                         required
                         />
-                        <div class="text-left font mt-2">CVC</div>
+                        <div class="text-left font mt-3">CVC</div>
                         <input
                         type="number"
                         class="form-control"
@@ -101,9 +91,30 @@
                         required
                         />
                     </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" @click="atmCardApproved()">Purchase</button>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success" @click="atmCardApproval()">Proceed</button>
+                    </div>
+                </div>
+                <div class="modal-content" v-else>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Purchase Service</h5> 
+                    </div>
+                    <div class="modal-body text-center">
+                        <div class="text-left font mt-2">Description</div>
+                        <textarea
+                        type="text"
+                        class="form-control"
+                        name="description"
+                        v-model="formData.description"
+                        id="description"
+                        placeholder="Type description"
+                        required
+                        />
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center mt-3">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" @click="purchaseService()">Purchase</button>
                     </div>
                 </div>
             </div>
@@ -127,27 +138,42 @@ export default {
     //   store.dispatch("showBuyerRequests");
     });
     const paymentElements = ref({
-      serviceUserId:'',
+      service_id:'',
       number:'',
-      exp_month:1,
+      exp_month:6,
       exp_year:2022,
       cvc:'',
     });
+    const formData = ref({
+      service_id:'',
+      description:'',
+      token: ''
+    });
     const getServiceId = (id) => {
-      paymentElements.value.serviceUserId = id
+      paymentElements.value.service_id = id
+      formData.value.service_id = id
     };
 
-    function atmCardApproved() {
-      store.dispatch("purchaseService", paymentElements.value);
-      console.log("service id: ",paymentElements.value);
+    function atmCardApproval() {
+      store.dispatch("ATM_CardDetail", paymentElements.value);
+      console.log("payment values: ",paymentElements.value);
+
       paymentElements.value = {}
+    }
+    function purchaseService() {
+      store.dispatch("purchaseService", formData.value);
+      console.log("formdata values: ",formData.value);
+      formData.value = {}
     }
 
     return {
       service: computed(() => store.getters.getSingleService),
-      atmCardApproved,
+      cardSection: computed(() => store.getters.getCardSection),
+      atmCardApproval,
       getServiceId,
-      paymentElements
+      paymentElements,
+      purchaseService,
+      formData
     };
   },
 };

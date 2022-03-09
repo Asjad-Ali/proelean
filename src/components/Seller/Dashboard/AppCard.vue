@@ -15,8 +15,8 @@
         <div class="row gx-5 gy-3">
           <div class="col-12 col-lg-9">
             <div>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's
+            Get work done faster and with confidence on Pro eLean.
+            Inspired with projects made by our eFreelancers.
             </div>
           </div>
           <!--//col-->
@@ -52,7 +52,7 @@
           class="btn-close btn-lrg-standard"
           data-bs-dismiss="alert"
           aria-label="Close"
-        >
+         >
        <i class="fa fa-times" aria-hidden="true"></i>
         </button>
       </div>
@@ -66,5 +66,22 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
+.btn-lrg-standard{
+  padding: 10px 0;
+    font-size: 14px;
+    text-align: center;
+    line-height: 16px;
+    font-weight: 700;
+    color: #fff;
+    border: 1px solid transparent;
+    background: #d26d69 !important;
+    border-radius: 3px
+}
+.seller-app .app-card .btn-close:focus {
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
 </style>

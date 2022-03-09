@@ -213,6 +213,17 @@ p.help-block li {
     background-color: #f45a2a;
     border-color: #f45a2a;
 }
+.loader {
+    display: block;
+  }
+  .spinner-border {
+    width: 4rem;
+    height: 4rem;
+  }
+  .spinnerInden{
+    margin-top: 8rem;
+    margin-bottom: 5rem;
+  }
 .text-success {
     color: #368fee !important;
 }

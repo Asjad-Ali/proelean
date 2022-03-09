@@ -1,14 +1,16 @@
 import Api from '@/services/API';
 import { ref } from 'vue';
 import useToast from '@/composables/useToast.js'
-//import { loadStripe } from '@stripe/stripe-js'
 
 export const state = {
     createJob:[],
     allJobs:[],
     allOrders:[],
     service:{},
-    loader: null
+    cardStripe:{},
+    loader: null,
+    cardSection: false,
+    orderType:{}
   }
 
 export const getters = {
@@ -16,7 +18,10 @@ export const getters = {
   getAllJobs : state => state.allJobs,
   getAllOrders : state => state.allOrders,
   getService : state => state.service,
+  getCardStripe : state => state.cardStripe,
   getLoaderVal : state => state.loader,
+  getCardSection : state => state.cardSection,
+  getOrderType : state => state.orderType
 }
 
 export const  mutations = {
@@ -29,8 +34,17 @@ export const  mutations = {
     setAllOrders(state,order){
       state.allOrders=order;
     },
+    setOrderType(state,order){
+      state.orderType=order;
+    },
     setService(state,service){
       state.service=service;
+    },
+    setCardStripe(state,stripe){
+      state.cardStripe=stripe;
+    },
+    setCardSection(state,value){
+      state.cardSection=value;
     },
     setLoader(state,loader){
       state.loader=loader;
@@ -95,15 +109,37 @@ export const  actions = {
         }
       },
 
-      async purchaseService({commit},payload){
+      async manageOrder({commit},payload){
+        const res = await Api.post('buyer/manage_order',payload);
+        if(res.status === 200){
+          console.log("Type of Order:",res.data);
+          commit("setOrderType",res.data);
+        }
+        else{
+          console.log("Error Order Type");
+        }
+      },
+
+      async ATM_CardDetail({commit},payload){
 
         const res = await Api.post('token',payload);
         if(res.status === 200){
-          console.log("Service",res.data)
-          console.log("Service token:",res.token)
-          // const token = res.token;
+          commit('setCardSection', true);
+          console.log("Service token:",res.token);
+          commit("setCardStripe",res.token);
+        }
+        else{
+          console.log("Error Stripe");
+        }
+      },
+
+      async purchaseService({commit,state},payload){
+        console.log("token",state.cardStripe)
+        payload.token = state.cardStripe
+        const res = await Api.post('buyer/custom_order',payload);
+        if(res.status === 201){
           commit("setService",res.data);
-          useToast('You purchased the service','success');
+          useToast(res.message,'success');
         }
         else{
           useToast(res.message);
@@ -111,16 +147,6 @@ export const  actions = {
         }
       },
 
-      async showFilteredOrders({commit}, value){
-        const res = await Api.get(`buyer/orders?status=${value}`);
-        if(res.status === 200){
-          console.log("Filtered Orders Response",res.data)
-          commit("setAllOrders",res.data);
-        }
-        else{
-          console.log("Error Filtered Orders");
-        }
-      },
 
       
 }

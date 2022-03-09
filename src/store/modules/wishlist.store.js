@@ -3,16 +3,21 @@ import useToast from '@/composables/useToast.js'
 
 export const state = {
   wishlistServices: [],
+  wishlistData: [],
   error: null,
 }
 
 export const getters = {
   getWishlist: state => state.wishlistServices,
+  getWishlistServices: state => state.wishlistData,
 }
 
 export const mutations = {
   setWishlist(state, data) {
     state.wishlistServices = data
+  },
+  setAllWishlistServices(state, data) {
+    state.wishlistData = data
   },
   setError(state, error) {
     state.error = error;
@@ -25,12 +30,27 @@ export const actions = {
     const resp = await Api.post('wishlist', payload)
     if (resp.status == 200) {
       useToast(resp.message, 'success');
-      commit('toggleFavourite', payload.service_id);
+      if(payload.type === 'gigs')
+      {
+        commit('toggleFavourite', payload.service_id);
+      }
+      else{
+        commit('toggleOfferedService', payload.service_id);
+      }
       commit('setRegisterStatus', 3);
     }
     else {
       useToast(resp.message);
       commit('setRegisterStatus', 4);
+    }
+
+  },
+  async allWishlistServices({ commit }, payload) {
+    commit('setLoadingStatus', 'LOADING');
+    const resp = await Api.get('get_wishlist', payload)
+    if (resp.status == 200) {
+      commit('setAllWishlistServices',resp.data)
+      commit('setLoadingStatus', 'COMPLETED');
     }
 
   },

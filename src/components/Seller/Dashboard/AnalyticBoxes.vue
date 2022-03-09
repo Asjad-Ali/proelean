@@ -4,7 +4,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Balance</h4>
-          <div class="stats-figure">€12,000</div>
+          <div class="stats-figure">{{user.availabe_balance}}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -16,7 +16,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Active Orders</h4>
-          <div class="stats-figure">12</div>
+          <div class="stats-figure">{{user.active_orders}}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -28,7 +28,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Impressions</h4>
-          <div class="stats-figure">12,628</div>
+          <div class="stats-figure">{{user.weekly_impression}}</div>
           <div class="stats-meta text-success">
             <svg
               width="1em"
@@ -57,7 +57,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Clicks</h4>
-          <div class="stats-figure">2,250</div>
+          <div class="stats-figure"> {{user.weekly_clicks}} </div>
           <div class="stats-meta text-success">
             <svg
               width="1em"
@@ -86,7 +86,16 @@
 </template>
 
 <script>
-export default {};
+import { computed } from '@vue/runtime-core';
+import { useStore } from 'vuex'
+export default {
+  setup() {
+    const store= useStore();
+    return{
+      user: computed(() => store.getters.getAuthUser),
+    }
+  }
+};
 </script>
 
 <style>
