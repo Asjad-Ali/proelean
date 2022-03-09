@@ -53,9 +53,12 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><router-link :to="{name:'gigDetail', params:{id:service.id}}">Open</router-link></li>
-              <li><router-link :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link></li>
-              <li><router-link to="">Delete</router-link></li>
+              <li class="dropdown-item"><router-link :to="{name:'gigDetail', params:{id:service.id}}">Open</router-link></li>
+              <li class="dropdown-item"><router-link :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link></li>
+              <li v-on:click.prevent="getServiceId(service.id)" class="dropdown-item"><a aria-hidden="true"
+                  data-toggle="modal"
+                  class="cursor-pointer"
+                  data-target="#exampleModalCenter">Delete</a></li>
             </ul>
           </div>
           <a
@@ -65,7 +68,6 @@
               <i v-else  class="fa fa-heart cursor-pointer" :class="{ redIcon : service.favourite}"
               :disabled="loader===service.id"   aria-hidden="true"></i>
           </a>
-
           <div class="price">
             <a href="#">
               Starting At <span> ${{ service.price }}</span>
@@ -73,13 +75,65 @@
           </div>
         </div>
       </div>
+
+          <div class="col-2">
+        <div
+          class="modal fade"
+          id="exampleModalCenter"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered"
+            role="document"
+          >
+            <div class="modal-content">
+              <div
+                class="modal-header d-flex justify-content-center"
+              >
+                <h5
+                  class="modal-title"
+                  id="exampleModalLongTitle"
+                >
+                  Delete Service
+                </h5>
+              </div>
+              <div class="modal-body text-center">
+                Are you sure you want to delete the service?
+              </div>
+              <div
+                class="modal-footer d-flex justify-content-center"
+              >
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  No
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-dismiss="modal"
+                  @click="deleteService()"
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </template>
 
 <script>
 import { useStore } from 'vuex';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 export default {
   props: {
@@ -92,15 +146,25 @@ export default {
     const store = useStore()
     const route = useRoute();
 
+    const serviceId = ref('');
+    const getServiceId = (id) => {
+      serviceId.value = id
+    };
+    function deleteService() {
+      store.dispatch('deleteService',serviceId.value)
+      console.log("delete service id: ", serviceId.value);
+    }
+
     function handleWishlist (id) {
       let payload = {
         'service_id': id,
         'type': route.name === 'Gigs' ? 'gigs' : 'offered'
       }
-      console.log("Click")
       store.dispatch('wishlist',payload)
     }
     return {
+      getServiceId,
+      deleteService,
       handleWishlist,
       loader: computed(() => store.getters.getRegisterStatus),
       imgURL: process.env.VUE_APP_URL

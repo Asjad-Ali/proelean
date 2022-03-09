@@ -188,7 +188,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "services" */'@/views/Services.vue'),
   },
   {
-    path: '/gig-detail/:id',
+    path: '/dashboard/gig-detail/:id',
     name: 'gigDetail',
     component: ServiceDetail,
   },
