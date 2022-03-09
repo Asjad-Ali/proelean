@@ -139,10 +139,10 @@ export default {
     });
     const paymentElements = ref({
       service_id:'',
-      number:'',
+      number:4242424242424242,
       exp_month:6,
       exp_year:2022,
-      cvc:'',
+      cvc:123,
     });
     const formData = ref({
       service_id:'',
