@@ -558,10 +558,10 @@
                   </div>
                 </div>
               </a>
-              <a
+              <router-link
                 class="dropdown-item dropdown-notifications-footer"
-                href="/chat"
-                >Read All Messages</a
+                to="/chat"
+                >Read All Messages</router-link
               >
             </div>
           </li>
