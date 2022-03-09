@@ -5,21 +5,17 @@ import useToast from '@/composables/useToast.js'
 export const state = {
     createJob:[],
     allJobs:[],
-    allOrders:[],
     service:{},
     cardStripe:{},
     cardSection: false,
-    orderType:{}
   }
 
 export const getters = {
   getCreateJob : state => state.createJob,
   getAllJobs : state => state.allJobs,
-  getAllOrders : state => state.allOrders,
   getService : state => state.service,
   getCardStripe : state => state.cardStripe,
   getCardSection : state => state.cardSection,
-  getOrderType : state => state.orderType
 }
 
 export const  mutations = {
@@ -28,12 +24,6 @@ export const  mutations = {
       },
     setAllJobs(state,job){
       state.allJobs=job;
-    },
-    setAllOrders(state,order){
-      state.allOrders=order;
-    },
-    setOrderType(state,order){
-      state.orderType=order;
     },
     setService(state,service){
       state.service=service;
@@ -87,34 +77,6 @@ export const  actions = {
         else{
           console.log("Error delete Job");
           useToast(res.message);
-        }
-      },
-
-      async showAllOrders({commit}){
-        commit('setLoader',1);
-        const res = await Api.get('buyer/orders');
-        if(res.status === 200){
-          console.log("All Orders Response",res.data)
-          commit("setAllOrders",res.data);
-          commit('setLoader',0);
-        }
-        else{
-          console.log("Error All Orders");
-        }
-      },
-
-      async manageOrder({commit,state},payload){
-        const res = await Api.post('buyer/manage_order',payload);
-        if(res.status === 200){
-          console.log("Type of Order:",res.status);
-          commit("setOrderType",res.data);
-          const afterSetOrder = ref(state.allOrders.filter(order => order.orderNo !== payload.order_no))
-          commit("setAllOrders",afterSetOrder.value);
-          useToast(res.message,'success');
-        }
-        else{
-          useToast(res.message);
-          console.log("Error Order Type");
         }
       },
 

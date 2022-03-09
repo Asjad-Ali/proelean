@@ -17,6 +17,7 @@ export const state = {
   reviewsHasNextPage: '',
   error: null,
   buyerRequests: [],
+  earnings:{}
 }
 
 export const getters = {
@@ -80,7 +81,11 @@ export const mutations = {
           service.favourite = service.favourite == 1 ? 0 : 1;
         }
       });
-    }
+    },
+
+    setEarnings(state, earnings) {
+      state.earnings = earnings
+    },
 }
 
 export const actions = {
@@ -235,5 +240,16 @@ export const actions = {
       useToast(resp.message);
     }
   },
+
+  async getEarnings({ commit }) {
+    const res = await Api.get(`seller/getEarnings`);
+    if (res.status === 200) {
+      commit("setEarnings", res.data);
+      console.log("Earnings", res.data);
+    } else {
+      console.log("get Earnings error");
+    }
+  },
+
 
 }

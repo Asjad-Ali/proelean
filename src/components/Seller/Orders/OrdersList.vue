@@ -232,42 +232,63 @@
                       <!-- Modal -->
                       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
-                          <div class="modal-content">
+                          <div class="modal-content" v-if="!orderSection">
                             <div class="modal-header">
                               <h5 class="modal-title" id="exampleModalLabel">Order Detail</h5>
                             </div>
                             <div class="modal-body d-flex flex-column">
                               <div class="row">
                                 <div class="col-2 text-dark"> Order </div>
-                                <div class="col-10"> 1321231548779856 </div>
+                                <div class="col-10"> {{order.orderNo}} </div>
                               </div>
                               <div class="row">
                                 <div class="col-2 text-dark"> Description </div>
-                                <div class="col-10"> wanna alsdasnlda sdadalkdja daskjdad </div>
+                                <div class="col-10"> {{order.description}} </div>
                               </div>
                               <div class="row">
                                 <div class="col-2 text-dark"> Seller </div>
-                                <div class="col-10"> Asjad Ali </div>
+                                <div class="col-10"> {{order.username}} </div>
                               </div>
                               <div class="row">
                                 <div class="col-2 text-dark"> Price </div>
-                                <div class="col-10"> $150 </div>
+                                <div class="col-10"> {{order.amount}} </div>
                               </div>
                               <div class="row">
                                 <div class="col-2 text-dark"> Revisions </div>
-                                <div class="col-10"> 5 </div>
+                                <div class="col-10"> {{order.revision}} </div>
                               </div>
                               <div class="row">
                                 <div class="col-2 text-dark"> Duration </div>
-                                <div class="col-10"> 10 days </div>
+                                <div class="col-10"> {{order.delivery_time}} </div>
                               </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close </button>
-                              <button type="button" v-if="order.status_id == 1" class="btn btn-danger" data-bs-dismiss="modal" @click="manage_Order()"> Dispute Order </button>
+                              <button type="button" v-if="order.status_id == 1" class="btn btn-danger" @click="submitOrder()"> Dispute Order </button>
                             </div>
                           </div>
+
+                          <div class="modal-content" v-else>
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Order Detail</h5>
+                            </div>
+                            <div class="modal-body">
+                               <textarea
+                                type="text"
+                                class="form-control"
+                                name="description"
+                                v-model="orderType.description"
+                                id="description"
+                                placeholder="Type description"
+                                required
+                                />
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close </button>
+                              <button type="button" v-if="order.status_id == 1" class="btn btn-danger" data-bs-dismiss="modal" @click="manage_Order()"> Submit </button>
+                            </div>
                         </div>
+                      </div>
                       </div>
                       <!-- Modal End -->
                     </td>
@@ -295,15 +316,18 @@ export default {
     onMounted(() => {
       store.dispatch("myOrders");
     })
-
+    const orderSection = ref(false);
     const orderType = ref({
       order_no:'',
       type:5,
       description:'i want to cancel the order',
     });
-
+    
+    const singleOrder = ref({});
     const getOrderNumber = (number) => {
-      orderType.value.order_no = number
+      orderType.value.order_no = number 
+      singleOrder.value = store.getters.myOrders.filter(order => order.orderNo === number)
+      console.log("order no",singleOrder.value)
     };
 
     function showAll(){
@@ -312,6 +336,9 @@ export default {
 
     function showFilter(value){
       store.dispatch("showFilteredOrders",value);
+    }
+    function submitOrder(value){
+      orderSection.value = true;
     }
     function manage_Order(){
       console.log("manage order",orderType.value);
@@ -326,7 +353,10 @@ export default {
       showAll,
       orderType,
       getOrderNumber,
-      manage_Order
+      manage_Order,
+      singleOrder,
+      orderSection,
+      submitOrder
     };
   },
 };
