@@ -109,4 +109,8 @@ export default {
 .disable{
 visibility: hidden
 }
+
+.card{
+  margin-bottom: 0px;
+}
 </style>

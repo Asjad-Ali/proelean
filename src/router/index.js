@@ -31,6 +31,7 @@ import Charts from '@/views/Seller/Charts.vue'
 import Analytics from '@/views/Seller/Analytics.vue'
 import BuyerRequestsnew from '@/views/Seller/BuyerRequestsnew.vue'
 import CreateGig from '@/views/Seller/CreateGig.vue'
+import Payments from '@/views/Seller/Payments.vue'
 
 
 const routes = [
@@ -43,6 +44,11 @@ const routes = [
     path: '/dashboard/sellers-gigs',
     name: 'SellersGigs',
     component: SellersGigs,
+  },
+  {
+    path: '/dashboard/payments',
+    name: 'Payments',
+    component: Payments,
   },
   {
     path: '/dashboard/create-gig',
