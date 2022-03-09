@@ -1,5 +1,10 @@
 <template>
   <div class="container-xl">
+    <div class="mb-3">
+      <div class="d-flex mb-2 align-items-center border-bottom">
+        <h3 >Buyer Requests</h3>
+      </div>
+    </div>
     <div v-if="loader" class="d-flex justify-content-center s-margin">
       <div class="spinner-border text-primary m-5" role="status">
         <span class="sr-only">Loading...</span>
@@ -23,7 +28,7 @@
                 />
               </div>
               <!--//col-->
-              <div class="col-12 col-lg-auto text-center text-lg-start">
+              <div class="col-12 col-lg-auto text-lg-start">
                 <h4 class="notification-title mb-1">
                   {{ request.user.username }}
                 </h4>
@@ -54,7 +59,7 @@
           <!--//app-card-body-->
           <div class="app-card-footer px-4 py-3 text-center">
             <button type="button" class="btn app-btn-secondary mx-2 my-1">
-              {{ request.total_offers }}Offers Sent
+              {{ request.total_offers }} Offers Sent
             </button>
             <button
               type="button"

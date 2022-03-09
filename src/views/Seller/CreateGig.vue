@@ -1,7 +1,7 @@
 <template>
   <div class="container-xl">
-    <h1 class="app-page-title">Create Services</h1>
-    <hr class="mb-4" />
+    <h1 class="app-page-title mb-2">Create Services</h1>
+    <div class="border-bottom mb-3 "></div>
     <div class="row g-4 settings-section">
       <div class="col-12 col-md-12">
         <div class="app-card app-card-settings shadow-sm p-4">

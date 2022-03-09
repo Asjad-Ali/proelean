@@ -75,15 +75,16 @@
                   </router-link>
               </div>
               <div class="col-2">
+                  <span v-on:click.prevent="getServiceId(service.id)">
                   <i
                     aria-hidden="true"
                     style="font-size: 17px"
-                    @click.prevent="getServiceId(service.id)"
-                    class="fa fa-trash cursor-pointer text-danger mt-1"
+                    class="fa fa-trash cursor-pointer text-danger"
                     data-toggle="modal"
-                    data-target="#exampleModalSmall"
+                    data-target="#exampleModalCenter"
                   >
                   </i>
+                  </span>
                   <div class="d-flex justify-content-center">
                       <div
                         class="modal fade w-75"
@@ -218,15 +219,16 @@
                         </router-link>
                       </div>
                       <div>
+                        <span v-on:click.prevent="getServiceId(service.id)">
                         <i
                           aria-hidden="true"
                           style="font-size: 17px"
-                          @click.prevent="getServiceId(service.id)"
                           class="fa fa-trash cursor-pointer text-danger"
                           data-toggle="modal"
                           data-target="#exampleModalCenter"
                         >
                         </i>
+                        </span>
                       </div>
                       </div>
 
@@ -300,15 +302,15 @@ import { useStore } from 'vuex';
 export default {
   setup() {
     const store = useStore()
-    const serviceId = ref("");
+    const serviceId = ref('');
+    
     const getServiceId = (id) => {
-      serviceId.value = id;
+      serviceId.value = id
     };
 
     onMounted(() => {
       store.dispatch("userServices", "");
     });
-
 
     function deleteService() {
       store.dispatch('deleteService',serviceId.value)
