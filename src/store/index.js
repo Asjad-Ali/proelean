@@ -21,11 +21,13 @@ export default createStore({
     recentNotifications: [],
     allNotifications: [],
     usermode: "BUYER",
+    loader: null,
     screenWidth: window.innerWidth,
   },
   getters: {
     getUserNotifications: (state) => state.userNotifications,
     isBuyerMode: (state) => (state.usermode == "BUYER" ? true : false),
+    getLoaderVal : state => state.loader,
     getScreenWidth: (state) => state.screenWidth,  
     getAllNotifications: (state) => state.allNotifications,
     getRecentNotifications: (state) => state.recentNotifications,
@@ -43,6 +45,10 @@ export default createStore({
     toggleUserMode(state) {
       state.usermode = state.usermode == "BUYER" ? "SELLER" : "BUYER";
     },
+    setLoader(state,loader){
+      state.loader=loader;
+      console.log("loader",state.loader)
+    }
   },
   actions: {
     async getNotification({ commit }) {

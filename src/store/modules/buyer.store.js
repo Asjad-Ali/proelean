@@ -8,7 +8,6 @@ export const state = {
     allOrders:[],
     service:{},
     cardStripe:{},
-    loader: null,
     cardSection: false,
     orderType:{}
   }
@@ -19,7 +18,6 @@ export const getters = {
   getAllOrders : state => state.allOrders,
   getService : state => state.service,
   getCardStripe : state => state.cardStripe,
-  getLoaderVal : state => state.loader,
   getCardSection : state => state.cardSection,
   getOrderType : state => state.orderType
 }
@@ -46,10 +44,6 @@ export const  mutations = {
     setCardSection(state,value){
       state.cardSection=value;
     },
-    setLoader(state,loader){
-      state.loader=loader;
-      console.log("loader",state.loader)
-    }
   }
 
 export const  actions = {
@@ -109,13 +103,17 @@ export const  actions = {
         }
       },
 
-      async manageOrder({commit},payload){
+      async manageOrder({commit,state},payload){
         const res = await Api.post('buyer/manage_order',payload);
         if(res.status === 200){
-          console.log("Type of Order:",res.data);
+          console.log("Type of Order:",res.status);
           commit("setOrderType",res.data);
+          const afterSetOrder = ref(state.allOrders.filter(order => order.orderNo !== payload.order_no))
+          commit("setAllOrders",afterSetOrder.value);
+          useToast(res.message,'success');
         }
         else{
+          useToast(res.message);
           console.log("Error Order Type");
         }
       },
