@@ -150,7 +150,7 @@ const routes = [
     component: ManageService
   },
   {
-    path: '/seller/update_service/:id',
+    path: '/dashboard/update_service/:id',
     name: 'UpdateService',
     component: UpdateService
   },
@@ -191,11 +191,6 @@ const routes = [
     path: '/gig-detail/:id',
     name: 'gigDetail',
     component: ServiceDetail,
-  },
-  {
-    path:'/notifications',
-    name: 'Notification',
-    component: () => import(/* webpackChunkName: "notifications" */ '@/views/Notification.vue')
   },
   {
     path: '/chat',
