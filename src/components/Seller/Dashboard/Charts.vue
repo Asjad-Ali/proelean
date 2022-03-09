@@ -227,7 +227,23 @@
 </template>
 
 <script>
-export default {};
+import useChart from "@/composables/useChart.js";
+//import { useStore } from 'vuex'
+import { onMounted } from '@vue/runtime-core';
+export default {
+  setup() {
+    //const store = useStore()
+    useChart();
+
+    onMounted(() => {
+      store.dispatch("getEarnings");
+    });
+
+    return {
+
+    };
+  },
+};
 </script>
 
 <style>
