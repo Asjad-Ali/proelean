@@ -4,6 +4,7 @@
       <div class="col-auto">
         <h1 class="app-page-title mb-0">Payments</h1>
       </div>
+      
       <div class="col-auto">
         <div class="page-utilities">
           <div
@@ -70,6 +71,7 @@
       </div>
       <!--//col-auto-->
     </div>
+    <div class="border-bottom my-3"></div>
     <!--//row-->
 
    
