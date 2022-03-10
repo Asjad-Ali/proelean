@@ -194,7 +194,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="order in orders" :key="order.id">
+                  <tr v-for="(order,index) in orders" :key="order.id">
                     <td class="text-center cell">
                       <div>
                         <img
@@ -271,7 +271,7 @@
                         class="btn btn-light"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
-                        @click="getOrderNumber(order.orderNo)"
+                        @click="getOrderNumber(index,order.orderNo)"
                       >
                         View
                       </button>
@@ -285,7 +285,7 @@
                         aria-hidden="true"
                       >
                         <div class="modal-dialog modal-dialog-centered">
-                          <div class="modal-content" v-if="!orderSection">
+                          <div class="modal-content" v-if="singleOrder && !orderSection">
                             <div class="modal-header">
                               <h5 class="modal-title" id="exampleModalLabel">
                                 Order Detail
@@ -294,30 +294,30 @@
                             <div class="modal-body d-flex flex-column">
                               <div class="row">
                                 <div class="col-2 text-dark">Order</div>
-                                <div class="col-10">{{ order.orderNo }}</div>
+                                <div class="col-10">{{ singleOrder.orderNo }}</div>
                               </div>
                               <div class="row">
                                 <div class="col-2 text-dark">Description</div>
                                 <div class="col-10">
-                                  {{ order.description }}
+                                  {{ singleOrder.description }}
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="col-2 text-dark">Seller</div>
-                                <div class="col-10">{{ order.username }}</div>
+                                <div class="col-2 text-dark">Buyer</div>
+                                <div class="col-10">{{ singleOrder.username }}</div>
                               </div>
                               <div class="row">
                                 <div class="col-2 text-dark">Price</div>
-                                <div class="col-10">{{ order.amount }}</div>
+                                <div class="col-10">{{ singleOrder.amount }}</div>
                               </div>
                               <div class="row">
                                 <div class="col-2 text-dark">Revisions</div>
-                                <div class="col-10">{{ order.revision }}</div>
+                                <div class="col-10">{{ singleOrder.revision }}</div>
                               </div>
                               <div class="row">
                                 <div class="col-2 text-dark">Duration</div>
                                 <div class="col-10">
-                                  {{ order.delivery_time }}
+                                  {{ singleOrder.delivery_time }}
                                 </div>
                               </div>
                             </div>
@@ -412,13 +412,11 @@ export default {
       url: "seller/manage_order",
     });
 
-    const singleOrder = ref({});
-    const getOrderNumber = (number) => {
-      orderType.value.order_no = number;
-      singleOrder.value = store.getters.myOrders.filter(
-        (order) => order.orderNo === number
-      );
-      console.log("order no", singleOrder.value);
+    const singleOrder = ref(null);
+    const getOrderNumber = (index,orderNo) => {
+      orderType.value.order_no = orderNo;
+      singleOrder.value = store.getters.myOrders[index];
+      console.log("order no", orderNo);
     };
 
     function showFilter(value) {
