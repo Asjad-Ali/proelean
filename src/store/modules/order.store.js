@@ -30,19 +30,6 @@ export const actions = {
     }
   },
 
-  async showFilteredOrders({ commit }, value) {
-    commit('setLoader', 1);
-    const res = await Api.get(value);
-    if (res.status === 200) {
-      console.log("Filtered Orders Response", res.data)
-      commit("setOrders", res.data);
-      commit('setLoader', 0);
-    }
-    else {
-      console.log("Error Filtered Orders");
-    }
-  },
-
   async manageOrder({ commit, state }, payload) {
     console.log("Order no:", payload.order_no);
     const res = await Api.post(payload.url, payload);
