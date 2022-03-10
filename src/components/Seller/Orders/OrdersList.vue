@@ -314,13 +314,14 @@ export default {
   setup() {
     const store = useStore()
     onMounted(() => {
-      store.dispatch("myOrders");
+      store.dispatch("myOrders",'seller/orders');
     })
     const orderSection = ref(false);
     const orderType = ref({
       order_no:'',
       type:5,
       description:'i want to cancel the order',
+      url: 'seller/manage_order'
     });
     
     const singleOrder = ref({});
@@ -335,9 +336,10 @@ export default {
     }
 
     function showFilter(value){
+      value = `seller/orders?status=${value}`
       store.dispatch("showFilteredOrders",value);
     }
-    function submitOrder(value){
+    function submitOrder(){
       orderSection.value = true;
     }
     function manage_Order(){
