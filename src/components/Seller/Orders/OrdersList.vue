@@ -334,7 +334,7 @@
                               </button>
                               <button
                                 type="button"
-                                v-if="order.status_id == 1"
+                                v-if="singleOrder.status_id == 1"
                                 class="btn btn-danger"
                                 @click="submitOrder()"
                               >
