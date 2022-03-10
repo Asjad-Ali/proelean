@@ -64,7 +64,7 @@ const routes = [
     name: 'Analytics',
     component: Analytics,
   },
- 
+
   {
     path: '/dashboard/settings',
     name: 'Settings',
@@ -97,6 +97,12 @@ const routes = [
     component: SellerDashboard,
   },
  
+  {
+    path: '/dashboard/chat',
+    name: 'SellerChat',
+    component: () => import(/* webpackChunkName: "chat" */'@/views/Chat.vue'),
+  },
+
   {
     path: '/seller-dashboard',
     name: 'SellerDashboard',
