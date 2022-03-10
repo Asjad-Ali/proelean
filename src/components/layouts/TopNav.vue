@@ -108,7 +108,7 @@
           class="navbar-nav align-items-center ml-auto"
           v-if="$store.state.isLoggedIn"
         >
-          <span class="mr-2">
+          <span class="mr-2" v-if="userInfo.isFreelancer">
             <a class="cursor-pointer" @click="handleUserMode">
               Switch to {{ isBuyerMode ? "Seller" : "Buyer" }}
             </a>
