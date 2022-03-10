@@ -626,7 +626,7 @@
 .seller-app .app-branding .logo-text {
     color: #252930;
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 500;
     vertical-align: middle
 }
 
@@ -838,7 +838,7 @@
 
 .seller-app .app-page-title {
     font-size: 1.5rem !important;
-    font-weight: bolder !important;
+    /* font-weight: bolder !important; */
     margin-bottom: 1.5rem;
 }
 

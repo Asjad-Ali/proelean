@@ -180,7 +180,7 @@
             <div class="table-responsive">
               <div class="m-5 text-center" v-if="!orders.length > 0">
                 <h5>No any orders available in this field</h5>
-                <figure class="py-3">
+                <figure class="py-3 m-0">
                   <img src="/assets/images/notfound.svg" alt="notfound" width="150">
                 </figure>
               </div>

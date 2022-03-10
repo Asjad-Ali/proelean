@@ -29,7 +29,7 @@
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Impressions</h4>
           <div class="stats-figure">{{user.weekly_impression}}</div>
-          <div class="stats-meta text-success">
+          <!-- <div class="stats-meta text-success">
             <svg
               width="1em"
               height="1em"
@@ -44,7 +44,7 @@
               />
             </svg>
             20%
-          </div>
+          </div> -->
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -58,7 +58,7 @@
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Clicks</h4>
           <div class="stats-figure"> {{user.weekly_clicks}} </div>
-          <div class="stats-meta text-success">
+          <!-- <div class="stats-meta text-success">
             <svg
               width="1em"
               height="1em"
@@ -73,7 +73,7 @@
               />
             </svg>
             5%
-          </div>
+          </div> -->
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>

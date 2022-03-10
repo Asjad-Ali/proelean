@@ -2,7 +2,8 @@
   <div class="container pt-3">
     <div class="row d-flex justify-content-center">
       <div class="col-lg-10">   
-        <h4 class="font-weight-bold mb-3">Buyer Requests</h4>
+        <h1 class="app-page-title mb-0">Buyer Requests</h1>
+        
         <div>
           <div v-if="loader" class="d-flex justify-content-center s-margin">
             <div class="spinner-border text-primary m-5" role="status">
