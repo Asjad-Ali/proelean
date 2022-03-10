@@ -60,8 +60,6 @@
                       >
                         {{ request.is_applied ? "Applied" : "Send Offer" }}
                     </button>
-
-
                     <!---------------------    Modal (Send Offer)     --------------------->
                     <div class="modal fade" id="sendOfferModal" tabindex="-1" role="dialog" aria-labelledby="sendOfferModalTitle" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered" role="document">
