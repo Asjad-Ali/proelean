@@ -5,7 +5,7 @@
         <h3 >Buyer Requests</h3>
       </div>
     </div>
-    <div v-if="loader" class="d-flex justify-content-center s-margin">
+    <div v-if="loader && $store.getters.getBuyerRequestsCurrentPage == 1" class="d-flex justify-content-center s-margin">
       <div class="spinner-border text-primary m-5" role="status">
         <span class="sr-only">Loading...</span>
       </div>
@@ -58,7 +58,7 @@
           </div>
           <!--//app-card-body-->
           <div class="app-card-footer px-4 py-3 text-center">
-            <button type="button" class="btn app-btn-secondary mx-2 my-1">
+            <button  style="cursor: default;" type="button"  class="btn app-btn-secondary mx-2 my-1">
               {{ request.total_offers }} Offers Sent
             </button>
             <button
@@ -78,7 +78,7 @@
               data-toggle="modal"
               data-target="#exampleModalCenter2"
             >
-              Cancel Offer
+              Skip
             </button>
           </div>
           <!--//app-card-footer-->
@@ -223,8 +223,10 @@
         <h2>No Any Service Available</h2>
       </div>
     </div>
-    <div class="text-center mt-4">
-      <a class="btn app-btn-secondary" href="#">Load more notifications</a>
+    <div class="text-center mt-4" v-if="$store.getters.isBuyerRequestHasNextPage">
+      
+      <a @click="loadMore()" class="btn app-btn-secondary" href="#">
+         Load more Requests</a>
     </div>
   </div>
 </template>
@@ -253,6 +255,10 @@ export default {
       jobId.value = id;
     };
 
+    function loadMore(){
+      store.dispatch("showBuyerRequests");
+    }
+
     function defineOffer(jobID) {
       payload.value.job_id = jobID;
       store.dispatch("getCountriesLanguage");
@@ -277,6 +283,7 @@ export default {
       sendOffer,
       deleteJob,
       getJobId,
+      loadMore,
       jobId,
     };
   },

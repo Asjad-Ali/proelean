@@ -6,7 +6,7 @@ var page = 1;
 
 export const state = {
   sellerReviews: [],
-  serviceReviews:[],
+  serviceReviews: [],
   userServices: [],
   s_Loader: '',
   userSingleService: [],
@@ -17,7 +17,9 @@ export const state = {
   reviewsHasNextPage: '',
   error: null,
   buyerRequests: [],
-  earnings:{}
+  buyerRequestsCurrentPage: 1,
+  hasNextPage: false,
+  earnings: {}
 }
 
 export const getters = {
@@ -30,6 +32,8 @@ export const getters = {
   getServiceReviews: state => state.serviceReviews,
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
+  getBuyerRequestsCurrentPage: state => state.buyerRequestsCurrentPage,
+  isBuyerRequestHasNextPage: state => state.hasNextPage
 }
 
 
@@ -67,25 +71,30 @@ export const mutations = {
   setDeleteGig(state, deletGig) {
     state.deleteService = deletGig;
   },
-  setBuyerRequests(state, request) {
-    state.buyerRequests = request;
+  setBuyerRequests(state, requests) {
+    requests.forEach(request => state.buyerRequests.push(request));
   },
   setSellerLoader(state, loaderVal) {
     state.s_Loader = loaderVal
   },
-  
-  toggleOfferedService(state,serviceId){
-      console.log("in offerd service",serviceId)
-      state.userSingleService.offered_services.forEach(service => {
-        if(service.id==serviceId){
-          service.favourite = service.favourite == 1 ? 0 : 1;
-        }
-      });
-    },
+  setBuyerRequestPageNo(state, page) {
+    state.buyerRequestsCurrentPage = page;
+  },
+  buyerRequestHasNextPage(state, status) {
+    state.hasNextPage = status;
+  },
+  toggleOfferedService(state, serviceId) {
+    console.log("in offerd service", serviceId)
+    state.userSingleService.offered_services.forEach(service => {
+      if (service.id == serviceId) {
+        service.favourite = service.favourite == 1 ? 0 : 1;
+      }
+    });
+  },
 
-    setEarnings(state, earnings) {
-      state.earnings = earnings
-    },
+  setEarnings(state, earnings) {
+    state.earnings = earnings
+  },
 }
 
 export const actions = {
@@ -121,26 +130,26 @@ export const actions = {
   async userSingleService({ commit, dispatch }, payload) {
     commit('setServicesLoadingStatus', 'LOADING');
     // if (!state.userServices.length) {
-      const res = await Api.get(`seller/services/${payload.id}?from=web`);
-      if (res.status === 200) {
-        commit("setSingleService", res.data);
-        if (payload.type === "ONUPDATE") {
-          dispatch("loadSubCategories", res.data.category.id);
-        }
-      } else {
-        console.log(res);
+    const res = await Api.get(`seller/services/${payload.id}?from=web`);
+    if (res.status === 200) {
+      commit("setSingleService", res.data);
+      if (payload.type === "ONUPDATE") {
+        dispatch("loadSubCategories", res.data.category.id);
       }
+    } else {
+      console.log(res);
+    }
     commit('setServicesLoadingStatus', 'COMPLETED');
   },
 
 
-  async getReviews({ commit },payload) {
+  async getReviews({ commit }, payload) {
     console.log("reviews, in action id", payload);
     const res = await Api.get(`${payload.type}/${payload.id}/reviews?page=${page}`);
     if (res.status === 200) {
-      payload.type === 'seller' 
-      ? commit("setSellerReviews",res.data)
-      : commit("setServiceReviews",res.data); 
+      payload.type === 'seller'
+        ? commit("setSellerReviews", res.data)
+        : commit("setServiceReviews", res.data);
 
       commit('setReviewsNextPage', res.links.next ?? '')
       console.log("Seller Reviews", res.data);
@@ -191,14 +200,19 @@ export const actions = {
     }
   },
 
-  async showBuyerRequests({ commit }) {
+  async showBuyerRequests({ commit, getters }) {
+    let currentPage = getters.getBuyerRequestsCurrentPage;
     commit('setLoader', 1);
-    let getData = JSON.parse(localStorage.getItem("userInfo"))
-    console.log("in action id: ", getData.id)
-    const res = await Api.get(`seller/buyer_requests`);
+    const res = await Api.get(`seller/buyer_requests?page=${currentPage}`);
     if (res.status === 200) {
       commit("setBuyerRequests", res.data);
-      console.log("Buyer Requests", res.data);
+      if (res.links.next) {
+        commit('buyerRequestHasNextPage', true);
+        commit('setBuyerRequestPageNo', res.meta.current_page+1);
+      } else {
+        commit('buyerRequestHasNextPage', false);
+      }
+
       commit('setLoader', 0);
     } else {
       console.log("Buyer Requests error");

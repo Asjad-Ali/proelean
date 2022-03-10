@@ -59,7 +59,7 @@ export const  actions = {
         if(res.status === 200){
           console.log("All Jobs Response",res.data)
           commit("setAllJobs",res.data);
-          commit('setLoader',0);
+          commit('seBuyerRequestLoader',0);
         }
         else{
           console.log("Error All Jobs");
