@@ -102,7 +102,6 @@
                 </div>
                 <div v-else>
                   <div
-                  v-if="orders.length"
                   class="table-responsive box-table mt-3 bg-white" 
                   >
                       <table class="table table-bordered" >
@@ -164,30 +163,53 @@
 </template>
 
 <script>
-import { onMounted, computed } from "@vue/runtime-core";
+import { onMounted, computed, ref } from "@vue/runtime-core";
 import { useStore } from 'vuex';
 
 export default {
   setup() {
-    const store = useStore()
+    const store = useStore();
+    const  buyerOrderURL = "buyer/orders?status=";
     onMounted(() => {
-      store.dispatch("showAllOrders");
-    })
+      store.dispatch("myOrders", buyerOrderURL);
+    });
+    const orderSection = ref(false);
+    const orderType = ref({
+      order_no: "",
+      type: 5,
+      description: "i want to cancel the order",
+      url: "buyer/manage_order",
+    });
 
-    function showAll(){
-      store.dispatch("showAllOrders");
+    const singleOrder = ref(null);
+    const getOrderNumber = (index,orderNo) => {
+      orderType.value.order_no = orderNo;
+      singleOrder.value = store.getters.myOrders[index];
+      console.log("order no", orderNo);
+    };
+
+    function showFilter(value) {
+      store.dispatch("myOrders", `${buyerOrderURL}${value}`);
     }
-
-    function showFilter(value){
-      store.dispatch("showFilteredOrders",value);
+    function submitOrder() {
+      orderSection.value = true;
+    }
+    function manage_Order() {
+      console.log("manage order", orderType.value);
+      store.dispatch("manageOrder", orderType.value);
     }
 
     return {
       imgURL: process.env.VUE_APP_URL,
-      orders: computed(() => store.getters.getAllOrders),
+      orders: computed(() => store.getters.myOrders),
       loader: computed(() => store.getters.getLoaderVal),
       showFilter,
-      showAll
+      orderType,
+      getOrderNumber,
+      manage_Order,
+      singleOrder,
+      orderSection,
+      submitOrder,
     };
   },
 };
