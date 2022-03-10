@@ -47,12 +47,11 @@ export const actions = {
     commit('setLoadingStatus','COMPLETED');    
   },
 
-  loadSubCategories: async ({ commit, state }, categoryId) => {
-    if (!state.subcategories.length) {
+  loadSubCategories: async ({ commit }, categoryId) => {
+    // if (state.subcategories.length) {
       const response = await Api.get(`subcategories/${categoryId}`)
       if (response.status === 200) {
         commit('setSubCategories', response.data);
-      }
     }
   },
 };
