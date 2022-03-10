@@ -1,4 +1,4 @@
-import { getFirestore, collection, query, where, onSnapshot, orderBy,limit } from "firebase/firestore";
+import { getFirestore, collection, query, where, onSnapshot, orderBy,limit ,doc, setDoc,updateDoc} from "firebase/firestore";
 
 export const state = {
     selectedConversation: {},
@@ -7,7 +7,8 @@ export const state = {
     conversationLoadingStatus: null,
     chatLoadingStatus: null,
     selectedChatListenerRef: null,
-    messages: []
+    messages: [],
+    referrerGig: null,
 }
 
 export const mutations = {
@@ -19,6 +20,9 @@ export const mutations = {
     },
     setError(state, error) {
         state.error = error;
+    },
+    setReferrerGig(state,gig){
+        state.referrerGig=gig
     },
     setConversation(state, conversation) {
         state.conversations.push(conversation);
@@ -68,7 +72,6 @@ export const actions = {
                 const id = change.doc.id;
                 const message = { id, ...change.doc.data() };
                 if (change.type === 'added') {
-                    console.log(message)
                     commit('setMessage',message);
                 }
                 if (change.type === "modified") {
@@ -82,9 +85,32 @@ export const actions = {
 
         commit('setSelectedChatListenerRef',unsubscribe);
     },
-    sendMessage({ commit },message) {
-        console.log(message);
-        commit("setSelectedConversation", message);
+    sendMessage({getters, dispatch },message) {
+        const db = getFirestore();
+        const newDocId=new Date().getTime().toString() + 'id';
+        const selectedConversation = getters.getSelectedConversation;
+        if(!selectedConversation){
+            return
+        }
+
+        const chatRef = doc(collection(db, `Conversations/${selectedConversation.id}/Messages`),newDocId);
+
+        const newMessage = {
+            message: message.text,
+            attachment: message.attachement,
+            attachementType: message.attachementType,
+            sentAt: new Date(new Date().toISOString()).getTime(),
+            refersGig: message.refersGig,
+            senderId: getters.getAuthUser.id,
+            messageOffer: null,
+            messageGig: getters.getReferrerGig,
+            deleteMessage: [],
+            id: newDocId
+        };
+
+        console.log("New Message", newMessage);
+        setDoc(chatRef, newMessage);
+        dispatch('updateConversation',newMessage);
     },
     lookForConversationChanges({ commit, getters }) {
         commit('setConversationLoadingStatus', 'LOADING');
@@ -97,21 +123,44 @@ export const actions = {
         /*const unsubscribe = */ onSnapshot(q, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
                 const id = change.doc.id;
-                const convesation = { id, ...change.doc.data() };
+                const conversation = { id, ...change.doc.data() };
                 if (change.type === "added") {
-                    commit('setConversation', convesation);
+                    commit('setConversation', conversation);
                 }
                 if (change.type === "modified") {
                     console.log("Modified Conversation: ", change.doc.data());
-                    commit('updateConversation', convesation);
+                    commit('updateConversation', conversation);
                 }
                 if (change.type === "removed") {
-                    console.log("Removed Conversation: ", convesation);
+                    console.log("Removed Conversation: ", conversation);
                 }
             });
         });
 
         commit('setConversationLoadingStatus', 'COMPLETED');
+    },
+    updateConversation({ getters},message){
+        const conversation=getters.getSelectedConversation;
+        const db = getFirestore();
+        const user=getters.getAuthUser;
+        const conversationRef = doc(db, "Conversations", conversation.id);
+
+        conversation.membersInfo.forEach(member => {
+            if(member.id==user.id){
+                member.name=user.name;
+                member.photo=user.image,
+                member.hasReadLastMessage=true;
+                member.type='available';
+            }
+        });
+        
+        updateDoc(conversationRef, {
+            sentAt: new Date(new Date().toISOString()).getTime(),
+            senderName: user.name,
+            senderId: user.id,
+            lastMessage: message.message,
+            membersInfo : conversation.membersInfo
+        });
     }
 }
 
@@ -123,4 +172,5 @@ export const getters = {
     getChatLoadingStatus: state => state.chatLoadingStatus,
     getSelectedChatListenerRef: state => state.selectedChatListenerRef,
     getChatMessages:  state => state.messages,
+    getReferrerGig: state => state.referrerGig,
 }
