@@ -18,6 +18,9 @@
         <router-view :key="$route.fullPath" />
       </div>
       <SellerFooter />
+       <div class="d-lg-none">
+      <MobileBottomNav />
+    </div>
     </div>
   </div>
 </template>

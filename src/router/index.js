@@ -27,7 +27,6 @@ import OrdersNew from '@/views/Seller/OrdersNew.vue'
 import Notifications from '@/views/Seller/Notifications.vue'
 import Account from '@/views/Seller/Account.vue'
 import Settings from '@/views/Seller/Settings.vue'
-import Charts from '@/views/Seller/Charts.vue'
 import Analytics from '@/views/Seller/Analytics.vue'
 import BuyerRequestsnew from '@/views/Seller/BuyerRequestsnew.vue'
 import CreateGig from '@/views/Seller/CreateGig.vue'
@@ -65,11 +64,7 @@ const routes = [
     name: 'Analytics',
     component: Analytics,
   },
-  {
-    path: '/dashboard/charts',
-    name: 'Charts',
-    component: Charts,
-  },
+ 
   {
     path: '/dashboard/settings',
     name: 'Settings',
