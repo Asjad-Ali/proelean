@@ -53,14 +53,15 @@
                 <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown">
                   <i class="material-icons">list</i>
                 </a>
-
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <li class="dropdown-item"><router-link :to="{name:'gigDetail', params:{id:service.id}}">Open</router-link></li>
                   <li class="dropdown-item"><router-link :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link></li>
-                  <li v-on:click.prevent="getServiceId(service.id)" class="dropdown-item"><a aria-hidden="true"
+                  <span @click="getServiceId(service.id)">
+                  <li class="dropdown-item"><a aria-hidden="true"
                       data-toggle="modal"
                       class="cursor-pointer"
                       data-target="#exampleModalCenter">Delete</a></li>
+                  </span>
                 </ul>
               </div>
               <a
@@ -140,7 +141,7 @@
 
 <script>
 import { useStore } from 'vuex';
-import { computed, ref } from 'vue';
+import { computed, ref, toRef } from 'vue';
 import { useRoute } from 'vue-router';
 export default {
   props: {
@@ -149,17 +150,17 @@ export default {
       required: true,
     }
   },
-  setup() {
+  setup(props) {
     const store = useStore()
     const route = useRoute();
 
-    const serviceId = ref('');
+    const serviceId = ref("");
+
     const getServiceId = (id) => {
-      serviceId.value = id
+      serviceId.value = id;
     };
-    function deleteService() {
-      store.dispatch('deleteService',serviceId.value)
-      console.log("delete service id: ", serviceId.value);
+    const deleteService = () => {
+      store.dispatch('deleteService', props.service.id)
     }
 
     function handleWishlist (id) {
@@ -174,7 +175,8 @@ export default {
       deleteService,
       handleWishlist,
       loader: computed(() => store.getters.getRegisterStatus),
-      imgURL: process.env.VUE_APP_URL
+      imgURL: process.env.VUE_APP_URL,
+      serviceId: toRef(serviceId.value)
     };
   },
 };
