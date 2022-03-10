@@ -149,16 +149,16 @@ const items = [
     ],
     path: "/dashboard/notifications",
     hasSubMenu: false,
-    subMenus: [
-      {
-        title: "Account",
-        path: "/dashboard",
-      },
-      {
-        title: "Notification",
-        path: "/dashboard/notifications",
-      }
+  },
+    {
+    title: "Chat",
+    svgPaths: [
+      'M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z',
+      'M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z',
+      
     ],
+    path: "/dashboard/chat",
+    hasSubMenu: false,
   },
   {
     title: "Buyer Requests",
@@ -168,16 +168,6 @@ const items = [
     ],
     path: "/dashboard/buyerrequestsnew",
     hasSubMenu: false,
-    subMenus: [
-      {
-        title: "BuyerRequests",
-        path: "/BuyerRequests",
-      },
-      {
-        title: "Notification",
-        path: "/dashboard/notifications",
-      }
-    ],
   },
   {
     title: "Withdrwals",
@@ -198,14 +188,7 @@ const items = [
       }
     ],
   },
-  {
-    title: "Charts",
-    svgPaths: [
-      'M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z',
-    ],
-    path: "/dashboard/charts",
-    hasSubMenu: false,
-  },
+
 ];
 export default {
   props: {
