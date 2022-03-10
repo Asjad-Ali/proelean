@@ -228,11 +228,11 @@
 
 <script>
 //import useChart from "@/composables/useChart.js";
-import { useStore } from 'vuex'
+//import { useStore } from 'vuex'
 import { onMounted } from '@vue/runtime-core';
 export default {
   setup() {
-    const store = useStore()
+    //const store = useStore()
     //useChart();
 
     onMounted(() => {
