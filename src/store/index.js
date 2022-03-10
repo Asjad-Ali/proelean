@@ -47,7 +47,6 @@ export default createStore({
     },
     setLoader(state,loader){
       state.loader=loader;
-      console.log("loader",state.loader)
     }
   },
   actions: {
