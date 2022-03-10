@@ -337,7 +337,7 @@ export default {
     function showFilter(value){
       store.dispatch("showFilteredOrders",value);
     }
-    function submitOrder(value){
+    function submitOrder(){
       orderSection.value = true;
     }
     function manage_Order(){
