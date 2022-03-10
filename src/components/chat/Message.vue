@@ -1,6 +1,8 @@
 <template>
   <div class="text-center my-3">
-    <span class="px-3 py-2 small bg-white shadow-sm rounded">DEC 21, 2020</span>
+    <span class="px-3 py-2 small bg-white shadow-sm rounded">{{
+      new Date(message.sentAt).toLocaleString().split(",")[0]
+    }}</span>
   </div>
   <div class="d-flex align-items-center osahan-post-header">
     <div class="dropdown-list-image mr-3 mb-auto">

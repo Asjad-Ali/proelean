@@ -102,7 +102,6 @@
                 </div>
                 <div v-else>
                   <div
-                  v-if="orders.length"
                   class="table-responsive box-table mt-3 bg-white" 
                   >
                       <table class="table table-bordered" >
