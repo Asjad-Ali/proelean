@@ -1,5 +1,5 @@
 <template>
-    <div :class="$store.getters.isBuyerMode ? 'py-5' : 'pb-5'">
+    <div :class="$store.getters.isBuyerMode ? 'py-0' : 'pb-0'">
          <div class="container">
             <div class="row">
                <!-- Main Content -->
