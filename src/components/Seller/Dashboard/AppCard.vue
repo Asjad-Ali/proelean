@@ -41,7 +41,7 @@
                   fill-rule="evenodd"
                   d="M8 6a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 10.293V6.5A.5.5 0 0 1 8 6z"
                 /></svg
-              >Download App</a
+              > Download App</a
             >
           </div>
           <!--//col-->
@@ -67,21 +67,26 @@ export default {};
 </script>
 
 <style scoped>
-.btn-lrg-standard{
-  padding: 10px 0;
-    font-size: 14px;
-    text-align: center;
-    line-height: 16px;
-    font-weight: 700;
-    color: #fff;
-    border: 1px solid transparent;
-    background: #d26d69 !important;
-    border-radius: 3px
-}
+
 .seller-app .app-card .btn-close:focus {
     box-shadow: none;
     border: none;
     outline: none;
+}
+
+.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    color: #000;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 16 16'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e) no-repeat center center/1em auto");
+    background-clip: content-box;
+    border: 0;
+    border-radius: 0.25rem;
+    opacity: .5;
+    font-size: 15px;
+    font-weight: 100;
 }
 
 </style>

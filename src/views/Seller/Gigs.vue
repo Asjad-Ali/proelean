@@ -17,7 +17,7 @@
             <!--//col-->
             <!-- <div class="col-auto">
               <router-link
-                class="btn app-btn-primary"
+                class="btn app-btn-secondary"
                 to="/dashboard/favourite_service"
                 >My Favourite Services</router-link
               >
@@ -35,11 +35,12 @@
         <!--//table-utilities-->
       </div>
       <!--//col-auto-->
+      
     </div>
-    <div class="border-bottom mb-2"></div>
+  
     <!--//row-->
-
-    <div class="row g-4 recommended d-flex flex-wrap justify-content-start">
+  <div class="border-bottom mb-2"></div>
+    <div class="row my-3 recommended d-flex flex-wrap justify-content-start">
       <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'" />
       <div
         class="col-6 col-md-4 mb-3 col-xxl-3 service-list-section"

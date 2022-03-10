@@ -123,7 +123,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>JOB DESCRIPTION</th>
+                  <th class="text-center">JOB DESCRIPTION</th>
                   <th class="text-center">POSTED DATE</th>
                   <th class="text-center">DURATION</th>
                   <th class="text-center">BUDGET</th>
@@ -134,8 +134,8 @@
               <tbody>
                 <tr v-for="job in jobs" :key="job.id">
                   <td>
-                      <p class="order-proposal-title">
-                        {{ job.description }}
+                      <p class="order-proposal-title ml-2">
+                        {{ job.description.substr(0,50) }}
                       </p>
                   </td>
                   <td class="text-center">{{ job.created_at }}</td>

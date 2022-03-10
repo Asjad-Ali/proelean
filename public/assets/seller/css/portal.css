@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,200&display=swap');
 .seller-app {
     min-height: 100vh;
     height: 100%;
@@ -5,8 +6,7 @@
     background: #f5f6fe;
     padding-top: 56px;
     overflow-x: hidden;
-    position: relative;
-    
+    font-family: 'Poppins', sans-serif;
 }
 .seller-app .app-card-doc .app-card-thumb-holder .icon-holder {
     font-size: 40px;
@@ -28,7 +28,10 @@
     color: #e87856;
 }
 
-
+.seller-app svg.svg-inline--fa.fa-search.fa-w-16.position-absolute {
+    margin-top: 15px;
+    margin-left: 10px;
+}
 .seller-app  .bg-success {
     background-color: #5cb377 !important;
 }
@@ -159,7 +162,7 @@
 }
 
 .seller-app .btn {
-    font-weight: 600;
+    font-weight: 400;
     padding: .4rem 1rem;
     font-size: .875rem;
     border: none
@@ -184,7 +187,8 @@
 .seller-app .app-btn-primary {
     background: #15a362;
     color: #fff;
-    border-color: #15a362
+    border-color: #15a362;
+    font-weight: 400;
 }
 
 .seller-app .app-btn-primary:hover {
@@ -625,7 +629,7 @@
 .seller-app .app-branding .logo-text {
     color: #252930;
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 500;
     vertical-align: middle
 }
 
@@ -824,11 +828,7 @@
     font-size: .8125rem
 }
 
-.app-footer{
-    position: absolute;
-    bottom: 0;
-}
-
+ 
 .seller-app .app-wrapper {
     transition: all .4s ease-in-out
 }
@@ -841,7 +841,7 @@
 
 .seller-app .app-page-title {
     font-size: 1.5rem !important;
-    font-weight: bolder !important;
+    /* font-weight: bolder !important; */
     margin-bottom: 1.5rem;
 }
 
@@ -1154,7 +1154,8 @@
 .seller-app .app-card-orders-table .table .cell {
     border-color: #e7e9ed;
     color: #5d6778;
-    vertical-align: middle
+    vertical-align: middle;
+    font-weight: 400;
 }
 
 .seller-app .app-card-orders-table .cell span {
@@ -1189,7 +1190,7 @@
 .seller-app .app-nav-tabs .nav-link {
     color: #5d6778;
     font-size: .875rem;
-    font-weight: bold
+    font-weight: 500;
 }
 
 .seller-app .app-nav-tabs .nav-link.active {

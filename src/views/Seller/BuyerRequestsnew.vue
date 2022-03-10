@@ -1,9 +1,11 @@
 <template>
   <div class="container-xl">
     <div class="mb-3">
-      <div class="d-flex mb-2 align-items-center border-bottom">
-        <h3 >Buyer Requests</h3>
+      <div class="d-flex mb-2 align-items-center">
+        <h1 class="app-page-title mb-0">Buyer Requests</h1>
+        
       </div>
+      <div class="border-bottom my-3"></div>
     </div>
     <div v-if="loader && $store.getters.getBuyerRequestsCurrentPage == 1" class="d-flex justify-content-center s-margin">
       <div class="spinner-border text-primary m-5" role="status">

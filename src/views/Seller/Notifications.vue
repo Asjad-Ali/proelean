@@ -3,7 +3,8 @@
        
             <div class="row d-flex justify-content-center col-12 m-0 p-0">
                <div class="col-md-12">
-                  <h4 class="mb-3">Notifications</h4>
+                  <h1 class="app-page-title">Notifications</h1>
+                  <div class="border-bottom my-3"></div>
                   <div class="box shadow-sm rounded bg-white mb-3">
                      <div class="box-title border-bottom p-3">
                         <h6 class="m-0">All Notifications</h6>
