@@ -226,7 +226,7 @@
     <div class="text-center mt-4" v-if="$store.getters.isBuyerRequestHasNextPage">
       
       <a @click="loadMore()" class="btn app-btn-secondary" href="#">
-         Load more Requests</a>
+        <span><i class="fa fa-spinner" aria-hidden="true"></i></span> Load more Requests</a>
     </div>
   </div>
 </template>
