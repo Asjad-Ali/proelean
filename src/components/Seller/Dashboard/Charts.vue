@@ -236,7 +236,7 @@ export default {
     useChart();
 
     onMounted(() => {
-      store.dispatch("getEarnings");
+    
     });
 
     return {
