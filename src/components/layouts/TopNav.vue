@@ -266,7 +266,7 @@
             </router-link>
           </li>
           <!-- Wishlist Service -->
-          <!-- <li
+          <li
             class="
               nav-item
               dropdown
@@ -297,7 +297,7 @@
                 />
               </svg>
             </router-link>
-          </li> -->
+          </li>
           <!-- Post a Job -->
           <li
             v-if="isBuyerMode"

@@ -8,7 +8,7 @@
                      <div class="box-title border-bottom p-3">
                         <h6 class="m-0">All Notifications</h6>
                      </div>
-                     <div v-if="!earlierNotification.length > 0">
+                     <div v-if="earlierNotification.length > 0">
                         <div  class="box-body p-0" v-for="notification in earlierNotification" :key="notification.index">
                         <div class="p-3 d-flex align-items-center bg-light border-bottom osahan-post-header">
                               <div class="dropdown-list-image mr-3">

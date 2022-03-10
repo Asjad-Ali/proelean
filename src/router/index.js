@@ -161,7 +161,7 @@ const routes = [
     component: BuyerRequests
   },
   {
-    path: '/dashboard/favourite_service',
+    path: '/seller/favourite_service',
     name: 'FavouriteService',
     component: FavouriteService
   },
@@ -189,7 +189,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "services" */'@/views/Services.vue'),
   },
   {
-    path: '/dashboard/gig-detail/:id',
+    path: '/gig-detail/:id',
     name: 'gigDetail',
     component: ServiceDetail,
   },
