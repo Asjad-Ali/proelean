@@ -72,7 +72,7 @@ export const mutations = {
     state.deleteService = deletGig;
   },
   setBuyerRequests(state, requests) {
-    requests.forEach(request => state.buyerRequests.push(request));
+    state.buyerRequests = requests;
   },
   setSellerLoader(state, loaderVal) {
     state.s_Loader = loaderVal
