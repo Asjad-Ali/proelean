@@ -71,7 +71,7 @@
       <!--//col-auto-->
     </div>
     <!--//row-->
-      <div class="border-bottom mb-3 "></div>
+    <div class="border-bottom mb-3"></div>
 
     <nav
       id="orders-table-tab"
@@ -92,7 +92,7 @@
         role="tab"
         aria-controls="orders-all"
         aria-selected="true"
-        @click="showAll()"
+        @click="showFilter(0)"
         >All</a
       >
       <a
@@ -178,7 +178,7 @@
         <div v-else class="app-card app-card-orders-table shadow-sm mb-5">
           <div class="app-card-body">
             <div class="table-responsive">
-              <div class="m-5 text-center" v-if="!orders.length>0">
+              <div class="m-5 text-center" v-if="!orders.length > 0">
                 <h4>No Any Orders Available in this Field</h4>
               </div>
               <table v-else class="table app-table-hover mb-0 p-1 text-left">
@@ -194,86 +194,160 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(order) in orders" :key="order.id">
-                      <td class="text-center cell">
-                        <div>
-                          <img
-                            class="img-fluid bg-info rounded-circle mb-1"
-                            style="width: 35px; height: 35px; object-fit:cover;"
-                            :src="`${imgURL}/${order.image}`"
-                            alt="img"
-                          />
-                        </div>
-                        <div>
-                        {{ order.username }}
-                        </div>
-                      </td>
-                    <td class="cell">
-                      <span class="truncate"
-                        >{{order.description.substr(0,50)}}</span>
-                    </td>
-                      <td class="cell"><span class="truncate">{{ order.created_at }}</span> </td>
-                      <td class="text-center cell"><span class="truncate">{{ order.delivery_time }}</span> </td>
-                      <td class="text-center cell"><span class="truncate">${{ order.amount }}</span> </td>
+                  <tr v-for="order in orders" :key="order.id">
                     <td class="text-center cell">
-                      <a ><span class="badge bg-success" v-if="order.status_id == 1">Active</span></a>
-                      <a ><span class="badge bg-secondary" v-if="order.status_id == 2">Delivered</span></a>
-                      <a ><span class="badge bg-info" v-if="order.status_id == 3">Revision</span></a>
-                      <a ><span class="badge bg-primary" v-if="order.status_id == 4">Completed</span></a>
-                      <a ><span class="badge bg-danger" v-if="order.status_id == 5">Disputed</span></a>
-                      <a ><span class="badge bg-warning" v-if="order.status_id == 6">Late</span></a>
+                      <div>
+                        <img
+                          class="img-fluid bg-info rounded-circle mb-1"
+                          style="width: 35px; height: 35px; object-fit: cover"
+                          :src="`${imgURL}/${order.image}`"
+                          alt="img"
+                        />
+                      </div>
+                      <div>
+                        {{ order.username }}
+                      </div>
                     </td>
                     <td class="cell">
-                    <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="getOrderNumber(order.orderNo)">
+                      <span class="truncate">{{
+                        order.description.substr(0, 50)
+                      }}</span>
+                    </td>
+                    <td class="cell">
+                      <span class="truncate">{{ order.created_at }}</span>
+                    </td>
+                    <td class="text-center cell">
+                      <span class="truncate">{{ order.delivery_time }}</span>
+                    </td>
+                    <td class="text-center cell">
+                      <span class="truncate">${{ order.amount }}</span>
+                    </td>
+                    <td class="text-center cell">
+                      <a
+                        ><span
+                          class="badge bg-success"
+                          v-if="order.status_id == 1"
+                          >Active</span
+                        ></a
+                      >
+                      <a
+                        ><span
+                          class="badge bg-secondary"
+                          v-if="order.status_id == 2"
+                          >Delivered</span
+                        ></a
+                      >
+                      <a
+                        ><span class="badge bg-info" v-if="order.status_id == 3"
+                          >Revision</span
+                        ></a
+                      >
+                      <a
+                        ><span
+                          class="badge bg-primary"
+                          v-if="order.status_id == 4"
+                          >Completed</span
+                        ></a
+                      >
+                      <a
+                        ><span
+                          class="badge bg-danger"
+                          v-if="order.status_id == 5"
+                          >Disputed</span
+                        ></a
+                      >
+                      <a
+                        ><span
+                          class="badge bg-warning"
+                          v-if="order.status_id == 6"
+                          >Late</span
+                        ></a
+                      >
+                    </td>
+                    <td class="cell">
+                      <!-- Button trigger modal -->
+                      <button
+                        type="button"
+                        class="btn btn-light"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        @click="getOrderNumber(order.orderNo)"
+                      >
                         View
                       </button>
 
                       <!-- Modal -->
-                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div
+                        class="modal fade"
+                        id="exampleModal"
+                        tabindex="-1"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
                         <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content" v-if="!orderSection">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Order Detail</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                Order Detail
+                              </h5>
                             </div>
                             <div class="modal-body d-flex flex-column">
                               <div class="row">
-                                <div class="col-2 text-dark"> Order </div>
-                                <div class="col-10"> {{order.orderNo}} </div>
+                                <div class="col-2 text-dark">Order</div>
+                                <div class="col-10">{{ order.orderNo }}</div>
                               </div>
                               <div class="row">
-                                <div class="col-2 text-dark"> Description </div>
-                                <div class="col-10"> {{order.description}} </div>
+                                <div class="col-2 text-dark">Description</div>
+                                <div class="col-10">
+                                  {{ order.description }}
+                                </div>
                               </div>
                               <div class="row">
-                                <div class="col-2 text-dark"> Seller </div>
-                                <div class="col-10"> {{order.username}} </div>
+                                <div class="col-2 text-dark">Seller</div>
+                                <div class="col-10">{{ order.username }}</div>
                               </div>
                               <div class="row">
-                                <div class="col-2 text-dark"> Price </div>
-                                <div class="col-10"> {{order.amount}} </div>
+                                <div class="col-2 text-dark">Price</div>
+                                <div class="col-10">{{ order.amount }}</div>
                               </div>
                               <div class="row">
-                                <div class="col-2 text-dark"> Revisions </div>
-                                <div class="col-10"> {{order.revision}} </div>
+                                <div class="col-2 text-dark">Revisions</div>
+                                <div class="col-10">{{ order.revision }}</div>
                               </div>
                               <div class="row">
-                                <div class="col-2 text-dark"> Duration </div>
-                                <div class="col-10"> {{order.delivery_time}} </div>
+                                <div class="col-2 text-dark">Duration</div>
+                                <div class="col-10">
+                                  {{ order.delivery_time }}
+                                </div>
                               </div>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close </button>
-                              <button type="button" v-if="order.status_id == 1" class="btn btn-danger" @click="submitOrder()"> Dispute Order </button>
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                              >
+                                Close
+                              </button>
+                              <button
+                                type="button"
+                                v-if="order.status_id == 1"
+                                class="btn btn-danger"
+                                @click="submitOrder()"
+                              >
+                                Dispute Order
+                              </button>
                             </div>
                           </div>
 
                           <div class="modal-content" v-else>
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Order Detail</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                Order Detail
+                              </h5>
                             </div>
                             <div class="modal-body">
-                               <textarea
+                              <textarea
                                 type="text"
                                 class="form-control"
                                 name="description"
@@ -281,14 +355,28 @@
                                 id="description"
                                 placeholder="Type description"
                                 required
-                                />
+                              />
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close </button>
-                              <button type="button" v-if="order.status_id == 1" class="btn btn-danger" data-bs-dismiss="modal" @click="manage_Order()"> Submit </button>
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                              >
+                                Close
+                              </button>
+                              <button
+                                type="button"
+                                v-if="order.status_id == 1"
+                                class="btn btn-danger"
+                                data-bs-dismiss="modal"
+                                @click="manage_Order()"
+                              >
+                                Submit
+                              </button>
                             </div>
+                          </div>
                         </div>
-                      </div>
                       </div>
                       <!-- Modal End -->
                     </td>
@@ -300,51 +388,48 @@
           </div>
           <!--//app-card-body-->
         </div>
-     </div>
-     </div>
-
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { onMounted, computed, ref } from "@vue/runtime-core";
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
 
 export default {
   setup() {
-    const store = useStore()
+    const store = useStore();
+    const sellerOrderURL = "seller/orders?status=";
     onMounted(() => {
-      store.dispatch("myOrders",'seller/orders');
-    })
+      store.dispatch("myOrders", sellerOrderURL);
+    });
     const orderSection = ref(false);
     const orderType = ref({
-      order_no:'',
-      type:5,
-      description:'i want to cancel the order',
-      url: 'seller/manage_order'
+      order_no: "",
+      type: 5,
+      description: "i want to cancel the order",
+      url: "seller/manage_order",
     });
-    
+
     const singleOrder = ref({});
     const getOrderNumber = (number) => {
-      orderType.value.order_no = number 
-      singleOrder.value = store.getters.myOrders.filter(order => order.orderNo === number)
-      console.log("order no",singleOrder.value)
+      orderType.value.order_no = number;
+      singleOrder.value = store.getters.myOrders.filter(
+        (order) => order.orderNo === number
+      );
+      console.log("order no", singleOrder.value);
     };
 
-    function showAll(){
-      store.dispatch("myOrders");
+    function showFilter(value) {
+      store.dispatch("myOrders", `${sellerOrderURL}${value}`);
     }
-
-    function showFilter(value){
-      value = `seller/orders?status=${value}`
-      store.dispatch("showFilteredOrders",value);
-    }
-    function submitOrder(){
+    function submitOrder() {
       orderSection.value = true;
     }
-    function manage_Order(){
-      console.log("manage order",orderType.value);
-      store.dispatch("manageOrder",orderType.value);
+    function manage_Order() {
+      console.log("manage order", orderType.value);
+      store.dispatch("manageOrder", orderType.value);
     }
 
     return {
@@ -352,21 +437,20 @@ export default {
       orders: computed(() => store.getters.myOrders),
       loader: computed(() => store.getters.getLoaderVal),
       showFilter,
-      showAll,
       orderType,
       getOrderNumber,
       manage_Order,
       singleOrder,
       orderSection,
-      submitOrder
+      submitOrder,
     };
   },
 };
 </script>
 
 <style scoped>
-.s-margin{
+.s-margin {
   margin-bottom: 8rem;
-  margin-top: 5rem ;
+  margin-top: 5rem;
 }
 </style>
