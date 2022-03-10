@@ -59,11 +59,11 @@ export const  actions = {
         if(res.status === 200){
           console.log("All Jobs Response",res.data)
           commit("setAllJobs",res.data);
-          commit('seBuyerRequestLoader',0);
         }
         else{
           console.log("Error All Jobs");
         }
+        commit('setLoader',0);
       },
 
       async deleteAJob({commit,state},id){
@@ -100,6 +100,7 @@ export const  actions = {
         if(res.status === 201){
           commit("setService",res.data);
           useToast(res.message,'success');
+          window.location.href = "/chat";
         }
         else{
           useToast(res.message);

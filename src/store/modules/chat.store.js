@@ -7,7 +7,7 @@ export const state = {
     conversationLoadingStatus: null,
     chatLoadingStatus: null,
     selectedChatListenerRef: null,
-    messages: [],
+    messages: []
 }
 
 export const mutations = {
@@ -62,12 +62,12 @@ export const actions = {
         const db = getFirestore();
 
         const chatRef = collection(db, `Conversations/${selectedConversation.id}/Messages`);
-        const q = query(chatRef, orderBy("sentAt",'desc'), limit(10));
+        const q = query(chatRef, orderBy('sentAt','asc'), limit(10));
         const unsubscribe = onSnapshot(q, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
                 const id = change.doc.id;
                 const message = { id, ...change.doc.data() };
-                if (change.type === "added") {
+                if (change.type === 'added') {
                     console.log(message)
                     commit('setMessage',message);
                 }
@@ -82,9 +82,9 @@ export const actions = {
 
         commit('setSelectedChatListenerRef',unsubscribe);
     },
-    sendMessage({ commit }, msg) {
-        // send msg to selected user
-        commit("setSelectedConversation", msg);
+    sendMessage({ commit },message) {
+        console.log(message);
+        commit("setSelectedConversation", message);
     },
     lookForConversationChanges({ commit, getters }) {
         commit('setConversationLoadingStatus', 'LOADING');

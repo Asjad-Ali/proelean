@@ -221,14 +221,14 @@
           <!---------------------    Modal End     --------------------->
         </div>
       </div>
+
       <div v-else class="container text-center py-5">
-        <h2>No Any Service Available</h2>
+        <h2>No Any Request Available Now</h2>
       </div>
     </div>
-    <div class="text-center mt-4" v-if="$store.getters.isBuyerRequestHasNextPage">
-      
+    <div  class="text-center mt-4" v-if="$store.getters.isBuyerRequestHasNextPage">
       <a @click="loadMore()" class="btn app-btn-secondary" href="#">
-        <span><i class="fa fa-spinner" aria-hidden="true"></i></span> Load more Requests</a>
+      {{loader === 1 ? 'Loading...' : 'Load more Requests'}}</a>
     </div>
   </div>
 </template>

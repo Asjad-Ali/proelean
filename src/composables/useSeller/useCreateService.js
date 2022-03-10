@@ -70,8 +70,8 @@ export default function useCreateService() {
   const getCategory = () => {
     data.value.category_id = document.getElementById("category").value;
     console.log("Catogry id", data.value.category_id)
-    createService.value.category_id = data.value.category_id;
     store.dispatch("loadSubCategories", data.value.category_id);
+    createService.value.category_id = data.value.category_id;
   };
 
 

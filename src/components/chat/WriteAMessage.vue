@@ -5,7 +5,7 @@
         placeholder="Write a message…"
         class="form-control border-0 p-3 shadow-none"
         rows="2"
-        v-model="msg"
+        v-model="newMessage.text"
       ></textarea>
     </div>
 
@@ -42,23 +42,23 @@ import { useStore } from "vuex";
 
 export default {
 setup() {
-    const msg = ref("");
     const store = useStore();
+
+    const newMessage = ref({
+        text: '',
+        attachements:[],
+        offer: null,
+    });
+
     const sendMsg = () => {
-      if (msg.value) {
-        let user = store.getters.getAuthUser;
-        let payload = {
-          name: 'Waheed',
-          photo: user.image,
-          body: msg.value,
-          sent_at: 'now',
-        }
-        store.dispatch("sendMessage", payload);
-        msg.value = ''
+      if (newMessage.value.text) {
+        store.dispatch("sendMessage", newMessage.value);
+        //newMessage.value.text = ''
       }
     };
+
     return {
-      msg,
+      newMessage,
       sendMsg,
     };
   },
