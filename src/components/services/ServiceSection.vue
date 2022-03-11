@@ -99,4 +99,6 @@ export default {
 .redIcon{
   color: red !important;
 }
+
+ 
 </style>

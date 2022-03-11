@@ -7,6 +7,7 @@ import BecomeSeller from '@/views/Become-Seller.vue'
 import Profile from '@/views/Profile.vue'
 import About from '@/views/About.vue'
 import ServiceDetail from '@/views/ServiceDetail.vue'
+import Purchase from '@/views/Purchase.vue'
 
 import CreateJob from '@/views/Buyer/CreateJob.vue'
 import Jobs from '@/views/Buyer/AllJobs.vue'
@@ -198,6 +199,11 @@ const routes = [
     path: '/gig-detail/:id',
     name: 'gigDetail',
     component: ServiceDetail,
+  },
+  {
+    path: '/purchase',
+    name: 'Purchase',
+    component: Purchase,
   },
   {
     path: '/chat',
