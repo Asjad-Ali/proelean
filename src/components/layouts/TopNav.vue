@@ -10,7 +10,7 @@
       px-0
     "
   >
-    <div class="container-fluid">
+    <div class="container-fluid p-0">
       <!-- Sidebar Toggle (Topbar) -->
       <a class="navbar-brand"
         ><router-link to="/"

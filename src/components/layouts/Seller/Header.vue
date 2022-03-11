@@ -30,36 +30,13 @@
               </a>
             </div>
             <!--//col-->
-            <div class="search-mobile-trigger d-sm-none col">
-              <i class="search-mobile-trigger-icon fas fa-search"></i>
-            </div>
-            <!--//col-->
-            <div class="app-search-box col">
-              <form class="app-search-form">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  name="search"
-                  class="form-control search-input"
-                />
-                <button
-                  type="submit"
-                  class="btn search-btn btn-primary"
-                  value="Search"
-                >
-                  <i class="fas fa-search"></i>
-                </button>
-              </form>
-            </div>
-            <!--//app-search-box-->
-
             <div class="app-utilities col-auto">
               <span class="mr-2">
                 <a class="cursor-pointer" @click="handleUserMode">
                   Switch to {{ isBuyerMode ? "Seller" : "Buyer" }}
                 </a>
               </span>
-              <div class="app-utility-item app-notifications-dropdown dropdown">
+              <div class="app-utility-item app-notifications-dropdown dropdown sm-fold-none">
                 <a
                   class="dropdown-toggle no-toggle-arrow"
                   id="notifications-dropdown-toggle"
@@ -154,7 +131,7 @@
                 <!--//dropdown-menu-->
               </div>
               <!--//app-utility-item-->
-              <div class="app-utility-item">
+              <div class="app-utility-item sm-fold-none">
                 <router-link to="/dashboard/settings" title="Settings">
                   <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                   <svg
@@ -235,26 +212,26 @@
 import SidePanel from "./SidePanel.vue";
 import { onMounted, computed, ref } from "vue";
 import { useStore } from "vuex";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 export default {
   components: { SidePanel },
   setup() {
     const store = useStore();
-    const router = useRouter()
+    const router = useRouter();
     const sidePanelOpened = ref(false);
 
     const isBuyerMode = computed(() => store.getters.isBuyerMode);
-    onMounted(()=>{
-      if(isBuyerMode.value) {
+    onMounted(() => {
+      if (isBuyerMode.value) {
         store.commit("toggleUserMode");
       }
-    })
+    });
     const handleUserMode = () => {
       store.commit("toggleUserMode");
       if (isBuyerMode.value) {
-        router.push({name: 'Home'});
+        router.push({ name: "Home" });
       } else {
-        router.push({name: 'sellerDashboard'});
+        router.push({ name: "sellerDashboard" });
       }
     };
 
@@ -264,7 +241,7 @@ export default {
       user: computed(() => store.getters.getAuthUser),
       imgURL: process.env.VUE_APP_URL,
       isBuyerMode,
-      handleUserMode
+      handleUserMode,
     };
   },
 };
@@ -274,5 +251,10 @@ export default {
 .app-utilities {
   display: flex;
   align-items: center;
+}
+@media (max-width: 280px) {
+    .sm-fold-none {
+        display: none;
+    }
 }
 </style>
