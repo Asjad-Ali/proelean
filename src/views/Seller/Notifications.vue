@@ -3,7 +3,12 @@
     <div class="col-md-12">
       <h1 class="app-page-title">Notifications</h1>
       <div class="border-bottom my-3"></div>
-      <div class="box shadow-sm rounded bg-white mb-3">
+      <div v-if="loader" class="d-flex justify-content-center s-margin">
+        <div class="spinner-border text-primary m-2" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div v-else class="box shadow-sm rounded bg-white mb-3">
         <div class="box-title border-bottom p-3">
           <h6 class="m-0">All Notifications</h6>
         </div>
@@ -26,7 +31,7 @@
               <div class="dropdown-list-image mr-3">
                 <img
                   class="rounded-circle"
-                  src="/assets/images/user/s4.png"
+                  :src="`${imgURL}/${'/assets/images/avator.png'}`"
                   alt=""
                 />
               </div>
@@ -130,11 +135,13 @@ export default {
     }
     return {
       deleteNotification,
+      imgURL: process.env.VUE_APP_URL,
       earlierNotification: computed(() => store.getters.getAllNotifications),
     };
   },
 };
 </script>
 
-<style>
+<style >
+
 </style>

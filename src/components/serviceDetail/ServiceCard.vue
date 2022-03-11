@@ -1,7 +1,6 @@
 <template>
     <div class="col-lg-4 right">
     <div class="">
-        
         <div class="tab-content">
         <div id="basic" class="tab-pane fade show active">
             <h4>Package Detail</h4>
@@ -129,6 +128,7 @@
             <router-link to="/chat" class="btn btn-success text-white">
                 Contact Seller
             </router-link>
+            
         </div>
     </div>
 </div>
