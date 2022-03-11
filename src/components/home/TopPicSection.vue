@@ -5,7 +5,7 @@
             <!-- <a href="#"  class="float-right ">See More ></a> -->
          </h2>
          <div class="row freelance-slider" v-if="$store.getters.getFeatGigs.length > 0">
-            <div class="col" v-for="service in $store.getters.getFeatGigs" :key="service.id">
+            <div class="col d-flex align-items-stretch justify-content-center" v-for="service in $store.getters.getFeatGigs" :key="service.id">
                <div class="freelancer">
                   <router-link :to="{name:'gigDetail', params:{id:service.id}}">
                      <img  class="img-fluid img-thumbnail gm-image" 

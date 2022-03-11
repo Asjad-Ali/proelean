@@ -5,6 +5,7 @@ import Register from '@/views/Auth/Register.vue'
 import Forgot from '@/views/Auth/Forgot.vue'
 import BecomeSeller from '@/views/Become-Seller.vue'
 import Profile from '@/views/Profile.vue'
+import About from '@/views/About.vue'
 import ServiceDetail from '@/views/ServiceDetail.vue'
 
 import CreateJob from '@/views/Buyer/CreateJob.vue'
@@ -138,6 +139,11 @@ const routes = [
     path: '/Profile',
     name: 'Profile',
     component: Profile,
+  },
+  {
+    path: '/About',
+    name: 'About',
+    component: About,
   },
 
   {

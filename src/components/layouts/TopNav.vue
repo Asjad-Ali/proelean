@@ -14,7 +14,7 @@
       <!-- Sidebar Toggle (Topbar) -->
       <a class="navbar-brand"
         ><router-link to="/"
-          ><img src="/assets/images/Pro-eLean-.png" alt="" /> </router-link
+          ><img src="/assets/images/Pro-eLean-.png" alt="Proelean logo" /> </router-link
       ></a>
       <!-- Topbar Search -->
       <form
