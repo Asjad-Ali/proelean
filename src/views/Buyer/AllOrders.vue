@@ -3,49 +3,21 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="d-flex align-items-center mb-3 border-bottom">
-            <h3 class="font-weight-bold mb-3">Orders</h3>
-            
-            
-            <!----------------------    Button trigger modal    --------------------->
-            <button type="button" class="btn btn-sm btn-success ml-auto light" data-toggle="modal" data-target="#exampleModalCenter">
-              Use Filter
-            </button>
+          <div class="d-flex align-items-center justify-content-between mb-3 border-bottom">
+            <h3 class="font-weight-bold mb-3">Orders</h3>            
 
-            <!------------------------      Modal     -------------------------->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Filter</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <input type="radio" id="all" name="filter" class="close" data-dismiss="modal" @click="showFilter(0)" value="0">
-                    <label>All</label><br>
-                    <input type="radio" id="active" name="filter" class="close" data-dismiss="modal" @click="showFilter(1)" value="1">
-                    <label>Active</label><br>
-                    <input type="radio" id="delivered" name="filter" class="close" data-dismiss="modal" @click="showFilter(2)" value="2">
-                    <label>Delivered</label><br>
-                    <input type="radio" id="revision" name="filter" class="close" data-dismiss="modal" @click="showFilter(3)" value="3">
-                    <label>Revision</label><br>
-                    <input type="radio" id="complete" name="filter" class="close" data-dismiss="modal" @click="showFilter(4)" value="4">
-                    <label>Complete</label><br>
-                    <input type="radio" id="disputed" name="filter" class="close" data-dismiss="modal" @click="showFilter(5)" value="5">
-                    <label>Disputed</label><br>
-                    <input type="radio" id="late" name="filter" class="close" data-dismiss="modal" @click="showFilter(6)" value="6">
-                    <label>Late</label><br>
-                  </div>
-                </div>
-              </div>
+              <select class="form-select form-control-sm" aria-label="Default select example"  @change="showFilter" id="ordersValue">
+                <option :value="order.value" v-for="order in OrderSelectionType" :key="order.index">
+                  {{ order.name }}
+                </option>
+              </select>
+            
             </div>
-            <!------------------------      Modal End     -------------------------->
           </div>
         </div>
       </div>
     </div>
+    
 
         <!-- for mobile screen -->
        <div class="container tab-content osahan-table rounded d-sm-none">
@@ -77,14 +49,130 @@
               <span class="text-muted"> <i class="fa fa-clock-o"></i>  Duration: </span> <span> {{ order.delivery_time }}</span>
               <span class="text-muted ml-5"> <i class="fa fa-usd"></i>  Budget: </span> <span> {{ order.amount }}</span>
               <div class="d-flex justify-content-end mt-2">
-                <td>
+                <div>
                     <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 1"> Active </button>
                     <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
                     <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 3"> Revision </button>
                     <button class="btn btn-sm btn-success w-100" v-if="order.status_id == 4"> Completed </button>
                     <button class="btn btn-sm btn-danger w-100" v-if="order.status_id == 5"> Disputed </button>
                     <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 6"> Late </button>
-                </td>
+                </div>
+                <span class="ml-2">
+                              <!-- Button trigger modal -->
+                              <button
+                                type="button"
+                                class="btn btn-light"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModalMobile"
+                                @click="getOrderNumber(order.orderNo)"
+                              >
+                                View
+                              </button>
+
+                              <!-- Modal -->
+                              <div
+                                class="modal fade"
+                                id="exampleModalMobile"
+                                tabindex="-1"
+                                aria-labelledby="exampleModalMobileLabel"
+                                aria-hidden="true"
+                              >
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content" v-if="singleOrder && !orderSection">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalMobileLabel">
+                                        Order Detail
+                                      </h5>
+                                    </div>
+                                    <div class="modal-body d-flex flex-column">
+                                      <div class="row">
+                                        <div class="col-3 text-dark">Order</div>
+                                        <div class="col-9 text-left">{{ singleOrder.orderNo }}</div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-3 col-sm-4 text-dark">Description</div>
+                                        <div class="col-9 col-sm-8 text-left">
+                                          {{ singleOrder.description }}
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-3 text-dark">Seller</div>
+                                        <div class="col-9 text-left">{{ singleOrder.username }}</div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-3 text-dark">Price</div>
+                                        <div class="col-9 text-left">{{ singleOrder.amount }}</div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-3 text-dark">Revisions</div>
+                                        <div class="col-9 text-left">{{ singleOrder.revision }}</div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-3 text-dark">Duration</div>
+                                        <div class="col-9 text-left">
+                                          {{ singleOrder.delivery_time }}
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"
+                                      >
+                                        Close
+                                      </button>
+                                      <button
+                                        type="button"
+                                        v-if="singleOrder.status_id == 1"
+                                        class="btn btn-danger"
+                                        @click="submitOrder()"
+                                      >
+                                        Dispute Order
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  <div class="modal-content" v-else>
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalMobileLabel">
+                                        Order Detail
+                                      </h5>
+                                    </div>
+                                    <div class="modal-body">
+                                      <textarea
+                                        type="text"
+                                        class="form-control"
+                                        name="description"
+                                        v-model="orderType.description"
+                                        id="description"
+                                        placeholder="Type description"
+                                        required
+                                      />
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"
+                                      >
+                                        Close
+                                      </button>
+                                      <button
+                                        type="button"
+                                        v-if="order.status_id == 1 || order.status_id == 5"
+                                        class="btn btn-danger"
+                                        data-bs-dismiss="modal"
+                                        @click="manage_Order()"
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!----- Modal End ----->
+                            </span>
               </div>
             </div>
           </div>
@@ -93,6 +181,7 @@
 
 
 
+          <!-- For Web Screen -->
           <div class="tab-content osahan-table rounded d-none d-sm-block container">
             <div class="tab-pane active" id="active">
                 <div v-if="loader" class="d-flex justify-content-center s-margin">
@@ -102,7 +191,7 @@
                 </div>
                 <div v-else>
                   <div
-                  class="table-responsive box-table mt-3 bg-white" 
+                  class="table-responsive box-table mt-1 bg-white" 
                   >
                       <table class="table table-bordered" >
                         <thead>
@@ -132,7 +221,7 @@
                               </div>
                             </td>
                             <td>
-                                <p class="order-proposal-title">
+                                <p class="order-proposal-title ml-1">
                                   {{ order.description.substr(0, 50) }}
                                 </p>
                             </td>
@@ -250,7 +339,7 @@
                                       </button>
                                       <button
                                         type="button"
-                                        v-if="order.status_id == 1"
+                                        v-if="order.status_id == 1 || order.status_id == 5"
                                         class="btn btn-danger"
                                         data-bs-dismiss="modal"
                                         @click="manage_Order()"
@@ -261,7 +350,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <!-- Modal End -->
+                              <!----- Modal End ----->
                             </td>
                           </tr>
                         </tbody>
@@ -276,7 +365,6 @@
         <h2>No Any Order Available</h2>
       </div>
 
-  </div>
 </template>
 
 <script>
@@ -292,6 +380,15 @@ export default {
     });
     const orderSection = ref(false);
     
+    const OrderSelectionType =  [ 
+      { value: 0, name:"All" },
+      { value: 1, name:"Active" },
+      { value: 2, name:"Delivered" },
+      { value: 3, name:"Revision" },
+      { value: 4, name:"Complete" },
+      { value: 5, name:"Dispute" },
+      { value: 6, name:"Late" },
+    ]
     const orderType = ref({
       order_no: "",
       type: 5,
@@ -306,7 +403,9 @@ export default {
       console.log("singleOrder", singleOrder.value);
     };
 
-    function showFilter(value) {
+    function showFilter() {
+      let value = document.getElementById("ordersValue").value;
+      console.log("value", value);
       store.dispatch("myOrders", `${buyerOrderURL}${value}`);
     }
     function submitOrder() {
@@ -323,6 +422,7 @@ export default {
       loader: computed(() => store.getters.getLoaderVal),
       showFilter,
       orderType,
+      OrderSelectionType,
       getOrderNumber,
       manage_Order,
       singleOrder,

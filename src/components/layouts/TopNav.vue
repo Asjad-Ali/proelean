@@ -10,11 +10,11 @@
       px-0
     "
   >
-    <div class="container-fluid">
+    <div class="container-fluid p-0">
       <!-- Sidebar Toggle (Topbar) -->
       <a class="navbar-brand"
         ><router-link to="/"
-          ><img src="/assets/images/Pro-eLean-.png" alt="" /> </router-link
+          ><img src="/assets/images/Pro-eLean-.png" alt="Proelean logo" /> </router-link
       ></a>
       <!-- Topbar Search -->
       <form
@@ -108,7 +108,7 @@
           class="navbar-nav align-items-center ml-auto"
           v-if="$store.state.isLoggedIn"
         >
-          <span class="mr-2">
+          <span class="mr-2" v-if="user.isFreelancer">
             <a class="cursor-pointer" @click="handleUserMode">
               Switch to {{ isBuyerMode ? "Seller" : "Buyer" }}
             </a>
@@ -325,6 +325,8 @@
                 fill="currentColor"
                 class="bi bi-bag-plus"
                 viewBox="0 0 16 16"
+                title="Post a Job"
+
               >
                 <path
                   fill-rule="evenodd"

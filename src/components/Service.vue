@@ -1,7 +1,7 @@
 <template>
 <div>
   <div v-if="service">
-      <div class="card h-100">
+      <div class="card h-100 mb-4">
         <router-link :to="{name:'gigDetail', params:{id:service.id}}">
           <img class="img-fluid" :src="imgURL+'/'+service.service_media[0].media"  />
         </router-link>

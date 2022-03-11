@@ -8,12 +8,12 @@
     <div class="dropdown-list-image mr-3 mb-auto">
       <img
         class="rounded-circle"
-        :src="`${imgUrl}/${otherMember.photo}`"
+        :src="`${imgUrl}/${messageOwner(message.senderId).photo}`"
         alt=""
       />
     </div>
     <div class="mr-1">
-      <div class="text-truncate h6 mb-3">{{ otherMember.name }}</div>
+      <div class="text-truncate h6 mb-3">{{ messageOwner(message.senderId).name}}</div>
       <p>
         {{ message.message }}
         <!-- <a href="#">iamosahan@gmail.com</a> -->
@@ -29,7 +29,7 @@
 
 <script>
 import { useStore } from "vuex";
-import { computed, onMounted, ref } from "vue";
+import {  onMounted, ref } from "vue";
 
 export default {
   props: {
@@ -43,16 +43,18 @@ export default {
     const store = useStore();
     const timeNow = ref(Date.now());
 
-    const otherMember = computed(() =>
-      store.getters.getSelectedConversation.membersInfo.find(
-        (member) => store.getters.getAuthUser.id != member.id
+    const messageOwner = (senderId) => {
+      return store.getters.getSelectedConversation.membersInfo
+      ? store.getters.getSelectedConversation.membersInfo.find(
+        (member) => senderId == member.id
       )
-    );
+      : {name:'',photo:null}
+    }
 
     onMounted(() => {
       setInterval(() => {
         timeNow.value = Date.now();
-      }, 1000);
+      }, 15000);
     });
 
     const timeDiff = (time) => {
@@ -70,7 +72,7 @@ export default {
     };
 
     return {
-      otherMember,
+      messageOwner,
       imgUrl: process.env.VUE_APP_URL,
       timeDiff,
     };

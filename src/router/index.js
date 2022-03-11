@@ -5,7 +5,9 @@ import Register from '@/views/Auth/Register.vue'
 import Forgot from '@/views/Auth/Forgot.vue'
 import BecomeSeller from '@/views/Become-Seller.vue'
 import Profile from '@/views/Profile.vue'
+import About from '@/views/About.vue'
 import ServiceDetail from '@/views/ServiceDetail.vue'
+import Purchase from '@/views/Purchase.vue'
 
 import CreateJob from '@/views/Buyer/CreateJob.vue'
 import Jobs from '@/views/Buyer/AllJobs.vue'
@@ -139,6 +141,11 @@ const routes = [
     name: 'Profile',
     component: Profile,
   },
+  {
+    path: '/About',
+    name: 'About',
+    component: About,
+  },
 
   {
     path: '/seller/create_service',
@@ -190,6 +197,11 @@ const routes = [
     path: '/gig-detail/:id',
     name: 'gigDetail',
     component: ServiceDetail,
+  },
+  {
+    path: '/purchase',
+    name: 'Purchase',
+    component: Purchase,
   },
   {
     path: '/chat',

@@ -17,7 +17,7 @@
     <div class="font-weight-bold mr-1 overflow-hidden">
       <div class="text-truncate">{{otherMember.name}}</div>
       <div class="small text-truncate overflow-hidden text-black-50">
-        <i class="mdi mdi-check"></i> {{conversation.lastMessage}}
+        <i class="mdi mdi-check"></i> <span v-if="conversation.senderId==$store.getters.getAuthUser.id">me:</span>  {{conversation.lastMessage}}
       </div>
     </div>
     <span class="ml-auto mb-auto">
@@ -43,7 +43,7 @@ export default {
       onMounted( () => {
         setInterval( () =>  {
           timeNow.value=Date.now();
-        }, 1000);
+        }, 5000);
       })
 
 
