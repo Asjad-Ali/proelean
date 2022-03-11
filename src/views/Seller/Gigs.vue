@@ -15,13 +15,13 @@
             "
           >
             <!--//col-->
-            <div class="col-auto">
+            <!-- <div class="col-auto">
               <router-link
                 class="btn app-btn-secondary"
                 to="/dashboard/favourite_service"
                 >My Favourite Services</router-link
               >
-            </div>
+            </div> -->
             <div class="col-auto">
               <router-link
                 class="btn app-btn-primary"
