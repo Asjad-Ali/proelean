@@ -27,7 +27,9 @@
                   <span class="total-rating-out-five">{{service.service_rating}}</span>
                   <span class="total-rating">({{service.total_reviews}})</span>
                </span>
-               <a href="#">Contact Me</a>
+               <router-link to="/chat" class="btn btn-success">
+                  Contact Me
+               </router-link>
             </div>
          </div>
       </div>
