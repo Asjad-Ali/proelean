@@ -1,10 +1,148 @@
 <template>
- <h1>Hello Purchase page</h1>
+<div class="main-page py-5">
+<div class="container">
+    <div class="mb-2">
+       
+        <h1 class="app-page-title">Confirm order and pay</h1>
+        <span class="text-muted">please make the payment, after that you can enjoy all the features and benefits.</span>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card p-3">
+                <h6 class="text-uppercase">Payment details</h6>
+                <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" required="required"> <span>Name on card</span> </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <i class="fa fa-credit-card"></i> <span>Card Number</span> </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex flex-row">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Expiry</span> </div>
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>CVV</span> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 mb-4">
+                    <h6 class="text-uppercase">Billing Address</h6>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Street Address</span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>City</span> </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>State/Province</span> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control" required="required"> <span>Zip code</span> </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="mt-4 mb-4 d-flex justify-content-between"> 
+               <router-link to="/home"><span>Previous step</span> </router-link>
+               <button class="btn app-btn-primary px-3">Pay $840</button> </div>
+        </div>
+        <div class="col-md-4 col-lg-4 right">
+            <PackageDetail/>
+        </div>
+    </div>
+</div>
+</div>
 </template>
 
 <script>
+import PackageDetail from "./Buyer/PackageDetail.vue";
+ 
 export default {
-   components: { },
+   components: { PackageDetail },
    
 }
 </script>
+
+<style scoped> 
+ 
+ .app-page-title {
+    font-size: 1.5rem !important;
+ 
+}
+
+ 
+ .app-btn-primary {
+    background: #15a362;
+    color: #fff;
+    border-color: #15a362;
+    font-weight: 400;
+}
+.form-control {
+    border-bottom: 2px solid #eee !important;
+    border: none;
+    font-weight: 600
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #8bbafe;
+    outline: 0;
+    box-shadow: none;
+    border-radius: 0px;
+    border-bottom: 2px solid #15a362 !important
+}
+
+.inputbox {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%
+}
+
+.inputbox span {
+    position: absolute;
+    top: 7px;
+    left: 11px;
+    transition: 0.5s
+}
+
+.inputbox i {
+    position: absolute;
+    top: 13px;
+    right: 8px;
+    transition: 0.5s;
+    color: #3F51B5
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+.inputbox input:focus~span {
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 12px
+}
+
+.inputbox input:valid~span {
+    transform: translateX(-0px) translateY(-15px);
+    font-size: 12px
+}
+.svg-inline--fa.fa-w-18 {
+ 
+    position: absolute;
+    top: 10px;
+    margin-left: -8px;
+        color: deeppink;
+} 
+.app-btn-primary:hover {
+    color: #fff;
+    background: #18ba70;
+    border-color: #18ba70;
+}
+  
+ 
+ 
+</style>
