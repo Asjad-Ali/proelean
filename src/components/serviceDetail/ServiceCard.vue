@@ -32,14 +32,11 @@
                     </li>
                 </ul>
             </article>
-            <button class="btn-primary Lwidth">Continue ($8,029)</button>
-        </div>
-
-        </div>
-        <div class="contact-seller-wrapper d-flex justify-content-center">
+            
+            
             <!-- Button trigger modal -->
             <button type="button" @click.prevent="getServiceId(service.id)" class="btn btn-success width" data-toggle="modal" data-target="#staticBackdrop">
-            Purchase
+                Continue
             </button>
 
             <!---------------------     Modal    ---------------------->
@@ -91,9 +88,11 @@
                         required
                         />
                     </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" @click="atmCardApproval()">Proceed</button>
+                    <div class="modal-footer">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-6"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></div>
+                            <div class="col-6"><button class="btn btn-success" @click="atmCardApproval()">Proceed</button></div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-content" v-else>
@@ -112,16 +111,24 @@
                         required
                         />
                     </div>
-                    <div class="modal-footer d-flex justify-content-center mt-3">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal" @click="purchaseService()">Purchase</button>
+                    <div class="modal-footer">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-6"><button class="btn btn-secondary" data-dismiss="modal">Cancel</button></div>
+                            <div class="col-6"><button class="btn btn-success" data-dismiss="modal" @click="purchaseService()">Purchase</button></div>
+                        </div>
                     </div>
                 </div>
             </div>
             </div>
             <!---------------------    Modal End     --------------------->
 
-        <button class="btn btn-success ml-3 width" type="button">Contact Seller</button>
+        </div>
+
+        </div>
+        <div class="contact-seller-wrapper d-flex justify-content-center">    
+            <router-link to="/chat" class="btn btn-success text-white">
+                Contact Seller
+            </router-link>
         </div>
     </div>
 </div>

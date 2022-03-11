@@ -100,21 +100,20 @@
             </div>
           </div>
         </div>
-
-   <div class="app-card-body " v-else>
-   <div class="table-responsive h50vh flex-width-center">
-      <div class="m-5 text-center">
-         <h5>No notifications found</h5>
-         <figure class="py-3 m-0">
-            <img
-               src="/assets/seller/images/svg-icons/notify.svg"
-               alt="notfound"
-               width="150"
-               />
-         </figure>
-      </div>
-   </div>
-</div>
+            <div class="app-card-body " v-else>
+            <div class="table-responsive h50vh flex-width-center">
+                <div class="m-5 text-center">
+                  <h5>No notifications found</h5>
+                  <figure class="py-3 m-0">
+                      <img
+                        src="/assets/seller/images/svg-icons/notify.svg"
+                        alt="notfound"
+                        width="150"
+                        />
+                  </figure>
+                </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>

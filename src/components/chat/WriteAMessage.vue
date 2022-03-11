@@ -46,14 +46,16 @@ setup() {
 
     const newMessage = ref({
         text: '',
-        attachements:[],
+        attachement:'',
+        attachementType: 0,
         offer: null,
+        refersGig: false,
     });
 
     const sendMsg = () => {
       if (newMessage.value.text) {
         store.dispatch("sendMessage", newMessage.value);
-        //newMessage.value.text = ''
+        newMessage.value.text = ''
       }
     };
 

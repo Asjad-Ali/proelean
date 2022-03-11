@@ -43,7 +43,6 @@
               </div>
             </div>
           </div>
-          <Faq />
           <ReviewSection />
         </div>
         <ServiceCard />
@@ -56,15 +55,13 @@
 </template>
 
 <script>
-import { computed } from "@vue/runtime-core";
-import { onMounted } from "@vue/runtime-core";
+import { computed, onBeforeMount } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Gallery from "@/components/serviceDetail/Gallery.vue";
 import AboutService from "@/components/serviceDetail/AboutService.vue";
 import AboutSeller from "@/components/serviceDetail/AboutSeller.vue";
 import Service from "@/components/Service.vue";
-import Faq from "@/components/serviceDetail/Faq.vue";
 import ReviewSection from "@/components/profile/SellerReviewsSection.vue";
 import ServiceCard from "@/components/serviceDetail/ServiceCard.vue";
 // import PeopleViewProfile from '@/components/serviceDetail/PeopleViewProfile.vue';
@@ -77,7 +74,6 @@ export default {
     AboutService,
     AboutSeller,
     Service,
-    Faq,
     ReviewSection,
     ServiceCard,
     //  PeopleViewProfile,
@@ -90,9 +86,7 @@ export default {
       id: route.params.id,
       type: "SERVICE_DETAIL",
     };
-    onMounted(() => {
-      store.dispatch("userSingleService", payload);
-    });
+    onBeforeMount(store.dispatch("userSingleService", payload));
 
     return {
       service: computed(() => store.getters.getSingleService),
