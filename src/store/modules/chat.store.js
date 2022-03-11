@@ -9,6 +9,7 @@ export const state = {
     selectedChatListenerRef: null,
     messages: [],
     referrerGig: null,
+    areConversationsLoaded: false
 }
 
 export const mutations = {
@@ -48,6 +49,9 @@ export const mutations = {
     },
     setMessage(state,message){
         state.messages.push(message);
+    },
+    setConversationsAreLoaded(state){
+        state.areConversationsLoaded = true;
     }
 }
 
@@ -114,30 +118,32 @@ export const actions = {
     },
     lookForConversationChanges({ commit, getters }) {
         commit('setConversationLoadingStatus', 'LOADING');
-        const db = getFirestore();
-        const user = getters.getAuthUser;
-        const conversationRef = collection(db, "Conversations");
-        const q = query(conversationRef, where('members', 'array-contains', user.id) , orderBy("createdAt",'desc'));
+        if(!getters.areConversationListAlreadyLoaded) {
+            const db = getFirestore();
+            const user = getters.getAuthUser;
+            const conversationRef = collection(db, "Conversations");
+            const q = query(conversationRef, where('members', 'array-contains', user.id) , orderBy("createdAt",'desc'));
 
 
-        /*const unsubscribe = */ onSnapshot(q, (snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-                const id = change.doc.id;
-                const conversation = { id, ...change.doc.data() };
-                if (change.type === "added") {
-                    commit('setConversation', conversation);
-                }
-                if (change.type === "modified") {
-                    console.log("Modified Conversation: ", change.doc.data());
-                    commit('updateConversation', conversation);
-                }
-                if (change.type === "removed") {
-                    console.log("Removed Conversation: ", conversation);
-                }
+            /*const unsubscribe = */ onSnapshot(q, (snapshot) => {
+                snapshot.docChanges().forEach((change) => {
+                    const id = change.doc.id;
+                    const conversation = { id, ...change.doc.data() };
+                    if (change.type === "added") {
+                        commit('setConversation', conversation);
+                    }
+                    if (change.type === "modified") {
+                        console.log("Modified Conversation: ", change.doc.data());
+                        commit('updateConversation', conversation);
+                    }
+                    if (change.type === "removed") {
+                        console.log("Removed Conversation: ", conversation);
+                    }
+                });
             });
-        });
-
+        }
         commit('setConversationLoadingStatus', 'COMPLETED');
+        commit('setConversationsAreLoaded');
     },
     updateConversation({ getters},message){
         const conversation=getters.getSelectedConversation;
@@ -173,4 +179,5 @@ export const getters = {
     getSelectedChatListenerRef: state => state.selectedChatListenerRef,
     getChatMessages:  state => state.messages,
     getReferrerGig: state => state.referrerGig,
+    areConversationListAlreadyLoaded: state => state.areConversationsLoaded
 }
