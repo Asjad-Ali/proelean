@@ -282,7 +282,7 @@
               class="btn btn-icon btn-transparent-dark dropdown-toggle"
               data-bs-toggle="tooltip"
               data-bs-placement="top"
-              title="Manage order"
+              title="Favourite Services"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -460,14 +460,11 @@
             <a
               class="btn btn-icon btn-transparent-dark dropdown-toggle"
               id="navbarDropdownMessages"
-              href="javascript:void(0);"
-              role="button"
-              data-toggle="dropdown"
+              href="/chat"
               aria-haspopup="true"
               aria-expanded="false"
-              data-bs-toggle="tooltip"
               data-bs-placement="top"
-              title="Inbox"
+              title="Chat"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -487,7 +484,7 @@
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
             </a>
-            <div
+            <!-- <div
               class="
                 dropdown-menu dropdown-menu-right
                 border-0
@@ -522,7 +519,7 @@
                 :conversation="conversation"
                 :key="conversation.id"
               />
-            </div>
+            </div> -->
           </li>
           <!-- languages li start -->
           <li
@@ -606,7 +603,7 @@
               title="Profile"
             >
               <img
-                :src="`${imgURL}/${user.image}`"
+                :src="`${imgURL}/${user.image ?  user.image : '/assets/images/avator.png'}`"
                 class="dropdown-user-img img-full"
                 alt="profile_img"
               />
@@ -636,7 +633,7 @@
                 </div>
               </h6>
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="/profile">
+              <router-link class="dropdown-item" to="/dashboard/profile">
                 <div class="dropdown-item-icon">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

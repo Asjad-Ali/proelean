@@ -1,6 +1,4 @@
 <template>
-  
-       
             <div class="row d-flex justify-content-center col-12 m-0 p-0">
                <div class="col-md-12">
                   <h1 class="app-page-title">Notifications</h1>

@@ -166,7 +166,6 @@ const routes = [
     component: FavouriteService
   },
 
-
   {
     path: '/buyer/create_job',
     name: 'CreateJob',
@@ -182,7 +181,6 @@ const routes = [
     name: 'ManageOrder',
     component: AllOrders,
   },
-
   {
     path: '/gigs/:slug?',
     name: 'Gigs',
