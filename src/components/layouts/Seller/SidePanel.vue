@@ -21,11 +21,12 @@
         class="sidepanel-close d-xl-none"
         >&times;</a
       >
+
       <div class="app-branding">
         <router-link class="app-logo" to="/dashboard"
           ><img
             class="logo-icon me-2"
-            src="/assets/images/proeleanLogo.jpeg"
+            :src="`${imgURL}/${'/assets/images/proeleanLogo.jpeg'}`"
             alt="logo"
           /><span class="logo-text"> Proelean</span></router-link
         >
@@ -202,7 +203,8 @@ export default {
     const activeTabIndex=ref(0);
     return {
       items,
-      activeTabIndex
+      activeTabIndex,
+      imgURL: process.env.VUE_APP_URL
     }
   },
 };
