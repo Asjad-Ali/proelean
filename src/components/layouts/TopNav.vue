@@ -635,7 +635,7 @@
                 </div>
               </h6>
               <div class="dropdown-divider"></div>
-              <router-link class="dropdown-item" to="/dashboard/profile">
+              <router-link class="dropdown-item" to="/buyer-account">
                 <div class="dropdown-item-icon">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
