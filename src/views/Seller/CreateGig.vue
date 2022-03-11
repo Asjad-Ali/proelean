@@ -115,6 +115,7 @@
                       id="subCategory"
                       class="form-control"
                       name="category_id"
+                      
                       v-model="createService.sub_category_id"
                       required
                     >

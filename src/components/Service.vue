@@ -49,7 +49,7 @@
               </div>
             </div>
             <div class="footer">
-              <div class="dropdown">
+              <div class="dropdown" v-if="!$store.getters.isBuyerMode">
                 <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown">
                   <i class="material-icons">list</i>
                 </a>
@@ -67,8 +67,8 @@
               <a
               :class="{'disable': service.service_user.id === $store.getters.getAuthUser.id}"
               @click="handleWishlist(service.id)" >
-                  <i class="fa fa-spinner fa-spin" v-if="loader==service.id"></i>
-                  <i v-else  class="fa fa-heart cursor-pointer" :class="{ redIcon : service.favourite}"
+                  <i class="mdi mdi-repeat fs-2" v-if="loader==service.id"></i>
+                  <i v-else class="mdi mdi-heart cursor-pointer fs-2" :class="{ redIcon : service.favourite}"
                   :disabled="loader===service.id"   aria-hidden="true"></i>
               </a>
               <div class="price">
@@ -166,7 +166,7 @@ export default {
     function handleWishlist (id) {
       let payload = {
         'service_id': id,
-        'type': route.name === 'Gigs' ? 'gigs' : 'offered'
+        'type': route.name !== 'Gigs' ? 'offered' : 'gigs'
       }
       store.dispatch('wishlist',payload)
     }

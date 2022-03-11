@@ -26,16 +26,17 @@ export const mutations = {
 
 export const actions = {
   async wishlist({ commit }, payload) {
+    console.log("payload",payload)
     commit('setRegisterStatus', payload.service_id);
     const resp = await Api.post('wishlist', payload)
     if (resp.status == 200) {
       useToast(resp.message, 'success');
-      if(payload.type === 'gigs')
+      if(payload.type === 'offered')
       {
-        commit('toggleFavourite', payload.service_id);
+        commit('toggleOfferedService', payload.service_id);
       }
       else{
-        commit('toggleOfferedService', payload.service_id);
+        commit('toggleFavourite', payload.service_id);
       }
       commit('setRegisterStatus', 3);
     }
@@ -52,9 +53,9 @@ export const actions = {
       commit('setAllWishlistServices',resp.data)
       commit('setLoadingStatus', 'COMPLETED');
     }
-
   },
 
+  
   async showWishlist({ commit }) {
     const resp = await Api.get('get_wishlist')
     if (resp.status == 200) {
