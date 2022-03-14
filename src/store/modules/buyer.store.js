@@ -88,17 +88,17 @@ export const  actions = {
           commit('setCardSection', true);
           console.log("Service token:",res.token);
           commit("setCardStripe",res.token);
-          commit('setRegisterStatus', 3);
+          //commit('setRegisterStatus', 3);
         }
         else{
-          commit('setRegisterStatus', 4);
+          //commit('setRegisterStatus', 4);
           console.log("Error Stripe");
         }
       },
 
       async purchaseService({commit,state},payload){
 
-        commit('setRegisterStatus', 2);
+        //commit('setRegisterStatus', 2);
         console.log("token",state.cardStripe)
         payload.token = state.cardStripe
         const res = await Api.post('buyer/custom_order',payload);

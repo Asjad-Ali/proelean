@@ -8,15 +8,15 @@
     </div>
     <div class="row">
         <div class="col-md-8">
-            <div class="card p-3 shadow-none" v-if="!cardSection">
+            <div class="card p-2 shadow-none" >
                 <h6 class="text-uppercase">Payment details</h6>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="inputbox mt-3 mr-2"> <input type="number" name="ATM_Number"
                             v-model="paymentElements.number"
-                            id="ATM_Number" class="form-control" required="required"> <span class="card-margin"> <i class="fa fa-credit-card"> </i> </span> <span class="ml-3"> Card Number </span> </div>
+                            id="ATM_Number" class="form-control" required="required">  <span> Card Number </span> </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="d-flex flex-row">
                             <div class="inputbox mt-3 mr-2"> <input type="number"
                             class="form-control"
@@ -41,9 +41,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card p-3 shadow-none" v-else>
                 <div class="mt-4 mb-4">
                     <h6 class="text-uppercase">Description Section</h6>
                     <div class="row ">
@@ -57,12 +55,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mt-4 mb-4 d-flex justify-content-end" v-if="!cardSection"> 
-               <button class="btn btn-success px-3" @click="atmCardApproval()">{{registerStatus == 2 ? 'Loading...' : 'Proceed'}}</button> </div>
-            <div class="mt-4 mb-4 d-flex justify-content-end" v-else> 
+                <div class="mr-2 mb-1 d-flex justify-content-end"> 
                <button class="btn btn-success px-3" @click="purchaseService()">{{registerStatus == 2 ? 'Loading...' : 'Pay'}}</button> </div>
+
+            </div>
         </div>
 
         <div class="col-md-4 col-lg-4 right">
@@ -106,15 +103,17 @@ export default {
       token: ''
     });
 
-    function atmCardApproval() {
+    function purchaseService() {
+
       store.dispatch("ATM_CardDetail", paymentElements.value);
       console.log("payment values: ",paymentElements.value);
       //paymentElements.value = {}
-    }
-    function purchaseService() {
-      store.dispatch("purchaseService", formData.value);
-      console.log("formdata values: ",formData.value);
-      //formData.value = {}
+
+      setTimeout(function() {
+        store.dispatch("purchaseService", formData.value);
+        console.log("formdata values: ",formData.value);
+        }, 2500);    
+    //formData.value = {}
     }
 
     return {
@@ -123,7 +122,6 @@ export default {
       cardSection: computed(() => store.getters.getCardSection),
       paymentElements,
       formData,
-      atmCardApproval,
       purchaseService,
     };
   },
@@ -209,9 +207,5 @@ input::-webkit-inner-spin-button {
     border-color: #18ba70;
 }
   
-.card-margin{
-    margin-top: -7px;
-}
- 
  
 </style>
