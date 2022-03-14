@@ -1,7 +1,7 @@
 <template>
   <div class="card h-100">
     <!-- {{imgURL}} -->
-    <router-link :to="{name:'gigDetail', params:{id:service.id}}">
+    <router-link :to="{name:'GigDetail', params:{id:service.id}}">
       <img class="img-fluid" :src="'https://api.dex.proelean.com/'+service.service_media[0].media"  />
     </router-link>
     <div class="inner-slider">

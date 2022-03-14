@@ -1,17 +1,20 @@
 <template>
-      <div class="container">
+      <div class="container" v-if="$store.getters.getFeatGigs.length > 0">
          <h2>
             Top Picks For You
             <!-- <a href="#"  class="float-right ">See More ></a> -->
          </h2>
-         <div class="row freelance-slider" v-if="$store.getters.getFeatGigs.length > 0">
+         <div class="row freelance-slider" >
             <div class="col d-flex align-items-stretch justify-content-center" v-for="service in $store.getters.getFeatGigs" :key="service.id">
                <div class="freelancer">
-                  <router-link :to="{name:'gigDetail', params:{id:service.id}}">
+                  <router-link v-if="!$store.getters.isBuyerMode" :to="{name:'GigDetail', params:{id:service.id}}">
                      <img  class="img-fluid img-thumbnail gm-image" 
                      :src="`${imgURL}/${service.service_media[0].media}` ?? '/assets/images/banner.png'"
-                     />
-                  </router-link>
+                     />                  </router-link>
+                  <router-link v-else :to="{name:'BuyerServiceDetail', params:{id:service.id}}">
+                     <img  class="img-fluid img-thumbnail gm-image" 
+                     :src="`${imgURL}/${service.service_media[0].media}` ?? '/assets/images/banner.png'"
+                     />                  </router-link>
                   <div class="freelancer-footer">
                      <img
                         :src="`${imgURL}/${service.service_user.image ? service.service_user.image : '/assets/images/avator.png'}`"

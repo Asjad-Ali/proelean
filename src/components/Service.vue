@@ -2,10 +2,10 @@
 <div>
   <div v-if="service">
       <div class="card h-100 mb-4">
-        <router-link v-if="!$store.getters.isBuyerMode" :to="{name:'gigDetail', params:{id:service.id}}">
+        <router-link v-if="!$store.getters.isBuyerMode" :to="{name:'GigDetail', params:{id:service.id}}">
           <img class="img-fluid" :src="imgURL+'/'+service.service_media[0].media"  />
         </router-link>
-        <router-link v-else :to="{name:'gigDetail', params:{id:service.id}}">
+        <router-link v-else :to="{name:'BuyerServiceDetail', params:{id:service.id}}">
           <img class="img-fluid" :src="imgURL+'/'+service.service_media[0].media"  />
         </router-link>
         <div class="inner-slider">
@@ -57,7 +57,7 @@
                   <i class="mdi mdi-dots-vertical"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <li class="dropdown-item"><router-link :to="{name:'gigDetail', params:{id:service.id}}">Open</router-link></li>
+                  <li class="dropdown-item"><router-link :to="{name:'GigDetail', params:{id:service.id}}">Open</router-link></li>
                   <li class="dropdown-item"><router-link :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link></li>
                   <li @click="getServiceId(service.id)" class="dropdown-item"><a aria-hidden="true"
                       data-toggle="modal"

@@ -63,7 +63,7 @@ import ServiceCard from "@/components/serviceDetail/ServiceCard.vue";
 // import PeopleViewProfile from '@/components/serviceDetail/PeopleViewProfile.vue';
 
 export default {
-  name: "gigDetail",
+  name: "GigDetail",
   components: {
     Gallery,
     AboutService,
