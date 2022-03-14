@@ -454,8 +454,8 @@
               nav-item
               dropdown
               no-arrow no-caret
-              mr-3
-              dropdown-notifications
+              dropdown-user
+              mx-2
               d-none d-lg-block
             "
           >
@@ -465,6 +465,7 @@
               href="/chat"
               aria-haspopup="true"
               aria-expanded="false"
+              data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Chat"
             >
