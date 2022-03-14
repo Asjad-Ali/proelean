@@ -43,15 +43,23 @@ import ConversationList from "../components/chat/ConversationList.vue"
 import MessagesSection from "../components/chat/MessagesSection.vue"
 import { useStore } from 'vuex'
 import { onBeforeMount } from '@vue/runtime-core'
+import { useRoute } from 'vue-router'
 export default {
    components: { ConversationList, MessagesSection },
    setup() {
       const store = useStore();
+      const route = useRoute();
 
       onBeforeMount(() =>{
-         store.dispatch('lookForConversationChanges');
+         store.dispatch('lookForConversationChanges', route.params.id);
       });
-
+      // computed(()=>{
+      //    store.getters.getConversations.forEach((conversation) => {            
+      //       if(conversation.members.includes(route.params.id)) {
+      //          store.dispatch('openSelectedConversation', conversation.id)
+      //       }
+      //    })
+      // })
       const handleSelectedChat = (conversationID) => {
          store.dispatch('openSelectedChat',conversationID)
       }
