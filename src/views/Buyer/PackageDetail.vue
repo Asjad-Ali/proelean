@@ -1,5 +1,5 @@
 <template>
- <div class="tab-content" data-v-0d25e83c="">
+ <div class="tab-content shadow-none" data-v-0d25e83c="">
    <div id="basic" class="tab-pane fade show active" data-v-0d25e83c="">
       <h4 data-v-0d25e83c="">Package Detail</h4>
       <hr data-v-0d25e83c="">
