@@ -1,7 +1,7 @@
 <template>
 
      <div class="gig-img-outer">
-    <router-link :to="{name:'gigDetail', params:{id:service.id}}" >
+    <router-link :to="{name:'GigDetail', params:{id:service.id}}" >
         <img
           class="img-full"
           :src="(service.service_media.length && service.service_media[0].media) ? `${imgURL}/${service.service_media[0].media}` : `/assets/images/sample-gig.png`" />

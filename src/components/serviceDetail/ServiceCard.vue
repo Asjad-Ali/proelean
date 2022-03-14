@@ -58,14 +58,7 @@
       <!---------------------    Modal End     --------------------->
     </div>
   </div>
-  <!-- <div class="contact-seller-wrapper d-flex justify-content-center">
-    <router-link
-      :to="{ name: 'Chat', params: { id: `${service.service_user.id}` } }"
-      class="btn btn-success text-white"
-    >
-      Contact Seller
-    </router-link>
-  </div> -->
+
 </template>
 
 <script>
