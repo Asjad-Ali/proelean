@@ -20,6 +20,7 @@
           <Gallery :serviceMedia="service.service_media" />
           <AboutService :service="service" />
           <div class="profile-card">
+            <AboutSeller :service="service" />
 
             <h3 v-if="service.offered_services.length">
               Other Services I Offer
@@ -45,8 +46,10 @@
           <ReviewSection />
         </div>
         <ServiceCard />
+    <TopPicSection />
       </div>
     </div>
+
     <!-- <PeopleViewProfile /> -->
   </div>
 </template>
@@ -57,20 +60,24 @@ import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Gallery from "@/components/serviceDetail/Gallery.vue";
 import AboutService from "@/components/serviceDetail/AboutService.vue";
+import AboutSeller from "@/components/serviceDetail/AboutSeller.vue";
 import Service from "@/components/Service.vue";
 import ReviewSection from "@/components/profile/SellerReviewsSection.vue";
 import ServiceCard from "@/components/serviceDetail/ServiceCard.vue";
 // import PeopleViewProfile from '@/components/serviceDetail/PeopleViewProfile.vue';
+import TopPicSection from "@/components/home/TopPicSection.vue";
 
 export default {
   name: "gigDetail",
   components: {
     Gallery,
     AboutService,
+    AboutSeller,
     Service,
     ReviewSection,
     ServiceCard,
     //  PeopleViewProfile,
+    TopPicSection,
   },
   setup() {
     const store = useStore();

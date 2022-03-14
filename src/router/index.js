@@ -11,12 +11,12 @@ import Purchase from '@/views/Purchase.vue'
 
 import CreateJob from '@/views/Buyer/CreateJob.vue'
 import Jobs from '@/views/Buyer/AllJobs.vue'
-import AllOrders from '@/views/Buyer/AllOrders.vue'
+import BuyerAccount from '@/views/Buyer/BuyerAccount.vue'
+import BuyerServiceDetail from '@/views/Buyer/BuyerServiceDetail.vue'
 
-import CreateService from '@/views/Seller/CreateService.vue'
+
 import ManageService from '@/views/Seller/ManageService.vue'
 import UpdateService from '@/views/Seller/UpdateService.vue'
-import BuyerRequests from '@/views/Seller/BuyerRequestSection.vue'
 import FavouriteService from '@/views/Seller/FavouriteService.vue'
 
 
@@ -116,6 +116,16 @@ const routes = [
     component: SellerGigs,
   },
   {
+    path: '/buyer-account',
+    name: 'BuyerAccount',
+    component: BuyerAccount,
+  },
+  {
+    path: '/gig-detail/:id',
+    name: 'BuyerServiceDetail',
+    component: BuyerServiceDetail,
+  },
+  {
     path: '/login',
     name: 'Login',
     component: Login
@@ -148,11 +158,6 @@ const routes = [
   },
 
   {
-    path: '/seller/create_service',
-    name: 'CreateService',
-    component: CreateService
-  },
-  {
     path: '/seller/manage_service',
     name: 'ManageService',
     component: ManageService
@@ -161,11 +166,6 @@ const routes = [
     path: '/dashboard/update_service/:id',
     name: 'UpdateService',
     component: UpdateService
-  },
-  {
-    path: '/seller/buyer_requests',
-    name: 'BuyerRequests',
-    component: BuyerRequests
   },
   {
     path: '/seller/favourite_service',
@@ -184,17 +184,12 @@ const routes = [
     component: Jobs,
   },
   {
-    path: '/buyer/manage_order',
-    name: 'ManageOrder',
-    component: AllOrders,
-  },
-  {
     path: '/gigs/:slug?',
     name: 'Gigs',
     component: () => import(/* webpackChunkName: "services" */'@/views/Services.vue'),
   },
   {
-    path: '/gig-detail/:id',
+    path: '/dashboard/gig-detail/:id',
     name: 'gigDetail',
     component: ServiceDetail,
   },

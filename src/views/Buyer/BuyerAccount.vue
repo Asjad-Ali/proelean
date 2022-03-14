@@ -1,7 +1,8 @@
 <template>
   <div class="container-xl">
-    <h1 class="app-page-title">My Account</h1>
-    <div class="row gy-4">
+    <h3 class="app-page-title mt-4">My Account</h3>
+    <div class="border-bottom my-3"></div>
+    <div class="row gy-4 mb-4">
     <ProfileCard />
     <PreferencesCard />
     <SecurityCard />
