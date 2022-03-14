@@ -47,7 +47,7 @@
               <div class="mb-3 d-flex flex-start">
                 <div class="wrapper">
                   <div class="file-upload mr-2" @click="$refs.bannerInput.click()">
-                    <i class="fa fa-arrow-up"></i>
+                    <i class="fa fa-arrow-up cursor-pointer"></i>
                       <input
                         type="file"
                         multiple
@@ -57,7 +57,6 @@
                         @change="selectThumbnail"
                         required
                       />
-                    
                   </div>
                   <div
                     v-for="(banner, index) in bannersBase64"
@@ -77,11 +76,12 @@
                       "
                       :style="`background-image: url(${banner});`"
                     >
-                      <i @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                      <i @click="removeImage(index)" class="mdi mdi-close-box position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
                     </div>
                   </div>
                 </div>
               </div>
+              
               <div class="mb-3">
                 <div class="row">
                   <div class="form-group col-md-6">
@@ -257,8 +257,5 @@ export default {
 .wrapper .file-upload:hover {
   background-position: 0 -100%;
   color: #2590eb;
-}
-.svg-inline--fa {
-  height: 80px;
 }
 </style>

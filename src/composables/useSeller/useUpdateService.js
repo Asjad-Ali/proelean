@@ -68,13 +68,14 @@ export default function useCreateService() {
   }
 
   const removeOldImage = (index, path) => {
+    console.log("Image Index",index,path)
     getUpdateGig.value.delete.push(path)
     updateGig.value.service_media.splice(index,1)
   }
 
 
   const removeNewImage = (index) => {
-    console.log(index)
+    console.log("Image Index",index)
     bannersBase64.value.splice(index, 1);
     getUpdateGig.value.banner.splice(index, 1);
   }
