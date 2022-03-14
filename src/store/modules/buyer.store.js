@@ -82,28 +82,35 @@ export const  actions = {
 
       async ATM_CardDetail({commit},payload){
 
+        commit('setRegisterStatus', 2);
         const res = await Api.post('token',payload);
         if(res.status === 200){
           commit('setCardSection', true);
           console.log("Service token:",res.token);
           commit("setCardStripe",res.token);
+          commit('setRegisterStatus', 3);
         }
         else{
+          commit('setRegisterStatus', 4);
           console.log("Error Stripe");
         }
       },
 
       async purchaseService({commit,state},payload){
+
+        commit('setRegisterStatus', 2);
         console.log("token",state.cardStripe)
         payload.token = state.cardStripe
         const res = await Api.post('buyer/custom_order',payload);
         if(res.status === 201){
           commit("setService",res.data);
+          commit('setRegisterStatus', 3);
           useToast(res.message,'success');
           window.location.href = "/chat";
         }
         else{
           useToast(res.message);
+          commit('setRegisterStatus', 4);
           console.log("Error Service");
         }
       },
