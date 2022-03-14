@@ -1,9 +1,9 @@
 <template>
   <div>
-    <section class="py-5" v-if="updateGig">
+    <section  v-if="updateGig">
       <div class="container">
         <div class="row d-flex justify-content-center">
-          <div class="col-lg-9">
+          <div class="col-12">
             <h4 class="font-weight-bold pb-3">Update Serivce</h4>
               <form>
               <div class="bg-white rounded shadow-sm sidebar-page-right">
