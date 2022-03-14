@@ -6,14 +6,15 @@
         class="form-control border-0 p-3 shadow-none message-input"
         rows="3"
         v-model="newMessage.text"
+        :readonly="!$store.getters.getSelectedConversation && !$store.getters.getNewConversationUser"
       ></textarea>
        <i class="mdi mdi-send position-absolute send-icon cursor-pointer" @click.prevent="sendMsg"></i>
        <!-- <i class="mdi mdi-paperclip attachment-icon position-absolute "></i> -->
-             <div class="overflow-hidden position-absolute d-flex flex-column " style="top:0; left:0px">
+             <div class="overflow-hidden position-absolute d-flex flex-column" style="top:0; left:0px">
         <button type="button" class="btn btn-light btn-sm rounded">
           <i class="mdi mdi-image"></i>
         </button>
-        <button type="button" class="btn btn-light btn-sm rounded">
+        <button :disabled="!$store.getters.getSelectedConversation && !$store.getters.getNewConversationUser" type="button" class="btn btn-light btn-sm rounded">
           <i class="mdi mdi-paperclip"></i>
         </button>
       </div>
@@ -59,7 +60,7 @@ setup() {
         attachement:'',
         attachementType: 0,
         offer: null,
-        refersGig: false,
+        refererGig: false,
     });
 
     const sendMsg = () => {

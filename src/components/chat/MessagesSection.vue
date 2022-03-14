@@ -10,12 +10,18 @@
         </div> -->
       </div>
     </div>
-    <div class="osahan-chat-box p-3 border-top border-bottom bg-light chat-hieght">
+    <div
+      class="osahan-chat-box p-3 border-top border-bottom bg-light chat-hieght"
+    >
       <Message
-        v-for="(message,index) in $store.getters.getChatMessages"
+        v-for="(message, index) in $store.getters.getChatMessages"
         :key="message.id"
         :message="message"
-        :showDateBar=" index==0 || (new Date(message.sentAt).getDate() !== new Date($store.getters.getChatMessages[index-1].sentAt).getDate())"
+        :showDateBar="
+          index == 0 ||
+          new Date(message.sentAt).getDate() !==
+            new Date($store.getters.getChatMessages[index - 1].sentAt).getDate()
+        "
       />
     </div>
 
@@ -34,13 +40,18 @@ export default {
   setup() {
     const store = useStore();
 
-    const otherMember = computed(() =>
-    store.getters.getSelectedConversation.membersInfo
-      ? store.getters.getSelectedConversation.membersInfo.find(
-        (member) => store.getters.getAuthUser.id != member.id
-      )
-      : null
-    );
+    const otherMember = computed(() => {
+      if (store.getters.getNewConversationUser) {
+        return store.getters.getNewConversationUser;
+      } else {
+        return store.getters.getSelectedConversation &&
+        store.getters.getSelectedConversation.membersInfo
+          ? store.getters.getSelectedConversation.membersInfo.find(
+              (member) => store.getters.getAuthUser.id != member.id
+            )
+          : null;
+      }
+    });
     return {
       otherMember,
     };
@@ -49,7 +60,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.chat-hieght{
-    height: 65vh;
+.chat-hieght {
+  height: 65vh;
 }
 </style>

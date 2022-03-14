@@ -116,12 +116,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "services" */'@/views/Services.vue'),
   },
   {
-    path: '/purchase',
+    path: '/purchase/:id',
     name: 'Purchase',
     component: Purchase,
   },
   {
-    path: '/chat/:id',
+    path: '/chat/:id?',
     name: 'Chat',
     component: () => import(/* webpackChunkName: "chat" */'@/views/Chat.vue'),
   },
