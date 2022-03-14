@@ -10,7 +10,7 @@
         </div> -->
       </div>
     </div>
-    <div class="osahan-chat-box p-3 border-top border-bottom bg-light">
+    <div class="osahan-chat-box p-3 border-top border-bottom bg-light chat-hieght">
       <Message
         v-for="(message,index) in $store.getters.getChatMessages"
         :key="message.id"
@@ -48,5 +48,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.chat-hieght{
+    height: 65vh;
+}
 </style>

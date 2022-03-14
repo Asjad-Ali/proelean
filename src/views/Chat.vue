@@ -1,12 +1,12 @@
 <template>
-    <div :class="$store.getters.isBuyerMode ? 'py-3' : 'pb-0'">
+    <div :class="$store.getters.isBuyerMode && 'py-3'">
          <div>
-       <div class="container-fluid">
+       <div :class="$store.getters.isBuyerMode && `container-fluid`">
                <div class="row">
                <!-- Main Content -->
                <main class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-                  <div class="box shadow-sm rounded bg-white mb-3 osahan-chat chat-hieght">
-                     <h5 class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">Messaging</h5>
+                  <div class="box shadow-sm rounded bg-white mb-3 osahan-chat">
+                     <!-- <h5 class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">Messaging</h5> -->
                      <div class="row m-0">
                         <div class="border-right col-lg-5 col-xl-4 px-0">
                            <div class="osahan-chat-left">

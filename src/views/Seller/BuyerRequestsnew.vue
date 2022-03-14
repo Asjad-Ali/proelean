@@ -75,10 +75,8 @@
             </button>
             <button
               type="button"
-              @click.prevent="getJobId(request.id)"
               class="btn btn-success mx-2 my-1"
-              data-toggle="modal"
-              data-target="#exampleModalCenter2"
+              @click.prevent="deleteJob(request.id)"
             >
               Skip
             </button>
@@ -179,46 +177,6 @@
             </div>
           </div>
           <!----------------------    Modal End     --------------------->
-          <!---------------------    Modal (Cancel Offer)     --------------------->
-          <div
-            class="modal fade"
-            id="exampleModalCenter2"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="exampleModalCenter2Title"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header d-flex justify-content-center">
-                  <h5 class="modal-title" id="exampleModalLongTitle">
-                    Cancel Offer
-                  </h5>
-                </div>
-                <div class="modal-body text-center">
-                  Are you sure you want to cancel the offer?
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-dismiss="modal"
-                    @click.prevent="deleteJob()"
-                  >
-                    Yes
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    No
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!---------------------    Modal End     --------------------->
         </div>
       </div>
 
@@ -253,9 +211,6 @@ export default {
       price: "",
       delivery_time: "",
     });
-    const getJobId = (id) => {
-      jobId.value = id;
-    };
 
     function loadMore(){
       store.dispatch("showBuyerRequests");
@@ -271,9 +226,9 @@ export default {
       store.dispatch("sendOffer", payload.value);
     }
 
-    function deleteJob() {
-      store.dispatch("deleteBuyerJob", jobId.value);
-      console.log("delete request id: ", jobId.value);
+    function deleteJob(id) {
+      store.dispatch("deleteBuyerJob", id);
+      console.log("delete request id: ", id);
     }
     return {
       requests: computed(() => store.getters.getBuyerRequests),
@@ -284,7 +239,6 @@ export default {
       defineOffer,
       sendOffer,
       deleteJob,
-      getJobId,
       loadMore,
       jobId,
     };
