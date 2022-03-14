@@ -1,6 +1,6 @@
 <template>
   <div class="text-center my-3">
-    <span class="px-3 py-2 small bg-white shadow-sm rounded">{{
+    <span v-if="showDateBar" class="px-3 py-2 small bg-white shadow-sm rounded">{{
       new Date(message.sentAt).toLocaleString().split(",")[0]
     }}</span>
   </div>
@@ -37,6 +37,10 @@ export default {
       type: Object,
       required: true,
     },
+    showDateBar:{
+      required:true,
+      default:true
+    }
   },
 
   setup() {

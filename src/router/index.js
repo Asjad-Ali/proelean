@@ -6,7 +6,6 @@ import Forgot from '@/views/Auth/Forgot.vue'
 import BecomeSeller from '@/views/Become-Seller.vue'
 import Profile from '@/views/Profile.vue'
 import About from '@/views/About.vue'
-import ServiceDetail from '@/views/ServiceDetail.vue'
 import Purchase from '@/views/Purchase.vue'
 
 import CreateJob from '@/views/Buyer/CreateJob.vue'
@@ -14,25 +13,15 @@ import Jobs from '@/views/Buyer/AllJobs.vue'
 import BuyerAccount from '@/views/Buyer/BuyerAccount.vue'
 import BuyerServiceDetail from '@/views/Buyer/BuyerServiceDetail.vue'
 
+import SellerGigs from '@/views/Seller/Gigs.vue'
+import SellerOrders from '@/views/Seller/Orders.vue'
+
 
 import ManageService from '@/views/Seller/ManageService.vue'
-import UpdateService from '@/views/Seller/UpdateService.vue'
 import FavouriteService from '@/views/Seller/FavouriteService.vue'
 
 
-// import SellerOldDashboard from '@/components/SellerDashboard.vue'
-import SellerDashboard from '@/views/Seller/Dashboard.vue'
-import SellerGigs from '@/views/Seller/Gigs.vue'
-import SellerOrders from '@/views/Seller/Orders.vue'
-import SellersGigs from '@/views/Seller/Gigs.vue'
-import OrdersNew from '@/views/Seller/OrdersNew.vue'
-import Notifications from '@/views/Seller/Notifications.vue'
-import Account from '@/views/Seller/Account.vue'
-import Settings from '@/views/Seller/Settings.vue'
-import Analytics from '@/views/Seller/Analytics.vue'
-import BuyerRequestsnew from '@/views/Seller/BuyerRequestsnew.vue'
-import CreateGig from '@/views/Seller/CreateGig.vue'
-import Payments from '@/views/Seller/Payments.vue'
+import sellerRoutes from './seller.js'
 
 
 const routes = [
@@ -42,74 +31,11 @@ const routes = [
     component: Home,
   },
   {
-    path: '/dashboard/sellers-gigs',
-    name: 'SellersGigs',
-    component: SellersGigs,
-  },
-  {
-    path: '/dashboard/payments',
-    name: 'Payments',
-    component: Payments,
-  },
-  {
-    path: '/dashboard/create-gig',
-    name: 'CreateGig',
-    component: CreateGig,
-  },
-  {
-    path: '/dashboard/BuyerRequestsnew',
-    name: 'BuyerRequestsnew',
-    component:BuyerRequestsnew,
-  },
-  {
-    path: '/dashboard/analytics',
-    name: 'Analytics',
-    component: Analytics,
-  },
-
-  {
-    path: '/dashboard/settings',
-    name: 'Settings',
-    component: Settings,
-  },
-  {
-    path: '/dashboard/account',
-    name: 'Account',
-    component: Account,
-  },
-  {
-    path: '/dashboard/notifications',
-    name: 'Notifications',
-    component: Notifications,
-  },
-  {
-    path: '/dashboard/orders-new',
-    name: 'OrdersNew',
-    component: OrdersNew,
-  },
-  {
     path: '/seller-orders',
     name: 'SellerOrders',
     component: SellerOrders,
   },
 
-  {
-    path: '/dashboard',
-    name: 'sellerDashboard',
-    component: SellerDashboard,
-  },
- 
-  {
-    path: '/dashboard/chat',
-    name: 'SellerChat',
-    component: () => import(/* webpackChunkName: "chat" */'@/views/Chat.vue'),
-  },
-
-  {
-    path: '/seller-dashboard',
-    name: 'SellerDashboard',
-    component: SellerDashboard,
-  },
   {
     path: '/seller-gigs',
     name: 'SellerGigs',
@@ -163,11 +89,6 @@ const routes = [
     component: ManageService
   },
   {
-    path: '/dashboard/update_service/:id',
-    name: 'UpdateService',
-    component: UpdateService
-  },
-  {
     path: '/seller/favourite_service',
     name: 'FavouriteService',
     component: FavouriteService
@@ -189,11 +110,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "services" */'@/views/Services.vue'),
   },
   {
-    path: '/dashboard/gig-detail/:id',
-    name: 'gigDetail',
-    component: ServiceDetail,
-  },
-  {
     path: '/purchase',
     name: 'Purchase',
     component: Purchase,
@@ -203,6 +119,7 @@ const routes = [
     name: 'Chat',
     component: () => import(/* webpackChunkName: "chat" */'@/views/Chat.vue'),
   },
+  ...sellerRoutes
 ]
 
 const router = createRouter({
