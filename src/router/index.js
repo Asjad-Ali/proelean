@@ -194,7 +194,7 @@ const routes = [
     component: ServiceDetail,
   },
   {
-    path: '/purchase',
+    path: '/buyer/purchase/:id',
     name: 'Purchase',
     component: Purchase,
   },
