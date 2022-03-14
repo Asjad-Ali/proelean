@@ -54,17 +54,15 @@
             <div class="footer">
               <div class="dropdown" v-if="!$store.getters.isBuyerMode">
                 <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown">
-                  <i class="material-icons">list</i>
+                  <i class="mdi mdi-dots-vertical"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <li class="dropdown-item"><router-link :to="{name:'gigDetail', params:{id:service.id}}">Open</router-link></li>
                   <li class="dropdown-item"><router-link :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link></li>
-                  <span @click="getServiceId(service.id)">
-                  <li class="dropdown-item"><a aria-hidden="true"
+                  <li @click="getServiceId(service.id)" class="dropdown-item"><a aria-hidden="true"
                       data-toggle="modal"
                       class="cursor-pointer"
                       data-target="#exampleModalCenter">Delete</a></li>
-                  </span>
                 </ul>
               </div>
               <a
@@ -144,7 +142,7 @@
 
 <script>
 import { useStore } from 'vuex';
-import { computed, ref, toRef } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 export default {
   props: {
@@ -153,17 +151,21 @@ export default {
       required: true,
     }
   },
-  setup(props) {
+  setup() {
     const store = useStore()
     const route = useRoute();
 
-    const serviceId = ref("");
+    const serviceId = ref[{
+      id:''
+    }];
 
     const getServiceId = (id) => {
-      serviceId.value = id;
+      serviceId.value.id = id;
+      console.log("delete set id",serviceId.value.id)
     };
     const deleteService = () => {
-      store.dispatch('deleteService', props.service.id)
+      console.log("call id", serviceId.value.id)
+      // store.dispatch('deleteService', serviceId.value)
     }
 
     function handleWishlist (id) {
@@ -179,7 +181,6 @@ export default {
       handleWishlist,
       loader: computed(() => store.getters.getRegisterStatus),
       imgURL: process.env.VUE_APP_URL,
-      serviceId: toRef(serviceId.value)
     };
   },
 };

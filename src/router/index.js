@@ -12,6 +12,7 @@ import CreateJob from '@/views/Buyer/CreateJob.vue'
 import Jobs from '@/views/Buyer/AllJobs.vue'
 import BuyerAccount from '@/views/Buyer/BuyerAccount.vue'
 import BuyerServiceDetail from '@/views/Buyer/BuyerServiceDetail.vue'
+import ManageOrder from '@/views/Buyer/ManageOrder.vue'
 
 import SellerGigs from '@/views/Seller/Gigs.vue'
 import SellerOrders from '@/views/Seller/Orders.vue'
@@ -98,6 +99,11 @@ const routes = [
     path: '/buyer/create_job',
     name: 'CreateJob',
     component: CreateJob,
+  },
+  {
+    path: '/buyer/manage_order',
+    name: 'ManageOrder',
+    component: ManageOrder,
   },
   {
     path: '/buyer/jobs',
