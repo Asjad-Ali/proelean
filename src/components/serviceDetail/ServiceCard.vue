@@ -46,8 +46,9 @@
           >
             Continue
           </router-link>
+
           <router-link
-            :to="`/chat/${service.service_user.id}`"
+            :to="{ name: 'Chat', params: { id: `${service.service_user.id}` } }"
             class="btn btn-success text-white w-100 mt-3"
           >
             Contact Seller
@@ -57,6 +58,7 @@
       <!---------------------    Modal End     --------------------->
     </div>
   </div>
+
 </template>
 
 <script>

@@ -26,7 +26,15 @@ export const mutations = {
         state.referrerGig=gig
     },
     setConversation(state, conversation) {
+     
         state.conversations.push(conversation);
+
+        const paramId=location.pathname.split('/').pop();
+        if(!paramId.includes('chat') && conversation.members.includes(paramId)) {
+            this.dispatch('openSelectedConversation', conversation.id)
+            console.log(paramId);
+        }
+
     },
     updateConversation(state, updatedConv) {
         const conversations = state.conversations;
