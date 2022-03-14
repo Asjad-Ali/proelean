@@ -258,7 +258,4 @@ export default {
   background-position: 0 -100%;
   color: #2590eb;
 }
-.svg-inline--fa {
-  height: 80px;
-}
 </style>
