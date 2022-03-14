@@ -27,7 +27,7 @@
                   <span class="total-rating-out-five">{{service.service_rating}}</span>
                   <span class="total-rating">({{service.total_reviews}})</span>
                </span>
-               <router-link to="/chat" class="btn btn-success">
+               <router-link   :to="{ name: 'Chat', params: { id: `${service.service_user.id}` } }" class="btn btn-success">
                   Contact Me
                </router-link>
             </div>

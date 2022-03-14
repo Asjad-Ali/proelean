@@ -454,16 +454,25 @@
               nav-item
               dropdown
               no-arrow no-caret
-              mr-3
-              dropdown-notifications
+              dropdown-user
+              mx-2
               d-none d-lg-block
             "
           >
             <router-link
               class="btn btn-icon btn-transparent-dark dropdown-toggle"
               id="navbarDropdownMessages"
+<<<<<<< HEAD
+              href="/chat"
+              aria-haspopup="true"
+              aria-expanded="false"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Chat"
+=======
               to="/chat"
 
+>>>>>>> ed21509a702129ee0c2f4d50fc816f4a40d81521
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
