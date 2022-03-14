@@ -37,7 +37,7 @@
               </div>
               <div class="font-weight-bold mr-3">
                 <div class="text-truncate">{{ notification.name }}</div>
-                <div class="text-muted">{{ notification.body }}</div>
+                <div>{{ notification.body }}</div>
               </div>
               <span class="ml-auto my-auto">
                 <div class="d-flex">

@@ -14,7 +14,7 @@
   <div v-else class="seller-app">
     <SellerHeader />
     <div class="app-wrapper">
-      <div class="app-content pt-3 p-md-3 p-lg-4">
+      <div class="app-content" :class="$route.name != 'SellerChat' && `pt-3 p-md-3 p-lg-4`">
         <router-view :key="$route.fullPath" />
       </div>
       <SellerFooter />
