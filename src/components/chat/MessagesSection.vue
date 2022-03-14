@@ -12,9 +12,10 @@
     </div>
     <div class="osahan-chat-box p-3 border-top border-bottom bg-light">
       <Message
-        v-for="message in $store.getters.getChatMessages"
+        v-for="(message,index) in $store.getters.getChatMessages"
         :key="message.id"
         :message="message"
+        :showDateBar=" index==0 || (new Date(message.sentAt).getDate() !== new Date($store.getters.getChatMessages[index-1].sentAt).getDate())"
       />
     </div>
 
