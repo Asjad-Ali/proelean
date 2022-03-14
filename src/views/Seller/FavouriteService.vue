@@ -6,6 +6,8 @@
             <h3 >Favourite Services</h3>
           </div>
         </div>
+        <div v-if="favouriteServices">
+
         <div class="row g-4 recommended d-flex flex-wrap justify-content-start" v-if="favouriteServices">
           <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'" />
           <div
@@ -19,6 +21,7 @@
               <Service :service="favouriteService" />
             </div>
           </div>
+        </div>
         </div>
         <div v-else class="container text-center py-5">
           <h3>No Any Service Available</h3>

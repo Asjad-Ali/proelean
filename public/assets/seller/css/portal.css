@@ -26,9 +26,7 @@
     text-decoration: none;
 }
 
-.chat-hieght{
-    height: 90vh;
-}
+
 .seller-app .text-body-2 {
     font: 400 14px/22px "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #e87856;
@@ -215,6 +213,11 @@
     color: #5d6778;
     border: 1px solid #bcc1cb;
 }
+  .app-btn-secondary {
+    background: #fff;
+    color: #5d6778;
+    border: 1px solid #bcc1cb;
+}
 
 .seller-app .app-btn-secondary:hover {
     color: #15a362;
@@ -235,7 +238,7 @@
 .seller-app .form-control {
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
-    height: 2.5rem;
+    /* height: 2.5rem; */
     border-color: #e7e9ed;
     color: #5d6778;
 }
@@ -863,7 +866,7 @@
     padding: 1.25rem 1rem;
 }
 
-.seller-app .app-card {
+  .app-card {
     position: relative;
     background: #fff;
     border-radius: 0.25rem;
@@ -989,7 +992,7 @@
     font-size: 1rem;
 }
 
-.seller-app .app-card .app-icon-holder {
+  .app-card .app-icon-holder {
     display: inline-block;
     background: #edfdf6;
     color: #15a362;

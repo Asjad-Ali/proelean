@@ -38,14 +38,16 @@
                     class="form-control"
                     v-model="createService.description"
                     name="description"
-                    rows="7"
+                    rows="4"
                     placeholder="Describe About Your Serivce"
                     required
                   ></textarea>
                 </div>
               </div>
-              <div class="mb-3 d-flex flex-start">
-                <div class="wrapper">
+              <div class="mb-5 ">
+                 <label for="setting-input-2" class="form-label"
+                  >Upload Images</label>
+                <div class="wrapper d-flex flex-start">
                   <div class="file-upload mr-2" @click="$refs.bannerInput.click()">
                     <i class="fa fa-arrow-up cursor-pointer"></i>
                       <input
@@ -257,8 +259,5 @@ export default {
 .wrapper .file-upload:hover {
   background-position: 0 -100%;
   color: #2590eb;
-}
-.svg-inline--fa {
-  height: 80px;
 }
 </style>

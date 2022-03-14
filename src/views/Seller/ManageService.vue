@@ -26,7 +26,7 @@
         class="card d-md-none shadow-sm border-primary">
           <div>
             <div class="gig-img-outer text-center">
-              <router-link :to="{name:'gigDetail', params:{id:service.id}}">
+              <router-link :to="{name:'GigDetail', params:{id:service.id}}">
                 <img
                   :src="
                     service.service_media.length &&
@@ -168,7 +168,7 @@
                     :key="service.id"
                   >
                     <td>
-                      <router-link :to="{name:'gigDetail', params:{id:service.id}}">
+                      <router-link :to="{name:'GigDetail', params:{id:service.id}}">
                         <img
                           style="height: 120px; width: 220px"
                           class="img-thumbnail border-0"

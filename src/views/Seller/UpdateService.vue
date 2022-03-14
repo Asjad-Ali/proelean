@@ -78,7 +78,7 @@
                     >
                       <i
                         v-show="getBanners.length"
-                        @click="removeOldImage(index, banner.media)"
+                        @click="removeOldImage(index, banner)"
                         class="mdi mdi-close-box position-absolute"
                         style="top: 1%; right: 1%; font-size: 16px; color: red"
                       ></i>
@@ -302,8 +302,5 @@ export default {
 .wrapper .file-upload:hover {
   background-position: 0 -100%;
   color: #2590eb;
-}
-.svg-inline--fa {
-  height: 80px;
 }
 </style>

@@ -10,7 +10,7 @@
       px-0
     "
   >
-    <div class="container-fluid p-0">
+    <div class="container-fluid mobile-p-0">
       <!-- Sidebar Toggle (Topbar) -->
       <a class="navbar-brand"
         ><router-link to="/"
@@ -444,7 +444,7 @@
               </a>
               <router-link
                 class="dropdown-item dropdown-notifications-footer"
-                to="/notifications"
+                to="/dashboard/notifications"
                 >View All Notification</router-link
               >
             </div>
@@ -829,5 +829,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+.mobile-p-0{
+  @media screen and (max-width:568px) {
+    padding: 0;
+  }
+}
+
 </style>
+

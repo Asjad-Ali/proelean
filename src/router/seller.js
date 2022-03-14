@@ -20,7 +20,7 @@ const sellerRoutes = [
     },
 
     {
-        path: '/dashboard/chat',
+        path: '/dashboard/chat/:id?',
         name: 'SellerChat',
         component: () => import(/* webpackChunkName: "chat" */'@/views/Chat.vue'),
     },
@@ -83,7 +83,7 @@ const sellerRoutes = [
     },
     {
         path: '/dashboard/gig-detail/:id',
-        name: 'gigDetail',
+        name: 'GigDetail',
         component: ServiceDetail,
     },
 ];
