@@ -125,7 +125,7 @@
 
         </div>
         <div class="contact-seller-wrapper d-flex justify-content-center">    
-            <router-link to="/chat" class="btn btn-success text-white">
+            <router-link :to="`/chat/${service.service_user.id}`" class="btn btn-success text-white">
                 Contact Seller
             </router-link>
             
