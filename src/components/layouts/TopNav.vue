@@ -459,14 +459,11 @@
               d-none d-lg-block
             "
           >
-            <a
+            <router-link
               class="btn btn-icon btn-transparent-dark dropdown-toggle"
               id="navbarDropdownMessages"
-              href="/chat"
-              aria-haspopup="true"
-              aria-expanded="false"
-              data-bs-placement="top"
-              title="Chat"
+              to="/chat"
+
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -485,7 +482,7 @@
                 ></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-            </a>
+            </router-link>
             <!-- <div
               class="
                 dropdown-menu dropdown-menu-right
