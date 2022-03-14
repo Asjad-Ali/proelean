@@ -83,7 +83,7 @@ const sellerRoutes = [
     },
     {
         path: '/dashboard/gig-detail/:id',
-        name: 'gigDetail',
+        name: 'GigDetail',
         component: ServiceDetail,
     },
 ];

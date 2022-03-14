@@ -46,7 +46,7 @@
           <ReviewSection />
         </div>
         <ServiceCard />
-    <TopPicSection />
+     <TopPicSection />
       </div>
     </div>
 
@@ -68,7 +68,7 @@ import ServiceCard from "@/components/serviceDetail/ServiceCard.vue";
 import TopPicSection from "@/components/home/TopPicSection.vue";
 
 export default {
-  name: "gigDetail",
+  name: "GigDetail",
   components: {
     Gallery,
     AboutService,

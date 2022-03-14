@@ -444,7 +444,7 @@
               </a>
               <router-link
                 class="dropdown-item dropdown-notifications-footer"
-                to="/notifications"
+                to="/dashboard/notifications"
                 >View All Notification</router-link
               >
             </div>
