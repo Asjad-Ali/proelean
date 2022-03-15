@@ -6,11 +6,14 @@
           <h4>Package Detail</h4>
           <hr />
           <div class="header">
-            <h3>
-              <b class="title">   </b><span class="price">{{service.price}}</span>
-            </h3>
             <p>
               {{service.s_description}}
+            </p>
+            <p>
+              {{service.description.substr(0,100)}}{{service.description.length > 100 ? '..' : ''}}
+            </p>
+            <p>
+              {{service.additional_info.substr(0,100)}}{{service.additional_info.length > 100 ? '...' : ''}}
             </p>
           </div>
           <article>
@@ -23,21 +26,9 @@
                 ><i class="fa fa-refresh" aria-hidden="true"></i> Revision: {{service.revision}}</b
               >
             </div>
-            <!-- <ul class="features">
-              <li class="feature included">
-                <i class="fa fa-check" aria-hidden="true"></i>Source File
-              </li>
-              <li class="feature included">
-                <i class="fa fa-check" aria-hidden="true"></i>Commercial Use
-              </li>
-              <li class="feature">
-                <i class="fa fa-check" aria-hidden="true"></i>Interactive Mockup
-              </li>
-              <li class="feature included">
-                <i class="fa fa-check" aria-hidden="true"></i>10 Pages
-              </li>
-            </ul> -->
           </article>
+          <h3 ><b> Price</b><span class="price">${{service.price}}</span></h3>
+
 
           <router-link
             :to="{ name: 'Purchase', params: { id: service.id } }"

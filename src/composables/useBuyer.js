@@ -126,7 +126,7 @@ export default function useBecomeSeller() {
 
 
     
-    const descriptionRegex = /^[a-zA-Z ]{20,300}$/;
+    const descriptionRegex = /^[a-zA-Z. ]{20,300}$/;
     const descriptionErrors = ref({
       description: null,
     });
@@ -138,7 +138,7 @@ export default function useBecomeSeller() {
             descriptionErrors.value.description = "Description is required"
         }
         else if(!current.description.match(descriptionRegex)){
-            descriptionErrors.value.description = "Description is not Valid"
+            descriptionErrors.value.description = "Description's length must be minimum 20 characters"
         }
         else{
             descriptionErrors.value.description = null
@@ -153,6 +153,7 @@ export default function useBecomeSeller() {
         jobCreation,
         handleCredentials,
         formData,
+        payload,
         descriptionRegex,
         descriptionErrors
     }
