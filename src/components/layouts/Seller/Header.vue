@@ -178,8 +178,8 @@
                     >
                   </li>
                   <li>
-                    <router-link class="dropdown-item" to="/dashboard/settings"
-                      >Settings</router-link
+                    <router-link class="dropdown-item" to="/dashboard/change_password"
+                      >Change Password</router-link
                     >
                   </li>
                   <li><hr class="dropdown-divider" /></li>

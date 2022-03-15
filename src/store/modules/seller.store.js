@@ -183,6 +183,7 @@ export const actions = {
       useToast(res.message);
       commit('setRegisterStatus', 4);
     }
+    return res;
   },
 
   async updateService({ commit }, updateServiceData) {
@@ -263,6 +264,23 @@ export const actions = {
     } else {
       console.log("get Earnings error");
     }
+  },
+
+  async updateProfile({ commit }, payload) {
+    console.log("profile",payload)
+    commit('setRegisterStatus', 2);
+    const resp = await Api.formData('update_profile', payload);
+    if (resp.status == 200) {
+      useToast("Profile Has been Successfully Updated", 'success');
+      commit('setRegisterStatus', 3);
+      localStorage.setItem('userInfo',JSON.stringify(resp))
+    }
+    else {
+      commit('setRegisterStatus', 4);
+      useToast(resp.message);
+    }
+
+    return resp;
   },
 
 

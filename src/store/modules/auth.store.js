@@ -97,6 +97,20 @@ export const actions = {
       useToast(resp.message);
     }
   },
+
+  async updatePassword({ commit }, payload) {
+    console.log("Email", payload)
+    commit('setRegisterStatus', 2);
+    const resp = await Api.post('update_password', payload)
+    if (resp.status == 200) {
+      useToast(resp.message,'success');
+      commit('setRegisterStatus', 3);
+    } else {
+      commit('setRegisterStatus', 4);
+      useToast(resp.message,'success');
+    }
+  },
+
   async changePassword({ commit }, payload) {
     console.log("Email", payload)
     commit('setRegisterStatus', 2);

@@ -1,5 +1,5 @@
 import SellerDashboard from '@/views/Seller/Dashboard.vue'
-import SellersGigs from '@/views/Seller/Gigs.vue'
+import SellerServices from '@/views/Seller/SellerServices.vue'
 import OrdersNew from '@/views/Seller/OrdersNew.vue'
 import Notifications from '@/views/Seller/Notifications.vue'
 import Account from '@/views/Seller/Account.vue'
@@ -10,6 +10,8 @@ import CreateGig from '@/views/Seller/CreateGig.vue'
 import Payments from '@/views/Seller/Payments.vue'
 import UpdateService from '@/views/Seller/UpdateService.vue'
 import ServiceDetail from '@/views/ServiceDetail.vue'
+import EditProfile from '@/views/Seller/EditProfile.vue'
+import ChangePassword from '@/views/Seller/ChangePassword.vue'
 
 
 const sellerRoutes = [
@@ -31,9 +33,9 @@ const sellerRoutes = [
         component: SellerDashboard,
     },
     {
-        path: '/dashboard/sellers-gigs',
-        name: 'SellersGigs',
-        component: SellersGigs,
+        path: '/dashboard/sellers-services',
+        name: 'SellerServices',
+        component: SellerServices,
     },
     {
         path: '/dashboard/payments',
@@ -85,6 +87,16 @@ const sellerRoutes = [
         path: '/dashboard/gig-detail/:id',
         name: 'GigDetail',
         component: ServiceDetail,
+    },
+    {
+        path: '/dashboard/edit-profile',
+        name: 'EditProfile',
+        component: EditProfile,
+    },
+    {
+        path: '/dashboard/change_password',
+        name: 'ChangePassword',
+        component: ChangePassword,
     },
 ];
 export default sellerRoutes;

@@ -1,9 +1,11 @@
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 export default function useCreateService() {
 
   const store = useStore();
+  const route = useRouter();
   const bannersBase64 = ref([]);
   const preview = ref(null);
 
@@ -37,7 +39,13 @@ export default function useCreateService() {
     createService.value.sub_category_id = document.getElementById("subCategory").value
     createService.value.delivery_time = document.getElementById("deliveryTime").value
     console.log(createService.value)
-    store.dispatch('createService', createService.value)
+    store.dispatch('createService', createService.value).then(res => {
+      if(res.status === 201) {
+
+        route.push({name: "SellerServices"});
+      }
+    })
+
   }
 
 
