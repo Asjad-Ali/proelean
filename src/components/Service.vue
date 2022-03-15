@@ -1,12 +1,6 @@
 <template>
 <div>
-  <div v-if="!userServices.length > 0">
-    <h5>No Any Service Available</h5>
-    <figure class="py-3 m-0">
-       <img src="/assets/seller/images/svg-icons/notfound.svg" alt="notfound" width="150">
-    </figure>
-  </div>
-  <div v-else>
+  <div v-if="service">
       <div class="card h-100 mb-4">
         <router-link v-if="!$store.getters.isBuyerMode" :to="{name:'GigDetail', params:{id:service.id}}">
           <img class="img-fluid" :src="imgURL+'/'+service.service_media[0].media"  />
@@ -88,6 +82,9 @@
         </div>
       </div>
   </div>
+  <div v-else>
+    <h4>No Service Available</h4>
+  </div>
 </div>
 </template>
 
@@ -116,7 +113,6 @@ export default {
     return {
       handleWishlist,
       loader: computed(() => store.getters.getRegisterStatus),
-      userServices: computed(() => store.getters.getUserServices),
       imgURL: process.env.VUE_APP_URL,
     };
   },
