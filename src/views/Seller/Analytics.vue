@@ -8,9 +8,9 @@
 
 <script>
  
-import AnalyticsCard from "../../components/Seller/Analytics/Analytics-Card.vue";
+import AnalyticsCard from "@/components/Seller/Analytics/Analytics-Card.vue";
 
 export default {
-  components: {  AnalyticsCard },
+  components: {  AnalyticsCard }
 };
 </script>

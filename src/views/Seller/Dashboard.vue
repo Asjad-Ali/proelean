@@ -15,8 +15,14 @@ import AnalyticBoxes from "../../components/Seller/Dashboard/AnalyticBoxes.vue";
 import Charts from "../../components/Seller/Dashboard/Charts.vue";
 // import StatsSection from "../../components/Seller/Dashboard/StatsSection.vue";
 import ActionCards from "../../components/Seller/Dashboard/ActionCards.vue";
+import { useStore } from 'vuex';
+import { onMounted } from '@vue/runtime-core';
 
 export default {
-  components:{ AppCard, AnalyticBoxes, Charts, ActionCards }
+  components:{ AppCard, AnalyticBoxes, Charts, ActionCards },
+  setup() {
+    const store = useStore();
+    onMounted(store.dispatch('getEarnings'));
+  }
 }
 </script>

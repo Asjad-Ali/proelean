@@ -134,13 +134,12 @@ export default {
     onBeforeMount(store.dispatch("userSingleService", payload));
    
     function purchaseService() {
-        store.dispatch("purchaseService", formData.value);
+        store.dispatch("purchaseService", formData.value)
         console.log("formdata values: ",formData.value);
     }
 
     return {
       registerStatus: computed(() => store.getters.getRegisterStatus),
-      service: computed(() => store.getters.getSingleService),
       formData,
       purchaseService,
       descriptionRegex,
