@@ -1,5 +1,6 @@
 <template>
-  <div
+<div>
+  <div v-if="conversations.length > 0"
   @click="$store.dispatch('openSelectedConversation',conversation.id)"
     class="
       p-3
@@ -24,7 +25,15 @@
       <div class="text-right text-muted pt-1 small">{{timeDiff(conversation.sentAt)}}</div>
     </span>
   </div>
+  <div v-else>
+    <div class="card shadow-none d-flex justify-content-center align-items-center flex-column mt-5 mx-5">
+    <p> No Any Conversation </p>
+    <h5>Start a New Chat</h5>
+    </div>
+  </div>
+</div>
 </template>
+
 
 <script>
 import { useStore } from "vuex";
@@ -69,7 +78,8 @@ export default {
     return  {
       otherMember,
       imgUrl: process.env.VUE_APP_URL,
-      timeDiff
+      timeDiff,
+      conversations: computed(() => store.getters.getConversations),
     }
     }
 };
