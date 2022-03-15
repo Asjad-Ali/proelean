@@ -1,11 +1,16 @@
 <template>
- <div class="tab-content shadow-none" data-v-0d25e83c="">
+ <div class="tab-content shadow-none" data-v-0d25e83c="" v-if="service.s_description">
    <div id="basic" class="tab-pane fade show active" data-v-0d25e83c="">
       <h4 data-v-0d25e83c="">Package Detail</h4>
       <hr data-v-0d25e83c="">
-      <div class="header" data-v-0d25e83c="">
-         <h3 data-v-0d25e83c=""><b class="title" data-v-0d25e83c="">10 Screens</b><span class="price" data-v-0d25e83c="">$8,029</span></h3>
-         <p data-v-0d25e83c="">I will design rough sketches for upto 5 Screens of your website/Mobile app. </p>
+      <div class="header">
+         <p >{{service.s_description}}</p>
+            <p>
+              {{service.description.substr(0,100)}}{{service.description.length > 100 ? '..' : ''}}
+            </p>
+            <p>
+              {{service.additional_info.substr(0,100)}}{{service.additional_info.length > 100 ? '...' : ''}}
+            </p>
       </div>
       <article data-v-0d25e83c="">
          <div class="d-flex" data-v-0d25e83c="">
@@ -25,7 +30,7 @@
                      </path>
                   </g>
                </svg>
-               <!-- <i class="fa fa-clock-o" aria-hidden="true" data-v-0d25e83c=""></i> Font Awesome fontawesome.com --> 3 Days Delivery
+                Delivery: {{service.delivery_time}}
             </b>
             <b class="delivery ml-3" data-v-0d25e83c="">
                <svg class="svg-inline--fa fa-refresh fa-w-16" aria-hidden="true" data-v-0d25e83c="" focusable="false" data-prefix="fa" data-icon="refresh" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
@@ -43,42 +48,27 @@
                      </path>
                   </g>
                </svg>
-               <!-- <i class="fa fa-refresh" aria-hidden="true" data-v-0d25e83c=""></i> Font Awesome fontawesome.com --> 1 Revision
+               <!-- <i class="fa fa-refresh" aria-hidden="true" data-v-0d25e83c=""></i> Font Awesome fontawesome.com --> Revision: {{service.revision}}
             </b>
          </div>
-         <ul class="features" data-v-0d25e83c="">
-            <li class="feature included" data-v-0d25e83c="">
-               <svg class="svg-inline--fa fa-check fa-w-16" aria-hidden="true" data-v-0d25e83c="" focusable="false" data-prefix="fa" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                  <path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-               </svg>
-               <!-- <i class="fa fa-check" aria-hidden="true" data-v-0d25e83c=""></i> Font Awesome fontawesome.com -->Source File 
-            </li>
-            <li class="feature included" data-v-0d25e83c="">
-               <svg class="svg-inline--fa fa-check fa-w-16" aria-hidden="true" data-v-0d25e83c="" focusable="false" data-prefix="fa" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                  <path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-               </svg>
-               <!-- <i class="fa fa-check" aria-hidden="true" data-v-0d25e83c=""></i> Font Awesome fontawesome.com -->Commercial Use 
-            </li>
-            <li class="feature" data-v-0d25e83c="">
-               <svg class="svg-inline--fa fa-check fa-w-16" aria-hidden="true" data-v-0d25e83c="" focusable="false" data-prefix="fa" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                  <path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-               </svg>
-               <!-- <i class="fa fa-check" aria-hidden="true" data-v-0d25e83c=""></i> Font Awesome fontawesome.com -->Interactive Mockup 
-            </li>
-            <li class="feature included" data-v-0d25e83c="">
-               <svg class="svg-inline--fa fa-check fa-w-16" aria-hidden="true" data-v-0d25e83c="" focusable="false" data-prefix="fa" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                  <path fill="currentColor" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path>
-               </svg>
-               <!-- <i class="fa fa-check" aria-hidden="true" data-v-0d25e83c=""></i> Font Awesome fontawesome.com -->10 Pages 
-            </li>
-         </ul>
       </article>
+               <h3 ><b> Price</b><span class="price">${{service.price}}</span></h3>
    </div>
 </div>
 </template>
 
 <script>
-export default {};
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+export default {
+  setup() {
+    const store = useStore();
+    return {
+      service: computed(() => store.getters.getSingleService),
+    };
+  },
+};
 </script>
 
 <style>

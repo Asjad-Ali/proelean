@@ -4,7 +4,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Balance</h4>
-          <div class="stats-figure">€12,000</div>
+          <div class="stats-figure">€{{analytic.availabe_balance}}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -16,7 +16,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Earning This Month</h4>
-          <div class="stats-figure">€500</div>
+          <div class="stats-figure">€{{analytic.monthly_selling}}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -28,7 +28,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Avg Order Price</h4>
-          <div class="stats-figure">€800</div>
+          <div class="stats-figure">€{{analytic.average_selling}}</div>
            
         </div>
         <!--//app-card-body-->
@@ -41,7 +41,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Active Orders</h4>
-          <div class="stats-figure">€1,000</div>
+          <div class="stats-figure">€{{analytic.active_orders_balance}}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -53,7 +53,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Pending Clearance</h4>
-          <div class="stats-figure">€750</div>
+          <div class="stats-figure">€{{analytic.pending_balance}}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -65,7 +65,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Cancelled Orders</h4>
-          <div class="stats-figure">€250</div>
+          <div class="stats-figure">€{{analytic.cancelled_orders_balance}}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -118,7 +118,16 @@
 </template>
 
 <script>
-export default {};
+import { computed } from '@vue/runtime-core';
+import { useStore } from 'vuex';
+export default {
+  setup() {
+    const store = useStore();
+    return {
+      analytic: computed(()=> store.getters.getSellerEarning)
+    }
+  }
+};
 </script>
 
 <style>
