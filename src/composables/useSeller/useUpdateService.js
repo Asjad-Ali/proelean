@@ -37,7 +37,6 @@ export default function useCreateService() {
     getUpdateGig.value.id = updateGig.value.id
     getUpdateGig.value._method= 'PUT'
     
-    console.log(getUpdateGig.value)
     store.dispatch('updateService', getUpdateGig.value)
     getUpdateGig.value.banner=[]
   }

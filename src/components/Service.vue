@@ -56,10 +56,10 @@
                 <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown">
                   <i class="mdi mdi-dots-vertical"></i>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <ul  class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <li class="dropdown-item"><router-link :to="{name:'GigDetail', params:{id:service.id}}">Open</router-link></li>
                   <li class="dropdown-item"><router-link :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link></li>
-                  <li @click="getServiceId(service.id)" class="dropdown-item"><a aria-hidden="true"
+                  <li @click="$emit('selectService',service)" class="dropdown-item"><a aria-hidden="true"
                       data-toggle="modal"
                       class="cursor-pointer"
                       data-target="#exampleModalCenter">Delete</a></li>
@@ -79,58 +79,6 @@
               </div>
             </div>
           </div>
-
-              <div class="col-2">
-            <div
-              class="modal fade"
-              id="exampleModalCenter"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="exampleModalCenterTitle"
-              aria-hidden="true"
-            >
-              <div
-                class="modal-dialog modal-dialog-centered"
-                role="document"
-              >
-                <div class="modal-content">
-                  <div
-                    class="modal-header d-flex justify-content-center"
-                  >
-                    <h5
-                      class="modal-title"
-                      id="exampleModalLongTitle"
-                    >
-                      Delete Service
-                    </h5>
-                  </div>
-                  <div class="modal-body text-center">
-                    Are you sure you want to delete the service?
-                  </div>
-                  <div
-                    class="modal-footer d-flex justify-content-center"
-                  >
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-dismiss="modal"
-                    >
-                      No
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-danger"
-                      data-dismiss="modal"
-                      @click="deleteService()"
-                    >
-                      Yes
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
   </div>
@@ -142,7 +90,7 @@
 
 <script>
 import { useStore } from 'vuex';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 export default {
   props: {
@@ -155,19 +103,6 @@ export default {
     const store = useStore()
     const route = useRoute();
 
-    const serviceId = ref[{
-      id:''
-    }];
-
-    const getServiceId = (id) => {
-      serviceId.value.id = id;
-      console.log("delete set id",serviceId.value.id)
-    };
-    const deleteService = () => {
-      console.log("call id", serviceId.value.id)
-      // store.dispatch('deleteService', serviceId.value)
-    }
-
     function handleWishlist (id) {
       let payload = {
         'service_id': id,
@@ -176,8 +111,6 @@ export default {
       store.dispatch('wishlist',payload)
     }
     return {
-      getServiceId,
-      deleteService,
       handleWishlist,
       loader: computed(() => store.getters.getRegisterStatus),
       imgURL: process.env.VUE_APP_URL,
