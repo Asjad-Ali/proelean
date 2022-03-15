@@ -14,7 +14,10 @@
       <!-- Sidebar Toggle (Topbar) -->
       <a class="navbar-brand"
         ><router-link to="/"
-          ><img src="/assets/images/Pro-eLean-.png" alt="Proelean logo" /> </router-link
+          ><img
+            src="/assets/images/Pro-eLean-.png"
+            alt="Proelean logo"
+          /> </router-link
       ></a>
       <!-- Topbar Search -->
       <form
@@ -26,8 +29,8 @@
           my-2 my-md-0
           mw-100
           navbar-search
-      "
-      style="width: 34%;"
+        "
+        style="width: 34%"
       >
         <div class="input-group">
           <input
@@ -327,7 +330,6 @@
                 class="bi bi-bag-plus"
                 viewBox="0 0 16 16"
                 title="Post a Job"
-
               >
                 <path
                   fill-rule="evenodd"
@@ -463,14 +465,12 @@
             <router-link
               class="btn btn-icon btn-transparent-dark dropdown-toggle"
               id="navbarDropdownMessages"
-              href="/chat"
               aria-haspopup="true"
               aria-expanded="false"
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Chat"
               to="/chat"
-
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -609,7 +609,9 @@
               title="Profile"
             >
               <img
-                :src="`${imgURL}/${user.image ?  user.image : '/assets/images/avator.png'}`"
+                :src="`${imgURL}/${
+                  user.image ? user.image : '/assets/images/avator.png'
+                }`"
                 class="dropdown-user-img img-full"
                 alt="profile_img"
               />
@@ -756,7 +758,7 @@
 
 <script>
 import Api from "@/services/API";
-import {  useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { computed, onMounted, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
 
@@ -799,9 +801,9 @@ export default {
     const handleUserMode = () => {
       store.commit("toggleUserMode");
       if (isBuyerMode.value) {
-        router.push({name: 'Home'});
+        router.push({ name: "Home" });
       } else {
-        router.push({name: 'sellerDashboard'});
+        router.push({ name: "sellerDashboard" });
       }
     };
 
@@ -834,12 +836,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.mobile-p-0{
-  @media screen and (max-width:568px) {
+.mobile-p-0 {
+  @media screen and (max-width: 568px) {
     padding: 0;
   }
 }
-
 </style>
 
