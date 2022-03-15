@@ -77,7 +77,7 @@ export const  actions = {
         }
       },
 
-      async purchaseService({commit,state},payload){
+      async purchaseService({commit,state,getters},payload){
 
         commit('setRegisterStatus', 2);
         const res = await Api.post('token',payload[0].paymentElements);
@@ -90,7 +90,8 @@ export const  actions = {
             commit("setService",resp.data);
             commit('setRegisterStatus', 3);
             useToast(resp.message,'success');
-            window.location.href = `/chat/${getters.getSingleService.service_user.id}`;
+            let id = getters.getSingleService.service_user.id;
+            window.location.href = `/chat/${id}`;
             //route.push({ name: 'Chat', params: { id: `${getters.getSingleService.service_user.id}` } })
           }
           else{
