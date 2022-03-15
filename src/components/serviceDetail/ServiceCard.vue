@@ -7,24 +7,23 @@
           <hr />
           <div class="header">
             <h3>
-              <b class="title">10 Screens</b><span class="price">$8,029</span>
+              <b class="title">   </b><span class="price">{{service.price}}</span>
             </h3>
             <p>
-              I will design rough sketches for upto 5 Screens of your
-              website/Mobile app.
+              {{service.s_description}}
             </p>
           </div>
           <article>
             <div class="d-flex">
               <b class="delivery"
-                ><i class="fa fa-clock-o" aria-hidden="true"></i> 3 Days
-                Delivery</b
+                ><i class="fa fa-clock-o" aria-hidden="true"></i> Delivery: {{service.delivery_time}}
+                </b
               >
               <b class="delivery ml-3"
-                ><i class="fa fa-refresh" aria-hidden="true"></i> 1 Revision</b
+                ><i class="fa fa-refresh" aria-hidden="true"></i> Revision: {{service.revision}}</b
               >
             </div>
-            <ul class="features">
+            <!-- <ul class="features">
               <li class="feature included">
                 <i class="fa fa-check" aria-hidden="true"></i>Source File
               </li>
@@ -37,19 +36,19 @@
               <li class="feature included">
                 <i class="fa fa-check" aria-hidden="true"></i>10 Pages
               </li>
-            </ul>
+            </ul> -->
           </article>
 
           <router-link
             :to="{ name: 'Purchase', params: { id: service.id } }"
-            class="btn btn-success text-white w-100"
+            class="btn btn-success text-white w-100" v-if="isBuyerMode"
           >
             Continue
           </router-link>
 
           <router-link
             :to="{ name: 'Chat', params: { id: `${service.service_user.id}` } }"
-            class="btn btn-success text-white w-100 mt-3"
+            class="btn btn-success text-white w-100 mt-3" v-if="isBuyerMode"
           >
             Contact Seller
           </router-link>
@@ -69,6 +68,7 @@ export default {
   setup() {
     const store = useStore();
     return {
+      isBuyerMode: computed(() => store.getters.isBuyerMode),
       service: computed(() => store.getters.getSingleService),
     };
   },
