@@ -77,7 +77,7 @@ export const  actions = {
         }
       },
 
-      async purchaseService({commit, state, getters},payload){
+      async purchaseService({commit,state,getters},payload){
 
         commit('setRegisterStatus', 2);
         const res = await Api.post('token',payload[0].paymentElements);
