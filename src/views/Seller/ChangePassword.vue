@@ -1,5 +1,5 @@
 <template>
-  <div class="container-xl mb-3">
+  <div class="container-xl py-3">
     <h4 >My Account</h4>
     <div class="border-bottom mb-3"></div>
     <div class="row gy-4 d-flex justify-content-center">

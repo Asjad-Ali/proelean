@@ -17,6 +17,7 @@ import ManageOrder from '@/views/Buyer/AllOrders.vue'
 
 import BuyerAccount from '@/views/Seller/Account.vue'
 import BuyerEditProfile from '@/views/Seller/EditProfile.vue'
+import BuyerChangePassword from '@/views/Seller/ChangePassword.vue'
 import SellerOrders from '@/views/Seller/Orders.vue'
 
 
@@ -48,6 +49,11 @@ const routes = [
     path: '/buyer/edit-profile',
     name: 'BuyerEditProfile',
     component: BuyerEditProfile,
+  },
+  {
+    path: '/buyer/change_password',
+    name: 'BuyerChangePassword',
+    component: BuyerChangePassword,
   },
   {
     path: '/gig-detail/:id',
