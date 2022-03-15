@@ -36,7 +36,7 @@
                     </li>
                  </ul>
               </div>
-              <div class="footer-list">
+              <!-- <div class="footer-list">
                  <h4>Community</h4>
                  <ul class="list">
                     <li><a href="#">Events</a></li>
@@ -45,13 +45,13 @@
                     <li><a href="#">Invite a Friend</a></li>
                     <li><a href="#">Become a Seller</a></li>
                  </ul>
-              </div>
+              </div> -->
            </div>
            <div class="copyright mb-5 mb-lg-0">
               <div class="logo">
-                 <a href="index.html">
-                 <img src="assets/images/Pro-eLean-.png">
-                 </a>
+                 <router-link to="/">
+                 <img src="/assets/images/Pro-eLean-.png">
+                 </router-link>
               </div>
               <p>© Copyright 2022 Proelean. All Rights Reserved
               </p>

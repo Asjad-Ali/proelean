@@ -130,15 +130,16 @@ export const actions = {
 
   async userSingleService({ commit, dispatch }, payload) {
     commit('setServicesLoadingStatus', 'LOADING');
-    // if (!state.userServices.length) {
-    const res = await Api.get(`seller/services/${payload.id}?from=web`);
-    if (res.status === 200) {
-      commit("setSingleService", res.data);
-      if (payload.type === "ONUPDATE") {
-        dispatch("loadSubCategories", res.data.category.id);
+    if (!state.userSingleService || state.userSingleService.id !== payload.id) {
+      const res = await Api.get(`seller/services/${payload.id}?from=web`);
+      if (res.status === 200) {
+        commit("setSingleService", res.data);
+        if (payload.type === "ONUPDATE") {
+          dispatch("loadSubCategories", res.data.category.id);
+        }
+      } else {
+        console.log(res);
       }
-    } else {
-      console.log(res);
     }
     commit('setServicesLoadingStatus', 'COMPLETED');
   },
