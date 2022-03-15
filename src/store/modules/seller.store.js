@@ -130,7 +130,7 @@ export const actions = {
 
   async userSingleService({ commit, dispatch }, payload) {
     commit('setServicesLoadingStatus', 'LOADING');
-    if (!state.userSingleService || state.userSingleService.id !== payload.id) {
+    // if (!state.userSingleService || state.userSingleService.id !== payload.id) {
       const res = await Api.get(`seller/services/${payload.id}?from=web`);
       if (res.status === 200) {
         commit("setSingleService", res.data);
@@ -140,7 +140,7 @@ export const actions = {
       } else {
         console.log(res);
       }
-    }
+    // }
     commit('setServicesLoadingStatus', 'COMPLETED');
   },
 
