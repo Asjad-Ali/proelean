@@ -7,7 +7,7 @@
   <div class="d-flex align-items-center osahan-post-header">
     <div class="dropdown-list-image mr-3 mb-auto">
       <img
-        class="rounded-circle"
+        class="rounded-circle position-fit"
         :src="`${imgUrl}/${messageOwner(message.senderId).photo}`"
         alt=""
       />
@@ -84,5 +84,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.position-fit{
+  object-fit: cover;
+}
 </style>
