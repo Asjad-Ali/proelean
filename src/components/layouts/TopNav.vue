@@ -463,7 +463,7 @@
             "
           >
             <router-link
-              class="btn btn-icon btn-transparent-dark dropdown-toggle"
+              class="btn btn-icon btn-transparent-dark dropdown-toggle" 
               id="navbarDropdownMessages"
               aria-haspopup="true"
               aria-expanded="false"

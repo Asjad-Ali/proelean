@@ -14,7 +14,6 @@
               <Service :service="service" />
             </div>
           </div>
-
           <ReviewSection />
         </div>
       </div>
