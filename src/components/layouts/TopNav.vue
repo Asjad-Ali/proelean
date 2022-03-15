@@ -26,7 +26,8 @@
           my-2 my-md-0
           mw-100
           navbar-search
-        "
+      "
+      style="width: 34%;"
       >
         <div class="input-group">
           <input
