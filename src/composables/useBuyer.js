@@ -1,4 +1,5 @@
-import { ref,watch } from "vue";
+import { computed, ref,watch } from "vue";
+import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
 export default function useBecomeSeller() {
@@ -18,6 +19,7 @@ export default function useBecomeSeller() {
             fb: '',
             twitter: ''
         });
+
     
         const dataErrors = ref({
             title: null,
@@ -72,6 +74,7 @@ export default function useBecomeSeller() {
 
 
     const store = useStore();
+    const route = useRoute();
     const createJob = ref({
         description: "",
         category_id: "cU1VOWVkQVVpVElJdll4eThYOXpBZz09",
@@ -98,12 +101,60 @@ export default function useBecomeSeller() {
 
     }
 
+    const payload = {
+        id: route.params.id,
+        type: "SERVICE_DETAIL",
+        };
+
+
+    const formData = ref([
+        { 
+            paymentElements: { 
+            service_id:payload.id,
+            number:4242424242424242,
+            exp_month:6,
+            exp_year:2022,
+            cvc:123,}
+        },
+        { 
+            descriptionData: {
+            service_id:payload.id,
+            description:'',
+            token: ''}
+        }
+        ]);
+
+
+    
+    const descriptionRegex = /^[a-zA-Z ]{20,300}$/;
+    const descriptionErrors = ref({
+      description: null,
+    });
+
+        
+    watch(formData.value[1].descriptionData,(current) => {
+        if(!current.description){
+            console.log("in condition",current.description)
+            descriptionErrors.value.description = "Description is required"
+        }
+        else if(!current.description.match(descriptionRegex)){
+            descriptionErrors.value.description = "Description is not Valid"
+        }
+        else{
+            descriptionErrors.value.description = null
+        }
+    })
+
     return {
+        service: computed(() => store.getters.getSingleService),
         data,
         subCategories,
         createJob,
         jobCreation,
-        handleCredentials
+        handleCredentials,
+        formData,
+        descriptionRegex,
+        descriptionErrors
     }
 
 }
