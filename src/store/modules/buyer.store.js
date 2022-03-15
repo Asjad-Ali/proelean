@@ -90,7 +90,7 @@ export const  actions = {
             commit("setService",resp.data);
             commit('setRegisterStatus', 3);
             useToast(resp.message,'success');
-            window.location.href = "/chat";
+            window.location.href = `/chat/${getters.getSingleService.service_user.id}`;
             //route.push({ name: 'Chat', params: { id: `${getters.getSingleService.service_user.id}` } })
           }
           else{
