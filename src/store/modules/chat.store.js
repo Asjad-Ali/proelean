@@ -87,7 +87,7 @@ export const actions = {
         const db = getFirestore();
 
         const chatRef = collection(db, `Conversations/${selectedConversation.id}/Messages`);
-        const q = query(chatRef, orderBy('sentAt', 'asc'), limit(10));
+        const q = query(chatRef, orderBy('sentAt', 'desc'), limit(10));
         const unsubscribe = onSnapshot(q, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
                 const id = change.doc.id;
