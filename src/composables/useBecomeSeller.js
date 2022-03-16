@@ -36,10 +36,6 @@ export default function useBecomeSeller() {
         description: null,
         category_id: null,
         sub_category_id: null,
-        portfolio: null,
-        instagram: null,
-        facebook: null,
-        twitter: null
     });
 
 
@@ -91,28 +87,6 @@ export default function useBecomeSeller() {
         }else{
             dataErrors.value.cinic  = null                               
         }
-
-
-        if(value.portfolio && value.portfolio.length < 10) {
-            dataErrors.value.portfolio = 'Incorrect URL'
-        }else{
-            dataErrors.value.portfolio  = null                               
-        }
-        if(value.instagram && value.instagram.length < 10) {
-            dataErrors.value.instagram = 'Incorrect URL'
-        }else{
-            dataErrors.value.instagram  = null                               
-        }
-        if(value.facebook && value.facebook.length < 10) {
-            dataErrors.value.facebook = 'Incorrect URL'
-        }else{
-            dataErrors.value.facebook  = null                               
-        }
-        if(value.twitter && value.twitter.length < 10) {
-            dataErrors.value.twitter = 'Incorrect URL'
-        }else{
-            dataErrors.value.twitter  = null                               
-        }
     })
 
     const convertFileToBase64 = (file) => {
@@ -124,19 +98,15 @@ export default function useBecomeSeller() {
         reader.readAsDataURL(file);
     }
 
-    // const removeImage = (e) => {
-    //     data.value.cinic.indexOf(index,0)
-    // }
-
- 
-      
         
 
 
-    //   const removeImage = index => {
-    //     bannersBase64.value.splice(index, 1);
-    //     createGig.value.banner.splice(index, 1);
-    // }
+    const removeImage = () => {
+        console.log("Remove Image")
+        preview.value = ''
+        bannersBase64.value = '';
+        data.value.cinic = '';
+      }
 
     const encodeImageFileAsURL =file => {    
         const reader = new FileReader();  
@@ -191,6 +161,7 @@ export default function useBecomeSeller() {
         //     store.dispatch('handleBecomeSeller',data.value);
         // }
     };
+    const btnStatus = ref(store.getters.getRegisterStatus)
 
     return {
         data,
@@ -200,11 +171,13 @@ export default function useBecomeSeller() {
         subCatLoader,
         bannersBase64,
         convertFileToBase64,
-        // removeImage,
+        removeImage,
         encodeImageFileAsURL,
         handleBecomeSeller,
         onCategorySelected,
-        handleCinic
+        handleCinic,
+        btnStatus
+
     }
 
 }
