@@ -40,7 +40,7 @@
                         user.image ? user.image : '/assets/images/avator.png'
                       }`"
                       class="
-                        profile-image
+                        profileImage
                         dropdown-user-img
                         img-full
                         rounded-circle
@@ -226,4 +226,8 @@ export default {
 </script>
 
 <style>
+.profileImage{
+    width: 120px !important;
+    height: 120px !important;
+}
 </style>

@@ -76,14 +76,6 @@
                 >
                   <i class="mdi mdi-dots-vertical"></i>
                 </a>
-<<<<<<< HEAD
-                <ul  class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <router-link :to="{name:'GigDetail', params:{id:service.id}}"><li class="dropdown-item">Open </li></router-link>
-                  <router-link :to="{name:'UpdateService', params:{id:service.id}}"><li class="dropdown-item">Edit </li></router-link>
-                  <li data-toggle="modal"
-                      class="cursor-pointer dropdown-item"  
-                      data-target="#exampleModalCenter" @click="$emit('selectService',service)">Delete</li>
-=======
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <router-link
                     :to="{ name: 'GigDetail', params: { id: service.id } }"
@@ -105,7 +97,6 @@
                       >Delete</a
                     >
                   </li>
->>>>>>> 2b6617c91174770dfa16a86d26b25a8a9b148c7a
                 </ul>
               </div>
               <a
