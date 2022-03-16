@@ -1,12 +1,24 @@
 <template>
-<div>
-  <div v-if="service">
+  <div>
+    <div v-if="service">
       <div class="card h-100 mb-4 position-relative">
-        <router-link v-if="!$store.getters.isBuyerMode" :to="{name:'GigDetail', params:{id:service.id}}">
-          <img class="img-fluid" :src="imgURL+'/'+service.service_media[0].media"  />
+        <router-link
+          v-if="!$store.getters.isBuyerMode"
+          :to="{ name: 'GigDetail', params: { id: service.id } }"
+        >
+          <img
+            class="img-fluid"
+            :src="imgURL + '/' + service.service_media[0].media"
+          />
         </router-link>
-        <router-link v-else :to="{name:'BuyerServiceDetail', params:{id:service.id}}">
-          <img class="img-fluid" :src="imgURL+'/'+service.service_media[0].media"  />
+        <router-link
+          v-else
+          :to="{ name: 'BuyerServiceDetail', params: { id: service.id } }"
+        >
+          <img
+            class="img-fluid"
+            :src="imgURL + '/' + service.service_media[0].media"
+          />
         </router-link>
         <div class="inner-slider">
           <div class="inner-wrapper d-flex flex-column align-content-between">
@@ -14,23 +26,26 @@
               <span class="seller-image">
                 <img
                   class="img-fluid"
-                  :src="`${imgURL}/${service.service_user ? service.service_user.image : '/assets/images/avator.png'}`"
+                  :src="`${imgURL}/${
+                    service.service_user
+                      ? service.service_user.image
+                      : '/assets/images/avator.png'
+                  }`"
                   alt="img"
                 />
               </span>
               <span class="seller-name">
-                {{
-                  service.service_user.username
-                }}
+                {{ service.service_user.username }}
 
                 <!-- <span class="level hint--top level-one-seller">
                   Level 1 Seller
                 </span> -->
               </span>
             </div>
-            <h3 style="overflow: hidden; height: 3rem;">
+            <h3 style="overflow: hidden; height: 3rem">
               <!-- {{ service.s_description.substr(0, 125) }} -->
-              {{service.s_description.substr(0, 75)}}{{service.s_description.length > 40 ? '...' : ''}}
+              {{ service.s_description.substr(0, 75)
+              }}{{ service.s_description.length > 20 ? "..." : "" }}
             </h3>
             <div class="content-info">
               <div class="rating-wrapper">
@@ -53,23 +68,61 @@
             </div>
             <div class="footer">
               <div class="dropdown" v-if="!$store.getters.isBuyerMode">
-                <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown">
+                <a
+                  class="dropdown-toggle"
+                  href="#"
+                  id="dropdownMenuLink"
+                  data-bs-toggle="dropdown"
+                >
                   <i class="mdi mdi-dots-vertical"></i>
                 </a>
+<<<<<<< HEAD
                 <ul  class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <router-link :to="{name:'GigDetail', params:{id:service.id}}"><li class="dropdown-item">Open </li></router-link>
                   <router-link :to="{name:'UpdateService', params:{id:service.id}}"><li class="dropdown-item">Edit </li></router-link>
                   <li data-toggle="modal"
                       class="cursor-pointer dropdown-item"  
                       data-target="#exampleModalCenter" @click="$emit('selectService',service)">Delete</li>
+=======
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <router-link
+                    :to="{ name: 'GigDetail', params: { id: service.id } }"
+                    ><li class="dropdown-item">Open</li></router-link
+                  >
+                  <router-link
+                    :to="{ name: 'UpdateService', params: { id: service.id } }"
+                    ><li class="dropdown-item">Edit</li></router-link
+                  >
+                  <li
+                    @click="$emit('selectService', service)"
+                    class="dropdown-item"
+                  >
+                    <a
+                      aria-hidden="true"
+                      data-toggle="modal"
+                      class="cursor-pointer"
+                      data-target="#exampleModalCenter"
+                      >Delete</a
+                    >
+                  </li>
+>>>>>>> 2b6617c91174770dfa16a86d26b25a8a9b148c7a
                 </ul>
               </div>
               <a
-              :class="{'disable': service.service_user.id === $store.getters.getAuthUser.id}"
-              @click="handleWishlist(service.id)" >
-                  <i class="mdi mdi-repeat fs-2" v-if="loader==service.id"></i>
-                  <i v-else class="mdi mdi-heart cursor-pointer fs-2" :class="{ redIcon : service.favourite}"
-                  :disabled="loader===service.id"   aria-hidden="true"></i>
+                :class="{
+                  disable:
+                    service.service_user.id === $store.getters.getAuthUser.id,
+                }"
+                @click="handleWishlist(service.id)"
+              >
+                <i class="mdi mdi-repeat fs-2" v-if="loader == service.id"></i>
+                <i
+                  v-else
+                  class="mdi mdi-heart cursor-pointer fs-2"
+                  :class="{ redIcon: service.favourite }"
+                  :disabled="loader === service.id"
+                  aria-hidden="true"
+                ></i>
               </a>
               <div class="price">
                 <a href="#">
@@ -80,45 +133,60 @@
           </div>
         </div>
         <!-- Share Button -->
-      <div class="p-2 position-absolute share-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
-        <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
-      </svg>
+        <div @click="shareService(service.id)" class="p-2 position-absolute share-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-share"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
+            />
+          </svg>
+        </div>
       </div>
-      </div>
+    </div>
+    <div v-else>
+      <h4>No Service Available</h4>
+    </div>
   </div>
-  <div v-else>
-    <h4>No Service Available</h4>
-  </div>
-</div>
 </template>
 
 <script>
-import { useStore } from 'vuex';
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useStore } from "vuex";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import nativeShare from "../composables/useShare";
 export default {
   props: {
     service: {
       type: Object,
       required: true,
-    }
+    },
   },
   setup() {
-    const store = useStore()
+    const store = useStore();
     const route = useRoute();
 
-    function handleWishlist (id) {
+    const handleWishlist = (id) => {
       let payload = {
-        'service_id': id,
-        'type': route.name !== 'Gigs' ? 'offered' : 'gigs'
-      }
-      store.dispatch('wishlist',payload)
-    }
+        service_id: id,
+        type: route.name !== "Gigs" ? "offered" : "gigs",
+      };
+      store.dispatch("wishlist", payload);
+    };
+
+    const shareService = (id) => {
+      nativeShare('Share This Service',`/gig-detail/${id}`);
+    };
     return {
       handleWishlist,
       loader: computed(() => store.getters.getRegisterStatus),
       imgURL: process.env.VUE_APP_URL,
+      shareService
     };
   },
 };
@@ -127,36 +195,36 @@ export default {
 
 <style scoped>
 .inner-slider {
- margin-bottom:0px !important;
+  margin-bottom: 0px !important;
 }
-.redIcon{
+.redIcon {
   color: red !important;
 }
-.disable{
-visibility: hidden
+.disable {
+  visibility: hidden;
 }
 .dropdown-toggle::after {
-    display:none;
+  display: none;
 }
 
-.card{
+.card {
   margin-bottom: 0px;
 }
 
-.mdi-dots-vertical{
+.mdi-dots-vertical {
   font-size: 17px;
 }
 
-.share-btn{
+.share-btn {
   top: 5px;
   right: 5px;
   background: #fff;
   border-radius: 5px;
   cursor: pointer;
-}
- 
- svg.bi.bi-share {
-    color: #15a362;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 }
 
+svg.bi.bi-share {
+  color: #15a362;
+}
 </style>
