@@ -94,4 +94,4 @@ export default {
 .other-message{
   background: #8396ab;
 }
-</style>
+</style>  

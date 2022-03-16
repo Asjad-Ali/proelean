@@ -25,6 +25,7 @@ import BuyerNotifications from '@/views/Seller/Notifications.vue'
 
 import ManageService from '@/views/Seller/ManageService.vue'
 import FavouriteService from '@/views/Seller/FavouriteService.vue'
+import OrderDetails from '@/views/OrderDtails.vue'
 
 
 import sellerRoutes from './seller.js'
@@ -35,6 +36,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/order-details',
+    name: 'OrderDetails',
+    component: OrderDetails,
   },
   {
     path: '/seller-orders',
