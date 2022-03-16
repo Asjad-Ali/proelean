@@ -1,6 +1,7 @@
 <template>
   <div class="container-xl">
     <h1 class="app-page-title">Overview</h1>
+ 
     <AppCard />
     <AnalyticBoxes />
     <Charts />

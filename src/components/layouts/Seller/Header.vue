@@ -131,10 +131,10 @@
                 <!--//dropdown-menu-->
               </div>
               <!--//app-utility-item-->
-              <div class="app-utility-item sm-fold-none">
-                <router-link to="/dashboard/settings" title="Settings">
+              <!-- <div class="app-utility-item sm-fold-none">
+                <router-link to="/dashboard/settings" title="Settings"> -->
                   <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                  <svg
+                  <!-- <svg
                     width="1em"
                     height="1em"
                     viewBox="0 0 16 16"
@@ -152,7 +152,7 @@
                     />
                   </svg>
                 </router-link>
-              </div>
+              </div> -->
               <!--//app-utility-item-->
 
               <div class="app-utility-item app-user-dropdown dropdown">
