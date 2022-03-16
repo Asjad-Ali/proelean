@@ -67,7 +67,7 @@
           <ul class="app-menu footer-menu list-unstyled">
             <li class="nav-item">
               <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-              <router-link class="nav-link" to="/dashboard/settings">
+              <!-- <router-link class="nav-link" to="/dashboard/settings">
                 <span class="nav-icon">
                   <svg
                     width="1em"
@@ -88,7 +88,7 @@
                   </svg>
                 </span>
                 <span class="nav-link-text">Settings</span> </router-link
-              ><!--//nav-link-->
+              >//nav-link -->
             </li>
             <!--//nav-item-->
           </ul>
