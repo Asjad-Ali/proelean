@@ -27,7 +27,7 @@ export default function useOrder() {
     });
 
 
-    const descriptionRegex = /^[a-zA-Z.]{20,300}$/;
+    const descriptionRegex = /^[a-zA-Z.,":/; ]{20,300}$/;
     const descriptionErrors = ref({
         description: 'Description is required',
         number: null,
@@ -49,9 +49,9 @@ export default function useOrder() {
         if (!current.paymentElements.number) {
             console.log("in condition", current.paymentElements.number)
             descriptionErrors.value.number = "Card Number is required"
-        } else if (current.paymentElements.number !== 16) {
-            console.log("Card number",current.paymentElements.number)
-            descriptionErrors.value.number = "Card Number length must be minimum 16 characters"
+        } else if (String(current.paymentElements.number).split("").length !== 16) {
+            //console.log("Card number",String(current.paymentElements.number).split("").length)
+            descriptionErrors.value.number = "Card Number length must be 16 characters"
         } else {
             descriptionErrors.value.number = null
         }
@@ -59,7 +59,7 @@ export default function useOrder() {
         if (!current.paymentElements.cvc) {
             console.log("in condition", current.paymentElements.cvc)
             descriptionErrors.value.cvc = "CVC is required"
-        } else if (!current.paymentElements.cvc.length === 3) {
+        } else if (String(current.paymentElements.cvc).split("").length !== 3) {
             descriptionErrors.value.cvc = "CVC length must be 3 characters"
         } else {
             descriptionErrors.value.cvc = null
@@ -68,7 +68,7 @@ export default function useOrder() {
         if (!current.paymentElements.exp_month) {
             console.log("in condition", current.paymentElements.exp_month)
             descriptionErrors.value.exp_month = "expiry month is required"
-        } else if (current.paymentElements.exp_month.length < 2) {
+        } else if (String(current.paymentElements.exp_month).split("").length > 2) {
             descriptionErrors.value.exp_month = "expiry month should be maximum 2 characters"
         } else {
             descriptionErrors.value.exp_month = null
@@ -77,7 +77,7 @@ export default function useOrder() {
         if (!current.paymentElements.exp_year) {
             console.log("in condition", current.paymentElements.exp_year)
             descriptionErrors.value.exp_year = "expiry year is required"
-        } else if (current.paymentElements.exp_year.length < 4) {
+        } else if (String(current.paymentElements.exp_year).split("").length > 4) {
             descriptionErrors.value.exp_year = "expiry year should be maximum 4 characters"
         } else {
             descriptionErrors.value.exp_year = null
