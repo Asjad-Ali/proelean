@@ -1,5 +1,5 @@
 <template>
-  <div class="main-page py-3" v-if="service && service.service_user">
+  <div class="main-page py-3">
     <div v-if="$store.getters.getServiceLoader === 'LOADING'" class="text-center spinnerInden vh-100">
       <div class="spinner-border text-primary m-2" role="status">
         <span class="sr-only">Loading...</span>
@@ -8,15 +8,15 @@
     <div v-else class="container">
       <div class="row">
         <div class="col-lg-8 left">
-          <nav aria-label="breadcrumb">
+          <!-- <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">
                 Library
               </li>
             </ol>
-          </nav>
-          <h2 class="h2-cutom-font">{{ service.s_description }}</h2>
+          </nav> -->
+          <h2 class="h2-cutom-font pb-0">{{ service.s_description }}</h2>
           <Gallery :serviceMedia="service.service_media" />
           <AboutService :service="service" />
           <div class="profile-card">

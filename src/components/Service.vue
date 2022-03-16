@@ -30,7 +30,7 @@
             </div>
             <h3 style="overflow: hidden; height: 3rem;">
               <!-- {{ service.s_description.substr(0, 125) }} -->
-              {{service.s_description.substr(0, 75)}}{{service.s_description.length > 20 ? '...' : ''}}
+              {{service.s_description.substr(0, 75)}}{{service.s_description.length > 40 ? '...' : ''}}
             </h3>
             <div class="content-info">
               <div class="rating-wrapper">
@@ -59,10 +59,9 @@
                 <ul  class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <router-link :to="{name:'GigDetail', params:{id:service.id}}"><li class="dropdown-item">Open </li></router-link>
                   <router-link :to="{name:'UpdateService', params:{id:service.id}}"><li class="dropdown-item">Edit </li></router-link>
-                  <li @click="$emit('selectService',service)" class="dropdown-item"><a aria-hidden="true"
-                      data-toggle="modal"
-                      class="cursor-pointer"  
-                      data-target="#exampleModalCenter">Delete</a></li>
+                  <li data-toggle="modal"
+                      class="cursor-pointer dropdown-item"  
+                      data-target="#exampleModalCenter" @click="$emit('selectService',service)">Delete</li>
                 </ul>
               </div>
               <a
