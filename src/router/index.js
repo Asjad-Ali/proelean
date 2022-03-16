@@ -19,6 +19,8 @@ import BuyerAccount from '@/views/Seller/Account.vue'
 import BuyerEditProfile from '@/views/Seller/EditProfile.vue'
 import BuyerChangePassword from '@/views/Seller/ChangePassword.vue'
 import SellerOrders from '@/views/Seller/Orders.vue'
+import BuyerNotifications from '@/views/Seller/Notifications.vue'
+
 
 
 import ManageService from '@/views/Seller/ManageService.vue'
@@ -54,6 +56,11 @@ const routes = [
     path: '/buyer/change_password',
     name: 'BuyerChangePassword',
     component: BuyerChangePassword,
+  },
+  {
+    path: '/buyer/notifications',
+    name: 'BuyerNotifications',
+    component: BuyerNotifications,
   },
   {
     path: '/gig-detail/:id',

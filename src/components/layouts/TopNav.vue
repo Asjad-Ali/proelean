@@ -407,15 +407,15 @@
                 </svg>
                 Alerts Center
               </h6>
-              <a
+              <router-link
+                v-for="notification in userNotification"
+                :key="notification.index"
                 class="
                   dropdown-item dropdown-notifications-item
                   d-flex
                   justify-content-between
                 "
-                href="#!"
-                v-for="notification in userNotification"
-                :key="notification.index"
+                to="/buyer/notifications"
               >
                 <div class="d-flex justify-content-start">
                   <div class="dropdown-notifications-item-icon bg-warning">
@@ -444,10 +444,10 @@
                 <div class="text-muted small ml-2">
                   {{ $filters.timeAgo(notification.created_at) }}
                 </div>
-              </a>
+              </router-link>
               <router-link
                 class="dropdown-item dropdown-notifications-footer"
-                to="/dashboard/notifications"
+                to="/buyer/notifications"
                 >View All Notification</router-link
               >
             </div>

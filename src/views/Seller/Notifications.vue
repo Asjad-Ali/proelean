@@ -1,7 +1,7 @@
 <template>
   <div class="row d-flex justify-content-center col-12 m-0 p-0">
     <div class="col-md-12">
-      <h1 class="app-page-title">Notifications</h1>
+      <h3 class="app-page-title">Notifications</h3>
       <div class="border-bottom my-3"></div>
       <div v-if="loader" class="d-flex justify-content-center s-margin">
         <div class="spinner-border text-primary m-2" role="status">
