@@ -80,12 +80,12 @@ export const  actions = {
       async purchaseService({commit,state,getters},payload){
 
         commit('setRegisterStatus', 2);
-        const res = await Api.post('token',payload[0].paymentElements);
+        const res = await Api.post('token',payload.paymentElements);
         if(res.status === 200){
           commit("setCardStripe",res.token);
           console.log("token",state.cardStripe);
-          payload[1].descriptionData.token = state.cardStripe;
-          const resp = await Api.post('buyer/custom_order',payload[1].descriptionData);
+          payload.descriptionData.token = state.cardStripe;
+          const resp = await Api.post('buyer/custom_order',payload.descriptionData);
           if(resp.status === 201){
             commit("setService",resp.data);
             commit('setRegisterStatus', 3);

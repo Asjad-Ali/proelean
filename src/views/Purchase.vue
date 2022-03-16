@@ -14,7 +14,7 @@
                     <div class="col-md-6">
                         <div class="inputbox mt-3 mr-2 position-relative"> 
                             <input type="number" name="ATM_Number"
-                            v-model="formData[0].paymentElements.number"
+                            v-model="formData.paymentElements.number"
                             id="ATM_Number" class="form-control input-alignment" required="required">  <span> Card Number </span> 
                                     <div class="position-absolute icons-top">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
@@ -33,7 +33,7 @@
                             <div class="inputbox mt-3 mr-2 position-relative"> <input type="number"
                             class="form-control input-alignment"
                             name="cvc"
-                            v-model="formData[0].paymentElements.cvc"
+                            v-model="formData.paymentElements.cvc"
                             id="cvc" required="required"> <span>CVC</span> 
                             <div class="position-absolute icons-top">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
@@ -52,7 +52,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="inputbox mt-3 mr-2 position-relative"> <input type="number" name="expiryMonth"
-                            v-model="formData[0].paymentElements.exp_month"
+                            v-model="formData.paymentElements.exp_month"
                             id="expiryMonth"
                             class="form-control input-alignment" required="required"> <span> Card Expiry Month</span> 
                                <div class="position-absolute icons-top">
@@ -69,7 +69,7 @@
                     <div class="col-md-6">
                         <div class="d-flex flex-row">
                             <div class="inputbox mt-3 mr-2 position-relative"> <input type="number" name="expiryYear"
-                            v-model="formData[0].paymentElements.exp_year"
+                            v-model="formData.paymentElements.exp_year"
                             id="expiryYear" class="form-control input-alignment" required="required"> <span>Card Expiry Year</span>
                                <div class="position-absolute icons-top">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
@@ -93,7 +93,7 @@
                                 <textarea type="text"
                                 class="form-control input-alignment"
                                 name="description"
-                                v-model="formData[1].descriptionData.description"
+                                v-model="formData.descriptionData.description"
                                 id="description"
                                 placeholder="Type description" required="required" />
                                 <div class="text-danger mt-1" v-show="descriptionErrors.description">
@@ -108,7 +108,7 @@
                 <!-- <router-link
                   :to="{ name: 'Chat', params: { id: `${service.service_user.id}` } }"
                 > -->
-                    <button class="btn btn-success px-3" :disabled="!Object.values(descriptionErrors).every((value) => !value) || registerStatus == 2"
+                <button class="btn btn-success px-3" :disabled="!Object.values(descriptionErrors).every((value) => !value) || registerStatus == 2"
                 @click="purchaseService()">{{registerStatus == 2 ? 'Loading...' : 'Pay'}}</button>
                 <!-- </router-link> -->
                 </div>
