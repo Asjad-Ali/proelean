@@ -4,7 +4,7 @@
       new Date(message.sentAt).toLocaleString().split(",")[0]
     }}</span>
   </div>
-  <div class="d-flex align-items-center osahan-post-header">
+  <div class="d-flex align-items-center osahan-post-header" :class="message.senderId==$store.getters.getAuthUser.id && `right-message` ">
     <div class="dropdown-list-image mr-3 mb-auto">
       <img
         class="rounded-circle position-fit"
@@ -13,8 +13,8 @@
       />
     </div>
     <div class="mr-1">
-      <div class="text-truncate h6 mb-3">{{ messageOwner(message.senderId).name}}</div>
-      <p>
+      <div class="text-truncate h6 mb-3">{{message.senderId==$store.getters.getAuthUser.id ? 'Me' : messageOwner(message.senderId).name}}</div>
+      <p class="p-3 rounded-lg text-white" :class="message.senderId==$store.getters.getAuthUser.id ? `my-message` : `other-message` ">
         {{ message.message }}
         <!-- <a href="#">iamosahan@gmail.com</a> -->
       </p>
@@ -87,5 +87,11 @@ export default {
 <style scoped>
 .position-fit{
   object-fit: cover;
+}
+.my-message{
+  background: #15a362;
+}
+.other-message{
+  background: #8396ab;
 }
 </style>
