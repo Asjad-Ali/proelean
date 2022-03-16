@@ -1,5 +1,5 @@
 <template>
-  <div class="row g-4 mb-4">
+  <div class="row g-4 mb-4" v-if="user">
     <div class="col-6 col-lg-3">
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
@@ -92,7 +92,7 @@ export default {
   setup() {
     const store= useStore();
     return{
-      user: computed(() => store.getters.getAuthUser),
+      user: computed(() => store.getters.getSellerEarning),
     }
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 col-lg-6">
+  <div class="col-12 col-lg-8 mb-3">
     <div
       class="
         app-card app-card-account
@@ -9,121 +9,106 @@
         align-items-start
       "
     >
-      <div class="app-card-header p-3 border-bottom-0">
-        <div class="row align-items-center gx-3">
-          <div class="col-auto">
-            <div class="app-icon-holder">
-              <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 16 16"
-                class="bi bi-person"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"
-                />
-              </svg>
-            </div>
-            <!--//icon-holder-->
+      <div class="app-card-body p-4 w-100 text-center">
+        <div class="align-items-center ">
+          <div>
           </div>
           <!--//col-->
           <div class="col-auto">
-            <h4 class="app-card-title">Profile</h4>
+            <h3 class="app-card-title">Profile</h3>
           </div>
           <!--//col-->
         </div>
         <!--//row-->
       </div>
+                
       <!--//app-card-header-->
       <div class="app-card-body px-4 w-100">
-        <div class="item border-bottom py-3">
-          <div class="row justify-content-between align-items-center">
+        <div class="item border-bottom">
+          <div class="row justify-content-center">
             <div class="col-auto">
-              <div class="item-label mb-2"><strong>Photo</strong></div>
-              <div class="item-data">
-                <img
-                  class="profile-image"
-                  src="/assets/seller/images/user.png"
-                  alt=""
+              <!-- <div class="item-label mb-2"><strong>Photo</strong></div> -->
+              <div class="item-data mb-3">
+                 <img
+                  :src="`${imgURL}/${user.image ?  user.image : '/assets/images/avator.png'}`"
+                  class="profile-image dropdown-user-img img-full rounded-circle"
+                  alt="profile_img"
                 />
               </div>
             </div>
             <!--//col-->
-            <div class="col text-end">
-              <a class="btn-sm app-btn-secondary" href="#">Change</a>
-            </div>
             <!--//col-->
           </div>
           <!--//row-->
         </div>
         <!--//item-->
+        <div class="row">
+          <div class="col-6">
+            <div  class="item border-bottom py-3">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                  <div class="item-label"><strong>Name</strong></div>
+                  <div class="item-data">{{ user.name }}</div>
+                </div>
+                <!--//col-->
+              </div>
+            <!--//row-->
+            </div>
+          <!--//item-->
+          <div class="item border-bottom py-3">
+            <div class="row justify-content-between align-items-center">
+              <div class="col-auto">
+                <div class="item-label"><strong>Email</strong></div>
+                <div class="item-data"><input type="hidden" name="email"></div>
+                <div class="item-data">{{ user.email }}</div>
+              </div>
+              <!--//col-->
+            </div>
+            <!--//row-->
+          </div>
+        <!--//item-->
+          </div>
+          <div class="col-6">
+            <div class="item border-bottom py-3">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                  <div class="item-label"><strong>Phone</strong></div>
+                  <div class="item-data"><input type="hidden" name="email"></div>
+                  <div class="item-data">{{ user.phone }}</div>
+                </div>
+                <!--//col-->
+              </div>
+              <!--//row-->
+            </div>
+            <!--//item-->
+            <div class="item border-bottom py-3">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                  <div class="item-label"><strong>Address</strong></div>
+                  <div class="item-data">{{ user.address }}</div>
+                </div>
+                <!--//col-->
+              </div>
+              <!--//row-->
+            </div>
+            <!--//item-->
+          </div>
+        </div>
         <div class="item border-bottom py-3">
           <div class="row justify-content-between align-items-center">
             <div class="col-auto">
-              <div class="item-label"><strong>Name</strong></div>
-              <div class="item-data">James Doe</div>
-            </div>
-            <!--//col-->
-            <div class="col text-end">
-              <a class="btn-sm app-btn-secondary" href="#">Change</a>
+              <div class="item-label"><strong>Description</strong></div>
+              <div class="item-data">{{ user.description }}</div>
             </div>
             <!--//col-->
           </div>
           <!--//row-->
         </div>
-        <!--//item-->
-        <div class="item border-bottom py-3">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-auto">
-              <div class="item-label"><strong>Email</strong></div>
-              <div class="item-data">james.doe@website.com</div>
-            </div>
-            <!--//col-->
-            <div class="col text-end">
-              <a class="btn-sm app-btn-secondary" href="#">Change</a>
-            </div>
-            <!--//col-->
-          </div>
-          <!--//row-->
-        </div>
-        <!--//item-->
-        <div class="item border-bottom py-3">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-auto">
-              <div class="item-label"><strong>Website</strong></div>
-              <div class="item-data">https://johndoewebsite.com</div>
-            </div>
-            <!--//col-->
-            <div class="col text-end">
-              <a class="btn-sm app-btn-secondary" href="#">Change</a>
-            </div>
-            <!--//col-->
-          </div>
-          <!--//row-->
-        </div>
-        <!--//item-->
-        <div class="item border-bottom py-3">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-auto">
-              <div class="item-label"><strong>Location</strong></div>
-              <div class="item-data">New York</div>
-            </div>
-            <!--//col-->
-            <div class="col text-end">
-              <a class="btn-sm app-btn-secondary" href="#">Change</a>
-            </div>
-            <!--//col-->
-          </div>
-          <!--//row-->
-        </div>
-        <!--//item-->
       </div>
       <!--//app-card-body-->
       <div class="app-card-footer p-4 mt-auto">
-        <a class="btn app-btn-secondary" href="#">Manage Profile</a>
+        <router-link v-if="$store.getters.isBuyerMode" to="/buyer/edit-profile" class="btn app-btn-secondary">Edit Profile</router-link>
+        <router-link v-else  to="/dashboard/edit-profile" class="btn app-btn-secondary">Edit Profile</router-link>
       </div>
       <!--//app-card-footer-->
     </div>
@@ -132,8 +117,24 @@
 </template>
 
 <script>
-export default {};
+import { computed } from '@vue/runtime-core';
+import { useStore } from 'vuex';
+export default {
+  setup(){
+    const store = useStore()
+
+    return{
+      user: computed(() => store.getters.getAuthUser),
+      imgURL: process.env.VUE_APP_URL,
+    }
+  }
+};
 </script>
 
 <style>
+.profile-image {
+    width: 120px;
+    height: 120px;
+}
+
 </style>

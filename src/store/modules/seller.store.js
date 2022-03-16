@@ -19,7 +19,7 @@ export const state = {
   buyerRequests: [],
   buyerRequestsCurrentPage: 1,
   hasNextPage: false,
-  earnings: {}
+  earnings: null
 }
 
 export const getters = {
@@ -33,7 +33,8 @@ export const getters = {
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
   getBuyerRequestsCurrentPage: state => state.buyerRequestsCurrentPage,
-  isBuyerRequestHasNextPage: state => state.hasNextPage
+  isBuyerRequestHasNextPage: state => state.hasNextPage,
+  getSellerEarning: state => state.earnings
 }
 
 
@@ -129,16 +130,17 @@ export const actions = {
 
   async userSingleService({ commit, dispatch }, payload) {
     commit('setServicesLoadingStatus', 'LOADING');
-    // if (!state.userServices.length) {
-    const res = await Api.get(`seller/services/${payload.id}?from=web`);
-    if (res.status === 200) {
-      commit("setSingleService", res.data);
-      if (payload.type === "ONUPDATE") {
-        dispatch("loadSubCategories", res.data.category.id);
+    // if (!state.userSingleService || state.userSingleService.id !== payload.id) {
+      const res = await Api.get(`seller/services/${payload.id}?from=web`);
+      if (res.status === 200) {
+        commit("setSingleService", res.data);
+        if (payload.type === "ONUPDATE") {
+          dispatch("loadSubCategories", res.data.category.id);
+        }
+      } else {
+        console.log(res);
       }
-    } else {
-      console.log(res);
-    }
+    // }
     commit('setServicesLoadingStatus', 'COMPLETED');
   },
 
@@ -183,6 +185,7 @@ export const actions = {
       useToast(res.message);
       commit('setRegisterStatus', 4);
     }
+    return res;
   },
 
   async updateService({ commit }, updateServiceData) {
@@ -208,7 +211,7 @@ export const actions = {
       commit("setBuyerRequests", res.data);
       if (res.links.next) {
         commit('buyerRequestHasNextPage', true);
-        commit('setBuyerRequestPageNo', res.meta.current_page+1);
+        commit('setBuyerRequestPageNo', res.meta.current_page + 1);
       } else {
         commit('buyerRequestHasNextPage', false);
       }
@@ -255,14 +258,32 @@ export const actions = {
     }
   },
 
-  async getEarnings({ commit }) {
-    const res = await Api.get(`seller/getEarnings`);
-    if (res.status === 200) {
-      commit("setEarnings", res.data);
-      console.log("Earnings", res.data);
-    } else {
-      console.log("get Earnings error");
+  async getEarnings({ commit, state }) {
+    if (!state.earnings) {
+      const res = await Api.get(`seller/getEarnings`);
+      if (res.status === 200) {
+        commit("setEarnings", res);
+      } else {
+        console.log("get Earnings error");
+      }
     }
+  },
+
+  async updateProfile({ commit }, payload) {
+    console.log("profile",payload)
+    commit('setRegisterStatus', 2);
+    const resp = await Api.formData('update_profile', payload);
+    if (resp.status == 200) {
+      useToast("Profile Has been Successfully Updated", 'success');
+      commit('setRegisterStatus', 3);
+      localStorage.setItem('userInfo',JSON.stringify(resp))
+    }
+    else {
+      commit('setRegisterStatus', 4);
+      useToast(resp.message);
+    }
+
+    return resp;
   },
 
 

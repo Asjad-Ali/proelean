@@ -131,10 +131,10 @@
                 <!--//dropdown-menu-->
               </div>
               <!--//app-utility-item-->
-              <div class="app-utility-item sm-fold-none">
-                <router-link to="/dashboard/settings" title="Settings">
+              <!-- <div class="app-utility-item sm-fold-none">
+                <router-link to="/dashboard/settings" title="Settings"> -->
                   <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                  <svg
+                  <!-- <svg
                     width="1em"
                     height="1em"
                     viewBox="0 0 16 16"
@@ -152,7 +152,7 @@
                     />
                   </svg>
                 </router-link>
-              </div>
+              </div> -->
               <!--//app-utility-item-->
 
               <div class="app-utility-item app-user-dropdown dropdown">
@@ -178,14 +178,14 @@
                     >
                   </li>
                   <li>
-                    <router-link class="dropdown-item" to="/dashboard/settings"
-                      >Settings</router-link
+                    <router-link class="dropdown-item" to="/dashboard/change_password"
+                      >Change Password</router-link
                     >
                   </li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
-                    <router-link class="dropdown-item" to="/login"
-                      >Log Out</router-link
+                    <button class="dropdown-item" @click="handleLogout()"
+                      >Log Out</button
                     >
                   </li>
                 </ul>
@@ -209,6 +209,7 @@
 </template>
 
 <script>
+import Api from "@/services/API";
 import SidePanel from "./SidePanel.vue";
 import { onMounted, computed, ref } from "vue";
 import { useStore } from "vuex";
@@ -221,6 +222,16 @@ export default {
     const sidePanelOpened = ref(false);
 
     const isBuyerMode = computed(() => store.getters.isBuyerMode);
+
+    const handleLogout = async () => {
+      const response = await Api.post("logout");
+      if (response.status === 200) {
+        localStorage.removeItem("PROELEAN_TOKEN");
+        localStorage.removeItem("userInfo");
+        router.go();
+      }
+    };
+
     onMounted(() => {
       if (isBuyerMode.value) {
         store.commit("toggleUserMode");
@@ -242,6 +253,7 @@ export default {
       imgURL: process.env.VUE_APP_URL,
       isBuyerMode,
       handleUserMode,
+      handleLogout
     };
   },
 };

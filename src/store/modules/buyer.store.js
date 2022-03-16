@@ -1,13 +1,14 @@
 import Api from '@/services/API';
 import { ref } from 'vue';
 import useToast from '@/composables/useToast.js'
+// import { useRoute } from 'vue-router';
+// const route = useRoute();
 
 export const state = {
     createJob:[],
     allJobs:[],
     service:{},
     cardStripe:{},
-    cardSection: false,
   }
 
 export const getters = {
@@ -15,7 +16,6 @@ export const getters = {
   getAllJobs : state => state.allJobs,
   getService : state => state.service,
   getCardStripe : state => state.cardStripe,
-  getCardSection : state => state.cardSection,
 }
 
 export const  mutations = {
@@ -30,9 +30,6 @@ export const  mutations = {
     },
     setCardStripe(state,stripe){
       state.cardStripe=stripe;
-    },
-    setCardSection(state,value){
-      state.cardSection=value;
     },
   }
 
@@ -80,32 +77,30 @@ export const  actions = {
         }
       },
 
-      async purchaseService({commit,state},payload){
+      async purchaseService({commit,state,getters},payload){
 
         commit('setRegisterStatus', 2);
         const res = await Api.post('token',payload[0].paymentElements);
         if(res.status === 200){
-          commit('setCardSection', true);
-          console.log("Service token:",res.token);
           commit("setCardStripe",res.token);
-          
-          console.log("token",state.cardStripe)
-          payload[1].descriptionData.token = state.cardStripe
+          console.log("token",state.cardStripe);
+          payload[1].descriptionData.token = state.cardStripe;
           const resp = await Api.post('buyer/custom_order',payload[1].descriptionData);
-          if(res.status === 200){
+          if(resp.status === 201){
             commit("setService",resp.data);
             commit('setRegisterStatus', 3);
             useToast(resp.message,'success');
-            window.location.href = "/chat";
+            window.location.href = `/chat/${getters.getSingleService.service_user.id}`
           }
           else{
             useToast(resp.message);
             commit('setRegisterStatus', 4);
-            console.log("Error Service");
+            console.log("Error custom Order");
           }
+          return resp.status;
         }
         else{
-          console.log("Error Stripe");
+          console.log("Error of Card Stripe");
         }
       },
       

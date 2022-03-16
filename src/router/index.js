@@ -10,11 +10,14 @@ import Purchase from '@/views/Purchase.vue'
 
 import CreateJob from '@/views/Buyer/CreateJob.vue'
 import Jobs from '@/views/Buyer/AllJobs.vue'
-import BuyerAccount from '@/views/Buyer/BuyerAccount.vue'
+
 import BuyerServiceDetail from '@/views/Buyer/BuyerServiceDetail.vue'
 import ManageOrder from '@/views/Buyer/AllOrders.vue'
 
-import SellerGigs from '@/views/Seller/Gigs.vue'
+
+import BuyerAccount from '@/views/Seller/Account.vue'
+import BuyerEditProfile from '@/views/Seller/EditProfile.vue'
+import BuyerChangePassword from '@/views/Seller/ChangePassword.vue'
 import SellerOrders from '@/views/Seller/Orders.vue'
 
 
@@ -38,14 +41,19 @@ const routes = [
   },
 
   {
-    path: '/seller-gigs',
-    name: 'SellerGigs',
-    component: SellerGigs,
-  },
-  {
     path: '/buyer-account',
     name: 'BuyerAccount',
     component: BuyerAccount,
+  },
+  {
+    path: '/buyer/edit-profile',
+    name: 'BuyerEditProfile',
+    component: BuyerEditProfile,
+  },
+  {
+    path: '/buyer/change_password',
+    name: 'BuyerChangePassword',
+    component: BuyerChangePassword,
   },
   {
     path: '/gig-detail/:id',
