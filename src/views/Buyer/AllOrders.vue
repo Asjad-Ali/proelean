@@ -189,7 +189,7 @@
                 </div>
                 <div v-else>
                   <div
-                  class="table-responsive box-table mt-1 bg-white" 
+                  class="table-responsive box-table mt-1 bg-white mb-5" 
                   >
                       <table class="table table-bordered" >
                         <thead>

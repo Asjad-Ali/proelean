@@ -33,7 +33,7 @@
 }
 
   svg.svg-inline--fa.fa-search.fa-w-16.position-absolute {
-    margin-top: 15px;
+    margin-top: 10px;
     margin-left: 10px;
 }
 .seller-app .bg-success {
@@ -236,9 +236,9 @@
 }
 
 .seller-app .form-control {
-    padding-top: 0.6rem;
+    /* padding-top: 0.6rem;
     padding-bottom: 0.6rem;
-    /* height: 2.5rem; */
+    height: 2.5rem; */
     border-color: #e7e9ed;
     color: #5d6778;
 }
