@@ -28,6 +28,10 @@ export const mutations = {
     state.setPasswordSection = value
   },
 
+  setUser(state, value) {
+    state.user = value
+  },
+
   setUserAsSeller(state) {
     state.user.isFreelancer = 1;
     console.log(state.user)
@@ -83,6 +87,24 @@ export const actions = {
     return resp;
   },
 
+  async updateProfile({ commit }, payload) {
+    console.log("profile",payload)
+    commit('setRegisterStatus', 2);
+    const resp = await Api.formData('update_profile', payload);
+    if (resp.status == 200) {
+      useToast("Profile Has been Successfully Updated", 'success');
+      commit('setRegisterStatus', 3);
+      localStorage.setItem('userInfo',JSON.stringify(resp))
+      commit('setUser',resp)
+    }
+    else {
+      commit('setRegisterStatus', 4);
+      useToast(resp.message);
+    }
+
+    return resp;
+  },
+
   async forgotPassword({ commit }, payload) {
     console.log("Email", payload)
     commit('setRegisterStatus', 2);
@@ -107,7 +129,7 @@ export const actions = {
       commit('setRegisterStatus', 3);
     } else {
       commit('setRegisterStatus', 4);
-      useToast(resp.message,'success');
+      useToast(resp.message);
     }
   },
 
