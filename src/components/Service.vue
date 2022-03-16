@@ -1,7 +1,7 @@
 <template>
 <div>
   <div v-if="service">
-      <div class="card h-100 mb-4">
+      <div class="card h-100 mb-4 position-relative">
         <router-link v-if="!$store.getters.isBuyerMode" :to="{name:'GigDetail', params:{id:service.id}}">
           <img class="img-fluid" :src="imgURL+'/'+service.service_media[0].media"  />
         </router-link>
@@ -57,11 +57,11 @@
                   <i class="mdi mdi-dots-vertical"></i>
                 </a>
                 <ul  class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <li class="dropdown-item"><router-link :to="{name:'GigDetail', params:{id:service.id}}">Open</router-link></li>
-                  <li class="dropdown-item"><router-link :to="{name:'UpdateService', params:{id:service.id}}">Edit</router-link></li>
+                  <router-link :to="{name:'GigDetail', params:{id:service.id}}"><li class="dropdown-item">Open </li></router-link>
+                  <router-link :to="{name:'UpdateService', params:{id:service.id}}"><li class="dropdown-item">Edit </li></router-link>
                   <li @click="$emit('selectService',service)" class="dropdown-item"><a aria-hidden="true"
                       data-toggle="modal"
-                      class="cursor-pointer"
+                      class="cursor-pointer"  
                       data-target="#exampleModalCenter">Delete</a></li>
                 </ul>
               </div>
@@ -80,6 +80,12 @@
             </div>
           </div>
         </div>
+        <!-- Share Button -->
+      <div class="p-2 position-absolute share-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+        <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+      </svg>
+      </div>
       </div>
   </div>
   <div v-else>
@@ -137,4 +143,21 @@ visibility: hidden
 .card{
   margin-bottom: 0px;
 }
+
+.mdi-dots-vertical{
+  font-size: 17px;
+}
+
+.share-btn{
+  top: 5px;
+  right: 5px;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+ 
+ svg.bi.bi-share {
+    color: #15a362;
+}
+
 </style>
