@@ -106,7 +106,7 @@
         </div>
       </div>
       <!--//app-card-body-->
-      <div class="app-card-footer p-4 mt-auto">
+      <div class="app-card-body p-4 w-100 text-center">
         <router-link v-if="$store.getters.isBuyerMode" to="/buyer/edit-profile" class="btn app-btn-secondary">Edit Profile</router-link>
         <router-link v-else  to="/dashboard/edit-profile" class="btn app-btn-secondary">Edit Profile</router-link>
       </div>
