@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-4 right">
+  <div class="col-lg-4 right mt-5">
     <div class="">
       <div class="tab-content">
         <div id="basic" class="tab-pane fade show active">

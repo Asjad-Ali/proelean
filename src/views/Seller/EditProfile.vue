@@ -35,17 +35,17 @@
                   <div class="item-data position-relative mb-3 cursor-pointer" >
                     <img v-if="!imageBase64" 
                       :src="`${imgURL}/${editUser.image ?  editUser.image : '/assets/images/avator.png'}`"
-                      class="profile-image dropdown-user-img img-full rounded-circle"
+                      class="profileImage dropdown-user-img img-full rounded-circle"
                       alt="profile_img"
                     />
                     <img v-else
                       :src="imageBase64"
-                      class="profile-image dropdown-user-img img-full rounded-circle"
+                      class="profileImage dropdown-user-img img-full rounded-circle"
                       alt="profile_img"
                     />
                     <input type="file" ref="profileInput"  accept="image/*" @change="handleProfileImage($event)" style="display:none" />
                   </div>
-                    <i @click="$refs.profileInput.click" class="mdi mdi-pencil position-absolute cursor-pointer rounded-circle" style="bottom:18%; right:9%; font-size:25px;"></i>
+                    <i @click="$refs.profileInput.click" class="mdi mdi-pencil position-absolute cursor-pointer rounded-circle" style="bottom:15%; right:9%; font-size:20px; background-color:white"></i>
                 </div>
                 <!--//col-->
                 <!--//col-->
@@ -177,5 +177,8 @@ export default {
 </script>
 
 <style>
-
+.profileImage{
+    width: 120px !important;
+    height: 120px !important;
+}
 </style>

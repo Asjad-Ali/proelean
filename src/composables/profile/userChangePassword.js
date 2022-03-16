@@ -56,7 +56,6 @@ export default function useChangePassword () {
      }
 
     watch(changePassword.value,(current) => {
-
         if (!current.current_password) {
             changePasswordError.value.current_password = "Current Password is required";
             } else if (current.current_password.length < 6 ) {
@@ -64,19 +63,21 @@ export default function useChangePassword () {
             } else {
             changePasswordError.value.current_password = null;
         }
-        
         if (!current.password) {
             changePasswordError.value.password = "Password is required";
             } else if (current.password.length < 6) {
             changePasswordError.value.password = "Password must be atleast 6 characters";
+            } else if (current.password === current.current_password) {
+            changePasswordError.value.password = "New Password should't match Old Password";
             } else {
             changePasswordError.value.password = null;
         }
-
         if (!current.password_confirmation) {
             changePasswordError.value.password_confirmation = "Confirm Password is required";
             } else if (current.password_confirmation != current.password ) {
             changePasswordError.value.password_confirmation = "Confirm Password dosn't match";
+            }else if (current.password_confirmation === current.current_password) {
+            changePasswordError.value.password = "New Password should't match Old Password";
             } else {
             changePasswordError.value.password_confirmation = null;
         }

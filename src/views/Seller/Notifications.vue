@@ -44,7 +44,7 @@
                   <div class="text-right text-muted ml-2">
                     {{ $filters.timeAgo(notification.created_at) }}
                   </div>
-                  <div>
+                  <!-- <div>
                     <i
                       class="
                         mdi
@@ -58,68 +58,70 @@
                       data-toggle="modal"
                       data-target="#exampleModalCenter"
                     ></i>
-                  </div>
-                  <div
-                    class="modal fade"
-                    id="exampleModalCenter"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="exampleModalCenterTitle"
-                    aria-hidden="true"
-                  >
-                    <div
-                      class="modal-dialog modal-dialog-centered"
-                      role="document"
-                    >
-                      <div class="modal-content">
-                        <div class="modal-header d-flex justify-content-center">
-                          <h5 class="modal-title" id="exampleModalLongTitle">
-                            Delete Notification
-                          </h5>
-                        </div>
-                        <div class="modal-body text-center">
-                          Are you sure you want to delete the service?
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                          >
-                            No
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-danger"
-                            data-dismiss="modal"
-                            @click="deleteNotification"
-                          >
-                            Yes
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  </div> -->
                 </div>
               </span>
             </div>
           </div>
         </div>
-            <div class="app-card-body " v-else>
-            <div class="table-responsive h50vh flex-width-center">
-                <div class="m-5 text-center">
-                  <h5>No notifications found</h5>
-                  <figure class="py-3 m-0">
-                      <img
-                        src="/assets/seller/images/svg-icons/notify.svg"
-                        alt="notfound"
-                        width="150"
-                        />
-                  </figure>
-                </div>
+          <div class="app-card-body " v-else>
+          <div class="table-responsive h50vh flex-width-center">
+              <div class="m-5 text-center">
+                <h5>No notifications found</h5>
+                <figure class="py-3 m-0">
+                    <img
+                      src="/assets/seller/images/svg-icons/notify.svg"
+                      alt="notfound"
+                      width="150"
+                      />
+                </figure>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- Confirmation Modal -->
+
+      <!-- <div
+        class="modal fade"
+        id="exampleModalCenter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                Delete Notification
+              </h5>
+            </div>
+            <div class="modal-body text-center">
+              Are you sure you want to delete the service?
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                No
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-dismiss="modal"
+                @click="deleteNotification"
+              >
+                Yes
+              </button>
             </div>
           </div>
-      </div>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>

@@ -14,7 +14,7 @@
                     <div class="col-md-6">
                         <div class="inputbox mt-3 mr-2 position-relative"> 
                             <input type="number" name="ATM_Number"
-                            v-model="formData[0].paymentElements.number"
+                            v-model="formData.paymentElements.number"
                             id="ATM_Number" class="form-control input-alignment" required="required">  <span> Card Number </span> 
                                     <div class="position-absolute icons-top">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
@@ -22,6 +22,9 @@
                                   <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
                                 </svg>
                             </div>
+                            <div class="text-danger mt-1" v-show="descriptionErrors.number">
+                                  {{ descriptionErrors.number }}
+                                </div>
                             </div>
                     
                     </div>
@@ -30,7 +33,7 @@
                             <div class="inputbox mt-3 mr-2 position-relative"> <input type="number"
                             class="form-control input-alignment"
                             name="cvc"
-                            v-model="formData[0].paymentElements.cvc"
+                            v-model="formData.paymentElements.cvc"
                             id="cvc" required="required"> <span>CVC</span> 
                             <div class="position-absolute icons-top">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-2-back" viewBox="0 0 16 16">
@@ -38,6 +41,9 @@
                                   <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1z"/>
                                 </svg>
                             </div>
+                            <div class="text-danger mt-1" v-show="descriptionErrors.cvc">
+                                  {{ descriptionErrors.cvc }}
+                                </div>
                             </div>
 
                         </div>
@@ -46,7 +52,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="inputbox mt-3 mr-2 position-relative"> <input type="number" name="expiryMonth"
-                            v-model="formData[0].paymentElements.exp_month"
+                            v-model="formData.paymentElements.exp_month"
                             id="expiryMonth"
                             class="form-control input-alignment" required="required"> <span> Card Expiry Month</span> 
                                <div class="position-absolute icons-top">
@@ -55,12 +61,15 @@
                                 <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
                                 </svg>
                             </div>
+                            <div class="text-danger mt-1" v-show="descriptionErrors.exp_month">
+                                  {{ descriptionErrors.exp_month }}
+                                </div>
                             </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-flex flex-row">
                             <div class="inputbox mt-3 mr-2 position-relative"> <input type="number" name="expiryYear"
-                            v-model="formData[0].paymentElements.exp_year"
+                            v-model="formData.paymentElements.exp_year"
                             id="expiryYear" class="form-control input-alignment" required="required"> <span>Card Expiry Year</span>
                                <div class="position-absolute icons-top">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
@@ -68,6 +77,9 @@
                                 <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
                                 </svg>
                             </div>
+                            <div class="text-danger mt-1" v-show="descriptionErrors.exp_year">
+                                  {{ descriptionErrors.exp_year }}
+                                </div>
                              </div>
                         </div>
                     </div>
@@ -81,7 +93,7 @@
                                 <textarea type="text"
                                 class="form-control input-alignment"
                                 name="description"
-                                v-model="formData[1].descriptionData.description"
+                                v-model="formData.descriptionData.description"
                                 id="description"
                                 placeholder="Type description" required="required" />
                                 <div class="text-danger mt-1" v-show="descriptionErrors.description">
@@ -96,7 +108,8 @@
                 <!-- <router-link
                   :to="{ name: 'Chat', params: { id: `${service.service_user.id}` } }"
                 > -->
-                    <button class="btn btn-success px-3" @click="purchaseService()">{{registerStatus == 2 ? 'Loading...' : 'Pay'}}</button>
+                <button class="btn btn-success px-3" :disabled="!Object.values(descriptionErrors).every((value) => !value) || registerStatus == 2"
+                @click="purchaseService()">{{registerStatus == 2 ? 'Loading...' : 'Pay'}}</button>
                 <!-- </router-link> -->
                 </div>
             </div>
@@ -114,7 +127,7 @@
 
 <script>
 import PackageDetail from "@/views/Buyer/PackageDetail.vue";
-import useBuyer from '@/composables/useBuyer.js'
+import useOrder from '@/composables/useOrder.js'
 //import ServiceCard from "@/components/serviceDetail/ServiceCard.vue";
 import { computed, onBeforeMount } from "vue";
 import { useStore } from 'vuex';
@@ -129,7 +142,7 @@ export default {
     const { formData,
           descriptionRegex,
           descriptionErrors,
-          payload } = useBuyer();
+          payload } = useOrder();
     
     onBeforeMount(store.dispatch("userSingleService", payload));
    

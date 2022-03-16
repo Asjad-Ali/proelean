@@ -31,7 +31,7 @@
               <div class="item-data mb-3">
                  <img
                   :src="`${imgURL}/${user.image ?  user.image : '/assets/images/avator.png'}`"
-                  class="profile-image dropdown-user-img img-full rounded-circle"
+                  class="profileImage dropdown-user-img img-full rounded-circle"
                   alt="profile_img"
                 />
               </div>
@@ -132,7 +132,7 @@ export default {
 </script>
 
 <style>
-.profile-image {
+.profileImage {
     width: 120px;
     height: 120px;
 }
