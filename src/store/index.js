@@ -51,6 +51,7 @@ export default createStore({
   },
   actions: {
     async getNotification({ commit }) {
+      commit('setLoader',1);
       const res = await Api.get("notification");
       if (res.status === 200) {
         commit("setRecentNotification", res.notifications.slice(0, 4));
@@ -58,6 +59,7 @@ export default createStore({
       } else {
         commit("setNotification", res.message);
       }
+      commit('setLoader',0);
     },
 
     updateScreenWidthOnResize({ commit }) {
