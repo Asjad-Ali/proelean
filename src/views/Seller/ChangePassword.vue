@@ -97,7 +97,6 @@
           <!--//app-card-body-->
           <div class="app-card-footer p-4 mt-auto ">
             <a class="btn app-btn-secondary mr-2" @click="updatePassword">{{ btnStatus === 2 ? 'Loading...' : 'Update Password' }}</a>
-            <router-link class="btn app-btn-secondary" to="/dashboard">Back</router-link>
           </div>
           <!--//app-card-footer-->
         </div>

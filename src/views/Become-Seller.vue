@@ -145,12 +145,12 @@
                       dataErrors.cinic
                     }}</span>
                   </div>
-                  <div class="upload-cnic cursor-pointer d-flex position-relative align-items-center justify-content-center mx-auto" 
-                  :style="`background-image: url(${preview})`" @click="$refs.cnicInput.click()"
+                  <div class="upload-cnic d-flex position-relative align-items-center justify-content-center mx-auto" 
+                  :style="`background-image: url(${preview})`" 
                   >
-                    <i v-if="!data.cinic"  class="fa fa-file-image-o" style="font-size:20px; "></i>
+                    <i  v-if="!data.cinic" @click="$refs.cnicInput.click()" class="mdi mdi-image-plus cursor-pointer" style="font-size:20px; "></i>
                     <input type="file" ref="cnicInput" accept="image/*" @change="handleCinic($event)" style="display:none" />
-                    <i v-if="data.cinic" @click="removeImage(index)" class="fa fa-close position-absolute" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                    <i v-if="data.cinic" @click="removeImage()" class="mdi mdi-close-box position-absolute cursor-pointer" style="top:1%; right:1%; font-size:16px; color:red"></i>
                   </div>
                 </div>
               </div>
@@ -306,8 +306,7 @@
                 :disabled="$store.getters.getSubmitStatus"
                 @click.prevent="handleBecomeSeller"
               >
-              <i class="fa fa-spinner fa-spin" v-if="$store.getters.getSubmitStatus"></i>
-                Submit
+                {{ btnStatus == 2 ? 'Loading...' : 'Submit'}}
               </button>
             </div>
           </form>
@@ -331,8 +330,9 @@ export default {
       subCatLoader,
       preview,
       handleCinic,
-      
-      handleBecomeSeller
+      removeImage,
+      handleBecomeSeller,
+      btnStatus
     } = useBecomeSeller();
 
     const selectSubCategory = () => {
@@ -357,11 +357,12 @@ export default {
       subCategories,
       subCatLoader,
       handleCinic,
-      // removeImage,
+      removeImage,
       selectLanguage,
       selectCountry,
       selectAvailability,
-      selectSubCategory
+      selectSubCategory,
+      btnStatus
     };
   },
 };

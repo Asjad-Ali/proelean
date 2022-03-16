@@ -7,7 +7,6 @@ export const state = {
     countries: [],
     languages: [],
     deliveryDays: [],
-    submitLoader: false,
     error: null,
   }
 
@@ -30,7 +29,6 @@ export const getters = {
   getCountries: state => state.countries,
   getLanguages: state => state.languages,
   getDeliveryDays: state => state.deliveryDays,
-  getSubmitStatus: state => state.submitLoader,
 }
 
 export const  actions = {
@@ -58,17 +56,18 @@ export const  actions = {
       }
     },
 
-    async handleBecomeSeller({ commit, state }, payload) {
+    async handleBecomeSeller({ commit }, payload) {
+      commit('setRegisterStatus', 2);
       console.log(payload)
-      state.submitLoader = true;
       const res = await Api.formData('become_freelancer',payload);
       if(res.status === 201) {
         commit('setUserAsSeller');
         useToast(res.message,'success');
+        commit('setRegisterStatus', 3);
         router.go()
       } else {
         useToast(res.message);
       }
-      state.submitLoader = false;
+
     },
   }
