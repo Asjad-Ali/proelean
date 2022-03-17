@@ -78,7 +78,7 @@
               class="btn btn-success mx-2 my-1"
               @click.prevent="deleteJob(request.id)"
             >
-              Skip
+              Cancel Offer
             </button>
           </div>
           <!--//app-card-footer-->

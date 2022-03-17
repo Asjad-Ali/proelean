@@ -140,7 +140,7 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="setting-input-2" class="form-label"
-                      >Delivery Time</label
+                      >Delivery Days</label
                     >
                     <select
                       id="deliveryTime"
@@ -172,6 +172,7 @@
                       </div>
                       <input
                         type="number"
+                        min="5"
                         class="form-control"
                         name="price"
                         v-model="createService.price"
@@ -179,6 +180,9 @@
                         required=""
                       />
                     </div>
+                    <div class="text-danger mt-1" v-show="createServiceError.price">
+                        {{ createServiceError.price }}
+                      </div>
                   </div>
                 </div>
               </div>
@@ -207,6 +211,7 @@ export default {
     const store = useStore();
     const {
       createService,
+      createServiceError,
       data,
       bannersBase64,
       gigCreation,
@@ -221,6 +226,7 @@ export default {
     return {
       registerStatus: computed(() => store.getters.getRegisterStatus),
       createService,
+      createServiceError,
       getCategory,
       data,
       gigCreation,
