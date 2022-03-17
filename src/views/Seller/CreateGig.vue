@@ -46,7 +46,9 @@
               </div>
               <div class="mb-5">
                 <label for="setting-input-2" class="form-label"
-                  >Upload Images</label
+                  >Upload Images 
+                  <span style="font-size: 12px; color:red;font-weight: 500;">Perfect Thumbnail Size (650*350)</span>
+                  </label
                 >
                 <div class="wrapper d-flex flex-start">
                   <div
