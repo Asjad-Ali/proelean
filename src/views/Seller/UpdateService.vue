@@ -159,7 +159,7 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="setting-input-2" class="form-label"
-                      >Delivery Time</label
+                      >Delivery Days</label
                     >
                     <select
                       id="deliveryTime"

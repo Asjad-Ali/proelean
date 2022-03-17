@@ -36,9 +36,9 @@
             <div class="col-auto">
               <select class="form-select w-auto">
                 <option selected value="option-1">All</option>
-                <option value="option-2">This week</option>
+                <!-- <option value="option-2">This week</option>
                 <option value="option-3">This month</option>
-                <option value="option-4">Last 3 months</option>
+                <option value="option-4">Last 3 months</option> -->
               </select>
             </div>
             
@@ -166,12 +166,12 @@
               <table v-else class="table app-table-hover mb-0 p-1 text-left">
                 <thead>
                   <tr>
-                    <th class="cell">User</th>
-                    <th class="cell">Order Description</th>
-                    <th class="cell">Duration</th>
-                    <th class="cell">Post Date</th>
-                    <th class="cell">Budget</th>
-                    <th class="cell">Status</th>
+                    <th class="cell text-center bold">User</th>
+                    <th class="cell bold">Order Description</th>
+                    <th class="cell bold">Duration</th>
+                    <th class="cell text-center bold">Post Date</th>
+                    <th class="cell text-center bold">Budget</th>
+                    <th class="cell text-center bold">Status</th>
                     <th class="cell"></th>
                   </tr>
                 </thead>
@@ -432,5 +432,8 @@ export default {
 .s-margin {
   margin-bottom: 8rem;
   margin-top: 5rem;
+}
+.bold{
+  font-weight: bolder !important;
 }
 </style>

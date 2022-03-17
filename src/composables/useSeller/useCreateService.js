@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
@@ -33,6 +33,26 @@ export default function useCreateService() {
     delivery_time: '',
     price: "",
   });
+
+  const createServiceError = ref({
+    s_description: "",
+    description: "",
+    banner: [],
+    category_id: "",
+    sub_category_id: "",
+    delivery_time: '',
+    price: "",
+  });
+
+  watch(createService.value,(current) => {
+    if(!current.price){
+      createServiceError.value.price = "Budget is required"
+    } else if(current.price < 5){
+      createServiceError.value.price = "Minimum enter budget $5 "
+    } else {
+      createServiceError.value.price = null
+    }
+  })
 
  
   const gigCreation = () => {
@@ -91,6 +111,7 @@ export default function useCreateService() {
     removeImage,
     encodeImageFileAsURL,
     createService,
+    createServiceError,
     bannersBase64,
     convertFileToBase64
   }
