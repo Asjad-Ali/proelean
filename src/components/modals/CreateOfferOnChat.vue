@@ -92,6 +92,7 @@ export default {
     setup() {
         const store = useStore()
         store.dispatch('userServices');
+        store.dispatch('getCountriesLanguage');
         const payload = {
             description: '',
             price: '',

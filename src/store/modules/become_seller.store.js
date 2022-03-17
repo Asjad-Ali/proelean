@@ -46,7 +46,7 @@ export const  actions = {
     },
 
     async getCountriesLanguage({ commit, state }) {
-      if(!state.getDeliveryDays){
+      if(!state.deliveryDays){
         const response = await Api.get('countries&categories');
         if(response.status === 200) {
           commit('setCountries',response.data.countries);
