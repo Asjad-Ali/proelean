@@ -4,7 +4,7 @@
   <CountDown/>
     <AppCard />
     <AnalyticBoxes />
-    <Charts />
+    <Charts v-if="$store.getters.getSellerEarning.analytics" />
     <!-- <StatsSection /> -->
     <ActionCards />
   </div>

@@ -12,6 +12,7 @@
     </div>
     <div
       class="osahan-chat-box p-3 border-top border-bottom bg-light chat-hieght"
+      ref="chat_height"
     >
       <Message
         v-for="(message, index) in $store.getters.getChatMessages"
@@ -33,12 +34,13 @@
 import WriteAMessage from "./WriteAMessage.vue";
 import Message from "./Message.vue";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 
 export default {
   components: { Message, WriteAMessage },
   setup() {
     const store = useStore();
+    const chat_height = ref(null);
 
     const otherMember = computed(() => {
       if (store.getters.getNewConversationUser) {
@@ -52,8 +54,13 @@ export default {
           : null;
       }
     });
+
+    onMounted(() => {
+      console.log(chat_height.value.clientHeight);
+    })
     return {
       otherMember,
+      chat_height
     };
   },
 };
