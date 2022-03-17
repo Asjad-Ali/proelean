@@ -12,7 +12,7 @@
                            <div class="osahan-chat-left">
                               <div class="position-relative icon-form-control p-3 border-bottom">
                                  <i class="fa fa-search position-absolute"></i>
-                                 <input placeholder="Search messages" type="text" class="form-control">
+                                 <input placeholder="Search for users" type="text" class="form-control">
                               </div>
                               <div v-if="$store.getters.getConversationListStatus==='LOADING'">
                                  <p>Loading...</p>

@@ -34,7 +34,7 @@
             :to="{ name: 'Purchase', params: { id: service.id } }"
             class="btn btn-success text-white w-100" v-if="isBuyerMode"
           >
-            Continue
+            Purchase
           </router-link>
 
           <router-link

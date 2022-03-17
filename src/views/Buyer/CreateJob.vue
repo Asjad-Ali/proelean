@@ -64,7 +64,7 @@
                <div class="border-bottom p-3">
                  <div class="row">
                     <div class="form-group col-md-6">
-                    <label>Delivery Time</label>
+                    <label>Delivery Days</label>
                       <select
                         id="inputState"
                         class="form-control"
