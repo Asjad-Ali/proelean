@@ -19,7 +19,7 @@ export const state = {
   buyerRequests: [],
   buyerRequestsCurrentPage: 1,
   hasNextPage: false,
-  earnings: null
+  earnings: {}
 }
 
 export const getters = {
@@ -259,8 +259,9 @@ export const actions = {
   },
 
   async getEarnings({ commit, state }) {
-    if (!state.earnings) {
+    if(!state.earnings.length) {
       const res = await Api.get(`seller/getEarnings`);
+      console.log(res)
       if (res.status === 200) {
         commit("setEarnings", res);
       } else {

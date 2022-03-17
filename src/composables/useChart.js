@@ -1,113 +1,90 @@
-// //import { useStore } from 'vuex'
-// import { onMounted, } from 'vue'
+import { useStore } from 'vuex'
+import { onMounted, ref } from 'vue'
 
 
-// export default function useChart() {
+export default function useChart() {
 
-//     //const store = useStore();
+    const store = useStore();
+    // onBeforeMount(store.dispatch('getEarnings'))
 
-//     window.chartColors = {
-//         green: '#75c181', // rgba(117,193,129, 1)
-//         blue: '#5b99ea', // rgba(91,153,234, 1)
-//         gray: '#a9b5c9',
-//         text: '#252930',
-//         border: '#e7e9ed'
-//     };
-    
-//     /* Random number generator for demo purpose */
-//     const randomDataPoint = function(){ return Math.round(Math.random()*100)};
-    
+    window.chartColors = {
+        green: '#75c181', // rgba(117,193,129, 1)
+        blue: '#5b99ea', // rgba(91,153,234, 1)
+        gray: '#a9b5c9',
+        text: '#252930',
+        border: '#e7e9ed'
+    };
 
-//     const lineChartConfig = {
-//         type: 'line',
+    // /* Random number generator for demo purpose */
+    // const randomDataPoint = function(){ return Math.round(Math.random()*100)};
 
-//         data: {
-//             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-            
-//             datasets: [{
-//                 label: 'Dataset',
-//                 backgroundColor: "rgba(117,193,129,0.2)", 
-//                 borderColor: "rgba(117,193,129, 0.8)", 
-//                 data: [
-//                     randomDataPoint(),
-//                     randomDataPoint(),
-//                     randomDataPoint(),
-//                     randomDataPoint(),
-//                     randomDataPoint(),
-//                     randomDataPoint(),
-//                     randomDataPoint()
-//                 ],
-//             }]
-//         },
-//         options: {
-//             responsive: true,		
-            
-//             legend: {
-//                 display: true,
-//                 position: 'bottom',
-//                 align: 'end',
-//             },
+    const Impressions = store.getters.getSellerEarning;
+    const barChartConfig = ref({
+        type: 'bar',
 
-//             tooltips: {
-//                 mode: 'index',
-//                 intersect: false,
-//                 titleMarginBottom: 10,
-//                 bodySpacing: 10,
-//                 xPadding: 16,
-//                 yPadding: 16,
-//                 borderColor: window.chartColors.border,
-//                 borderWidth: 1,
-//                 backgroundColor: '#fff',
-//                 bodyFontColor: window.chartColors.text,
-//                 titleFontColor: window.chartColors.text,
-//                 callbacks: {
-//                     label: function(tooltipItem, data) {	                 
-//                         return tooltipItem.value + '%';   
-//                     }
-//                 },
-                
+        data: {
+            labels: Impressions.analytics ? Impressions.analytics.reverse().map(week => week.day) : [],
+            datasets: [{
+                label: 'Clicks',
+                backgroundColor: window.chartColors.green,
+                borderColor: window.chartColors.green,
+                borderWidth: 1,
+                maxBarThickness: 16,
 
-//             },
-//             hover: {
-//                 mode: 'nearest',
-//                 intersect: true
-//             },
-//             scales: {
-//                 xAxes: [{
-//                     display: true,
-//                     gridLines: {
-//                         drawBorder: false,
-//                         color: window.chartColors.border,
-//                     },
-//                     scaleLabel: {
-//                         display: false,
-                    
-//                     }
-//                 }],
-//                 yAxes: [{
-//                     display: true,
-//                     gridLines: {
-//                         drawBorder: false,
-//                         color: window.chartColors.border,
-//                     },
-//                     scaleLabel: {
-//                         display: false,
-//                     },
-//                     ticks: {
-//                         beginAtZero: true,
-//                         userCallback: function(value, index, values) {
-//                             return value.toLocaleString() + '%';  
-//                         }
-//                     },
-//                 }]
-//             }
-//         }
-//     };
+                data: Impressions.analytics ? Impressions.analytics.reverse().map(week => week.clicks) : []
+            }]
+        },
+        options: {
+            responsive: true,
+            aspectRatio: 1.5,
+            legend: {
+                position: 'bottom',
+                align: 'end',
+            },
+            title: {
+                display: true,
+                text: 'Weekly Impressions'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+                titleMarginBottom: 10,
+                bodySpacing: 10,
+                xPadding: 16,
+                yPadding: 16,
+                borderColor: window.chartColors.border,
+                borderWidth: 1,
+                backgroundColor: '#fff',
+                bodyFontColor: window.chartColors.text,
+                titleFontColor: window.chartColors.text,
 
-//     onMounted(() => {
-//         var lineChart = document.getElementById('chart-line').getContext('2d');
-// 	    window.myLine = new Chart(lineChart, lineChartConfig);
-//         store.dispatch("getEarnings");
-//     })
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    gridLines: {
+                        drawBorder: false,
+                        color: window.chartColors.border,
+                    },
 
-// }
+                }],
+                yAxes: [{
+                    display: true,
+                    gridLines: {
+                        drawBorder: false,
+                        color: window.chartColors.borders,
+                    },
+
+
+                }]
+            }
+
+        }
+    });
+
+    onMounted(() => {
+        const barChart = document.getElementById('canvas-barchart').getContext('2d');
+        window.myBar = new window.Chart(barChart, barChartConfig.value);
+    })
+
+}
