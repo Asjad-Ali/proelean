@@ -23,7 +23,7 @@ import SellerOrders from '@/views/Seller/Orders.vue'
 
 import ManageService from '@/views/Seller/ManageService.vue'
 import FavouriteService from '@/views/Seller/FavouriteService.vue'
-import OrderDetails from '@/views/OrderDtails.vue'
+import OrderDetails from '@/views/OrderDetails.vue'
 
 
 import sellerRoutes from './seller.js'
