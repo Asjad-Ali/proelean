@@ -13,25 +13,25 @@
       <div class="col-lg-3 col-md-12 col-12">
         <h4>Days</h4>
         <div class="covid-content">
-          <h1>00</h1>
+          <h2>00</h2>
         </div>
       </div>
       <div class="col-lg-3 col-md-12 col-12">
         <h4>Hours</h4>
         <div class="covid-content">
-          <h1>20</h1>
+          <h2>20</h2>
         </div>
       </div>
       <div class="col-lg-3 col-md-12 col-12">
         <h4>Minutes</h4>
         <div class="covid-content">
-          <h1>30</h1>
+          <h2>30</h2>
         </div>
       </div>
       <div class="col-lg-3 col-md-12 col-12">
         <h4>Seconds</h4>
         <div class="covid-content">
-          <h1>22</h1>
+          <h2>22</h2>
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@ export default {};
     padding-bottom: 10px;
     padding-top: 10px;
 }
-h1{
+h2{
   color: #2DBCB2;
 }
 </style>
