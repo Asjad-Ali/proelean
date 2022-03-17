@@ -5,12 +5,12 @@
         <div class="app-card-header p-3">
           <div class="row justify-content-between align-items-center">
             <div class="col-auto">
-              <h4 class="app-card-title">Bar Chart Example</h4>
+              <h4 class="app-card-title">Weekly Impressions</h4>
             </div>
             <!--//col-->
             <div class="col-auto">
               <div class="card-header-action">
-                <a href="charts.html">More charts</a>
+                <span>12-12-2022 - today</span>
               </div>
               <!--//card-header-actions-->
             </div>
@@ -21,14 +21,14 @@
         <!--//app-card-header-->
         <div class="app-card-body p-3 p-lg-4">
           <div class="mb-3 d-flex">
-            <select
+            <!-- <select
               class="form-select form-select-sm ms-auto d-inline-flex w-auto"
             >
               <option value="1" selected>This week</option>
               <option value="2">Today</option>
               <option value="3">This Month</option>
               <option value="3">This Year</option>
-            </select>
+            </select> -->
           </div>
           <div class="chart-container">
             <canvas id="canvas-barchart"></canvas>
@@ -180,13 +180,13 @@
 </template>
 
 <script>
-//import useChart from "@/composables/useChart.js";
+import useChart from "@/composables/useChart.js";
 //import { useStore } from 'vuex'
 import { onMounted } from '@vue/runtime-core';
 export default {
   setup() {
     //const store = useStore()
-    //useChart();
+    useChart();
 
     onMounted(() => {
     

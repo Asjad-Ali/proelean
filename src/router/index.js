@@ -12,7 +12,7 @@ import CreateJob from '@/views/Buyer/CreateJob.vue'
 import Jobs from '@/views/Buyer/AllJobs.vue'
 
 import BuyerServiceDetail from '@/views/Buyer/BuyerServiceDetail.vue'
-import ManageOrder from '@/views/Buyer/AllOrders.vue'
+import ManageOrder from '@/views/Buyer/ManageOrder.vue'
 
 
 import BuyerAccount from '@/views/Seller/Account.vue'

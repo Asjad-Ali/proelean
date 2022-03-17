@@ -226,13 +226,47 @@
                             <td class="text-center">{{ order.created_at }}</td>
                             <td class="text-center">{{ order.delivery_time }}</td>
                             <td class="text-center">{{ order.amount }}.0{{ order.currency }}</td>
-                            <td>
-                              <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 1"> Active </button>
-                              <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
-                              <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 3"> Revision </button>
-                              <button class="btn btn-sm btn-success w-100" v-if="order.status_id == 4"> Complete </button>
-                              <button class="btn btn-sm btn-danger w-100" v-if="order.status_id == 5"> Disputed </button>
-                              <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 6"> Late </button>
+                            <td class="text-center">
+                              <a
+                                ><span
+                                  class="badge bg-success"
+                                  v-if="order.status_id == 1"
+                                  >Active</span
+                                ></a
+                              >
+                              <a
+                                ><span
+                                  class="badge bg-secondary"
+                                  v-if="order.status_id == 2"
+                                  >Delivered</span
+                                ></a
+                              >
+                              <a
+                                ><span class="badge bg-info" v-if="order.status_id == 3"
+                                  >Revision</span
+                                ></a
+                              >
+                              <a
+                                ><span
+                                  class="badge bg-primary"
+                                  v-if="order.status_id == 4"
+                                  >Completed</span
+                                ></a
+                              >
+                              <a
+                                ><span
+                                  class="badge bg-danger"
+                                  v-if="order.status_id == 5"
+                                  >Disputed</span
+                                ></a
+                              >
+                              <a
+                                ><span
+                                  class="badge bg-warning"
+                                  v-if="order.status_id == 6"
+                                  >Late</span
+                                ></a
+                              >
                             </td>
                             <td class="text-center">
                               <!-- Button trigger modal -->
@@ -436,5 +470,17 @@ export default {
 .s-margin{
   margin-bottom: 8rem;
   margin-top: 5rem ;
+}
+.badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
 }
 </style>

@@ -89,9 +89,9 @@ export default {
   object-fit: cover;
 }
 .my-message{
-  background: #15a362;
+  background:#8396ab ;
 }
 .other-message{
-  background: #8396ab;
+  background: #15a362;
 }
 </style>  
