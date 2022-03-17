@@ -62,13 +62,13 @@
           <div class="item p-3">
             <div class="row align-items-center">
               <div class="col">
-                <div class="title mb-1">Project lorem ipsum dolor sit amet</div>
+                <div class="title mb-1">Inbox response rate</div>
                 <div class="progress">
                   <div
                     class="progress-bar bg-success"
                     role="progressbar"
-                    style="width: 25%"
-                    aria-valuenow="25"
+                    style="width: 100%"
+                    aria-valuenow="100"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
@@ -76,19 +76,7 @@
               </div>
               <!--//col-->
               <div class="col-auto">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-chevron-right"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                  />
-                </svg>
+            <p> 100%</p>
               </div>
               <!--//col-->
             </div>
@@ -101,14 +89,14 @@
             <div class="row align-items-center">
               <div class="col">
                 <div class="title mb-1">
-                  Project duis aliquam et lacus quis ornare
+                  Order response rate
                 </div>
                 <div class="progress">
                   <div
                     class="progress-bar bg-success"
                     role="progressbar"
-                    style="width: 34%"
-                    aria-valuenow="34"
+                    style="width: 100%"
+                    aria-valuenow="100"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
@@ -116,19 +104,7 @@
               </div>
               <!--//col-->
               <div class="col-auto">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-chevron-right"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                  />
-                </svg>
+            <p>100%</p>
               </div>
               <!--//col-->
             </div>
@@ -141,14 +117,14 @@
             <div class="row align-items-center">
               <div class="col">
                 <div class="title mb-1">
-                  Project sed tempus felis id lacus pulvinar
+                 Order completion
                 </div>
                 <div class="progress">
                   <div
-                    class="progress-bar bg-success"
+                    class="progress-bar bg-danger"
                     role="progressbar"
-                    style="width: 68%"
-                    aria-valuenow="68"
+                    style="width: 40%"
+                    aria-valuenow="40"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
@@ -156,19 +132,7 @@
               </div>
               <!--//col-->
               <div class="col-auto">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-chevron-right"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                  />
-                </svg>
+           <p>40%</p>
               </div>
               <!--//col-->
             </div>
@@ -181,14 +145,14 @@
             <div class="row align-items-center">
               <div class="col">
                 <div class="title mb-1">
-                  Project sed tempus felis id lacus pulvinar
+                 Delivered on time
                 </div>
                 <div class="progress">
                   <div
                     class="progress-bar bg-success"
                     role="progressbar"
-                    style="width: 52%"
-                    aria-valuenow="52"
+                    style="width: 100%"
+                    aria-valuenow="100"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
@@ -196,19 +160,7 @@
               </div>
               <!--//col-->
               <div class="col-auto">
-                <svg
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 16 16"
-                  class="bi bi-chevron-right"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-                  />
-                </svg>
+          <p>100%</p>
               </div>
               <!--//col-->
             </div>
@@ -217,6 +169,7 @@
           </div>
           <!--//item-->
         </div>
+       
         <!--//app-card-body-->
       </div>
       <!--//app-card-->
