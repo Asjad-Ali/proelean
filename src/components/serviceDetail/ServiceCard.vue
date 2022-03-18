@@ -18,18 +18,33 @@
           </div>
           <article>
             <div class="d-flex">
-              <b class="delivery"
-                ><i class="fa fa-clock-o" aria-hidden="true"></i> Delivery: {{service.delivery_time}}
-                </b
-              >
-              <b class="delivery ml-3"
-                ><i class="fa fa-refresh" aria-hidden="true"></i> Revision: {{service.revision}}</b
+              <div class="delivery"
+                ><i class="mdi mdi-clock" aria-hidden="true"></i><b class="mr-2"> Delivery Time:  </b> {{ service.delivery_time}}
+                </div >
+              <div class="delivery ml-3"
+                ><i class="mdi mdi-sync" aria-hidden="true"></i> <b class="mr-2"> Revision:  </b> {{ service.revision}}</div
               >
             </div>
           </article>
-          <h3 ><b> Price</b><span class="price">${{service.price}}</span></h3>
-
-
+          <article>
+            <div>
+              <div class="delivery"
+                ><i class="mdi mdi-radiobox-blank" aria-hidden="true"></i><b class="mr-2"> Category :  </b> {{ service.category.title}}
+                </div >
+            </div>
+            <div>
+              <div class="delivery">
+              <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> {{ service.sub_category.title}}</div
+              >
+            </div>
+          </article>
+          <article>
+            <div>
+              <div class="delivery"
+                ><i class="mdi mdi-currency-eur" aria-hidden="true"></i><b class="mr-2"> Price :  </b> €{{service.price}}
+                </div >
+            </div>
+          </article>
           <router-link
             :to="{ name: 'Purchase', params: { id: service.id } }"
             class="btn btn-success text-white w-100" v-if="isBuyerMode"

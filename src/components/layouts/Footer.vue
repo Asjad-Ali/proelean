@@ -5,7 +5,7 @@
               <div class="footer-list">
                  <h4>Categories</h4>
                  <ul class="list">
-                    <li v-for="category in $store.getters.getCategories" :key="category.id">
+                    <li  v-for="(category,index) in $store.getters.getCategories" :key="category.id" v-show="index < 6">
                        <router-link :to="'/gigs/'+category.slug" >{{category.title}}</router-link>
                      </li>
                  </ul>

@@ -118,7 +118,7 @@
                 >
               {{registerStatus == 2 ? 'Loading...' : 'Agree & Joins'}} 
               </button>
-              <div class="text-center mt-3 border-bottom pb-3">
+              <!-- <div class="text-center mt-3 border-bottom pb-3">
                 <p class="small text-muted">Or login with</p>
                 <div class="row">
                   <div class="col-6">
@@ -138,7 +138,7 @@
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="py-3 d-flex align-item-center">
                 <a href="forgot-password.html">Forgot password?</a>
                 <span class="ml-auto">
