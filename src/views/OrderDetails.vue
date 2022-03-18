@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container-fluid">
+  <div class="container-fluid" v-if="order">
     <CountDown class="my-3"/>
     <!-- {{order}} -->
     <div class="row my-4">
@@ -94,11 +94,11 @@
            </div>
            <div class="order-deatils-card">
              <p class="text-muted">Delivery date</p>
-             <p>{{order.deliveryDate}}</p>
+             <p>{{order.end_date}}</p>
            </div>
            <div class="order-deatils-card">
              <p class="text-muted">Duration</p>
-             <p>{{order.duration}}</p>
+             <p>{{order.delivery_time}}</p>
            </div>
            <div class="order-deatils-card">
              <p class="text-muted">Revisions</p>
@@ -122,69 +122,58 @@
     </div>
  
   </div>
+  <div v-else>
+    <h1 class="text-center">No Order found</h1>
+  </div>
 </template>
 
 <script>
 import { computed, onMounted, ref } from '@vue/runtime-core';
 import CountDown from "../components/Seller/Dashboard/CountDown.vue";
-import useOrder from "../composables/useOrder.js"
 import TimeLine from "./TimeLine.vue";
 import { useStore } from 'vuex';
+import { useRoute } from 'vue-router';
 export default {
    components: 
    { CountDown, TimeLine },
-  //  props :{
-  //     order:{
-  //       type: Object,
-  //       required: true
-  //     }
-  //   },
    setup(){
     const store = useStore();
-    const { order } = useOrder();
-
-    const sellerOrderURL = "seller/orders?status=";
-    onMounted(() => {
-      store.dispatch("myOrders", sellerOrderURL);
-    });
-    const orderSection = ref(false);
+    const route = useRoute();
+    const order=ref();
+    
+    // const sellerOrderURL = "seller/orders?status=";
+    const payload = {
+      id: route.params.id,
+      orderNo: route.params.orderNo,
+      type: "object"
+    }
     const orderType = ref({
-      order_no: order.orderNo,
+      order_no: payload.orderNo,
       type: 5,
       description: "i want to cancel the order",
       url: "seller/manage_order",
     });
+    
 
-    const singleOrder = ref(null);
-    const getOrderNumber = (orderNo) => {
-      orderType.value.order_no = orderNo;
-      //singleOrder.value = store.getters.myOrders[index];
-      console.log("order no", orderNo);
-    };
+    onMounted(async () =>{
+        order.value=store.getters.myOrders.find(order => order.id === payload.id);
+        if(!order.value){
+          order.value= await store.dispatch("getOrderById", payload.id);
+        }
+     });
 
-    function showFilter(value) {
-      store.dispatch("myOrders", `${sellerOrderURL}${value}`);
-    }
-    function submitOrder() {
-      orderSection.value = true;
-    }
     function manage_Order() {
       console.log("manage order", orderType.value);
       store.dispatch("manageOrder", orderType.value);
     }
 
     return{
-      orders: computed(() => store.getters.myOrders),
+      order,
       loader: computed(() => store.getters.getLoaderVal),
       imgURL: process.env.VUE_APP_URL,
-      order,
-      showFilter,
+      payload,
       orderType,
-      getOrderNumber,
       manage_Order,
-      singleOrder,
-      orderSection,
-      submitOrder,
     }
    }
    };

@@ -11,23 +11,6 @@ export default function useOrder() {
         type: "SERVICE_DETAIL",
     };
 
-    const order = {
-      id: route.params.id,
-      orderNo: route.params.orderNo,
-      username: route.params.username,
-      description: route.params.description,
-      currency: route.params.currency,
-      amount: route.params.amount,
-      deliveryDate: route.params.end_date,
-      duration: route.params.delivery_time,
-      image: route.params.image,
-      revision: route.params.revision,
-      status_id: route.params.status_id,
-      delivery_note: route.params.delivery_note,
-      created_at: route.params.created_at,
-      type: "object",
-    };
-
     const formData = ref({
             paymentElements: {
                 service_id: payload.id,
@@ -105,7 +88,6 @@ export default function useOrder() {
         service: computed(() => store.getters.getSingleService),
         formData,
         payload,
-        order,
         descriptionRegex,
         descriptionErrors
     }
