@@ -3,7 +3,7 @@
     <div class="">
       <div class="tab-content">
         <div id="basic" class="tab-pane fade show active">
-          <h4>Package Detail</h4>
+          <h4>Service Details</h4>
           <hr />
           <div class="header">
             <p>
