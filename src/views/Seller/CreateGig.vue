@@ -50,7 +50,7 @@
                   <span style="font-size: 12px; color:red;font-weight: 500;">Perfect Thumbnail Size (650*350)</span>
                   </label
                 >
-                <div class="wrapper d-flex flex-start">
+                <div class="wrapper d-flex flex-wrap justify-content-center align-items-center">
                   <div
                     class="file-upload mr-2"
                     @click="$refs.bannerInput.click()"
@@ -245,9 +245,8 @@ export default {
   background: #fafbff;
   height: 100%;
   padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: start;
+ 
+ 
 }
 .wrapper .file-upload {
   height: 100px;
