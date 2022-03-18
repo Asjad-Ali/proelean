@@ -21,10 +21,7 @@
           <AboutService :service="service" />
           <div class="profile-card">
 
-            <h3 v-if="service.offered_services.length">
-              Other Services I Offer
-            </h3>
-            <div class="recommended d-flex flex-wrap justify-content-start">
+             <!-- <div class="recommended d-flex flex-wrap justify-content-start">
               <Loader
                 v-if="
                   $store.getters.getServiceLoader === 'LOADING' &&
@@ -40,7 +37,7 @@
               >
                 <Service :service="offeredService" />
               </div>
-            </div>
+            </div> -->
           </div>
           <ReviewSection />
         </div>
@@ -57,7 +54,6 @@ import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Gallery from "@/components/serviceDetail/Gallery.vue";
 import AboutService from "@/components/serviceDetail/AboutService.vue";
-import Service from "@/components/Service.vue";
 import ReviewSection from "@/components/profile/SellerReviewsSection.vue";
 import ServiceCard from "@/components/serviceDetail/ServiceCard.vue";
 // import PeopleViewProfile from '@/components/serviceDetail/PeopleViewProfile.vue';
@@ -67,7 +63,6 @@ export default {
   components: {
     Gallery,
     AboutService,
-    Service,
     ReviewSection,
     ServiceCard,
     //  PeopleViewProfile,
