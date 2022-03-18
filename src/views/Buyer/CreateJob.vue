@@ -24,13 +24,13 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <select
-                      id="category"
+                      id="category_id"
                       class="form-control"
                       name="category_id"
                       :onchange="onChange"
                       required
                     >
-                    <option selected>Select Category</option>
+                    <option selected disabled>Select Category</option>
                       <option
                         v-for="category in $store.getters.getCategories"
                         :value="category.id"
@@ -43,13 +43,12 @@
                   </div>
                   <div class="form-group col-md-6">
                     <select
-                      id="sub_category"
+                      id="sub_category_id"
                       class="form-control"
                       name="sub_category_id"
-                      v-model="createJob.sub_category_id"
                       required
                     >
-                      <option selected>Select Sub Category</option>
+                      <option selected disabled>Select Sub Category</option>
                       <option
                         v-for="subCategory in $store.getters.getSubCategories"
                         :value="subCategory.id"
@@ -70,7 +69,6 @@
                         class="form-control"
                         name="delivery_time"
                         v-model="createJob.delivery_time"
-                        :onchange="onChange"
                         required
                       >
                         <option selected>Select day</option>
@@ -124,6 +122,7 @@ import { computed, onMounted } from '@vue/runtime-core';
 export default {
   setup() {
     const store = useStore()
+    
     const {
       data,
       createJob,
@@ -136,7 +135,7 @@ export default {
     });
 
     const onChange = () => {
-      data.value.categoryId = document.getElementById("category").value;
+      data.value.categoryId = document.getElementById("category_id").value;
       store.dispatch("loadSubCategories", data.value.categoryId);
     };
 

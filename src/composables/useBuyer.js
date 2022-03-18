@@ -75,8 +75,8 @@ export default function useBecomeSeller() {
     const store = useStore();
     const createJob = ref({
         description: "",
-        category_id: "cU1VOWVkQVVpVElJdll4eThYOXpBZz09",
-        sub_category_id: "cU1VOWVkQVVpVElJdll4eThYOXpBZz09",
+        category_id: "",
+        sub_category_id: "",
         delivery_time: "",
         budget:"",
     });
@@ -91,11 +91,11 @@ export default function useBecomeSeller() {
     }
 
     const jobCreation = () => {
-        store.dispatch('createAJob',createJob.value)
         console.log("Create Job Value", createJob.value);
-        createJob.value = '';
-        document.getElementById("sub_category_id").value = '';
-        document.getElementById("delivery_time").value = '';
+        // store.dispatch('createAJob',createJob.value)
+        // createJob.value = '';
+        // document.getElementById("sub_category_id").value = '';
+        // document.getElementById("delivery_time").value = '';
 
     }
 
