@@ -80,7 +80,7 @@
                     type="password"
                     class="form-control userForm position-relative"
                     :class="[{ 'border-danger ': forgotErrors.confirmation_password },{'border-success': !forgotErrors.confirmation_password}]"
-                    v-model="forgot.confirmation_password"
+                    v-model="forgot.password_confirmation"
                   />
                   <i class="mdi mdi-lock position-absolute" style="left:0"></i>
                   <i @click="toggleVisSignupConPass"  class="mdi position-absolute cursor-pointer" 

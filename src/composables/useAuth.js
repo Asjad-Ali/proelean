@@ -144,7 +144,7 @@ export default function useAuth() {
       email: '',
       token:'',
       password:'',
-      confirmation_password:''
+      password_confirmation:''
    });
 
    const forgotErrors = ref({

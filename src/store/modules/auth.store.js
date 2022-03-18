@@ -134,7 +134,6 @@ export const actions = {
   },
 
   async changePassword({ commit }, payload) {
-    console.log("Email", payload)
     commit('setRegisterStatus', 2);
     const resp = await Api.post('change_password', payload)
     if (resp.status == 200) {
