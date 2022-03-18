@@ -48,7 +48,7 @@
           <!--//app-card-header-->
           <div class="app-card-body p-4">
             <div class="notification-content">
-              {{order.delivery_note}}
+              {{order.delivery_note ? order.delivery_note  : " Yet no delivery notes."}}
             </div>
 
           </div>
