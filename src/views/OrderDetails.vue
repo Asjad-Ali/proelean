@@ -2,6 +2,7 @@
 
   <div class="container-fluid">
     <CountDown class="my-3"/>
+    <!-- {{order}} -->
     <div class="row my-4">
       <div class="col-md-8">
         <div class="app-card app-card-notification shadow-sm">
@@ -37,9 +38,7 @@
                 </h4>
 
                 <ul class="notification-meta list-inline mb-0">
-                  <li class="list-inline-item">1 day ago</li>
-                  <!-- <li class="list-inline-item">|</li>
-                  <li class="list-inline-item">System</li> -->
+                  <li class="list-inline-item">{{order.created_at}}</li>
                 </ul>
               </div>
               <!--//col-->
@@ -49,13 +48,9 @@
           <!--//app-card-header-->
           <div class="app-card-body p-4">
             <div class="notification-content">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere, quas deleniti inventore ab nulla officiis labore sequi, alias tempora dignissimos recusandae voluptate .
+              {{order.delivery_note}}
             </div>
 
-      
-
-
-            
           </div>
           <!--//app-card-body-->
           <div class="app-card-footer px-4 py-3">
@@ -82,41 +77,43 @@
             
               <img src="https://api.dex.proelean.com/uploads/SellerMedia/123416456141564.jpg" class="img-fluid" alt="Responsive image" />
           
-              <p class="p-1"> I will design front end web development using react, bootstrap, CSS</p>
+              <p class="pt-1 pl-1 mt-1">{{order.description}}</p>
               <div>
-            <button type="button" class="btn badge bg-success pl-4 pr-4 text-white">
-              Completed
-            </button>
+            <button type="button" class="btn badge bg-primary pl-4 pr-4 text-white" v-if="order.status_id == 1"> Active </button>
+            <button type="button" class="btn badge bg-secondary pl-4 pr-4 text-white" v-if="order.status_id == 2"> Delivered </button>
+            <button type="button" class="btn badge bg-info pl-4 pr-4 text-white" v-if="order.status_id == 3"> Revision </button>
+            <button type="button" class="btn badge bg-success pl-4 pr-4 text-white" v-if="order.status_id == 4"> Completed </button>
+            <button type="button" class="btn badge bg-danger pl-4 pr-4 text-white" v-if="order.status_id == 5"> Disputed </button>
+            <button type="button" class="btn badge bg-secondary pl-4 pr-4 text-white" v-if="order.status_id == 6"> Late </button>
           </div>
           <hr>
       <div class="order-deatils-header py-2">
              <div class="order-deatils-card">
              <p class="text-muted">Ordered from</p>
-             <p>Asif Ali</p>
+             <p>{{order.username}}</p>
            </div>
            <div class="order-deatils-card">
              <p class="text-muted">Delivery date</p>
-             <p>Sep 17, 7:43 PM</p>
+             <p>{{order.deliveryDate}}</p>
            </div>
            <div class="order-deatils-card">
              <p class="text-muted">Duration</p>
-             <p>3 Days</p>
+             <p>{{order.duration}}</p>
            </div>
            <div class="order-deatils-card">
              <p class="text-muted">Revisions</p>
-             <p>3</p>
+             <p>{{order.revision}}</p>
            </div>
            <div class="order-deatils-card">
              <p class="text-muted">Order number</p>
-             <p>#FO293FD99C53</p>
+             <p>{{order.orderNo}}</p>
            </div>
            <div class="order-deatils-card">
              <p class="text-muted">Price</p>
-             <p>250$</p>
+             <p>{{order.amount}}{{order.currency}}</p>
            </div>
-
-           <button class="btn btn-danger">Cancel Order</button>
-      </div>
+            <button class="btn btn-danger" v-if="order.status_id == 1" @click="manage_Order()">Cancel Order</button>
+        </div>
              
              
           </div>
@@ -128,9 +125,69 @@
 </template>
 
 <script>
+import { computed, onMounted, ref } from '@vue/runtime-core';
 import CountDown from "../components/Seller/Dashboard/CountDown.vue";
+import useOrder from "../composables/useOrder.js"
 import TimeLine from "./TimeLine.vue";
-export default { components: { CountDown, TimeLine } };
+import { useStore } from 'vuex';
+export default {
+   components: 
+   { CountDown, TimeLine },
+  //  props :{
+  //     order:{
+  //       type: Object,
+  //       required: true
+  //     }
+  //   },
+   setup(){
+    const store = useStore();
+    const { order } = useOrder();
+
+    const sellerOrderURL = "seller/orders?status=";
+    onMounted(() => {
+      store.dispatch("myOrders", sellerOrderURL);
+    });
+    const orderSection = ref(false);
+    const orderType = ref({
+      order_no: order.orderNo,
+      type: 5,
+      description: "i want to cancel the order",
+      url: "seller/manage_order",
+    });
+
+    const singleOrder = ref(null);
+    const getOrderNumber = (orderNo) => {
+      orderType.value.order_no = orderNo;
+      //singleOrder.value = store.getters.myOrders[index];
+      console.log("order no", orderNo);
+    };
+
+    function showFilter(value) {
+      store.dispatch("myOrders", `${sellerOrderURL}${value}`);
+    }
+    function submitOrder() {
+      orderSection.value = true;
+    }
+    function manage_Order() {
+      console.log("manage order", orderType.value);
+      store.dispatch("manageOrder", orderType.value);
+    }
+
+    return{
+      orders: computed(() => store.getters.myOrders),
+      loader: computed(() => store.getters.getLoaderVal),
+      imgURL: process.env.VUE_APP_URL,
+      order,
+      showFilter,
+      orderType,
+      getOrderNumber,
+      manage_Order,
+      singleOrder,
+      orderSection,
+      submitOrder,
+    }
+   }
+   };
 </script>
 
 <style scoped>
