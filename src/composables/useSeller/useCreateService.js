@@ -37,7 +37,7 @@ export default function useCreateService() {
   const createServiceError = ref({
     s_description: "",
     description: "",
-    banner: [],
+    banner: "",
     category_id: "",
     sub_category_id: "",
     delivery_time: '',
@@ -45,16 +45,50 @@ export default function useCreateService() {
   });
 
   watch(createService.value,(current) => {
+    if(!current.s_description){
+        createServiceError.value.s_description = "Title is required"
+    }else if(current.s_description.length < 5){
+      createServiceError.value.s_description = "Title must be at least 5 characters"
+    }else{
+        createServiceError.value.s_description = null
+    }
+    if(!current.description){
+        createServiceError.value.description = "Description is required"
+    }else if(current.description.length < 20){
+        createServiceError.value.description = "Description must be at least 20 characters"
+    }else{
+        createServiceError.value.description = null
+    }
+
+    if(!current.category_id){
+        createServiceError.value.category_id = "Category is required"
+    }else{
+        createServiceError.value.category_id = null
+    }
+    if(!current.banner){
+        createServiceError.value.banner = "Thumbnail is required"
+    }else{
+        createServiceError.value.banner = null
+    }
+    if(!current.sub_category_id){
+        createServiceError.value.sub_category_id = "Sub Category is required"
+    }else{
+        createServiceError.value.sub_category_id = null
+    }
+    if(!current.delivery_time){
+        createServiceError.value.delivery_time = "Delivery Days is required"
+    }else{
+        createServiceError.value.delivery_time = null
+    }
     if(!current.price){
-      createServiceError.value.price = "Budget is required"
+        createServiceError.value.price = "Budget is required"
     } else if(current.price < 5){
-      createServiceError.value.price = "Minimum enter budget $5 "
+        createServiceError.value.price = "Minimum budget $5 "
     } else {
-      createServiceError.value.price = null
+        createServiceError.value.price = null
     }
   })
 
- 
   const gigCreation = () => {
     createService.value.sub_category_id = document.getElementById("subCategory").value
     createService.value.delivery_time = document.getElementById("deliveryTime").value

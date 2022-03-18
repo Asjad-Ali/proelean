@@ -39,8 +39,7 @@ export default function useBecomeSeller() {
     });
 
 
-    // const instagram = /^\s*(http\:\/\/)?instagram\.com\/[a-z\d-_]{1,255}\s*$/;
-    
+   
     watch(data.value,(value) => {
 
         if(!value.freelancer_title) {  
@@ -69,6 +68,8 @@ export default function useBecomeSeller() {
 
         if(!value.description) {
             dataErrors.value.description = ' Description is required'
+        }else if(value.description.length < 15){
+            dataErrors.value.description = "Description must be at least 15 characters"
         } else{
             dataErrors.value.description  = null                               
         }

@@ -57,16 +57,20 @@
               <div class="col-6">
                 <div  class="item py-2">
                     <div>
-                      <div class="item-label mb-2"><strong>Name</strong></div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="name"
-                            name="name"
-                            v-model="editUser.name"
-                            placeholder="Enter your name"
-                            required
-                          />
+                      <div class="item-label mb-2"><strong>Name</strong>
+                      <span class="text-danger m-0 p-0">*</span>
+                      <span class="text-danger mt-1" v-show="editUserError.name">
+                      {{ editUserError.name }}</span>
+                      </div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          name="name"
+                          v-model="editUser.name"
+                          placeholder="Enter your name"
+                          required
+                        />
                     </div>
                     <!--//col-->
                 <!--//row-->
@@ -74,17 +78,18 @@
 
               <!--//item-->
               <div class="item py-2">
-                    <div>
-                      <div class="item-label mb-2"><strong>Email</strong></div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="email"
-                            v-model="editUser.email"
-                            placeholder="Enter your Email"
-                            required
-                          />
-                    </div>
+                  <div>
+                    <div class="item-label mb-2"><strong>Email</strong></div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          readonly
+                          id="email"
+                          v-model="editUser.email"
+                          placeholder="Enter your Email"
+                          required
+                        />
+                  </div>
                 <!--//row-->
               </div>
 
@@ -93,7 +98,10 @@
               <div class="col-6">
                 <div class="item py-2">
                     <div>
-                      <div class="item-label mb-2"><strong>Phone</strong></div>
+                      <div class="item-label mb-2"><strong>Phone</strong>
+                      <span class="text-danger mt-1" v-show="editUserError.phone">
+                      {{ editUserError.phone }}</span>
+                      </div>
                           <input
                             type="text"
                             class="form-control"
@@ -109,7 +117,9 @@
                 <!--//item-->
                 <div class="item py-2">
                     <div>
-                      <div class="item-label mb-2"><strong>Address</strong></div>
+                      <div class="item-label mb-2"><strong>Address</strong>
+
+                      </div>
                           <input
                             type="text"
                             class="form-control"
@@ -125,17 +135,17 @@
               </div>
             </div>
             <div class="item pt-2">
-                    <div>
-                      <div class="item-label mb-2"><strong>Description</strong></div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="description"
-                            v-model="editUser.description"
-                            placeholder="Enter your Description"
-                            required
-                          />
-                    </div>
+                <div>
+                  <div class="item-label mb-2"><strong>Description</strong></div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="description"
+                      v-model="editUser.description"
+                      placeholder="Enter your Description"
+                      required
+                    />
+                </div>
               <!--//row-->
             </div>
           </div>
@@ -157,6 +167,7 @@ export default {
   setup(){
     const {
       editUser,
+      editUserError,
       btnStatus,
       imageBase64,
       handleProfileImage,
@@ -166,6 +177,7 @@ export default {
 
     return{
       btnStatus,
+      editUserError,
       imageBase64,
       handleProfileImage,
       update,

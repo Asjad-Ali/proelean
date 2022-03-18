@@ -10,14 +10,9 @@
               <div class="mb-3">
                 <label for="setting-input-1" class="form-label"
                   >Enter Your Title
-                  <span
-                    class="ms-2"
-                    data-container="body"
-                    data-bs-toggle="popover"
-                    data-trigger="hover"
-                    data-placement="top"
-                    data-content="This is a Bootstrap popover example. You can use popover to provide extra info."
-                  ></span>
+                  <span class="text-danger m-0 p-0">*</span>
+                  <span class="text-danger mt-1" v-show="createServiceError.s_description">
+                  {{ createServiceError.s_description }}</span>
                 </label>
                 <input
                   type="text"
@@ -31,7 +26,11 @@
               </div>
               <div class="mb-3">
                 <label for="setting-input-2" class="form-label"
-                  >Describe Your services</label
+                  >Describe Your services
+                  <span class="text-danger m-0 p-0">*</span>
+                  <span class="text-danger mt-1" v-show="createServiceError.description">
+                  {{ createServiceError.description }}</span>
+                  </label
                 >
                 <div class="form-group">
                   <textarea
@@ -46,8 +45,11 @@
               </div>
               <div class="mb-5">
                 <label for="setting-input-2" class="form-label"
-                  >Upload Images 
-                  <span style="font-size: 12px; color:red;font-weight: 500;">Perfect Thumbnail Size (650*350)</span>
+                  >Upload Images
+                  <span style="font-size: 12px;font-weight: 500;">Perfect Thumbnail Size (650*350)</span>
+                    <span class="text-danger m-0 p-0">*</span>
+                    <span class="text-danger mt-1" v-show="createServiceError.banner">
+                    {{ createServiceError.banner }}</span>
                   </label
                 >
                 <div class="wrapper d-flex flex-wrap justify-content-center align-items-center">
@@ -92,7 +94,11 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="setting-input-2" class="form-label"
-                      >Choose a category</label
+                      >Choose a category
+                      <span class="text-danger m-0 p-0">*</span>
+                      <span class="text-danger mt-1" v-show="createServiceError.category_id">
+                      {{ createServiceError.category_id }}</span>
+                      </label
                     >
                     <select
                       id="category"
@@ -100,10 +106,11 @@
                       name="category_id"
                       placeholder="Select Category"
                       data-msg="Please select category."
+                      v-model="createService.category_id"
                       :onchange="getCategory"
                       required=""
                     >
-                      <option disabled="" value="">Select Category</option>
+                      <option selected disabled="" value="">Select Category</option>
                       <option
                         v-for="category in $store.getters.getCategories"
                         :value="category.id"
@@ -115,8 +122,11 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="setting-input-2" class="form-label"
-                      >Choose subcategory</label
-                    >
+                      >Choose a Sub Category
+                      <span class="text-danger m-0 p-0">*</span>
+                      <span class="text-danger mt-1" v-show="createServiceError.sub_category_id">
+                      {{ createServiceError.sub_category_id }}</span>
+                      </label>
                     <select
                       id="subCategory"
                       class="form-control"
@@ -140,13 +150,18 @@
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="setting-input-2" class="form-label"
-                      >Delivery Days</label
+                      >Delivery Days
+                      <span class="text-danger m-0 p-0">*</span>
+                      <span class="text-danger mt-1" v-show="createServiceError.delivery_time">
+                      {{ createServiceError.delivery_time }}</span>
+                      </label
                     >
                     <select
                       id="deliveryTime"
                       class="form-control"
                       name="delivery_time"
                       placeholder="Select Category"
+                      v-model="createService.delivery_time"
                       data-msg="Please select category."
                       required=""
                     >
@@ -162,7 +177,11 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="setting-input-2" class="form-label"
-                      >What is your budget for this service?</label
+                      >What's your budget?
+                      <span class="text-danger m-0 p-0">*</span>
+                      <span class="text-danger mt-1" v-show="createServiceError.price">
+                      {{ createServiceError.price }}</span>
+                      </label
                     >
                     <div class="input-group">
                       <div
@@ -172,26 +191,21 @@
                       </div>
                       <input
                         type="number"
-                        min="5"
                         class="form-control"
                         name="price"
                         v-model="createService.price"
-                        id="inlineFormInputGroup"
                         required=""
                       />
                     </div>
-                    <div class="text-danger mt-1" v-show="createServiceError.price">
-                        {{ createServiceError.price }}
-                      </div>
                   </div>
                 </div>
               </div>
               <button
                 class="btn app-btn-primary"
                 @click.prevent="gigCreation"
-                :disabled="registerStatus === 2"
+                :disabled="!Object.values(createServiceError).every(value => !value) || btnStatus == 2"
               >
-                {{ registerStatus === 2 ? "Loading..." : "Create" }}
+                {{ btnStatus === 2 ? "Loading..." : "Create" }}
               </button>
             </form>
           </div>
@@ -224,7 +238,7 @@ export default {
     onBeforeMount(() => store.dispatch("getCountriesLanguage"));
 
     return {
-      registerStatus: computed(() => store.getters.getRegisterStatus),
+      btnStatus: computed(() => store.getters.getRegisterStatus),
       createService,
       createServiceError,
       getCategory,
