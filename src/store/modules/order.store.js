@@ -30,6 +30,16 @@ export const actions = {
     }
   },
 
+  async getOrderById({ commit }, id) {
+    commit('setLoader', 1);
+    const res = await Api.get(`get_order/${id}`);
+    if (res.status === 200) {
+      commit('setLoader', 0);
+      return res;
+    }
+    return null;
+  },
+
   async manageOrder({ commit, state }, payload) {
     console.log("Order no:", payload.order_no);
     const res = await Api.post(payload.url, payload);
