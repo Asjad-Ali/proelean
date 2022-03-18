@@ -48,7 +48,7 @@
           <!--//app-card-header-->
           <div class="app-card-body p-4">
             <div class="notification-content">
-              {{order.delivery_note ? order.delivery_note  : " Yet no delivery notes."}}
+              {{order.delivery_note ? order.delivery_note  : "Not Yet delivery notes."}}
             </div>
 
           </div>
@@ -123,7 +123,7 @@
  
   </div>
   <div v-else>
-    <h1 class="text-center">No Order found</h1>
+    <h2 class="text-center my-5">No Order Available</h2>
   </div>
 </template>
 
