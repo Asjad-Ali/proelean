@@ -20,11 +20,12 @@
         <a
           aria-hidden="true"
           data-toggle="modal"
-          class="cursor-pointer"
+          class=" btn-light btn-sm rounded text-center cursor-pointer"
           data-target="#exampleModalCenter"
           @click="showOfferModal = true"
           >
-          <i class="mdi mdi-image"></i>
+ 
+          <i class="mdi mdi-plus"></i>
         </a>
           
         
@@ -110,6 +111,7 @@ setup() {
 .message-input{
   padding-left: 55px !important;
 padding-right: 35px !important;
+min-height: 100px;
 }
 
 // Small devices (landscape phones, less than 768px)
