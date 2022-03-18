@@ -18,12 +18,12 @@ export default function useChart() {
     // /* Random number generator for demo purpose */
     // const randomDataPoint = function(){ return Math.round(Math.random()*100)};
 
-    const Impressions = store.getters.getSellerEarning;
+    const Impressions = store.getters.getSellerEarning ? store.getters.getSellerEarning.analytics.reverse() : [];
     const barChartConfig = ref({
         type: 'bar',
 
         data: {
-            labels: Impressions.analytics ? Impressions.analytics.reverse().map(week => week.day) : [],
+            labels: Impressions.map(week => week.day),
             datasets: [{
                 label: 'Clicks',
                 backgroundColor: window.chartColors.green,
@@ -31,7 +31,7 @@ export default function useChart() {
                 borderWidth: 1,
                 maxBarThickness: 16,
 
-                data: Impressions.analytics ? Impressions.analytics.reverse().map(week => week.clicks) : []
+                data: Impressions.map(week => week.clicks)
             }]
         },
         options: {
