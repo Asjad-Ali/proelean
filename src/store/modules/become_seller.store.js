@@ -45,8 +45,8 @@ export const  actions = {
       });
     },
 
-    async getCountriesLanguage({ commit, state }) {
-      if(!state.getDeliveryDays){
+    async getCountriesLanguage({ commit, getters }) {
+      if(!getters.getLanguages.length){
         const response = await Api.get('countries&categories');
         if(response.status === 200) {
           commit('setCountries',response.data.countries);
