@@ -157,7 +157,8 @@
 <script>
 import { useStore } from "vuex";
 import useAuth from "@/composables/useAuth";
-import { computed } from "vue";
+import { computed, onBeforeMount } from "vue";
+import { useRouter } from 'vue-router';
 export default {
   name: "Register",
   setup() {
@@ -172,12 +173,22 @@ export default {
       toggleVisSignupConPass
       } = useAuth();
 
-    let store = useStore();
+    const store = useStore();
+    const router = useRouter();
+
+    onBeforeMount(() => {
+      // if user already login return back to '/'
+      if (localStorage.getItem("PROELEAN_TOKEN")) {
+        router.push({ name: "Home" });
+      }
+    });
 
     const handleRegister = (e) => {
       e.preventDefault();
       store.dispatch("register", signup.value);
     };
+
+    
     const registerStatus = computed( () => {
       return   store.getters.getRegisterStatus;
     });

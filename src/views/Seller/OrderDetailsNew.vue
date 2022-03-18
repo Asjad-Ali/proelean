@@ -1,5 +1,5 @@
 <template>
-  <OrderDetail/>
+    <OrderDetail/>
 </template>
 
 <script>

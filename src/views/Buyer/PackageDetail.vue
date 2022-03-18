@@ -30,7 +30,7 @@
                      </path>
                   </g>
                </svg>
-                Delivery: {{service.delivery_time}}
+                Delivery Time: {{service.delivery_time}}
             </b>
             <b class="delivery ml-3" data-v-0d25e83c="">
                <svg class="svg-inline--fa fa-refresh fa-w-16" aria-hidden="true" data-v-0d25e83c="" focusable="false" data-prefix="fa" data-icon="refresh" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
