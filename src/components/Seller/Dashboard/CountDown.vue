@@ -5,10 +5,10 @@
       alert alert-dismissible
       shadow-sm
       mb-4
-      border-left-decoration
       pb-3
     "
   >
+<h4 style="border-bottom: 1px solid #e7e9ed;">Time left to deliver</h4>
     <div class="row d-flex justify-content-center text-center">
       <div class="col-lg-3 col-md-12 col-12">
         <h4>Days</h4>
