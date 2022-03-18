@@ -7,6 +7,7 @@ export const state = {
     countries: [],
     languages: [],
     deliveryDays: [],
+    revisions: [],
     error: null,
   }
 
@@ -20,6 +21,9 @@ export const  mutations = {
   setDeliveryDays(state,deliveryDays) {
     state.deliveryDays = deliveryDays;
   },
+  setRevisions(state, revisions){
+    state.revisions = revisions;
+  },
   setError(state,error){
     state.error=error;
   }
@@ -28,6 +32,7 @@ export const  mutations = {
 export const getters = {
   getCountries: state => state.countries,
   getLanguages: state => state.languages,
+  getRevisions: state => state.revisions,
   getDeliveryDays: state => state.deliveryDays,
 }
 
@@ -52,6 +57,7 @@ export const  actions = {
           commit('setCountries',response.data.countries);
           commit('setLanguages',response.data.languages);
           commit('setDeliveryDays',response.data.delivery_days);
+          commit('setRevisions',response.data.revisions);
         }
       }
     },
