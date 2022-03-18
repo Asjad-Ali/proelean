@@ -17,9 +17,22 @@
         <button :disabled="!$store.getters.getSelectedConversation && !$store.getters.getNewConversationUser" type="button" class="btn btn-light btn-sm rounded">
           <i class="mdi mdi-paperclip"></i>
         </button>
+        <a
+          aria-hidden="true"
+          data-toggle="modal"
+          class="cursor-pointer"
+          data-target="#exampleModalCenter"
+          @click="showOfferModal = true"
+          >
+          <i class="mdi mdi-image"></i>
+        </a>
+          
+        
       </div>
     </div>
 
+  <SendOffer v-if="showOfferModal" />
+ 
     <!-- CHOOSE A FILE -->
     <!-- <div class="p-3 d-flex align-items-center">
       <div class="overflow-hidden">
@@ -48,12 +61,15 @@
 </template>
 
 <script>
+import SendOffer from "../modals/CreateOfferOnChat.vue";
 import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 
 export default {
+  components: {SendOffer},
 setup() {
     const store = useStore();
+    const showOfferModal = ref(false)
 
     const newMessage = ref({
         text: '',
@@ -73,6 +89,7 @@ setup() {
     return {
       newMessage,
       sendMsg,
+      showOfferModal
     };
   },
 }
