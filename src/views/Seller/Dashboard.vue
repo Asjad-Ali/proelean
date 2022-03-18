@@ -1,7 +1,7 @@
 <template>
   <div class="container-xl">
     <h1 class="app-page-title">Dashboard</h1>
-  <CountDown/>
+  <!-- <CountDown /> -->
     <AppCard />
     <AnalyticBoxes />
     <Charts v-if="$store.getters.getSellerEarning.analytics" />
@@ -18,10 +18,12 @@ import Charts from "../../components/Seller/Dashboard/Charts.vue";
 import ActionCards from "../../components/Seller/Dashboard/ActionCards.vue";
 import { useStore } from 'vuex';
 import { onMounted } from '@vue/runtime-core';
-import CountDown from "../../components/Seller/Dashboard/CountDown.vue";
+// import CountDown from "../../components/Seller/Dashboard/CountDown.vue";
 
 export default {
-  components:{ AppCard, AnalyticBoxes, Charts, ActionCards, CountDown },
+  components:{ AppCard, AnalyticBoxes, Charts, ActionCards, 
+  // CountDown 
+  },
   setup() {
     const store = useStore();
     onMounted(store.dispatch('getEarnings'));

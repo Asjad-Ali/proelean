@@ -1,7 +1,7 @@
 <template>
 
   <div class="container-fluid" v-if="order">
-    <CountDown class="my-3"/>
+    <CountDown :time="order.end_date" v-if="new Date(order.end_date) > new Date()" class="my-3"/>
     <!-- {{order}} -->
     <div class="row my-4">
       <div class="col-md-8">
