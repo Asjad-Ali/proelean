@@ -42,7 +42,7 @@
     <div class="row my-3 recommended d-flex flex-wrap justify-content-start">
       <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'" />
       <div
-        class="col-6 col-md-4 mb-3 col-xxl-3 service-list-section"
+        class="col-12 col-md-4 mb-3 col-xxl-3 service-list-section"
         v-for="service in userServices"
         :key="service.id"
         v-else
