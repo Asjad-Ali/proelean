@@ -1,5 +1,6 @@
 import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
+import compressImage from "../useImageCompression";
 
 export default function useEditProfile(){
 
@@ -46,8 +47,9 @@ export default function useEditProfile(){
 
     })
 
-    const handleProfileImage = (e) => {
-        convertFileToBase64(e.target.files[0]);
+    const handleProfileImage = async (e) => {
+        const file = await compressImage(e.target.files[0]);
+        convertFileToBase64(file,'profile-img');
     };
 
     const convertFileToBase64 = (file) => {

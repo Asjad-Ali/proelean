@@ -11,8 +11,9 @@
       </div>
     </div>
     <div
+    id="messages-section"
       class="osahan-chat-box p-3 border-top border-bottom bg-light chat-hieght"
-      ref="chat_height"
+      @scroll="handleScroll"
     >
       <Message
         v-for="(message, index) in $store.getters.getChatMessages"
@@ -34,20 +35,19 @@
 import WriteAMessage from "./WriteAMessage.vue";
 import Message from "./Message.vue";
 import { useStore } from "vuex";
-import { computed, onMounted, ref } from "vue";
+import { computed } from "vue";
 
 export default {
   components: { Message, WriteAMessage },
   setup() {
     const store = useStore();
-    const chat_height = ref(null);
 
     const otherMember = computed(() => {
       if (store.getters.getNewConversationUser) {
         return store.getters.getNewConversationUser;
       } else {
         return store.getters.getSelectedConversation &&
-        store.getters.getSelectedConversation.membersInfo
+          store.getters.getSelectedConversation.membersInfo
           ? store.getters.getSelectedConversation.membersInfo.find(
               (member) => store.getters.getAuthUser.id != member.id
             )
@@ -55,12 +55,14 @@ export default {
       }
     });
 
-    onMounted(() => {
-      console.log(chat_height.value.clientHeight);
-    })
+    const handleScroll = (e) => {
+      if (e.target.scrollTop == 0) {
+        store.dispatch('reversePaginate');
+      }
+    };
     return {
       otherMember,
-      chat_height
+      handleScroll,
     };
   },
 };
@@ -69,5 +71,11 @@ export default {
 <style lang="scss" scoped>
 .chat-hieght {
   height: 65vh;
+}
+
+.scroll-disabled{
+   position: fixed;
+    margin-top: 0;// override by JS to use acc to curr $(window).scrollTop()
+    width: 100%;
 }
 </style>
