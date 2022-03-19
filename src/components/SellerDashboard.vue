@@ -3,7 +3,6 @@
          <div class="container">
             <div class="row">
                <PersonalDetails/>
-
                <div class="col-lg-8 right">
                   <div class="d-flex align-items-center p-3 bg-white rounded shadow-sm h5 m-0">
                      <b>Active orders</b>

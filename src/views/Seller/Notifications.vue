@@ -80,7 +80,6 @@
         </div>
       </div>
       <!-- Confirmation Modal -->
-
       <!-- <div
         class="modal fade"
         id="exampleModalCenter"

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div v-if="service">
-      <div class="card h-100 mb-4 position-relative">
+    <div class="card h-100 mb-4 position-relative">
         <router-link
           v-if="!$store.getters.isBuyerMode"
           :to="{ name: 'GigDetail', params: { id: service.id } }"
@@ -44,7 +43,7 @@
                 <h3 style="overflow: hidden; height: 3rem">
                   <!-- {{ service.s_description.substr(0, 125) }} -->
                   {{ service.s_description.substr(0, 75)
-                  }}{{ service.s_description.length > 20 ? "..." : "" }}
+                  }}{{ service.s_description.length > 75 ? "..." : "" }}
                 </h3>
                 <div class="content-info">
                 <div class="rating-wrapper">
@@ -103,29 +102,25 @@
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                 >
-                  <i class="mdi mdi-dots-vertical"></i>
+                  <i class="mdi mdi-dots-vertical md-size-5x"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <router-link
                     :to="{ name: 'GigDetail', params: { id: service.id } }"
-                    ><li class="dropdown-item">Open</li></router-link
+                    ><li class="dropdown-item"><i class="mdi mdi-folder-open"></i> Open</li></router-link
                   >
                   <router-link
                     :to="{ name: 'UpdateService', params: { id: service.id } }"
-                    ><li class="dropdown-item">Edit</li></router-link
+                    ><li class="dropdown-item"><i class="mdi mdi-pencil"></i> Edit</li></router-link
                   >
-                  <li
+                  <a
                     @click="$emit('selectService', service)"
-                    class="dropdown-item"
+                    class="cursor-pointer"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter"
                   >
-                    <a
-                      aria-hidden="true"
-                      data-toggle="modal"
-                      class="cursor-pointer"
-                      data-target="#exampleModalCenter"
-                      >Delete</a
-                    >
-                  </li>
+                    <li class="dropdown-item"> <i class="mdi mdi-delete"></i> Delete</li>
+                  </a>
                 </ul>
               </div>
               <a
@@ -167,10 +162,6 @@
             />
           </svg>
         </div>
-      </div>
-    </div>
-    <div v-else>
-      <h4>No Service Available</h4>
     </div>
   </div>
 </template>
@@ -192,9 +183,19 @@ export default {
     const route = useRoute();
 
     const handleWishlist = (id) => {
+      let routeType = ''
+      if(route.name === 'Gigs')
+      {
+        routeType = "gigs"
+      }else if(route.name === 'FavouriteService')
+      {
+        routeType = "favouriteService"
+      }else{
+        routeType = "offered"
+      }
       let payload = {
         service_id: id,
-        type: route.name !== "Gigs" ? "offered" : "gigs",
+        type:  routeType
       };
       store.dispatch("wishlist", payload);
     };

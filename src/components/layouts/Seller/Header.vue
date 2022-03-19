@@ -164,6 +164,7 @@
                   data-bs-toggle="dropdown"
                   href="#"
                   role="button"
+                  aria-haspopup="true"
                   aria-expanded="false"
                   ><img
                     :src="`${imgURL}/${user.image}`"
@@ -174,50 +175,37 @@
                   class="dropdown-menu"
                   aria-labelledby="user-dropdown-toggle"
                 >
+                <li>
+                  <div class="dropdown-item d-flex">
+                    <img
+                      :src="`${imgURL}/${user.image}`"
+                      class="dropdown-user-img img-full rounded-circle"
+                      alt="profile_img"
+                    />
+                    <div class="dropdown-user-details ml-1">
+                      <div class="dropdown-user-details-name">
+                        <b>{{ user.username }}</b>
+                      </div>
+                      <div>
+                        {{ user.email }}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
                   <li>
                     <router-link class="dropdown-item" to="/dashboard/account"
-                      >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="15"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="feather feather-settings mb-1"
-                      >
-                        <circle cx="12" cy="12" r="3"></circle>
-                        <path
-                          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-                        ></path>
-                      </svg>
-                      Account</router-link
+                      ><i class="mdi mdi-account"></i> Account</router-link
                     >
                   </li>
                   <li>
                     <router-link class="dropdown-item" to="/dashboard/change_password"
-                      >
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-lock-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"
-                    />
-                  </svg>Change Password</router-link
+                      > <i class="mdi mdi-lock"></i> Change Password</router-link
                     >
                   </li>
-                  <li><hr class="dropdown-divider" /></li>
                   <li>
                     <button class="dropdown-item" @click="handleLogout()"
-                      >Log Out</button
+                      ><i class="mdi mdi-logout"></i> Log Out</button
                     >
                   </li>
                 </ul>
@@ -295,6 +283,9 @@ export default {
 .app-utilities {
   display: flex;
   align-items: center;
+}
+.app-user-dropdown > a::after {
+  display: none;
 }
 @media (max-width: 280px) {
     .sm-fold-none {

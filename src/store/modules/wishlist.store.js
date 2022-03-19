@@ -2,25 +2,32 @@ import Api from '@/services/API'
 import useToast from '@/composables/useToast.js'
 
 export const state = {
+  wishlist: [],
   wishlistServices: [],
-  wishlistData: [],
   error: null,
 }
 
 export const getters = {
-  getWishlist: state => state.wishlistServices,
-  getWishlistServices: state => state.wishlistData,
+  getWishlist: state => state.wishlist,
+  getWishlistServices: state => state.wishlistServices,
 }
 
 export const mutations = {
   setWishlist(state, data) {
-    state.wishlistServices = data
+    state.wishlist = data
   },
   setAllWishlistServices(state, data) {
-    state.wishlistData = data
+    state.wishlistServices = data
   },
   setError(state, error) {
     state.error = error;
+  },
+  toggleFavourite(state,serviceId){
+    state.wishlistServices.forEach(service => {
+      if(service.id==serviceId){
+        service.favourite = service.favourite == 1 ? 0 : 1;
+      }
+    });
   }
 }
 
@@ -35,7 +42,9 @@ export const actions = {
       {
         commit('toggleOfferedService', payload.service_id);
       }
-      else{
+      else if (payload.type === 'gigs'){
+        commit('toggleGigsFavourite', payload.service_id);
+      } else{
         commit('toggleFavourite', payload.service_id);
       }
       commit('setRegisterStatus', 3);
@@ -55,7 +64,6 @@ export const actions = {
     }
   },
 
-  
   async showWishlist({ commit }) {
     const resp = await Api.get('get_wishlist')
     if (resp.status == 200) {
