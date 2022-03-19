@@ -64,6 +64,7 @@
                       ref="bannerInput"
                       id="bannerInput"
                       style="display: none"
+                      accept="image/*"
                       @change="selectThumbnail"
                       required
                     />

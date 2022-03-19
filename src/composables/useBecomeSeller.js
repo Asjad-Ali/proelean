@@ -2,6 +2,7 @@ import { ref, watch } from "vue";
 import { useStore } from "vuex";
 import { onBeforeMount } from '@vue/runtime-core';
 import router from "../router";
+import compressImage from "./useImageCompression";
 
 export default function useBecomeSeller() {
 
@@ -99,9 +100,6 @@ export default function useBecomeSeller() {
         reader.readAsDataURL(file);
     }
 
-        
-
-
     const removeImage = () => {
         console.log("Remove Image")
         preview.value = ''
@@ -131,8 +129,9 @@ export default function useBecomeSeller() {
         store.dispatch("loadSubCategories", data.value.category_id);
     };
 
-    const handleCinic = (e) => {
-        convertFileToBase64(e.target.files[0]);
+    const handleCinic = async (e) => {
+        const file = await compressImage(e.target.files[0]);
+        convertFileToBase64(file);
     };
 
     const handleBecomeSeller = () => {
