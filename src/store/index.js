@@ -65,7 +65,6 @@ export default createStore({
     updateScreenWidthOnResize({ commit }) {
       commit("setScreenWidth", window.innerWidth);
       window.addEventListener("resize", () => {
-        console.log(window.innerWidth);
         commit("setScreenWidth", window.innerWidth);
       });
     },
