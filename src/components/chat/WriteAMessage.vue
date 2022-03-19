@@ -23,6 +23,7 @@
           class=" btn-light btn-sm rounded text-center cursor-pointer"
           data-target="#exampleModalCenter"
           @click="showOfferModal = true"
+          v-if="!$store.getters.isBuyerMode"
           >
  
           <i class="mdi mdi-plus"></i>
