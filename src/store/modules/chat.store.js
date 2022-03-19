@@ -248,7 +248,38 @@ export const actions = {
             hasReadLastMessage:false,
             type : "available"
         });
-    }
+    },
+
+    async sendCustomOfferToBuyerOnChat({getters, dispatch},payload) {
+
+        console.log(payload)
+        const db = getFirestore();
+        const newDocId = new Date().getTime().toString() + 'id';
+       
+        const selectedConversation = getters.getSelectedConversation;
+        if (!selectedConversation) {
+            return
+        }
+
+        const chatRef = doc(collection(db, `Conversations/${selectedConversation.id}/Messages`), newDocId);
+
+        const newMessage = {
+            message: payload.description,
+            attachment: "",
+            attachementType: 0,
+            sentAt: new Date(new Date().toISOString()).getTime(),
+            refersGig: false,
+            senderId: getters.getAuthUser.id,
+            messageOffer: payload,
+            messageGig: getters.getReferrerGig,
+            deleteMessage: [],
+            id: newDocId
+        };
+
+        console.log("New Message", newMessage);
+        setDoc(chatRef, newMessage);
+        dispatch('updateConversation', newMessage);
+    },
 }
 
 export const getters = {

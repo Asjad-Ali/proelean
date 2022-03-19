@@ -14,14 +14,15 @@
           <h5 class="modal-title" id="exampleModalLongTitle">Custom Offer</h5>
         </div>
         <div class="modal-body text-center">
-            <select
+          <select
             id="deliveryTime"
             class="form-control"
             name="delivery_time"
-            v-model="payload.service_id"
+            v-model="payload.gigId"
+            @change="handleSelectedService"
             required
           >
-            <option selected>Select service</option>
+            <option value="0" selected>Select service</option>
             <option
               v-for="service in $store.getters.getUserServices"
               :value="service.id"
@@ -45,7 +46,7 @@
             type="number"
             class="form-control"
             name="price"
-            v-model="payload.price"
+            v-model="payload.totalOffer"
             id="price"
             placeholder="Total Offer(EUR)"
             required
@@ -55,7 +56,7 @@
             id="deliveryTime"
             class="form-control"
             name="delivery_time"
-            v-model="payload.delivery_time"
+            v-model="payload.deliveryDays"
             required
           >
             <option selected>Select day</option>
@@ -67,7 +68,27 @@
               {{ day }}
             </option>
           </select>
+
+                  <div class="text-left font mt-2">Revisions</div>
+          <select
+            id="deliveryTime"
+            class="form-control"
+            name="delivery_time"
+            v-model="payload.revisions"
+            required
+          >
+            <option selected>Select revision</option>
+            <option
+              v-for="revision in $store.getters.getRevisions"
+              :value="revision"
+              :key="revision.index"
+            >
+              {{ revision }}
+            </option>
+          </select>
+          
         </div>
+
         <div class="modal-footer d-flex justify-content-center">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             No
@@ -76,7 +97,7 @@
             type="button"
             class="btn btn-danger"
             data-dismiss="modal"
-            @click.prevent="deleteService"
+            @click.prevent="sendOffer"
           >
             Yes
           </button>
@@ -87,25 +108,45 @@
 </template>
 
 <script>
-import { useStore } from 'vuex'
+import { ref } from "@vue/reactivity";
+import { useStore } from "vuex";
 export default {
-    setup() {
-        const store = useStore()
-        store.dispatch('userServices');
-        store.dispatch('getCountriesLanguage');
-        const payload = {
-            description: '',
-            price: '',
-            delivery_time: ''
-        }
+  setup() {
+    const store = useStore();
+    store.dispatch("userServices");
+    store.dispatch("getCountriesLanguage");
+    const payload = ref({
+      deliveryDays: "",
+      description: "",
+      offerSenderId: "",
+      revisions: "",
+      serviceId: "",
+      serviceTitle: "",
+      status: 0,
+      totalOffer: "",
+    });
 
-        return {
-            payload
-        }
-    }
-}
+    const handleSelectedService = () => {
+      let selectedService = store.getters.getUserServices.find(
+        (service) => service.id === payload.value.gigId
+      );
+      payload.value.serviceId = selectedService.id;
+      payload.value.serviceTitle = selectedService.s_description;
+      payload.value.offerSenderId = selectedService.service_user.id;
+    };
+    const sendOffer = () => {
+      store.dispatch("sendCustomOfferToBuyerOnChat", payload.value);
+      console.log(payload.value);
+    };
+
+    return {
+      payload,
+      sendOffer,
+      handleSelectedService,
+    };
+  },
+};
 </script>
 
 <style>
-
 </style>
