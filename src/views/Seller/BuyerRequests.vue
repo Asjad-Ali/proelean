@@ -1,9 +1,17 @@
 <template>
   <div class="container-xl">
     <div class="mb-3">
-      <div class="d-flex mb-2 align-items-center">
+      <div class="d-flex mb-2 justify-content-between ">
+        <div >
         <h1 class="app-page-title mb-0">Buyer Requests</h1>
-        
+        </div>
+        <div>
+        <select class="form-select form-control-sm" aria-label="Default select example"  @change="showFilter" id="requestValue">
+          <option :value="req.value" v-for="req in buyerRequestType" :key="req.index">
+            {{ req.name }}
+          </option>
+        </select>
+      </div>
       </div>
       <div class="border-bottom my-3"></div>
     </div>
@@ -34,11 +42,10 @@
                 <h4 class="notification-title mb-1">
                   {{ request.user.username }}
                 </h4>
-
                 <ul class="notification-meta list-inline mb-0">
-                  <li class="list-inline-item">{{ request.created_at }}</li>
+                  <li class="list-inline-item"> <i class="mdi mdi-clock"></i> {{ $filters.timeAgo(request.created_at) }}</li>
                   <li class="list-inline-item">|</li>
-                  <li class="list-inline-item">Document: No Attachment</li>
+                  <li class="list-inline-item"> <i class="mdi mdi-file"></i> Document: No Attachment</li>
                 </ul>
               </div>
               <!--//col-->
@@ -46,9 +53,9 @@
             <!--//row-->
             <div>
               <ul class="notification-meta list-inline mb-0">
-                <li class="list-inline-item">{{ request.delivery_time }}</li>
+                <li class="list-inline-item"><b> <i class="mdi mdi-clock"></i> Duration : </b> {{ request.delivery_time }}</li>
                 <li class="list-inline-item">|</li>
-                <li class="list-inline-item">budget: {{ request.budget }}$</li>
+                <li class="list-inline-item"><b><i class="mdi mdi-currency-eur"></i> budget : </b>€{{ request.budget }}</li>
               </ul>
             </div>
           </div>
@@ -75,10 +82,11 @@
             </button>
             <button
               type="button"
+              :disabled="getBtnStatus == 2"
               class="btn btn-success mx-2 my-1"
               @click.prevent="deleteJob(request.id)"
             >
-              Cancel Offer
+              {{ getBtnStatus == 2 ? "Loading..." : "Cancel Offer" }}
             </button>
           </div>
           <!--//app-card-footer-->
@@ -194,16 +202,17 @@
 
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import { useStore } from "vuex";
 
 export default {
   setup() {
     const store = useStore();
-    onMounted(() => {
+    onBeforeMount(() => {
       store.dispatch("showBuyerRequests");
     });
-    const jobId = ref("");
+
+    const jobId = ref("")
     const payload = ref({
       job_id: "",
       service_id: "",
@@ -211,6 +220,11 @@ export default {
       price: "",
       delivery_time: "",
     });
+
+    const buyerRequestType =  [ 
+      { value: 0, name:"Buyer Request" },
+      { value: 1, name:"Sent Offer" },
+    ]
 
     function loadMore(){
       store.dispatch("showBuyerRequests");
@@ -226,12 +240,25 @@ export default {
       store.dispatch("sendOffer", payload.value);
     }
 
+    function showFilter() {
+      let value = document.getElementById("requestValue").value;
+      console.log(value)
+      if(value == 1){
+        store.dispatch("showBuyerRequests","sent_offers");
+      }else{
+        store.dispatch("showBuyerRequests");
+      }
+    }
+
     function deleteJob(id) {
       store.dispatch("deleteBuyerJob", id);
       console.log("delete request id: ", id);
     }
+
     return {
       requests: computed(() => store.getters.getBuyerRequests),
+      buyerRequestType,
+      showFilter,
       loader: computed(() => store.getters.getLoaderVal),
       getBtnStatus: computed(() => store.getters.getRegisterStatus),
       imgURL: process.env.VUE_APP_URL,

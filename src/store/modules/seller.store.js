@@ -203,10 +203,15 @@ export const actions = {
     }
   },
 
-  async showBuyerRequests({ commit, getters }) {
-    let currentPage = getters.getBuyerRequestsCurrentPage;
+  async showBuyerRequests({ commit },jobStatus) {
+
+    // let currentPage = getters.getBuyerRequestsCurrentPage;
+    // if(jobStatus) {
+    //   currentPage = 1;
+    // }
+
     commit('setLoader', 1);
-    const res = await Api.get(`seller/buyer_requests?page=${currentPage}`);
+    const res = await Api.get(`seller/buyer_requests?status=${jobStatus}`);
     if (res.status === 200) {
       commit("setBuyerRequests", res.data);
       if (res.links.next) {
@@ -233,11 +238,13 @@ export const actions = {
   },
 
   async deleteBuyerJob({ commit, state }, id) {
+    commit('setRegisterStatus', 2);
     const res = await Api.delete(`seller/cancel_offer/${id}`);
     if (res.status === 200) {
       useToast(res.message, 'success');
       const afterRemoveJob = ref(state.buyerRequests.filter(job => job.id !== id))
       commit("setBuyerRequests", afterRemoveJob.value);
+      commit('setRegisterStatus', 3);
     }
     else {
       useToast(res.message);

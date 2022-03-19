@@ -5,7 +5,7 @@ import Notifications from '@/views/Seller/Notifications.vue'
 import Account from '@/views/Seller/Account.vue'
 import Settings from '@/views/Seller/Settings.vue'
 import Analytics from '@/views/Seller/Analytics.vue'
-import BuyerRequestsnew from '@/views/Seller/BuyerRequestsnew.vue'
+import BuyerRequests from '@/views/Seller/BuyerRequests.vue'
 import CreateGig from '@/views/Seller/CreateGig.vue'
 import Payments from '@/views/Seller/Payments.vue'
 import UpdateService from '@/views/Seller/UpdateService.vue'
@@ -54,9 +54,9 @@ const sellerRoutes = [
         component: CreateGig,
     },
     {
-        path: '/dashboard/BuyerRequestsnew',
-        name: 'BuyerRequestsnew',
-        component: BuyerRequestsnew,
+        path: '/dashboard/buyer_requests',
+        name: 'BuyerRequests',
+        component: BuyerRequests,
     },
     {
         path: '/dashboard/analytics',
