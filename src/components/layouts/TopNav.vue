@@ -269,39 +269,6 @@
               </svg>
             </router-link>
           </li>
-          <!-- Wishlist Service -->
-          <li
-            class="
-              nav-item
-              dropdown
-              no-arrow no-caret
-              mr-3
-              dropdown-notifications
-              show
-              d-none d-lg-block
-            "
-          >
-            <router-link
-              to="/seller/favourite_service"
-              class="btn btn-icon btn-transparent-dark dropdown-toggle"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="Favourite Services"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-heart"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
-                />
-              </svg>
-            </router-link>
-          </li>
           <!-- Post a Job -->
           <li
             v-if="isBuyerMode"
@@ -625,17 +592,17 @@
               "
               aria-labelledby="navbarDropdownUserImage"
             >
-              <h6 class="dropdown-header d-flex align-items-center">
+              <h6 class="dropdown-header px-3 py-1 d-flex align-items-center">
                 <img
                   :src="`${imgURL}/${user.image}`"
-                  class="dropdown-user-img img-full"
+                  class="dropdown-user-img img-full mr-1"
                   alt="profile_img"
                 />
-                <div class="dropdown-user-details">
+                <div class="dropdown-user-details ml-1">
                   <div class="dropdown-user-details-name">
                     {{ userInfo.username }}
                   </div>
-                  <div class="dropdown-user-details-email">
+                  <div class="dropdown-user-details">
                     {{ userInfo.email }}
                   </div>
                 </div>
@@ -643,40 +610,13 @@
               <div class="dropdown-divider"></div>
               <router-link class="dropdown-item" to="/buyer-account">
                 <div class="dropdown-item-icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="feather feather-settings"
-                  >
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path
-                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-                    ></path>
-                  </svg>
+                  <i class="mdi mdi-account"></i>
                 </div>
                 Account
               </router-link>
               <router-link class="dropdown-item" to="/buyer/change_password">
                 <div class="dropdown-item-icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-lock-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"
-                    />
-                  </svg>
+                  <i class="mdi mdi-lock"></i>
                 </div>
                 Change Password
               </router-link>
@@ -728,22 +668,7 @@
 
               <button class="dropdown-item" @click="handleLogout">
                 <div class="dropdown-item-icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="feather feather-log-out"
-                  >
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                    <polyline points="16 17 21 12 16 7"></polyline>
-                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                  </svg>
+                  <i class="mdi mdi-logout"></i>
                 </div>
                 Logout
               </button>
