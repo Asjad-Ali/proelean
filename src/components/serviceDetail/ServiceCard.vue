@@ -1,10 +1,10 @@
 <template>
   <div class="col-lg-4 right mt-5">
-    <div class="">
+    <div>
       <div class="tab-content">
         <div id="basic" class="tab-pane fade show active">
           <h4>Service Details</h4>
-          <hr />
+          <hr class="my-2"/>
           <div class="header">
             <p>
               {{service.s_description}}
@@ -17,14 +17,14 @@
             </p>
           </div>
           <article>
-            <div class="d-flex">
               <div class="delivery"
                 ><i class="mdi mdi-clock" aria-hidden="true"></i><b class="mr-2"> Delivery Time:  </b> {{ service.delivery_time}}
                 </div >
-              <div class="delivery ml-3"
+          </article>
+          <article>
+              <div class="delivery"
                 ><i class="mdi mdi-sync" aria-hidden="true"></i> <b class="mr-2"> Revision:  </b> {{ service.revision}}</div
               >
-            </div>
           </article>
           <article>
             <div>
@@ -84,5 +84,8 @@ export default {
 <style scoped>
 .width {
   width: 140px;
+}
+.main-page .right .tab-content p{
+  margin: 15px 5px;
 }
 </style>
