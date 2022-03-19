@@ -43,7 +43,7 @@ export const mutations = {
   setSellerOfferedServices(state, services) {
     state.sellerOfferedServices = services;
   },
-  toggleFavourite(state,serviceId){
+  toggleGigsFavourite(state,serviceId){
       state.services.forEach(service => {
         if(service.id==serviceId){
           service.favourite = service.favourite == 1 ? 0 : 1;
