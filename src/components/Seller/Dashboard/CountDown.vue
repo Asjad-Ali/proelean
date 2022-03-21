@@ -14,25 +14,25 @@
     <div class="row d-flex justify-content-center text-center">
       <div class="col-lg-3 col-md-12 col-12">
         <h4>Days</h4>
-        <div class="covid-content">
+        <div class="count-down-content">
           <h2>{{ remainingTime.days }}</h2>
         </div>
       </div>
       <div class="col-lg-3 col-md-12 col-12">
         <h4>Hours</h4>
-        <div class="covid-content">
+        <div class="count-down-content">
           <h2>{{ remainingTime.hours }}</h2>
         </div>
       </div>
       <div class="col-lg-3 col-md-12 col-12">
         <h4>Minutes</h4>
-        <div class="covid-content">
+        <div class="count-down-content">
           <h2>{{ remainingTime.minutes }}</h2>
         </div>
       </div>
       <div class="col-lg-3 col-md-12 col-12">
         <h4>Seconds</h4>
-        <div class="covid-content">
+        <div class="count-down-content">
           <h2>{{ remainingTime.seconds }}</h2>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style scoped>
-.covid-content {
+.count-down-content {
   background: #14222b;
   color: #2dbcb2;
   padding: 16px;

@@ -119,3 +119,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.seller-app .btn:hover,
+.btn:active,
+.btn:focus {
+    color: #fff;
+   
+}
+</style>

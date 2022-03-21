@@ -188,7 +188,7 @@
                       <div
                         class="input-group-prepend d-flex align-items-center"
                       >
-                        <div class="btn app-btn-secondary">$</div>
+                        <div class="btn app-btn-secondary">€</div>
                       </div>
                       <input
                         type="number"
@@ -199,6 +199,41 @@
                       />
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="setting-input-2" class="form-label"
+                      >No of revisions 
+                      <span class="text-danger m-0 p-0">*</span>
+                      <span class="text-danger mt-1" >
+                      Number of revisions is required</span>
+                      </label
+                    >
+                    <select
+                      id="deliveryTime"
+                      class="form-control"
+                      name="delivery_time"
+                      placeholder="Select Category"
+                      v-model="createService.delivery_time"
+                      data-msg="Please select category."
+                      required=""
+                    >
+                      <option disabled="" value="">Select revisions</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>Unlimited</option>
+                    </select>
+                  </div>
+                 
                 </div>
               </div>
               <button
