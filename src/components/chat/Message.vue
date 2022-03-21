@@ -53,9 +53,8 @@
                 <div>
                   <div class="delivery">
                     <i class="mdi mdi-currency-eur" aria-hidden="true"></i
-                    ><b class="mr-2"> Price : </b> €{{
-                      message.messageOffer.totalOffer
-                    }}
+                    ><b class="mr-2"> Price : </b>
+                    {{ message.messageOffer.totalOffer }}
                   </div>
                 </div>
               </article>
@@ -73,14 +72,45 @@
                   {{ message.messageOffer.revisions }}
                 </div>
               </article>
-              <a href="#" class="btn btn-primary text-white mt-2"
-                >Withdraw the offer</a
+              <button
+                class="btn btn-success text-white mt-2"
+                v-if="
+                  message.messageOffer.offerSenderId ===
+                  $store.getters.getAuthUser.id
+                "
+                @click="withdrawOffer($event, message.id)"
+                :disabled="message.messageOffer.status === 2"
+              >
+                <i
+                  class="fa fa-circle-o-notch fa-spin"
+                  style="font-size: 16px"
+                  v-if="
+                    $store.getters.getMessageOfferLoadingStatus === 'LOADING'
+                  "
+                ></i>
+                {{
+                  message.messageOffer.status === 2
+                    ? "offer withdrawn"
+                    : "Withdraw the offer"
+                }}
+              </button>
+              <a
+                aria-hidden="true"
+                data-toggle="modal"
+                class="btn-light btn-sm rounded text-center cursor-pointer"
+                data-target="#staticBackdrop"
+                v-else
+                @click="acceptCustomOffer(message.messageOffer)"
+                >Accept offer</a
               >
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <AcceptServiceOffer v-if="acceptOffer"/>
+
     <span class="ml-auto mb-auto">
       <div class="text-right text-muted pt-1 small">
         {{ timeDiff(message.sentAt) }}
@@ -92,6 +122,7 @@
 <script>
 import { useStore } from "vuex";
 import { onMounted, ref } from "vue";
+import AcceptServiceOffer from "@/components/modals/PurchaseService.vue";
 
 export default {
   props: {
@@ -105,9 +136,12 @@ export default {
     },
   },
 
+  components: { AcceptServiceOffer },
+
   setup() {
     const store = useStore();
     const timeNow = ref(Date.now());
+    const acceptOffer = ref(false);
 
     const messageOwner = (senderId) => {
       return store.getters.getSelectedConversation.membersInfo
@@ -137,10 +171,24 @@ export default {
       }
     };
 
+    const withdrawOffer = (event, messageID) => {
+      store.dispatch("withdrawOffer", messageID).then(() => {
+        event.target.innerText = "offer withdrawn";
+      });
+    };
+
+    const acceptCustomOffer = (offer) => {
+      acceptOffer.value = true;
+      store.commit('setCustomOffer',offer)
+    }
+
     return {
       messageOwner,
       imgUrl: process.env.VUE_APP_URL,
       timeDiff,
+      withdrawOffer,
+      acceptCustomOffer,
+      acceptOffer
     };
   },
 };
