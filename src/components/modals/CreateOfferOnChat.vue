@@ -91,7 +91,7 @@
 
         <div class="modal-footer d-flex justify-content-center">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            No
+            Cancel
           </button>
           <button
             type="button"
@@ -99,7 +99,7 @@
             data-dismiss="modal"
             @click.prevent="sendOffer"
           >
-            Yes
+            Send
           </button>
         </div>
       </div>

@@ -87,6 +87,9 @@
                         style="top: 1%; right: 1%; font-size: 16px; color: red"
                       ></i>
                     </div>
+                    <!-- <div class="gigs-thumbnail" >
+                      <img  src="{banner}" class="gigs-thumbnail-img"/>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -326,6 +329,19 @@ export default {
 .wrapper .file-upload:hover {
   background-position: 0 -100%;
   color: #2590eb;
+}
+
+.gigs-thumbnail{
+  height: 100px;
+  width: 100px;
+  border: 1px solid red;
+}
+gigs-thumbnail-img{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  object-fit: cover;
+
 }
 
 </style>

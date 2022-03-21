@@ -36,7 +36,7 @@
         </div>
         <!--//app-card-body-->
         <div class="app-card-footer p-4 mt-auto">
-          <router-link to="/dashboard/sellers-gigs" class="btn app-btn-secondary" >Share Your Services</router-link>
+          <router-link to="/dashboard/sellers-services" class="btn app-btn-secondary" >Share Your Services</router-link>
         </div>
         <!--//app-card-footer-->
       </div>
