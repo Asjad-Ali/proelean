@@ -17,44 +17,44 @@
             </p>
           </div>
           <article>
-              <div class="delivery"
+              <div class="delivery text-muted"
                 ><i class="mdi mdi-clock" aria-hidden="true"></i><b class="mr-2"> Delivery Time:  </b> {{ service.delivery_time}}
                 </div >
           </article>
           <article>
-              <div class="delivery"
+              <div class="delivery text-muted"
                 ><i class="mdi mdi-sync" aria-hidden="true"></i> <b class="mr-2"> Revision:  </b> {{ service.revision}}</div
               >
           </article>
           <article>
             <div>
-              <div class="delivery"
+              <div class="delivery text-muted"
                 ><i class="mdi mdi-radiobox-blank" aria-hidden="true"></i><b class="mr-2"> Category :  </b> {{ service.category.title}}
                 </div >
             </div>
             <div>
-              <div class="delivery">
+              <div class="delivery text-muted">
               <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> {{ service.sub_category.title}}</div
               >
             </div>
           </article>
           <article>
             <div>
-              <div class="delivery"
+              <div class="delivery text-muted"
                 ><i class="mdi mdi-currency-eur" aria-hidden="true"></i><b class="mr-2"> Price :  </b> €{{service.price}}
                 </div >
             </div>
           </article>
           <router-link
             :to="{ name: 'Purchase', params: { id: service.id } }"
-            class="btn btn-success text-white w-100" v-if="isBuyerMode"
+            class="btn app-btn-primary   w-100" v-if="isBuyerMode"
           >
             Purchase
           </router-link>
 
           <router-link
             :to="{ name: 'Chat', params: { id: `${service.service_user.id}` } }"
-            class="btn btn-success text-white w-100 mt-3" v-if="isBuyerMode"
+            class="btn app-btn-secondary w-100 mt-3" v-if="isBuyerMode"
           >
             Contact Seller
           </router-link>
