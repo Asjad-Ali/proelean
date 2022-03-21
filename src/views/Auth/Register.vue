@@ -118,30 +118,8 @@
                 >
               {{registerStatus == 2 ? 'Loading...' : 'Agree & Joins'}} 
               </button>
-              <!-- <div class="text-center mt-3 border-bottom pb-3">
-                <p class="small text-muted">Or login with</p>
-                <div class="row">
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      class="btn btn-outline-instagram btn-block"
-                    >
-                      <i class="mdi mdi-instagram"></i> Instagram
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      class="btn btn-outline-facebook btn-block"
-                    >
-                      <i class="mdi mdi-facebook"></i> Facebook
-                    </button>
-                  </div>
-                </div>
-              </div> -->
-              <div class="py-3 d-flex align-item-center">
-                <a href="forgot-password.html">Forgot password?</a>
-                <span class="ml-auto">
+              <div class="py-3 d-flex align-item-center justify-content-center">
+                <span>
                   Already on Pro Elean?
                   <router-link to="/login">Sign in</router-link></span
                 >

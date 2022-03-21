@@ -1,13 +1,21 @@
 <template>
   <footer class="bg-white">
         <div class="container">
-           <div class="d-flex justify-content-between">
+           <div class="d-flex justify-content-between margin-left">
               <div class="footer-list">
                  <h4>Categories</h4>
-                 <ul class="list">
+                 <ul class="list" v-if="$store.state.isLoggedIn">
                     <li  v-for="(category,index) in $store.getters.getCategories" :key="category.id" v-show="index < 6">
                        <router-link :to="'/gigs/'+category.slug" >{{category.title}}</router-link>
                      </li>
+                 </ul>
+                 <ul v-else>
+                    <li><a href="#"> Graphic & Design </a></li>
+                    <li><a href="#"> Digital Marketing </a></li>
+                    <li><a href="#"> Writing & translation </a></li>
+                    <li><a href="#"> Video Animation </a></li>
+                    <li><a href="#"> Music & Audio </a></li>
+                    <li><a href="#"> Programming & Tech </a></li>
                  </ul>
               </div>
               <div class="footer-list">
@@ -80,6 +88,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.margin-left{
+   margin-left: 175px;
+}
 </style>
