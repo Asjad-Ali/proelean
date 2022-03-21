@@ -118,6 +118,7 @@
                 >
               {{registerStatus == 2 ? 'Loading...' : 'Agree & Joins'}} 
               </button>
+<<<<<<< HEAD
               <!-- <div class="text-center mt-3 border-bottom pb-3">
                 <p class="small text-muted">Or login with</p>
                 <div class="row">
@@ -141,6 +142,10 @@
               </div> -->
               <div class="py-3 d-flex align-item-center">
                 <span class="ml-auto">
+=======
+              <div class="py-3 d-flex align-item-center justify-content-center">
+                <span>
+>>>>>>> b24a9f2930a0b254a3ff72f5b087f0a7b4ca0e39
                   Already on Pro Elean?
                   <router-link to="/login">Sign in</router-link></span
                 >

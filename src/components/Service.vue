@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="card h-100 mb-4 position-relative">
+  <div class="my-2">
+    <div class="card h-100  position-relative">
         <router-link
           v-if="!$store.getters.isBuyerMode"
           :to="{ name: 'GigDetail', params: { id: service.id } }"
@@ -216,6 +216,10 @@ export default {
 
 
 <style scoped>
+
+.card {
+  margin-bottom: 0px !important;
+}
 .inner-slider {
   margin-bottom: 0px !important;
 }
@@ -228,10 +232,7 @@ export default {
 .dropdown-toggle::after {
   display: none;
 }
-
-.card {
-  margin-bottom: 0px;
-}
+ 
 
 .mdi-dots-vertical {
   font-size: 17px;

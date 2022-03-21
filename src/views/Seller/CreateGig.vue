@@ -87,6 +87,9 @@
                         style="top: 1%; right: 1%; font-size: 16px; color: red"
                       ></i>
                     </div>
+                    <!-- <div class="gigs-thumbnail" >
+                      <img  src="{banner}" class="gigs-thumbnail-img"/>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -188,7 +191,7 @@
                       <div
                         class="input-group-prepend d-flex align-items-center"
                       >
-                        <div class="btn app-btn-secondary">$</div>
+                        <div class="btn app-btn-secondary">€</div>
                       </div>
                       <input
                         type="number"
@@ -199,6 +202,41 @@
                       />
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="setting-input-2" class="form-label"
+                      >No of revisions 
+                      <span class="text-danger m-0 p-0">*</span>
+                      <span class="text-danger mt-1" >
+                      Number of revisions is required</span>
+                      </label
+                    >
+                    <select
+                      id="deliveryTime"
+                      class="form-control"
+                      name="delivery_time"
+                      placeholder="Select Category"
+                      v-model="createService.delivery_time"
+                      data-msg="Please select category."
+                      required=""
+                    >
+                      <option disabled="" value="">Select revisions</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>Unlimited</option>
+                    </select>
+                  </div>
+                 
                 </div>
               </div>
               <button
@@ -291,6 +329,19 @@ export default {
 .wrapper .file-upload:hover {
   background-position: 0 -100%;
   color: #2590eb;
+}
+
+.gigs-thumbnail{
+  height: 100px;
+  width: 100px;
+  border: 1px solid red;
+}
+gigs-thumbnail-img{
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  object-fit: cover;
+
 }
 
 </style>
