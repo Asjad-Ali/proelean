@@ -33,14 +33,7 @@
               </form>
             </div>
             <!--//col-->
-            <div class="col-auto">
-              <select class="form-select w-auto">
-                <option selected value="option-1">All</option>
-                <!-- <option value="option-2">This week</option>
-                <option value="option-3">This month</option>
-                <option value="option-4">Last 3 months</option> -->
-              </select>
-            </div>
+            
             
           </div>
           <!--//row-->
@@ -249,7 +242,7 @@
                     <td class="cell">
                       <!-- Button trigger modal -->
                       <!-- params:{id:order} , props:{order} -->
-                      <router-link :to="{name:'OrderDetails', params:order}"
+                      <router-link :to="{name:'OrderDetailsNew', params:order}"
                         class="btn btn-light">
                         View 
                       </router-link>

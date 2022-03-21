@@ -118,7 +118,7 @@
                 >
               {{registerStatus == 2 ? 'Loading...' : 'Agree & Joins'}} 
               </button>
-              <div class="text-center mt-3 border-bottom pb-3">
+              <!-- <div class="text-center mt-3 border-bottom pb-3">
                 <p class="small text-muted">Or login with</p>
                 <div class="row">
                   <div class="col-6">
@@ -138,7 +138,7 @@
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="py-3 d-flex align-item-center">
                 <a href="forgot-password.html">Forgot password?</a>
                 <span class="ml-auto">
@@ -157,7 +157,8 @@
 <script>
 import { useStore } from "vuex";
 import useAuth from "@/composables/useAuth";
-import { computed } from "vue";
+import { computed, onBeforeMount } from "vue";
+import { useRouter } from 'vue-router';
 export default {
   name: "Register",
   setup() {
@@ -172,12 +173,22 @@ export default {
       toggleVisSignupConPass
       } = useAuth();
 
-    let store = useStore();
+    const store = useStore();
+    const router = useRouter();
+
+    onBeforeMount(() => {
+      // if user already login return back to '/'
+      if (localStorage.getItem("PROELEAN_TOKEN")) {
+        router.push({ name: "Home" });
+      }
+    });
 
     const handleRegister = (e) => {
       e.preventDefault();
       store.dispatch("register", signup.value);
     };
+
+    
     const registerStatus = computed( () => {
       return   store.getters.getRegisterStatus;
     });

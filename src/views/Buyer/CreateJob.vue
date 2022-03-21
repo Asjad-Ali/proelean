@@ -7,7 +7,10 @@
           <div class="bg-white rounded shadow-sm sidebar-page-right">
             <div class="bg-white rounded p-0">
               <div class="border-bottom p-3">
-                <label>Describe the job</label>
+                <label>Describe the job
+                  <span class="text-danger m-0 p-0">*</span>
+                  <span class="text-danger mt-1" v-show="createJobError.description">
+                  {{ createJobError.description }}</span></label>
                 <div class="form-group">
                   <textarea
                     class="form-control"
@@ -20,17 +23,21 @@
                 </div>
               </div>
               <div class="border-bottom p-3">
-                <label>Choose a category:</label>
                 <div class="row">
                   <div class="form-group col-md-6">
+                <label>Choose a category:<span class="text-danger m-0 p-0">*</span>
+                  <span class="text-danger mt-1" v-show="createJobError.category_id">
+                  {{ createJobError.category_id }}</span>
+                  </label>
                     <select
                       id="category_id"
                       class="form-control"
                       name="category_id"
-                      :onchange="onChange"
+                      v-model="createJob.category_id"
+                      :onchange="getCategory"
                       required
                     >
-                    <option selected disabled>Select Category</option>
+                    <option selected disabled value="">Select Category</option>
                       <option
                         v-for="category in $store.getters.getCategories"
                         :value="category.id"
@@ -42,13 +49,18 @@
                     </select>
                   </div>
                   <div class="form-group col-md-6">
+                    <label>Choose a Sub category:<span class="text-danger m-0 p-0">*</span>
+                    <span class="text-danger mt-1" v-show="createJobError.sub_category_id">
+                    {{ createJobError.sub_category_id }}</span>
+                    </label>
                     <select
                       id="sub_category_id"
                       class="form-control"
+                      v-model="createJob.sub_category_id"
                       name="sub_category_id"
                       required
                     >
-                      <option selected disabled>Select Sub Category</option>
+                      <option selected disabled value="">Select Sub Category</option>
                       <option
                         v-for="subCategory in $store.getters.getSubCategories"
                         :value="subCategory.id"
@@ -63,25 +75,32 @@
                <div class="border-bottom p-3">
                  <div class="row">
                     <div class="form-group col-md-6">
-                    <label>Delivery Days</label>
+                    <label>Delivery Days
+                        <span class="text-danger m-0 p-0">*</span>
+                        <span class="text-danger mt-1" v-show="createJobError.delivery_time">
+                        {{ createJobError.delivery_time }}</span>
+                    </label>
                       <select
-                        id="inputState"
+                        id="delivery_time"
                         class="form-control"
                         name="delivery_time"
                         v-model="createJob.delivery_time"
                         required
                       >
-                        <option selected>Select day</option>
+                        <option selected disabled value="">Select day</option>
                         <option  
                           v-for="day in $store.getters.getDeliveryDays"
                           :value="day" 
                           :key="day.index"
                         > {{ day }} </option>
-                        
                       </select>
                    </div>
                     <div class="form-group col-md-6">
-                      <label>What's your budget? </label>
+                      <label>What's your budget?
+                        <span class="text-danger m-0 p-0">*</span>
+                        <span class="text-danger mt-1" v-show="createJobError.budget">
+                        {{ createJobError.budget }}</span>
+                        </label>
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <div class="btn btn-success">$</div>
@@ -101,10 +120,10 @@
               <div class="p-3 d-flex justify-content-end">
                 <button
                   class="btn btn-success btn-lg font-weight-bold"
-                  :disabled="getBtnStatus == 2"
                   @click.prevent="jobCreation"
+                  :disabled="!Object.values(createJobError).every((value) => !value) || btnStatus == 2"
                 >
-                  {{ getBtnStatus == 2 ? "Loading..." : "Submit Request"  }}
+                  {{ btnStatus == 2 ? "Loading..." : "Submit Request"  }}
                 </button>
               </div>
             </div>
@@ -116,7 +135,7 @@
 </template>
 
 <script>
-import useBuyer from "@/composables/useBuyer.js";
+import useCreateJob from "@/composables/useCreateJob.js";
 import { useStore } from 'vuex';
 import { computed, onMounted } from '@vue/runtime-core';
 export default {
@@ -124,27 +143,24 @@ export default {
     const store = useStore()
     
     const {
-      data,
       createJob,
+      getCategory,
+      createJobError,
       jobCreation,
       handleCredentials
-    } = useBuyer();
+    } = useCreateJob();
 
     onMounted(() => {
       store.dispatch("getCountriesLanguage");
     });
 
-    const onChange = () => {
-      data.value.categoryId = document.getElementById("category_id").value;
-      store.dispatch("loadSubCategories", data.value.categoryId);
-    };
-
     return {
-      getBtnStatus: computed(() => store.getters.getRegisterStatus),
+      btnStatus: computed(() => store.getters.getRegisterStatus),
       createJob,
+      createJobError,
       jobCreation,
       handleCredentials,
-      onChange,
+      getCategory,
     };
   },
 };

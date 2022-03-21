@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div v-if="service">
-      <div class="card h-100 mb-4 position-relative">
+    <div class="card h-100 mb-4 position-relative">
         <router-link
           v-if="!$store.getters.isBuyerMode"
           :to="{ name: 'GigDetail', params: { id: service.id } }"
@@ -36,18 +35,46 @@
               </span>
               <span class="seller-name">
                 {{ service.service_user.username }}
-
-                <!-- <span class="level hint--top level-one-seller">
-                  Level 1 Seller
-                </span> -->
-              </span>
+             </span>
             </div>
-            <h3 style="overflow: hidden; height: 3rem">
-              <!-- {{ service.s_description.substr(0, 125) }} -->
-              {{ service.s_description.substr(0, 75)
-              }}{{ service.s_description.length > 20 ? "..." : "" }}
-            </h3>
-            <div class="content-info">
+              <router-link
+                v-if="!$store.getters.isBuyerMode"
+                :to="{ name: 'GigDetail', params: { id: service.id } }">
+                <h3 style="overflow: hidden; height: 3rem">
+                  <!-- {{ service.s_description.substr(0, 125) }} -->
+                  {{ service.s_description.substr(0, 75)
+                  }}{{ service.s_description.length > 75 ? "..." : "" }}
+                </h3>
+                <div class="content-info">
+                <div class="rating-wrapper">
+                  <span class="gig-rating text-body-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 1792 1792"
+                      width="15"
+                      height="15"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"
+                      ></path>
+                    </svg>
+                    {{ service.service_rating }}
+                    <span>({{ service.total_reviews }})</span>
+                  </span>
+                </div>
+            </div>
+            </router-link>
+            <router-link
+                v-else
+                :to="{ name: 'BuyerServiceDetail', params: { id: service.id } }"
+              >
+                <h3 style="overflow: hidden; height: 3rem">
+                  <!-- {{ service.s_description.substr(0, 125) }} -->
+                  {{ service.s_description.substr(0, 75)
+                  }}{{ service.s_description.length > 20 ? "..." : "" }}
+                </h3>
+              <div class="content-info">
               <div class="rating-wrapper">
                 <span class="gig-rating text-body-2">
                   <svg
@@ -66,6 +93,7 @@
                 </span>
               </div>
             </div>
+            </router-link>
             <div class="footer">
               <div class="dropdown" v-if="!$store.getters.isBuyerMode">
                 <a
@@ -74,29 +102,25 @@
                   id="dropdownMenuLink"
                   data-bs-toggle="dropdown"
                 >
-                  <i class="mdi mdi-dots-vertical"></i>
+                  <i class="mdi mdi-dots-vertical md-size-5x"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <router-link
                     :to="{ name: 'GigDetail', params: { id: service.id } }"
-                    ><li class="dropdown-item">Open</li></router-link
+                    ><li class="dropdown-item"><i class="mdi mdi-folder-open"></i> Open</li></router-link
                   >
                   <router-link
                     :to="{ name: 'UpdateService', params: { id: service.id } }"
-                    ><li class="dropdown-item">Edit</li></router-link
+                    ><li class="dropdown-item"><i class="mdi mdi-pencil"></i> Edit</li></router-link
                   >
-                  <li
+                  <a
                     @click="$emit('selectService', service)"
-                    class="dropdown-item"
+                    class="cursor-pointer"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter"
                   >
-                    <a
-                      aria-hidden="true"
-                      data-toggle="modal"
-                      class="cursor-pointer"
-                      data-target="#exampleModalCenter"
-                      >Delete</a
-                    >
-                  </li>
+                    <li class="dropdown-item"> <i class="mdi mdi-delete"></i> Delete</li>
+                  </a>
                 </ul>
               </div>
               <a
@@ -138,10 +162,6 @@
             />
           </svg>
         </div>
-      </div>
-    </div>
-    <div v-else>
-      <h4>No Service Available</h4>
     </div>
   </div>
 </template>
@@ -163,9 +183,19 @@ export default {
     const route = useRoute();
 
     const handleWishlist = (id) => {
+      let routeType = ''
+      if(route.name === 'Gigs')
+      {
+        routeType = "gigs"
+      }else if(route.name === 'FavouriteService')
+      {
+        routeType = "favouriteService"
+      }else{
+        routeType = "offered"
+      }
       let payload = {
         service_id: id,
-        type: route.name !== "Gigs" ? "offered" : "gigs",
+        type:  routeType
       };
       store.dispatch("wishlist", payload);
     };

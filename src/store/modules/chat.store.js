@@ -1,5 +1,19 @@
-import Api from '@/services/API'
-import { getFirestore, collection, query, where, onSnapshot, orderBy, limit, doc, setDoc, updateDoc } from "firebase/firestore";
+import Api from "@/services/API";
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    onSnapshot,
+    orderBy,
+    limit,
+    doc,
+    setDoc,
+    updateDoc,
+    startAfter,
+    getDocs,
+    limitToLast,
+} from "firebase/firestore";
 
 export const state = {
     selectedConversation: null,
@@ -13,36 +27,53 @@ export const state = {
     areConversationsLoaded: false,
     newConversationUser: null,
     isConversationNew: true,
+    hasMoreMessages: true,
+};
+
+const scrollToBottom = () => {
+    setTimeout(() => {
+        const messagesDiv = document.getElementById("messages-section");
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    },300);
+}
+
+const holdScroll =() =>{
+    let messagesDiv = document.getElementById("messages-section");
+    const lastScrollHeight= messagesDiv.scrollHeight;
+    setTimeout(() => {
+        messagesDiv = document.getElementById("messages-section");
+        messagesDiv.scrollTop = (messagesDiv.scrollHeight - lastScrollHeight);
+    },200);
 }
 
 export const mutations = {
     setMessages(state, messages) {
-        messages.forEach(msg => state.messages.push(msg));
+        messages.forEach((msg) => state.messages.push(msg));
     },
     setSelectedConversation(state, conversation) {
-        state.selectedConversation = conversation
-        state.newConversationUser=null;
+        state.selectedConversation = conversation;
+        state.newConversationUser = null;
     },
     setError(state, error) {
         state.error = error;
     },
     setReferrerGig(state, gig) {
-        state.referrerGig = gig
+        state.referrerGig = gig;
     },
     setConversation(state, conversation) {
         state.conversations.push(conversation);
 
-        const paramId = location.pathname.split('/').pop();
-        if (!paramId.includes('chat') && conversation.members.includes(paramId)) {
-            this.dispatch('openSelectedConversation', conversation.id)
+        const paramId = location.pathname.split("/").pop();
+        if (!paramId.includes("chat") && conversation.members.includes(paramId)) {
+            this.dispatch("openSelectedConversation", conversation.id);
         }
     },
-    setNewConversationStatus(state,value){
-        state.isConversationNew = value
+    setNewConversationStatus(state, value) {
+        state.isConversationNew = value;
     },
     updateConversation(state, updatedConv) {
         const conversations = state.conversations;
-        const index = conversations.findIndex(conv => conv.id == updatedConv.id);
+        const index = conversations.findIndex((conv) => conv.id == updatedConv.id);
         conversations.splice(index, 1);
         conversations.unshift(updatedConv);
         state.conversations = conversations;
@@ -61,23 +92,34 @@ export const mutations = {
     },
     setMessage(state, message) {
         state.messages.push(message);
+        scrollToBottom();
+    },
+    setHasMoreMessages(state, val) {
+        state.hasMoreMessages = val;
+    },
+    setMessageInStart(state, message) {
+        state.messages.unshift(message);
+        holdScroll();
     },
     setConversationsAreLoaded(state) {
         state.areConversationsLoaded = true;
     },
-    setNewConversationUser(state,user){
-        state.newConversationUser=user;
-    }
-}
+    setNewConversationUser(state, user) {
+        state.newConversationUser = user;
+    },
+};
 
 export const actions = {
     openSelectedConversation({ commit, getters }, conversationID) {
-        commit('setNewConversationStatus',false);
+        commit("setNewConversationStatus", false);
 
-        const selectedConversation = getters.getConversations.find(conversation => conversation.id == conversationID)
-        commit('setSelectedConversation', selectedConversation)
-        commit('setChatLoadingStatus', 'LOADING');
-        commit('resetMessages');
+        const selectedConversation = getters.getConversations.find(
+            (conversation) => conversation.id == conversationID
+        );
+        commit("setSelectedConversation", selectedConversation);
+        commit("setChatLoadingStatus", "LOADING");
+        commit("resetMessages");
+        commit('setHasMoreMessages', true);
 
         //unsubscribe old chat listener
         if (getters.getSelectedChatListenerRef) {
@@ -86,14 +128,21 @@ export const actions = {
 
         const db = getFirestore();
 
-        const chatRef = collection(db, `Conversations/${selectedConversation.id}/Messages`);
-        const q = query(chatRef, orderBy('sentAt', 'desc'), limit(10));
+        const chatRef = collection(
+            db,
+            `Conversations/${selectedConversation.id}/Messages`
+        );
+        const limitRecords = 8;
+        const q = query(chatRef, orderBy("sentAt"), limitToLast(limitRecords));
         const unsubscribe = onSnapshot(q, (snapshot) => {
+
+            commit('setHasMoreMessages', snapshot.docs.length == limitRecords ? true : false);
+
             snapshot.docChanges().forEach((change) => {
                 const id = change.doc.id;
                 const message = { id, ...change.doc.data() };
-                if (change.type === 'added') {
-                    commit('setMessage', message);
+                if (change.type === "added") {
+                    commit("setMessage", message);
                 }
                 if (change.type === "modified") {
                     console.log("Modified Message: ", message);
@@ -104,27 +153,61 @@ export const actions = {
             });
         });
 
-        commit('setSelectedChatListenerRef', unsubscribe);
+        commit("setSelectedChatListenerRef", unsubscribe);
     },
-    async sendMessage({ getters, dispatch }, {text,attachement,refererGig,attachementType}) {
+    async reversePaginate({ commit, getters }) {
+        const selectedConversation = getters.getSelectedConversation;
+        if (!selectedConversation || !getters.hasMoreMessages) {
+            return false;
+        }
+        commit("setChatLoadingStatus", "LOADING");
 
-        const newConversationUser=getters.getNewConversationUser;
+        const db = getFirestore();
 
-        if(!getters.getSelectedConversation && !newConversationUser){
+        const chatRef = collection(
+            db,
+            `Conversations/${selectedConversation.id}/Messages`
+        );
+
+        const firstMessage = getters.getMessages[0];
+        const limitRecords = 8;
+        const q = query(chatRef, orderBy("sentAt", 'desc'), startAfter(firstMessage));
+
+        const querySnapshot = await getDocs(q);
+
+        commit('setHasMoreMessages', querySnapshot.docs.length == limitRecords ? true : false);
+        querySnapshot.forEach((doc) => {
+            const id = doc.id;
+            const message = { id, ...doc.data() };
+            commit("setMessageInStart", message);
+        });
+
+        commit("setChatLoadingStatus", "COMPLETED");
+    },
+    async sendMessage(
+        { getters, dispatch },
+        { text, attachement, refererGig, attachementType }
+    ) {
+        const newConversationUser = getters.getNewConversationUser;
+
+        if (!getters.getSelectedConversation && !newConversationUser) {
             return;
-        } else if (newConversationUser && !getters.getSelectedConversation){
-            await dispatch('createConversation',newConversationUser);
+        } else if (newConversationUser && !getters.getSelectedConversation) {
+            await dispatch("createConversation", newConversationUser);
         }
 
         const db = getFirestore();
-        const newDocId = new Date().getTime().toString() + 'id';
-       
+        const newDocId = new Date().getTime().toString() + "id";
+
         const selectedConversation = getters.getSelectedConversation;
         if (!selectedConversation) {
-            return
+            return;
         }
 
-        const chatRef = doc(collection(db, `Conversations/${selectedConversation.id}/Messages`), newDocId);
+        const chatRef = doc(
+            collection(db, `Conversations/${selectedConversation.id}/Messages`),
+            newDocId
+        );
 
         const newMessage = {
             message: text,
@@ -136,32 +219,35 @@ export const actions = {
             messageOffer: null,
             messageGig: getters.getReferrerGig,
             deleteMessage: [],
-            id: newDocId
+            id: newDocId,
         };
 
         console.log("New Message", newMessage);
         setDoc(chatRef, newMessage);
-        dispatch('updateConversation', newMessage);
+        dispatch("updateConversation", newMessage);
     },
     lookForConversationChanges({ commit, getters }) {
-        commit('setConversationLoadingStatus', 'LOADING');
+        commit("setConversationLoadingStatus", "LOADING");
         if (!getters.areConversationListAlreadyLoaded) {
             const db = getFirestore();
             const user = getters.getAuthUser;
             const conversationRef = collection(db, "Conversations");
-            const q = query(conversationRef, where('members', 'array-contains', user.id), orderBy("createdAt", 'desc'));
+            const q = query(
+                conversationRef,
+                where("members", "array-contains", user.id),
+                orderBy("createdAt", "desc")
+            );
 
-
-            /*const unsubscribe = */ onSnapshot(q, (snapshot) => {
+      /*const unsubscribe = */ onSnapshot(q, (snapshot) => {
                 snapshot.docChanges().forEach((change) => {
                     const id = change.doc.id;
                     const conversation = { id, ...change.doc.data() };
                     if (change.type === "added") {
-                        commit('setConversation', conversation);
+                        commit("setConversation", conversation);
                     }
                     if (change.type === "modified") {
                         console.log("Modified Conversation: ", change.doc.data());
-                        commit('updateConversation', conversation);
+                        commit("updateConversation", conversation);
                     }
                     if (change.type === "removed") {
                         console.log("Removed Conversation: ", conversation);
@@ -169,8 +255,8 @@ export const actions = {
                 });
             });
         }
-        commit('setConversationLoadingStatus', 'COMPLETED');
-        commit('setConversationsAreLoaded');
+        commit("setConversationLoadingStatus", "COMPLETED");
+        commit("setConversationsAreLoaded");
     },
     updateConversation({ getters }, message) {
         const conversation = getters.getSelectedConversation;
@@ -178,12 +264,11 @@ export const actions = {
         const user = getters.getAuthUser;
         const conversationRef = doc(db, "Conversations", conversation.id);
 
-        conversation.membersInfo.forEach(member => {
+        conversation.membersInfo.forEach((member) => {
             if (member.id == user.id) {
                 member.name = user.name;
-                member.photo = user.image,
-                    member.hasReadLastMessage = true;
-                member.type = 'available';
+                (member.photo = user.image), (member.hasReadLastMessage = true);
+                member.type = "available";
             }
         });
 
@@ -192,13 +277,13 @@ export const actions = {
             senderName: user.name,
             senderId: user.id,
             lastMessage: message.message,
-            membersInfo: conversation.membersInfo
+            membersInfo: conversation.membersInfo,
         });
     },
-    async createConversation({ getters,commit }, user) {
+    async createConversation({ getters, commit }, user) {
         const db = getFirestore();
         const authUser = getters.getAuthUser;
-        const newConvId= new Date().getTime().toString() + 'convId';
+        const newConvId = new Date().getTime().toString() + "convId";
         const conversationRef = doc(db, "Conversations", newConvId);
 
         const membersInfo = [
@@ -206,26 +291,24 @@ export const actions = {
                 id: user.id,
                 name: user.name,
                 photo: user.photo,
-                type: 'available',
-                hasReadLastMessage: false
-            }, {
+                type: "available",
+                hasReadLastMessage: false,
+            },
+            {
                 id: authUser.id,
                 name: authUser.name,
                 photo: authUser.image,
-                type: 'available',
-                hasReadLastMessage: true
-            }
+                type: "available",
+                hasReadLastMessage: true,
+            },
         ];
-        const members = [
-            user.id,
-            authUser.id,
-        ];
+        const members = [user.id, authUser.id];
 
-        const newCov={
-            id:newConvId,
+        const newCov = {
+            id: newConvId,
             senderName: user.name,
             senderId: user.id,
-            lastMessage:null,
+            lastMessage: null,
             members,
             membersInfo,
             title: "",
@@ -234,33 +317,105 @@ export const actions = {
             createdAt: new Date(new Date().toISOString()).getTime(),
         };
 
-        await setDoc(conversationRef,newCov );
-        commit('setSelectedConversation',newCov);
-
+        await setDoc(conversationRef, newCov);
+        commit("setSelectedConversation", newCov);
     },
-    async getUserDataFromApi({ commit }, userId){
-        const user= await Api.get(`profile?user=${userId}`);
-        console.log(user);
-        commit('setNewConversationUser',{
-            id: user.id,
-            name:user.name,
-            photo: user.image,
-            hasReadLastMessage:false,
-            type : "available"
+
+    async handleConversationPagination({ commit, getters }) {
+        const selectedConversation = getters.getSelectedConversation;
+        const messages = getters.getMessages;
+        if (!selectedConversation && !messages) {
+            return;
+        }
+
+        const lastMessage = messages[messages.length - 1];
+        console.log("pagination");
+        const db = getFirestore();
+        const chatRef = collection(
+            db,
+            `Conversations/${selectedConversation.id}/Messages`
+        );
+        const q = query(
+            chatRef,
+            orderBy("sentAt", "desc"),
+            startAfter(lastMessage),
+            limit(10)
+        );
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                const id = change.doc.id;
+                const message = { id, ...change.doc.data() };
+                if (change.type === "added") {
+                    commit("setMessage", message);
+                }
+                if (change.type === "modified") {
+                    console.log("Modified Message: ", message);
+                }
+                if (change.type === "removed") {
+                    console.log("Removed Message: ", message);
+                }
+            });
         });
-    }
-}
+
+        commit("setSelectedChatListenerRef", unsubscribe);
+    },
+    async getUserDataFromApi({ commit }, userId) {
+        const user = await Api.get(`profile?user=${userId}`);
+        console.log(user);
+        commit("setNewConversationUser", {
+            id: user.id,
+            name: user.name,
+            photo: user.image,
+            hasReadLastMessage: false,
+            type: "available",
+        });
+    },
+
+    async sendCustomOfferToBuyerOnChat({ getters, dispatch }, payload) {
+        console.log(payload);
+        const db = getFirestore();
+        const newDocId = new Date().getTime().toString() + "id";
+
+        const selectedConversation = getters.getSelectedConversation;
+        if (!selectedConversation) {
+            return;
+        }
+
+        const chatRef = doc(
+            collection(db, `Conversations/${selectedConversation.id}/Messages`),
+            newDocId
+        );
+
+        const newMessage = {
+            message: payload.description,
+            attachment: "",
+            attachementType: 0,
+            sentAt: new Date(new Date().toISOString()).getTime(),
+            refersGig: false,
+            senderId: getters.getAuthUser.id,
+            messageOffer: payload,
+            messageGig: getters.getReferrerGig,
+            deleteMessage: [],
+            id: newDocId,
+        };
+
+        console.log("New Message", newMessage);
+        setDoc(chatRef, newMessage);
+        dispatch("updateConversation", newMessage);
+    },
+};
 
 export const getters = {
     getMessages: (state) => state.messages,
     getSelectedConversation: (state) => state.selectedConversation,
-    getConversations: state => state.conversations,
-    getConversationListStatus: state => state.conversationLoadingStatus,
-    getChatLoadingStatus: state => state.chatLoadingStatus,
-    getSelectedChatListenerRef: state => state.selectedChatListenerRef,
-    getChatMessages: state => state.messages,
-    getReferrerGig: state => state.referrerGig,
-    isConversationNew: state => state.isConversationNew,
-    areConversationListAlreadyLoaded: state => state.areConversationsLoaded,
-    getNewConversationUser: state => state.newConversationUser,
-}
+    getConversations: (state) => state.conversations,
+    getConversationListStatus: (state) => state.conversationLoadingStatus,
+    getChatLoadingStatus: (state) => state.chatLoadingStatus,
+    getSelectedChatListenerRef: (state) => state.selectedChatListenerRef,
+    getChatMessages: (state) => state.messages,
+    getReferrerGig: (state) => state.referrerGig,
+    isConversationNew: (state) => state.isConversationNew,
+    areConversationListAlreadyLoaded: (state) => state.areConversationsLoaded,
+    getNewConversationUser: (state) => state.newConversationUser,
+    hasMoreMessages: state => state.hasMoreMessages
+};

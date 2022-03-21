@@ -14,17 +14,11 @@ import Jobs from '@/views/Buyer/AllJobs.vue'
 import BuyerServiceDetail from '@/views/Buyer/BuyerServiceDetail.vue'
 import ManageOrder from '@/views/Buyer/ManageOrder.vue'
 
-
 import BuyerAccount from '@/views/Seller/Account.vue'
 import BuyerEditProfile from '@/views/Seller/EditProfile.vue'
 import BuyerChangePassword from '@/views/Seller/ChangePassword.vue'
-import SellerOrders from '@/views/Seller/Orders.vue'
 import BuyerNotifications from '@/views/Seller/Notifications.vue'
 
-
-
-import ManageService from '@/views/Seller/ManageService.vue'
-import FavouriteService from '@/views/Seller/FavouriteService.vue'
 import OrderDetails from '@/views/OrderDetails.vue'
 
 
@@ -42,12 +36,7 @@ const routes = [
     name: 'OrderDetails',
     component: OrderDetails,
   },
-  {
-    path: '/seller-orders',
-    name: 'SellerOrders',
-    component: SellerOrders,
-  },
-
+ 
   {
     path: '/buyer-account',
     name: 'BuyerAccount',
@@ -103,17 +92,6 @@ const routes = [
     path: '/About',
     name: 'About',
     component: About,
-  },
-
-  {
-    path: '/seller/manage_service',
-    name: 'ManageService',
-    component: ManageService
-  },
-  {
-    path: '/seller/favourite_service',
-    name: 'FavouriteService',
-    component: FavouriteService
   },
 
   {

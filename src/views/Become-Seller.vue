@@ -18,9 +18,11 @@
                       <label id="titleLabel" class="form-label">
                         Freelancer Title
                         <span class="text-danger">*</span>
-                        <span class="text-danger " v-if="dataErrors.freelancer_title">{{
-                          dataErrors.freelancer_title
-                        }}</span>
+                        <span
+                          class="text-danger"
+                          v-if="dataErrors.freelancer_title"
+                          >{{ dataErrors.freelancer_title }}</span
+                        >
                       </label>
                       <div class="form-group">
                         <input
@@ -56,7 +58,13 @@
                           :onchange="selectLanguage"
                         >
                           <option selected>Select language</option>
-                          <option v-for="language in $store.getters.getLanguages" :key="language" :value="language">{{ language }}</option>
+                          <option
+                            v-for="language in $store.getters.getLanguages"
+                            :key="language"
+                            :value="language"
+                          >
+                            {{ language }}
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -70,9 +78,11 @@
                       <label class="form-label">
                         Availability
                         <span class="text-danger">*</span>
-                        <span class="text-danger" v-if="dataErrors.availability">{{
-                          dataErrors.availability
-                        }}</span>
+                        <span
+                          class="text-danger"
+                          v-if="dataErrors.availability"
+                          >{{ dataErrors.availability }}</span
+                        >
                       </label>
                       <div class="form-group">
                         <select
@@ -83,7 +93,6 @@
                           <option selected>Select availability</option>
                           <option value="full time">Full Time</option>
                           <option value="part time">Part Time</option>
-                         
                         </select>
                       </div>
                     </div>
@@ -94,9 +103,11 @@
                       <label class="form-label">
                         Country
                         <span class="text-danger">*</span>
-                        <span class="text-danger" v-if="dataErrors.country_id">{{
-                          dataErrors.country_id
-                        }}</span>
+                        <span
+                          class="text-danger"
+                          v-if="dataErrors.country_id"
+                          >{{ dataErrors.country_id }}</span
+                        >
                       </label>
                       <div class="form-group">
                         <select
@@ -105,7 +116,13 @@
                           :onchange="selectCountry"
                         >
                           <option selected>Select country</option>
-                          <option v-for="country in $store.getters.getCountries" :value="country.id" :key="country.id">{{ country.name }}</option>
+                          <option
+                            v-for="country in $store.getters.getCountries"
+                            :value="country.id"
+                            :key="country.id"
+                          >
+                            {{ country.name }}
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -124,9 +141,9 @@
                   <div class="form-group mb-4">
                     <label class="mb-1">BIO</label>
                     <span class="text-danger">*</span>
-                      <span class="text-danger" v-if="dataErrors.description">
-                        {{ dataErrors.description }}
-                      </span>
+                    <span class="text-danger" v-if="dataErrors.description">
+                      {{ dataErrors.description }}
+                    </span>
                     <div class="position-relative">
                       <textarea
                         class="form-control"
@@ -145,18 +162,42 @@
                       dataErrors.cinic
                     }}</span>
                   </div>
-                  <div class="upload-cnic d-flex position-relative align-items-center justify-content-center mx-auto" 
-                  :style="`background-image: url(${preview})`" 
+                  <div
+                    class="
+                      upload-cnic
+                      d-flex
+                      position-relative
+                      align-items-center
+                      justify-content-center
+                      mx-auto
+                    "
+                    :style="`background-image: url(${preview})`"
                   >
-                    <i  v-if="!data.cinic" @click="$refs.cnicInput.click()" class="mdi mdi-image-plus cursor-pointer" style="font-size:20px; "></i>
-                    <input type="file" ref="cnicInput" accept="image/*" @change="handleCinic($event)" style="display:none" />
-                    <i v-if="data.cinic" @click="removeImage()" class="mdi mdi-close-box position-absolute cursor-pointer" style="top:1%; right:1%; font-size:16px; color:red"></i>
+                    <i
+                      v-if="!data.cinic"
+                      @click="$refs.cnicInput.click()"
+                      class="mdi mdi-image-plus cursor-pointer"
+                      style="font-size: 20px"
+                    ></i>
+                    <input
+                      type="file"
+                      ref="cnicInput"
+                      accept="image/*"
+                      @change="handleCinic($event)"
+                      style="display: none"
+                    />
+                    <i
+                      v-if="data.cinic"
+                      @click="removeImage()"
+                      class="mdi mdi-close-box position-absolute cursor-pointer"
+                      style="top: 1%; right: 1%; font-size: 16px; color: red"
+                    ></i>
                   </div>
                 </div>
               </div>
             </div>
             <div class="shadow-sm rounded bg-white mb-3">
-              <div class="box-title border-bottom p-3 ">
+              <div class="box-title border-bottom p-3">
                 <h6 class="m-0">Category</h6>
               </div>
               <div class="box-body px-3 pt-3 pb-0">
@@ -166,9 +207,9 @@
                       <label class="form-label">
                         Category
                         <span class="text-danger">*</span>
-                      <span class="text-danger" v-if="dataErrors.category_id">
-                        {{ dataErrors.category_id }}
-                      </span> 
+                        <span class="text-danger" v-if="dataErrors.category_id">
+                          {{ dataErrors.category_id }}
+                        </span>
                       </label>
                       <div class="form-group">
                         <select
@@ -196,9 +237,12 @@
                       <label class="form-label">
                         Sub Category
                         <span class="text-danger">*</span>
-                      <span class="text-danger" v-if="dataErrors.sub_category_id">
-                        {{ dataErrors.sub_category_id }}
-                      </span>
+                        <span
+                          class="text-danger"
+                          v-if="dataErrors.sub_category_id"
+                        >
+                          {{ dataErrors.sub_category_id }}
+                        </span>
                       </label>
                       <div class="form-group">
                         <select
@@ -214,7 +258,8 @@
                             Select Sub Category
                           </option>
                           <option
-                            v-for="subCategory in $store.getters.getSubCategories"
+                            v-for="subCategory in $store.getters
+                              .getSubCategories"
                             :value="subCategory.id"
                             :key="subCategory.id"
                           >
@@ -303,10 +348,13 @@
               <button
                 type="submit"
                 class="btn btn-success ml-2"
-                :disabled="$store.getters.getSubmitStatus"
+                :disabled="
+                  !Object.values(dataErrors).every((value) => !value) ||
+                  btnStatus == 2
+                "
                 @click.prevent="handleBecomeSeller"
               >
-                {{ btnStatus == 2 ? 'Loading...' : 'Submit'}}
+                {{ btnStatus == 2 ? "Loading..." : "Submit" }}
               </button>
             </div>
           </form>
@@ -321,7 +369,6 @@ import useBecomeSeller from "@/composables/useBecomeSeller";
 
 export default {
   setup() {
-
     const {
       data,
       dataErrors,
@@ -332,21 +379,22 @@ export default {
       handleCinic,
       removeImage,
       handleBecomeSeller,
-      btnStatus
+      btnStatus,
     } = useBecomeSeller();
 
     const selectSubCategory = () => {
-      data.value.sub_category_id = document.querySelector('#subcategoryID').value
-    }
+      data.value.sub_category_id =
+        document.querySelector("#subcategoryID").value;
+    };
     const selectLanguage = () => {
-      data.value.lang = document.querySelector('#language').value
-    }
+      data.value.lang = document.querySelector("#language").value;
+    };
     const selectCountry = () => {
-      data.value.country_id = document.querySelector('#country').value
-    }
+      data.value.country_id = document.querySelector("#country").value;
+    };
     const selectAvailability = () => {
-      data.value.availability = document.querySelector('#availability').value
-    }
+      data.value.availability = document.querySelector("#availability").value;
+    };
 
     return {
       data,
@@ -362,19 +410,19 @@ export default {
       selectCountry,
       selectAvailability,
       selectSubCategory,
-      btnStatus
+      btnStatus,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.upload-cnic{
-    width:80px; 
-    height:80px; 
-    border:1px solid grey;
-    margin-bottom: 10px;
-    background-size: cover;
-    background-position: center;
+.upload-cnic {
+  width: 80px;
+  height: 80px;
+  border: 1px solid grey;
+  margin-bottom: 10px;
+  background-size: cover;
+  background-position: center;
 }
 </style>
