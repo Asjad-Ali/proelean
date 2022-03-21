@@ -105,4 +105,25 @@ export const  actions = {
         }
       },
       
+      async purchaseOfferedService({getters}, payload) {
+        const res = await Api.post('token',payload);
+        if(res.status === 200 ){
+          const customOffer = getters.getSelectedCustomOffer;
+          payload = {
+            service_id: customOffer.serviceId,
+            description: customOffer.description,
+            price: customOffer.totalOffer,
+            revision: customOffer.revisions,
+            delivery_time: customOffer.deliveryDays,
+            token: res.token
+          }
+          const response = await Api.post('buyer/chat_order',payload);
+          if(response.status===201) {
+            useToast(response.message,'success');
+          } else {
+            console.log(response)
+          }
+        }
+      }
+
 }
