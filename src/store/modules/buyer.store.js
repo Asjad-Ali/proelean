@@ -48,6 +48,7 @@ export const  actions = {
           useToast(res.message);
             commit('setRegisterStatus',4);
         }
+        return res;
       },
 
       async showAllJobs({commit}){

@@ -113,7 +113,7 @@
                 >                
                 {{registerStatus == 2 ? ' Loading...' : ' Set Password'}}
               </button>
-              <div class="text-center mt-3 border-bottom pb-3">
+              <!-- <div class="text-center mt-3 border-bottom pb-3">
                 <p class="small text-muted">Or login with</p>
                 <div class="row">
                   <div class="col-6">
@@ -133,7 +133,7 @@
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="py-3 d-flex align-item-center">
                 <router-link to="/login">Login</router-link>
                 <span class="ml-auto">

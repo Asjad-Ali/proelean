@@ -102,8 +102,8 @@
 </template>
 
 <script>
-import { ref } from "vue";
-// import { useRouter } from 'vue-router';
+import { onMounted, ref } from "vue";
+import { useRoute } from 'vue-router';
 const items = [
   {
     title: "Dashboard",
@@ -130,7 +130,7 @@ const items = [
       'M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z'
     ],
     
-    path: "/dashboard/orders-new",
+    path: "/dashboard/orders",
     hasSubMenu: false,
   },
   {
@@ -211,14 +211,38 @@ export default {
   },
 
   setup() {
-    // const route = useRouter();
-    const activeTabIndex=ref(0);
-
-    // onMounted(() => {
-    //   if(route.params.path=='dashboard'){
-    //     activeTabIndex.value=3;
-    //   }
-    // });
+    const route = useRoute();
+    const activeTabIndex=ref();
+    onMounted(() => {
+      console.log("Route path",route.path)
+      if(route.path == '/dashboard'){
+        activeTabIndex.value = 0;
+      }
+      if (route.path == '/dashboard/sellers-services'){
+        activeTabIndex.value = 1;
+      }
+      if (route.path == '/dashboard/orders'){
+        activeTabIndex.value = 2;
+      }
+      if (route.path == '/dashboard/analytics'){
+        activeTabIndex.value = 3;
+      }
+      if (route.path == '/dashboard/notifications'){
+        activeTabIndex.value = 4;
+      }
+      if (route.path == '/dashboard/chat'){
+        activeTabIndex.value = 5;
+      }
+      if (route.path == '/dashboard/buyer_requests'){
+        activeTabIndex.value = 6;
+      }
+      if (route.path == '/dashboard/payments'){
+        activeTabIndex.value = 7;
+      }
+      if (route.path == '/dashboard/account'){
+        activeTabIndex.value = 8;
+      }
+    });
 
     return {
       items,

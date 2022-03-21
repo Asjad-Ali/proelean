@@ -1,39 +1,36 @@
 <template>
   <div class="py-3">
     <div class="container">
-        <div class="mb-3">
-          <div class="d-flex mb-2 align-items-center border-bottom">
-            <h3 >Favourite Services</h3>
-          </div>
+      <div class="mb-3">
+        <div class="d-flex mb-2 align-items-center border-bottom">
+          <h3>Favourite Services</h3>
         </div>
-        <div v-if="favouriteServices.length > 0">
-
-        <div class="row g-4 recommended d-flex flex-wrap justify-content-start" v-if="favouriteServices">
-          <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'" />
+      </div>
+       <Loader v-if="$store.getters.getLoaderVal === 1" />
+        <div v-else>
+          <div v-if="favouriteServices.length" class="row g-4 recommended d-flex flex-wrap justify-content-start" >
           <div
             class="col-6 col-md-4 mb-3 col-xxl-3 service-list-section"
             v-for="favouriteService in favouriteServices"
             :key="favouriteService.id"
-            v-else
           >
-            {{ Service }}
             <div>
               <Service :service="favouriteService" />
             </div>
           </div>
         </div>
+          <div class="text-center m-5" v-else>
+            <h3>No More Services Available</h3>
+          </div>
         </div>
-        <div v-else class="container text-center py-5">
-          <h2>No Service Available</h2>
-        </div>
-    </div>
+      </div>
   </div>
 </template>
 
 <script>
 import { computed, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import Loader from "../../components/loadingComponent.vue";
+import Loader from "@/components/loadingComponent.vue";
 import Service from "@/components/Service.vue";
 
 export default {

@@ -140,7 +140,6 @@
                 </div>
               </div> -->
               <div class="py-3 d-flex align-item-center">
-                <a href="forgot-password.html">Forgot password?</a>
                 <span class="ml-auto">
                   Already on Pro Elean?
                   <router-link to="/login">Sign in</router-link></span

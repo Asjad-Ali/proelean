@@ -128,14 +128,14 @@
                   disable:
                     service.service_user.id === $store.getters.getAuthUser.id,
                 }"
-                @click="handleWishlist(service.id)"
+                @click="handleWishlist(service.id,service.favourite)"
               >
-                <i class="mdi mdi-repeat fs-2" v-if="loader == service.id"></i>
+                <i class="mdi mdi-repeat fs-2" v-if="heartStatus == service.id"></i>
                 <i
                   v-else
                   class="mdi mdi-heart cursor-pointer fs-2"
                   :class="{ redIcon: service.favourite }"
-                  :disabled="loader === service.id"
+                  :disabled="heartStatus === service.id"
                   aria-hidden="true"
                 ></i>
               </a>
@@ -182,7 +182,7 @@ export default {
     const store = useStore();
     const route = useRoute();
 
-    const handleWishlist = (id) => {
+    const handleWishlist = (id,wishValue) => {
       let routeType = ''
       if(route.name === 'Gigs')
       {
@@ -195,7 +195,8 @@ export default {
       }
       let payload = {
         service_id: id,
-        type:  routeType
+        type:  routeType,
+        favourite: wishValue
       };
       store.dispatch("wishlist", payload);
     };
@@ -205,7 +206,7 @@ export default {
     };
     return {
       handleWishlist,
-      loader: computed(() => store.getters.getRegisterStatus),
+      heartStatus: computed(() => store.getters.getRegisterStatus),
       imgURL: process.env.VUE_APP_URL,
       shareService
     };

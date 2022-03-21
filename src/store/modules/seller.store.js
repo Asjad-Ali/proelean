@@ -238,7 +238,7 @@ export const actions = {
   },
 
   async deleteBuyerJob({ commit, state }, id) {
-    commit('setRegisterStatus', 2);
+    commit('setRegisterStatus', id);
     const res = await Api.delete(`seller/cancel_offer/${id}`);
     if (res.status === 200) {
       useToast(res.message, 'success');
