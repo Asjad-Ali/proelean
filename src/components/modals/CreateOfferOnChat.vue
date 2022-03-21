@@ -128,16 +128,30 @@ export default {
 
     const handleSelectedService = () => {
       let selectedService = store.getters.getUserServices.find(
-        (service) => service.id === payload.value.gigId
+        (service) => service.id === payload.value.serviceId
       );
       payload.value.serviceId = selectedService.id;
       payload.value.serviceTitle = selectedService.s_description;
       payload.value.offerSenderId = selectedService.service_user.id;
     };
     const sendOffer = () => {
-      store.dispatch("sendCustomOfferToBuyerOnChat", payload.value);
-      console.log(payload.value);
+      store.dispatch("sendCustomOfferToBuyerOnChat", payload.value).then(()=>{
+        resetFields();
+      });
+
     };
+
+    function resetFields()
+    {
+      payload.value.deliveryDays = ""
+      payload.value.description = ""
+      payload.value.offerSenderId = ""
+      payload.value.revisions = ""
+      payload.value.serviceId = ""
+      payload.value.serviceTitle = ""
+      payload.value.status = 0
+      payload.value.totalOffer = ""
+    }
 
     return {
       payload,

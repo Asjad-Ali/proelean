@@ -22,7 +22,7 @@
                         type="number"
                         class="form-control"
                         name="ATM_Number"
-                        
+                        v-model="payload.number"
                         id="ATM_Number"
                         placeholder="Enter 16 characters of your ATM Number "
                         required
@@ -32,7 +32,7 @@
                         type="number"
                         class="form-control"
                         name="expiryMonth"
-                        
+                        v-model="payload.exp_month"
                         id="expiryMonth"
                         placeholder="Enter Card Expiry Month"
                         required
@@ -42,7 +42,7 @@
                         type="number"
                         class="form-control"
                         name="expiryYear"
-                        
+                        v-model="payload.exp_year"
                         id="expiryYear"
                         placeholder="Enter Card Expiry Year"
                         required
@@ -52,7 +52,7 @@
                         type="number"
                         class="form-control"
                         name="cvc"
-                        
+                        v-model="payload.cvc"
                         id="cvc"
                         placeholder="Enter CVC"
                         required
@@ -60,10 +60,38 @@
                     </div>
                 <div class="modal-footer d-flex justify-content-center">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" @click="$emit('purchase-service')">Purchase</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" @click="handleCustomerDetail">Continue</button>
                     </div>
                 </div>
             </div>
             </div>
             <!---------------------    Modal End     --------------------->
 </template>
+
+<script>
+import { ref } from '@vue/reactivity'
+import { useStore } from 'vuex'
+export default {
+    setup() {
+
+        const store = useStore();
+
+        const payload = ref({
+            number: 4242424242424242,
+            exp_month: 2,
+            exp_year: 2023,
+            cvc: 123
+        })
+
+        console.log(store.getters.getSelectedCustomOffer)
+        const handleCustomerDetail = (e) => {
+            e.preventDefault();
+            store.dispatch('purchaseOfferedService',payload.value)
+        }
+        return {
+            payload,
+            handleCustomerDetail
+        }
+    }
+}
+</script>
