@@ -1,6 +1,6 @@
 import SellerDashboard from '@/views/Seller/Dashboard.vue'
 import SellerServices from '@/views/Seller/SellerServices.vue'
-import OrdersNew from '@/views/Seller/OrdersNew.vue'
+import Orders from '@/views/Seller/Orders.vue'
 import Notifications from '@/views/Seller/Notifications.vue'
 import Account from '@/views/Seller/Account.vue'
 import Settings from '@/views/Seller/Settings.vue'
@@ -80,9 +80,9 @@ const sellerRoutes = [
         component: Notifications,
     },
     {
-        path: '/dashboard/orders-new',
-        name: 'OrdersNew',
-        component: OrdersNew,
+        path: '/dashboard/orders',
+        name: 'Orders',
+        component: Orders,
     },
     {
         path: '/dashboard/update_service/:id',

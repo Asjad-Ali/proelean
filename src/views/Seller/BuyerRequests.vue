@@ -82,14 +82,17 @@
             </button>
             <button
               type="button"
-              :disabled="getBtnStatus == 2"
+              :disabled="getBtnStatus == request.id"
               class="btn btn-success mx-2 my-1"
               @click="deleteJob(request.id)"
             >
-              {{ getBtnStatus == 2 ? "Loading..." : "Cancel Offer" }}
+              {{ getBtnStatus == request.id ? "Loading..." : "Cancel Offer" }}
             </button>
           </div>
           <!--//app-card-footer-->
+<<<<<<< HEAD
+        </div>
+=======
          </div>
          <!---------------------    Modal (Send Offer)     --------------------->
             <div
@@ -185,6 +188,7 @@
               </div>
             </div>
           <!----------------------    Modal End     --------------------->
+>>>>>>> b24a9f2930a0b254a3ff72f5b087f0a7b4ca0e39
       </div>
 
       <div v-else class="container text-center py-5">
@@ -195,6 +199,102 @@
       <a @click="loadMore()" class="btn app-btn-secondary" href="#">
       {{loader === 1 ? 'Loading...' : 'Load more Requests'}}</a>
     </div>
+
+    <!---------------------    Modal (Send Offer)     --------------------->
+    <div
+      class="modal fade"
+      id="sendOfferModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="sendOfferModalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header d-flex justify-content-center">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Send Offer
+            </h5>
+          </div>
+          <div class="modal-body text-center">
+            <div class="text-left font">Describe your offer</div>
+            <textarea
+              type="text"
+              class="form-control"
+              name="description"
+              v-model="payload.description"
+              id="description"
+              placeholder="Describe your offer"
+              required
+            />
+            <div class="text-left font mt-2">Total Price</div>
+            <input
+              type="number"
+              class="form-control"
+              name="price"
+              v-model="payload.price"
+              id="price"
+              placeholder="Total Offer(EUR)"
+              required
+            />
+            <div class="text-left font mt-2">Delivery Time</div>
+            <select
+              id="deliveryTime"
+              class="form-control"
+              name="delivery_time"
+              v-model="payload.delivery_time"
+              required
+            >
+              <option selected>Select day</option>
+              <option
+                v-for="day in $store.getters.getDeliveryDays"
+                :value="day"
+                :key="day.index"
+              >
+                {{ day }}
+              </option>
+            </select>
+
+            <div class="text-left font mt-2">Service</div>
+            <select
+              id="services"
+              class="form-control"
+              name="service"
+              v-model="payload.service_id"
+              required
+            >
+              <option selected disabled>Select Service</option>
+              <option
+                v-for="service in $store.getters.getUserServices"
+                :value="service.id"
+                :key="service.id"
+              >
+                {{ service.s_description }}
+              </option>
+            </select>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button
+              type="button"
+              class="btn btn-success"
+              :disabled="getBtnStatus == 2"
+              data-dismiss="modal"
+              @click.prevent="sendOffer()"
+            >
+              {{ getBtnStatus == 2 ? "Loading..." : "Send Offer" }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!----------------------    Modal End     --------------------->
   </div>
 </template>
 

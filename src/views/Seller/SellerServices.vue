@@ -39,16 +39,20 @@
 
     <!--//row-->
     <div class="border-bottom mb-2"></div>
-    <div class="row my-3 recommended d-flex flex-wrap justify-content-start">
-      <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'" />
+    <Loader v-if="$store.getters.getLoadingStatus === 'LOADING'" />
+    <div v-else>
+        <div v-if="userServices.length > 0" class="row my-3 recommended d-flex flex-wrap justify-content-start">
       <div
         class="col-12 col-md-4 mb-3 col-xxl-3 service-list-section"
         v-for="service in userServices"
         :key="service.id"
-        v-else
       >
         <Service @selectService="selectService" :service="service" />
       </div>
+    </div>
+    <div class="text-center m-5" v-else>
+      <h2>No More Services Available</h2>
+    </div>
     </div>
   </div>
 

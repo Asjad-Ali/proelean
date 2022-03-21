@@ -121,49 +121,6 @@
             </a>
           </span>
 
-          <!-- Manage Services -->
-          <li
-            v-if="!isBuyerMode"
-            class="
-              nav-item
-              dropdown
-              no-arrow no-caret
-              mr-3
-              dropdown-notifications
-              show
-              d-none d-lg-block
-            "
-            :disabled="userInfo.isFreelancer"
-          >
-            <router-link
-              to="/seller/manage_service"
-              class="btn btn-icon btn-transparent-dark dropdown-toggle"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
-              title="Manage Services"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-list-task"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"
-                />
-                <path
-                  d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"
-                />
-              </svg>
-            </router-link>
-          </li>
           <!-- Buyer Requests-->
           <li
             v-if="!isBuyerMode"
@@ -272,7 +229,7 @@
               </svg>
             </router-link>
           </li>
-          <!-- Post a Job -->
+          <!-- Favourite Services -->
           <li
             v-if="isBuyerMode"
             class="
@@ -286,27 +243,22 @@
             "
           >
             <router-link
-              to="/buyer/create_job"
+              to="/buyer/favourite_services"
               class="btn btn-icon btn-transparent-dark dropdown-toggle"
               data-bs-toggle="tooltip"
               data-bs-placement="top"
-              title="Post a job"
+              title="Favourite Services"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-bag-plus"
+                class="bi bi-heart"
                 viewBox="0 0 16 16"
-                title="Post a Job"
               >
                 <path
-                  fill-rule="evenodd"
-                  d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"
-                />
-                <path
-                  d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
+                  d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
                 />
               </svg>
             </router-link>
@@ -628,51 +580,6 @@
                 </div>
                 Change Password
               </router-link>
-
-              <div class="d-sm-none">
-                <router-link class="dropdown-item" to="/buyer/jobs">
-                  <i
-                    class="fa fa-briefcase mr-2 text-muted"
-                    aria-hidden="true"
-                  ></i>
-                  Manage Job
-                </router-link>
-              </div>
-              <div class="d-sm-none">
-                <router-link class="dropdown-item" to="/buyer/manage_order">
-                  <i
-                    class="fa fa-first-order text-muted mr-2"
-                    aria-hidden="true"
-                  ></i>
-                  Manage Order
-                </router-link>
-              </div>
-              <div v-if="!isBuyerMode" :disabled="userInfo.isFreelancer">
-                <div class="d-sm-none">
-                  <router-link
-                    class="dropdown-item"
-                    to="/seller/manage_service"
-                  >
-                    <i
-                      class="fa fa-cogs text-muted mr-2"
-                      aria-hidden="true"
-                    ></i>
-                    Manage services
-                  </router-link>
-                </div>
-                <div class="d-sm-none">
-                  <router-link
-                    class="dropdown-item"
-                    to="/seller/buyer_requests"
-                  >
-                    <i
-                      class="fa fa-cart-arrow-down text-muted mr-2"
-                      aria-hidden="true"
-                    ></i>
-                    Buyer Requests
-                  </router-link>
-                </div>
-              </div>
 
               <button class="dropdown-item" @click="handleLogout">
                 <div class="dropdown-item-icon">
