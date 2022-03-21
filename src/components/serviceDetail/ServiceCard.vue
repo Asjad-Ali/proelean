@@ -4,7 +4,7 @@
       <div class="tab-content">
         <div id="basic" class="tab-pane fade show active">
           <h4>Service Details</h4>
-          <hr class="my-2"/>
+          <hr class="my-2">
           <div class="header">
             <p>
               {{service.s_description}}

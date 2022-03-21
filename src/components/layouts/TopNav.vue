@@ -32,7 +32,7 @@
         "
         style="width: 34%"
       >
-        <div class="input-group">
+        <div class="input-group" v-if="$store.state.isLoggedIn">
           <input
             type="text"
             v-model="keywords"
@@ -50,6 +50,9 @@
               <i class="fa fa-search fa-sm"></i>
             </button>
           </div>
+        </div>
+        <div v-else>
+          <h4 class="text-muted">Pro Elean</h4>
         </div>
       </form>
       <!-- Topbar Navbar -->
