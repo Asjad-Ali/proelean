@@ -28,14 +28,14 @@
         }}
       </div>
       <p
-        class="p-3 rounded-lg text-white"
+        class="p-3 rounded-lg text-white text-breaks"
         :class="
           message.senderId == $store.getters.getAuthUser.id
             ? `my-message`
             : `other-message`
         "
         v-if="!message.messageOffer"
-      >
+       >
         {{ message.message }}
         <!-- <a href="#">iamosahan@gmail.com</a> -->
       </p>
@@ -155,5 +155,9 @@ export default {
 }
 .other-message {
   background: #15a362;
+}
+
+.text-breaks{
+  word-break: break-all;
 }
 </style>  
