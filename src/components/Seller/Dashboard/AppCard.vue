@@ -88,5 +88,11 @@ export default {};
     font-size: 15px;
     font-weight: 100;
 }
+.seller-app .btn:hover,
+.btn:active,
+.btn:focus {
+    color: #fff;
+   
+}
 
 </style>
