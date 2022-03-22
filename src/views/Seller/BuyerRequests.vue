@@ -347,7 +347,7 @@ export default {
     }
 
     function deleteJob(id) {
-      //store.dispatch("deleteBuyerJob", id);
+      store.dispatch("deleteBuyerJob", id);
       console.log("delete request id: ", id);
     }
 
