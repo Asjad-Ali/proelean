@@ -90,9 +90,6 @@
             </button>
           </div>
           <!--//app-card-footer-->
-<<<<<<< HEAD
-        </div>
-=======
          </div>
          <!---------------------    Modal (Send Offer)     --------------------->
             <div
@@ -188,7 +185,6 @@
               </div>
             </div>
           <!----------------------    Modal End     --------------------->
->>>>>>> b24a9f2930a0b254a3ff72f5b087f0a7b4ca0e39
       </div>
 
       <div v-else class="container text-center py-5">
