@@ -14,7 +14,7 @@
               align-items-center
             "
           >
-            <div class="col-8">
+            <!-- <div class="col-8">
               <form class="table-search-form gx-1 align-items-center">
                 <div class="col-auto">
                   <input
@@ -27,7 +27,7 @@
                   />
                 </div>
               </form>
-            </div>
+            </div> -->
             <!--//col-->
             
             
@@ -258,7 +258,7 @@
 </template>
 
 <script>
-import { onMounted, computed, ref} from "@vue/runtime-core";
+import { onMounted, computed} from "@vue/runtime-core";
 import { useStore } from "vuex";
 
 export default {
@@ -269,13 +269,13 @@ export default {
     onMounted(() => {
       store.dispatch("myOrders", sellerOrderURL);
     });
-    const buyerName = ref()
+  
 
     function showFilter(value) {
       store.dispatch("myOrders", `${sellerOrderURL}${value}`);
     }
     return {
-      buyerName,
+  
       imgURL: process.env.VUE_APP_URL,
       orders: computed(() => store.getters.myOrders),
       loader: computed(() => store.getters.getLoaderVal),
