@@ -54,15 +54,20 @@
           </div>
           <!--//app-card-body-->
           <div class="app-card-footer px-4 py-3">
-            <router-link to="/chat" class="action-link" 
+            <router-link to="/dashboard/chat" class="action-link" v-if="!$store.getters.isBuyerMode"
               >Go to Inbox <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-</svg>
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+            </svg>
+            </router-link>
+            <router-link to="/chat" class="action-link" v-else
+              >Go to Inbox <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+            </svg>
             </router-link>
           </div>
           <!--//app-card-footer-->
         </div>
-           <TimeLine/>
+           <TimeLine :order="order"/>
       </div>
       <div class="col-md-4 mt-2">
        
@@ -75,7 +80,7 @@
           <div id="basic" class="tab-pane fade show active" data-v-0d25e83c="">
             <h4 data-v-0d25e83c="">Order Details</h4>
             
-              <img src="https://api.dex.proelean.com/uploads/SellerMedia/123416456141564.jpg" class="img-fluid" alt="Responsive image" />
+              <img :src="imgURL + '/' + order.image" class="img-fluid object" alt="Responsive image" />
           
               <p class="pt-1 pl-1 mt-1">{{order.description}}</p>
               <div>
@@ -226,6 +231,15 @@ export default {
 
 .app-card-footer {
     background: #fafbff;
+}
+
+.object{
+  object-fit:cover
+}
+
+.img-fluid{
+  width: 310px;
+  height: 150px;
 }
 
 </style>

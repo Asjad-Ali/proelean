@@ -5,14 +5,19 @@ import { ref } from 'vue';
 
 export const state = {
   orders: [],
+  timeline: []
 }
 export const getters = {
   myOrders: state => state.orders,
+  getTimeline: state => state.timeline,
 }
 
 export const mutations = {
   setOrders(state, order) {
     state.orders = order;
+  },
+  setTimeline(state, timeline) {
+    state.timeline = timeline;
   },
 }
 
@@ -63,6 +68,17 @@ export const actions = {
       useToast(res.message);
       console.log("Error Order Type");
     }
+  },
+
+  async timeline({ commit }, orderNo) {
+    commit('setLoader', 1);
+    const res = await Api.get(`order/${orderNo}/activity`);
+    if (res.status === 200) {
+      commit('setLoader', 0);
+      commit('setTimeline',res.data);
+      return res;
+    }
+    // return null;
   },
 
 

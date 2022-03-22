@@ -9,29 +9,34 @@
                   <th class="cell bold" >Title</th>
                   <th class="cell bold" >Price</th>
                   <th class="cell bold text-center" >Due In</th>
-                   
                   <th class="cell bold text-center" >Status</th>
                   <th class="cell bold" ></th>
                </tr>
             </thead>
             <tbody >
-               <tr >
+               <tr v-for="order in orders" :key="order.id">
                   <td class="text-center cell" >
                      <div >
-                       <img class="img-fluid bg-info mb-1" src="https://api.dex.proelean.com/uploads/SellerMedia/123416456141564.jpg" alt="img" width="80" height="80"></div>
+                       <img class="img-fluid bg-info mb-1"
+                        alt="img" width="60" height="60"
+                        :src="imgURL + '/' + order.image"
+                        ></div>
                       
                   </td>
-                  <td class="cell" ><span class="truncate" >Get work done faster and with confidence on Pro eLean. Get work done faster and with confidence on Pro eLean. Get work done faster and with confidence on Pro eLean. </span></td>
-                  <td class="cell" ><span class="truncate" >€ 450</span></td>
-                  <td class="text-center cell" ><span class="truncate mdi mdi-clock" > 9d, 10h</span></td>
+                  <td class="cell" ><span class="truncate" >{{order.description}} </span></td>
+                  <td class="cell" ><span class="truncate" >{{order.currency}}{{order.amount}}</span></td>
+                  <td class="text-center cell" ><span class="truncate mdi mdi-clock" > {{order.end_date}}</span></td>
                    
                   <td class="text-center cell" >
                     
-                  <span class="badge bg-success" >IN PROGRESS</span> 
+                  <span class="badge bg-success" v-if="order.status_id == 1"> IN PROGRESS </span> 
                     
                   </td>
                   <td class="cell" >
-                     <a href="/dashboard/order-details/a2JxdnVRYUoreCs5QUVpeTJBT0xHdz09" class="btn btn-light" > View </a>
+                      <router-link :to="{name:'OrderDetails', params:order}"
+                        class="btn btn-light">
+                        View 
+                      </router-link>
                   </td>
                </tr>
             </tbody>
@@ -44,7 +49,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+   props: {
+      orders: {
+         type: Array,
+         required: true
+      }
+   },
+   setup() {
+      return{
+         imgURL: process.env.VUE_APP_URL,
+      }
+   }
+};
 </script>
 
 <style scoped>
