@@ -1,9 +1,10 @@
 <template>
-  <div class="container-xl">
+  <div class="container-xl" v-if="orders">
     <h1 class="app-page-title">Dashboard</h1>
   <!-- <CountDown /> -->
-    <AppCard />
-    <ActiveOrderCard/>
+    <AppCard class="marginBottom" />
+    
+    <ActiveOrderCard class="margin" :orders="orders"/>
     <AnalyticBoxes />
     <Charts v-if="$store.getters.getSellerEarning.analytics" />
     <!-- <StatsSection /> -->
@@ -18,7 +19,7 @@ import Charts from "../../components/Seller/Dashboard/Charts.vue";
 // import StatsSection from "../../components/Seller/Dashboard/StatsSection.vue";
 import ActionCards from "../../components/Seller/Dashboard/ActionCards.vue";
 import { useStore } from 'vuex';
-import { onMounted } from '@vue/runtime-core';
+import { computed, onBeforeMount } from '@vue/runtime-core';
 import ActiveOrderCard from "../../components/Seller/Dashboard/ActiveOrderCard.vue";
 // import CountDown from "../../components/Seller/Dashboard/CountDown.vue";
 
@@ -26,7 +27,22 @@ export default {
   components:{ AppCard, AnalyticBoxes, Charts, ActionCards, ActiveOrderCard },
   setup() {
     const store = useStore();
-    onMounted(store.dispatch('getEarnings'));
+    //const orders = ref([]);
+    const sellerOrderURL = "seller/orders?status=";
+    onBeforeMount(() => {
+      store.dispatch('getEarnings');
+      store.dispatch('myOrders', sellerOrderURL);
+      //console.log("helo",orders.value)
+        }
+    );
+    return{
+      /////   Active Orders
+      orders: (computed(()=> store.getters.myOrders.filter(order => order.status_id == 1))),
+    }
   }
 }
 </script>
+
+<style scoped>
+
+</style>
