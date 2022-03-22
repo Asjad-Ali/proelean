@@ -21,11 +21,11 @@ import ActionCards from "../../components/Seller/Dashboard/ActionCards.vue";
 import { useStore } from 'vuex';
 import { computed, onBeforeMount } from '@vue/runtime-core';
 import ActiveOrderCard from "../../components/Seller/Dashboard/ActiveOrderCard.vue";
-import ActiveOrderFilter from "../../components/Seller/Dashboard/ActiveOrderFilter.vue";
+//import ActiveOrderFilter from "../../components/Seller/Dashboard/ActiveOrderFilter.vue";
 // import CountDown from "../../components/Seller/Dashboard/CountDown.vue";
 
 export default {
-  components:{ AppCard, AnalyticBoxes, Charts, ActionCards, ActiveOrderCard, ActiveOrderFilter },
+  components:{ AppCard, AnalyticBoxes, Charts, ActionCards, ActiveOrderCard },
   setup() {
     const store = useStore();
     //const orders = ref([]);
