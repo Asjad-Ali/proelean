@@ -57,7 +57,7 @@
                 </div>
                 <span class="ml-2">
                   <router-link 
-                  :to="{name:'OrderDetails', params:order}"
+                  :to="{name:'OrderDetailsBuyer', params:order}"
                   class="btn btn-light">
                      View 
                   </router-link>
@@ -160,7 +160,7 @@
                               >
                             </td>
                             <td class="text-center">
-                               <router-link :to="{name:'OrderDetails', params:order}"
+                               <router-link :to="{name:'OrderDetailsBuyer', params:order}"
                                 class="btn btn-light">
                                 View 
                               </router-link>

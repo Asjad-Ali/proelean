@@ -1,7 +1,7 @@
 <template>
   <footer class="bg-white">
         <div class="container">
-           <div class="d-flex justify-content-between margin-left">
+           <div class="d-flex justify-content-between">
               <div class="footer-list">
                  <h4>Categories</h4>
                  <ul class="list" v-if="$store.state.isLoggedIn">
@@ -89,7 +89,5 @@ export default {
 </script>
 
 <style scoped>
-.margin-left{
-   margin-left: 175px;
-}
+
 </style>

@@ -238,7 +238,7 @@
                     <td class="cell">
                       <!-- Button trigger modal -->
                       <!-- params:{id:order} , props:{order} -->
-                      <router-link :to="{name:'OrderDetailsNew', params:order}"
+                      <router-link :to="{name:'OrderDetails', params:order}"
                         class="btn btn-light">
                         View 
                       </router-link>

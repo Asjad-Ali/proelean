@@ -112,7 +112,40 @@
              <p class="text-muted">Price</p>
              <p>{{order.amount}}{{order.currency}}</p>
            </div>
-            <button class="btn btn-danger" v-if="order.status_id == 1" @click="manage_Order()">Cancel Order</button>
+
+<!-- Button trigger modal -->
+<button v-if="order.status_id == 1" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Cancel & Create Dispute
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cancel & Create Dispute</h5>
+      </div>
+      <div class="modal-body">
+        <!-- <div class="text-left font">Describe Reason</div> -->
+          <textarea
+           type="text"
+           class="form-control"
+           name="description"
+           placeholder="Type Decription for cancel order"
+           v-model="orderType.description"
+           id="description"
+           required
+                    />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="manage_Order()"> Submit </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+           
         </div>
              
              
@@ -150,7 +183,7 @@ export default {
     const orderType = ref({
       order_no: payload.orderNo,
       type: 5,
-      description: "i want to cancel the order",
+      description: "I want to cancel the order...",
       url: "seller/manage_order",
     });
     

@@ -187,11 +187,11 @@ export default {
       if(route.name === 'Gigs')
       {
         routeType = "gigs"
-      }else if(route.name === 'FavouriteService')
+      }else if(route.name === 'offered')
       {
-        routeType = "favouriteService"
-      }else{
         routeType = "offered"
+      }else{
+        routeType = "favouriteService"
       }
       let payload = {
         service_id: id,

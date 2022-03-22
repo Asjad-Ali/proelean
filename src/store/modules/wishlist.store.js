@@ -1,5 +1,6 @@
 import Api from '@/services/API'
 import useToast from '@/composables/useToast.js'
+import { ref } from 'vue'
 
 export const state = {
   wishlist: [],
@@ -32,16 +33,19 @@ export const mutations = {
 }
 
 export const actions = {
-  async wishlist({ commit }, payload) {
+  async wishlist({ commit, getters }, payload) {
     commit('setRegisterStatus', payload.service_id);
     const resp = await Api.post('wishlist', payload)
     if (resp.status == 200) {
       commit('setRegisterStatus', 3);
+      console.log(payload.favourite, payload.type)
+
       if(payload.favourite == 0){
         useToast(resp.message, 'success');
       } else{
         useToast(resp.message);
       }
+
       if(payload.type === 'offered')
       {
         commit('toggleOfferedService', payload.service_id);
@@ -49,7 +53,8 @@ export const actions = {
       else if (payload.type === 'gigs'){
         commit('toggleGigsFavourite', payload.service_id);
       } else{
-        commit('toggleFavourite', payload.service_id);
+        let favouriteServices = ref(getters.getWishlistServices.filter( service => service.id !== payload.service_id))
+        commit('setAllWishlistServices',favouriteServices.value)
       }
     }
     else {

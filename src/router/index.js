@@ -19,7 +19,7 @@ import BuyerEditProfile from '@/views/Seller/EditProfile.vue'
 import BuyerChangePassword from '@/views/Seller/ChangePassword.vue'
 import BuyerNotifications from '@/views/Seller/Notifications.vue'
 
-import OrderDetails from '@/views/OrderDetails.vue'
+import OrderDetailsBuyer from '@/views/OrderDetailsBuyer.vue'
 
 
 import sellerRoutes from './seller.js'
@@ -33,8 +33,8 @@ const routes = [
   },
   {
     path: '/order-details/:id',
-    name: 'OrderDetails',
-    component: OrderDetails,
+    name: 'OrderDetailsBuyer',
+    component: OrderDetailsBuyer,
   },
  
   {
