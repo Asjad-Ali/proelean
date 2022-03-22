@@ -1,4 +1,23 @@
 <template>
+  <!--selected media preview  -->
+  <div class="row p-3 d-flex justify-content-start">
+    <table v-if="chatMedia.media.type">
+      <tr>
+        <td class="d-flex flex-row justify-content-between">
+          <i
+            class="mdi mdi-image"
+            v-if="chatMedia.media.type.includes('image')"
+          >
+            <span class="ml-2">{{ chatMedia.media.name }}</span></i
+          >
+          <p>{{ chatMedia.media.size }}</p>
+          <a href="#" @click="removeMedia($event, chatMedia.media.name)"
+            ><i class="mdi mdi-close-box" style="font-size: 16px"></i
+          ></a>
+        </td>
+      </tr>
+    </table>
+  </div>
   <!-- WRITE A MESSAGE -->
   <div class="w-100 border-top border-bottom position-relative">
     <textarea
@@ -20,9 +39,22 @@
       class="overflow-hidden position-absolute d-flex flex-column"
       style="top: 0; left: 0px"
     >
-      <button type="button" class="btn btn-light btn-sm rounded">
+      <button
+        type="button"
+        class="btn btn-light btn-sm rounded"
+        @click="$refs.mediaInput.click()"
+      >
+        <input
+          type="file"
+          ref="mediaInput"
+          id="mediaInput"
+          style="display: none"
+          @change="selectMedia"
+          required
+        />
         <i class="mdi mdi-image"></i>
       </button>
+
       <button
         :disabled="
           !$store.getters.getSelectedConversation &&
@@ -47,56 +79,59 @@
   </div>
 
   <SendOffer v-if="showOfferModal" />
-
-
-  <!-- CHOOSE A FILE -->
-  <!-- <div class="p-3 d-flex align-items-center">
-      <div class="overflow-hidden">
-        <button type="button" class="btn btn-light btn-sm rounded">
-          <i class="mdi mdi-image"></i>
-        </button>
-        <button type="button" class="btn btn-light btn-sm rounded">
-          <i class="mdi mdi-paperclip"></i>
-        </button>
-        <button type="button" class="btn btn-light btn-sm rounded">
-          <i class="mdi mdi-camera"></i>
-        </button>
-      </div>
-      <span class="ml-auto">
-        <button
-          type="button"
-          class="btn btn-success btn-sm rounded"
-          @click.prevent="sendMsg"
-        >
-          <i class="mdi mdi-send"></i> Send
-        </button>
-      </span>
-    </div> -->
-
-  <!-- <ChooseFile /> -->
 </template>
 
 <script>
 import SendOffer from "../modals/CreateOfferOnChat.vue";
-import { ref } from "@vue/reactivity";
-import { useStore } from "vuex";
+// import { useStore } from "vuex";
+import useFirebaseMedia from "@/composables/useFirebaseMedia";
+import compressImage from '@/composables/useImageCompression';
+import { ref } from '@vue/reactivity';
+
 
 export default {
   components: { SendOffer },
   setup() {
-    const store = useStore();
-    const showOfferModal = ref(false);
+    const {
+      uploadAttachment,
+    } = useFirebaseMedia();
 
+    // const store = useStore();
+
+    const chatMedia = ref({
+      message: "",
+      media: "",
+    });
+
+    const showOfferModal = ref(false);
     const newMessage = ref({
       text: "",
-      attachement: "",
+      attachment: "",
       attachementType: 0,
       offer: null,
       refererGig: false,
     });
 
+    // select media file's
+    async function selectMedia(e) {
+      const file = e.target.files[0];
+      const image = await compressImage(file);
+      chatMedia.value.media = image;
+    }
+
+    const removeMedia = (e) => {
+      e.preventDefault();
+      chatMedia.value.media = {};
+    };
+
     const sendMsg = () => {
+      if (chatMedia.value.media) {
+        console.log("upload file");
+        uploadAttachment(chatMedia.value.media, newMessage.value);
+      }
+
       if (newMessage.value.text) {
+        console.log('is it firing')
         store.dispatch("sendMessage", newMessage.value);
         newMessage.value.text = "";
       }
@@ -106,6 +141,9 @@ export default {
       newMessage,
       sendMsg,
       showOfferModal,
+      selectMedia,
+      chatMedia,
+      removeMedia,
     };
   },
 };

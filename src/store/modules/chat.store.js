@@ -215,7 +215,7 @@ export const actions = {
             collection(db, `Conversations/${selectedConversation.id}/Messages`),
             newDocId
         );
-
+        
         const newMessage = {
             message: text,
             attachment: attachement,
