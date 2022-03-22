@@ -71,14 +71,14 @@
 
 
           <!-- For Web Screen -->
-          <div v-if="orders.length>0" class="tab-content osahan-table rounded d-none d-sm-block container">
-            <div class="tab-pane active" id="active">
+          <div  class="tab-content osahan-table rounded d-none d-sm-block container">
                 <div v-if="loader" class="d-flex justify-content-center s-margin">
                   <div class="spinner-border text-primary m-2" role="status">
                     <span class="sr-only">Loading...</span>
                   </div>
                 </div>
-                <div v-else>
+            <div v-else class="tab-pane active" id="active">
+                <div v-if="orders.length>0">
                   <div
                   class="table-responsive box-table mt-1 bg-white mb-5" 
                   >
@@ -170,13 +170,11 @@
                       </table>
                   </div>
                 </div>
+                <div v-else class="container tab-content text-center py-5">
+                <h2>No Any Order Available</h2>
+              </div>
             </div>
           </div>
-      
-      <div v-else v-show="!loader" class="container tab-content text-center py-5">
-        <h2>No Any Order Available</h2>
-      </div>
-
 </template>
 
 <script>

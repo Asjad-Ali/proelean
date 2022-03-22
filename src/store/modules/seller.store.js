@@ -238,7 +238,7 @@ export const actions = {
   },
 
   async deleteBuyerJob({ commit, state }, id) {
-    commit('setRegisterStatus', 2);
+    commit('setRegisterStatus', id);
     const res = await Api.delete(`seller/cancel_offer/${id}`);
     if (res.status === 200) {
       useToast(res.message, 'success');
@@ -248,19 +248,17 @@ export const actions = {
     }
     else {
       useToast(res.message);
+      commit('setRegisterStatus', 4);
     }
   },
 
-  async sendOffer({ commit, dispatch }, payload) {
-    commit('setRegisterStatus', 2);
+  async sendOffer({ dispatch }, payload) {
     const resp = await Api.post('seller/send_offer', payload);
     if (resp.status == 200) {
       useToast(resp.message, 'success');
-      commit('setRegisterStatus', 3);
       dispatch("addBuyerRequests")
     }
     else {
-      commit('setRegisterStatus', 4);
       useToast(resp.message);
     }
   },

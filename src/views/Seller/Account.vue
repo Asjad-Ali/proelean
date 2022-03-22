@@ -4,7 +4,6 @@
     <div class="border-bottom my-3"></div>
     <div class="row gy-4 d-flex justify-content-center">
       <ProfileCard  />
-
     </div>
   </div>
 </template>

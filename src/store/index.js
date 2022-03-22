@@ -21,7 +21,7 @@ export default createStore({
     recentNotifications: [],
     allNotifications: [],
     usermode: "BUYER",
-    loader: null,
+    loader: 0,
     screenWidth: window.innerWidth,
   },
   getters: {

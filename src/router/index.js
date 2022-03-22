@@ -7,7 +7,7 @@ import BecomeSeller from '@/views/Become-Seller.vue'
 import Profile from '@/views/Profile.vue'
 import About from '@/views/About.vue'
 import Purchase from '@/views/Purchase.vue'
-
+import FavouriteServices from '@/views/Seller/FavouriteService.vue'
 import CreateJob from '@/views/Buyer/CreateJob.vue'
 import Jobs from '@/views/Buyer/AllJobs.vue'
 
@@ -51,6 +51,11 @@ const routes = [
     path: '/buyer/change_password',
     name: 'BuyerChangePassword',
     component: BuyerChangePassword,
+  },
+  {
+    path: '/buyer/favourite_services',
+    name: 'FavouriteServices',
+    component: FavouriteServices,
   },
   {
     path: '/buyer/notifications',

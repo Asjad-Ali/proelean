@@ -1,8 +1,8 @@
 <template>
- <div class="tab-content shadow-none" data-v-0d25e83c="" v-if="service.s_description">
-   <div id="basic" class="tab-pane fade show active" data-v-0d25e83c="">
-      <h4 data-v-0d25e83c="">Service Details</h4>
-      <hr data-v-0d25e83c="">
+ <div class="tab-content shadow-none"  v-if="service.s_description">
+   <div id="basic" class="tab-pane fade show active">
+      <h4>Service Details</h4>
+      <hr class="my-2">
       <div class="header">
          <p >{{service.s_description}}</p>
             <p>
@@ -12,19 +12,35 @@
               {{service.additional_info.substr(0,100)}}{{service.additional_info.length > 100 ? '...' : ''}}
             </p>
       </div>
-      <article data-v-0d25e83c="">
-         <div class="d-flex text-muted" data-v-0d25e83c="">
-            <b class="delivery" data-v-0d25e83c="">
-   <i class="mdi mdi-clock" aria-hidden="true"  ></i>
-                Delivery Time: {{service.delivery_time}}
-            </b>
-            <b class="delivery ml-3" data-v-0d25e83c="">
-   <i class="mdi mdi-sync" aria-hidden="true" data-v-0d25e83c=""></i>
-               <!-- <i class="fa fa-refresh" aria-hidden="true" data-v-0d25e83c=""></i> Font Awesome fontawesome.com --> Revision: {{service.revision}}
-            </b>
-         </div>
-      </article>
-               <h3 ><b> Price</b><span class="price">${{service.price}}</span></h3>
+      <article>
+              <div class="delivery"
+                ><i class="mdi mdi-clock" aria-hidden="true"></i><b class="mr-2"> Delivery Time:  </b> {{ service.delivery_time}}
+                </div >
+          </article>
+          <article>
+              <div class="delivery"
+                ><i class="mdi mdi-sync" aria-hidden="true"></i> <b class="mr-2"> Revision:  </b> {{ service.revision}}</div
+              >
+          </article>
+          <article>
+            <div>
+              <div class="delivery"
+                ><i class="mdi mdi-radiobox-blank" aria-hidden="true"></i><b class="mr-2"> Category :  </b> {{ service.category.title}}
+                </div >
+            </div>
+            <div>
+              <div class="delivery">
+              <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> {{ service.sub_category.title}}</div
+              >
+            </div>
+          </article>
+          <article>
+            <div>
+              <div class="delivery"
+                ><i class="mdi mdi-currency-eur" aria-hidden="true"></i><b class="mr-2"> Price :  </b> €{{service.price}}
+                </div >
+            </div>
+          </article>
    </div>
 </div>
 </template>
@@ -43,5 +59,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.width {
+  width: 140px;
+}
+.main-page .right .tab-content p{
+  margin: 15px 5px;
+}
 </style>

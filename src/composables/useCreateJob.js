@@ -1,4 +1,5 @@
 import { computed, ref, watch } from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 export default function useCreateJob() {
@@ -6,6 +7,7 @@ export default function useCreateJob() {
     const subCategories = ref(null);
     
     const store = useStore();
+    const route = useRouter();
     const createJob = ref({
         description: "",
         category_id: "",
@@ -60,7 +62,12 @@ export default function useCreateJob() {
         createJob.value.sub_category_id = document.getElementById("sub_category_id").value;
         createJob.value.delivery_time = document.getElementById("delivery_time").value;
         console.log("Create Job Value", createJob.value);
-        store.dispatch('createAJob',createJob.value)
+        store.dispatch('createAJob',createJob.value).then(res => {
+             if(res.status === 201){
+                route.push({name: "Jobs"})
+                console.log("Responese",res)
+            } 
+        })
     }
 
     const getCategory = () => {

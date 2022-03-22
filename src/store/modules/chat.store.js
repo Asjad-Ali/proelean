@@ -6,7 +6,6 @@ import {
     where,
     onSnapshot,
     orderBy,
-    limit,
     doc,
     setDoc,
     updateDoc,
@@ -28,6 +27,8 @@ export const state = {
     newConversationUser: null,
     isConversationNew: true,
     hasMoreMessages: true,
+    customServiceOffer: {},
+    msgOfferLoadingStatus: ''
 };
 
 const scrollToBottom = () => {
@@ -107,6 +108,12 @@ export const mutations = {
     setNewConversationUser(state, user) {
         state.newConversationUser = user;
     },
+    setWithdrawLoadingStatus(state, status) {
+        state.msgOfferLoadingStatus = status;
+    },
+    setCustomOffer(state, offer) {
+        state.customServiceOffer = offer;
+    }
 };
 
 export const actions = {
@@ -321,44 +328,6 @@ export const actions = {
         commit("setSelectedConversation", newCov);
     },
 
-    async handleConversationPagination({ commit, getters }) {
-        const selectedConversation = getters.getSelectedConversation;
-        const messages = getters.getMessages;
-        if (!selectedConversation && !messages) {
-            return;
-        }
-
-        const lastMessage = messages[messages.length - 1];
-        console.log("pagination");
-        const db = getFirestore();
-        const chatRef = collection(
-            db,
-            `Conversations/${selectedConversation.id}/Messages`
-        );
-        const q = query(
-            chatRef,
-            orderBy("sentAt", "desc"),
-            startAfter(lastMessage),
-            limit(10)
-        );
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-                const id = change.doc.id;
-                const message = { id, ...change.doc.data() };
-                if (change.type === "added") {
-                    commit("setMessage", message);
-                }
-                if (change.type === "modified") {
-                    console.log("Modified Message: ", message);
-                }
-                if (change.type === "removed") {
-                    console.log("Removed Message: ", message);
-                }
-            });
-        });
-
-        commit("setSelectedChatListenerRef", unsubscribe);
-    },
     async getUserDataFromApi({ commit }, userId) {
         const user = await Api.get(`profile?user=${userId}`);
         console.log(user);
@@ -403,6 +372,30 @@ export const actions = {
         setDoc(chatRef, newMessage);
         dispatch("updateConversation", newMessage);
     },
+
+    async withdrawOffer({commit, getters, dispatch}, docID) {
+
+        commit('setWithdrawLoadingStatus', 'LOADING');
+        const selectedConversation = getters.getSelectedConversation;
+        const messages = getters.getMessages;
+
+        const db = getFirestore();
+
+        const chatRef = doc(collection(db, `Conversations/${selectedConversation.id}/Messages`), docID);
+
+        updateDoc(chatRef, {
+            'messageOffer.status': 2
+        });
+
+        // update the message offer status
+        const message = messages.find(message => message.id === docID)
+        if(message && message.messageOffer.status === 0) {
+            message.messageOffer.status = 2;
+        }
+
+        dispatch("updateConversation", message);
+        commit('setWithdrawLoadingStatus', 'COMPLETED');
+    }
 };
 
 export const getters = {
@@ -417,5 +410,7 @@ export const getters = {
     isConversationNew: (state) => state.isConversationNew,
     areConversationListAlreadyLoaded: (state) => state.areConversationsLoaded,
     getNewConversationUser: (state) => state.newConversationUser,
-    hasMoreMessages: state => state.hasMoreMessages
+    hasMoreMessages: state => state.hasMoreMessages,
+    getSelectedCustomOffer: state => state.customServiceOffer,
+    getMessageOfferLoadingStatus: state => state.msgOfferLoadingStatus
 };

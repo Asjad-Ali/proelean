@@ -4,7 +4,7 @@
       <div class="col-auto">
         <h1 class="app-page-title mb-0">Orders</h1>
       </div>
-      <div class="col-auto">
+      <div class="col-7">
         <div class="page-utilities">
           <div
             class="
@@ -14,21 +14,17 @@
               align-items-center
             "
           >
-            <div class="col-auto">
-              <form class="table-search-form row gx-1 align-items-center">
+            <div class="col-8">
+              <form class="table-search-form gx-1 align-items-center">
                 <div class="col-auto">
                   <input
                     type="text"
                     id="search-orders"
                     name="searchorders"
+                    v-model="buyerName"
                     class="form-control search-orders"
                     placeholder="Search"
                   />
-                </div>
-                <div class="col-auto">
-                  <button type="submit" class="btn app-btn-secondary">
-                    Search
-                  </button>
                 </div>
               </form>
             </div>
@@ -262,21 +258,28 @@
 </template>
 
 <script>
-import { onMounted, computed} from "@vue/runtime-core";
+import { onMounted, computed, ref, watch} from "@vue/runtime-core";
 import { useStore } from "vuex";
 
 export default {
   setup() {
     const store = useStore();
     const sellerOrderURL = "seller/orders?status=";
+
     onMounted(() => {
       store.dispatch("myOrders", sellerOrderURL);
     });
+    const buyerName = ref()
+
+    watch(buyerName,(current) => {
+      console.log(current)
+    })
 
     function showFilter(value) {
       store.dispatch("myOrders", `${sellerOrderURL}${value}`);
     }
     return {
+      buyerName,
       imgURL: process.env.VUE_APP_URL,
       orders: computed(() => store.getters.myOrders),
       loader: computed(() => store.getters.getLoaderVal),
