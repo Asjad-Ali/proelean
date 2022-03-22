@@ -1,7 +1,7 @@
 <template>
   <footer class="bg-white">
         <div class="container">
-           <div class="d-flex justify-content-between">
+           <div v-if="isAuthenticated" class="d-flex justify-content-between">
               <div class="footer-list">
                  <h4>Categories</h4>
                  <ul class="list" v-if="$store.state.isLoggedIn">
@@ -84,7 +84,11 @@
 
 <script>
 export default {
-
+   setup(){
+      return{
+         isAuthenticated: localStorage.getItem("PROELEAN_TOKEN"),
+      }
+   }
 }
 </script>
 

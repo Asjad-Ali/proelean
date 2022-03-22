@@ -19,7 +19,8 @@ export const state = {
   buyerRequests: [],
   buyerRequestsCurrentPage: 1,
   hasNextPage: false,
-  earnings: {}
+  earnings: {},
+  hasBuyerRequestLoaded:'REQUESTS'
 }
 
 export const getters = {
@@ -34,7 +35,8 @@ export const getters = {
   getBuyerRequests: state => state.buyerRequests,
   getBuyerRequestsCurrentPage: state => state.buyerRequestsCurrentPage,
   isBuyerRequestHasNextPage: state => state.hasNextPage,
-  getSellerEarning: state => state.earnings
+  getSellerEarning: state => state.earnings,
+  hasBuyerRequestsLoaded: state => (state.hasBuyerRequestLoaded === 'REQUESTS' ? true : false)
 }
 
 
@@ -73,7 +75,7 @@ export const mutations = {
     state.deleteService = deletGig;
   },
   setBuyerRequests(state, requests) {
-    state.buyerRequests = requests;
+    state.buyerRequests.push(...requests);
   },
   setSellerLoader(state, loaderVal) {
     state.s_Loader = loaderVal
@@ -92,7 +94,9 @@ export const mutations = {
       }
     });
   },
-
+  setBuyerRequestStatus(state, status) {
+    state.hasBuyerRequestLoaded = status;
+  },
   setEarnings(state, earnings) {
     state.earnings = earnings
   },
@@ -201,17 +205,20 @@ export const actions = {
       useToast(res.message);
       commit('setRegisterStatus', 4);
     }
+    return res;
   },
 
-  async showBuyerRequests({ commit },jobStatus) {
-
-    // let currentPage = getters.getBuyerRequestsCurrentPage;
-    // if(jobStatus) {
-    //   currentPage = 1;
-    // }
-
+  async showBuyerRequests({ commit, getters, state }, status ) {
+    
     commit('setLoader', 1);
-    const res = await Api.get(`seller/buyer_requests?status=${jobStatus}`);
+    let page = getters.getBuyerRequestsCurrentPage;
+
+    if(status==="sent_offers" && getters.hasBuyerRequestsLoaded) {
+      page = 1;
+      state.buyerRequests = []
+    }
+
+    const res = await Api.get(`seller/buyer_requests?status=${status}&page=${page}`);
     if (res.status === 200) {
       commit("setBuyerRequests", res.data);
       if (res.links.next) {
@@ -220,7 +227,7 @@ export const actions = {
       } else {
         commit('buyerRequestHasNextPage', false);
       }
-
+      // commit('setBuyerRequestStatus', 'SENT_OFFERS')
       commit('setLoader', 0);
     } else {
       console.log("Buyer Requests error");

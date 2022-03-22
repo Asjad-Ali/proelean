@@ -46,7 +46,7 @@
 
               <div class="mb-3 d-flex flex-start">
                 <div class="wrapper">
-                  <div
+                  <div v-show="getBanners.length < 4"
                     class="file-upload mr-2"
                     @click="$refs.bannerInput.click()"
                   >
@@ -77,8 +77,8 @@
                       :style="`background-image: url(${banner.media ? `${imgURL}/${banner.media}` : banner};`"
                     >
                       <i
-                        v-show="getBanners.length"
-                        @click="removeOldImage(index, banner)"
+                        v-show="getBanners.length > 1"
+                        @click="removeOldImage(index, banner.media)"
                         class="mdi mdi-close-box position-absolute"
                         style="top: 1%; right: 1%; font-size: 16px; color: red"
                       ></i>

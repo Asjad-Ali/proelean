@@ -34,7 +34,7 @@
             </div>
             <div>
               <div class="delivery text-muted">
-              <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> {{ service.sub_category.title}}</div
+              <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> {{service.sub_category.title.substr(0,29)}}{{service.sub_category.title > 29 ? '...' : ''}}</div
               >
             </div>
           </article>

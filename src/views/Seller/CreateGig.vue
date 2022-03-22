@@ -54,6 +54,7 @@
                 >
                 <div class="wrapper d-flex flex-wrap justify-content-center align-items-center">
                   <div
+                    v-show="bannersBase64.length < 4"
                     class="file-upload mr-2"
                     @click="$refs.bannerInput.click()"
                   >

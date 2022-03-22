@@ -1,9 +1,11 @@
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 export default function useCreateService() {
 
   const store = useStore();
+  const route = useRouter();
   const bannersBase64 = ref([]);
   const updateGig = computed(()=>store.getters.getSingleService);
 
@@ -36,21 +38,21 @@ export default function useCreateService() {
     getUpdateGig.value.price = updateGig.value.price
     getUpdateGig.value.id = updateGig.value.id
     getUpdateGig.value._method= 'PUT'
-    
-    store.dispatch('updateService', getUpdateGig.value)
-    getUpdateGig.value.banner=[]
+    console.log("Update Service",getUpdateGig.value)
+    store.dispatch('updateService', getUpdateGig.value).then(res => {
+      if(res.status == 200){
+        route.push({name: "SellerServices"});
+      }
+    })
   }
 
   const getBanners = computed(() =>
   updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
 
-
   const selectThumbnail = (e) => {
     const files = e.target.files;
-
     for (let i = 0; i < files.length; i++)
-      getUpdateGig.value.banner.push(files[i]);
-
+    getUpdateGig.value.banner.push(files[i]);
     document.querySelector('#bannerInput').value = '';
     bannersBase64.value = [];
     getUpdateGig.value.banner.forEach( img => {

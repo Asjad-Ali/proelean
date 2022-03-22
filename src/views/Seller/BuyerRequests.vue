@@ -228,7 +228,7 @@ export default {
     ]
 
     function loadMore(){
-      store.dispatch("showBuyerRequests");
+      store.dispatch("showBuyerRequests",);
     }
 
     function defineOffer(jobID) {
@@ -248,6 +248,8 @@ export default {
       if(value == 1){
         store.dispatch("showBuyerRequests","sent_offers");
       }else{
+        store.state.buyerRequests = [];
+        store.state.buyerRequestsCurrentPage = 1;
         store.dispatch("showBuyerRequests");
       }
     }
