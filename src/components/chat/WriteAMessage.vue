@@ -83,7 +83,7 @@
 
 <script>
 import SendOffer from "../modals/CreateOfferOnChat.vue";
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
 import useFirebaseMedia from "@/composables/useFirebaseMedia";
 import compressImage from '@/composables/useImageCompression';
 import { ref } from '@vue/reactivity';
@@ -96,7 +96,7 @@ export default {
       uploadAttachment,
     } = useFirebaseMedia();
 
-    // const store = useStore();
+    const store = useStore();
 
     const chatMedia = ref({
       message: "",
