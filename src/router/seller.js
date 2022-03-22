@@ -12,7 +12,7 @@ import UpdateService from '@/views/Seller/UpdateService.vue'
 import ServiceDetail from '@/views/Seller/ServiceDetail.vue'
 import EditProfile from '@/views/Seller/EditProfile.vue'
 import ChangePassword from '@/views/Seller/ChangePassword.vue'
-import OrderDetailsNew from '@/views/Seller/OrderDetailsNew.vue'
+import OrderDetails from '@/views/Seller/OrderDetails.vue'
 
 
 const sellerRoutes = [
@@ -35,8 +35,8 @@ const sellerRoutes = [
     },
     {
         path: '/dashboard/order-details/:id',
-        name: 'OrderDetailsNew',
-        component: OrderDetailsNew,
+        name: 'OrderDetails',
+        component: OrderDetails,
     },
     {
         path: '/dashboard/sellers-services',
