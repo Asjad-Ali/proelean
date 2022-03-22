@@ -38,7 +38,7 @@ export default function useEditProfile(){
             editUserError.value.name = null
         }
         if(!current.phone){
-            editUserError.value.phone = "Name is Requird"
+            editUserError.value.phone = "Phone number is Requird"
         }else if(!current.phone.match(phoneRegex)){
             editUserError.value.phone = "Phone number is not valid"
         }else{

@@ -51,9 +51,9 @@ export const  actions = {
         return res;
       },
 
-      async showAllJobs({commit}){
+      async showAllJobs({commit},jobType){
         commit('setLoader',1);
-        const res = await Api.get('buyer/jobs');
+        const res = await Api.get(`buyer/jobs?status=${jobType}`);
         if(res.status === 200){
           console.log("All Jobs Response",res.data)
           commit("setAllJobs",res.data);

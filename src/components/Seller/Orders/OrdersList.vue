@@ -258,7 +258,7 @@
 </template>
 
 <script>
-import { onMounted, computed, ref, watch} from "@vue/runtime-core";
+import { onMounted, computed, ref} from "@vue/runtime-core";
 import { useStore } from "vuex";
 
 export default {
@@ -270,10 +270,6 @@ export default {
       store.dispatch("myOrders", sellerOrderURL);
     });
     const buyerName = ref()
-
-    watch(buyerName,(current) => {
-      console.log(current)
-    })
 
     function showFilter(value) {
       store.dispatch("myOrders", `${sellerOrderURL}${value}`);
