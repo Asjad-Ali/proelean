@@ -91,6 +91,18 @@
           </div>
           <!--//app-card-footer-->
          </div>
+
+      </div>
+
+      <div v-else class="container text-center py-5">
+        <h2>No Any Request Available Now</h2>
+      </div>
+    </div>
+    <div  class="text-center mt-4" v-if="$store.getters.isBuyerRequestHasNextPage">
+      <a @click="loadMore()" class="btn app-btn-secondary" href="#">
+      {{loader === 1 ? 'Loading...' : 'Load more Requests'}}</a>
+    </div>
+
          <!---------------------    Modal (Send Offer)     --------------------->
             <div
               class="modal fade"
@@ -185,6 +197,8 @@
               </div>
             </div>
           <!----------------------    Modal End     --------------------->
+<<<<<<< HEAD
+=======
       </div>
 
       <div v-else class="container text-center py-5">
@@ -291,6 +305,7 @@
       </div>
     </div>
     <!----------------------    Modal End     --------------------->
+>>>>>>> 4ed0c77ae7afd5d2c3a2043fa9cee764a2fcf8ec
   </div>
 </template>
 
