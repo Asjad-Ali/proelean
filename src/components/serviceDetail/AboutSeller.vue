@@ -4,7 +4,7 @@
          <label class="profile-pict" for="profile_image">
          <img
             :src="`${imgURL}/${service.service_user.image}`"
-            class="profile-pict-img img-fluid" alt="img">
+            class="profile-pict-img img-fluid object" alt="img">
          </label>
          <div class="right">
             <div class="profile-name">
@@ -73,3 +73,9 @@ export default {
    }
 }
 </script>
+
+<style scoped>
+.object{
+   object-fit: cover;
+}
+</style>
