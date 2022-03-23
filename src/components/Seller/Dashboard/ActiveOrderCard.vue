@@ -25,7 +25,7 @@
                   </td>
                   <td class="cell" ><span class="truncate" >{{order.description}} </span></td>
                   <td class="cell" ><span class="truncate" >{{order.currency}}{{order.amount}}</span></td>
-                  <td class="text-center cell" ><span class="truncate mdi mdi-clock" > {{order.end_date}}</span></td>
+                  <td class="text-center cell " ><span class="truncate mdi mdi-clock" > {{order.end_date}}</span></td>
                    
                   <td class="text-center cell" >
                     
