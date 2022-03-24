@@ -5,10 +5,11 @@ export default function useFirebaseMedia() {
 
     const store = useStore();
 
-    async function uploadAttachment(file, message) {
+    async function uploadAttachment(attachment, message) {
         
         const storage = getStorage();
         const selectedConversationId = store.getters.getSelectedConversation
+        const file = attachment.media;
         // const mediaDir = message.attachment.type.includes('image') ? 'images' : 'videos';
 
         // Create the file metadata
@@ -61,7 +62,7 @@ export default function useFirebaseMedia() {
                     console.log('File available at', downloadURL);
                     message.attachment = downloadURL;
                     store.dispatch("sendMessage", message);
-                    document.getElementById("media-container").remove();
+                    attachment.media="";
                 });
             }
         );
