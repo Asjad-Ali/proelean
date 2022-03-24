@@ -38,7 +38,7 @@ export default {
     );
     return{
       /////   Active Orders
-      orders: (computed(()=> store.getters.myOrders.filter(order => order.status_id == 1))),
+      orders: (computed(()=> store.getters.getMyOrders.filter(order => order.status_id == 1))),
     }
   }
 }

@@ -8,7 +8,7 @@ export const state = {
   timeline: []
 }
 export const getters = {
-  myOrders: state => state.orders,
+  getMyOrders: state => state.orders,
   getTimeline: state => state.timeline,
 }
 
