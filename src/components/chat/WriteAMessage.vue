@@ -1,7 +1,7 @@
 <template>
   <!--selected media preview  -->
-  <div class="row p-3 d-flex justify-content-start">
-    <table v-if="chatMedia.media.type">
+  <div class="row p-3 d-flex justify-content-start" id="media-container">
+    <table class="table" v-if="chatMedia.media.type">
       <tr>
         <td class="d-flex flex-row justify-content-between">
           <i
@@ -10,7 +10,14 @@
           >
             <span class="ml-2">{{ chatMedia.media.name }}</span></i
           >
+        </td>
+        <td>
           <p>{{ chatMedia.media.size }}</p>
+        </td>
+        <td>
+          <p id="upload-progress"></p>
+        </td>
+        <td>
           <a href="#" @click="removeMedia($event, chatMedia.media.name)"
             ><i class="mdi mdi-close-box" style="font-size: 16px"></i
           ></a>
@@ -42,6 +49,10 @@
       <button
         type="button"
         class="btn btn-light btn-sm rounded"
+        :disabled="
+          !$store.getters.getSelectedConversation &&
+          !$store.getters.getNewConversationUser
+        "
         @click="$refs.mediaInput.click()"
       >
         <input
@@ -85,16 +96,13 @@
 import SendOffer from "../modals/CreateOfferOnChat.vue";
 import { useStore } from "vuex";
 import useFirebaseMedia from "@/composables/useFirebaseMedia";
-import compressImage from '@/composables/useImageCompression';
-import { ref } from '@vue/reactivity';
-
+import compressImage from "@/composables/useImageCompression";
+import { ref } from "@vue/reactivity";
 
 export default {
   components: { SendOffer },
   setup() {
-    const {
-      uploadAttachment,
-    } = useFirebaseMedia();
+    const { uploadAttachment } = useFirebaseMedia();
 
     const store = useStore();
 
@@ -107,7 +115,7 @@ export default {
     const newMessage = ref({
       text: "",
       attachment: "",
-      attachementType: 0,
+      attachmentType: 0,
       offer: null,
       refererGig: false,
     });
@@ -131,7 +139,7 @@ export default {
       }
 
       if (newMessage.value.text) {
-        console.log('is it firing')
+        console.log("is it firing");
         store.dispatch("sendMessage", newMessage.value);
         newMessage.value.text = "";
       }

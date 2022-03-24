@@ -36,6 +36,7 @@
         "
         v-if="!message.messageOffer"
        >
+       <img :src="message.attachment" alt="" v-if="message.attachment" style="width: 20%; height: 20%;">
         {{ message.message }}
         <!-- <a href="#">iamosahan@gmail.com</a> -->
       </p>

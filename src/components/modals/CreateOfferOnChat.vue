@@ -18,7 +18,7 @@
             id="deliveryTime"
             class="form-control"
             name="delivery_time"
-            v-model="payload.gigId"
+            v-model="payload.serviceId"
             @change="handleSelectedService"
             required
           >
@@ -127,9 +127,11 @@ export default {
     });
 
     const handleSelectedService = () => {
+      console.log(payload.value.serviceId)
       let selectedService = store.getters.getUserServices.find(
         (service) => service.id === payload.value.serviceId
       );
+      console.log(payload.value)
       payload.value.serviceId = selectedService.id;
       payload.value.serviceTitle = selectedService.s_description;
       payload.value.offerSenderId = selectedService.service_user.id;

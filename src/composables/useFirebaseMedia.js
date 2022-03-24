@@ -8,6 +8,8 @@ export default function useFirebaseMedia() {
     async function uploadAttachment(file, message) {
         
         const storage = getStorage();
+        const selectedConversationId = store.getters.getSelectedConversation
+        // const mediaDir = message.attachment.type.includes('image') ? 'images' : 'videos';
 
         // Create the file metadata
         /** @type {any} */
@@ -16,7 +18,7 @@ export default function useFirebaseMedia() {
         };
 
         // Upload file and metadata to the object 'images/mountains.jpg'
-        const storageRef = ref(storage, `uploads/images/${new Date().getTime().toString()}_dir/` + file.name);
+        const storageRef = ref(storage, `uploads/images/${selectedConversationId.id}` + file.name);
         const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
         // Listen for state changes, errors, and completion of the upload.
@@ -25,6 +27,7 @@ export default function useFirebaseMedia() {
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 console.log('Upload is ' + progress + '% done');
+                document.getElementById('upload-progress').innerText = progress+ '% done';
                 switch (snapshot.state) {
                     case 'paused':
                         console.log('Upload is paused');
@@ -57,7 +60,8 @@ export default function useFirebaseMedia() {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
                     message.attachment = downloadURL;
-                    store.dispatch("sendMessage", message);        
+                    store.dispatch("sendMessage", message);
+                    document.getElementById("media-container").remove();
                 });
             }
         );

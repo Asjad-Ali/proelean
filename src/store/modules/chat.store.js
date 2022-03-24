@@ -193,7 +193,7 @@ export const actions = {
     },
     async sendMessage(
         { getters, dispatch },
-        { text, attachement, refererGig, attachementType }
+        payload
     ) {
         const newConversationUser = getters.getNewConversationUser;
 
@@ -217,11 +217,11 @@ export const actions = {
         );
         
         const newMessage = {
-            message: text,
-            attachment: attachement,
-            attachementType: attachementType,
+            message: payload.text,
+            attachment: payload.attachment,
+            attachmentType: payload.attachmentType,
             sentAt: new Date(new Date().toISOString()).getTime(),
-            refersGig: refererGig,
+            refersGig: payload.refererGig,
             senderId: getters.getAuthUser.id,
             messageOffer: null,
             messageGig: getters.getReferrerGig,

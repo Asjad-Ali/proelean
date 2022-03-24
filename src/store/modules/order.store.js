@@ -48,7 +48,7 @@ export const actions = {
 
   async manageOrder({ commit, state, getters }, payload) {
     console.log("Order no:", payload.order_no);
-    const res = await Api.post(payload.url, payload);
+    const res = await Api.formData(payload.url, payload);
     //const router = useRouter();
     if (res.status === 200) {
       console.log("Type of Order:", res.status);
