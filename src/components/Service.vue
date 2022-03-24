@@ -181,22 +181,21 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
-
-    const handleWishlist = (id,wishValue) => {
+    const handleWishlist = (id,wishlistValue) => {
       let routeType = ''
       if(route.name === 'Gigs')
       {
         routeType = "gigs"
-      }else if(route.name === 'offered')
+      }else if(route.name === 'BuyerServiceDetail')
       {
-        routeType = "offered"
+        routeType = "offeredServices"
       }else{
         routeType = "favouriteService"
       }
       let payload = {
         service_id: id,
         type:  routeType,
-        favourite: wishValue
+        favourite: wishlistValue
       };
       store.dispatch("wishlist", payload);
     };

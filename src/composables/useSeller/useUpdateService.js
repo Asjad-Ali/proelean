@@ -81,15 +81,6 @@ export default function useCreateService() {
     getUpdateGig.value.banner.splice(index, 1);
   }
 
-  // const removeImage = index => {
-  //   console.log("Index",index)
-  //   // bannersBase64.value.splice(index, 1);
-  //   updateGig.value.service_media.splice(index,1)
-  //   // getUpdateGig.value.banner.splice(index, 1);
-  //   // getBanners.value.splice(index, 1)
-  //   console.log("All picture",getBanners)
-  // }
-
   const getCategory = () => {
     data.value.category_id = document.getElementById("category").value;
     store.dispatch("loadSubCategories", data.value.category_id);

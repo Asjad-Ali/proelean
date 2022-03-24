@@ -61,7 +61,6 @@
                     <i class="fa fa-arrow-up cursor-pointer"></i>
                     <input
                       type="file"
-                      multiple
                       ref="bannerInput"
                       id="bannerInput"
                       style="display: none"
@@ -211,30 +210,24 @@
                     <label for="setting-input-2" class="form-label"
                       >No of revisions 
                       <span class="text-danger m-0 p-0">*</span>
-                      <span class="text-danger mt-1" >
-                      Number of revisions is required</span>
-                      </label
-                    >
+                      <span class="text-danger mt-1" v-show="createServiceError.revision">
+                      {{ createServiceError.revision }}</span>
+                      </label>
                     <select
                       id="deliveryTime"
                       class="form-control"
                       name="delivery_time"
                       placeholder="Select Category"
-                      v-model="createService.delivery_time"
+                      v-model="createService.revision"
                       data-msg="Please select category."
                       required=""
                     >
-                      <option disabled="" value="">Select revisions</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
-                      <option>10</option>
-                      <option>Unlimited</option>
+                      <option disabled="" selected value="">Select Revisions</option>
+                      <option
+                      v-for="revision in $store.getters.getRevisions" :key="revision"
+                      :value="revision"
+                       >{{ revision }}</option>
+
                     </select>
                   </div>
                  

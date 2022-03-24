@@ -33,6 +33,7 @@ export default function useCreateService() {
     sub_category_id: "",
     delivery_time: '',
     price: "",
+    revision:""
   });
 
   const createServiceError = ref({
@@ -43,6 +44,7 @@ export default function useCreateService() {
     sub_category_id: "",
     delivery_time: '',
     price: "",
+    revision:""
   });
 
   watch(createService.value,(current) => {
@@ -82,11 +84,16 @@ export default function useCreateService() {
         createServiceError.value.delivery_time = null
     }
     if(!current.price){
-        createServiceError.value.price = "Budget is required"
+      createServiceError.value.price = "Budget is required"
     } else if(current.price < 5){
-        createServiceError.value.price = "Minimum budget $5 "
+      createServiceError.value.price = "Minimum budget €5 "
     } else {
-        createServiceError.value.price = null
+      createServiceError.value.price = null
+    }
+    if(!current.revision){
+        createServiceError.value.revision = "Revision is required"
+    }else{
+        createServiceError.value.revision = null
     }
   })
 
