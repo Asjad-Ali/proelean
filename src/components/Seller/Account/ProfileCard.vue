@@ -113,6 +113,23 @@
       <!--//app-card-footer-->
     </div>
     <!--//app-card-->
+
+             <!-- buyer Modes -->
+    <div v-if="$store.getters.isBuyerMode" class="app-card app-card-account shadow-sm d-flex flex-column mt-3">
+        <div class="d-flex justify-content-center mt-3">
+          <h3 class="app-card-title">
+              Buying
+            </h3>
+        </div>
+         
+          <div class="app-card-body p-4 w-100 text-center">
+            <div class="px-2 mb-2">
+              <router-link to="/buyer/create_job" class="btn app-btn-secondary">Post a Job</router-link>
+              <router-link to="/buyer/jobs" class="btn app-btn-secondary ml-3">View All jobs</router-link>
+            </div>
+          </div>
+    </div>
+          <!-- buyer Modes end -->
   </div>
 </template>
 
