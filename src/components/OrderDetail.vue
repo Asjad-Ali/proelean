@@ -194,7 +194,7 @@ export default {
     
 
     onMounted(async () =>{
-        order.value=store.getters.myOrders.find(order => order.id === payload.id);
+        order.value=store.getters.getMyOrders.find(order => order.id === payload.id);
         if(!order.value){
           order.value= await store.dispatch("getOrderById", payload.id);
         }

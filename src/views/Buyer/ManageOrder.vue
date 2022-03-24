@@ -214,7 +214,7 @@ export default {
 
     return {
       imgURL: process.env.VUE_APP_URL,
-      orders: computed(() => store.getters.myOrders),
+      orders: computed(() => store.getters.getMyOrders),
       loader: computed(() => store.getters.getLoaderVal),
       showFilter,
       OrderSelectionType,
