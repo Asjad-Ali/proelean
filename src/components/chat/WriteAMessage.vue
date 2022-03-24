@@ -134,15 +134,13 @@ export default {
 
     const sendMsg = () => {
       if (chatMedia.value.media) {
-        console.log("upload file");
         uploadAttachment(chatMedia.value, newMessage.value);
-      }
-
-      if (newMessage.value.text) {
-        console.log("is it firing");
+      } else {
+        if(!chatMedia.value.message) {return;}
         store.dispatch("sendMessage", newMessage.value);
         newMessage.value.text = "";
       }
+
     };
 
     return {
