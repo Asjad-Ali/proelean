@@ -136,7 +136,7 @@ export default {
       if (chatMedia.value.media) {
         uploadAttachment(chatMedia.value.media, newMessage.value);
       } else {
-        if(!chatMedia.value.message) {return;}
+        if(!newMessage.value.text) {return;}
         store.dispatch("sendMessage", newMessage.value);
         newMessage.value.text = "";
       }
