@@ -27,7 +27,8 @@
         </div>
       </div>
 
-      <div class="tab-content osahan-table rounded d-sm-none">
+          <!-------- For Mobile Screen -------->
+      <div class="tab-content osahan-table rounded d-sm-none mt-3">
         <div class="tab-pane active" id="active">
           <div v-if="loader" class="d-flex justify-content-center s-margin">
             <div class="spinner-border text-primary m-2" role="status">
@@ -118,6 +119,7 @@
     </div>
 
 
+        <!-------- For Web Screen -------->
     <div class="tab-content d-none d-sm-block osahan-table container rounded px-3">
       <div class="tab-pane active" id="active">
         <div v-if="loader" class="d-flex justify-content-center l-margin">

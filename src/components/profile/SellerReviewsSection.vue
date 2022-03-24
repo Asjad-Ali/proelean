@@ -1,10 +1,10 @@
 <template>
   <div class="review-section">
-    <div class="d-flex align-items-center justify-content-between mb-4">
+    <div class="d-flex align-items-center justify-content-between mb-1">
       <h4 class="m-0">
         Reviews as {{type}}
-
-        <small
+      </h4>
+        <!-- <small
           ><span class="star-rating-s15"></span
           ><span
             ><span
@@ -19,14 +19,14 @@
               >({{ user.total_reviews }})</span
             ></span
           ></small
-        >
-      </h4>
-      <select class="custom-select custom-select-sm border-0 shadow-sm ml-2">
+        > -->
+
+      <!-- <select class="custom-select custom-select-sm border-0 shadow-sm ml-2">
         <option>Most Relevant</option>
         <option>Most Recent</option>
-      </select>
+      </select> -->
     </div>
-    <div class="breakdown">
+    <!-- <div class="breakdown">
       <ul class="header-stars">
         <li>
           Seller communication level
@@ -50,7 +50,7 @@
           </small>
         </li>
       </ul>
-    </div>
+    </div> -->
     <div class="no-review text-center" v-if="!reviews.length">
       <p>No reviews yet</p>
     </div>
