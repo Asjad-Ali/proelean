@@ -53,7 +53,6 @@
                     <i class="fa fa-arrow-up cursor-pointer"></i>
                     <input
                       type="file"
-                      multiple
                       ref="bannerInput"
                       id="bannerInput"
                       style="display: none"

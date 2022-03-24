@@ -17,10 +17,9 @@ export const state = {
   reviewsHasNextPage: '',
   error: null,
   buyerRequests: [],
-  buyerRequestsCurrentPage: 1,
-  hasNextPage: false,
+  buyerRequestsPages: [],
+  buyerHasNext: [],
   earnings: {},
-  hasBuyerRequestLoaded:'REQUESTS'
 }
 
 export const getters = {
@@ -33,12 +32,10 @@ export const getters = {
   getServiceReviews: state => state.serviceReviews,
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
-  getBuyerRequestsCurrentPage: state => state.buyerRequestsCurrentPage,
-  isBuyerRequestHasNextPage: state => state.hasNextPage,
+  getBuyerRequestsPages: state => state.buyerRequestsPages,
+  getBuyerHasNext: state => state.buyerHasNext,
   getSellerEarning: state => state.earnings,
-  hasBuyerRequestsLoaded: state => (state.hasBuyerRequestLoaded === 'REQUESTS' ? true : false)
 }
-
 
 export const mutations = {
 
@@ -75,27 +72,24 @@ export const mutations = {
     state.deleteService = deletGig;
   },
   setBuyerRequests(state, requests) {
-    state.buyerRequests.push(...requests);
+    state.buyerRequests = requests;
+  },
+  setBuyerRequestsPages(state, pages) {
+    state.buyerRequestsPages = pages;
+  },
+  setBuyerHasNext(state, pages) {
+    state.buyerHasNext = pages;
   },
   setSellerLoader(state, loaderVal) {
     state.s_Loader = loaderVal
   },
-  setBuyerRequestPageNo(state, page) {
-    state.buyerRequestsCurrentPage = page;
-  },
-  buyerRequestHasNextPage(state, status) {
-    state.hasNextPage = status;
-  },
+
   toggleOfferedService(state, serviceId) {
-    console.log("in offerd service", serviceId)
     state.userSingleService.offered_services.forEach(service => {
       if (service.id == serviceId) {
         service.favourite = service.favourite == 1 ? 0 : 1;
       }
     });
-  },
-  setBuyerRequestStatus(state, status) {
-    state.hasBuyerRequestLoaded = status;
   },
   setEarnings(state, earnings) {
     state.earnings = earnings
@@ -208,27 +202,15 @@ export const actions = {
     return res;
   },
 
-  async showBuyerRequests({ commit, getters, state }, status ) {
-    
-    commit('setLoader', 1);
-    let page = getters.getBuyerRequestsCurrentPage;
-
-    if(status==="sent_offers" && getters.hasBuyerRequestsLoaded) {
-      page = 1;
-      state.buyerRequests = []
-    }
-
-    const res = await Api.get(`seller/buyer_requests?status=${status}&page=${page}`);
+  async showBuyerRequests({ commit }, payload) {
+    console.log("Status",payload.status,"Page",payload.page)
+    commit('setSellerLoader', 1);
+    const res = await Api.get(`seller/buyer_requests?status=${payload.status}&page=${payload.page}`);
     if (res.status === 200) {
       commit("setBuyerRequests", res.data);
-      if (res.links.next) {
-        commit('buyerRequestHasNextPage', true);
-        commit('setBuyerRequestPageNo', res.meta.current_page + 1);
-      } else {
-        commit('buyerRequestHasNextPage', false);
-      }
-      // commit('setBuyerRequestStatus', 'SENT_OFFERS')
-      commit('setLoader', 0);
+      commit("setBuyerRequestsPages", res.meta);
+      commit("setBuyerHasNext", res.links);
+      commit('setSellerLoader', 0);
     } else {
       console.log("Buyer Requests error");
     }

@@ -15,7 +15,7 @@
       </div>
       <div class="border-bottom my-3"></div>
     </div>
-    <div v-if="loader && $store.getters.getBuyerRequestsCurrentPage == 1" class="d-flex justify-content-center s-margin">
+    <div v-if="loader" class="d-flex justify-content-center s-margin">
       <div class="spinner-border text-primary m-5" role="status">
         <span class="sr-only">Loading...</span>
       </div>
@@ -92,111 +92,123 @@
           <!--//app-card-footer-->
          </div>
 
+          <div  class="text-center mt-4" >
+          <nav aria-label="Page navigation example">
+            <ul class="pagination d-flex justify-content-center">
+              <li class="page-item" >
+                <a class="page-link" :class="{empty:nextPrev.prev == null}" href="#"> Previous</a>
+              </li>
+              <li class="page-item" v-for="page in pages.last_page" :key="page">
+                <a class="page-link" :class="{active:pages.current_page == page}"  @click="loadOtherRequest(page)">{{ page }}</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" :class="{empty:nextPrev.next == null}" >Next</a> 
+              </li>
+            </ul>
+          </nav>
+    </div>
+
       </div>
 
       <div v-else class="container text-center py-5">
         <h2>No Any Request Available Now</h2>
       </div>
     </div>
-    <div  class="text-center mt-4" v-if="$store.getters.isBuyerRequestHasNextPage">
-      <a @click="loadMore()" class="btn app-btn-secondary" href="#">
-      {{loader === 1 ? 'Loading...' : 'Load more Requests'}}</a>
-    </div>
 
-         <!---------------------    Modal (Send Offer)     --------------------->
-            <div
-              class="modal fade"
-              id="sendOfferModal"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="sendOfferModalTitle"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header d-flex justify-content-center">
-                    <h5 class="modal-title" id="exampleModalLongTitle">
-                      Send Offer
-                    </h5>
-                  </div>
-                  <div class="modal-body text-center">
-                    <div class="text-left font">Describe your offer</div>
-                    <textarea
-                      type="text"
-                      class="form-control"
-                      name="description"
-                      v-model="payload.description"
-                      id="description"
-                      placeholder="Describe your offer"
-                      required
-                    />
-                    <div class="text-left font mt-2">Total Price</div>
-                    <input
-                      type="number"
-                      class="form-control"
-                      name="price"
-                      v-model="payload.price"
-                      id="price"
-                      placeholder="Total Offer(EUR)"
-                      required
-                    />
-                    <div class="text-left font mt-2">Delivery Time</div>
-                    <select
-                      id="deliveryTime"
-                      class="form-control"
-                      name="delivery_time"
-                      v-model="payload.delivery_time"
-                      required
-                    >
-                      <option selected>Select day</option>
-                      <option
-                        v-for="day in $store.getters.getDeliveryDays"
-                        :value="day"
-                        :key="day.index"
-                      >
-                        {{ day }}
-                      </option>
-                    </select>
-
-                    <div class="text-left font mt-2">Service</div>
-                    <select
-                      id="services"
-                      class="form-control"
-                      name="service"
-                      v-model="payload.service_id"
-                      required
-                    >
-                      <option selected disabled>Select Service</option>
-                      <option
-                        v-for="service in $store.getters.getUserServices"
-                        :value="service.id"
-                        :key="service.id"
-                      >
-                        {{ service.s_description }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="modal-footer d-flex justify-content-center">
-                    <button
-                      type="button"
-                      class="btn btn-success"
-                      data-dismiss="modal"
-                      @click.prevent="sendOffer()"
-                    >
-                      Send Offer
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-dismiss="modal"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
+    <!-- -------------------    Modal (Send Offer)     --------------------->
+      <div
+        class="modal fade"
+        id="sendOfferModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="sendOfferModalTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                Send Offer
+              </h5>
             </div>
-          <!----------------------    Modal End     --------------------->
+            <div class="modal-body text-center">
+              <div class="text-left font">Describe your offer</div>
+              <textarea
+                type="text"
+                class="form-control"
+                name="description"
+                v-model="payload.description"
+                id="description"
+                placeholder="Describe your offer"
+                required
+              />
+              <div class="text-left font mt-2">Total Price</div>
+              <input
+                type="number"
+                class="form-control"
+                name="price"
+                v-model="payload.price"
+                id="price"
+                placeholder="Total Offer(EUR)"
+                required
+              />
+              <div class="text-left font mt-2">Delivery Time</div>
+              <select
+                id="deliveryTime"
+                class="form-control"
+                name="delivery_time"
+                v-model="payload.delivery_time"
+                required
+              >
+                <option selected>Select day</option>
+                <option
+                  v-for="day in $store.getters.getDeliveryDays"
+                  :value="day"
+                  :key="day.index"
+                >
+                  {{ day }}
+                </option>
+              </select>
+
+              <div class="text-left font mt-2">Service</div>
+              <select
+                id="services"
+                class="form-control"
+                name="service"
+                v-model="payload.service_id"
+                required
+              >
+                <option selected disabled>Select Service</option>
+                <option
+                  v-for="service in $store.getters.getUserServices"
+                  :value="service.id"
+                  :key="service.id"
+                >
+                  {{ service.s_description }}
+                </option>
+              </select>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button
+                type="button"
+                class="btn btn-success"
+                data-dismiss="modal"
+                @click.prevent="sendOffer()"
+              >
+                Send Offer
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!----------------------    Modal End     ------------------- -->
   </div>
 </template>
 
@@ -207,72 +219,84 @@ import { computed, onBeforeMount, ref } from "vue";
 import { useStore } from "vuex";
 
 export default {
-  setup() {
-    const store = useStore();
-    onBeforeMount(() => {
-      store.dispatch("showBuyerRequests");
-    });
+    setup() {
+        const store = useStore();
+        const requestType = ref ({
+          status:'',
+          page: 1
+        })
+        onBeforeMount(() => {
+            store.dispatch("showBuyerRequests",requestType.value);
+        });
+        const jobId = ref("");
+        const payload = ref({
+            job_id: "",
+            service_id: "",
+            description: "",
+            price: "",
+            delivery_time: "",
+        });
+        const buyerRequestType = [
+            { value: 0, name: "Buyer Request" },
+            { value: 1, name: "Sent Offer" },
+        ];
 
-    const jobId = ref("")
-    const payload = ref({
-      job_id: "",
-      service_id: "",
-      description: "",
-      price: "",
-      delivery_time: "",
-    });
+        function defineOffer(jobID) {
+            payload.value.job_id = jobID;
+            store.dispatch("getCountriesLanguage");
+            store.dispatch("userServices");
+        }
+        function sendOffer() {
+            store.dispatch("sendOffer", payload.value);
+            payload.value = {};
+        }
+        
+        function showFilter() {
+            let value = document.getElementById("requestValue").value;
+            if (value == 1) {
+              requestType.value.status = "sent_offers"
+              store.dispatch("showBuyerRequests",requestType.value);
+            }
+            else {
+              requestType.value.status = ''
+              store.dispatch("showBuyerRequests",requestType.value);
+            }
+        }
+        function deleteJob(id) {
+            store.dispatch("deleteBuyerJob", id);
+            console.log("delete request id: ", id);
+        }
 
-    const buyerRequestType =  [ 
-      { value: 0, name:"Buyer Request" },
-      { value: 1, name:"Sent Offer" },
-    ]
-
-    function loadMore(){
-      store.dispatch("showBuyerRequests",);
-    }
-
-    function defineOffer(jobID) {
-      payload.value.job_id = jobID;
-      store.dispatch("getCountriesLanguage");
-      store.dispatch("userServices");
-    }
-
-    function sendOffer() {
-      store.dispatch("sendOffer", payload.value);
-      payload.value = {};
-    }
-
-    function showFilter() {
-      let value = document.getElementById("requestValue").value;
-      console.log(value)
-      if(value == 1){
-        store.dispatch("showBuyerRequests","sent_offers");
-      }else{
-        store.state.buyerRequests = [];
-        store.state.buyerRequestsCurrentPage = 1;
-        store.dispatch("showBuyerRequests");
-      }
-    }
-
-    function deleteJob(id) {
-      store.dispatch("deleteBuyerJob", id);
-      console.log("delete request id: ", id);
-    }
-
-    return {
-      requests: computed(() => store.getters.getBuyerRequests),
-      buyerRequestType,
-      showFilter,
-      loader: computed(() => store.getters.getLoaderVal),
-      getBtnStatus: computed(() => store.getters.getRegisterStatus),
-      imgURL: process.env.VUE_APP_URL,
-      payload,
-      defineOffer,
-      sendOffer,
-      deleteJob,
-      loadMore,
-      jobId,
-    };
-  },
+        const loadOtherRequest = (page) => {
+          requestType.value.page = page
+          store.dispatch("showBuyerRequests",requestType.value);
+        }
+        return {
+            pages: computed(() => store.getters.getBuyerRequestsPages),
+            nextPrev: computed(() => store.getters.getBuyerHasNext),
+            requests: computed(() => store.getters.getBuyerRequests),
+            buyerRequestType,
+            showFilter,
+            loader: computed(() => store.getters.getSellerLoader),
+            getBtnStatus: computed(() => store.getters.getRegisterStatus),
+            imgURL: process.env.VUE_APP_URL,
+            payload,
+            loadOtherRequest,
+            defineOffer,
+            sendOffer,
+            deleteJob,
+            jobId,
+        };
+    },
 };
 </script>
+
+<style>
+.empty{
+  cursor:default !important;
+}
+.active{
+  background-color: rgb(165, 159, 159);
+  color: rgb(32, 32, 32);
+}
+</style>
