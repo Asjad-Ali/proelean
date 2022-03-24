@@ -16,7 +16,7 @@
               </li>
             </ol>
           </nav> -->
-          <h2 class="h2-cutom-font pb-0">{{ service.s_description }}</h2>
+          <h2 class="h2-cutom-font pb-0 ">{{ service.s_description }}</h2>
           <Gallery :serviceMedia="service.service_media" />
           <AboutService :service="service" />
           <div class="profile-card">
