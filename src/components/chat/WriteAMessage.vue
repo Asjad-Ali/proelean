@@ -134,7 +134,7 @@ export default {
 
     const sendMsg = () => {
       if (chatMedia.value.media) {
-        uploadAttachment(chatMedia.value, newMessage.value);
+        uploadAttachment(chatMedia.value.media, newMessage.value);
       } else {
         if(!chatMedia.value.message) {return;}
         store.dispatch("sendMessage", newMessage.value);

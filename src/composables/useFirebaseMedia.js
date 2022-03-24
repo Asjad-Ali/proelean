@@ -5,12 +5,11 @@ export default function useFirebaseMedia() {
 
     const store = useStore();
 
-    async function uploadAttachment(attachment, message) {
+    async function uploadAttachment(file, message) {
         
         const storage = getStorage();
         const selectedConversationId = store.getters.getSelectedConversation
-        const file = attachment.media;
-        // const mediaDir = message.attachment.type.includes('image') ? 'images' : 'videos';
+        const mediaDir = file.type.includes('image') ? 'images' : 'videos';
 
         // Create the file metadata
         /** @type {any} */
@@ -18,8 +17,10 @@ export default function useFirebaseMedia() {
             contentType: 'image/jpeg'
         };
 
+        console.log("dir", mediaDir);
+
         // Upload file and metadata to the object 'images/mountains.jpg'
-        const storageRef = ref(storage, `uploads/images/${selectedConversationId.id}` + file.name);
+        const storageRef = ref(storage, `uploads/${mediaDir}/${selectedConversationId.id}` + file.name);
         const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
         // Listen for state changes, errors, and completion of the upload.
@@ -62,7 +63,7 @@ export default function useFirebaseMedia() {
                     console.log('File available at', downloadURL);
                     message.attachment = downloadURL;
                     store.dispatch("sendMessage", message);
-                    attachment.media="";
+                    file="";
                 });
             }
         );
