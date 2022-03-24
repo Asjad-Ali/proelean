@@ -38,15 +38,13 @@ export const actions = {
     const resp = await Api.post('wishlist', payload)
     if (resp.status == 200) {
       commit('setRegisterStatus', 3);
-      console.log(payload.favourite, payload.type)
-
       if(payload.favourite == 0){
         useToast(resp.message, 'success');
       } else{
         useToast(resp.message);
       }
 
-      if(payload.type === 'offered')
+      if(payload.type === 'offeredServices')
       {
         commit('toggleOfferedService', payload.service_id);
       }
