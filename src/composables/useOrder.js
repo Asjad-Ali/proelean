@@ -11,6 +11,51 @@ export default function useOrder() {
         type: "SERVICE_DETAIL",
     };
 
+
+    const payloadOrder = {
+        id: route.params.id,
+        orderNo: route.params.orderNo,
+        type: "object"
+      }
+
+
+    const orderDispute = ref({
+        order_no: payloadOrder.orderNo,
+        type: 5,
+        description: "Please cancel the order",
+        url: "seller/manage_order",
+      });
+  
+      const orderDeliver = ref({
+        order_no: payloadOrder.orderNo,
+        type: 2,
+        description: "order delivered",
+        delivered_file: "",
+        delivery_note: "delivery file proceed",
+        url: "seller/manage_order",
+      });
+  
+      const orderComplete = ref({
+        order_no: payloadOrder.orderNo,
+        type: 4,
+        description: "satisfy with your work, the order is complete",
+        url: "buyer/manage_order",
+      });
+  
+      const orderRevision = ref({
+        order_no: payloadOrder.orderNo,
+        type: 3,
+        revision_description: "hey seller! do this again",
+        url: "buyer/manage_order",
+      });
+  
+      const orderCancel = ref({
+        order_no: payloadOrder.orderNo,
+        type: 8,
+        url: "seller/manage_order",
+      });
+  
+
     const formData = ref({
             paymentElements: {
                 service_id: payload.id,
@@ -84,12 +129,57 @@ export default function useOrder() {
         }
     })
 
+
+    const selectDeliveredFile = (e) => {
+        orderDeliver.value.delivered_file = e.target.files[0];
+        console.log("order deliverd file: ", orderDeliver.value.delivered_file);
+       }
+
+
+    function order_dispute() {
+        console.log("manage order", orderDispute.value);
+        store.dispatch("manageOrder", orderDispute.value);
+      }
+  
+      function order_deliver() {
+        console.log("manage order", orderDeliver.value);
+        store.dispatch("manageOrder", orderDeliver.value);
+      }
+  
+      function order_complete() {
+        console.log("manage order", orderComplete.value);
+        store.dispatch("manageOrder", orderComplete.value);
+      }
+  
+      function order_revision() {
+        console.log("manage order", orderRevision.value);
+        store.dispatch("manageOrder", orderRevision.value);
+      }
+  
+      function order_cancel() {
+        console.log("manage order", orderCancel.value);
+        store.dispatch("manageOrder", orderCancel.value);
+      }
+  
+
     return {
         service: computed(() => store.getters.getSingleService),
         formData,
         payload,
+        payloadOrder,
         descriptionRegex,
-        descriptionErrors
+        descriptionErrors,
+        orderDispute,
+        order_dispute,
+        orderDeliver,
+        order_deliver,
+        selectDeliveredFile,
+        orderComplete,
+        order_complete,
+        orderRevision,
+        order_revision,
+        orderCancel,
+        order_cancel
     }
 
 }

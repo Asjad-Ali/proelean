@@ -80,12 +80,10 @@
           <div id="basic" class="tab-pane fade show active" data-v-0d25e83c="">
             <h4 data-v-0d25e83c="">Order Details</h4>
             
-              <img :src="imgURL + '/' + order.image" class="image-fluid object"
-               alt="Responsive image"
-               v-if="$store.getters.isBuyerMode" />
+              
               <img :src="imgURL + '/' + order.image" class="img-fluid object"
                alt="Responsive image"
-               v-if="!$store.getters.isBuyerMode" />
+               />
           
               <p class="pt-1 pl-1 mt-1">{{order.description}}</p>
               <div>
@@ -161,9 +159,45 @@
 
 
 
+                                              <!-----------  Revision the Order  ----------->
+          <!-- Button trigger modal -->
+          <button v-if="order.status_id == 2 && $store.getters.isBuyerMode && order.revision>0"  type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal4">
+            Revision
+          </button>
+
+          <!-----------------------   Modal  ---------------------->
+          <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModal4Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal4Label">Revision</h5>
+                </div>
+                <div class="modal-body">
+                    <textarea
+                    type="text"
+                    class="form-control mb-2"
+                    name="description"
+                    placeholder="Decription"
+                    v-model="orderRevision.revision_description"
+                    id="description"
+                    required
+                    />
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="order_revision()"> Submit </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!------------------------   MOdal End   ------------------------>
+          <!------------------------  Revision the Order Section END  ------------------------>
+
+
+
                                         <!-----------  Deliver Your Work  ----------->
           <!-- Button trigger modal -->
-          <button v-if="order.status_id == 1 && !$store.getters.isBuyerMode" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+          <button v-if="(order.status_id == 1 || order.status_id == 3) && !$store.getters.isBuyerMode" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
             Deliver Your Work
           </button>
 
@@ -232,6 +266,12 @@
           <!------------------------   MOdal End   ------------------------>
           <!------------------------  Cancel & Create Dispute Section END  ------------------------>
 
+
+                            <!-----------  Cancel Request of Dispute  ----------->
+          <button v-if="order.status_id == 5" type="button" class="btn btn-success mt-2" @click="order_cancel()">
+            Cancel Request
+          </button>
+
           </div>
            
         </div>
@@ -251,89 +291,57 @@
 <script>
 import { computed, onMounted, ref } from '@vue/runtime-core';
 import CountDown from "../components/Seller/Dashboard/CountDown.vue";
+import useOrder from "@/composables/useOrder";
 import TimeLine from "@/views/TimeLine.vue";
 import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
 export default {
    components: 
    { CountDown, TimeLine },
    setup(){
     const store = useStore();
-    const route = useRoute();
+    // const route = useRoute();
     const order=ref();
-    
-    // const sellerOrderURL = "seller/orders?status=";
-    const payload = {
-      id: route.params.id,
-      orderNo: route.params.orderNo,
-      type: "object"
-    }
-
-    const orderDispute = ref({
-      order_no: payload.orderNo,
-      type: 5,
-      description: "I want to cancel the order...",
-      url: "seller/manage_order",
-    });
-
-    const orderDeliver = ref({
-      order_no: payload.orderNo,
-      type: 2,
-      description: "order delivered",
-      delivered_file: "",
-      delivery_note: "delivery file proceed",
-      url: "seller/manage_order",
-    });
-
-    const orderComplete = ref({
-      order_no: payload.orderNo,
-      type: 4,
-      description: "completed the order",
-      url: "buyer/manage_order",
-    });
-
-
-
-    onMounted(async () =>{
-        order.value=store.getters.getMyOrders.find(order => order.id === payload.id);
-        if(!order.value){
-          order.value= await store.dispatch("getOrderById", payload.id);
-        }
-     });
-
-    const selectDeliveredFile = (e) => {
-      orderDeliver.value.delivered_file = e.target.files[0];
-      console.log("order deliverd file: ", orderDeliver.value.delivered_file);
-     }
-
-
-    function order_dispute() {
-      console.log("manage order", orderDispute.value);
-      store.dispatch("manageOrder", orderDispute.value);
-    }
-
-    function order_deliver() {
-      console.log("manage order", orderDeliver.value);
-      store.dispatch("manageOrder", orderDeliver.value);
-    }
-
-    function order_complete() {
-      console.log("manage order", orderComplete.value);
-      store.dispatch("manageOrder", orderComplete.value);
-    }
-
-    return{
-      order,
-      loader: computed(() => store.getters.getLoaderVal),
-      imgURL: process.env.VUE_APP_URL,
-      payload,
+    const {
+      payloadOrder,
       orderDispute,
       order_dispute,
       orderDeliver,
       order_deliver,
       selectDeliveredFile,
       orderComplete,
-      order_complete
+      order_complete,
+      orderRevision,
+      order_revision,
+      orderCancel,
+      order_cancel
+    } = useOrder();
+
+
+    onMounted(async () =>{
+        order.value=store.getters.getMyOrders.find(order => order.id === payloadOrder.id);
+        if(!order.value){
+          order.value= await store.dispatch("getOrderById", payloadOrder.id);
+        }
+     });
+
+
+    return{
+      order,
+      loader: computed(() => store.getters.getLoaderVal),
+      imgURL: process.env.VUE_APP_URL,
+      payloadOrder,
+      orderDispute,
+      order_dispute,
+      orderDeliver,
+      order_deliver,
+      selectDeliveredFile,
+      orderComplete,
+      order_complete,
+      orderRevision,
+      order_revision,
+      orderCancel,
+      order_cancel
     }
    }
    };
@@ -364,9 +372,5 @@ export default {
   height: 150px;
 }
 
-.image-fluid{
-  width: 380px;
-  height: 150px;
-}
 
 </style>
