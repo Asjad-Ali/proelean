@@ -33,7 +33,7 @@
             class="card d-md-none shadow-sm border-primary"
           >
             <div class="card-body">
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between flex-wrap">
               <span>
                 <img
                    class="img-fluid bg-info rounded-circle mr-2"
@@ -47,15 +47,15 @@
               </div>
               <h5 class="card-title bg-light mt-3">{{ order.description }}</h5>
               <span class="text-muted"> <i class="fa fa-clock-o"></i>  Duration: </span> <span> {{ order.delivery_time }}</span>
-              <span class="text-muted ml-5"> <i class="fa fa-usd"></i>  Budget: </span> <span> {{ order.amount }}</span>
+              <span class="text-muted ml-4"> <i class="fa fa-usd"></i>  Budget: </span> <span> {{ order.amount }}</span>
               <div class="d-flex justify-content-end mt-2">
                 <div>
-                    <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 1"> Active </button>
-                    <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
-                    <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 3"> Revision </button>
-                    <button class="btn btn-sm btn-success w-100" v-if="order.status_id == 4"> Completed </button>
-                    <button class="btn btn-sm btn-danger w-100" v-if="order.status_id == 5"> Disputed </button>
-                    <button class="btn btn-sm btn-primary w-100" v-if="order.status_id == 6"> Late </button>
+                    <button class="btn btn-md btn-primary w-100" v-if="order.status_id == 1"> Active </button>
+                    <button class="btn btn-md btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
+                    <button class="btn btn-md btn-primary w-100" v-if="order.status_id == 3"> Revision </button>
+                    <button class="btn btn-md btn-success w-100" v-if="order.status_id == 4"> Completed </button>
+                    <button class="btn btn-md btn-danger w-100" v-if="order.status_id == 5"> Disputed </button>
+                    <button class="btn btn-md btn-primary w-100" v-if="order.status_id == 6"> Late </button>
                 </div>
                 <span class="ml-2">
                   <router-link 
@@ -214,7 +214,7 @@ export default {
 
     return {
       imgURL: process.env.VUE_APP_URL,
-      orders: computed(() => store.getters.myOrders),
+      orders: computed(() => store.getters.getMyOrders),
       loader: computed(() => store.getters.getLoaderVal),
       showFilter,
       OrderSelectionType,

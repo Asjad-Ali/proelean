@@ -80,7 +80,12 @@
           <div id="basic" class="tab-pane fade show active" data-v-0d25e83c="">
             <h4 data-v-0d25e83c="">Order Details</h4>
             
-              <img :src="imgURL + '/' + order.image" class="img-fluid object" alt="Responsive image" />
+              <img :src="imgURL + '/' + order.image" class="image-fluid object"
+               alt="Responsive image"
+               v-if="$store.getters.isBuyerMode" />
+              <img :src="imgURL + '/' + order.image" class="img-fluid object"
+               alt="Responsive image"
+               v-if="!$store.getters.isBuyerMode" />
           
               <p class="pt-1 pl-1 mt-1">{{order.description}}</p>
               <div>
@@ -118,8 +123,84 @@
              <p>{{order.amount}}{{order.currency}}</p>
            </div>
 
+          <div class="d-flex flex-column">
+
+                                              <!-----------  Complete the Order  ----------->
           <!-- Button trigger modal -->
-          <button v-if="order.status_id == 1" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button v-if="order.status_id == 2 && $store.getters.isBuyerMode" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+            Complete
+          </button>
+
+          <!-----------------------   Modal  ---------------------->
+          <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModal3Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal3Label">Complete the Order</h5>
+                </div>
+                <div class="modal-body">
+                    <textarea
+                    type="text"
+                    class="form-control mb-2"
+                    name="description"
+                    placeholder="Decription"
+                    v-model="orderComplete.description"
+                    id="description"
+                    required
+                    />
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="order_complete()"> Submit </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!------------------------   MOdal End   ------------------------>
+          <!------------------------  Complete the Order Section END  ------------------------>
+
+
+
+                                        <!-----------  Deliver Your Work  ----------->
+          <!-- Button trigger modal -->
+          <button v-if="order.status_id == 1 && !$store.getters.isBuyerMode" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+            Deliver Your Work
+          </button>
+
+          <!-----------------------   Modal  ---------------------->
+          <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModal2Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal2Label">Deliver Your Work</h5>
+                </div>
+                <div class="modal-body">
+                    <textarea
+                    type="text"
+                    class="form-control mb-2"
+                    name="description"
+                    placeholder="Decription"
+                    v-model="orderDeliver.description"
+                    id="description"
+                    required
+                    />
+                    <input type="file" id="myFile" name="delivered_file"
+                    @change="selectDeliveredFile" required />
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="order_deliver()"> Submit </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!------------------------   MOdal End   ------------------------>
+          <!------------------------  Deliver the work Section END  ------------------------>
+
+
+                                            <!-----------  Cancel & Create Dispute  ----------->
+          <!-- Button trigger modal -->
+          <button v-if="order.status_id == 1" type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Cancel & Create Dispute
           </button>
 
@@ -136,20 +217,22 @@
                     class="form-control"
                     name="description"
                     placeholder="Type Decription for cancel order"
-                    v-model="orderType.description"
+                    v-model="orderDispute.description"
                     id="description"
                     required
                     />
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="manage_Order()"> Submit </button>
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="order_dispute()"> Submit </button>
                 </div>
               </div>
             </div>
           </div>
           <!------------------------   MOdal End   ------------------------>
+          <!------------------------  Cancel & Create Dispute Section END  ------------------------>
 
+          </div>
            
         </div>
              
@@ -185,24 +268,58 @@ export default {
       orderNo: route.params.orderNo,
       type: "object"
     }
-    const orderType = ref({
+
+    const orderDispute = ref({
       order_no: payload.orderNo,
       type: 5,
       description: "I want to cancel the order...",
       url: "seller/manage_order",
     });
-    
+
+    const orderDeliver = ref({
+      order_no: payload.orderNo,
+      type: 2,
+      description: "order delivered",
+      delivered_file: "",
+      delivery_note: "delivery file proceed",
+      url: "seller/manage_order",
+    });
+
+    const orderComplete = ref({
+      order_no: payload.orderNo,
+      type: 4,
+      description: "completed the order",
+      url: "buyer/manage_order",
+    });
+
+
 
     onMounted(async () =>{
-        order.value=store.getters.myOrders.find(order => order.id === payload.id);
+        order.value=store.getters.getMyOrders.find(order => order.id === payload.id);
         if(!order.value){
           order.value= await store.dispatch("getOrderById", payload.id);
         }
      });
 
-    function manage_Order() {
-      console.log("manage order", orderType.value);
-      store.dispatch("manageOrder", orderType.value);
+    const selectDeliveredFile = (e) => {
+      orderDeliver.value.delivered_file = e.target.files[0];
+      console.log("order deliverd file: ", orderDeliver.value.delivered_file);
+     }
+
+
+    function order_dispute() {
+      console.log("manage order", orderDispute.value);
+      store.dispatch("manageOrder", orderDispute.value);
+    }
+
+    function order_deliver() {
+      console.log("manage order", orderDeliver.value);
+      store.dispatch("manageOrder", orderDeliver.value);
+    }
+
+    function order_complete() {
+      console.log("manage order", orderComplete.value);
+      store.dispatch("manageOrder", orderComplete.value);
     }
 
     return{
@@ -210,8 +327,13 @@ export default {
       loader: computed(() => store.getters.getLoaderVal),
       imgURL: process.env.VUE_APP_URL,
       payload,
-      orderType,
-      manage_Order,
+      orderDispute,
+      order_dispute,
+      orderDeliver,
+      order_deliver,
+      selectDeliveredFile,
+      orderComplete,
+      order_complete
     }
    }
    };
@@ -239,6 +361,11 @@ export default {
 
 .img-fluid{
   width: 310px;
+  height: 150px;
+}
+
+.image-fluid{
+  width: 380px;
   height: 150px;
 }
 

@@ -16,7 +16,8 @@
               </li>
             </ol>
           </nav> -->
-          <h2 class="h2-cutom-font pb-0">{{ service.s_description }}</h2>
+          <h2 class="h2-cutom-font pb-0 d-none d-sm-block ">{{ service.s_description }}</h2>
+           <h2 class="h2-cutom-font pb-0 d-sm-none">{{ service.s_description.substr(0,18) }}{{service.s_description.length > 18 ? '..' : ''}}</h2>
           <Gallery :serviceMedia="service.service_media" />
           <AboutService :service="service" />
           <div class="profile-card">
