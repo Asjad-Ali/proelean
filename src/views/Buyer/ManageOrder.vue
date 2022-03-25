@@ -46,8 +46,8 @@
                 <span class="mt-2">{{ order.created_at }}</span>
               </div>
               <h5 class="card-title bg-light mt-3">{{ order.description }}</h5>
-              <span class="text-muted"> <i class="fa fa-clock-o"></i>  Duration: </span> <span> {{ order.delivery_time }}</span>
-              <span class="text-muted ml-4"> <i class="fa fa-usd"></i>  Budget: </span> <span> {{ order.amount }}</span>
+              <span class="text-muted"> <i class="mdi mdi-clock"></i>  Duration: </span> <span> {{ order.delivery_time }}</span>
+              <span class="text-muted ml-4"> <i class="mdi mdi-database"></i>  Budget: </span> <span> {{ order.amount }}</span>
               <div class="d-flex justify-content-end mt-2">
                 <div>
                     <button class="btn btn-md btn-primary w-100" v-if="order.status_id == 1"> Active </button>

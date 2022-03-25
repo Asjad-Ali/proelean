@@ -267,6 +267,41 @@
           <!------------------------  Cancel & Create Dispute Section END  ------------------------>
 
 
+                                                      <!-----------  Request for More days of delivery  ----------->
+          <!-- Button trigger modal -->
+          <button v-if="(order.status_id == 6 && !$store.getters.isBuyerMode)" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal6">
+            Request for More Days
+          </button>
+
+          <!-----------------------   Modal  ---------------------->
+          <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModal6Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal6Label">Request for More Days</h5>
+                </div>
+                <div class="modal-body">
+                    <textarea
+                    type="text"
+                    class="form-control"
+                    name="description"
+                    placeholder="Decription"
+                    v-model="orderLate.description"
+                    id="description"
+                    required
+                    />
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="order_late()"> Submit </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!------------------------   MOdal End   ------------------------>
+          <!------------------------  Request for More days of delivery Section END  ------------------------>
+
+
                             <!-----------  Cancel Request of Dispute  ----------->
           <button v-if="order.status_id == 5" type="button" class="btn btn-success mt-2" @click="order_cancel()">
             Cancel Request
@@ -275,7 +310,6 @@
           </div>
            
         </div>
-             
              
           </div>
         </div>
@@ -314,7 +348,9 @@ export default {
       orderRevision,
       order_revision,
       orderCancel,
-      order_cancel
+      order_cancel,
+      orderLate,
+      order_late
     } = useOrder();
 
 
@@ -341,7 +377,9 @@ export default {
       orderRevision,
       order_revision,
       orderCancel,
-      order_cancel
+      order_cancel,
+      orderLate,
+      order_late
     }
    }
    };

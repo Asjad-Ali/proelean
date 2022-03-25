@@ -261,7 +261,7 @@
               nav-item
               dropdown
               no-arrow no-caret
-              mr-3
+              mr-1
               dropdown-notifications
             "
           >
@@ -506,7 +506,6 @@
               dropdown
               no-arrow no-caret
               dropdown-user
-              d-none d-lg-block
             "
           >
             <a
