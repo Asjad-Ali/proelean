@@ -3,38 +3,43 @@
   <div
     class="
       app-card
-      alert alert-dismissible
       shadow-sm
       mb-4
       pb-3
+      p-3
+      text-center
     "
   >
-<h5 style="border-bottom: 1px solid #e7e9ed;" class="text-center py-2 text-muted">Time left to deliver</h5>
+<h5 style="border-bottom: 1px solid #e7e9ed;" class="  py-2 text-muted">Time left to deliver</h5>
  
-    <div class="row d-flex justify-content-center text-center">
-      <div class="col-lg-3 col-md-12 col-12">
-        <h4>Days</h4>
+    <div class="row ">
+      <div class="col-lg-3 col-md-3 col-3">
+        <h4 class="d-md-block d-none">Days</h4>
         <div class="count-down-content">
           <h2>{{ remainingTime.days }}</h2>
         </div>
+        <h4 class="d-md-none d-block p-0">D</h4>
       </div>
-      <div class="col-lg-3 col-md-12 col-12">
-        <h4>Hours</h4>
+      <div class="col-lg-3 col-md-3 col-3">
+        <h4 class="d-md-block d-none">Hours</h4>
         <div class="count-down-content">
           <h2>{{ remainingTime.hours }}</h2>
         </div>
+        <h4 class="d-md-none d-block p-0">H</h4>
       </div>
-      <div class="col-lg-3 col-md-12 col-12">
-        <h4>Minutes</h4>
+      <div class="col-lg-3 col-md-3 col-3">
+        <h4 class="d-md-block d-none">Minutes</h4>
         <div class="count-down-content">
           <h2>{{ remainingTime.minutes }}</h2>
         </div>
+        <h4 class="d-md-none d-block p-0">M</h4>
       </div>
-      <div class="col-lg-3 col-md-12 col-12">
-        <h4>Seconds</h4>
+      <div class="col-lg-3 col-md-3 col-3">
+        <h4 class="d-md-block d-none">Seconds</h4>
         <div class="count-down-content">
           <h2>{{ remainingTime.seconds }}</h2>
         </div>
+        <h4 class="d-md-none d-block p-0">S</h4>
       </div>
     </div>
   </div>
@@ -85,15 +90,26 @@ export default {
 .count-down-content {
   background: #14222b;
   color: #2dbcb2;
-  padding: 16px;
+  /* padding: 16px; */
   border-radius: 10px;
 }
 h4 {
   font-weight: 600;
   padding-bottom: 10px;
   padding-top: 10px;
+  font-size: 15px;
 }
 h2 {
   color: #2dbcb2;
 }
+
+@media (max-width: 767.98px) { 
+  
+ 
+ h2{
+    font-size: 20px !important;
+  }
+}
+ 
+
 </style>
