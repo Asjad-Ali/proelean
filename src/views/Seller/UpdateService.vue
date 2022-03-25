@@ -199,6 +199,30 @@
                   </div>
                 </div>
               </div>
+              <div class="mb-3">
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="setting-input-2" class="form-label"
+                      >Delivery Days</label
+                    >
+                    <select
+                      id="deliveryTime"
+                      class="form-control"
+                      name="delivery_time"
+                      required
+                    >
+                      <option disabled selected value="">Select day</option>
+                      <option
+                       v-for="revision in $store.getters.getRevisions" :key="revision"
+                        :value="revision"
+                        :selected="day == updateGig.delivery_time"
+                      >
+                        {{ revision }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
               <button
                 :disabled="registerStatus === 2"
                 class="btn app-btn-primary"
