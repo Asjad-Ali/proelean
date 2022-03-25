@@ -48,7 +48,7 @@
                       "
                       id="categories"
                     >
-                      <option value="0">All</option>
+                      <option value="" disabled selected>All</option>
                       <option
                         v-for="category in $store.getters.getCategories"
                         :value="category.slug"
