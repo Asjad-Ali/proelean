@@ -1,4 +1,5 @@
 <template>
+<!-- For Web Screen -->
 <div class="app-card app-card-orders-table shadow-sm my-3" >
    <div class="app-card-body" >
       <div class="table-responsive">
@@ -46,6 +47,32 @@
    </div>
    <!--//app-card-body-->
 </div>
+
+<!-- For Mobile Screen -->
+<!-- <div class="app-card shadow-sm d-sm-none my-3" >
+   <div class="app-card-body p-2" >
+      <div class="d-flex flex-column" v-for="order in orders" :key="order.id">
+         <div>
+            <div class="text-secondary cell bold"> Service: </div>
+         </div>
+         <div>
+            <div class="text-secondary cell d-flex justify-content-between"> <div class="bold"> Title: </div>  <div> {{order.description}} </div> </div>
+         </div>
+         <div>
+            <div class="text-secondary cell d-flex justify-content-between"> <div class="bold">  Price: </div>  <div> {{order.currency}}{{order.amount}} </div> </div>
+         </div>
+         <div>
+            <div class="text-secondary cell d-flex justify-content-between"> <div class="bold"> Due In: </div>  <div> {{order.end_date}} </div> </div>
+         </div>
+         <div>
+            <div class="text-secondary cell bold"> Status: </div>
+         </div>
+         <div> 
+            <div class="text-secondary cell bold"> View: </div>
+         </div>
+      </div>
+   </div>
+</div> -->
 </template>
 
 <script>
