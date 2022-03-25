@@ -14,7 +14,7 @@
               align-items-center
             "
           >
-            <!-- <div class="col-8">
+            <div class="col-8">
               <form class="table-search-form gx-1 align-items-center">
                 <div class="col-auto">
                   <input
@@ -27,7 +27,7 @@
                   />
                 </div>
               </form>
-            </div> -->
+            </div>
             <!-- //col -->
           </div>
           <!--//row-->
