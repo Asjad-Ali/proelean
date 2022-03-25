@@ -99,7 +99,7 @@
                 <a class="page-link" :class="{empty:nextPrev.prev == null}" href="#"> Previous</a>
               </li>
               <li class="page-item" v-for="page in pages.last_page" :key="page">
-                <a class="page-link" :class="{active:pages.current_page == page}"  @click="loadOtherRequest(page)">{{ page }}</a>
+                <a class="page-link" :class="{activePagination:pages.current_page == page}"  @click="loadOtherRequest(page)">{{ page }}</a>
               </li>
               <li class="page-item">
                 <a class="page-link" :class="{empty:nextPrev.next == null}" >Next</a> 
@@ -295,7 +295,7 @@ export default {
 .empty{
   cursor:default !important;
 }
-.active{
+.activePagination{
   background-color: rgb(165, 159, 159);
   color: rgb(32, 32, 32);
 }
