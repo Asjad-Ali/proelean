@@ -22,7 +22,7 @@
                               </select>
                            </div> -->
                         </div>
-                        <h3 v-if="$route.params.slug">Services In {{ $route.params.slug }}</h3>
+                        <h3 v-if="$route.params.slug">Services In {{ $route.params.slug || category}}</h3>
                      </div>
                   </div>
                   <div class="row">
@@ -41,7 +41,7 @@
                         v-if="!$store.getters.getServices.length && $store.getters.getLoadingStatus==='COMPLETED'" 
                      >
                      <div class="d-flex justify-content-center align-item-center">
-                        No service found against {{ $route.params.slug }}
+                        No service found against {{ $route.params.slug  || category }}
                      </div>
                      </div>
                   </div>
@@ -86,7 +86,8 @@ export default {
       })
       onMounted(store.dispatch('searchServices',`search?q=${ route.params.slug ? route.params.slug : ''}&category=${category}`))
       return {
-         isNextPage: computed(()=>store.getters.getNextPage)
+         isNextPage: computed(()=>store.getters.getNextPage),
+         category
       }
    }
 }
