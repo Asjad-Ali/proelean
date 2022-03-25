@@ -75,14 +75,16 @@ export default {
    setup() {
       const store = useStore();
       const route = useRoute();
+      const params = new URLSearchParams(window.location.search)
+      const category = params.has('category') ? params.get('category') : '';
 
       onBeforeRouteUpdate((to, from) => {
          if(to.params.slug !== from.params.slug) {
-            store.dispatch('searchServices',`search?q=${ to.params.slug ? to.params.slug : ''}`)
+            store.dispatch('searchServices',`search?q=${ to.params.slug ? to.params.slug : ''}&category=${category}`)
             store.dispatch('setPage',1);
          }
       })
-      onMounted(store.dispatch('searchServices',`search?q=${ route.params.slug ? route.params.slug : ''}`))
+      onMounted(store.dispatch('searchServices',`search?q=${ route.params.slug ? route.params.slug : ''}&category=${category}`))
       return {
          isNextPage: computed(()=>store.getters.getNextPage)
       }
