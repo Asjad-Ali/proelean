@@ -54,6 +54,13 @@ export default function useOrder() {
         type: 8,
         url: "seller/manage_order",
       });
+
+      const orderLate = ref({
+        order_no: payloadOrder.orderNo,
+        type: 6,
+        description: "Please extend the delivery time",
+        url: "seller/manage_order",
+      });
   
 
     const formData = ref({
@@ -160,6 +167,11 @@ export default function useOrder() {
         console.log("manage order", orderCancel.value);
         store.dispatch("manageOrder", orderCancel.value);
       }
+
+      function order_late() {
+        console.log("manage order", orderLate.value);
+        store.dispatch("manageOrder", orderLate.value);
+      }
   
 
     return {
@@ -179,7 +191,9 @@ export default function useOrder() {
         orderRevision,
         order_revision,
         orderCancel,
-        order_cancel
+        order_cancel,
+        orderLate,
+        order_late
     }
 
 }
