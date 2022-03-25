@@ -98,9 +98,11 @@
               <li class="page-item" >
                 <a class="page-link" :class="{empty:nextPrev.prev == null}" href="#"> Previous</a>
               </li>
+
               <li class="page-item" v-for="page in pages.last_page" :key="page">
                 <a class="page-link" :class="{activePagination:pages.current_page == page}"  @click="loadOtherRequest(page)">{{ page }}</a>
               </li>
+              
               <li class="page-item">
                 <a class="page-link" :class="{empty:nextPrev.next == null}" >Next</a> 
               </li>
@@ -221,6 +223,7 @@ import { useStore } from "vuex";
 export default {
     setup() {
         const store = useStore();
+        const pages = ref(store.getters.getBuyerRequestsPages)
         const requestType = ref ({
           status:'',
           page: 1
@@ -272,7 +275,7 @@ export default {
           store.dispatch("showBuyerRequests",requestType.value);
         }
         return {
-            pages: computed(() => store.getters.getBuyerRequestsPages),
+            pages,
             nextPrev: computed(() => store.getters.getBuyerHasNext),
             requests: computed(() => store.getters.getBuyerRequests),
             buyerRequestType,
@@ -293,10 +296,12 @@ export default {
 
 <style>
 .empty{
-  cursor:default !important;
+  cursor:no-drop;
+  color: #0e0e0f !important;
 }
 .activePagination{
-  background-color: rgb(165, 159, 159);
-  color: rgb(32, 32, 32);
+  background-color:#2cdd9b;
+  color: #fff !important;
 }
+
 </style>
