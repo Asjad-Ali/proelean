@@ -9,7 +9,7 @@
          <div class="right">
             <div class="profile-name">
                <span class="user-status">
-               <a href="#" class="seller-link">{{service.service_user.username}}</a>
+               <a class="seller-link">{{service.service_user.username}}</a>
                </span>
                <div class="seller-level">{{service.s_description}} </div>
             </div>

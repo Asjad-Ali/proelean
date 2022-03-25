@@ -100,6 +100,7 @@ export default function useCreateService() {
   const gigCreation = () => {
     createService.value.sub_category_id = document.getElementById("subCategory").value
     createService.value.delivery_time = document.getElementById("deliveryTime").value
+    createService.value.revision = document.getElementById("revision").value
     console.log(createService.value)
     store.dispatch('createService', createService.value).then(res => {
       if(res.status === 201) {
