@@ -1,4 +1,4 @@
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
@@ -7,7 +7,7 @@ export default function useCreateService() {
   const store = useStore();
   const route = useRouter();
   const bannersBase64 = ref([]);
-  const updateGig = computed(()=>store.getters.getSingleService);
+  const updateGig = ref(computed(() => store.getters.getSingleService));
 
   const data = ref({
     description: '',
@@ -25,16 +25,38 @@ export default function useCreateService() {
     sub_category_id: "",
     delivery_time: '',
     price: "",
-    id:""
+    id:"",
+    revision:'',
+    additional_info:''
   });
 
+
+  const getUpdateGigError = ref({
+    s_description: "",
+    description: "",
+    banner: [],
+    delete: [],
+    category_id: "",
+    sub_category_id: "",
+    delivery_time: '',
+    price: "",
+    id:"",
+    revision:'',
+    additional_info:''
+  });
+
+  watch(updateGig.value, (current) => {
+    console.log(current)
+  })
 
   const updateService = () => {
     getUpdateGig.value.sub_category_id = document.getElementById("subCategory").value
     getUpdateGig.value.category_id = document.getElementById("category").value
     getUpdateGig.value.delivery_time = document.getElementById("deliveryTime").value
+    getUpdateGig.value.revision = document.getElementById("revision").value
     getUpdateGig.value.s_description = updateGig.value.s_description
     getUpdateGig.value.description = updateGig.value.description
+    getUpdateGig.value.additional_info = updateGig.value.additional_info
     getUpdateGig.value.price = updateGig.value.price
     getUpdateGig.value.id = updateGig.value.id
     getUpdateGig.value._method= 'PUT'
@@ -87,6 +109,8 @@ export default function useCreateService() {
   };
 
 
+
+
   return {
     data,
     getCategory,
@@ -95,6 +119,7 @@ export default function useCreateService() {
     removeOldImage,
     encodeImageFileAsURL,
     updateGig,
+    getUpdateGigError,
     getBanners,
     removeNewImage,
     bannersBase64

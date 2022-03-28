@@ -54,6 +54,7 @@ export const mutations = {
 
 export const actions = {
 
+  
   async searchServices({ commit, state }, search) {
     state.services = [];
     commit('setLoadingStatus', 'LOADING');

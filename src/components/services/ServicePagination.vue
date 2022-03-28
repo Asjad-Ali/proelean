@@ -39,7 +39,7 @@
             @click.prevent="next($store.getters.getPages.current_page)"
           >
             <span aria-hidden="true"
-              >Next <i class="fa fa-chevron-right" aria-hidden="true"></i
+              >Next  <i class="fa fa-chevron-right" aria-hidden="true"></i
             ></span>
             <span class="sr-only"></span>
           </a>
@@ -65,7 +65,6 @@ export default {
       handlePagination(page + 1);
     };
     const handlePagination = (page) => {
-      console.log(page);
       store.dispatch("searchServices", `search?q=${query}&page=${page}`);
     };
 

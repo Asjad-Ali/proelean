@@ -191,6 +191,8 @@
               </div>
               <!--//row-->
             </div>
+              </div>
+            </div>
           </div>
           <!--//app-card-body-->
           <div class="app-card-body p-4 w-100 text-center">
@@ -202,8 +204,6 @@
         </div>
         <!--//app-card-->
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
