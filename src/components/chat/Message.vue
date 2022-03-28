@@ -28,6 +28,7 @@
         }}
       </div>
       <p
+        :style="message.attachment && 'background-color : transparent;'"
         class="p-3 rounded-lg text-white text-breaks"
         :class="
           message.senderId == $store.getters.getAuthUser.id
@@ -35,46 +36,61 @@
             : `other-message`
         "
         v-if="!message.messageOffer"
-       >
-       <img :src="message.attachment" alt="" v-if="message.attachment" style="width: 20%; height: 20%;">
+      >
+        <img
+          :src="message.attachment"
+          alt=""
+          v-if="message.attachment"
+          style="
+            width: 20%;
+            height: 20%;
+            object-fit: cover;
+            border: 1px solid #dde;
+            border-radius: 10px;
+            padding: 10px;
+          "
+          class="img-fluid"
+        />
         {{ message.message }}
         <!-- <a href="#">iamosahan@gmail.com</a> -->
       </p>
       <div class="row" v-else>
-        <div class="col-sm-12">
+        <div class="col-md-10">
           <div class="card shadow-none">
             <div class="card-body">
-              <p class="card-text">
+              <p class="offer-title">
                 {{ message.messageOffer.serviceTitle }}
               </p>
-              <p class="card-text">
+              <p class="offer-description">
                 {{ message.messageOffer.description }}
               </p>
-              <article>
-                <div>
-                  <div class="delivery">
-                    <i class="mdi mdi-currency-eur" aria-hidden="true"></i
-                    ><b class="mr-2"> Price : </b>
-                    {{ message.messageOffer.totalOffer }}
+              <div class="d-md-flex justify-content-around py-2 flex-wrap">
+                <article>
+                  <div>
+                    <div class="delivery">
+                      <i class="mdi mdi-currency-eur" aria-hidden="true"></i>
+                      <p class="mr-2">Price :</p>
+                      {{ message.messageOffer.totalOffer }}
+                    </div>
                   </div>
-                </div>
-              </article>
-              <article>
-                <div class="delivery">
-                  <i class="mdi mdi-clock" aria-hidden="true"></i
-                  ><b class="mr-2"> Delivery Time: </b>
-                  {{ message.messageOffer.deliveryDays }}
-                </div>
-              </article>
-              <article>
-                <div class="delivery">
-                  <i class="mdi mdi-sync" aria-hidden="true"></i>
-                  <b class="mr-2"> Revision: </b>
-                  {{ message.messageOffer.revisions }}
-                </div>
-              </article>
+                </article>
+                <article>
+                  <div class="delivery">
+                    <i class="mdi mdi-clock" aria-hidden="true"></i>
+                    <p class="mr-2">Delivery Time:</p>
+                    {{ message.messageOffer.deliveryDays }}
+                  </div>
+                </article>
+                <article>
+                  <div class="delivery">
+                    <i class="mdi mdi-sync" aria-hidden="true"></i>
+                    <p class="mr-2">Revision:</p>
+                    {{ message.messageOffer.revisions }}
+                  </div>
+                </article>
+              </div>
               <button
-                class="btn btn-success text-white mt-2"
+                class="btn app-btn-primary"
                 v-if="
                   message.messageOffer.offerSenderId ===
                   $store.getters.getAuthUser.id
@@ -110,7 +126,7 @@
       </div>
     </div>
 
-    <AcceptServiceOffer v-if="acceptOffer"/>
+    <AcceptServiceOffer v-if="acceptOffer" />
 
     <span class="ml-auto mb-auto">
       <div class="text-right text-muted pt-1 small">
@@ -180,8 +196,8 @@ export default {
 
     const acceptCustomOffer = (offer) => {
       acceptOffer.value = true;
-      store.commit('setCustomOffer',offer)
-    }
+      store.commit("setCustomOffer", offer);
+    };
 
     return {
       messageOwner,
@@ -189,13 +205,42 @@ export default {
       timeDiff,
       withdrawOffer,
       acceptCustomOffer,
-      acceptOffer
+      acceptOffer,
     };
   },
 };
 </script>
 
 <style scoped>
+.offer-title {
+  font-weight: 500;
+  font-size: 17px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e7e9ed;
+}
+
+.seller-app .btn {
+  font-weight: 400;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  border: none;
+  color: #fff;
+}
+.mdi {
+  color: #15a362;
+}
+.offer-description {
+  font-weight: 400;
+  color: #8396ab;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.delivery {
+  display: flex;
+}
+.delivery p {
+  font-weight: 500;
+}
 .position-fit {
   object-fit: cover;
 }
@@ -206,7 +251,7 @@ export default {
   background: #15a362;
 }
 
-.text-breaks{
+.text-breaks {
   word-break: break-all;
 }
 </style>  
