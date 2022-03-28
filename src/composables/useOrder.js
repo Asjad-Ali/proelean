@@ -55,12 +55,6 @@ export default function useOrder() {
         url: "seller/manage_order",
       });
 
-      const orderCancelBuyer = ref({
-        order_no: payloadOrder.orderNo,
-        type: 8,
-        url: "buyer/manage_order",
-      });
-
       const orderLate = ref({
         order_no: payloadOrder.orderNo,
         type: 6,
@@ -175,8 +169,9 @@ export default function useOrder() {
       }
 
       function buyer_cancel_request() {
-        console.log("manage order", orderCancelBuyer.value);
-        store.dispatch("manageOrder", orderCancelBuyer.value);
+        orderCancel.value.url = "buyer/manage_order";
+        console.log("manage order", orderCancel.value);
+        store.dispatch("manageOrder", orderCancel.value);
       }
 
       function order_late() {
@@ -202,7 +197,6 @@ export default function useOrder() {
         orderRevision,
         order_revision,
         orderCancel,
-        orderCancelBuyer,
         buyer_cancel_request,
         seller_cancel_request,
         orderLate,
