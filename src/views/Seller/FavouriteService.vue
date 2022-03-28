@@ -19,7 +19,7 @@
             </div>
           </div>
         </div>
-          <div class="text-center m-5" v-else>
+          <div class="text-center m-3 card p-5 shadow-none" v-else>
             <h3>No More Services Available</h3>
           </div>
         </div>

@@ -44,7 +44,7 @@
         </div>
         <!--//item-->
         <div class="row">
-          <div class="col-md-6 col-12">
+          <div class="col-6">
             <div class="item border-bottom py-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
@@ -71,7 +71,7 @@
             </div>
             <!--//item-->
           </div>
-          <div class="col-md-6 col-12">
+          <div class="col-6">
             <div class="item border-bottom py-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">

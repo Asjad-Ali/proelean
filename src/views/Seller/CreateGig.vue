@@ -213,22 +213,22 @@
                       <span class="text-danger mt-1" v-show="createServiceError.revision">
                       {{ createServiceError.revision }}</span>
                       </label>
-                    <select
-                      id="deliveryTime"
-                      class="form-control"
-                      name="delivery_time"
-                      placeholder="Select Category"
-                      v-model="createService.revision"
-                      data-msg="Please select category."
-                      required=""
-                    >
-                      <option disabled="" selected value="">Select Revisions</option>
-                      <option
-                      v-for="revision in $store.getters.getRevisions" :key="revision"
-                      :value="revision"
-                       >{{ revision }}</option>
+                      <select
+                        id="revision"
+                        class="form-control"
+                        name="delivery_time"
+                        placeholder="Select Category"
+                        v-model="createService.revision"
+                        data-msg="Please select category."
+                        required=""
+                      >
+                        <option disabled="" selected value="">Select Revisions</option>
+                        <option
+                        v-for="revision in $store.getters.getRevisions" :key="revision"
+                        :value="revision"
+                        >{{ revision }}</option>
 
-                    </select>
+                      </select>
                   </div>
                  
                 </div>

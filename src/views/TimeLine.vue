@@ -17,6 +17,14 @@
                                     <div class=""> {{orderTime.description}} </div>
                                     <div class="text-muted"> {{orderTime.created_at}} </div>
                                 </div>
+                                <!-- <div class="d-flex justify-content-end">
+                                    <button v-if="(order.status_id == 6 && $store.getters.isBuyerMode)" type="button" class="btn btn-light mt-2" >
+                                    Accept
+                                    </button>
+                                    <button v-if="(order.status_id == 6 && $store.getters.isBuyerMode)" type="button" class="btn btn-secondary mt-2 ml-2" >
+                                    Reject
+                                    </button>
+                                </div> -->
                             </div>
                         </div>
                     </div>
