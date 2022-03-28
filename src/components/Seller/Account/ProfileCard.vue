@@ -10,9 +10,8 @@
       "
     >
       <div class="app-card-body p-4 w-100 text-center">
-        <div class="align-items-center ">
-          <div>
-          </div>
+        <div class="align-items-center">
+          <div></div>
           <!--//col-->
           <div class="col-auto">
             <h3 class="app-card-title">Profile</h3>
@@ -21,7 +20,7 @@
         </div>
         <!--//row-->
       </div>
-                
+
       <!--//app-card-header-->
       <div class="app-card-body px-4 w-100">
         <div class="item border-bottom">
@@ -29,8 +28,10 @@
             <div class="col-auto">
               <!-- <div class="item-label mb-2"><strong>Photo</strong></div> -->
               <div class="item-data mb-3">
-                 <img
-                  :src="`${imgURL}/${user.image ?  user.image : '/assets/images/avator.png'}`"
+                <img
+                  :src="`${imgURL}/${
+                    user.image ? user.image : '/assets/images/avator.png'
+                  }`"
                   class="profileImage dropdown-user-img img-full rounded-circle"
                   alt="profile_img"
                 />
@@ -43,8 +44,8 @@
         </div>
         <!--//item-->
         <div class="row">
-          <div class="col-12 col-md-6">
-            <div  class="item border-bottom py-3">
+          <div class="col-md-6 col-12">
+            <div class="item border-bottom py-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
                   <div class="item-label"><strong>Name</strong></div>
@@ -52,28 +53,32 @@
                 </div>
                 <!--//col-->
               </div>
-            <!--//row-->
+              <!--//row-->
             </div>
-          <!--//item-->
-          <div class="item border-bottom py-3">
-            <div class="row justify-content-between align-items-center">
-              <div class="col-auto">
-                <div class="item-label"><strong>Email</strong></div>
-                <div class="item-data"><input type="hidden" name="email"></div>
-                <div class="item-data">{{ user.email }}</div>
+            <!--//item-->
+            <div class="item border-bottom py-3">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                  <div class="item-label"><strong>Email</strong></div>
+                  <div class="item-data">
+                    <input type="hidden" name="email" />
+                  </div>
+                  <div class="item-data">{{ user.email }}</div>
+                </div>
+                <!--//col-->
               </div>
-              <!--//col-->
+              <!--//row-->
             </div>
-            <!--//row-->
+            <!--//item-->
           </div>
-        <!--//item-->
-          </div>
-          <div class="col-12 col-md-6">
+          <div class="col-md-6 col-12">
             <div class="item border-bottom py-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
                   <div class="item-label"><strong>Phone</strong></div>
-                  <div class="item-data"><input type="hidden" name="email"></div>
+                  <div class="item-data">
+                    <input type="hidden" name="email" />
+                  </div>
                   <div class="item-data">{{ user.phone }}</div>
                 </div>
                 <!--//col-->
@@ -111,67 +116,65 @@
       </div>
       <!--//app-card-body-->
       <div class="app-card-body p-4 w-100 text-center">
-        <router-link v-if="$store.getters.isBuyerMode" to="/buyer/edit-profile" class="btn app-btn-secondary">Edit Profile</router-link>
-        <router-link v-else  to="/dashboard/edit-profile" class="btn app-btn-secondary">Edit Profile</router-link>
+        <router-link
+          v-if="$store.getters.isBuyerMode"
+          to="/buyer/edit-profile"
+          class="btn app-btn-secondary"
+          >Edit Profile</router-link
+        >
+        <router-link
+          v-else
+          to="/dashboard/edit-profile"
+          class="btn app-btn-secondary"
+          >Edit Profile</router-link
+        >
       </div>
       <!--//app-card-footer-->
     </div>
     <!--//app-card-->
 
-             <!-- buyer Modes -->
-    <div v-if="$store.getters.isBuyerMode" class="app-card app-card-account shadow-sm d-flex flex-column mt-3">
-        <div class="d-flex justify-content-center mt-3">
-          <h3 class="app-card-title">
-              Buying
-            </h3>
-        </div>
-         
-          <div class="app-card-body p-2 w-100 text-center">
-            <div class="px-2 mb-2">
-              <router-link to="/buyer/create_job" class="btn app-btn-secondary">Post a Job</router-link>
-              <router-link to="/buyer/jobs" class="btn app-btn-secondary ml-3">View All jobs</router-link>
-            </div>
-          </div>
-    </div>
-          <!-- buyer Modes end -->
+    <!-- buyer Modes -->
+    <div
+      v-if="$store.getters.isBuyerMode"
+      class="app-card app-card-account shadow-sm d-flex flex-column mt-3"
+    >
+      <div class="d-flex justify-content-center mt-3">
+        <h3 class="app-card-title">Buying</h3>
+      </div>
 
-             <!-- general section -->
-    <div v-if="$store.getters.isBuyerMode" class="app-card app-card-account shadow-sm d-flex flex-column mt-3">
-        <div class="d-flex justify-content-center mt-3">
-          <h3 class="app-card-title">
-              General
-            </h3>
+      <div class="app-card-body p-4 w-100 text-center">
+        <div class="px-2 mb-2">
+          <router-link to="/buyer/create_job" class="btn app-btn-secondary"
+            >Post a Job</router-link
+          >
+          <router-link to="/buyer/jobs" class="btn app-btn-secondary ml-3"
+            >View All jobs</router-link
+          >
         </div>
-         
-          <div class="app-card-body p-2 w-100 text-center">
-            <div class="px-2 mb-2">
-              <router-link to="/buyer/favourite_services" class="btn app-btn-secondary"> Saved </router-link>
-            </div>
-          </div>
+      </div>
     </div>
-          <!-- general section end -->
+    <!-- buyer Modes end -->
   </div>
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core';
-import { useStore } from 'vuex';
+import { computed } from "@vue/runtime-core";
+import { useStore } from "vuex";
 export default {
-  setup(){
-    const store = useStore()
+  setup() {
+    const store = useStore();
 
-    return{
+    return {
       user: computed(() => store.getters.getAuthUser),
       imgURL: process.env.VUE_APP_URL,
-    }
-  }
+    };
+  },
 };
 </script>
 
 <style>
 .profileImage {
-    width: 120px;
-    height: 120px;
+  width: 120px;
+  height: 120px;
 }
-
 </style>

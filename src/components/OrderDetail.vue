@@ -281,19 +281,20 @@
                   <h5 class="modal-title" id="exampleModal6Label">Request for More Days</h5>
                 </div>
                 <div class="modal-body">
+                    <!-- v-model="orderLate.description"   uncomment this field & add in textarea --> 
                     <textarea
                     type="text"
                     class="form-control"
                     name="description"
                     placeholder="Decription"
-                    v-model="orderLate.description"
                     id="description"
                     required
                     />
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="order_late()"> Submit </button>
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" > Submit </button>
+                  <!-- @click="order_late()"   uncomment this field & add in textarea  -->
                 </div>
               </div>
             </div>
@@ -303,7 +304,12 @@
 
 
                             <!-----------  Cancel Request of Dispute  ----------->
-          <button v-if="order.status_id == 5" type="button" class="btn btn-success mt-2" @click="order_cancel()">
+          <!-- if Seller -->
+          <button v-if="(order.status_id == 5 && !$store.getters.isBuyerMode)" type="button" class="btn btn-success mt-2" @click="seller_cancel_request()">
+            Cancel Request
+          </button>
+          <!-- if Buyer -->
+          <button v-if="(order.status_id == 5 && $store.getters.isBuyerMode)" type="button" class="btn btn-success mt-2" @click="buyer_cancel_request()">
             Cancel Request
           </button>
 
@@ -348,7 +354,8 @@ export default {
       orderRevision,
       order_revision,
       orderCancel,
-      order_cancel,
+      buyer_cancel_request,
+      seller_cancel_request,
       orderLate,
       order_late
     } = useOrder();
@@ -377,7 +384,8 @@ export default {
       orderRevision,
       order_revision,
       orderCancel,
-      order_cancel,
+      buyer_cancel_request,
+      seller_cancel_request,
       orderLate,
       order_late
     }
