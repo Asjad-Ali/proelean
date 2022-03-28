@@ -127,13 +127,13 @@
           <nav aria-label="Page navigation example" >
             <ul class="pagination d-flex justify-content-center">
               <li class="page-item" :class="{disabled:!$store.getters.getLinks.prev}" >
-                <a class="page-link"   @click="previous($store.getters.getPages.current_page)"> Previous</a>
+                <a class="page-link d-flex"   @click="previous($store.getters.getPages.current_page)"> <i class="mdi mdi-chevron-left"></i>Previous </a>
               </li>
-              <li class="page-item" v-for="page in $store.getters.getPages.links" :key="page">
-                <a class="page-link" :class="{activePagination:page.active}"  @click="loadOtherRequest(page.label)" v-if="page.label.length < 5">{{ page.label }}</a>
+              <li class="page-item" v-for="page in $store.getters.getPages.last_page" :key="page">
+                <a class="page-link" :class="{activePagination:$store.getters.getPages.current_page == page}"  @click="loadOtherRequest(page)" >{{ page }}</a>
               </li>
               <li class="page-item" :class="{disabled:!$store.getters.getLinks.next}" >
-                <a class="page-link"  @click="next($store.getters.getPages.current_page)" >Next</a> 
+                <a class="page-link d-flex"  @click="next($store.getters.getPages.current_page)" >Next <i class="mdi mdi-chevron-right"></i> </a> 
               </li>
             </ul>
           </nav>
@@ -162,61 +162,76 @@
               </h5>
             </div>
             <div class="modal-body text-center">
-              <div class="text-left font">Describe your offer</div>
-              <textarea
-                type="text"
-                class="form-control"
-                name="description"
-                v-model="payload.description"
-                id="description"
-                placeholder="Describe your offer"
-                required
-              />
-              <div class="text-left font mt-2">Total Price</div>
-              <input
-                type="number"
-                class="form-control"
-                name="price"
-                v-model="payload.price"
-                id="price"
-                placeholder="Total Offer(EUR)"
-                required
-              />
-              <div class="text-left font mt-2">Delivery Time</div>
-              <select
-                id="deliveryTime"
-                class="form-control"
-                name="delivery_time"
-                v-model="payload.delivery_time"
-                required
-              >
-                <option selected>Select day</option>
-                <option
-                  v-for="day in $store.getters.getDeliveryDays"
-                  :value="day"
-                  :key="day.index"
+              <div class="my-2">
+                <div class="text-left font mt-2">Choose Service<span class="text-danger mr-1">*</span>
+                  <span class="text-danger" v-show="sendRequestError.service_id">{{ sendRequestError.service_id }}</span>
+                </div>
+                <select
+                  id="services"
+                  class="form-control"
+                  name="service"
+                  v-model="sendRequest.service_id"
+                  required
                 >
-                  {{ day }}
-                </option>
-              </select>
-
-              <div class="text-left font mt-2">Service</div>
-              <select
-                id="services"
-                class="form-control"
-                name="service"
-                v-model="payload.service_id"
-                required
-              >
-                <option selected disabled>Select Service</option>
-                <option
-                  v-for="service in $store.getters.getUserServices"
-                  :value="service.id"
-                  :key="service.id"
+                  <option selected value="" disabled>Select Service</option>
+                  <option
+                    v-for="service in $store.getters.getUserServices"
+                    :value="service.id"
+                    :key="service.id"
+                  >
+                    {{ service.s_description }}
+                  </option>
+                </select>
+              </div>
+              <div class="my-2">
+                <div class="text-left font">Describe your offer<span class="text-danger mr-1">*</span>
+                  <span class="text-danger" v-show="sendRequestError.description">{{ sendRequestError.description }}</span>
+                </div>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  name="description"
+                  v-model="sendRequest.description"
+                  id="description"
+                  placeholder="Describe your offer"
+                  required
+                />
+              </div>
+              <div class="my-2">
+                <div class="text-left font mt-2">Total Price<span class="text-danger mr-1">*</span>
+                  <span class="text-danger" v-show="sendRequestError.price">{{ sendRequestError.price }}</span>
+                </div>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="price"
+                  v-model="sendRequest.price"
+                  id="price"
+                  placeholder="Total Offer(EUR)"
+                  required
+                />
+              </div>
+              <div class="my-2">
+                <div class="text-left font mt-2">Delivery Time<span class="text-danger mr-1">*</span>
+                  <span class="text-danger" v-show="sendRequestError.delivery_time">{{ sendRequestError.delivery_time }}</span>
+                </div>
+                <select
+                  id="deliveryTime"
+                  class="form-control"
+                  name="delivery_time"
+                  v-model="sendRequest.delivery_time"
+                  required
                 >
-                  {{ service.s_description }}
-                </option>
-              </select>
+                  <option selected>Select day</option>
+                  <option
+                    v-for="day in $store.getters.getDeliveryDays"
+                    :value="day"
+                    :key="day.index"
+                  >
+                    {{ day }}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="modal-footer d-flex justify-content-center">
               <button
@@ -224,6 +239,7 @@
                 class="btn btn-success"
                 data-dismiss="modal"
                 @click.prevent="sendOffer()"
+                :disabled="!Object.values(sendRequestError).every(value => !value)"
               >
                 Send Offer
               </button>
@@ -264,7 +280,8 @@ export default {
       next,
       buyerRequestType,
       showFilter,
-      payload,
+      sendRequest,
+      sendRequestError,
       loadOtherRequest,
       defineOffer,
       sendOffer,
@@ -281,7 +298,8 @@ export default {
       showFilter,
       getBtnStatus: computed(() => store.getters.getRegisterStatus),
       imgURL: process.env.VUE_APP_URL,
-      payload,
+      sendRequest,
+      sendRequestError,
       loadOtherRequest,
       defineOffer,
       sendOffer,
