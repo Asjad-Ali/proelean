@@ -1,6 +1,6 @@
 <template>
   <div class="row m-0 p-0">
-    <div class="col-lg-10">
+    <div class="col-lg-12">
       <h3 class="app-page-title">Notifications</h3>
       <div class="border-bottom my-3"></div>
       <div v-if="loader" class="d-flex justify-content-center s-margin">
