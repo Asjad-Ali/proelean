@@ -111,7 +111,7 @@
         </div>
 
         <div class="modal-footer d-flex justify-content-center">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <button type="button" class="btn btn-secondary" id="cancel" data-dismiss="modal">
             Cancel
           </button>
           <button
@@ -189,6 +189,7 @@ export default {
     };
     const sendOffer = () => {
       store.dispatch("sendCustomOfferToBuyerOnChat", payload.value).then(() => {
+        document.getElementById('cancel').click();
         resetFields();
       });
     };
