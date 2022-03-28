@@ -61,6 +61,11 @@ export default function useOrder() {
         description: "Please extend the delivery time",
         url: "seller/manage_order",
       });
+
+      const orderDateExtend = ref({
+        order_id: payloadOrder.id,
+        extended_delivery_days: "",
+      });
   
 
     const formData = ref({
@@ -178,6 +183,12 @@ export default function useOrder() {
         console.log("manage order", orderLate.value);
         store.dispatch("manageOrder", orderLate.value);
       }
+
+      function order_date_extend() {
+        console.log("Order Date Extend: ", orderDateExtend.value);
+        store.dispatch("dateExtendOfOrder", orderDateExtend.value);
+        orderDateExtend.value.extended_delivery_days = "";
+      }
   
 
     return {
@@ -200,7 +211,9 @@ export default function useOrder() {
         buyer_cancel_request,
         seller_cancel_request,
         orderLate,
-        order_late
+        order_late,
+        orderDateExtend,
+        order_date_extend
     }
 
 }
