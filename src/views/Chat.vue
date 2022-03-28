@@ -46,6 +46,12 @@ import { onBeforeMount,onMounted } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 export default {
    components: { ConversationList, MessagesSection },
+   //  props: {
+   //    service: {
+   //       type: Object,
+   //       required: true,
+   //    }
+   // },
    setup() {
       const store = useStore();
       const route = useRoute();

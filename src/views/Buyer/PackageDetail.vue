@@ -3,7 +3,7 @@
    <div id="basic" class="tab-pane fade show active">
       <h4>Service Details</h4>
       <hr class="my-2">
-      <div class="header">
+      <div class="header text-secondary">
          <p >{{service.s_description}}</p>
             <p>
               {{service.description.substr(0,100)}}{{service.description.length > 100 ? '..' : ''}}
@@ -14,31 +14,31 @@
       </div>
       <article>
               <div class="delivery"
-                ><i class="mdi mdi-clock" aria-hidden="true"></i><b class="mr-2"> Delivery Time:  </b> {{ service.delivery_time}}
+                ><i class="mdi mdi-clock" aria-hidden="true"></i><b class="mr-2"> Delivery Time:  </b> <span class="text-muted"> {{ service.delivery_time}} </span> 
                 </div >
           </article>
           <article>
               <div class="delivery"
-                ><i class="mdi mdi-sync" aria-hidden="true"></i> <b class="mr-2"> Revision:  </b> {{ service.revision}}</div
+                ><i class="mdi mdi-sync" aria-hidden="true"></i> <b class="mr-2"> Revision:  </b> <span class="text-muted">  {{ service.revision}} </span></div
               >
           </article>
           <article>
             <div>
               <div class="delivery"
-                ><i class="mdi mdi-radiobox-blank" aria-hidden="true"></i><b class="mr-2"> Category :  </b> {{ service.category.title}}
+                ><i class="mdi mdi-radiobox-blank" aria-hidden="true"></i><b class="mr-2"> Category :  </b> <span class="text-muted">  {{ service.category.title}} </span>
                 </div >
             </div>
             <div>
               <div class="delivery">
-              <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> {{ service.sub_category.title}}</div
+              <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> <span class="text-muted">  {{ service.sub_category.title}} </span> </div
               >
             </div>
           </article>
           <article>
             <div>
               <div class="delivery"
-                ><i class="mdi mdi-currency-eur" aria-hidden="true"></i><b class="mr-2"> Price :  </b> €{{service.price}}
-                </div >
+                ><i class="mdi mdi-currency-eur" aria-hidden="true"></i><b class="mr-2"> Price :  </b> <span class="text-muted">  €{{service.price}}
+                </span> </div >
             </div>
           </article>
    </div>

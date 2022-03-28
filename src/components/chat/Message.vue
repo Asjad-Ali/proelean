@@ -42,7 +42,7 @@
       </p>
       <div class="row" v-else>
         <div class="col-sm-12">
-          <div class="card">
+          <div class="card shadow-none">
             <div class="card-body">
               <p class="card-text">
                 {{ message.messageOffer.serviceTitle }}
