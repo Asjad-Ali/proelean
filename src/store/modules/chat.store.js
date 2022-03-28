@@ -34,7 +34,10 @@ export const state = {
 const scrollToBottom = () => {
     setTimeout(() => {
         const messagesDiv = document.getElementById("messages-section");
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        if (messagesDiv) {
+             messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+       
     },300);
 }
 

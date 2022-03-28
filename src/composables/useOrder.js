@@ -163,7 +163,13 @@ export default function useOrder() {
         store.dispatch("manageOrder", orderRevision.value);
       }
   
-      function order_cancel() {
+      function seller_cancel_request() {
+        console.log("manage order", orderCancel.value);
+        store.dispatch("manageOrder", orderCancel.value);
+      }
+
+      function buyer_cancel_request() {
+        orderCancel.value.url = "buyer/manage_order";
         console.log("manage order", orderCancel.value);
         store.dispatch("manageOrder", orderCancel.value);
       }
@@ -191,7 +197,8 @@ export default function useOrder() {
         orderRevision,
         order_revision,
         orderCancel,
-        order_cancel,
+        buyer_cancel_request,
+        seller_cancel_request,
         orderLate,
         order_late
     }
