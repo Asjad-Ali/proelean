@@ -70,6 +70,23 @@ export const actions = {
     }
   },
 
+
+  async dateExtendOfOrder({ commit, state }, payload) {
+    console.log("Order id:", payload.order_id);
+    const res = await Api.post(`seller/extend_order`, payload);
+    //const router = useRouter();
+    if (res.status === 200) {
+      console.log("Type of Order:", res.status);
+      const afterSetOrder = ref(state.orders.filter(order => order.id !== payload.order_id))
+      commit("setOrders", afterSetOrder.value);
+      useToast(res.message, 'success');
+    }
+    else {
+      useToast(res.message);
+      console.log("Error Order Type");
+    }
+  },
+
   async timeline({ commit }, orderNo) {
     commit('setLoader', 1);
     const res = await Api.get(`order/${orderNo}/activity`);

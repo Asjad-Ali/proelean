@@ -232,6 +232,49 @@
           <!------------------------  Deliver the work Section END  ------------------------>
 
 
+                                                      <!-----------  Request for More days of delivery  ----------->
+          <!-- Button trigger modal -->
+          <button v-if="((order.status_id == 1 || order.status_id == 6) && !$store.getters.isBuyerMode)" type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal6">
+            Request for More Days
+          </button>
+
+          <!-----------------------   Modal  ---------------------->
+          <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModal6Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModal6Label">Request for More Days</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="text-left font mt-2">Delivery Time</div>
+                    <select
+                      id="deliveryTime"
+                      class="form-control"
+                      name="delivery_time"
+                      v-model="orderDateExtend.extended_delivery_days"
+                      required
+                    >
+                      <option selected>Select day</option>
+                      <option
+                        v-for="day in $store.getters.getDeliveryDays"
+                        :value="day"
+                        :key="day.index"
+                      >
+                        {{ day }}
+                      </option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="order_date_extend()" > Submit </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!------------------------   MOdal End   ------------------------>
+          <!------------------------  Request for More days of delivery Section END  ------------------------>
+
+
                                             <!-----------  Cancel & Create Dispute  ----------->
           <!-- Button trigger modal -->
           <button v-if="order.status_id == 1" type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -266,41 +309,6 @@
           <!------------------------   MOdal End   ------------------------>
           <!------------------------  Cancel & Create Dispute Section END  ------------------------>
 
-
-                                                      <!-----------  Request for More days of delivery  ----------->
-          <!-- Button trigger modal -->
-          <button v-if="(order.status_id == 6 && !$store.getters.isBuyerMode)" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal6">
-            Request for More Days
-          </button>
-
-          <!-----------------------   Modal  ---------------------->
-          <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModal6Label" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModal6Label">Request for More Days</h5>
-                </div>
-                <div class="modal-body">
-                    <!-- v-model="orderLate.description"   uncomment this field & add in textarea --> 
-                    <textarea
-                    type="text"
-                    class="form-control"
-                    name="description"
-                    placeholder="Decription"
-                    id="description"
-                    required
-                    />
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" > Submit </button>
-                  <!-- @click="order_late()"   uncomment this field & add in textarea  -->
-                </div>
-              </div>
-            </div>
-          </div>
-          <!------------------------   MOdal End   ------------------------>
-          <!------------------------  Request for More days of delivery Section END  ------------------------>
 
 
                             <!-----------  Cancel Request of Dispute  ----------->
@@ -357,7 +365,9 @@ export default {
       buyer_cancel_request,
       seller_cancel_request,
       orderLate,
-      order_late
+      order_late,
+      orderDateExtend,
+      order_date_extend
     } = useOrder();
 
 
@@ -387,7 +397,9 @@ export default {
       buyer_cancel_request,
       seller_cancel_request,
       orderLate,
-      order_late
+      order_late,
+      orderDateExtend,
+      order_date_extend
     }
    }
    };
