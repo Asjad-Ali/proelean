@@ -33,7 +33,8 @@ export default function useCreateService() {
     sub_category_id: "",
     delivery_time: '',
     price: "",
-    revision:""
+    revision:"",
+    additional_info:''
   });
 
   const createServiceError = ref({
@@ -44,7 +45,8 @@ export default function useCreateService() {
     sub_category_id: "",
     delivery_time: '',
     price: "",
-    revision:""
+    revision:"",
+    additional_info:''
   });
 
   watch(createService.value,(current) => {

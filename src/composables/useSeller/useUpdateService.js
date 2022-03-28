@@ -25,14 +25,16 @@ export default function useCreateService() {
     sub_category_id: "",
     delivery_time: '',
     price: "",
-    id:""
+    id:"",
+    revision:'',
+    additional_info:''
   });
-
 
   const updateService = () => {
     getUpdateGig.value.sub_category_id = document.getElementById("subCategory").value
     getUpdateGig.value.category_id = document.getElementById("category").value
     getUpdateGig.value.delivery_time = document.getElementById("deliveryTime").value
+    getUpdateGig.value.revision = document.getElementById("revision").value
     getUpdateGig.value.s_description = updateGig.value.s_description
     getUpdateGig.value.description = updateGig.value.description
     getUpdateGig.value.price = updateGig.value.price

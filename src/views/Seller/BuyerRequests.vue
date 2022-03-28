@@ -15,16 +15,16 @@
       </div>
       <div class="border-bottom my-3"></div>
     </div>
-    <div v-if="loader" class="d-flex justify-content-center s-margin">
+    <div v-if="$store.getters.getBuyerRequestLoader" class="d-flex justify-content-center s-margin">
       <div class="spinner-border text-primary m-5" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </div>
     <div v-else>
-      <div v-if="requests">
+      <div v-if="$store.getters.getBuyerRequests">
         <div
           class="app-card app-card-notification shadow-sm mb-4"
-          v-for="request in requests"
+          v-for="request in $store.getters.getBuyerRequests"
           :key="request.id"
         >
           <div class="app-card-header px-4 py-3 d-flex justify-content-between">
@@ -62,7 +62,6 @@
           <!--//app-card-header-->
           <div class="app-card-body p-4">
             <div class="notification-content">
-              {{ request.description }}
             </div>
           </div>
           <!--//app-card-body-->
@@ -91,25 +90,21 @@
           </div>
           <!--//app-card-footer-->
          </div>
-
-          <div  class="text-center mt-4" >
-          <nav aria-label="Page navigation example">
+          <div class="text-center mt-4" >
+          <nav aria-label="Page navigation example" >
             <ul class="pagination d-flex justify-content-center">
-              <li class="page-item" >
-                <a class="page-link" :class="{empty:nextPrev.prev == null}" href="#"> Previous</a>
+              <li class="page-item" :class="{disabled:!$store.getters.getLinks.prev}" >
+                <a class="page-link"   @click="previous($store.getters.getPages.current_page)"> Previous</a>
               </li>
-
-              <li class="page-item" v-for="page in pages.last_page" :key="page">
-                <a class="page-link" :class="{activePagination:pages.current_page == page}"  @click="loadOtherRequest(page)">{{ page }}</a>
+              <li class="page-item" v-for="page in $store.getters.getPages.links" :key="page">
+                <a class="page-link" :class="{activePagination:page.active}"  @click="loadOtherRequest(page.label)" v-if="page.label.length < 5">{{ page.label }}</a>
               </li>
-              
-              <li class="page-item">
-                <a class="page-link" :class="{empty:nextPrev.next == null}" >Next</a> 
+              <li class="page-item" :class="{disabled:!$store.getters.getLinks.next}" >
+                <a class="page-link"  @click="next($store.getters.getPages.current_page)" >Next</a> 
               </li>
             </ul>
           </nav>
-    </div>
-
+        </div>
       </div>
 
       <div v-else class="container text-center py-5">
@@ -217,88 +212,55 @@
 
 
 <script>
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, onBeforeMount, onMounted } from "vue";
 import { useStore } from "vuex";
+import useBuyerRequest from '@/composables/useSeller/useBuyerRequest.js'
 
 export default {
-    setup() {
-        const store = useStore();
-        const pages = ref(store.getters.getBuyerRequestsPages)
-        const requestType = ref ({
-          status:'',
-          page: 1
-        })
-        onBeforeMount(() => {
-            store.dispatch("showBuyerRequests",requestType.value);
-        });
-        const jobId = ref("");
-        const payload = ref({
-            job_id: "",
-            service_id: "",
-            description: "",
-            price: "",
-            delivery_time: "",
-        });
-        const buyerRequestType = [
-            { value: 0, name: "Buyer Request" },
-            { value: 1, name: "Sent Offer" },
-        ];
+  setup() {
+    const store = useStore();
+    onBeforeMount(() => store.dispatch("showBuyerRequests",requestType.value));
+    onMounted(()=>{
+      store.dispatch("getCountriesLanguage");
+      store.dispatch("userServices");
+    })
+    const{
+      pages,
+      requestType,
+      previous,
+      next,
+      buyerRequestType,
+      showFilter,
+      payload,
+      loadOtherRequest,
+      defineOffer,
+      sendOffer,
+      deleteJob,
+      jobId,
+    } = useBuyerRequest();
 
-        function defineOffer(jobID) {
-            payload.value.job_id = jobID;
-            store.dispatch("getCountriesLanguage");
-            store.dispatch("userServices");
-        }
-        function sendOffer() {
-            store.dispatch("sendOffer", payload.value);
-            payload.value = {};
-        }
-        
-        function showFilter() {
-            let value = document.getElementById("requestValue").value;
-            if (value == 1) {
-              requestType.value.status = "sent_offers"
-              store.dispatch("showBuyerRequests",requestType.value);
-            }
-            else {
-              requestType.value.status = ''
-              store.dispatch("showBuyerRequests",requestType.value);
-            }
-        }
-        function deleteJob(id) {
-            store.dispatch("deleteBuyerJob", id);
-            console.log("delete request id: ", id);
-        }
-
-        const loadOtherRequest = (page) => {
-          requestType.value.page = page
-          store.dispatch("showBuyerRequests",requestType.value);
-        }
-        return {
-            pages,
-            nextPrev: computed(() => store.getters.getBuyerHasNext),
-            requests: computed(() => store.getters.getBuyerRequests),
-            buyerRequestType,
-            showFilter,
-            loader: computed(() => store.getters.getSellerLoader),
-            getBtnStatus: computed(() => store.getters.getRegisterStatus),
-            imgURL: process.env.VUE_APP_URL,
-            payload,
-            loadOtherRequest,
-            defineOffer,
-            sendOffer,
-            deleteJob,
-            jobId,
-        };
+    return {
+      pages,
+      previous,
+      requestType,
+      next,
+      buyerRequestType,
+      showFilter,
+      getBtnStatus: computed(() => store.getters.getRegisterStatus),
+      imgURL: process.env.VUE_APP_URL,
+      payload,
+      loadOtherRequest,
+      defineOffer,
+      sendOffer,
+      deleteJob,
+      jobId,
+    };
     },
 };
 </script>
 
 <style>
-.empty{
-  cursor:no-drop;
-  color: #0e0e0f !important;
-}
+
 .activePagination{
   background-color:#2cdd9b;
   color: #fff !important;

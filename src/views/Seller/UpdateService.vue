@@ -206,7 +206,7 @@
                       >Delivery Days</label
                     >
                     <select
-                      id="deliveryTime"
+                      id="revision"
                       class="form-control"
                       name="delivery_time"
                       required
@@ -221,6 +221,21 @@
                       </option>
                     </select>
                   </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="setting-input-2" class="form-label"
+                  >Additional Info</label
+                >
+                <div class="form-group">
+                  <textarea
+                    class="form-control"
+                    v-model="updateGig.additional_info"
+                    name="description"
+                    rows="4"
+                    placeholder="Describe About Your Serivce"
+                    required
+                  ></textarea>
                 </div>
               </div>
               <button

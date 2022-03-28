@@ -132,8 +132,9 @@
                       {{ createServiceError.sub_category_id }}</span>
                       </label>
                     <select
+                      style="width:100%"
                       id="subCategory"
-                      class="form-control"
+                      class="form-control shadow-none"
                       name="category_id"
                       v-model="createService.sub_category_id"
                       required
@@ -227,10 +228,24 @@
                         v-for="revision in $store.getters.getRevisions" :key="revision"
                         :value="revision"
                         >{{ revision }}</option>
-
                       </select>
-                  </div>
-                 
+                    </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="setting-input-2" class="form-label"
+                  >Additional Info
+                  </label
+                >
+                <div class="form-group">
+                  <textarea
+                    class="form-control"
+                    v-model="createService.additional_info"
+                    name="description"
+                    rows="4"
+                    placeholder="Describe About Your Serivce"
+                    required
+                  ></textarea>
                 </div>
               </div>
               <button

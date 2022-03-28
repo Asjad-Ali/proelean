@@ -16,16 +16,13 @@
             <div class="user-info">
                <span class="user-info-rating d-flex align-items-center">
                   <div class="star-rating-s15-wrapper">
-                     <span class="star-rating-s15 rate-10">
-                     <i class="fa fa-star" aria-hidden="true"></i>
-                     <i class="fa fa-star" aria-hidden="true"></i>
-                     <i class="fa fa-star" aria-hidden="true"></i>
-                     <i class="fa fa-star" aria-hidden="true"></i>
-                     <i class="fa fa-star" aria-hidden="true"></i>
+                     <span class="rate-10">
+                     <i class="fa fa-star" aria-hidden="true"   v-for="star in service.service_user.user_rating" :key="star" ></i>
                      </span>
+                   
                   </div>
-                  <span class="total-rating-out-five">{{service.service_rating}}</span>
-                  <span class="total-rating">({{service.total_reviews}})</span>
+                  <span class="total-rating-out-five">{{service.service_user.user_rating}}</span>
+                  <span class="total-rating">({{service.service_user.total_reviews}})</span>
                </span>
                <router-link   :to="{ name: 'Chat', params: { id: `${service.service_user.id}` } }" class="btn btn-success">
                   Contact Me

@@ -43,7 +43,7 @@
         </div>
         <!--//item-->
         <div class="row">
-          <div class="col-6">
+          <div class="col-12 col-md-6">
             <div  class="item border-bottom py-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
@@ -68,7 +68,7 @@
           </div>
         <!--//item-->
           </div>
-          <div class="col-6">
+          <div class="col-12 col-md-6">
             <div class="item border-bottom py-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
@@ -94,15 +94,19 @@
             <!--//item-->
           </div>
         </div>
-        <div class="item border-bottom py-3">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-auto">
-              <div class="item-label"><strong>Description</strong></div>
-              <div class="item-data">{{ user.description }}</div>
+        <div class="row">
+          <div class="col-12">
+            <div class="item border-bottom py-3">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-auto">
+                  <div class="item-label"><strong>Description</strong></div>
+                  <div class="item-data">{{ user.description }}</div>
+                </div>
+                <!--//col-->
+              </div>
+              <!--//row-->
             </div>
-            <!--//col-->
           </div>
-          <!--//row-->
         </div>
       </div>
       <!--//app-card-body-->

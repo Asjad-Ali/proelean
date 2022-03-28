@@ -53,13 +53,13 @@
               <!--//row-->
             </div>
             <!--//item-->
-            <div class="row">
-              <div class="col-6">
+            <div class="row ">
+              <div class="col-12 col-md-6">
                 <div  class="item py-2">
                     <div>
                       <div class="item-label mb-2"><strong>Name</strong>
                       <span class="text-danger m-0 p-0">*</span>
-                      <span class="text-danger mt-1" v-show="editUserError.name">
+                      <span class="text-danger mt-1 ml-1" v-show="editUserError.name">
                       {{ editUserError.name }}</span>
                       </div>
                         <input
@@ -95,11 +95,11 @@
 
             <!--//item-->
               </div>
-              <div class="col-6">
+              <div class="col-12 col-md-6">
                 <div class="item py-2">
                     <div>
-                      <div class="item-label mb-2"><strong>Phone</strong>
-                      <span class="text-danger mt-1" v-show="editUserError.phone">
+                      <div class="item-label mb-2"><strong>Phone </strong>
+                      <span class="text-danger mt-1 ml-1" v-show="editUserError.phone">
                       {{ editUserError.phone }}</span>
                       </div>
                           <input
@@ -134,7 +134,9 @@
                 <!--//item-->
               </div>
             </div>
-            <div class="item pt-2">
+            <div class="row ">
+              <div class="col-12">
+                <div class="item pt-2">
                 <div>
                   <div class="item-label mb-2"><strong>Description</strong></div>
                     <input
@@ -147,6 +149,8 @@
                     />
                 </div>
               <!--//row-->
+            </div>
+              </div>
             </div>
           </div>
           <!--//app-card-body-->

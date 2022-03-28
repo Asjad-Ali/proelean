@@ -9,6 +9,7 @@ export const state = {
   serviceReviews: [],
   userServices: [],
   s_Loader: '',
+  buyerRequestLoader: '',
   userSingleService: [],
   createGigData: '',
   deleteService: '',
@@ -18,12 +19,12 @@ export const state = {
   error: null,
   buyerRequests: [],
   buyerRequestsPages: [],
-  buyerHasNext: [],
   earnings: {},
 }
 
 export const getters = {
   getUserServices: state => state.userServices,
+  getBuyerRequestLoader: state => state.buyerRequestLoader,
   getSellerLoader: state => state.s_Loader,
   getServiceLoader: state => state.loadingStatus,
   getSingleService: state => state.userSingleService,
@@ -33,7 +34,6 @@ export const getters = {
   servicesHasNextPage: state => state.servicesHasNextPage,
   getBuyerRequests: state => state.buyerRequests,
   getBuyerRequestsPages: state => state.buyerRequestsPages,
-  getBuyerHasNext: state => state.buyerHasNext,
   getSellerEarning: state => state.earnings,
 }
 
@@ -77,11 +77,11 @@ export const mutations = {
   setBuyerRequestsPages(state, pages) {
     state.buyerRequestsPages = pages;
   },
-  setBuyerHasNext(state, pages) {
-    state.buyerHasNext = pages;
-  },
   setSellerLoader(state, loaderVal) {
     state.s_Loader = loaderVal
+  },
+  setBuyerRequestLoader(state, loaderVal) {
+    state.buyerRequestLoader = loaderVal
   },
 
   toggleOfferedService(state, serviceId) {
@@ -203,14 +203,15 @@ export const actions = {
   },
 
   async showBuyerRequests({ commit }, payload) {
-    console.log("Status",payload.status,"Page",payload.page)
-    commit('setSellerLoader', 1);
-    const res = await Api.get(`seller/buyer_requests?status=${payload.status}&page=${payload.page}`);
+    console.log("Status",payload.status,"Page",payload.current_page)
+    commit('setBuyerRequestLoader', 1);
+    const res = await Api.get(`seller/buyer_requests?status=${payload.status}&page=${payload.current_page}`);
     if (res.status === 200) {
       commit("setBuyerRequests", res.data);
-      commit("setBuyerRequestsPages", res.meta);
-      commit("setBuyerHasNext", res.links);
-      commit('setSellerLoader', 0);
+      commit('setCurrentPage', res.meta.current_page);
+      commit('setLinks', res.links);
+      commit('setPagination', res.meta);
+      commit('setBuyerRequestLoader', 0);
     } else {
       console.log("Buyer Requests error");
     }

@@ -45,10 +45,10 @@
                      </div>
                      </div>
                   </div>
-                  <PaginationSection v-if="$store.getters.getServices.length" />
+                  <PaginationSection v-if="$store.getters.getServices.length && $store.getters.getPages.last_page > 1" />
                </div>
             </div>
-         </div>
+         </div> 
    </section>
 
   </div>
