@@ -68,13 +68,13 @@
                 />
               </div>
               <div class="d-flex justify-content-between px-2 pt-2">
-                <h4 class="">
+                <h4 class="margin-minus">
                   {{ order.username }}
                 </h4>
                 <div class="d-flex align-items-center"> <button class="badge bg-success border border-success" v-if="order.status_id == 1"> IN PROGRESS </button> </div>
               </div>
                 <div class="d-flex flex-column">
-                  <div class=""> <i class="mdi mdi-clock"></i> {{ order.end_date }}</div> 
+                  <div class=""> <i class="mdi mdi-clock"></i> <b> Due In: </b> {{ order.end_date.substr(0,11) }}</div> 
                   <!-- <div class=""> <i class="mdi mdi-clock"></i> <b> Delivery Time: </b>  {{ order.delivery_time }}</div>  -->
                   <div class=""> <i class="mdi mdi-database"></i> <b> Price : </b> {{ order.currency }}{{ order.amount }}</div> 
                 </div>
@@ -142,6 +142,10 @@ export default {
  background: #75a925;
   bottom: 2px;
   right: 2px;
+}
+
+.margin-minus{
+   margin-left: -6px;
 }
 
 </style>
