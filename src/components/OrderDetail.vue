@@ -304,9 +304,11 @@
 
 
                             <!-----------  Cancel Request of Dispute  ----------->
+          <!-- if Seller -->
           <button v-if="(order.status_id == 5 && !$store.getters.isBuyerMode)" type="button" class="btn btn-success mt-2" @click="seller_cancel_request()">
             Cancel Request
           </button>
+          <!-- if Buyer -->
           <button v-if="(order.status_id == 5 && $store.getters.isBuyerMode)" type="button" class="btn btn-success mt-2" @click="buyer_cancel_request()">
             Cancel Request
           </button>
@@ -352,7 +354,6 @@ export default {
       orderRevision,
       order_revision,
       orderCancel,
-      orderCancelBuyer,
       buyer_cancel_request,
       seller_cancel_request,
       orderLate,
@@ -383,7 +384,6 @@ export default {
       orderRevision,
       order_revision,
       orderCancel,
-      orderCancelBuyer,
       buyer_cancel_request,
       seller_cancel_request,
       orderLate,
