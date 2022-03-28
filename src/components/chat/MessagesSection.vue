@@ -2,7 +2,12 @@
   <div class="col-lg-7 col-xl-8 px-0">
     <div class="p-3 d-flex align-items-center border-bottom osahan-post-header">
       <div class="font-weight-bold mr-1 overflow-hidden">
-        <div class="text-truncate">
+        <div class="text-truncate d-flex align-items-center">
+          <span
+            @click="$emit('showConversation', true)"
+            class="d-block d-lg-none"
+            ><i class="mdi mdi-arrow-left mr-2"></i
+          ></span>
           {{ otherMember ? otherMember.name : "" }}
         </div>
         <!-- <div class="small text-truncate overflow-hidden text-black-50">
@@ -11,7 +16,7 @@
       </div>
     </div>
     <div
-    id="messages-section"
+      id="messages-section"
       class="osahan-chat-box p-3 border-top border-bottom bg-light chat-hieght"
       @scroll="handleScroll"
     >
@@ -57,7 +62,7 @@ export default {
 
     const handleScroll = (e) => {
       if (e.target.scrollTop == 0) {
-        store.dispatch('reversePaginate');
+        store.dispatch("reversePaginate");
       }
     };
     return {
@@ -73,9 +78,9 @@ export default {
   height: 65vh;
 }
 
-.scroll-disabled{
-   position: fixed;
-    margin-top: 0;// override by JS to use acc to curr $(window).scrollTop()
-    width: 100%;
+.scroll-disabled {
+  position: fixed;
+  margin-top: 0; // override by JS to use acc to curr $(window).scrollTop()
+  width: 100%;
 }
 </style>
