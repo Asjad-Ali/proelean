@@ -4,7 +4,7 @@
   <!-- <CountDown /> -->
     <AppCard class="marginBottom" />
     
-    <ActiveOrderCard class="margin" :orders="orders"/>
+    <ActiveOrderCard v-if="orders.length>0" class="margin" :orders="orders"/>
     <AnalyticBoxes />
     <Charts v-if="$store.getters.getSellerEarning.analytics" />
     <!-- <StatsSection /> -->

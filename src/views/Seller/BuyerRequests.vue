@@ -45,14 +45,18 @@
                 <ul class="notification-meta list-inline mb-0">
                   <li class="list-inline-item"> <i class="mdi mdi-clock"></i> {{ $filters.timeAgo(request.created_at) }}</li>
                   <li class="list-inline-item">|</li>
-                  <li class="list-inline-item"> <i class="mdi mdi-file"></i> Document: No Attachment</li>
+                  <li class="list-inline-item"> <i class="mdi mdi-file"></i> <b> Document: </b> No Attachment</li>
+                  <div class="d-flex flex-column">
+                    <li class="list-inline-item d-sm-none"><b> <i class="mdi mdi-clock"></i> Duration : </b> {{ request.delivery_time }}</li>
+                    <li class="list-inline-item d-sm-none"><b><i class="mdi mdi-database"></i> budget : </b>€{{ request.budget }}</li>
+                  </div>
                 </ul>
               </div>
               <!--//col-->
             </div>
             <!--//row-->
             <div>
-              <ul class="notification-meta list-inline mb-0">
+              <ul class="notification-meta list-inline mb-0 d-none d-sm-block ">
                 <li class="list-inline-item"><b> <i class="mdi mdi-clock"></i> Duration : </b> {{ request.delivery_time }}</li>
                 <li class="list-inline-item">|</li>
                 <li class="list-inline-item"><b><i class="mdi mdi-database"></i> budget : </b>€{{ request.budget }}</li>
@@ -65,8 +69,9 @@
             </div>
           </div>
           <!--//app-card-body-->
-          <div class="app-card-footer px-4 py-3 text-center">
-            <button  style="cursor: default;" type="button"  class="btn app-btn-secondary mx-2 my-1">
+          <!-- For Web Screen & Tablet -->
+          <div class="app-card-footer px-4 py-3 text-center d-none d-sm-block">
+            <button style="cursor: default;" type="button"  class="btn app-btn-secondary mx-2 my-1">
               {{ request.total_offers }} Offers Sent
             </button>
             <button
@@ -88,6 +93,34 @@
               {{ getBtnStatus == request.id ? "Loading..." : "Cancel Offer" }}
             </button>
           </div>
+          <!-- Web Screen & Tablet Section END -->
+
+          <!----- For Mobile Screen ----->
+          <div class="app-card-footer px-4 py-3 text-center d-flex flex-column align-items-center d-sm-none">
+            <button style="cursor: default;" type="button"  class="btn app-btn-secondary mx-2 my-1 w-100">
+              {{ request.total_offers }} Offers Sent
+            </button>
+            <button
+              type="button"
+              class="btn app-btn-primary mx-2 my-1 w-100"
+              :style="{ 'pointer-events': request.is_applied ? 'none' : '' }"
+              data-toggle="modal"
+              data-target="#sendOfferModal"
+              @click.prevent="defineOffer(request.id)"
+            >
+              {{ request.is_applied ? "Applied" : "Send Offer" }}
+            </button>
+            <button
+              type="button"
+              :disabled="getBtnStatus == request.id"
+              class="btn btn-success mx-2 my-1 w-100"
+              @click="deleteJob(request.id)"
+            >
+              {{ getBtnStatus == request.id ? "Loading..." : "Cancel Offer" }}
+            </button>
+          </div>
+          <!-- Mobile Screen Section END -->
+
           <!--//app-card-footer-->
          </div>
           <div class="text-center mt-4" >

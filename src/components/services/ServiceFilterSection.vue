@@ -16,13 +16,14 @@
                     </a>
                     </h6>
                 </div>
-                <div id="collapsetwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div id="collapsetwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                     <div class="filters-card-body card-shop-filters">
                     <div class="custom-control custom-radio" 
                         v-for="category in $store.getters.getCategories" :key="category.id"
                         >
                         <input type="radio" class="custom-control-input" name="customRadio" :id="category.id" 
                             @change="handleCategoriesFilter(category.slug)"
+                            :checked="category.slug===$route.params.slug"
                             >
                         <label class="custom-control-label" :for="category.id">{{ category.title }} </label>
                     </div>

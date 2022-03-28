@@ -14,7 +14,7 @@
               align-items-center
             "
           >
-            <!-- <div class="col-8">
+            <div class="col-8">
               <form class="table-search-form gx-1 align-items-center">
                 <div class="col-auto">
                   <input
@@ -27,7 +27,7 @@
                   />
                 </div>
               </form>
-            </div> -->
+            </div>
             <!-- //col -->
           </div>
           <!--//row-->
@@ -149,7 +149,7 @@
                       <th class="cell text-center bold">User</th>
                       <th class="cell bold">Order Description</th>
                       <th class="cell bold">Duration</th>
-                      <th class="cell text-center bold">Post Date</th>
+                      <th class="cell text-center bold">Delivery Time</th>
                       <th class="cell text-center bold">Budget</th>
                       <th class="cell text-center bold">Status</th>
                       <th class="cell"></th>
@@ -176,7 +176,7 @@
                         }}</span>
                       </td>
                       <td class="cell">
-                        <span class="truncate">{{ order.created_at }}</span>
+                        <span class="truncate">{{ order.end_date }}</span>
                       </td>
                       <td class="text-center cell">
                         <span class="truncate">{{ order.delivery_time }}</span>

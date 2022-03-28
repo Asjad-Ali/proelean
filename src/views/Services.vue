@@ -22,7 +22,7 @@
                               </select>
                            </div> -->
                         </div>
-                        <h3 v-if="$route.params.slug">Services In {{ $route.params.slug }}</h3>
+                        <h3 v-if="$route.params.slug">Services In {{ $route.params.slug || category}}</h3>
                      </div>
                   </div>
                   <div class="row">
@@ -41,7 +41,7 @@
                         v-if="!$store.getters.getServices.length && $store.getters.getLoadingStatus==='COMPLETED'" 
                      >
                      <div class="d-flex justify-content-center align-item-center">
-                        No service found against {{ $route.params.slug }}
+                        No service found against {{ $route.params.slug  || category }}
                      </div>
                      </div>
                   </div>
@@ -75,16 +75,19 @@ export default {
    setup() {
       const store = useStore();
       const route = useRoute();
+      const params = new URLSearchParams(window.location.search)
+      const category = params.has('category') ? params.get('category') : '';
 
       onBeforeRouteUpdate((to, from) => {
          if(to.params.slug !== from.params.slug) {
-            store.dispatch('searchServices',`search?q=${ to.params.slug ? to.params.slug : ''}`)
+            store.dispatch('searchServices',`search?q=${ to.params.slug ? to.params.slug : ''}&category=${category}`)
             store.dispatch('setPage',1);
          }
       })
-      onMounted(store.dispatch('searchServices',`search?q=${ route.params.slug ? route.params.slug : ''}`))
+      onMounted(store.dispatch('searchServices',`search?q=${ route.params.slug ? route.params.slug : ''}&category=${category}`))
       return {
-         isNextPage: computed(()=>store.getters.getNextPage)
+         isNextPage: computed(()=>store.getters.getNextPage),
+         category
       }
    }
 }

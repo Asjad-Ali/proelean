@@ -14,9 +14,15 @@
           <h5 class="modal-title" id="exampleModalLongTitle">Custom Offer</h5>
         </div>
         <div class="modal-body text-center">
+          <div class="text-left font">
+            Choose a service<span class="text-danger">*</span>
+            <span class="ml-2 text-danger">{{
+              payloadErrorBag.serviceId
+            }}</span>
+          </div>
           <select
             id="deliveryTime"
-            class="form-control"
+            class="form-control mb-2"
             name="delivery_time"
             v-model="payload.serviceId"
             @change="handleSelectedService"
@@ -31,7 +37,13 @@
               {{ service.s_description }}
             </option>
           </select>
-          <div class="text-left font">Describe your offer</div>
+          <div class="text-left font">
+            Describe your offer<span class="text-danger">*</span>
+            <span class="ml-2 text-danger">{{
+              payloadErrorBag.description
+            }}</span>
+          </div>
+
           <textarea
             type="text"
             class="form-control"
@@ -41,7 +53,12 @@
             placeholder="Describe your offer"
             required
           />
-          <div class="text-left font mt-2">Total Price</div>
+          <div class="text-left font mt-2">
+            Total Price<span class="text-danger">*</span>
+            <span class="ml-2 text-danger">{{
+              payloadErrorBag.totalOffer
+            }}</span>
+          </div>
           <input
             type="number"
             class="form-control"
@@ -51,7 +68,12 @@
             placeholder="Total Offer(EUR)"
             required
           />
-          <div class="text-left font mt-2">Delivery Time</div>
+          <div class="text-left font mt-2">
+            Delivery Time<span class="text-danger">*</span>
+            <span class="ml-2 text-danger">{{
+              payloadErrorBag.deliveryDays
+            }}</span>
+          </div>
           <select
             id="deliveryTime"
             class="form-control"
@@ -69,7 +91,7 @@
             </option>
           </select>
 
-                  <div class="text-left font mt-2">Revisions</div>
+          <div class="text-left font mt-2">Revisions</div>
           <select
             id="deliveryTime"
             class="form-control"
@@ -86,7 +108,6 @@
               {{ revision }}
             </option>
           </select>
-          
         </div>
 
         <div class="modal-footer d-flex justify-content-center">
@@ -95,9 +116,10 @@
           </button>
           <button
             type="button"
-            class="btn btn-danger"
+            class="btn btn-success"
             data-dismiss="modal"
             @click.prevent="sendOffer"
+            :disabled="disable"
           >
             Send
           </button>
@@ -110,6 +132,7 @@
 <script>
 import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
+import { computed, watch } from "@vue/runtime-core";
 export default {
   setup() {
     const store = useStore();
@@ -126,39 +149,69 @@ export default {
       totalOffer: "",
     });
 
+    const payloadErrorBag = ref({
+      serviceId: null,
+      deliveryDays: null,
+      description: null,
+      totalOffer: null,
+    });
+
+    watch(payload.value, (value) => {
+      if (!value.serviceId) {
+        payloadErrorBag.value.serviceId = "Service is required";
+      } else {
+        payloadErrorBag.value.serviceId = null;
+      }
+      if (!value.deliveryDays) {
+        payloadErrorBag.value.deliveryDays = "Delivery time is required";
+      } else {
+        payloadErrorBag.value.deliveryDays = null;
+      }
+      if (!value.description) {
+        payloadErrorBag.value.description = "Description is required";
+      } else {
+        payloadErrorBag.value.description = null;
+      }
+      if (!value.totalOffer) {
+        payloadErrorBag.value.totalOffer = "Price is required";
+      } else {
+        payloadErrorBag.value.totalOffer = null;
+      }
+    });
+
     const handleSelectedService = () => {
-      console.log(payload.value.serviceId)
+      console.log(payload.value.serviceId);
       let selectedService = store.getters.getUserServices.find(
         (service) => service.id === payload.value.serviceId
       );
-      console.log(payload.value)
+      console.log(payload.value);
       payload.value.serviceId = selectedService.id;
       payload.value.serviceTitle = selectedService.s_description;
       payload.value.offerSenderId = selectedService.service_user.id;
     };
     const sendOffer = () => {
-      store.dispatch("sendCustomOfferToBuyerOnChat", payload.value).then(()=>{
+      store.dispatch("sendCustomOfferToBuyerOnChat", payload.value).then(() => {
         resetFields();
       });
-
     };
 
-    function resetFields()
-    {
-      payload.value.deliveryDays = ""
-      payload.value.description = ""
-      payload.value.offerSenderId = ""
-      payload.value.revisions = ""
-      payload.value.serviceId = ""
-      payload.value.serviceTitle = ""
-      payload.value.status = 0
-      payload.value.totalOffer = ""
+    function resetFields() {
+      payload.value.deliveryDays = "";
+      payload.value.description = "";
+      payload.value.offerSenderId = "";
+      payload.value.revisions = "";
+      payload.value.serviceId = "";
+      payload.value.serviceTitle = "";
+      payload.value.status = 0;
+      payload.value.totalOffer = "";
     }
 
     return {
       payload,
+      payloadErrorBag,
       sendOffer,
       handleSelectedService,
+      disable: computed(() => Object.values(payload.value).includes(null || "") ? true : false),
     };
   },
 };

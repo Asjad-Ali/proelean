@@ -1,5 +1,6 @@
 <template>
-<div class="app-card app-card-orders-table shadow-sm my-3" >
+<!-- For Web Screen -->
+<div class="app-card app-card-orders-table shadow-sm d-none d-sm-block my-3" >
    <div class="app-card-body" >
       <div class="table-responsive">
          <table class="table app-table-hover mb-0 p-1 text-left" >
@@ -46,6 +47,55 @@
    </div>
    <!--//app-card-body-->
 </div>
+<!-- For Web Screen END-->
+
+
+<!-- For Mobile Screen (CARD) -->
+      <div class="d-sm-none">
+          <div
+            v-for="order in orders"
+            :key="order.id"
+            class="card d-md-none shadow-sm border-primary"
+          >
+          <div class="app-card-header px-2 py-2">
+            <div class="g-3 align-items-center">
+              <div class="col-12 text-center">
+                <img
+                  class="img-fluid rounded-circle mr-2"
+                  style="width: 55px; height: 55px; object-fit: cover"
+                  :src="`${imgURL}/${order.image}`"
+                  alt=""
+                />
+              </div>
+              <div class="d-flex justify-content-between px-2 pt-2">
+                <h4 class="">
+                  {{ order.username }}
+                </h4>
+                <div class="d-flex align-items-center"> <button class="badge bg-success border border-success" v-if="order.status_id == 1"> IN PROGRESS </button> </div>
+              </div>
+                <div class="d-flex flex-column">
+                  <div class=""> <i class="mdi mdi-clock"></i> {{ order.end_date }}</div> 
+                  <!-- <div class=""> <i class="mdi mdi-clock"></i> <b> Delivery Time: </b>  {{ order.delivery_time }}</div>  -->
+                  <div class=""> <i class="mdi mdi-database"></i> <b> Price : </b> {{ order.currency }}{{ order.amount }}</div> 
+                </div>
+              </div>
+          </div>
+          <!--//app-card-header-->
+
+          <div class="app-card-body ml-2 mr-2 mb-3">
+              {{ order.description.substr(0,50)}}{{order.description.length > 50 ? '..' : ''}}
+          </div>
+          <div class="app-card-footer">
+               <div class="mx-3">
+                  <router-link :to="{name:'OrderDetails', params:order}"
+                   class="btn btn-light mb-3 w-100">
+                   View 
+                  </router-link>
+               </div>
+          </div>
+         </div>
+      </div>
+<!-- For Mobile Screen END -->
 </template>
 
 <script>
