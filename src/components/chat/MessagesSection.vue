@@ -30,6 +30,66 @@
             new Date($store.getters.getChatMessages[index - 1].sentAt).getDate()
         "
       />
+      <!-- Gig Refrence -->
+      <!-- <div class="container">
+        <p class="m-0 text-muted p-1">This Service is related to:</p>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="offer-img-holder">
+                <img
+                  src="https://api.dex.proelean.com/uploads/SellerMedia/123416456141564.jpg"
+                  alt=""
+                  class="img-fluid"
+                />
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">
+                  I will design front end web development using react,
+                  bootstrap, CSS
+                </h5>
+                <p class="card-text">
+                  I will design front end web development using react,
+                  bootstrap, CSS
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Gig Refrence 2 -->
+      <div class="conatainer">
+        <p class="m-0 text-muted p-1">This Service is related to:</p>
+        <div class="row d-flex justify-content-start align-items-center">
+          <div class="col-md-6 col-12">
+            <div class="card shadow-none p-3">
+              <div class="row">
+                <div class="col-md-6 col-12">
+                  <div class="offer-img-holder">
+                    <img
+                      src="https://api.dex.proelean.com/uploads/SellerMedia/123416456141564.jpg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6 col-12 d-flex align-items-center">
+                  <div>
+                    <h6 class="card-title">Web Developer</h6>
+                    <p class="card-text">
+                      <i class="mdi mdi-account"> </i>
+                      Asif Ali
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <WriteAMessage />
@@ -78,9 +138,23 @@ export default {
   height: 65vh;
 }
 
+.offer-img-holder {
+  height: auto;
+  max-width: 200px;
+}
+.offer-img-holder img {
+  height: auto;
+  width: 100%;
+}
 .scroll-disabled {
   position: fixed;
   margin-top: 0; // override by JS to use acc to curr $(window).scrollTop()
   width: 100%;
+}
+@media (max-width: 767.98px) {
+  .offer-img-holder {
+    height: auto;
+    max-width: 100%;
+  }
 }
 </style>
