@@ -37,11 +37,11 @@
               </div>
               <div class="mr-3">
                 <div class=" font-weight-bold text-truncate">{{ notification.name }}</div>
-                <div class="text-muted">{{ notification.body }}</div>
+                <div style="word-break: break-word;" class="text-muted">{{ notification.body }}</div>
               </div>
               <span class="ml-auto my-auto">
                 <div class="d-flex">
-                  <div class="text-right text-muted ml-2">
+                  <div style="position:sticky" class="text-right text-muted ml-2">
                     {{ $filters.timeAgo(notification.created_at) }}
                   </div>
                   <!-- <div>

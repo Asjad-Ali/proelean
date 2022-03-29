@@ -94,9 +94,9 @@
                   <div>
                     <div class="item-label mb-2">
                       <strong>Name</strong>
-                      <span class="text-danger m-0 p-0">*</span>
+                      <span class="text-danger ">*</span>
                       <span
-                        class="text-danger mt-1"
+                        class="text-danger mt-1 ml-1"
                         v-show="editUserError.name"
                       >
                         {{ editUserError.name }}</span
@@ -141,7 +141,7 @@
                     <div class="item-label mb-2">
                       <strong>Phone</strong>
                       <span
-                        class="text-danger mt-1"
+                        class="text-danger mt-1 ml-1"
                         v-show="editUserError.phone"
                       >
                         {{ editUserError.phone }}</span
@@ -182,7 +182,7 @@
                 <div class="item-label mb-2"><strong>Description</strong></div>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control mb-4"
                   id="description"
                   v-model="editUser.description"
                   placeholder="Enter your Description"
@@ -196,9 +196,11 @@
           </div>
           <!--//app-card-body-->
           <div class="app-card-body p-4 w-100 text-center">
-            <a class="btn app-btn-secondary mr-2" @click="update">{{
+            <button class="btn app-btn-secondary mr-2" @click="update"
+            :disabled="!Object.values(editUserError).every(value => !value)"
+            >{{
               btnStatus === 2 ? "Loading..." : "Update"
-            }}</a>
+            }}</button>
           </div>
           <!--//app-card-footer-->
         </div>

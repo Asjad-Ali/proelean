@@ -631,12 +631,12 @@ export default {
         store.dispatch("getNotification");
       }
       // tooltip
-      const tooltipTriggerList = [].slice.call(
-        document.querySelectorAll('[data-bs-toggle="tooltip"]')
-      );
-      tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new window.bootstrap.Tooltip(tooltipTriggerEl);
-      });
+      // const tooltipTriggerList = [].slice.call(
+      //   document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      // );
+      // tooltipTriggerList.map(function (tooltipTriggerEl) {
+      //   return new window.bootstrap.Tooltip(tooltipTriggerEl);
+      // });
     });
 
     const handleSearch = () => {
