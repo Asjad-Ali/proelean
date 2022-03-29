@@ -2,27 +2,27 @@
 <nav class="nav">
 
       <!------------------------------    Buyer Side Nav     ------------------------------->
-  <router-link v-if="$store.getters.isBuyerMode" to="/" class="nav__link"  active-link="nav__link--active">
+  <router-link  to="/" class="nav__link"  active-link="nav__link--active">
     <i class="material-icons nav__icon">home</i>
     <span class="nav__text">Home</span>
   </router-link>
 
-  <router-link v-if="$store.getters.isBuyerMode" to="/chat" class="nav__link" active-link="nav__link--active">
+  <router-link  to="/chat" class="nav__link" active-link="nav__link--active">
     <i class="material-icons nav__icon">mail</i>
     <span class="nav__text">Inbox</span>
   </router-link>
 
-  <router-link v-if="$store.getters.isBuyerMode" to="/gigs" class="nav__link" active-link="nav__link--active">
+  <router-link  to="/gigs" class="nav__link" active-link="nav__link--active">
     <i class="material-icons nav__icon">search</i>
     <span class="nav__text">Search</span>
   </router-link>
 
-  <router-link v-if="$store.getters.isBuyerMode" to="/buyer/manage_order" class="nav__link" active-link="nav__link--active">
+  <router-link  to="/buyer/manage_order" class="nav__link" active-link="nav__link--active">
     <i class="material-icons nav__icon">shopping_bag</i>
     <span class="nav__text">Orders</span>
   </router-link>
 
-  <router-link v-if="$store.getters.isBuyerMode" to="/buyer/favourite_services" class="nav__link" active-link="nav__link--active">
+  <router-link  to="/buyer/favourite_services" class="nav__link" active-link="nav__link--active">
     <i class="mdi mdi-heart"></i>
     <span class="nav__text">Services</span>
   </router-link>
