@@ -1,6 +1,8 @@
 import { computed, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import compressImage from '@/composables/useImageCompression'
+
 
 export default function useCreateService() {
 
@@ -46,7 +48,7 @@ export default function useCreateService() {
   });
 
   watch(updateGig.value, (current) => {
-    console.log(current)
+    console.log(current.s_description)
   })
 
   const updateService = () => {
@@ -71,10 +73,21 @@ export default function useCreateService() {
   const getBanners = computed(() =>
   updateGig.value.service_media ? [...bannersBase64.value, ...updateGig.value.service_media] : bannersBase64.value);
 
-  const selectThumbnail = (e) => {
+  const selectThumbnail = async (e) => {
     const files = e.target.files;
     for (let i = 0; i < files.length; i++)
-    getUpdateGig.value.banner.push(files[i]);
+    {
+      if(!files[i].type.includes('image')){
+        alert(files[i].type + ' extension is not allowed');
+        return;
+      }
+
+      const image=await compressImage(files[i]);
+      getUpdateGig.value.banner.push(image);
+    }
+
+
+
     document.querySelector('#bannerInput').value = '';
     bannersBase64.value = [];
     getUpdateGig.value.banner.forEach( img => {
