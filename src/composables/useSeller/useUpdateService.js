@@ -32,7 +32,6 @@ export default function useCreateService() {
     additional_info:''
   });
 
-
   const getUpdateGigError = ref({
     s_description: "",
     description: "",
@@ -46,10 +45,6 @@ export default function useCreateService() {
     revision:'',
     additional_info:''
   });
-
-  watch(updateGig.value, (current) => {
-    console.log(current.s_description)
-  })
 
   const updateService = () => {
     getUpdateGig.value.sub_category_id = document.getElementById("subCategory").value
@@ -121,8 +116,9 @@ export default function useCreateService() {
     store.dispatch("loadSubCategories", data.value.category_id);
   };
 
-
-
+  watch(updateGig.value,(current) => {
+    console.log(current.s_description)
+  })
 
   return {
     data,
