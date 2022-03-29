@@ -1,29 +1,56 @@
 <template>
   <!--selected media preview  -->
-  <div class="row p-3 d-flex justify-content-start" id="media-container">
-    <table class="table" v-if="chatMedia.media.type">
-      <tr>
-        <td class="d-flex flex-row justify-content-between">
-          <i
-            class="mdi mdi-image"
-            v-if="chatMedia.media.type.includes('image')"
-          >
-            <span class="ml-2">{{ chatMedia.media.name }}</span></i
-          >
-        </td>
-        <td>
-          <p>{{ chatMedia.media.size }}</p>
-        </td>
-        <td>
-          <p id="upload-progress"></p>
-        </td>
-        <td>
-          <a href="#" @click="removeMedia($event, chatMedia.media.name)"
-            ><i class="mdi mdi-close-box" style="font-size: 16px"></i
-          ></a>
-        </td>
-      </tr>
-    </table>
+  <div class="container">
+    <div
+      class="
+        row
+        shadow-sm
+        d-flex
+        justify-content-between
+        align-items-center
+        px-3
+        py-2
+        img-attachment-bg
+      "
+      v-if="chatMedia.media.type"
+    >
+      <div>
+        <i class="mdi mdi-image" v-if="chatMedia.media.type.includes('image')">
+          <span class="ml-2">{{ chatMedia.media.name }}</span></i
+        >
+      </div>
+      <div>
+        <p class="m-0">{{ chatMedia.media.size }}</p>
+      </div>
+      <div>
+        <a href="#" @click="removeMedia($event, chatMedia.media.name)"
+          ><i class="mdi mdi-close-box"></i
+        ></a>
+      </div>
+    </div>
+
+    <!-- <div class="row p-3" id="media-container">
+      <table class="table m-0" v-if="chatMedia.media.type">
+        <tr>
+          <td class="d-flex flex-row justify-content-between">
+            <i class="mdi mdi-image" v-if="chatMedia.media.type.includes('image')">
+              <span class="ml-2">{{ chatMedia.media.name }}</span></i >
+          </td>
+          <td>
+            <p>{{ chatMedia.media.size }}</p>
+          </td>
+          <td>
+            <p id="upload-progress"></p>
+          </td>
+          <td>
+            <a href="#" @click="removeMedia($event, chatMedia.media.name)"
+              ><i class="mdi mdi-close-box"></i
+            ></a>
+          </td>
+        </tr>
+      </table>
+ 
+    </div> -->
   </div>
   <!-- WRITE A MESSAGE -->
   <div class="w-100 border-top border-bottom position-relative">
@@ -136,11 +163,12 @@ export default {
       if (chatMedia.value.media) {
         uploadAttachment(chatMedia, newMessage.value);
       } else {
-        if(!newMessage.value.text) {return;}
+        if (!newMessage.value.text) {
+          return;
+        }
         store.dispatch("sendMessage", newMessage.value);
         newMessage.value.text = "";
       }
-
     };
 
     return {
@@ -173,6 +201,13 @@ export default {
   min-height: 100px;
 }
 
+.img-attachment-bg {
+  background: azure;
+}
+.mdi-close-box {
+  color: red;
+  font-size: 20px;
+}
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 991.98px) {
   .send-icon {
