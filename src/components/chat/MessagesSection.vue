@@ -78,7 +78,10 @@
                 </div>
                 <div class="col-md-6 col-12 d-flex align-items-center">
                   <div>
-                    <h6 class="card-title">Web Developer</h6>
+                    <h6 class="card-title">
+                      I will design front end web development using react,
+                      bootstrap, CSS
+                    </h6>
                     <p class="card-text">
                       <i class="mdi mdi-account"> </i>
                       Asif Ali
