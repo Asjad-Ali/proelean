@@ -89,7 +89,7 @@
     </div>
   </div>
 
-  <SendOffer v-if="showOfferModal" />
+  <SendOffer />
 </template>
 
 <script>
@@ -134,7 +134,7 @@ export default {
 
     const sendMsg = () => {
       if (chatMedia.value.media) {
-        uploadAttachment(chatMedia.value.media, newMessage.value);
+        uploadAttachment(chatMedia, newMessage.value);
       } else {
         if(!newMessage.value.text) {return;}
         store.dispatch("sendMessage", newMessage.value);

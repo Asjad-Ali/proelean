@@ -37,24 +37,14 @@
         "
         v-if="!message.messageOffer"
       >
-        <img
-          :src="message.attachment"
-          alt=""
-          v-if="message.attachment"
-          style="
-            width: 20%;
-            height: 20%;
-            object-fit: cover;
-            border: 1px solid #dde;
-            border-radius: 10px;
-            padding: 10px;
-          "
-          class="img-fluid"
-        />
         {{ message.message }}
-        <!-- <a href="#">iamosahan@gmail.com</a> -->
       </p>
-      <div class="row" v-else>
+      <div v-if="message.attachment" class="img-holder">
+        <img :src="message.attachment" class="img-fluid" />
+      </div>
+
+      <!-- <a href="#">iamosahan@gmail.com</a> -->
+      <div class="row" v-if="message.messageOffer">
         <div class="col-md-10">
           <div class="card shadow-none">
             <div class="card-body">
@@ -217,6 +207,10 @@ export default {
   font-size: 17px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e7e9ed;
+}
+.img-holder {
+  width: 100%;
+  height: auto;
 }
 
 .seller-app .btn {
