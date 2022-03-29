@@ -59,40 +59,6 @@
           </div>
         </div>
       </div> -->
-
-      <!-- Gig Refrence 2 -->
-      <div class="conatainer">
-        <p class="m-0 text-muted p-1">This Service is related to:</p>
-        <div class="row d-flex justify-content-start align-items-center">
-          <div class="col-md-6 col-12">
-            <div class="card shadow-none p-3">
-              <div class="row">
-                <div class="col-md-6 col-12">
-                  <div class="offer-img-holder">
-                    <img
-                      src="https://api.dex.proelean.com/uploads/SellerMedia/123416456141564.jpg"
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-6 col-12 d-flex align-items-center">
-                  <div>
-                    <h6 class="card-title">
-                      I will design front end web development using react,
-                      bootstrap, CSS
-                    </h6>
-                    <p class="card-text">
-                      <i class="mdi mdi-account"> </i>
-                      Asif Ali
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <WriteAMessage />
@@ -136,28 +102,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.chat-hieght {
-  height: 65vh;
-}
-
-.offer-img-holder {
-  height: auto;
-  max-width: 200px;
-}
-.offer-img-holder img {
-  height: auto;
-  width: 100%;
-}
-.scroll-disabled {
-  position: fixed;
-  margin-top: 0; // override by JS to use acc to curr $(window).scrollTop()
-  width: 100%;
-}
-@media (max-width: 767.98px) {
-  .offer-img-holder {
-    height: auto;
-    max-width: 100%;
-  }
-}
-</style>

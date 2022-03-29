@@ -84,12 +84,6 @@ import { useRoute } from "vue-router";
 import { ref } from "vue";
 export default {
   components: { ConversationList, MessagesSection },
-  //  props: {
-  //    service: {
-  //       type: Object,
-  //       required: true,
-  //    }
-  // },
   setup() {
     const store = useStore();
     const route = useRoute();
@@ -98,6 +92,9 @@ export default {
 
     onBeforeMount(() => {
       store.dispatch("lookForConversationChanges");
+      if (route.query.gig) {
+        store.dispatch("getRefererService", route.query.gig );
+      }
     });
     onMounted(() => {
       store.commit("setNewConversationStatus", true);
