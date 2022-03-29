@@ -222,7 +222,7 @@
                   v-model="sendRequest.delivery_time"
                   required
                 >
-                  <option selected>Select day</option>
+                  <option selected disabled value="">Select day</option>
                   <option
                     v-for="day in $store.getters.getDeliveryDays"
                     :value="day"

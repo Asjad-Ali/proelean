@@ -22,15 +22,15 @@
     <span class="nav__text">Orders</span>
   </router-link>
 
-  <router-link v-if="$store.getters.isBuyerMode" to="/buyer-account" class="nav__link" active-link="nav__link--active">
-    <i class="material-icons nav__icon">person</i>
-    <span class="nav__text">Profile</span>
+  <router-link v-if="$store.getters.isBuyerMode" to="/buyer/favourite_services" class="nav__link" active-link="nav__link--active">
+    <i class="mdi mdi-heart"></i>
+    <span class="nav__text">Services</span>
   </router-link>
 
 
 
       <!------------------------------    Seller Side Nav     ----------------------------->
-    <router-link v-if="!$store.getters.isBuyerMode"  to="/dashboard" class="nav__link"  active-link="nav__link--active">
+    <!-- <router-link v-if="!$store.getters.isBuyerMode"  to="/dashboard" class="nav__link"  active-link="nav__link--active">
     <i class="material-icons nav__icon">home</i>
     <span class="nav__text">Dashboard</span>
   </router-link>
@@ -48,7 +48,7 @@
   <router-link v-if="!$store.getters.isBuyerMode"  to="/dashboard/account" class="nav__link" active-link="nav__link--active">
     <i class="material-icons nav__icon">person</i>
     <span class="nav__text">Profile</span>
-  </router-link>
+  </router-link> -->
 
 
   

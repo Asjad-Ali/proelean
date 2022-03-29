@@ -9,6 +9,7 @@ export const state = {
     deliveryDays: [],
     revisions: [],
     error: null,
+    buyerLoader:''
   }
 
 export const  mutations = {
@@ -26,11 +27,15 @@ export const  mutations = {
   },
   setError(state,error){
     state.error=error;
+  },
+  setBuyerOrderDetailLoader(state,loaderValue){
+    state.buyerLoader=loaderValue;
   }
 }
 
 export const getters = {
   getCountries: state => state.countries,
+  getBuyerOrderDetailLoader: state => state.buyerLoader,
   getLanguages: state => state.languages,
   getRevisions: state => state.revisions,
   getDeliveryDays: state => state.deliveryDays,
@@ -51,6 +56,7 @@ export const  actions = {
     },
 
     async getCountriesLanguage({ commit, getters }) {
+      commit("setBuyerOrderDetailLoader",1)
       if(!getters.getLanguages.length){
         const response = await Api.get('countries&categories');
         if(response.status === 200) {
@@ -60,6 +66,7 @@ export const  actions = {
           commit('setRevisions',response.data.revisions);
         }
       }
+      commit("setBuyerOrderDetailLoader",0)
     },
 
     async handleBecomeSeller({ commit }, payload) {
