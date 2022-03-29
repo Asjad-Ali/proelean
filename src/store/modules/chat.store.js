@@ -224,7 +224,7 @@ export const actions = {
             attachment: payload.attachment,
             attachmentType: payload.attachmentType,
             sentAt: new Date(new Date().toISOString()).getTime(),
-            refersGig: payload.refererGig,
+            refersGig: getters.getReferrerGig || false,
             senderId: getters.getAuthUser.id,
             messageOffer: null,
             messageGig: getters.getReferrerGig,
@@ -398,6 +398,22 @@ export const actions = {
 
         dispatch("updateConversation", message);
         commit('setWithdrawLoadingStatus', 'COMPLETED');
+    },
+
+    async getRefererService({commit}, serviceID) {
+        console.log(serviceID)
+        const res = await Api.post(`referer_service/${serviceID}`);
+        if (res.status === 200) {
+            const payload = {
+                gigId: res.data.id,
+                gigTitle: res.data.s_description,
+                gigImage: res.data.service_media[0].media,
+                gigUsername: res.data.service_user.username
+            }
+          commit("setReferrerGig", payload);
+        } else {
+          console.log(res);
+        }
     }
 };
 

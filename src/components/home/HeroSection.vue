@@ -48,7 +48,7 @@
                       "
                       id="categories"
                     >
-                      <option value="" disabled selected>All</option>
+                      <option value="all" selected>All</option>
                       <option
                         v-for="category in $store.getters.getCategories"
                         :value="category.slug"
@@ -116,21 +116,18 @@ export default {
     }
 
     const handleSearch = () => {
-
       keywords.value = slugify(keywords.value);
+      url.value = "/gigs";
 
-      if(keywords.value && categorySlug.value) {
-        url.value = `/gigs/${keywords.value}?category=${categorySlug.value}`;
-      } else if(!keywords.value || categorySlug.value) {
-        url.value = `/gigs?category=${categorySlug.value}`;
-      } else if(keywords.value) {
-        url.value = `/gigs/${keywords.value}`;
+      if (keywords.value) {
+        url.value = url.value.concat("/" + keywords.value);
+      } else if (categorySlug.value != null) {
+        url.value = url.value.concat("?category=" + categorySlug.value);
       } else {
-        url.value = '/gigs';
+        url.value = "/gigs";
       }
 
       router.push(url.value);
-      
     };
     // /* Encode string to slug */
     /* eslint-disable */

@@ -53,7 +53,7 @@
           </router-link>
 
           <router-link
-            :to="{ name: 'Chat', params: { id: `${service.service_user.id}` } }"
+            :to="{ name: 'Chat', params: { id: `${service.service_user.id}`}, query: {gig: service.id} }"
             class="btn app-btn-secondary w-100 mt-3" v-if="isBuyerMode"
           >
             Contact Seller
