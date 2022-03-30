@@ -87,7 +87,7 @@ export const actions = {
     return resp;
   },
 
-  async updateProfile({ commit }, payload) {
+  async updateProfile({ commit,getters }, payload) {
     console.log("profile",payload)
     commit('setRegisterStatus', 2);
     const resp = await Api.formData('update_profile', payload);
@@ -96,6 +96,11 @@ export const actions = {
       commit('setRegisterStatus', 3);
       localStorage.setItem('userInfo',JSON.stringify(resp))
       commit('setUser',resp)
+      if (getters.isBuyerMode) {
+        window.location.href = `/buyer-account`
+      } else {
+        window.location.href = `/dashboard/account`
+      }
     }
     else {
       commit('setRegisterStatus', 4);

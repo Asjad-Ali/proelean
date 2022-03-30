@@ -64,11 +64,14 @@
             </div>
           </div>
           <!--//app-card-header-->
-          <div class="app-card-body p-4">
+          
+          <div class="app-card-body px-4 py-2 text-justify">
             <div class="notification-content">
+              {{ request.description }}
             </div>
           </div>
           <!--//app-card-body-->
+
           <!-- For Web Screen & Tablet -->
           <div class="app-card-footer px-4 py-3 text-center d-none d-sm-block">
             <button style="cursor: default;" type="button"  class="btn app-btn-secondary mx-2 my-1">
@@ -96,7 +99,7 @@
           <!-- Web Screen & Tablet Section END -->
 
           <!----- For Mobile Screen ----->
-          <div class="app-card-footer px-4 py-3 text-center d-flex flex-column align-items-center d-sm-none">
+          <div class="app-card-footer px-4 pb-1 text-center d-flex flex-column align-items-center d-sm-none">
             <button style="cursor: default;" type="button"  class="btn app-btn-secondary mx-2 my-1 w-100">
               {{ request.total_offers }} Offers Sent
             </button>
@@ -222,7 +225,7 @@
                   v-model="sendRequest.delivery_time"
                   required
                 >
-                  <option selected disabled value="">Select day</option>
+                  <option selected>Select day</option>
                   <option
                     v-for="day in $store.getters.getDeliveryDays"
                     :value="day"

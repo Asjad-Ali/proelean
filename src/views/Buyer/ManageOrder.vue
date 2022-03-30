@@ -50,17 +50,17 @@
               <span class="text-muted ml-4"> <i class="mdi mdi-database"></i>  Budget: </span> <span> {{ order.amount }}</span>
               <div class="d-flex justify-content-end mt-2">
                 <div>
-                    <button class="btn btn-md btn-primary w-100" v-if="order.status_id == 1"> Active </button>
-                    <button class="btn btn-md btn-primary w-100" v-if="order.status_id == 2"> Delivered </button>
-                    <button class="btn btn-md btn-primary w-100" v-if="order.status_id == 3"> Revision </button>
-                    <button class="btn btn-md btn-success w-100" v-if="order.status_id == 4"> Completed </button>
-                    <button class="btn btn-md btn-danger w-100" v-if="order.status_id == 5"> Disputed </button>
-                    <button class="btn btn-md btn-primary w-100" v-if="order.status_id == 6"> Late </button>
+                    <button class="badge bg-success w-100" v-if="order.status_id == 1"> Active </button>
+                    <button class="badge bg-secondary w-100" v-if="order.status_id == 2"> Delivered </button>
+                    <button class="badge bg-info w-100" v-if="order.status_id == 3"> Revision </button>
+                    <button class="badge bg-primary w-100" v-if="order.status_id == 4"> Completed </button>
+                    <button class="badge bg-danger w-100" v-if="order.status_id == 5"> Disputed </button>
+                    <button class="badge bg-warning w-100" v-if="order.status_id == 6"> Late </button>
                 </div>
                 <span class="ml-2">
                   <router-link 
                   :to="{name:'OrderDetailsBuyer', params:order}"
-                  class="btn btn-light">
+                  class="badge bg-light text">
                      View 
                   </router-link>
                 </span>
@@ -242,4 +242,9 @@ export default {
     vertical-align: baseline;
     border-radius: 0.25rem;
 }
+
+.text{
+  color:rgb(60, 219, 94);
+}
+
 </style>
