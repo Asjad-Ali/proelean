@@ -123,11 +123,6 @@
                     <div class="form-group col-md-6">
                       <label for="setting-input-2" class="form-label"
                         >Choose a category<span class="text-danger">*</span>
-                        <span
-                          class="text-danger"
-                          v-show="getUpdateGigError.category_id"
-                          >{{ getUpdateGigError.category_id }}</span
-                        >
                         </label
                       >
                       <select
@@ -152,11 +147,6 @@
                     <div class="form-group col-md-6">
                       <label for="setting-input-2" class="form-label"
                         >Choose subcategory<span class="text-danger">*</span>
-                        <span
-                          class="text-danger"
-                          v-show="getUpdateGigError.sub_category_id"
-                          >{{ getUpdateGigError.sub_category_id }}</span
-                        >
                         </label
                       >
                       <select
@@ -182,11 +172,6 @@
                     <div class="form-group col-md-6">
                       <label for="setting-input-2" class="form-label"
                         >Delivery Days<span class="text-danger">*</span>
-                        <span
-                          class="text-danger"
-                          v-show="getUpdateGigError.delivery_time"
-                          >{{ getUpdateGigError.delivery_time }}</span
-                        >
                         </label
                       >
                       <select
@@ -268,12 +253,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="setting-input-2" class="form-label"
-                    >Additional Info<span class="text-danger">*</span>
-                      <span
-                        class="text-danger"
-                        v-show="getUpdateGigError.category_id"
-                        >{{ getUpdateGigError.category_id }}</span
-                      >
+                    >Additional Info
                     </label
                   >
                   <div class="form-group">
