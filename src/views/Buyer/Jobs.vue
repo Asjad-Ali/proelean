@@ -56,12 +56,11 @@
               <span class="text-muted"> <i class="mdi mdi-clock"></i>  Duration: </span> <span> {{ job.delivery_time }}</span>
               <span class="text-muted ml-5"> <i class="mdi mdi-currency-eur"></i>  Budget: </span> <span> {{ job.budget }}</span>
               <div class="d-flex justify-content-end ">
-                <button
-                        type="button"
+                <router-link :to="{name:'ViewOffers', params:{id:job.id}}"
                         class="btn btn-primary mt-2"
                 >
                   Total Offers: {{ job.total_offers }}
-                </button>
+                </router-link>
               </div>
             </div>
           </div>
@@ -154,9 +153,11 @@
                   <td class="text-center">{{ job.delivery_time }}</td>
                   <td class="text-center">${{ job.budget }}</td>
                   <td class="text-center">
-                    <button class="btn btn-sm btn-primary">
+                    <router-link :to="{name:'ViewOffers', params:{id:job.id}}"
+                    class="btn btn-sm btn-primary"
+                     >
                       {{ job.total_offers }}
-                    </button>
+                    </router-link>
                   </td>
                   <td class="text-center">
                     <!---------------------    Button trigger modal    -------------------->

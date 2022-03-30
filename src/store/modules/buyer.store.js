@@ -9,6 +9,7 @@ export const state = {
     allJobs:[],
     service:{},
     cardStripe:{},
+    offers:[]
   }
 
 export const getters = {
@@ -16,6 +17,7 @@ export const getters = {
   getAllJobs : state => state.allJobs,
   getService : state => state.service,
   getCardStripe : state => state.cardStripe,
+  getViewOffers : state => state.offers,
 }
 
 export const  mutations = {
@@ -30,6 +32,9 @@ export const  mutations = {
     },
     setCardStripe(state,stripe){
       state.cardStripe=stripe;
+    },
+    setViewOffers(state,offers){
+      state.offers=offers;
     },
   }
 
@@ -124,6 +129,19 @@ export const  actions = {
             console.log(response)
           }
         }
-      }
+      },
+      
+      async viewOffers({commit},id){
+        commit('setLoader',1);
+        const res = await Api.get(`buyer/jobs/${id}/offers`);
+        if(res.status === 200){
+          console.log("View Offers: ",res.data)
+          commit("setViewOffers",res.data);
+        }
+        else{
+          console.log("Error All Jobs");
+        }
+        commit('setLoader',0);
+      },
 
 }
