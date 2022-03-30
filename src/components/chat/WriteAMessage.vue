@@ -166,8 +166,10 @@ export default {
         if (!newMessage.value.text) {
           return;
         }
-        store.dispatch("sendMessage", newMessage.value);
+        store.dispatch("sendMessage", newMessage.value).then(()=>{
         newMessage.value.text = "";
+        });
+
       }
     };
 
