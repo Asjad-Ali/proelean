@@ -238,6 +238,9 @@ export const actions = {
 
         console.log("New Message", newMessage);
         setDoc(chatRef, newMessage);
+
+        // last message id
+        newMessage.lastMessageId = newDocId;
         dispatch("updateConversation", newMessage);
         // check if messageGig
         if(newMessage.messageGig) {
@@ -295,6 +298,7 @@ export const actions = {
             senderName: user.name,
             senderId: user.id,
             lastMessage: message.message,
+            lastMessageId: message.lastMessageId,
             membersInfo: conversation.membersInfo,
         });
     },
