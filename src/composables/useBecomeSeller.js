@@ -138,28 +138,10 @@ export default function useBecomeSeller() {
         
         if(!data.value.freelancer_title) {  
         dataErrors.value.freelancer_title = 'Title is required'                               
-        } else if(!data.value.lang) {
-            dataErrors.value.lang = 'Language is required'
-        } else if(!data.value.availability) {
-            dataErrors.value.availability = 'Availability is required'
-        } else if(!data.value.description) {
-            dataErrors.value.description = 'description is required'
-        }  else if(!data.value.category_id) {
-            dataErrors.value.category_id = 'Category is required'
-        } else if(!data.value.country_id) {
-            dataErrors.value.country_id = 'Country is required'
-        } else if(!data.value.sub_category_id) {
-            dataErrors.value.sub_category_id = 'Subcategory is required'
         }else{
             console.log(data.value)
-            store.dispatch('handleBecomeSeller',data.value);                               
+            store.dispatch('handleBecomeSeller',data.value);
         }
-
-
-        // 
-        // if(!dataErrors.value) {
-        //     store.dispatch('handleBecomeSeller',data.value);
-        // }
     };
     const btnStatus = ref(store.getters.getRegisterStatus)
 
