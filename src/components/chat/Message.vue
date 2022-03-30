@@ -39,7 +39,7 @@
       >
         {{ message.message }}
       </p>
-      <div v-if="message.attachment" class="img-holder">
+      <div v-if="message.attachment" class="img-holder-attchments">
         <img :src="message.attachment" class="img-fluid" />
       </div>
 
@@ -115,33 +115,72 @@
         </div>
       </div>
 
-      <!-- Gig Refrence 2 -->
-      <div class="conatainer" v-if="message.messageGig  && message.senderId===$store.getters.getAuthUser.id">
+      <!-- Gig Refrence  -->
+      <!-- <di
+        class="conatainer py-5"
+        v-if="
+          message.messageGig &&
+          message.senderId === $store.getters.getAuthUser.id
+        "
+      >
         <p class="m-0 text-muted p-1">This message is related to:</p>
         <div class="row d-flex justify-content-start align-items-center">
-          <div class="col-md-6 col-12">
+          <div class="col-md-8 col-12">
             <div class="card shadow-none p-3">
               <div class="row">
-                <div class="col-md-6 col-12">
+                <div class="col-md-2 col-3">
                   <div class="offer-img-holder">
                     <img
-                      :src="`${imgUrl}/`+$store.getters.getReferrerGig.gigImage"
+                      :src="
+                        `${imgUrl}/` + $store.getters.getReferrerGig.gigImage
+                      "
                       alt=""
                       class="img-fluid"
                     />
                   </div>
                 </div>
-                <div class="col-md-6 col-12 d-flex align-items-center">
+                <div class="col-md-10 col-9 d-flex align-items-center">
                   <div>
                     <h6 class="card-title">
-                      {{$store.getters.getReferrerGig.gigTitle}}
+                      {{ $store.getters.getReferrerGig.gigTitle }}
                     </h6>
                     <p class="card-text">
                       <i class="mdi mdi-account"> </i>
-                      {{$store.getters.getReferrerGig.gigUsername}}
+                      {{ $store.getters.getReferrerGig.gigUsername }}
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </di> -->
+
+      <!-- card gig refrence new -->
+      <div class="row">
+        <div class="col-md-7">
+          <div
+            class="gig-refrence-main py-5"
+            v-if="
+              message.messageGig &&
+              message.senderId === $store.getters.getAuthUser.id
+            "
+          >
+            <p class="m-0 text-muted p-1">This message is related to:</p>
+            <div class="card">
+              <img
+                class="card-img-top"
+                :src="`${imgUrl}/` + $store.getters.getReferrerGig.gigImage"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h6 class="card-title">
+                  {{ $store.getters.getReferrerGig.gigTitle }}
+                </h6>
+                <p class="card-text">
+                  <i class="mdi mdi-account"> </i>
+                  {{ $store.getters.getReferrerGig.gigUsername }}
+                </p>
               </div>
             </div>
           </div>
@@ -241,10 +280,25 @@ export default {
   padding-bottom: 10px;
   border-bottom: 1px solid #e7e9ed;
 }
-.img-holder {
+.card-img-top {
   width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+/* .img-holder-attchments {
+  height: 300px;
+  width: 300px;
+} */
+.img-holder-attchments img {
+  max-width: 50%;
   height: auto;
 }
+
+/* .img-holder {
+  width: 100%;
+  height: auto;
+} */
 
 .seller-app .btn {
   font-weight: 400;
@@ -292,7 +346,7 @@ export default {
 }
 .offer-img-holder img {
   height: auto;
-  width: 100%;
+  width: 30%;
 }
 .scroll-disabled {
   position: fixed;
