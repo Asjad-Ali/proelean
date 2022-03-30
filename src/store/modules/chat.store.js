@@ -239,7 +239,10 @@ export const actions = {
         console.log("New Message", newMessage);
         setDoc(chatRef, newMessage);
         dispatch("updateConversation", newMessage);
-        commit("setReferrerMsg", true);
+        // check if messageGig
+        if(newMessage.messageGig) {
+            commit("setReferrerMsg", true);
+        }
     },
     lookForConversationChanges({ commit, getters }) {
         commit("setConversationLoadingStatus", "LOADING");
