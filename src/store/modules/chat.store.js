@@ -224,7 +224,7 @@ export const actions = {
             attachment: payload.attachment,
             attachmentType: payload.attachmentType,
             sentAt: new Date(new Date().toISOString()).getTime(),
-            refersGig: getters.getReferrerGig || false,
+            refersGig: getters.getReferrerGig ? true : false,
             senderId: getters.getAuthUser.id,
             messageOffer: null,
             messageGig: getters.getReferrerGig,
