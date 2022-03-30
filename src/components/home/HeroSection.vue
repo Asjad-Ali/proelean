@@ -113,6 +113,7 @@ export default {
 
     function handleSelectedCategory() {
       categorySlug.value = document.getElementById("categories").value;
+      console.log(categorySlug.value)
     }
 
     const handleSearch = () => {
@@ -121,7 +122,8 @@ export default {
 
       if (keywords.value) {
         url.value = url.value.concat("/" + keywords.value);
-      } else if (categorySlug.value != null) {
+      } 
+      if (categorySlug.value != null) {
         url.value = url.value.concat("?category=" + categorySlug.value);
       } else {
         url.value = "/gigs";

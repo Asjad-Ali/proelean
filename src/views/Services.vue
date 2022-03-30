@@ -22,7 +22,7 @@
                               </select>
                            </div> -->
                         </div>
-                        <h3 v-if="$route.params.slug">Services In {{ $route.params.slug || category}}</h3>
+                        <h3 v-if="$route.params.slug || category">Services In {{ category + ' ' + $route.params.slug }}</h3>
                      </div>
                   </div>
                   <div class="row">

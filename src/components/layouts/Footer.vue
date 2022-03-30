@@ -22,7 +22,7 @@
                  <h4>About</h4>
                  <ul class="list">
                     <li><a href="#">Careers</a></li>
-                    <li><a href="about">About</a></li>
+                    <li><router-link to="/about">About</router-link></li>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms of Service</a></li>
                     <li><a href="#">Intellectual Property Claims</a></li>
