@@ -28,7 +28,8 @@ export const state = {
     isConversationNew: true,
     hasMoreMessages: true,
     customServiceOffer: {},
-    msgOfferLoadingStatus: ''
+    msgOfferLoadingStatus: '',
+    referrerMsg: false
 };
 
 const scrollToBottom = () => {
@@ -116,6 +117,9 @@ export const mutations = {
     },
     setCustomOffer(state, offer) {
         state.customServiceOffer = offer;
+    },
+    setReferrerMsg(state, isset) {
+        state.referrerMsg = isset;
     }
 };
 
@@ -195,7 +199,7 @@ export const actions = {
         commit("setChatLoadingStatus", "COMPLETED");
     },
     async sendMessage(
-        { getters, dispatch },
+        { getters, dispatch, commit },
         payload
     ) {
         const newConversationUser = getters.getNewConversationUser;
@@ -224,10 +228,10 @@ export const actions = {
             attachment: payload.attachment,
             attachmentType: payload.attachmentType,
             sentAt: new Date(new Date().toISOString()).getTime(),
-            refersGig: getters.getReferrerGig ? true : false,
+            refersGig: getters.getReferrerGig && getters.getReferrerMsgStatus===false ? true : false,
             senderId: getters.getAuthUser.id,
             messageOffer: null,
-            messageGig: getters.getReferrerGig,
+            messageGig: getters.getReferrerGig && getters.getReferrerMsgStatus===false ? getters.getReferrerGig : null,
             deleteMessage: [],
             id: newDocId,
         };
@@ -235,6 +239,7 @@ export const actions = {
         console.log("New Message", newMessage);
         setDoc(chatRef, newMessage);
         dispatch("updateConversation", newMessage);
+        commit("setReferrerMsg", true);
     },
     lookForConversationChanges({ commit, getters }) {
         commit("setConversationLoadingStatus", "LOADING");
@@ -431,5 +436,6 @@ export const getters = {
     getNewConversationUser: (state) => state.newConversationUser,
     hasMoreMessages: state => state.hasMoreMessages,
     getSelectedCustomOffer: state => state.customServiceOffer,
-    getMessageOfferLoadingStatus: state => state.msgOfferLoadingStatus
+    getMessageOfferLoadingStatus: state => state.msgOfferLoadingStatus,
+    getReferrerMsgStatus: state => state.referrerMsg
 };
