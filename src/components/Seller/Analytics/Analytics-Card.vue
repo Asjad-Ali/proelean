@@ -4,7 +4,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Balance</h4>
-          <div class="stats-figure">€{{analytic.availabe_balance}}</div>
+          <div class="stats-figure">€{{ analytic.availabe_balance }}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -16,7 +16,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Earning This Month</h4>
-          <div class="stats-figure">€{{analytic.monthly_selling}}</div>
+          <div class="stats-figure">€{{ analytic.monthly_selling }}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -28,8 +28,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Avg Order Price</h4>
-          <div class="stats-figure">€{{analytic.average_selling}}</div>
-           
+          <div class="stats-figure">€{{ analytic.average_selling }}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -37,11 +36,11 @@
       <!--//app-card-->
     </div>
     <!--//col-->
-        <div class="col-6 col-lg-4 mb-4">
+    <div class="col-6 col-lg-4 mb-4">
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Active Orders</h4>
-          <div class="stats-figure">€{{analytic.active_orders_balance}}</div>
+          <div class="stats-figure">€{{ analytic.active_orders_balance }}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -53,7 +52,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Pending Clearance</h4>
-          <div class="stats-figure">€{{analytic.pending_balance}}</div>
+          <div class="stats-figure">€{{ analytic.pending_balance }}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -65,7 +64,9 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Cancelled Orders</h4>
-          <div class="stats-figure">€{{analytic.cancelled_orders_balance}}</div>
+          <div class="stats-figure">
+            €{{ analytic.cancelled_orders_balance }}
+          </div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -74,7 +75,8 @@
     </div>
     <!--//col-->
   </div>
-<div class="row">
+
+  <!-- <div class="row">
     <div class="col-12 col-lg-12 ">
       <div class="app-card app-card-chart h-100 shadow-sm">
         <div class="app-card-header p-3">
@@ -82,18 +84,18 @@
             <div class="col-auto">
               <h4 class="app-card-title">Bar Chart Example</h4>
             </div>
-            <!--//col-->
+        
             <div class="col-auto">
               <div class="card-header-action">
                 <a href="charts.html">More charts</a>
               </div>
-              <!--//card-header-actions-->
+          
             </div>
-            <!--//col-->
+        
           </div>
-          <!--//row-->
+       
         </div>
-        <!--//app-card-header-->
+    
         <div class="app-card-body p-3 p-lg-4">
           <div class="mb-3 d-flex">
             <select
@@ -109,24 +111,24 @@
             <canvas id="canvas-barchart"></canvas>
           </div>
         </div>
-        <!--//app-card-body-->
+      
       </div>
-      <!--//app-card-->
+      
     </div>
-</div>
- 
+</div> -->
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core';
-import { useStore } from 'vuex';
+import { computed } from "@vue/runtime-core";
+import { useStore } from "vuex";
+
 export default {
   setup() {
     const store = useStore();
     return {
-      analytic: computed(()=> store.getters.getSellerEarning)
-    }
-  }
+      analytic: computed(() => store.getters.getSellerEarning),
+    };
+  },
 };
 </script>
 
