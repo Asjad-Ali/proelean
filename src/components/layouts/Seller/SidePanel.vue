@@ -39,7 +39,7 @@
 
            <li class="nav-item" v-for="(item,index) in items" :key="index">
             <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-            <router-link @click="activeTabIndex=index" class="nav-link" :class="{active: activeTabIndex==index}" :to="item.path" >
+            <router-link  class="nav-link" :class="{active: item.path == $route.path}" :to="item.path" @click="handleCloseSideBar(item.path)" >
               <span class="nav-icon">
                 <svg
                   width="1em"
@@ -102,8 +102,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
-import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 const items = [
   {
     title: "Dashboard",
@@ -211,43 +210,15 @@ export default {
   },
 
   setup() {
-    const route = useRoute();
-    const activeTabIndex=ref();
-    onMounted(() => {
-      console.log("Route path",route.path)
-      if(route.path == '/dashboard'){
-        activeTabIndex.value = 0;
-      }
-      if (route.path == '/dashboard/sellers-services'){
-        activeTabIndex.value = 1;
-      }
-      if (route.path == '/dashboard/orders'){
-        activeTabIndex.value = 2;
-      }
-      if (route.path == '/dashboard/analytics'){
-        activeTabIndex.value = 3;
-      }
-      if (route.path == '/dashboard/notifications'){
-        activeTabIndex.value = 4;
-      }
-      if (route.path == '/dashboard/chat'){
-        activeTabIndex.value = 5;
-      }
-      if (route.path == '/dashboard/buyer_requests'){
-        activeTabIndex.value = 6;
-      }
-      if (route.path == '/dashboard/payments'){
-        activeTabIndex.value = 7;
-      }
-      if (route.path == '/dashboard/account'){
-        activeTabIndex.value = 8;
-      }
-    });
-
+    const router = useRouter();
+    function handleCloseSideBar(path) {
+      document.getElementById('sidepanel-close').click();
+      router.push(path);
+    }
     return {
       items,
-      activeTabIndex,
-      imgURL: process.env.VUE_APP_URL
+      imgURL: process.env.VUE_APP_URL,
+      handleCloseSideBar
     }
   },
 };

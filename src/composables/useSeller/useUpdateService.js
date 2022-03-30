@@ -1,4 +1,4 @@
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import compressImage from '@/composables/useImageCompression'
@@ -31,22 +31,7 @@ export default function useCreateService() {
     revision:'',
     additional_info:''
   });
-
-  const getUpdateGigError = ref({
-    s_description: "",
-    description: "",
-    banner: [],
-    delete: [],
-    category_id: "",
-    sub_category_id: "",
-    delivery_time: '',
-    price: "",
-    id:"",
-    revision:'',
-    additional_info:''
-  });
-
-  const updateService = () => {
+  const setUpdateValue = () => {
     getUpdateGig.value.sub_category_id = document.getElementById("subCategory").value
     getUpdateGig.value.category_id = document.getElementById("category").value
     getUpdateGig.value.delivery_time = document.getElementById("deliveryTime").value
@@ -57,6 +42,16 @@ export default function useCreateService() {
     getUpdateGig.value.price = updateGig.value.price
     getUpdateGig.value.id = updateGig.value.id
     getUpdateGig.value._method= 'PUT'
+  }
+
+  const getUpdateGigError = ref({
+    s_description: "",
+    description: "",
+    price: "",
+  });
+
+  const updateService = () => {
+    setUpdateValue();
     console.log("Update Service",getUpdateGig.value)
     store.dispatch('updateService', getUpdateGig.value).then(res => {
       if(res.status == 200){
@@ -115,10 +110,6 @@ export default function useCreateService() {
     data.value.category_id = document.getElementById("category").value;
     store.dispatch("loadSubCategories", data.value.category_id);
   };
-
-  watch(updateGig.value,(current) => {
-    console.log(current.s_description)
-  })
 
   return {
     data,

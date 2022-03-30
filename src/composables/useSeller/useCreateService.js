@@ -88,7 +88,7 @@ export default function useCreateService() {
     if(!current.price){
       createServiceError.value.price = "Budget is required"
     } else if(current.price < 5){
-      createServiceError.value.price = "Minimum budget €5 "
+      createServiceError.value.price = "Minimum budget is €5 "
     } else {
       createServiceError.value.price = null
     }
