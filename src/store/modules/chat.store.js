@@ -224,7 +224,7 @@ export const actions = {
         );
         
         const newMessage = {
-            message: payload.text,
+            message: payload.text || (payload.attachment ? "Image" : ""),
             attachment: payload.attachment,
             attachmentType: payload.attachmentType,
             sentAt: new Date(new Date().toISOString()).getTime(),
