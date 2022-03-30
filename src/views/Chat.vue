@@ -79,7 +79,7 @@
 import ConversationList from "../components/chat/ConversationList.vue";
 import MessagesSection from "../components/chat/MessagesSection.vue";
 import { useStore } from "vuex";
-import { onBeforeMount, onMounted } from "@vue/runtime-core";
+import { computed, onBeforeMount, onMounted } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { ref } from "vue";
 export default {
@@ -89,6 +89,7 @@ export default {
     const route = useRoute();
 
     const mode = ref("conversation");
+    const toggleModeStatus = ref(false);
 
     onBeforeMount(() => {
       store.dispatch("lookForConversationChanges");
@@ -116,10 +117,11 @@ export default {
     };
 
     const toggleMode = () => {
+      toggleModeStatus.value = mode.value == "conversation" ? true : false;
       mode.value = mode.value == "conversation" ? "chat" : "conversation";
     };
     return {
-      mode,
+      mode: computed(() => store.getters.getSelectedConversation != null && !toggleModeStatus.value ? "chat" : "conversation"),
       toggleMode,
       handleSelectedChat,
     };

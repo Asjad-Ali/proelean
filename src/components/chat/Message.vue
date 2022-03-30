@@ -116,7 +116,7 @@
       </div>
 
       <!-- Gig Refrence 2 -->
-      <div class="conatainer" v-if="message.messageGig && $store.getters.getReferrerGig && message.senderId===$store.getters.getAuthUser.id">
+      <div class="conatainer" v-if="message.messageGig  && message.senderId===$store.getters.getAuthUser.id">
         <p class="m-0 text-muted p-1">This message is related to:</p>
         <div class="row d-flex justify-content-start align-items-center">
           <div class="col-md-6 col-12">
