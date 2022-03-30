@@ -13,6 +13,7 @@ import Jobs from '@/views/Buyer/Jobs.vue'
 
 import BuyerServiceDetail from '@/views/Buyer/BuyerServiceDetail.vue'
 import ManageOrder from '@/views/Buyer/ManageOrder.vue'
+import ViewOffers from '@/views/Buyer/ViewOffers.vue'
 
 import BuyerAccount from '@/views/Seller/Account.vue'
 import BuyerEditProfile from '@/views/Seller/EditProfile.vue'
@@ -66,6 +67,11 @@ const routes = [
     path: '/gig-detail/:id',
     name: 'BuyerServiceDetail',
     component: BuyerServiceDetail,
+  },
+  {
+    path: '/buyer/view-offers/:id',
+    name: 'ViewOffers',
+    component: ViewOffers,
   },
   {
     path: '/login',
