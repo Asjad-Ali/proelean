@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-10">
           <div
             class="gig-refrence-main py-5"
           >
@@ -41,3 +41,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.card-img-top {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+
+</style>

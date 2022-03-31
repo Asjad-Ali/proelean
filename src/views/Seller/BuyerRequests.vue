@@ -29,7 +29,7 @@
         >
           <div class="app-card-header px-4 py-3 d-flex justify-content-between">
             <div class="row g-3 align-items-center">
-              <div class="col-12 col-lg-auto text-center text-lg-start">
+              <div class="col-12 col-md-auto text-center text-lg-start">
                 <img
                   class="img-fluid rounded-circle mr-2"
                   style="width: 45px; height: 45px; object-fit: cover"
@@ -38,7 +38,7 @@
                 />
               </div>
               <!--//col-->
-              <div class="col-12 col-lg-auto text-lg-start">
+              <div class="col-12 marg col-lg-auto text-lg-start">
                 <h4 class="notification-title mb-1">
                   {{ request.user.username }}
                 </h4>
@@ -73,54 +73,51 @@
           <!--//app-card-body-->
 
           <!-- For Web Screen & Tablet -->
-          <div class="app-card-footer px-4 py-3 text-center d-none d-sm-block">
-            <button style="cursor: default;" type="button"  class="btn app-btn-secondary mx-2 my-1">
+          <div class="app-card-footer px-4 py-2 text-center d-none d-sm-block">
+            <div style="cursor: default;" type="button"  class="badge back text-dark mr-2 mb-2 p-2">
               {{ request.total_offers }} Offers Sent
-            </button>
-            <button
-              type="button"
-              class="btn app-btn-primary mx-2 my-1"
+            </div>
+            <div
+              class="badge bg-primary mr-2 mb-2 p-2"
               :style="{ 'pointer-events': request.is_applied ? 'none' : '' }"
               data-toggle="modal"
               data-target="#sendOfferModal"
               @click.prevent="defineOffer(request.id)"
             >
               {{ request.is_applied ? "Applied" : "Send Offer" }}
-            </button>
-            <button
-              type="button"
+            </div>
+            <div
               :disabled="getBtnStatus == request.id"
-              class="btn btn-success mx-2 my-1"
+              class="badge bg-danger mr-2 mb-2 p-2"
               @click="deleteJob(request.id)"
             >
               {{ getBtnStatus == request.id ? "Loading..." : "Cancel Offer" }}
-            </button>
+            </div>
           </div>
           <!-- Web Screen & Tablet Section END -->
 
           <!----- For Mobile Screen ----->
-          <div class="app-card-footer px-4 pb-1 text-center d-flex flex-column align-items-center d-sm-none">
-            <button style="cursor: default;" type="button"  class="btn app-btn-secondary mx-2 my-1 w-100">
+          <div class="app-card-footer px-4 pb-1 text-center d-flex justify-content-center d-sm-none">
+            <div style="cursor: default;"  
+            class="badge back text-dark mr-2 mb-2 p-2">
               {{ request.total_offers }} Offers Sent
-            </button>
-            <button
-              type="button"
-              class="btn app-btn-primary mx-2 my-1 w-100"
+            </div>
+            <div
+              class="badge bg-primary mr-2 mb-2 p-2"
               :style="{ 'pointer-events': request.is_applied ? 'none' : '' }"
               data-toggle="modal"
               data-target="#sendOfferModal"
               @click.prevent="defineOffer(request.id)"
             >
               {{ request.is_applied ? "Applied" : "Send Offer" }}
-            </button>
-            <button
-              type="button"
+            </div>
+            <div
               :disabled="getBtnStatus == request.id"
-              class="btn btn-success mx-2 my-1 w-100"
+              class="badge bg-danger mb-2 p-2"
               @click="deleteJob(request.id)"
             >
               {{ getBtnStatus == request.id ? "Loading..." : "Cancel Offer" }}
-            </button>
+            </div>
           </div>
           <!-- Mobile Screen Section END -->
 
@@ -143,8 +140,8 @@
         </div>
       </div>
 
-      <div v-else class="container text-center py-5">
-        <h2>No Any Request Available Now</h2>
+      <div v-else class="container card shadow-none text-center py-5">
+        <h2>No Request Available</h2>
       </div>
     </div>
 
@@ -318,6 +315,14 @@ export default {
 .activePagination{
   background-color:#2cdd9b;
   color: #fff !important;
+}
+
+.marg{
+  margin-left: -15px;
+}
+
+.back{
+  background-color: rgba(235, 229, 229, 0.822);
 }
 
 </style>

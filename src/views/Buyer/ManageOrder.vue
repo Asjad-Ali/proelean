@@ -68,8 +68,8 @@
             </div>
           </div>
           </div>
-            <div v-else class="text-center my-5">
-              <h4>No More Orders Available</h4>
+            <div v-else class="card shadow-none text-center py-5">
+              <h3>No Order Available</h3>
             </div>
           </div>
         </div>
@@ -177,8 +177,8 @@
                       </table>
                   </div>
                 </div>
-                <div v-else class="container tab-content text-center py-5">
-                  <h2>No Any Order Available</h2>
+                <div v-else class="container card shadow-none tab-content text-center py-5">
+                  <h3>No Order Available</h3>
                 </div>
             </div>
           </div>
