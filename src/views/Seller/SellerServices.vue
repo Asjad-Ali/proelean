@@ -50,8 +50,8 @@
         <Service @selectService="selectService" :service="service" />
       </div>
     </div>
-    <div class="text-center m-5" v-else>
-      <h2>No More Services Available</h2>
+    <div class="card shadow-none text-center m-3 py-5" v-else>
+      <h2>No Service Available</h2>
     </div>
     </div>
   </div>

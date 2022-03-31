@@ -35,6 +35,7 @@
               <span class="sr-only">Loading...</span>
             </div>
           </div>
+          <div v-if="jobs.length > 0">
           <div
             v-for="job in jobs"
             :key="job.id"
@@ -52,17 +53,23 @@
                 >
                 </i>
             </div>
-              <h5 class="card-title bg-light">{{ job.description }}</h5>
+              <h5 class="card-title bg-light mt-2">{{ job.description }}</h5>
               <span class="text-muted"> <i class="mdi mdi-clock"></i>  Duration: </span> <span> {{ job.delivery_time }}</span>
-              <span class="text-muted ml-5"> <i class="mdi mdi-currency-eur"></i>  Budget: </span> <span> {{ job.budget }}</span>
-              <div class="d-flex justify-content-end ">
-                <router-link :to="{name:'ViewOffers', params:{id:job.id}}"
-                        class="btn btn-primary mt-2"
+              <span class="text-muted ml-4"> <i class="mdi mdi-currency-eur"></i>  Budget: </span> <span> {{ job.budget }}</span>
+              <div class="d-flex justify-content-end">
+                <router-link
+                  :class="{disabled:job.total_offers == 0}"
+                  :to="{name:'ViewOffers', params:{id:job.id}}"
+                  class="btn btn-primary mt-2"
                 >
-                  Total Offers: {{ job.total_offers }}
+                  Review Offers: {{ job.total_offers }}
                 </router-link>
               </div>
             </div>
+          </div>
+          </div>
+          <div v-else class="card shadow-none text-center py-4">
+            <h3>No Job Available</h3>
           </div>
         </div>
       </div>
@@ -151,12 +158,14 @@
                   </td>
                   <td class="text-center">{{ job.created_at }}</td>
                   <td class="text-center">{{ job.delivery_time }}</td>
-                  <td class="text-center">${{ job.budget }}</td>
+                  <td class="text-center"> ${{ job.budget }} </td>
                   <td class="text-center">
-                    <router-link :to="{name:'ViewOffers', params:{id:job.id}}"
+                    <router-link
+                    :class="{disabled:job.total_offers == 0}"
+                    :to="{name:'ViewOffers', params:{id:job.id}}"
                     class="btn btn-sm btn-primary"
                      >
-                      {{ job.total_offers }}
+                       {{ job.total_offers }}
                     </router-link>
                   </td>
                   <td class="text-center">
@@ -175,8 +184,8 @@
               </tbody>
             </table>
           </div>
-            <div v-else class="container text-center py-5">
-            <h2>No Any Job Available</h2>
+            <div v-else class="card shadow-none text-center m-2 py-5">
+            <h3>No Job Available</h3>
           </div>
         </div>
       </div>

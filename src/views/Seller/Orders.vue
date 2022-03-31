@@ -250,7 +250,7 @@
                 </table>
               </div>
               <div v-else class="m-5 text-center">
-                <h5>No any orders available in this field</h5>
+                <h4>No Order Available</h4>
                 <figure class="py-3 m-0">
                   <img
                     src="/assets/seller/images/svg-icons/notfound.svg"
@@ -325,7 +325,7 @@
             </div>
             </div>
            </div>
-          <div v-else class="m-5 text-center">
+          <div v-else class="card shadow-none m-4 py-3 text-center">
                     <h5>No Order Available </h5>
                     <figure class="py-3 m-0">
                       <img

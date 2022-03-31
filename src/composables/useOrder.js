@@ -66,6 +66,10 @@ export default function useOrder() {
         order_id: payloadOrder.id,
         extended_delivery_days: "",
       });
+
+      const orderDateExtendError = ref({
+        extended_delivery_days: "Extend Date is required",
+      });
   
 
     const formData = ref({
@@ -141,6 +145,14 @@ export default function useOrder() {
         }
     })
 
+    watch(orderDateExtend.value,(current) => {
+      if(!current.extended_delivery_days){
+        orderDateExtendError.value.extended_delivery_days = "Extend Date is required"
+      }else{
+        orderDateExtendError.value.extended_delivery_days = null
+      }
+    })
+
 
     const selectDeliveredFile = (e) => {
         orderDeliver.value.delivered_file = e.target.files[0];
@@ -213,6 +225,7 @@ export default function useOrder() {
         orderLate,
         order_late,
         orderDateExtend,
+        orderDateExtendError,
         order_date_extend
     }
 

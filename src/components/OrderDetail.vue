@@ -254,7 +254,10 @@
                       <h5 class="modal-title" id="exampleModal6Label">Request for More Days</h5>
                     </div>
                     <div class="modal-body">
-                        <div class="text-left font mt-2">Delivery Time</div>
+                      <!-- {{orderDateExtendError.extended_delivery_days >0 ? '1' : '0' }} -->
+                        <div class="text-left font mt-2">Delivery Time<span class="text-danger mr-1">*</span>
+                          <span class="text-danger" v-show="orderDateExtendError.extended_delivery_days">{{ orderDateExtendError.extended_delivery_days }}</span>
+                        </div>
                         <select
                           id="deliveryTime"
                           class="form-control"
@@ -274,7 +277,9 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="order_date_extend()" > Submit </button>
+                      <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="order_date_extend()" 
+                      :disabled="!Object.values(orderDateExtendError).every(value => !value)"
+                      > Submit </button>
                     </div>
                   </div>
                 </div>
@@ -376,6 +381,7 @@ export default {
       orderLate,
       order_late,
       orderDateExtend,
+      orderDateExtendError,
       order_date_extend
     } = useOrder();
 
@@ -410,6 +416,7 @@ export default {
       orderLate,
       order_late,
       orderDateExtend,
+      orderDateExtendError,
       order_date_extend
     }
    }
