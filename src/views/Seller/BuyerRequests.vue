@@ -143,8 +143,8 @@
         </div>
       </div>
 
-      <div v-else class="container text-center py-5">
-        <h2>No Any Request Available Now</h2>
+      <div v-else class="container card shadow-none text-center py-5">
+        <h2>No Request Available</h2>
       </div>
     </div>
 

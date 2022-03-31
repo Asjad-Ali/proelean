@@ -35,6 +35,7 @@
               <span class="sr-only">Loading...</span>
             </div>
           </div>
+          <div v-if="jobs.length > 0">
           <div
             v-for="job in jobs"
             :key="job.id"
@@ -59,10 +60,14 @@
                 <router-link :to="{name:'ViewOffers', params:{id:job.id}}"
                         class="btn btn-primary mt-2"
                 >
-                  Total Offers: {{ job.total_offers }}
+                  Review Offers: {{ job.total_offers }}
                 </router-link>
               </div>
             </div>
+          </div>
+          </div>
+          <div v-else class="card shadow-none text-center py-4">
+            <h3>No Job Available</h3>
           </div>
         </div>
       </div>
@@ -175,8 +180,8 @@
               </tbody>
             </table>
           </div>
-            <div v-else class="container text-center py-5">
-            <h2>No Any Job Available</h2>
+            <div v-else class="card shadow-none text-center m-2 py-5">
+            <h3>No Job Available</h3>
           </div>
         </div>
       </div>
