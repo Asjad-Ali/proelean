@@ -43,106 +43,15 @@
         <img :src="message.attachment" class="img-fluid" />
       </div>
 
-      <div class="row" v-if="message.messageOffer">
-        <div class="col-md-10">
-          <div class="card shadow-none">
-            <div class="card-body">
-              <p class="offer-title">
-                {{ message.messageOffer.serviceTitle }}
-              </p>
-              <p class="offer-description">
-                {{ message.messageOffer.description }}
-              </p>
-              <div class="d-md-flex justify-content-around py-2 flex-wrap">
-                <article>
-                  <div>
-                    <div class="delivery">
-                      <i class="mdi mdi-currency-eur" aria-hidden="true"></i>
-                      <p class="mr-2">Price :</p>
-                      {{ message.messageOffer.totalOffer }}
-                    </div>
-                  </div>
-                </article>
-                <article>
-                  <div class="delivery">
-                    <i class="mdi mdi-clock" aria-hidden="true"></i>
-                    <p class="mr-2">Delivery Time:</p>
-                    {{ message.messageOffer.deliveryDays }}
-                  </div>
-                </article>
-                <article>
-                  <div class="delivery">
-                    <i class="mdi mdi-sync" aria-hidden="true"></i>
-                    <p class="mr-2">Revision:</p>
-                    {{ message.messageOffer.revisions }}
-                  </div>
-                </article>
-              </div>
-              <button
-                class="btn app-btn-primary"
-                v-if="
-                  message.messageOffer.offerSenderId === $store.getters.getAuthUser.id 
-                  && (message.messageOffer.status === 2 || message.messageOffer.status === 0)
-                "
-                @click="withdrawOffer($event, message.id)"
-                :disabled="message.messageOffer.status === 2"
-              >
-                {{
-                  message.messageOffer.status === 2
-                    ? "offer withdrawn"
-                    : "Withdraw the offer"
-                }}
-              </button>
-              <button
-                aria-hidden="true"
-                data-toggle="modal"
-                class="btn app-btn-primary btn-sm "
-                data-target="#staticBackdrop"
-                id="accept_offer"
-                v-else
-                @click="acceptCustomOffer(message)"
-                :disabled="message.messageOffer.status === 1 || (loading.status === 'LOADING' && loading.offerId === message.id)"
-                >
-                <!-- <i class="fa fa-spin" v-if="loading.status === 'LOADING' && loading.offerId === message.id"></i> -->
-                {{message.messageOffer.status === 1 ? 'Offer accepted' : 'Accept offer'}}</button
-              >
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- card gig offer new -->
+      <ServiceOfferCard :message="message" v-if="message.messageOffer" />      
 
       <!-- card gig refrence new -->
-      <div class="row">
-        <div class="col-md-7">
-          <div
-            class="gig-refrence-main py-5"
-            v-if="
-              message.messageGig
-            "
-          >
-            <p class="m-0 text-muted p-1">This message is related to:</p>
-            <div class="card">
-              <img
-                class="card-img-top"
-                :src="`${imgUrl}/` + message.messageGig.gigImage"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h6 class="card-title">
-                  {{ message.messageGig.gigTitle }}
-                </h6>
-                <p class="card-text">
-                  <i class="mdi mdi-account"> </i>
-                  {{ message.messageGig.gigUsername }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ServiceReferenceCard :message="message" v-if="message.messageGig && message.senderId === $store.getters.getAuthUser.id" />
+
     </div>
 
-    <AcceptServiceOffer v-if="acceptOffer" />
+    
 
     <span class="ml-auto mb-auto">
       <div class="text-right text-muted pt-1 small">
@@ -154,8 +63,9 @@
 
 <script>
 import { useStore } from "vuex";
-import { computed, onMounted, ref } from "vue";
-import AcceptServiceOffer from "@/components/modals/PurchaseService.vue";
+import { onMounted, ref } from "vue";
+import ServiceReferenceCard from "@/components/chat/ServiceReferenceCard.vue"
+import ServiceOfferCard from "@/components/chat/ServiceOfferCard.vue"
 
 export default {
   props: {
@@ -169,12 +79,12 @@ export default {
     },
   },
 
-  components: { AcceptServiceOffer },
+  components: { ServiceReferenceCard, ServiceOfferCard },
 
   setup() {
     const store = useStore();
     const timeNow = ref(Date.now());
-    const acceptOffer = ref(false);
+    
 
     const messageOwner = (senderId) => {
       return store.getters.getSelectedConversation.membersInfo
@@ -204,49 +114,16 @@ export default {
       }
     };
 
-    const withdrawOffer = (event, messageID) => {
-
-      const offerPayload = {
-        'docId': messageID,
-        'status': 2
-      };
-
-      store.dispatch("withdrawOffer", offerPayload).then(() => {
-        event.target.innerText = "offer withdrawn";
-      });
-
-    };
-
-    const acceptCustomOffer = (offer) => {
-      acceptOffer.value = true;
-      store.commit("setCustomOffer", offer);
-    };
-
     return {
       messageOwner,
       imgUrl: process.env.VUE_APP_URL,
       timeDiff,
-      withdrawOffer,
-      acceptCustomOffer,
-      acceptOffer,
-      loading: computed(() => store.getters.getOfferPurchaseStatus)
     };
   },
 };
 </script>
 
 <style scoped>
-.offer-title {
-  font-weight: 500;
-  font-size: 17px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e7e9ed;
-}
-.card-img-top {
-  width: 100%;
-  max-height: 200px;
-  object-fit: cover;
-}
 
 /* .img-holder-attchments {
   height: 300px;
@@ -262,28 +139,7 @@ export default {
   height: auto;
 } */
 
-.seller-app .btn {
-  font-weight: 400;
-  padding: 0.4rem 1rem;
-  font-size: 0.875rem;
-  border: none;
-  color: #fff;
-}
-.mdi {
-  color: #15a362;
-}
-.offer-description {
-  font-weight: 400;
-  color: #8396ab;
-  word-wrap: break-word;
-  word-break: break-all;
-}
-.delivery {
-  display: flex;
-}
-.delivery p {
-  font-weight: 500;
-}
+
 .position-fit {
   object-fit: cover;
 }
@@ -300,29 +156,5 @@ export default {
 
 .chat-hieght {
   height: 65vh;
-}
-
-.offer-img-holder {
-  height: auto;
-  max-width: 200px;
-}
-.offer-img-holder img {
-  height: auto;
-  width: 30%;
-}
-.disable-offer-btn{
-  cursor: not-allowed;
-  color: gray
-}
-.scroll-disabled {
-  position: fixed;
-  margin-top: 0; /* override by JS to use acc to curr $(window).scrollTop() */
-  width: 100%;
-}
-@media (max-width: 767.98px) {
-  .offer-img-holder {
-    height: auto;
-    max-width: 100%;
-  }
 }
 </style>
