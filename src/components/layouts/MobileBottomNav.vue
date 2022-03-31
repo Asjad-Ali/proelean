@@ -24,7 +24,7 @@
 
   <router-link  to="/buyer/favourite_services" class="nav__link" active-link="nav__link--active">
     <i class="mdi mdi-heart"></i>
-    <span class="nav__text">Services</span>
+    <span class="nav__text">Favourite</span>
   </router-link>
 
 
