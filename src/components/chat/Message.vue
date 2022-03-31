@@ -124,16 +124,16 @@
             <div class="card">
               <img
                 class="card-img-top"
-                :src="`${imgUrl}/` + $store.getters.getReferrerGig.gigImage"
+                :src="`${imgUrl}/` + message.messageGig.gigImage"
                 alt="Card image cap"
               />
               <div class="card-body">
                 <h6 class="card-title">
-                  {{ $store.getters.getReferrerGig.gigTitle }}
+                  {{ message.messageGig.gigTitle }}
                 </h6>
                 <p class="card-text">
                   <i class="mdi mdi-account"> </i>
-                  {{ $store.getters.getReferrerGig.gigUsername }}
+                  {{ message.messageGig.gigUsername }}
                 </p>
               </div>
             </div>
