@@ -7,7 +7,7 @@
     <router-view :key="$route.fullPath" />
     <Footer  />
     <div class="d-lg-none">
-      <MobileBottomNav v-if="$store.getters.isBuyerMode" />
+      <MobileBottomNav v-if="$store.getters.isBuyerMode && isAuthenticated" />
     </div>
   </div>
 
@@ -19,7 +19,7 @@
       </div>
       <SellerFooter  />
        <div class="d-lg-none">
-      <MobileBottomNav v-if="$store.getters.isBuyerMode"  />
+      <MobileBottomNav v-if="$store.getters.isBuyerMode && isAuthenticated"  />
     </div>
     </div>
   </div>
