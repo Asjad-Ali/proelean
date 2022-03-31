@@ -81,8 +81,10 @@
               <button
                 class="btn app-btn-primary"
                 v-if="
-                  message.messageOffer.offerSenderId === $store.getters.getAuthUser.id 
-                  && (message.messageOffer.status === 2 || message.messageOffer.status === 0)
+                  message.messageOffer.offerSenderId ===
+                    $store.getters.getAuthUser.id &&
+                  (message.messageOffer.status === 2 ||
+                    message.messageOffer.status === 0)
                 "
                 @click="withdrawOffer($event, message.id)"
                 :disabled="message.messageOffer.status === 2"
@@ -96,16 +98,24 @@
               <button
                 aria-hidden="true"
                 data-toggle="modal"
-                class="btn app-btn-primary btn-sm "
+                class="btn app-btn-primary btn-sm"
                 data-target="#staticBackdrop"
                 id="accept_offer"
                 v-else
                 @click="acceptCustomOffer(message)"
-                :disabled="message.messageOffer.status === 1 || (loading.status === 'LOADING' && loading.offerId === message.id)"
-                >
-                <!-- <i class="fa fa-spin" v-if="loading.status === 'LOADING' && loading.offerId === message.id"></i> -->
-                {{message.messageOffer.status === 1 ? 'Offer accepted' : 'Accept offer'}}</button
+                :disabled="
+                  message.messageOffer.status === 1 ||
+                  (loading.status === 'LOADING' &&
+                    loading.offerId === message.id)
+                "
               >
+                <!-- <i class="fa fa-spin" v-if="loading.status === 'LOADING' && loading.offerId === message.id"></i> -->
+                {{
+                  message.messageOffer.status === 1
+                    ? "Offer accepted"
+                    : "Accept offer"
+                }}
+              </button>
             </div>
           </div>
         </div>
@@ -113,13 +123,8 @@
 
       <!-- card gig refrence new -->
       <div class="row">
-        <div class="col-md-7">
-          <div
-            class="gig-refrence-main py-5"
-            v-if="
-              message.messageGig
-            "
-          >
+        <div class="col-md-12">
+          <div class="gig-refrence-main py-5" v-if="message.messageGig">
             <p class="m-0 text-muted p-1">This message is related to:</p>
             <div class="card">
               <img
@@ -205,16 +210,14 @@ export default {
     };
 
     const withdrawOffer = (event, messageID) => {
-
       const offerPayload = {
-        'docId': messageID,
-        'status': 2
+        docId: messageID,
+        status: 2,
       };
 
       store.dispatch("withdrawOffer", offerPayload).then(() => {
         event.target.innerText = "offer withdrawn";
       });
-
     };
 
     const acceptCustomOffer = (offer) => {
@@ -229,7 +232,7 @@ export default {
       withdrawOffer,
       acceptCustomOffer,
       acceptOffer,
-      loading: computed(() => store.getters.getOfferPurchaseStatus)
+      loading: computed(() => store.getters.getOfferPurchaseStatus),
     };
   },
 };
@@ -310,9 +313,9 @@ export default {
   height: auto;
   width: 30%;
 }
-.disable-offer-btn{
+.disable-offer-btn {
   cursor: not-allowed;
-  color: gray
+  color: gray;
 }
 .scroll-disabled {
   position: fixed;
