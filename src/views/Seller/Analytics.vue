@@ -10,8 +10,17 @@
 <script>
 import Charts from "@/components/Seller/Dashboard/Charts.vue";
 import AnalyticsCard from "@/components/Seller/Analytics/Analytics-Card.vue";
+import { onMounted } from '@vue/runtime-core';
+import { useStore } from 'vuex';
 
 export default {
   components: { AnalyticsCard, Charts },
+  setup(){
+    const store = useStore()
+    onMounted(() => {
+      store.dispatch("getEarnings");
+    })
+  }
 };
+
 </script>

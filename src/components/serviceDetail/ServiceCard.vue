@@ -1,6 +1,9 @@
 <template>
-  <div class="col-lg-4 right mt-5">
-    <div>
+  <div class="col-lg-4 right">
+    <div class="mt-2 d-flex justify-content-end">
+      <router-link class="text-primary" :to="{ name: 'UpdateService', params: { id: service.id } }"><u>Edit Service</u></router-link>
+    </div>
+    <div class="mt-4 ">
       <div class="tab-content">
         <div id="basic" class="tab-pane fade show active">
           <h4>Service Details</h4>
