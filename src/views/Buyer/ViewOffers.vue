@@ -53,23 +53,23 @@
           <!--//app-card-header-->
 
         <div class="d-none d-sm-block">
-          <div class="app-card-body px-4 py-2 text-justify d-flex justify-content-between">
-            <div class="notification-content d-flex align-items-center">
-                <div class="d-none d-sm-block">
+            <div class="row app-card-body text-justify px-4 py-2">
+                <div class="col-lg-9 col-md-7">
                     {{ offer.description }}
                 </div>
+                <div class="col-lg-3 col-md-5">
+                    <div class="d-flex justify-content-end">
+                    <button class="btn btn-sm btn-danger">
+                        Place an Order
+                    </button>
+                    <router-link :to="{name:'Chat', params:{id:offer.profile.id}}"
+                            class="ml-2 btn btn-sm btn-light"
+                    >
+                    Contact Seller
+                    </router-link>
+                </div>
+                </div>
             </div>
-            <div class="d-none d-sm-block">
-                <button class="btn btn-sm btn-danger">
-                    Place an Order
-                </button>
-                <router-link :to="{name:'Chat', params:{id:offer.profile.id}}"
-                        class="ml-2 btn btn-sm btn-light"
-                >
-                  Contact Seller
-                </router-link>
-            </div>
-          </div>
         </div>
           <!--//app-card-body-->
           <!-- WEB Screen END -->
@@ -127,9 +127,9 @@
          </div>
       </div>
 
-      <div v-else class="container text-center py-5">
-        <h2>No Offer Yet</h2>
-      </div>
+      <div v-else class="card shadow-none text-center py-5">
+            <h3>No Offer Yet</h3>
+          </div>
     </div>
 
    

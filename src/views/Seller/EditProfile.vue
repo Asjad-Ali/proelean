@@ -140,6 +140,7 @@
                   <div>
                     <div class="item-label mb-2">
                       <strong>Phone</strong>
+                      <span class="text-danger">*</span>
                       <span
                         class="text-danger mt-1 ml-1"
                         v-show="editUserError.phone"
