@@ -80,6 +80,7 @@ export const actions = {
       const afterSetOrder = ref(state.orders.filter(order => order.id !== payload.order_id))
       commit("setOrders", afterSetOrder.value);
       useToast(res.message, 'success');
+      window.location.href = `/dashboard/orders`
     }
     else {
       useToast(res.message);

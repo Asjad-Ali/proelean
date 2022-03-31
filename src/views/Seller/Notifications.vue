@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 export default {
   setup() {
@@ -134,8 +134,10 @@ export default {
     function deleteNotification() {
       console.log("Deleted Successfully");
     }
+    onMounted(() => store.dispatch('getNotification'))
     return {
       deleteNotification,
+      loader: computed(() => store.getters.getLoaderVal),
       imgURL: process.env.VUE_APP_URL,
       earlierNotification: computed(() => store.getters.getAllNotifications),
     };

@@ -50,14 +50,16 @@ export default createStore({
     }
   },
   actions: {
-    async getNotification({ commit }) {
+    async getNotification({ commit, getters }) {
       commit('setLoader',1);
-      const res = await Api.get("notification");
-      if (res.status === 200) {
-        commit("setRecentNotification", res.notifications.slice(0, 4));
-        commit("setAllNotification", res.notifications);
-      } else {
-        commit("setNotification", res.message);
+      if(!getters.getAllNotifications.length > 0){
+        const res = await Api.get("notification");
+        if (res.status === 200) {
+          commit("setRecentNotification", res.notifications.slice(0, 4));
+          commit("setAllNotification", res.notifications);
+        } else {
+          commit("setNotification", res.message);
+        }
       }
       commit('setLoader',0);
     },

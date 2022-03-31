@@ -1,6 +1,6 @@
 <template>
   <div class="my-2">
-    <div class="card h-100  position-relative">
+    <div class="card h-100 shadow-none position-relative">
         <router-link
           v-if="!$store.getters.isBuyerMode"
           :to="{ name: 'GigDetail', params: { id: service.id } }"
