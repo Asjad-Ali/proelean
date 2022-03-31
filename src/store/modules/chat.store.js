@@ -224,7 +224,7 @@ export const actions = {
         );
         
         const newMessage = {
-            message: payload.text || (payload.attachment ? "Image" : ""),
+            message: payload.text || (payload.attachment ? "Image" : "") || (payload.messageOffer ? "Offer" : ""),
             attachment: payload.attachment,
             attachmentType: payload.attachmentType,
             sentAt: new Date(new Date().toISOString()).getTime(),
@@ -242,10 +242,12 @@ export const actions = {
         // last message id
         newMessage.lastMessageId = newDocId;
         dispatch("updateConversation", newMessage);
+
         // check if messageGig
         if(newMessage.messageGig) {
             commit("setReferrerMsg", true);
         }
+
     },
     lookForConversationChanges({ commit, getters }) {
         commit("setConversationLoadingStatus", "LOADING");
@@ -298,7 +300,7 @@ export const actions = {
             senderName: user.name,
             senderId: user.id,
             lastMessage: message.message,
-            lastMessageId: message.lastMessageId,
+            lastMessageId: message.lastMessageId || message.id,
             membersInfo: conversation.membersInfo,
         });
     },
@@ -356,7 +358,6 @@ export const actions = {
     },
 
     async sendCustomOfferToBuyerOnChat({ getters, dispatch }, payload) {
-        console.log(payload);
         const db = getFirestore();
         const newDocId = new Date().getTime().toString() + "id";
 
@@ -371,9 +372,9 @@ export const actions = {
         );
 
         const newMessage = {
-            message: payload.description,
+            message: "Offer",
             attachment: "",
-            attachementType: 0,
+            attachmentType: 5,
             sentAt: new Date(new Date().toISOString()).getTime(),
             refersGig: false,
             senderId: getters.getAuthUser.id,
@@ -383,31 +384,30 @@ export const actions = {
             id: newDocId,
         };
 
-        console.log("New Message", newMessage);
         setDoc(chatRef, newMessage);
         dispatch("updateConversation", newMessage);
     },
 
-    async withdrawOffer({commit, getters, dispatch}, docID) {
+    async withdrawOffer({commit, getters, dispatch}, payload) {
 
         commit('setWithdrawLoadingStatus', 'LOADING');
+
         const selectedConversation = getters.getSelectedConversation;
         const messages = getters.getMessages;
 
         const db = getFirestore();
 
-        const chatRef = doc(collection(db, `Conversations/${selectedConversation.id}/Messages`), docID);
+        const chatRef = doc(collection(db, `Conversations/${selectedConversation.id}/Messages`), payload.docId);
 
         updateDoc(chatRef, {
-            'messageOffer.status': 2
+            'messageOffer.status': payload.status
         });
 
         // update the message offer status
-        const message = messages.find(message => message.id === docID)
-        if(message && message.messageOffer.status === 0) {
-            message.messageOffer.status = 2;
-        }
+        const message = messages.find(message => message.id === payload.docId)
+        message.messageOffer.status = payload.status;
 
+        message.message = "Offer";
         dispatch("updateConversation", message);
         commit('setWithdrawLoadingStatus', 'COMPLETED');
     },

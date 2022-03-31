@@ -43,7 +43,6 @@
         <img :src="message.attachment" class="img-fluid" />
       </div>
 
-      <!-- <a href="#">iamosahan@gmail.com</a> -->
       <div class="row" v-if="message.messageOffer">
         <div class="col-md-10">
           <div class="card shadow-none">
@@ -82,79 +81,35 @@
               <button
                 class="btn app-btn-primary"
                 v-if="
-                  message.messageOffer.offerSenderId ===
-                  $store.getters.getAuthUser.id
+                  message.messageOffer.offerSenderId === $store.getters.getAuthUser.id 
+                  && (message.messageOffer.status === 2 || message.messageOffer.status === 0)
                 "
                 @click="withdrawOffer($event, message.id)"
                 :disabled="message.messageOffer.status === 2"
               >
-                <i
-                  class="fa fa-circle-o-notch fa-spin"
-                  style="font-size: 16px"
-                  v-if="
-                    $store.getters.getMessageOfferLoadingStatus === 'LOADING'
-                  "
-                ></i>
                 {{
                   message.messageOffer.status === 2
                     ? "offer withdrawn"
                     : "Withdraw the offer"
                 }}
               </button>
-              <a
+              <button
                 aria-hidden="true"
                 data-toggle="modal"
-                class="btn-light btn-sm rounded text-center cursor-pointer"
+                class="btn app-btn-primary btn-sm "
                 data-target="#staticBackdrop"
+                id="accept_offer"
                 v-else
-                @click="acceptCustomOffer(message.messageOffer)"
-                >Accept offer</a
+                @click="acceptCustomOffer(message)"
+                :disabled="message.messageOffer.status === 1 || (loading.status === 'LOADING' && loading.offerId === message.id)"
+                >
+                <!-- <i class="fa fa-spin" v-if="loading.status === 'LOADING' && loading.offerId === message.id"></i> -->
+                {{message.messageOffer.status === 1 ? 'Offer accepted' : 'Accept offer'}}</button
               >
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Gig Refrence  -->
-      <!-- <di
-        class="conatainer py-5"
-        v-if="
-          message.messageGig &&
-          message.senderId === $store.getters.getAuthUser.id
-        "
-      >
-        <p class="m-0 text-muted p-1">This message is related to:</p>
-        <div class="row d-flex justify-content-start align-items-center">
-          <div class="col-md-8 col-12">
-            <div class="card shadow-none p-3">
-              <div class="row">
-                <div class="col-md-2 col-3">
-                  <div class="offer-img-holder">
-                    <img
-                      :src="
-                        `${imgUrl}/` + $store.getters.getReferrerGig.gigImage
-                      "
-                      alt=""
-                      class="img-fluid"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-10 col-9 d-flex align-items-center">
-                  <div>
-                    <h6 class="card-title">
-                      {{ $store.getters.getReferrerGig.gigTitle }}
-                    </h6>
-                    <p class="card-text">
-                      <i class="mdi mdi-account"> </i>
-                      {{ $store.getters.getReferrerGig.gigUsername }}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </di> -->
 
       <!-- card gig refrence new -->
       <div class="row">
@@ -162,24 +117,23 @@
           <div
             class="gig-refrence-main py-5"
             v-if="
-              message.messageGig &&
-              message.senderId === $store.getters.getAuthUser.id
+              message.messageGig
             "
           >
             <p class="m-0 text-muted p-1">This message is related to:</p>
             <div class="card">
               <img
                 class="card-img-top"
-                :src="`${imgUrl}/` + $store.getters.getReferrerGig.gigImage"
+                :src="`${imgUrl}/` + message.messageGig.gigImage"
                 alt="Card image cap"
               />
               <div class="card-body">
                 <h6 class="card-title">
-                  {{ $store.getters.getReferrerGig.gigTitle }}
+                  {{ message.messageGig.gigTitle }}
                 </h6>
                 <p class="card-text">
                   <i class="mdi mdi-account"> </i>
-                  {{ $store.getters.getReferrerGig.gigUsername }}
+                  {{ message.messageGig.gigUsername }}
                 </p>
               </div>
             </div>
@@ -200,7 +154,7 @@
 
 <script>
 import { useStore } from "vuex";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import AcceptServiceOffer from "@/components/modals/PurchaseService.vue";
 
 export default {
@@ -251,9 +205,16 @@ export default {
     };
 
     const withdrawOffer = (event, messageID) => {
-      store.dispatch("withdrawOffer", messageID).then(() => {
+
+      const offerPayload = {
+        'docId': messageID,
+        'status': 2
+      };
+
+      store.dispatch("withdrawOffer", offerPayload).then(() => {
         event.target.innerText = "offer withdrawn";
       });
+
     };
 
     const acceptCustomOffer = (offer) => {
@@ -268,6 +229,7 @@ export default {
       withdrawOffer,
       acceptCustomOffer,
       acceptOffer,
+      loading: computed(() => store.getters.getOfferPurchaseStatus)
     };
   },
 };
@@ -347,6 +309,10 @@ export default {
 .offer-img-holder img {
   height: auto;
   width: 30%;
+}
+.disable-offer-btn{
+  cursor: not-allowed;
+  color: gray
 }
 .scroll-disabled {
   position: fixed;

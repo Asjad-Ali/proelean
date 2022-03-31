@@ -83,10 +83,11 @@ export default {
             cvc: 123
         })
 
-        console.log(store.getters.getSelectedCustomOffer)
         const handleCustomerDetail = (e) => {
             e.preventDefault();
-            store.dispatch('purchaseOfferedService',payload.value)
+            store.dispatch('purchaseOfferedService',payload.value).then(()=>{
+                document.getElementById('accept_offer').innerText = "Offer accepted";
+            })
         }
         return {
             payload,
