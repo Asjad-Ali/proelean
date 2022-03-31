@@ -117,7 +117,7 @@
           <div
             class="gig-refrence-main py-5"
             v-if="
-              message.messageGig
+              message.messageGig && message.senderId === $store.getters.getAuthUser.id
             "
           >
             <p class="m-0 text-muted p-1">This message is related to:</p>
