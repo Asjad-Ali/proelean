@@ -112,34 +112,7 @@
       </div>
 
       <!-- card gig refrence new -->
-      <div class="row">
-        <div class="col-md-7">
-          <div
-            class="gig-refrence-main py-5"
-            v-if="
-              message.messageGig && message.senderId === $store.getters.getAuthUser.id
-            "
-          >
-            <p class="m-0 text-muted p-1">This message is related to:</p>
-            <div class="card">
-              <img
-                class="card-img-top"
-                :src="`${imgUrl}/` + message.messageGig.gigImage"
-                alt="Card image cap"
-              />
-              <div class="card-body">
-                <h6 class="card-title">
-                  {{ message.messageGig.gigTitle }}
-                </h6>
-                <p class="card-text">
-                  <i class="mdi mdi-account"> </i>
-                  {{ message.messageGig.gigUsername }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ServiceReferenceCard :message="message" v-if="message.messageGig && message.senderId === $store.getters.getAuthUser.id" />
     </div>
 
     <AcceptServiceOffer v-if="acceptOffer" />
@@ -156,6 +129,7 @@
 import { useStore } from "vuex";
 import { computed, onMounted, ref } from "vue";
 import AcceptServiceOffer from "@/components/modals/PurchaseService.vue";
+import ServiceReferenceCard from "@/components/chat/ServiceReferenceCard.vue"
 
 export default {
   props: {
@@ -169,7 +143,7 @@ export default {
     },
   },
 
-  components: { AcceptServiceOffer },
+  components: { AcceptServiceOffer, ServiceReferenceCard },
 
   setup() {
     const store = useStore();
