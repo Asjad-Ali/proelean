@@ -17,12 +17,13 @@
             <tbody >
                <tr v-for="order in orders" :key="order.id">
                   <td class="text-center cell" >
-                     <div >
-                       <img class="img-fluid bg-info mb-1"
-                        alt="img" width="60" height="60"
+                  <div class="item-data mb-3">
+                     <img
                         :src="imgURL + '/' + order.image"
-                        ></div>
-                      
+                        class="profileImage dropdown-user-img img-full rounded-circle"
+                        alt="profile_img"
+                     />
+                  </div>
                   </td>
                   <td class="cell" ><span class="truncate" >{{order.description}} </span></td>
                   <td class="cell" ><span class="truncate" >{{order.currency}}{{order.amount}}</span></td>
@@ -146,6 +147,11 @@ export default {
 
 .margin-minus{
    margin-left: -6px;
+}
+.profileImage {
+  width: 60px !important;
+  height: 60px !important;
+  object-fit: cover;
 }
 
 </style>
