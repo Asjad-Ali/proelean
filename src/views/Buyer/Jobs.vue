@@ -53,9 +53,9 @@
                 >
                 </i>
             </div>
-              <h5 class="card-title bg-light">{{ job.description }}</h5>
+              <h5 class="card-title bg-light mt-2">{{ job.description }}</h5>
               <span class="text-muted"> <i class="mdi mdi-clock"></i>  Duration: </span> <span> {{ job.delivery_time }}</span>
-              <span class="text-muted ml-5"> <i class="mdi mdi-currency-eur"></i>  Budget: </span> <span> {{ job.budget }}</span>
+              <span class="text-muted ml-4"> <i class="mdi mdi-currency-eur"></i>  Budget: </span> <span> {{ job.budget }}</span>
               <div class="d-flex justify-content-end ">
                 <router-link :to="{name:'ViewOffers', params:{id:job.id}}"
                         class="btn btn-primary mt-2"
@@ -156,12 +156,12 @@
                   </td>
                   <td class="text-center">{{ job.created_at }}</td>
                   <td class="text-center">{{ job.delivery_time }}</td>
-                  <td class="text-center">${{ job.budget }}</td>
+                  <td class="text-center"> ${{ job.budget }} </td>
                   <td class="text-center">
                     <router-link :to="{name:'ViewOffers', params:{id:job.id}}"
                     class="btn btn-sm btn-primary"
                      >
-                      {{ job.total_offers }}
+                       {{ job.total_offers }}
                     </router-link>
                   </td>
                   <td class="text-center">
