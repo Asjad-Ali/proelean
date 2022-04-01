@@ -123,7 +123,7 @@
 
           <!--//app-card-footer-->
          </div>
-          <div class="text-center mt-4" >
+          <div class="text-center mt-4" v-if="$store.getters.getLinks.next" >
           <nav aria-label="Page navigation example" >
             <ul class="pagination d-flex justify-content-center">
               <li class="page-item" :class="{disabled:!$store.getters.getLinks.prev}" >

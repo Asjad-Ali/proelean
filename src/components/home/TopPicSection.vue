@@ -5,7 +5,7 @@
             <!-- <a href="#"  class="float-right ">See More ></a> -->
          </h2>
          <div class="row freelance-slider" >
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch justify-content-center" v-for="service in $store.getters.getFeatGigs" :key="service.id">
+            <div class="col-lg-3 col-md-4 d-flex align-items-stretch justify-content-center" v-for="service in $store.getters.getFeatGigs" :key="service.id">
                <div class="freelancer">
                   <router-link v-if="!$store.getters.isBuyerMode" :to="{name:'GigDetail', params:{id:service.id}}">
                      <img  class="img-fluid img-thumbnail gm-image" 
