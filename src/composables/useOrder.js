@@ -65,10 +65,12 @@ export default function useOrder() {
       const orderDateExtend = ref({
         order_id: payloadOrder.id,
         extended_delivery_days: "",
+        description:""
       });
 
       const orderDateExtendError = ref({
         extended_delivery_days: "Extend Date is required",
+        description:"Description is required"
       });
   
 
@@ -150,6 +152,12 @@ export default function useOrder() {
         orderDateExtendError.value.extended_delivery_days = "Extend Date is required"
       }else{
         orderDateExtendError.value.extended_delivery_days = null
+      }
+
+      if(!current.description){
+        orderDateExtendError.value.description = "Description is required"
+      }else{
+        orderDateExtendError.value.description = null
       }
     })
 

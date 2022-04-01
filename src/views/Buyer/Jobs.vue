@@ -165,7 +165,7 @@
                     <!---------------------    Button trigger modal    -------------------->
                     <div
                       @click="getJobId(job.id)"
-                      class="badge bg-danger text-white"
+                      class="badge bg-danger text-white cursor-pointer"
                       data-toggle="modal"
                       data-target="#exampleModalCenter"
                     >
