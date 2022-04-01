@@ -321,4 +321,7 @@ export default {
   margin-bottom: 8rem;
   margin-top: 5rem;
 }
+.form-control{
+  padding: 18px 10px !important;
+}
 </style>

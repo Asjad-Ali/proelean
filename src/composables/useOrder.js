@@ -6,6 +6,9 @@ export default function useOrder() {
 
     const store = useStore();
     const route = useRoute();
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth()+1
+    const currentYear = currentDate.getFullYear();
     const payload = {
         id: route.params.id,
         type: "SERVICE_DETAIL",
@@ -79,7 +82,7 @@ export default function useOrder() {
                 service_id: payload.id,
                 number: 4242424242424242,
                 exp_month: 6,
-                exp_year: 2022,
+                exp_year: 2026,
                 cvc: 123,
             },
             descriptionData: {
@@ -92,7 +95,7 @@ export default function useOrder() {
 
     const descriptionRegex = /^[a-zA-Z.,":/; ]{20,300}$/;
     const descriptionErrors = ref({
-        description: 'Description is required',
+        description: null,
         number: null,
         exp_month: null,
         exp_year: null,
@@ -101,10 +104,9 @@ export default function useOrder() {
 
     watch(formData.value, (current) => {
         if (!current.descriptionData.description) {
-            console.log("in condition", current.descriptionData.description)
             descriptionErrors.value.description = "Description is required"
         } else if (!current.descriptionData.description.match(descriptionRegex)) {
-            descriptionErrors.value.description = "Description's length must be minimum 20 characters"
+            descriptionErrors.value.description = "Description's minimum 20 characters"
         } else {
             descriptionErrors.value.description = null
         }
@@ -114,7 +116,7 @@ export default function useOrder() {
             descriptionErrors.value.number = "Card Number is required"
         } else if (String(current.paymentElements.number).split("").length !== 16) {
             //console.log("Card number",String(current.paymentElements.number).split("").length)
-            descriptionErrors.value.number = "Card Number length must be 16 characters"
+            descriptionErrors.value.number = "Card Number 16 characters"
         } else {
             descriptionErrors.value.number = null
         }
@@ -131,17 +133,15 @@ export default function useOrder() {
         if (!current.paymentElements.exp_month) {
             console.log("in condition", current.paymentElements.exp_month)
             descriptionErrors.value.exp_month = "expiry month is required"
-        } else if (String(current.paymentElements.exp_month).split("").length > 2) {
-            descriptionErrors.value.exp_month = "expiry month should be maximum 2 characters"
         } else {
             descriptionErrors.value.exp_month = null
         }
 
         if (!current.paymentElements.exp_year) {
-            console.log("in condition", current.paymentElements.exp_year)
             descriptionErrors.value.exp_year = "expiry year is required"
-        } else if (String(current.paymentElements.exp_year).split("").length > 4) {
-            descriptionErrors.value.exp_year = "expiry year should be maximum 4 characters"
+        }else if (formData.value.paymentElements.exp_month < currentMonth && current.paymentElements.exp_year <= currentYear ) {
+          console.log(formData.value.paymentElements.exp_month)
+          descriptionErrors.value.exp_month = "Month is not valid"
         } else {
             descriptionErrors.value.exp_year = null
         }

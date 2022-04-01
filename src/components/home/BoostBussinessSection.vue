@@ -21,7 +21,7 @@
                   </ul>
                </div>
                <div class="col-md-6">
-                  <img src="assets/images/video.png" class="video-img w-100" >
+                  <img src="assets/images/video.jpg" class="video-img w-100" >
                </div>
             </div>
          </div>
