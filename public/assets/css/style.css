@@ -63,7 +63,7 @@ h5 {
 h6 {
     /* font-size: 13px !important; */
 }
-.h2-cutom-font{
+.h2-cutom-font {
     font-size: 30px !important;
 }
 .orange-color {
@@ -112,7 +112,6 @@ a {
     color: #fff;
     background: #0905ea !important;
     border-color: #0905ea;
-  
 }
 
 .btn-outline-success:hover {
@@ -220,15 +219,15 @@ p.help-block li {
 }
 .loader {
     display: block;
-  }
-  .spinner-border {
+}
+.spinner-border {
     width: 4rem;
     height: 4rem;
-  }
-  .spinnerInden{
+}
+.spinnerInden {
     margin-top: 8rem;
     margin-bottom: 5rem;
-  }
+}
 .text-success {
     color: #368fee !important;
 }
@@ -3124,10 +3123,10 @@ section.related-links ul li a:hover {
     .main-page .breadcrumb {
         display: none;
     }
-    .review-section,
+    /* .review-section,
     .review-list {
         display: none;
-    }
+    } */
     .main-page {
         padding: 0;
     }

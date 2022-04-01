@@ -112,7 +112,10 @@
                               <b> {{ notification.name }} </b>
                             </div>
                             <div class="desc" data-v-777096b7="">
-                              {{ notification.body }}
+                              {{ notification.body.substr(0, 50)
+                              }}{{
+                                notification.body.length > 50 ? "...." : ""
+                              }}
                             </div>
                             <div class="meta align-baseline" data-v-777096b7="">
                               {{ $filters.timeAgo(notification.created_at) }}

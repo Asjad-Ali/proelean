@@ -1,61 +1,27 @@
 <template>
   <div class="container-xl">
-    <div class="row g-3 mb-4 align-items-center justify-content-between">
-      <div class="col-auto">
-        <h1 class="app-page-title mb-0">Payments</h1>
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <h1 class="app-page-title mb-1" data-v-d1f2b3da="">Payments</h1>
       </div>
-      
-      <div class="col-auto">
-        <div class="page-utilities">
-          <div
-            class="
-              row
-              g-2
-              justify-content-start justify-content-md-end
-              align-items-center
-            "
-          >
-            <div class="col-auto">
-              <form class="table-search-form row gx-1 align-items-center">
-                <div class="col-auto">
-                  <input
-                    type="text"
-                    id="search-orders"
-                    name="searchorders"
-                    class="form-control search-orders"
-                    placeholder="Search"
-                  />
-                </div>
-                <div class="col-auto">
-                  <button type="submit" class="btn app-btn-secondary">
-                    Search
-                  </button>
-                </div>
-              </form>
-            </div>
-            <!--//col-->
-            <div class="col-auto">
-              <select class="form-select w-auto">
-                <option selected="" value="option-1">All</option>
-                <option value="option-2">This week</option>
-                <option value="option-3">This month</option>
-                <option value="option-4">Last 3 months</option>
-              </select>
-            </div>
-            <div class="col-auto">
-              <a class="btn app-btn-secondary" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-  <path d="M8 .95 14.61 4h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.379l.5 2A.5.5 0 0 1 15.5 17H.5a.5.5 0 0 1-.485-.621l.5-2A.5.5 0 0 1 1 14V7H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 4h.89L8 .95zM3.776 4h8.447L8 2.05 3.776 4zM2 7v7h1V7H2zm2 0v7h2.5V7H4zm3.5 0v7h1V7h-1zm2 0v7H12V7H9.5zM13 7v7h1V7h-1zm2-1V5H1v1h14zm-.39 9H1.39l-.25 1h13.72l-.25-1z"/>
-</svg>
-                Bank Transfer
-              </a>
-            </div>
-          </div>
-          <!--//row-->
-        </div>
-        <!--//table-utilities-->
+      <div class="col-md-4 col-8">
+        <input
+          type="text"
+          id="search-orders"
+          name="searchorders"
+          class="form-control search-orders"
+          placeholder="Search"
+          data-v-d1f2b3da=""
+        />
       </div>
-      <!--//col-auto-->
+      <div class="col-md-2 col-4">
+        <select class="form-select" data-v-d1f2b3da="">
+          <option selected="" value="option-1" data-v-d1f2b3da="">All</option>
+          <option value="option-2" data-v-d1f2b3da="">This week</option>
+          <option value="option-3" data-v-d1f2b3da="">This month</option>
+          <option value="option-4" data-v-d1f2b3da="">Last 3 months</option>
+        </select>
+      </div>
     </div>
     <div class="border-bottom my-3"></div>
     <!--//row-->
@@ -94,7 +60,7 @@
                       <span>17 Oct</span><span class="note">2:16 PM</span>
                     </td>
                     <td class="cell text-center">
-                      <span class="badge bg-success ">Paid</span>
+                      <span class="badge bg-success">Paid</span>
                     </td>
                     <td class="cell">$259.35</td>
                     <td class="cell">
@@ -112,7 +78,7 @@
                       ><span class="note">03:16 AM</span>
                     </td>
                     <td class="cell text-center">
-                      <span class="badge bg-warning ">Pending</span>
+                      <span class="badge bg-warning">Pending</span>
                     </td>
                     <td class="cell">$96.20</td>
                     <td class="cell">
@@ -151,7 +117,7 @@
                       ><span class="note">8:07 PM</span>
                     </td>
                     <td class="cell text-center">
-                      <span class="badge bg-success ">Paid</span>
+                      <span class="badge bg-success">Paid</span>
                     </td>
                     <td class="cell">$199.00</td>
                     <td class="cell">
@@ -170,7 +136,7 @@
                       ><span class="note">04:23 PM</span>
                     </td>
                     <td class="cell text-center">
-                      <span class="badge bg-danger ">Cancelled</span>
+                      <span class="badge bg-danger">Cancelled</span>
                     </td>
                     <td class="cell">$59.00</td>
                     <td class="cell">
@@ -191,7 +157,7 @@
                       ><span class="note">11:18 AM</span>
                     </td>
                     <td class="cell text-center">
-                      <span class="badge bg-success ">Paid</span>
+                      <span class="badge bg-success">Paid</span>
                     </td>
                     <td class="cell">$678.26</td>
                     <td class="cell">
@@ -339,9 +305,6 @@
         <!--//app-card-->
       </div>
       <!--//tab-pane-->
-
-   
-  
     </div>
     <!--//tab-content-->
   </div>
@@ -349,8 +312,7 @@
 
 <script>
 export default {
-  setup() {
-  },
+  setup() {},
 };
 </script>
 
