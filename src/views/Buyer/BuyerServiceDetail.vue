@@ -1,6 +1,9 @@
 <template>
   <div class="main-page py-3">
-    <div v-if="$store.getters.getServiceLoader === 'LOADING'" class="text-center spinnerInden vh-100">
+    <div
+      v-if="$store.getters.getServiceLoader === 'LOADING'"
+      class="text-center spinnerInden vh-100"
+    >
       <div class="spinner-border text-primary m-2" role="status">
         <span class="sr-only">Loading...</span>
       </div>
@@ -16,8 +19,13 @@
               </li>
             </ol>
           </nav> -->
-          <h2 class="h2-cutom-font pb-0 d-none d-sm-block ">{{ service.s_description }}</h2>
-           <h2 class="h2-cutom-font pb-0 d-sm-none">{{ service.s_description.substr(0,18) }}{{service.s_description.length > 18 ? '..' : ''}}</h2>
+          <h2 class="h2-cutom-font pb-0 d-none d-sm-block">
+            {{ service.s_description }}
+          </h2>
+          <h2 class="h2-cutom-font pb-0 d-sm-none">
+            {{ service.s_description.substr(0, 18)
+            }}{{ service.s_description.length > 18 ? ".." : "" }}
+          </h2>
           <Gallery :serviceMedia="service.service_media" />
           <AboutService :service="service" />
           <div class="profile-card">
@@ -33,7 +41,7 @@
                   service.offered_services.length
                 "
               />
-              
+
               <div
                 class="col-md-4 mb-3 service-list-section"
                 v-for="offeredService in service.offered_services"
@@ -47,7 +55,7 @@
           <ReviewSection />
         </div>
         <ServiceCard />
-     <TopPicSection />
+        <TopPicSection />
       </div>
     </div>
 

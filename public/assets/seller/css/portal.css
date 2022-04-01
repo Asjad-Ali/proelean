@@ -26,13 +26,12 @@
     text-decoration: none;
 }
 
-
 .seller-app .text-body-2 {
     font: 400 14px/22px "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #e87856;
 }
 
-  svg.svg-inline--fa.fa-search.fa-w-16.position-absolute {
+svg.svg-inline--fa.fa-search.fa-w-16.position-absolute {
     margin-top: 10px;
     margin-left: 10px;
 }
@@ -184,7 +183,6 @@
 .btn:active,
 .btn:focus {
     text-decoration: none;
-   
 }
 
 .seller-app .btn .bi {
@@ -204,7 +202,7 @@
     font-weight: 400;
 }
 
- .app-btn-primary:hover {
+.app-btn-primary:hover {
     color: #fff;
     background: #18ba70;
     border-color: #18ba70;
@@ -215,13 +213,13 @@
     color: #5d6778;
     border: 1px solid #bcc1cb;
 }
-  .app-btn-secondary {
+.app-btn-secondary {
     background: #fff;
     color: #5d6778;
     border: 1px solid #bcc1cb;
 }
 
- .app-btn-secondary:hover {
+.app-btn-secondary:hover {
     color: #15a362;
     border: 1px solid #15a362;
     background: #fff;
@@ -256,7 +254,7 @@
     border-color: #15a362;
 }
 
-.seller-app .form-select {
+/* .seller-app .form-select {
     display: block;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
@@ -267,6 +265,28 @@
     color: #495057;
     vertical-align: middle !important;
     background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+} */
+
+.form-select {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background-color: #fff;
+    background-image: url(../../images/icons/arrow-down.svg);
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 16px 12px;
@@ -396,7 +416,7 @@
 }
 
 .seller-app .app-utility-item .dropdown-menu.show {
-    top: 23px !important;
+    top: 5px !important;
 }
 
 .seller-app .app-utility-item .icon {
@@ -868,7 +888,7 @@
     padding: 1.25rem 1rem;
 }
 
-  .app-card {
+.app-card {
     position: relative;
     background: #fff;
     border-radius: 0.25rem;
@@ -994,7 +1014,7 @@
     font-size: 1rem;
 }
 
-  .app-card .app-icon-holder {
+.app-card .app-icon-holder {
     display: inline-block;
     background: #edfdf6;
     color: #15a362;
@@ -1533,5 +1553,3 @@
         width: 100%;
     }
 }
-
-

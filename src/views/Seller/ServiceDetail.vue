@@ -1,6 +1,9 @@
 <template>
-  <div class="main-page py-3">
-    <div v-if="$store.getters.getServiceLoader === 'LOADING'" class="text-center spinnerInden vh-100">
+  <div class="main-page py-md-3">
+    <div
+      v-if="$store.getters.getServiceLoader === 'LOADING'"
+      class="text-center spinnerInden vh-100"
+    >
       <div class="spinner-border text-primary m-2" role="status">
         <span class="sr-only">Loading...</span>
       </div>
@@ -8,20 +11,30 @@
     <div v-else class="container">
       <div class="row">
         <div class="col-lg-8 left">
+          <div class="mt-2 d-flex justify-content-end">
+            <router-link
+              class="text-primary d-md-none btn app-btn-secondary"
+              :to="{ name: 'UpdateService', params: { id: service.id } }"
+            >
+              <i class="mdi mdi-pencil"></i>
+              Edit Service
+            </router-link>
+          </div>
           <!-- <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active" aria-current="page">
                 Library
               </li>
-            </ol>
+            </ol>  
           </nav> -->
-          <h2 class="h2-cutom-font pb-0">{{ service.s_description }}</h2>
+          <h2 class="h2-cutom-font line-hight-0">
+            {{ service.s_description }}
+          </h2>
           <Gallery :serviceMedia="service.service_media" />
           <AboutService :service="service" />
           <div class="profile-card">
-
-             <!-- <div class="recommended d-flex flex-wrap justify-content-start">
+            <!-- <div class="recommended d-flex flex-wrap justify-content-start">
               <Loader
                 v-if="
                   $store.getters.getServiceLoader === 'LOADING' &&
@@ -84,5 +97,22 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.seller-app .btn {
+  font-weight: 400;
+  padding: 2px 5px;
+  font-size: 12px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.line-hight-0 {
+  line-height: normal !important;
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 991.98px) {
+  .h2-cutom-font {
+    font-size: 17px !important;
+  }
+}
 </style>
