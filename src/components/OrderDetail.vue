@@ -95,12 +95,12 @@
                     <p class="pt-1 pl-1 mt-1">{{order.description}}</p>
                   </div>
                   <div>
-                <button type="button" class="btn badge bg-success pl-4 pr-4 text-white" v-if="order.status_id == 1"> Active </button>
-                <button type="button" class="btn badge bg-secondary pl-4 pr-4 text-white" v-if="order.status_id == 2"> Delivered </button>
-                <button type="button" class="btn badge bg-info pl-4 pr-4 text-white" v-if="order.status_id == 3"> Revision </button>
-                <button type="button" class="btn badge bg-primary pl-4 pr-4 text-white" v-if="order.status_id == 4"> Completed </button>
-                <button type="button" class="btn badge bg-danger pl-4 pr-4 text-white" v-if="order.status_id == 5"> Disputed </button>
-                <button type="button" class="btn badge bg-warning pl-4 pr-4 text-white" v-if="order.status_id == 6"> Late </button>
+                <div class="badge bg-success pl-4 pr-4 text-white cursor-pointer-2" v-if="order.status_id == 1"> Active </div>
+                <div class="badge bg-secondary pl-4 pr-4 text-white cursor-pointer-2" v-if="order.status_id == 2"> Delivered </div>
+                <div class="badge bg-info pl-4 pr-4 text-white cursor-pointer-2" v-if="order.status_id == 3"> Revision </div>
+                <div class="badge bg-primary pl-4 pr-4 text-white cursor-pointer-2" v-if="order.status_id == 4"> Completed </div>
+                <div class="badge bg-danger pl-4 pr-4 text-white cursor-pointer-2" v-if="order.status_id == 5"> Disputed </div>
+                <div class="badge bg-warning pl-4 pr-4 text-white cursor-pointer-2" v-if="order.status_id == 6"> Late </div>
               </div>
               <hr>
           <div class="order-deatils-header py-2">
@@ -274,6 +274,18 @@
                             {{ day }}
                           </option>
                         </select>
+                        <div class="text-left font mt-2">Description<span class="text-danger mr-1">*</span>
+                          <span class="text-danger" v-show="orderDateExtendError.description">{{ orderDateExtendError.description }}</span>
+                        </div>
+                        <textarea
+                        type="text"
+                        class="form-control mb-2"
+                        name="description"
+                        placeholder="Decription"
+                        v-model="orderDateExtend.description"
+                        id="description"
+                        required
+                        />
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

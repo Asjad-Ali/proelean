@@ -17,6 +17,11 @@
                                     <div class=""> {{orderTime.description}} </div>
                                     <div class="text-muted"> {{orderTime.created_at}} </div>
                                 </div>
+                                <div class="d-flex justify-content-end" v-if="orderTime.properties.type == 'EXTEND_ORDER'">
+                                    <div class="badge back p-1 mt-1">
+                                        Extend: {{orderTime.properties.value}}
+                                    </div>
+                                </div>
                                 <!-- <div class="d-flex justify-content-end">
                                     <button v-if="(order.status_id == 6 && $store.getters.isBuyerMode)" type="button" class="btn btn-light mt-2" >
                                     Accept
