@@ -5,7 +5,7 @@ export default function useFirebaseMedia() {
 
     const store = useStore();
 
-    async function uploadAttachment(attachment, message) {
+    async function uploadAttachment(attachment, message, sendBtn) {
         
         const storage = getStorage();
         const selectedConversationId = store.getters.getSelectedConversation
@@ -65,6 +65,7 @@ export default function useFirebaseMedia() {
                     message.attachment = downloadURL;
                     store.dispatch("sendMessage", message);
                     attachment.value.media="";
+                    sendBtn.value = false;
                 });
             }
         );
