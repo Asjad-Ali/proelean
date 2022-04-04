@@ -73,6 +73,12 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+#aniimated-thumbnials {
+  height: 350px;
+  width: 100%;
+}
+
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
   .item-slick {

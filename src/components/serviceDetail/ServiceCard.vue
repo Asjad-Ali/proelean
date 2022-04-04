@@ -9,7 +9,7 @@
         Edit Service
       </router-link>
     </div>
-    <div class="mt-md-5 pt-2">
+    <div class="mt-md-2 pt-2">
       <div class="tab-content">
         <div id="basic" class="tab-pane fade show active">
           <h4>Service Details</h4>
