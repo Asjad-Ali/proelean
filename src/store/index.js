@@ -55,10 +55,10 @@ export default createStore({
       if(!getters.getAllNotifications.length > 0){
         const res = await Api.get("notification");
         if (res.status === 200) {
-          commit("setRecentNotification", res.notifications.slice(0, 4));
-          commit("setAllNotification", res.notifications);
+          commit("setRecentNotification", res.data.slice(0, 4));
+          commit("setAllNotification", res.data);
         } else {
-          commit("setNotification", res.message);
+          commit("setNotification", res);
         }
       }
       commit('setLoader',0);

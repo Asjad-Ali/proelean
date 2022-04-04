@@ -13,7 +13,7 @@
           <router-link :to="{name:'Gigs', params:{slug: category.slug}}">
           <img :src="`${category.banner.includes('https') || category.banner.includes('http') ? category.banner : imgURL+'/'+category.banner}`" class="card-img-top" alt="Card Image">
           <div class="card-body d-flex flex-column margn">
-            <h5 class="card-title">{{ category.title }}</h5>
+            <h5 class="card-title text-center">{{ category.title }}</h5>
           </div>
           </router-link>
         </div>

@@ -328,7 +328,8 @@
                   d-flex
                   justify-content-between
                 "
-                to="/buyer/notifications"
+                to="#"
+                @click="handleNotification(notification)"
               >
                 <div class="d-flex justify-content-start">
                   <div class="dropdown-notifications-item-icon bg-warning">
@@ -654,6 +655,22 @@ export default {
       }
     };
 
+    function handleNotification(notification) {
+      switch(notification.type) {
+        case "ORDER":
+          router.push(`/order-details/${notification.content_id}`);
+        break;
+    
+        case "OFFER":
+        router.push(`/buyer/view-offers/${notification.content_id}`);
+        break;
+        
+        case "MESSAGE":
+        router.push("/chat");
+        break;
+
+      }
+    }
     // /* Encode string to slug */
     /* eslint-disable */
     function slugify(text) {
@@ -677,6 +694,7 @@ export default {
       imgURL: process.env.VUE_APP_URL,
       handleUserMode,
       isBuyerMode,
+      handleNotification
     };
   },
 };

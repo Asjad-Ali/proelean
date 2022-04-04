@@ -115,7 +115,6 @@ export default function useOrder() {
             console.log("in condition", current.paymentElements.number)
             descriptionErrors.value.number = "Card Number is required"
         } else if (String(current.paymentElements.number).split("").length !== 16) {
-            //console.log("Card number",String(current.paymentElements.number).split("").length)
             descriptionErrors.value.number = "Card Number 16 characters"
         } else {
             descriptionErrors.value.number = null
@@ -125,6 +124,7 @@ export default function useOrder() {
             console.log("in condition", current.paymentElements.cvc)
             descriptionErrors.value.cvc = "CVC is required"
         } else if (String(current.paymentElements.cvc).split("").length !== 3) {
+          console.log(current.paymentElements.cvc)
             descriptionErrors.value.cvc = "CVC length must be 3 characters"
         } else {
             descriptionErrors.value.cvc = null
