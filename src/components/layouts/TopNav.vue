@@ -352,7 +352,7 @@
                   </div>
                   <div class="dropdown-notifications-item-content">
                     <div>{{ notification.name }}</div>
-                    <div class="text-muted small">{{ notification.body }}</div>
+                    <div class="text-muted small">{{ notification.body.substr(0,29) }}</div>
                   </div>
                 </div>
                 <div class="text-muted small ml-2">

@@ -106,21 +106,21 @@
                           />
                         </div>
                         <!--//col-->
-                        <div class="col" data-v-777096b7="">
-                          <div class="info" data-v-777096b7="">
-                            <div class="desc" data-v-777096b7="">
+                        <div class="col margn">
+                          <div class="info">
+                            <div class="desc">
                               <b> {{ notification.name }} </b>
                             </div>
-                            <div class="desc" data-v-777096b7="">
-                              {{ notification.body.substr(0, 50)
+                            <div class="desc">
+                              {{ notification.body.substr(0, 22)
                               }}{{
-                                notification.body.length > 50 ? "...." : ""
+                                notification.body.length > 22 ? ".." : ""
                               }}
                             </div>
-                            <div class="meta align-baseline" data-v-777096b7="">
+                          </div>
+                            <div class="meta align-baseline mr-2">
                               {{ $filters.timeAgo(notification.created_at) }}
                             </div>
-                          </div>
                         </div>
                         <!--//col-->
                       </div>
@@ -319,5 +319,8 @@ export default {
   .sm-fold-none {
     display: none;
   }
+}
+.margn{
+  margin-left: -15px;
 }
 </style>
