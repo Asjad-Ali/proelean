@@ -5,7 +5,7 @@
         <div class="col-md-12">
           <div class="d-flex align-items-center justify-content-between mb-3 border-bottom">
             <h3 class="font-weight-bold mb-3">Orders</h3>            
-              <select class="form-select form-control-sm" aria-label="Default select example"  @change="showFilter" id="ordersValue">
+              <select class="form-control-sm" aria-label="Default select example"  @change="showFilter" id="ordersValue">
                 <option :value="order.value" v-for="order in OrderSelectionType" :key="order.index">
                   {{ order.name }}
                 </option>

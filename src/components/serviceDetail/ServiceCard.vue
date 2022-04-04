@@ -49,15 +49,23 @@
               </div>
             </div>
             <div>
-              <div class="delivery text-muted">
+              <div class="delivery text-muted d-none d-sm-block">
                 <i
                   class="mdi mdi-google-circles-extended"
                   aria-hidden="true"
                 ></i>
                 <b class="mr-2 text-dark"> Sub Category: </b>
-                {{ service.sub_category.title.substr(0, 29)
-                }}{{ service.sub_category.title > 29 ? "..." : "" }}
+                 {{service.sub_category.title}}
               </div>
+              <div class="delivery text-muted d-sm-none">
+                <i
+                  class="mdi mdi-google-circles-extended"
+                  aria-hidden="true"
+                ></i>
+                <b class="mr-2 text-dark"> Sub Category: </b>
+                  {{service.sub_category.title.substr(0,13)}}{{service.sub_category.title.length > 13 ? '..' : ''}}
+              </div>
+
             </div>
           </article>
           <article>

@@ -29,10 +29,13 @@
                 </div >
             </div>
             <div>
-              <div class="delivery">
-              <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> <span class="text-muted">  {{ service.sub_category.title}} </span> </div
+              <div class="delivery d-none d-lg-block">
+              <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> <span class="text-muted">  {{service.sub_category.title}} </span> </div
               >
             </div>
+            <div class="delivery d-lg-none">
+              <i class="mdi mdi-google-circles-extended" aria-hidden="true"></i> <b class="mr-2"> Sub Category:  </b> <span class="text-muted">  {{service.sub_category.title.substr(0,13)}}{{service.sub_category.title.length > 13 ? '..' : ''}} </span>
+              </div>
           </article>
           <article>
             <div>

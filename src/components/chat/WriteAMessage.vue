@@ -59,6 +59,7 @@
       class="form-control border-0 p-3 shadow-none message-input"
       rows="3"
       v-model="newMessage.text"
+      onkeypress="if(event.key == 'Enter') {console.log('Test')}"
       :readonly="
         !$store.getters.getSelectedConversation &&
         !$store.getters.getNewConversationUser
