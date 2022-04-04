@@ -6,7 +6,7 @@
       </div>
       <div class="border-bottom my-2"></div>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7 col-lg-8">
           <div class="card p-4 shadow-none border">
             <h6 class="text-uppercase">Payment details</h6>
             <div class="border-bottom my-2"></div>
@@ -220,7 +220,7 @@
           </div>
         </div>
 
-        <div class="col-md-4 col-lg-4 right">
+        <div class="col-md-5 col-lg-4 right">
           <PackageDetail />
         </div>
       </div>
