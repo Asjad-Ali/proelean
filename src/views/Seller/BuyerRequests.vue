@@ -78,7 +78,7 @@
               {{ request.total_offers }} Offers Sent
             </div>
             <div
-              class="badge bg-primary mr-2 mb-2 p-2"
+              class="badge bg-primary cursor-pointer mr-2 mb-2 p-2"
               :style="{ 'pointer-events': request.is_applied ? 'none' : '' }"
               data-toggle="modal"
               data-target="#sendOfferModal"
@@ -88,7 +88,7 @@
             </div>
             <div
               :disabled="getBtnStatus == request.id"
-              class="badge bg-danger mr-2 mb-2 p-2"
+              class="badge bg-danger cursor-pointer mr-2 mb-2 p-2"
               @click="deleteJob(request.id)"
             >
               {{ getBtnStatus == request.id ? "Loading..." : "Cancel Offer" }}
@@ -103,7 +103,7 @@
               {{ request.total_offers }} Offers Sent
             </div>
             <div
-              class="badge bg-primary mr-2 mb-2 p-2"
+              class="badge bg-primary cursor-pointer mr-2 mb-2 p-2"
               :style="{ 'pointer-events': request.is_applied ? 'none' : '' }"
               data-toggle="modal"
               data-target="#sendOfferModal"
@@ -113,7 +113,7 @@
             </div>
             <div
               :disabled="getBtnStatus == request.id"
-              class="badge bg-danger mb-2 p-2"
+              class="badge bg-danger cursor-pointer mb-2 p-2"
               @click="deleteJob(request.id)"
             >
               {{ getBtnStatus == request.id ? "Loading..." : "Cancel Offer" }}
@@ -123,7 +123,7 @@
 
           <!--//app-card-footer-->
          </div>
-          <div class="text-center mt-4" >
+          <div class="text-center mt-4" v-if="$store.getters.getLinks.next" >
           <nav aria-label="Page navigation example" >
             <ul class="pagination d-flex justify-content-center">
               <li class="page-item" :class="{disabled:!$store.getters.getLinks.prev}" >

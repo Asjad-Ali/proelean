@@ -7,7 +7,7 @@
     <div class="row freelance-slider">
       <div
         class="
-          col-lg-3 col-md-6
+          col-lg-3 col-md-4
           d-flex
           align-items-stretch
           justify-content-center
@@ -60,9 +60,10 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- New Slider -->
-    <!-- <div class="owl-carousel owl-theme ">
+  <!-- New Slider -->
+  <!-- <div class="owl-carousel owl-theme ">
             <div class="item">
                 <div class="card  p-1   professional-services-cards ">
                     <img src="https://images.pexels.com/photos/11189614/pexels-photo-11189614.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"  alt="">
@@ -73,7 +74,6 @@
                 </div>
             </div>
         </div> -->
-  </div>
 </template>
 
 <script>

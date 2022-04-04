@@ -15,7 +15,7 @@
                </tr>
             </thead>
             <tbody >
-               <tr v-for="order in orders" :key="order.id">
+               <tr v-for="(order) in orders" :key="order.id">
                   <td class="text-center cell" >
                   <div class="item-data mb-3">
                      <img
@@ -31,7 +31,7 @@
                    
                   <td class="text-center cell" >
                     
-                  <span class="badge bg-success" v-if="order.status_id == 1"> IN PROGRESS </span> 
+                  <span class="badge bg-success cursor-pointer-2" v-if="order.status_id == 1"> IN PROGRESS </span> 
                     
                   </td>
                   <td class="cell" >
@@ -100,6 +100,7 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
 export default {
    props: {
       orders: {
@@ -108,8 +109,10 @@ export default {
       }
    },
    setup() {
+      const loadMore = ref();
+      loadMore.value = 3
       return{
-         imgURL: process.env.VUE_APP_URL,
+         loadMore, imgURL: process.env.VUE_APP_URL,
       }
    }
 };

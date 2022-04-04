@@ -74,13 +74,29 @@ export const actions = {
   async dateExtendOfOrder({ commit, state }, payload) {
     console.log("Order id:", payload.order_id);
     const res = await Api.post(`seller/extend_order`, payload);
-    //const router = useRouter();
-    if (res.status === 200) {
+    if (res.status === 201) {
       console.log("Type of Order:", res.status);
       const afterSetOrder = ref(state.orders.filter(order => order.id !== payload.order_id))
       commit("setOrders", afterSetOrder.value);
       useToast(res.message, 'success');
       window.location.href = `/dashboard/orders`
+    }
+    else {
+      useToast(res.message);
+      console.log("Error Order extend date");
+    }
+  },
+
+
+  async extendOrderRequest({ commit, state }, payload) {
+    console.log("Order id:", payload.order_id);
+    const res = await Api.post(`buyer/extend_order_request`, payload);
+    if (res.status === 200) {
+      console.log("Type of Order:", res.status);
+      const afterSetOrder = ref(state.orders.filter(order => order.id !== payload.order_id))
+      commit("setOrders", afterSetOrder.value);
+      useToast(res.message, 'success');
+      window.location.href = `/buyer/manage_order`
     }
     else {
       useToast(res.message);

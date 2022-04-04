@@ -127,40 +127,40 @@
                             <td class="text-center">
                               <a
                                 ><span
-                                  class="badge bg-success"
+                                  class="badge bg-success cursor-pointer-2"
                                   v-if="order.status_id == 1"
                                   >Active</span
                                 ></a
                               >
                               <a
                                 ><span
-                                  class="badge bg-secondary"
+                                  class="badge bg-secondary cursor-pointer-2"
                                   v-if="order.status_id == 2"
                                   >Delivered</span
                                 ></a
                               >
                               <a
-                                ><span class="badge bg-info" v-if="order.status_id == 3"
+                                ><span class="badge bg-info cursor-pointer-2" v-if="order.status_id == 3"
                                   >Revision</span
                                 ></a
                               >
                               <a
                                 ><span
-                                  class="badge bg-primary"
+                                  class="badge bg-primary cursor-pointer-2"
                                   v-if="order.status_id == 4"
                                   >Completed</span
                                 ></a
                               >
                               <a
                                 ><span
-                                  class="badge bg-danger"
+                                  class="badge bg-danger cursor-pointer-2"
                                   v-if="order.status_id == 5"
                                   >Disputed</span
                                 ></a
                               >
                               <a
                                 ><span
-                                  class="badge bg-warning"
+                                  class="badge bg-warning cursor-pointer-2"
                                   v-if="order.status_id == 6"
                                   >Late</span
                                 ></a

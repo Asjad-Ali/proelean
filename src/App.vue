@@ -82,7 +82,7 @@ export default {
   overflow: hidden;
   object-fit: cover;
 }
-.badge{
-  cursor: pointer;
+.cursor-pointer-2{
+  cursor: default
 }
 </style>

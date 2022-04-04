@@ -194,42 +194,42 @@
                       <td class="text-center cell">
                         <a
                           ><span
-                            class="badge bg-success"
+                            class="badge bg-success cursor-pointer-2"
                             v-if="order.status_id == 1"
                             >Active</span
                           ></a
                         >
                         <a
                           ><span
-                            class="badge bg-secondary"
+                            class="badge bg-secondary cursor-pointer-2"
                             v-if="order.status_id == 2"
                             >Delivered</span
                           ></a
                         >
                         <a
                           ><span
-                            class="badge bg-info"
+                            class="badge bg-info cursor-pointer-2"
                             v-if="order.status_id == 3"
                             >Revision</span
                           ></a
                         >
                         <a
                           ><span
-                            class="badge bg-primary"
+                            class="badge bg-primary cursor-pointer-2"
                             v-if="order.status_id == 4"
                             >Completed</span
                           ></a
                         >
                         <a
                           ><span
-                            class="badge bg-danger"
+                            class="badge bg-danger cursor-pointer-2"
                             v-if="order.status_id == 5"
                             >Disputed</span
                           ></a
                         >
                         <a
                           ><span
-                            class="badge bg-warning"
+                            class="badge bg-warning cursor-pointer-2"
                             v-if="order.status_id == 6"
                             >Late</span
                           ></a
@@ -297,12 +297,12 @@
                   <h4 class="margin-minus">
                     {{ order.username }}
                   </h4>
-                  <div class="d-flex align-items-center" v-if="order.status_id == 1"> <button class="badge bg-success border border-success"> Active </button> </div>
-                  <div class="d-flex align-items-center" v-if="order.status_id == 2"> <button class="badge bg-secondary border border-secondary"> Delivered </button> </div>
-                  <div class="d-flex align-items-center" v-if="order.status_id == 3"> <button class="badge bg-info border border-info"> Revision </button> </div>
-                  <div class="d-flex align-items-center" v-if="order.status_id == 4"> <button class="badge bg-primary border border-primary"> Completed </button> </div>
-                  <div class="d-flex align-items-center" v-if="order.status_id == 5"> <button class="badge bg-danger border border-danger"> Disputed </button> </div>
-                  <div class="d-flex align-items-center" v-if="order.status_id == 6"> <button class="badge bg-warning border border-warning"> Late </button> </div>
+                  <div class="d-flex align-items-center" v-if="order.status_id == 1"> <button class="badge bg-success border border-success cursor-pointer-2"> Active </button> </div>
+                  <div class="d-flex align-items-center" v-if="order.status_id == 2"> <button class="badge bg-secondary border border-secondary cursor-pointer-2"> Delivered </button> </div>
+                  <div class="d-flex align-items-center" v-if="order.status_id == 3"> <button class="badge bg-info border border-info cursor-pointer-2"> Revision </button> </div>
+                  <div class="d-flex align-items-center" v-if="order.status_id == 4"> <button class="badge bg-primary border border-primary cursor-pointer-2"> Completed </button> </div>
+                  <div class="d-flex align-items-center" v-if="order.status_id == 5"> <button class="badge bg-danger border border-danger cursor-pointer-2"> Disputed </button> </div>
+                  <div class="d-flex align-items-center" v-if="order.status_id == 6"> <button class="badge bg-warning border border-warning cursor-pointer-2"> Late </button> </div>
                 </div>
                   <div class="d-flex flex-column">
                     <div class=""> <i class="mdi mdi-clock"></i> <b> Due In: </b> {{ order.end_date.substr(0,11) }}</div> 
