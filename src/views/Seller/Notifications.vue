@@ -18,67 +18,55 @@
             v-for="notification in earlierNotification"
             :key="notification.index"
           >
-            <div
-              class="
-                p-3
-                d-flex
-                align-items-center
-                bg-light
-                border-bottom
-                osahan-post-header
-              "
-            >
-              <div class="dropdown-list-image mr-3">
-                <img
-                  class="rounded-circle"
-                  :src="`${imgURL}/${'/assets/images/avator.png'}`"
-                  alt=""
-                />
-              </div>
-              <div class="mr-3">
-                <div class=" font-weight-bold text-truncate">{{ notification.name }}</div>
-                <div style="word-break: break-word;" class="text-muted">{{ notification.body }}</div>
-              </div>
-              <span class="ml-auto my-auto">
-                <div class="d-flex">
-                  <div style="position:sticky" class="text-right text-muted ml-2">
+            <div class="p-3 bg-light border-bottom osahan-post-header">
+              <div class="row d-flex align-items-center">
+                <div class="col-auto">
+                  <div class="dropdown-list-image">
+                    <img
+                      class="rounded-circle"
+                      src="https://api.dex.proelean.com//assets/images/avator.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="font-weight-bold text-truncate text-left">
+                    {{ notification.name }}
+                  </div>
+                </div>
+                <div class="col-auto ml-auto">
+                  <div class="text-muted ml-2">
                     {{ $filters.timeAgo(notification.created_at) }}
                   </div>
-                  <!-- <div>
-                    <i
-                      class="
-                        mdi
-                        text-danger
-                        cursor-pointer
-                        mdi-delete
-                        fa-lg
-                        p-1
-                        m-2
-                      "
-                      data-toggle="modal"
-                      data-target="#exampleModalCenter"
-                    ></i>
-                  </div> -->
                 </div>
-              </span>
+              </div>
+              <div class="row">
+                <div class="col-auto p-3">
+                  <div class="text-muted" style="word-break: break-word">
+                    {{ notification.body }}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-          <div class="app-card-body " v-else>
-          <div class="table-responsive h50vh flex-width-center">
-              <div class="m-5 text-center">
-                <h5>No notifications found</h5>
-                <figure class="py-3 m-0">
-                    <img
-                      src="/assets/seller/images/svg-icons/notify.svg"
-                      alt="notfound"
-                      width="150"
-                      />
-                </figure>
-              </div>
+        <div class="app-card-body" v-else>
+          <div class="table-responsive flex-width-center">
+            <div class="m-5 text-center">
+              <h5>No notifications found</h5>
+              <figure class="">
+                <img
+                  class="rounded-circle"
+                  :src="'/assets/images/notify.svg'"
+                  alt=""
+                  width="200"
+                />
+              </figure>
+            </div>
           </div>
         </div>
       </div>
+
       <!-- Confirmation Modal -->
       <!-- <div
         class="modal fade"
@@ -134,7 +122,7 @@ export default {
     function deleteNotification() {
       console.log("Deleted Successfully");
     }
-    onMounted(() => store.dispatch('getNotification'))
+    onMounted(() => store.dispatch("getNotification"));
     return {
       deleteNotification,
       loader: computed(() => store.getters.getLoaderVal),
@@ -146,5 +134,4 @@ export default {
 </script>
 
 <style >
-
 </style>
