@@ -37,7 +37,7 @@ const routes = [
     name: 'OrderDetailsBuyer',
     component: OrderDetailsBuyer,
   },
- 
+
   {
     path: '/buyer-account',
     name: 'BuyerAccount',
@@ -144,13 +144,13 @@ const router = createRouter({
 });
 
 
-router.beforeEach((to, from, next) => {  
+router.beforeEach((to, from, next) => {
   window.scroll({
     top: 0,
     left: 0,
     behavior: "smooth",
   });
-  
+
   var isAuthenticated = localStorage.getItem('PROELEAN_TOKEN') ? true : false;
   if (['/login', '/register', '/forgot'].includes(to.path) || isAuthenticated) {
     next(); // allow to enter route

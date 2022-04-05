@@ -1,7 +1,7 @@
 <template>
   <div class="container-xl">
     <div class="row">
-      <div class="col-md-6 col-12">
+      <div class="col-md-3 col-12">
         <h1 class="app-page-title mb-1" data-v-d1f2b3da="">Payments</h1>
       </div>
       <div class="col-md-4 col-8">
@@ -21,6 +21,12 @@
           <option value="option-3" data-v-d1f2b3da="">This month</option>
           <option value="option-4" data-v-d1f2b3da="">Last 3 months</option>
         </select>
+      </div>
+      <div class="col-md-3 col-12 text-right">
+        <a href="#" class="btn app-btn-secondary my-2 m-md-0">
+          <i class="mdi mdi-bank"></i>
+          Bank Transfer</a
+        >
       </div>
     </div>
     <div class="border-bottom my-3"></div>
@@ -321,7 +327,7 @@ export default {
   margin-bottom: 8rem;
   margin-top: 5rem;
 }
-.form-control{
+.form-control {
   padding: 18px 10px !important;
 }
 </style>
