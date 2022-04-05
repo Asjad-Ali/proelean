@@ -22,7 +22,7 @@ export default createStore({
     userNotifications: {},
     recentNotifications: [],
     allNotifications: [],
-    usermode: "BUYER",
+    usermode: localStorage.getItem("USER_MODE") || "BUYER",
     loader: 0,
     screenWidth: window.innerWidth,
   },
@@ -44,6 +44,7 @@ export default createStore({
     },
     toggleUserMode(state) {
       state.usermode = state.usermode == "BUYER" ? "SELLER" : "BUYER";
+      localStorage.setItem('USER_MODE',state.usermode);
     },
     setLoader(state,loader){
       state.loader=loader;

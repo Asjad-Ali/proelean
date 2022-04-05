@@ -47,8 +47,7 @@
                     <div
                       class="osahan-chat-list"
                       v-else-if="
-                        mode == 'conversation' ||
-                        $store.getters.getScreenWidth > 999
+                       mode == 'conversation' || $store.getters.getScreenWidth  > 999 && !$route.query.gig
                       "
                     >
                       <ConversationList
@@ -95,7 +94,8 @@ export default {
       store.dispatch("lookForConversationChanges");
       if (route.query.gig) {
         store.dispatch("getRefererService", route.query.gig );
-      }
+      } 
+
     });
     onMounted(() => {
       store.commit("setNewConversationStatus", true);
