@@ -63,6 +63,7 @@
         !$store.getters.getSelectedConversation &&
         !$store.getters.getNewConversationUser
       "
+      @keyup.enter="sendMsg($event)"
     ></textarea>
     <button
      @click.prevent="sendMsg($event)"
