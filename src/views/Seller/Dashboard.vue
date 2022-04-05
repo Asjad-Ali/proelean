@@ -5,7 +5,7 @@
     <AppCard class="marginBottom" />
 
     <ActiveOrderCard v-if="orders.length > 0" class="margin" :orders="orders" />
-    <div class="d-flex justify-content-center my-3" v-if="orderLength !== allOrders.length" >
+    <div class="d-flex justify-content-center my-3" v-if="orderLength !== allOrders.length && orders.length > 0" >
       <button class="btn app-btn-secondary mb-3" @click="loadOrders" >Load More</button>
     </div>
     <AnalyticBoxes />

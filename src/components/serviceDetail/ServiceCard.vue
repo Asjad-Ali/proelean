@@ -1,6 +1,6 @@
 <template>
   <div class="col-lg-4 right">
-    <div class="mt-2 d-flex justify-content-end">
+    <div class="mt-2 d-flex justify-content-end" v-if="!$store.getters.isBuyerMode">
       <router-link
         class="text-primary d-none d-md-block btn app-btn-secondary"
         :to="{ name: 'UpdateService', params: { id: service.id } }"

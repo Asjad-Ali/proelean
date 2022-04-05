@@ -26,6 +26,7 @@
 
         </div>
       </div>
+      
 
           <!-------- For Mobile Screen -------->
       <div class="tab-content osahan-table rounded d-sm-none mt-3">

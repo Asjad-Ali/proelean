@@ -97,8 +97,8 @@
                         <div class="col-auto" data-v-777096b7="">
                           <img
                             :src="`${imgURL}/${
-                              notification.image
-                                ? notification.image
+                              notification.sender_pic
+                                ? notification.sender_pic
                                 : '/assets/images/avator.png'
                             }`"
                             class="profile-image img-full rounded-circle"

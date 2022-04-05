@@ -228,18 +228,18 @@ export default {
     const currentYear = ref(new Date().getFullYear());
     const loopYear = ref(0);
     const months = ref([
-      { name: "January" },
-      { name: "February" },
-      { name: "March" },
-      { name: "April" },
-      { name: "May" },
-      { name: "June" },
-      { name: "July" },
-      { name: "August" },
-      { name: "September" },
-      { name: "October" },
-      { name: "November" },
-      { name: "December" },
+      { name: "01" },
+      { name: "02" },
+      { name: "03" },
+      { name: "04" },
+      { name: "05" },
+      { name: "06" },
+      { name: "07" },
+      { name: "08" },
+      { name: "09" },
+      { name: "10" },
+      { name: "11" },
+      { name: "12" },
     ]);
     const { formData, descriptionRegex, descriptionErrors, payload } =
       useOrder();

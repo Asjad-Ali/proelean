@@ -206,7 +206,7 @@
                         <div
                           class="input-group-prepend d-flex align-items-center"
                         >
-                          <div class="btn app-btn-secondary">$</div>
+                          <div class="btn app-btn-secondary">€</div>
                         </div>
                         <input
                           type="number"
