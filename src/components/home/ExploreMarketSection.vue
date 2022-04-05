@@ -1,33 +1,40 @@
 <template>
-   <div class="market-wrapper py-5 bg-white">
-      <div class="container">
-         <h2 class="text-center">Explore the marketplace</h2>
- 
+  <div class="market-wrapper py-5 bg-white">
+    <div class="container">
+      <h2 class="text-center">Explore the marketplace</h2>
 
-
-<section>
-    <div class="row">
-      <!--ADD CLASSES HERE d-flex align-items-stretch-->
-      <div class="col-lg-3 d-flex align-items-stretch justify-content-center" v-for="category in $store.getters.getCategories" :key="category.id">
-        <div class="card shadow-none">
-          <router-link :to="{name:'Gigs', params:{slug: category.slug}}">
-          <img :src="`${category.banner.includes('https') || category.banner.includes('http') ? category.banner : imgURL+'/'+category.banner}`" class="card-img-top" alt="Card Image">
-<<<<<<< HEAD
-          <div class="card-body d-flex flex-column margn">
-            <h5 class="card-title text-center">{{ category.title }}</h5>
-=======
-          <div class="card-body d-flex flex-column margn text-center">
-            <h5 class="card-title">{{ category.title }}</h5>
->>>>>>> deb80317e6457cfa38fb94d60729579af86ba0ea
+      <section>
+        <div class="row">
+          <!--ADD CLASSES HERE d-flex align-items-stretch-->
+          <div
+            class="col-lg-3 d-flex align-items-stretch justify-content-center"
+            v-for="category in $store.getters.getCategories"
+            :key="category.id"
+          >
+            <div class="card shadow-none">
+              <router-link
+                :to="{ name: 'Gigs', params: { slug: category.slug } }"
+              >
+                <img
+                  :src="`${
+                    category.banner.includes('https') ||
+                    category.banner.includes('http')
+                      ? category.banner
+                      : imgURL + '/' + category.banner
+                  }`"
+                  class="card-img-top"
+                  alt="Card Image"
+                />
+                <div class="card-body d-flex flex-column margn text-center">
+                  <h5 class="card-title">{{ category.title }}</h5>
+                </div>
+              </router-link>
+            </div>
           </div>
-          </router-link>
         </div>
-      </div>
-    </div>
+      </section>
 
-</section>
-   
-         <!-- <ul class="categories-list mb-0">
+      <!-- <ul class="categories-list mb-0">
             <li>
                <a href="#">
                <img src="assets/images/graphics.svg" alt="" loading="lazy">Graphics &amp; Design
@@ -67,21 +74,21 @@
                </a>
             </li>
          </ul> -->
-      </div>
-   </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
- const imgURL = process.env.VUE_APP_URL;
+const imgURL = process.env.VUE_APP_URL;
 </script>
 
 <style scoped>
-.card img{
-   height: 200px;
-   width: 280px;
-   object-fit: cover;
+.card img {
+  height: 200px;
+  width: 280px;
+  object-fit: cover;
 }
-.margn{
-   margin-bottom: -10px;
+.margn {
+  margin-bottom: -10px;
 }
 </style>
