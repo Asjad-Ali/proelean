@@ -64,11 +64,15 @@
         !$store.getters.getNewConversationUser
       "
     ></textarea>
+    <button
+     @click.prevent="sendMsg($event)"
+     :disabled="sendBtn"
+     >
     <i
       class="mdi mdi-send position-absolute send-icon cursor-pointer"
-      @click.prevent="sendMsg"
+     
     ></i>
-
+    </button>
     <div
       class="overflow-hidden position-absolute d-flex flex-column"
       style="top: 0; left: 0px"
@@ -132,6 +136,7 @@ export default {
     const { uploadAttachment } = useFirebaseMedia();
 
     const store = useStore();
+    const sendBtn = ref(false);
 
     const chatMedia = ref({
       message: "",
@@ -159,9 +164,12 @@ export default {
       chatMedia.value.media = {};
     };
 
-    const sendMsg = () => {
+    const sendMsg = (event) => {
+      event.preventDefault();
+      sendBtn.value = true;
+
       if (chatMedia.value.media) {
-        uploadAttachment(chatMedia, newMessage.value);
+        uploadAttachment(chatMedia, newMessage.value, sendBtn);
       } else {
         if (!newMessage.value.text) {
           return;
@@ -176,6 +184,7 @@ export default {
     return {
       newMessage,
       sendMsg,
+      sendBtn,
       showOfferModal,
       selectMedia,
       chatMedia,

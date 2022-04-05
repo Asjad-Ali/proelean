@@ -20,7 +20,7 @@ export default createStore({
     userNotifications: {},
     recentNotifications: [],
     allNotifications: [],
-    usermode: "BUYER",
+    usermode: localStorage.getItem("USER_MODE") || "BUYER",
     loader: 0,
     screenWidth: window.innerWidth,
   },
@@ -44,6 +44,7 @@ export default createStore({
     },
     toggleUserMode(state) {
       state.usermode = state.usermode == "BUYER" ? "SELLER" : "BUYER";
+      localStorage.setItem('USER_MODE',state.usermode);
     },
     setLoader(state,loader){
       state.loader=loader;
@@ -55,10 +56,10 @@ export default createStore({
       if(!getters.getAllNotifications.length > 0){
         const res = await Api.get("notification");
         if (res.status === 200) {
-          commit("setRecentNotification", res.notifications.slice(0, 4));
-          commit("setAllNotification", res.notifications);
+          commit("setRecentNotification", res.data.slice(0, 4));
+          commit("setAllNotification", res.data);
         } else {
-          commit("setNotification", res.message);
+          commit("setNotification", res);
         }
       }
       commit('setLoader',0);
