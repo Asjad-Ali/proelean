@@ -178,9 +178,56 @@
               data-bs-placement="top"
               title="Manage Jobs"
             >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
-  <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z"/>
-</svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-briefcase"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z"
+                />
+              </svg>
+            </router-link>
+          </li>
+          <!-- Create Jobs -->
+          <li
+            v-if="isBuyerMode"
+            class="
+              nav-item
+              dropdown
+              no-arrow no-caret
+              mr-3
+              dropdown-notifications
+              show
+              d-none d-lg-block
+            "
+          >
+            <router-link
+              to="/buyer/create_job"
+              class="btn btn-icon btn-transparent-dark dropdown-toggle"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Create Jobs"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-bag-plus"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"
+                />
+                <path
+                  d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"
+                />
+              </svg>
             </router-link>
           </li>
           <!-- Manage Order -->
@@ -318,7 +365,7 @@
                   <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                   <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                 </svg>
-                Alerts Center
+                Recent Notifications
               </h6>
               <router-link
                 v-for="notification in userNotification"
@@ -329,30 +376,25 @@
                   justify-content-between
                 "
                 to="#"
-                @click="handleNotification(notification)"
+                @click.prevent="handleNotification(notification)"
               >
                 <div class="d-flex justify-content-start">
                   <div class="dropdown-notifications-item-icon bg-warning">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="feather feather-activity"
-                    >
-                      <polyline
-                        points="22 12 18 12 15 21 9 3 6 12 2 12"
-                      ></polyline>
-                    </svg>
+                    <img
+                      :src="`${imgURL}/${
+                        notification.sender_pic
+                          ? notification.sender_pic
+                          : '/assets/images/avator.png'
+                      }`"
+                      class="profile-image img-full rounded-circle"
+                      alt="profile_img"
+                    />
                   </div>
                   <div class="dropdown-notifications-item-content">
-                    <div>{{ notification.name }}</div>
-                    <div class="text-muted small">{{ notification.body.substr(0,29) }}</div>
+                    <b>{{ notification.name }}</b>
+                    <div class="text-muted small">
+                      {{ notification.body.substr(0, 29) }}
+                    </div>
                   </div>
                 </div>
                 <div class="text-muted small ml-2">
@@ -501,14 +543,7 @@
             </div>
           </li>
           <!-- languages li end -->
-          <li
-            class="
-              nav-item
-              dropdown
-              no-arrow no-caret
-              dropdown-user
-            "
-          >
+          <li class="nav-item dropdown no-arrow no-caret dropdown-user">
             <a
               class="btn btn-icon btn-transparent-dark dropdown-toggle"
               id="navbarDropdownUserImage"
@@ -562,12 +597,21 @@
               </router-link>
               <router-link class="dropdown-item" to="/buyer/change_password">
                 <div class="dropdown-item-icon">
- 
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
-  <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
-  <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
-</svg>
-
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-shield-lock"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"
+                    />
+                    <path
+                      d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"
+                    />
+                  </svg>
                 </div>
                 Change Password
               </router-link>
@@ -656,19 +700,18 @@ export default {
     };
 
     function handleNotification(notification) {
-      switch(notification.type) {
+      switch (notification.type) {
         case "ORDER":
           router.push(`/order-details/${notification.content_id}`);
-        break;
-    
-        case "OFFER":
-        router.push(`/buyer/view-offers/${notification.content_id}`);
-        break;
-        
-        case "MESSAGE":
-        router.push("/chat");
-        break;
+          break;
 
+        case "OFFER":
+          router.push(`/buyer/view-offers/${notification.content_id}`);
+          break;
+
+        case "MESSAGE":
+          router.push("/chat");
+          break;
       }
     }
     // /* Encode string to slug */
@@ -694,7 +737,7 @@ export default {
       imgURL: process.env.VUE_APP_URL,
       handleUserMode,
       isBuyerMode,
-      handleNotification
+      handleNotification,
     };
   },
 };

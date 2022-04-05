@@ -1,22 +1,22 @@
 <template>
   <div class="container-xl">
-    <div class="mb-3">
-      <div class="d-flex mb-2 justify-content-between ">
+    <div>
+      <div class="d-flex justify-content-between ">
         <div >
         <h3 class="app-page-title mb-0 mt-3">View Offers</h3>
         </div>
       </div>
-      <div class="border-bottom my-3"></div>
     </div>
+    <div class="border-bottom my-3"></div>
     <div v-if="$store.getters.getLoaderVal" class="d-flex justify-content-center s-margin">
       <div class="spinner-border text-primary m-5" role="status">
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <div v-else>
-      <div v-if="offers">
+    <div v-else class="mb-5">
+      <div v-if="offers.length > 0">
         <div
-          class="app-card app-card-notification shadow-sm mb-4"
+          class="app-card app-card-notification shadow-sm mb-2 p-2"
           v-for="offer in offers"
           :key="offer.id"
         >
@@ -115,7 +115,7 @@
                     Place an Order
                 </button>
                 <router-link :to="{name:'Chat', params:{id:offer.profile.id}}"
-                        class="mt-2 btn btn-sm btn-light w-100"
+                  class="mt-2 btn btn-sm btn-light text-black w-100"
                 >
                   Contact Seller
                 </router-link>
@@ -126,10 +126,9 @@
           <!--//app-card-footer-->
          </div>
       </div>
-
       <div v-else class="card shadow-none text-center py-5">
             <h3>No Offer Yet</h3>
-          </div>
+        </div>
     </div>
 
    

@@ -24,7 +24,7 @@
                   <div class="dropdown-list-image">
                     <img
                       class="rounded-circle"
-                      src="https://api.dex.proelean.com//assets/images/avator.png"
+                      :src="`${imgURL}/${notification.sender_pic ? notification.sender_pic : '/assets/images/avator.png'}`"
                       alt=""
                     />
                   </div>
@@ -34,14 +34,19 @@
                     {{ notification.name }}
                   </div>
                 </div>
-                <div class="col-auto ml-auto">
-                  <div class="text-muted ml-2">
+                <div class="col-auto ml-auto d-flex">
+                  <div class="text-muted ml-2 mt-1">
                     {{ $filters.timeAgo(notification.created_at) }}
                   </div>
+                  <div class="text-muted ml-2">
+                    <i style="font-size:22px" data-toggle="modal" data-target="#exampleModal"
+                    @click="deleteNotification(notification.id)"
+                      class="mdi mdi-delete text-danger cursor-pointer"></i>
+                  </div> 
                 </div>
               </div>
               <div class="row">
-                <div class="col-auto p-3">
+                <div class="col-10 p-3">
                   <div class="text-muted" style="word-break: break-word">
                     {{ notification.body }}
                   </div>
@@ -69,39 +74,25 @@
 
       <!-- Confirmation Modal -->
       <!-- <div
-        class="modal fade"
-        id="exampleModalCenter"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
+        class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
       >
-        <div
-          class="modal-dialog modal-dialog-centered"
-          role="document"
-        >
+        <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header d-flex justify-content-center">
-              <h5 class="modal-title" id="exampleModalLongTitle">
-                Delete Notification
-              </h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Delete Service</h5>
             </div>
             <div class="modal-body text-center">
               Are you sure you want to delete the service?
             </div>
             <div class="modal-footer d-flex justify-content-center">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
                 No
               </button>
               <button
                 type="button"
                 class="btn btn-danger"
                 data-dismiss="modal"
-                @click="deleteNotification"
+                @click.prevent="deleteNotification"
               >
                 Yes
               </button>
@@ -119,9 +110,11 @@ import { useStore } from "vuex";
 export default {
   setup() {
     const store = useStore();
-    function deleteNotification() {
-      console.log("Deleted Successfully");
+    function deleteNotification(id) {
+      console.log("Deleted Successfully",id);
+      store.dispatch("deleteNotification",id)
     }
+
     onMounted(() => store.dispatch("getNotification"));
     return {
       deleteNotification,

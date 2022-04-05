@@ -10,6 +10,8 @@ import * as become_seller from "./modules/become_seller.store";
 import * as wishlist from "./modules/wishlist.store";
 import * as chat from "./modules/chat.store";
 import * as order from "./modules/order.store";
+import { ref } from "vue";
+import useToast from '@/composables/useToast.js'
 
 let user = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -30,12 +32,10 @@ export default createStore({
     getLoaderVal : state => state.loader,
     getScreenWidth: (state) => state.screenWidth,  
     getAllNotifications: (state) => state.allNotifications,
-    getRecentNotifications: (state) => state.recentNotifications,
+    getRecentNotifications: (state) => state.recentNotifications = state.allNotifications.slice(0, 4),
   },
   mutations: {
-    setRecentNotification(state, notification) {
-      state.recentNotifications = notification;
-    },
+
     setAllNotification(state, notification) {
       state.allNotifications = notification;
     },
@@ -55,12 +55,24 @@ export default createStore({
       if(!getters.getAllNotifications.length > 0){
         const res = await Api.get("notification");
         if (res.status === 200) {
-          commit("setRecentNotification", res.data.slice(0, 4));
           commit("setAllNotification", res.data);
         } else {
           commit("setNotification", res);
         }
       }
+      commit('setLoader',0);
+    },
+
+
+    async deleteNotification({ commit, getters },payload) {
+      payload
+      commit('setLoader',1);
+        const res = await Api.delete(`notifications/${payload}/delete`);
+        if (res.message === "Notification removed") {
+          const notifications = ref(getters.getAllNotifications.filter(notification => notification.id != payload))
+          commit("setAllNotification", notifications.value);
+          useToast("Notification Deleted", 'success');
+        }
       commit('setLoader',0);
     },
 

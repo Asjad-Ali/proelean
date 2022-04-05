@@ -1,8 +1,9 @@
 <template>
-  <div class="container py-3">
+  <div class="container mt-3 mb-5">
     <div class="row d-flex justify-content-center">
       <div class="col-lg-10">
-        <h4 class="font-weight-bold pb-2">Create a Job</h4>
+        <h4 class="font-weight-bold">Create a Job</h4>
+        <div class="border-bottom my-2"></div>
         <form>
           <div class="bg-white rounded shadow-sm sidebar-page-right">
             <div class="bg-white rounded p-0">

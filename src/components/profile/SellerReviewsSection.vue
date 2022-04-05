@@ -64,10 +64,11 @@
             <div class="left">
               <span>
                 <img
-                  src="images/user/s9.png"
-                  class="profile-pict-img img-fluid"
-                  alt=""
-                />
+              :src="`${imgURL}/${ review.user.image ? review.user.image : '/assets/images/avator.png'
+              }`"
+              class="profile-pict-img img-full"
+              alt="img"
+            />
               </span>
             </div>
             <div class="right">
@@ -143,6 +144,7 @@ export default {
       user: computed(() => store.getters.getAuthUser),
       reviews: computed(() => payload.type === 'seller' ? store.getters.getSellerReviews : store.getters.getServiceReviews),
       handleReviews,
+      imgURL: process.env.VUE_APP_URL,
     };
   },
 };
