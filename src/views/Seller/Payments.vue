@@ -23,9 +23,9 @@
         </select>
       </div>
       <div class="col-md-3 col-12 text-right">
-        <a href="#" class="btn app-btn-secondary my-2 m-md-0">
+        <router-link to="/dashboard/bank-attachment" class="btn app-btn-secondary my-2 m-md-0">
           <i class="mdi mdi-bank"></i>
-          Bank Transfer</a
+          Bank Transfer</router-link
         >
       </div>
     </div>
@@ -38,14 +38,17 @@
         role="tabpanel"
         aria-labelledby="orders-all-tab"
       >
-        <div class="app-card app-card-orders-table shadow-sm mb-5">
+        <div v-if="loader" class="d-flex justify-content-center s-margin">
+          <div class="spinner-border text-primary m-2" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div class="app-card app-card-orders-table shadow-sm mb-5" v-else>
           <div class="app-card-body">
             <div class="table-responsive">
               <table class="table app-table-hover mb-0 text-left">
                 <thead>
                   <tr>
-                    <!-- <th class="cell">Sr#</th> -->
-                    <!-- <th class="cell">Product</th> -->
                     <th class="cell">Name</th>
                     <th class="cell">Date</th>
                     <th class="cell text-center">Status</th>
@@ -54,119 +57,50 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="withdraw in $store.getters.getWithdrawRequest" :key="withdraw.id">
-                    <!-- <td class="cell">#15346</td>
+                  <tr
+                    v-for="withdraw in $store.getters.getWithdrawRequest"
+                    :key="withdraw.id"
+                  >
                     <td class="cell">
-                      <span class="truncate"
-                        >Lorem ipsum dolor sit amet eget volutpat erat</span
-                      >
-                    </td>-->
-                    <td class="cell">{{$store.getters.getAuthUser.username}}</td> 
+                      {{ $store.getters.getAuthUser.username }}
+                    </td>
                     <td class="cell">
-                      <span>{{withdraw.created_at}}</span><span class="note">2:16 PM</span>
+                      <span>{{ withdraw.created_at }}</span
+                      ><span class="note">2:16 PM</span>
                     </td>
                     <td class="cell text-center">
-                      <span class="badge bg-success">{{withdraw.status}}</span>
+                      <span class="badge bg-success">{{
+                        withdraw.status
+                      }}</span>
                     </td>
-                    <td class="cell">${{withdraw.price}}</td>
+                    <td class="cell">${{ withdraw.amount }}</td>
                     <td class="cell">
                       <a class="btn-sm app-btn-secondary" href="#">View</a>
                     </td>
                   </tr>
-                  
                 </tbody>
               </table>
             </div>
-            <!--//table-responsive-->
           </div>
-          <!--//app-card-body-->
         </div>
-        <!--//app-card-->
-        <!-- <nav class="app-pagination">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
-                >Previous</a
-              >
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav> -->
-        <!--//app-pagination-->
       </div>
-      <!--//tab-pane-->
-
-      <div
-        class="tab-pane fade"
-        id="orders-paid"
-        role="tabpanel"
-        aria-labelledby="orders-paid-tab"
-      >
-        <div class="app-card app-card-orders-table mb-5">
-          <div class="app-card-body">
-            <div class="table-responsive">
-              <table class="table app-table-hover mb-0 text-left">
-                <thead>
-                  <tr>
-                    <!-- <th class="cell">Sr#</th> -->
-                    <!-- <th class="cell">Product</th> -->
-                    <th class="cell">Name</th>
-                    <th class="cell">Date</th>
-                    <th class="cell text-center">Status</th>
-                    <th class="cell">Total</th>
-                    <th class="cell"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="withdraw in $store.getters.getWithdrawRequest" :key="withdraw.id">
-                    <!-- <td class="cell">#15346</td>
-                    <td class="cell">
-                      <span class="truncate"
-                        >Lorem ipsum dolor sit amet eget volutpat erat</span
-                      >
-                    </td>-->
-                    <td class="cell">{{$store.getters.getAuthUser.username}}</td> 
-                    <td class="cell">
-                      <span>{{withdraw.created_at}}</span><span class="note">2:16 PM</span>
-                    </td>
-                    <td class="cell text-center">
-                      <span class="badge bg-success">{{withdraw.status}}</span>
-                    </td>
-                    <td class="cell">${{withdraw.price}}</td>
-                    <td class="cell">
-                      <a class="btn-sm app-btn-secondary" href="#">View</a>
-                    </td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-            </div>
-            <!--//table-responsive-->
-          </div>
-          <!--//app-card-body-->
-        </div>
-        <!--//app-card-->
-      </div>
-      <!--//tab-pane-->
     </div>
-    <!--//tab-content-->
   </div>
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core';
-import { useStore } from 'vuex';
+import { computed, onMounted } from "@vue/runtime-core";
+import { useStore } from "vuex";
 export default {
   setup() {
     const store = useStore();
     onMounted(store.dispatch("getWithdrawRequest"));
+
+    return {
+      loader: computed(() =>
+        store.getters.getPaymentLoadingStatus === "LOADING" ? true : false
+      ),
+    };
   },
 };
 </script>
