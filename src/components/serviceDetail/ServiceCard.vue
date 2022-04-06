@@ -2,7 +2,7 @@
   <div class="col-lg-4 right">
     <div class="mt-2 d-flex justify-content-end" v-if="!$store.getters.isBuyerMode">
       <router-link
-        class="text-primary d-none d-md-block btn app-btn-secondary"
+        class="text-primary edit-btn d-none btn app-btn-secondary"
         :to="{ name: 'UpdateService', params: { id: service.id } }"
       >
         <i class="mdi mdi-pencil"></i>
@@ -44,7 +44,7 @@
             <div>
               <div class="delivery text-muted">
                 <i class="mdi mdi-radiobox-blank" aria-hidden="true"></i
-                ><b class="mr-2 text-dark"> Category : </b>
+                ><b class="mr-2 text-dark"> Category: </b>
                 {{ service.category.title }}
               </div>
             </div>
@@ -62,8 +62,8 @@
                   class="mdi mdi-google-circles-extended"
                   aria-hidden="true"
                 ></i>
-                <b class="mr-2 text-dark"> Sub Category: </b>
-                  {{service.sub_category.title.substr(0,13)}}{{service.sub_category.title.length > 13 ? '..' : ''}}
+                <b class="mr-2 text-dark"> Sub Category:</b>
+                {{service.sub_category.title.trim().substr(0,13)}} {{service.sub_category.title.length > 13 ? '..' : ''}}
               </div>
 
             </div>
@@ -72,7 +72,7 @@
             <div>
               <div class="delivery text-muted">
                 <i class="mdi mdi-currency-eur" aria-hidden="true"></i
-                ><b class="mr-2 text-dark"> Price : </b> €{{ service.price }}
+                ><b class="mr-2 text-dark"> Price: </b> €{{ service.price }}
               </div>
             </div>
           </article>
@@ -123,5 +123,11 @@ export default {
 }
 .main-page .right .tab-content p {
   margin: 15px 5px;
+}
+
+@media (min-width: 991.98px) { 
+  .edit-btn{
+    display: block !important;
+  }
 }
 </style>

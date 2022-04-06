@@ -1,5 +1,5 @@
 <template>
-    <div id="reviews" class="review-section">
+    <div id="reviews" class="review-section" >
         <div class="d-flex align-items-center justify-content-between mb-2">
         <h4 class="m-0"> 37 Reviews </h4>
         <select class="custom-select custom-select-sm border-0 shadow-sm ml-2">

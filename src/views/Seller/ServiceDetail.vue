@@ -13,7 +13,7 @@
         <div class="col-lg-8 left">
           <div class="mt-2 d-flex justify-content-end">
             <router-link
-              class="text-primary d-md-none btn app-btn-secondary"
+              class="text-primary d-none edit-btn btn app-btn-secondary"
               :to="{ name: 'UpdateService', params: { id: service.id } }"
             >
               <i class="mdi mdi-pencil"></i>
@@ -52,10 +52,11 @@
               </div>
             </div> -->
           </div>
-          <ReviewSection />
+          <ReviewSection v-if="$store.getters.getScreenWidth > 991" />
         </div>
-        <ServiceCard />
+        <ServiceCard  class="order-md-2 order-1"/>
       </div>
+      <ReviewSection v-if="$store.getters.getScreenWidth < 991" />
     </div>
     <!-- <PeopleViewProfile /> -->
   </div>
@@ -113,6 +114,11 @@ export default {
 @media (max-width: 991.98px) {
   .h2-cutom-font {
     font-size: 17px !important;
+  }
+}
+@media (max-width: 991.98px) { 
+  .edit-btn{
+    display: block !important;
   }
 }
 </style>

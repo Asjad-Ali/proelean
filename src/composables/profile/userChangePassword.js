@@ -68,7 +68,7 @@ export default function useChangePassword () {
             } else if (current.password.length < 6) {
             changePasswordError.value.password = "Password must be atleast 6 characters";
             } else if (current.password === current.current_password) {
-            changePasswordError.value.password = "New Password should't match Old Password";
+            changePasswordError.value.password = "This password is already used";
             } else {
             changePasswordError.value.password = null;
         }
@@ -76,8 +76,6 @@ export default function useChangePassword () {
             changePasswordError.value.password_confirmation = "Confirm Password is required";
             } else if (current.password_confirmation != current.password ) {
             changePasswordError.value.password_confirmation = "Confirm Password dosn't match";
-            }else if (current.password_confirmation === current.current_password) {
-            changePasswordError.value.password = "New Password should't match Old Password";
             } else {
             changePasswordError.value.password_confirmation = null;
         }

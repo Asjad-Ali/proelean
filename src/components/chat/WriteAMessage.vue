@@ -61,8 +61,7 @@
       v-model="newMessage.text"
       :readonly="
         !$store.getters.getSelectedConversation &&
-        !$store.getters.getNewConversationUser
-      "
+        !$store.getters.getNewConversationUser"
     ></textarea>
     <button
      @click.prevent="sendMsg($event)"
