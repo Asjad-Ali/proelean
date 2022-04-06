@@ -20,6 +20,7 @@ export const state = {
   buyerRequests: [],
   buyerRequestsPages: [],
   earnings: {},
+  earningsDetail:{}
 }
 
 export const getters = {
@@ -35,6 +36,7 @@ export const getters = {
   getBuyerRequests: state => state.buyerRequests,
   getBuyerRequestsPages: state => state.buyerRequestsPages,
   getSellerEarning: state => state.earnings,
+  getSellerEarningDetails: state => state.earningsDetail,
 }
 
 export const mutations = {
@@ -93,6 +95,9 @@ export const mutations = {
   },
   setEarnings(state, earnings) {
     state.earnings = earnings
+  },
+  setEarningDetails(state, earnings) {
+    state.earningsDetail = earnings
   },
 }
 
@@ -261,6 +266,19 @@ export const actions = {
         console.log("get Earnings error");
       }
     }
+  },
+  async earningDetails({ commit, state }) {
+    commit('setServicesLoadingStatus', 'LOADING');
+    if(!state.earningsDetail.length) {
+      const res = await Api.get(`seller/earningDetails`);
+      console.log("Earning details",res.data)
+      if (res.status === 200) {
+        commit("setEarningDetails", res.data);
+      } else {
+        console.log("get Earnings error");
+      }
+    }
+    commit('setServicesLoadingStatus', 'COMPLETED');
   },
 
 }

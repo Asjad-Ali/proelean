@@ -1,9 +1,10 @@
 <template>
   <div class="container-xl pt-2 mb-3">
-    <h4>My Account</h4>
-    <div class="border-bottom mb-3"></div>
     <div class="row gy-4 d-flex justify-content-center">
+
       <div class="col-12 col-lg-8">
+        <h4>My Account</h4>
+        <div class="border-bottom mb-3"></div>
         <div
           class="
             app-card app-card-account
@@ -94,7 +95,7 @@
                   <div>
                     <div class="item-label mb-2">
                       <strong>Name</strong>
-                      <span class="text-danger ">*</span>
+                      <span class="text-danger">*</span>
                       <span
                         class="text-danger mt-1 ml-1"
                         v-show="editUserError.name"
@@ -181,10 +182,11 @@
             <div class="item pt-2">
               <div>
                 <div class="item-label mb-2"><strong>Description</strong></div>
-                <input
+                <textarea
                   type="text"
                   class="form-control mb-4"
                   id="description"
+                  rows="4"
                   v-model="editUser.description"
                   placeholder="Enter your Description"
                   required
@@ -192,21 +194,21 @@
               </div>
               <!--//row-->
             </div>
-              </div>
-            </div>
           </div>
-          <!--//app-card-body-->
-          <div class="app-card-body p-4 w-100 text-center">
-            <button class="btn app-btn-secondary mr-2" @click="update"
+          <div class="app-card-body mb-4 w-100 text-center">
+            <button class="btn app-btn-secondary" @click="update"
             :disabled="!Object.values(editUserError).every(value => !value)"
             >{{
               btnStatus === 2 ? "Loading..." : "Update"
             }}</button>
           </div>
-          <!--//app-card-footer-->
         </div>
-        <!--//app-card-->
       </div>
+      <!--//app-card-body-->
+      <!--//app-card-footer-->
+    </div>
+    <!--//app-card-->
+  </div>
 </template>
 
 <script>

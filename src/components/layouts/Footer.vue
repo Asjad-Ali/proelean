@@ -58,7 +58,7 @@
                  <img src="/assets/images/Pro-eLean-.png">
                  </router-link>
               </div>
-              <p>© Copyright 2022 Proelean. All Rights Reserved
+              <p class="text-sm-center">© Copyright 2022 Proelean. All Rights Reserved
               </p>
               <ul class="social">
                  <li>

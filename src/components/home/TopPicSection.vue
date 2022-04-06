@@ -25,8 +25,7 @@
               class="img-fluid img-thumbnail gm-image"
               :src="
                 `${imgURL}/${service.service_media[0].media}` ??
-                '/assets/images/banner.png'
-              "
+                '/assets/images/banner.png'"
             />
           </router-link>
           <div class="freelancer-footer">

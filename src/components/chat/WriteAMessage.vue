@@ -59,13 +59,20 @@
       class="form-control border-0 p-3 shadow-none message-input"
       rows="3"
       v-model="newMessage.text"
-      :readonly="!$store.getters.getSelectedConversation && !$store.getters.getNewConversationUser"
+      :readonly="
+        !$store.getters.getSelectedConversation &&
+        !$store.getters.getNewConversationUser
+      "
       @keyup.enter="sendMsg($event)"
     ></textarea>
     <button
      @click.prevent="sendMsg($event)"
-     :disabled="sendBtn">
-      <i class="mdi mdi-send position-absolute send-icon cursor-pointer"></i>
+     :disabled="sendBtn"
+     >
+    <i
+      class="mdi mdi-send position-absolute send-icon cursor-pointer"
+     
+    ></i>
     </button>
     <div
       class="overflow-hidden position-absolute d-flex flex-column"

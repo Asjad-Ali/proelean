@@ -1,7 +1,5 @@
 <template>
   <div class="container-xl">
-    <h3 class="app-page-title pt-3">My Account</h3>
-    <div class="border-bottom my-3"></div>
     <div class="row gy-4 d-flex justify-content-center">
       <ProfileCard  />
     </div>

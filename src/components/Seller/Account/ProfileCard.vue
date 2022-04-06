@@ -1,5 +1,7 @@
 <template>
   <div class="col-12 col-lg-8 mb-3">
+    <h3 class="app-page-title pt-3">My Account</h3>
+    <div class="border-bottom my-3"></div>
     <div
       class="
         app-card app-card-account
