@@ -3,8 +3,20 @@
     <div class="col-6 col-lg-4 mb-4">
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
-          <h4 class="stats-type mb-1">Balance</h4>
-          <div class="stats-figure">€{{ analytic.availabe_balance }}</div>
+          <h4 class="stats-type mb-1">Current Balance</h4>
+          <div class="stats-figure">€{{ earningDetails.current_balance }}</div>
+        </div>
+        <!--//app-card-body-->
+        <a class="app-card-link-mask" href="#"></a>
+      </div>
+      <!--//app-card-->
+    </div>
+    <!--//col-->
+    <div class="col-6 col-lg-4 mb-4">
+      <div class="app-card app-card-stat shadow-sm h-100">
+        <div class="app-card-body p-3 p-lg-4">
+          <h4 class="stats-type mb-1">Earning This Week</h4>
+          <div class="stats-figure">€{{ earningDetails.weekly_earning }}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -16,19 +28,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Earning This Month</h4>
-          <div class="stats-figure">€{{ analytic.monthly_selling }}</div>
-        </div>
-        <!--//app-card-body-->
-        <a class="app-card-link-mask" href="#"></a>
-      </div>
-      <!--//app-card-->
-    </div>
-    <!--//col-->
-    <div class="col-6 col-lg-4 mb-4">
-      <div class="app-card app-card-stat shadow-sm h-100">
-        <div class="app-card-body p-3 p-lg-4">
-          <h4 class="stats-type mb-1">Avg Order Price</h4>
-          <div class="stats-figure">€{{ analytic.average_selling }}</div>
+          <div class="stats-figure">€{{ earningDetails.monthly_earning }}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -40,7 +40,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Active Orders</h4>
-          <div class="stats-figure">€{{ analytic.active_orders_balance }}</div>
+          <div class="stats-figure">{{ analytics.active_orders }}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -51,8 +51,8 @@
     <div class="col-6 col-lg-4 mb-4">
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
-          <h4 class="stats-type mb-1">Pending Clearance</h4>
-          <div class="stats-figure">€{{ analytic.pending_balance }}</div>
+          <h4 class="stats-type mb-1">Earning This Year</h4>
+          <div class="stats-figure">€{{ earningDetails.year_earning }}</div>
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -63,9 +63,9 @@
     <div class="col-6 col-lg-4 mb-4">
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
-          <h4 class="stats-type mb-1">Cancelled Orders</h4>
+          <h4 class="stats-type mb-1">Total Earning</h4>
           <div class="stats-figure">
-            €{{ analytic.cancelled_orders_balance }}
+            €{{ earningDetails.total_earning }}
           </div>
         </div>
         <!--//app-card-body-->
@@ -126,7 +126,8 @@ export default {
   setup() {
     const store = useStore();
     return {
-      analytic: computed(() => store.getters.getSellerEarning),
+      earningDetails: computed(() => store.getters.getSellerEarningDetails),
+      analytics: computed(() => store.getters.getSellerEarning),
     };
   },
 };
