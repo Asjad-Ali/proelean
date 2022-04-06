@@ -40,11 +40,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Active Orders</h4>
-<<<<<<< HEAD
-          <div class="stats-figure">{{ analytics.active_orders }}</div>
-=======
           <div class="stats-figure">{{analytic.active_orders}} (€{{ analytic.active_orders_balance }})</div>
->>>>>>> 250c278e952485d716ccacf9433cd6e134db1f99
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>
@@ -69,11 +65,7 @@
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Total Earning</h4>
           <div class="stats-figure">
-<<<<<<< HEAD
             €{{ earningDetails.total_earning }}
-=======
-            {{analytic.cancelled_orders}} (€{{ analytic.cancelled_orders_balance }})
->>>>>>> 250c278e952485d716ccacf9433cd6e134db1f99
           </div>
         </div>
         <!--//app-card-body-->

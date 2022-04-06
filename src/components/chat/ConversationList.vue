@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="conversations.length > 0"
+      v-if="conversations.length >0 && otherMember"
       @click="openChat(conversation.id)"
       class="
         p-3
@@ -36,7 +36,7 @@
         </div>
       </span>
     </div>
-    <div v-else>
+    <div v-else-if="!conversations.length">
       <div
         class="
           card
@@ -49,7 +49,7 @@
           mx-5
         "
       >
-        <p>No Any Conversation</p>
+        <p>No Conversation</p>
         <h5>Start a New Chat</h5>
       </div>
     </div>
@@ -97,17 +97,12 @@ export default {
       }
     };
 
-    const otherMember = computed(() =>
-      props.conversation.membersInfo.find(
-        (member) => store.getters.getAuthUser.id != member.id
-      )
-    );
     return {
       openChat,
-      otherMember,
       imgUrl: process.env.VUE_APP_URL,
       timeDiff,
       conversations: computed(() => store.getters.getConversations),
+      otherMember: computed(() => props.conversation.membersInfo.find((member) => store.getters.getAuthUser.id != member.id))
     };
   },
 };
