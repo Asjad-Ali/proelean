@@ -44,7 +44,7 @@
             <div>
               <div class="delivery text-muted">
                 <i class="mdi mdi-radiobox-blank" aria-hidden="true"></i
-                ><b class="mr-2 text-dark"> Category : </b>
+                ><b class="mr-2 text-dark"> Category: </b>
                 {{ service.category.title }}
               </div>
             </div>
@@ -72,7 +72,7 @@
             <div>
               <div class="delivery text-muted">
                 <i class="mdi mdi-currency-eur" aria-hidden="true"></i
-                ><b class="mr-2 text-dark"> Price : </b> €{{ service.price }}
+                ><b class="mr-2 text-dark"> Price: </b> €{{ service.price }}
               </div>
             </div>
           </article>
