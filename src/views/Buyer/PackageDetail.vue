@@ -25,7 +25,7 @@
           <article>
             <div>
               <div class="delivery"
-                ><i class="mdi mdi-radiobox-blank" aria-hidden="true"></i><b class="mr-2"> Category :  </b> <span class="text-muted">  {{ service.category.title}} </span>
+                ><i class="mdi mdi-radiobox-blank" aria-hidden="true"></i><b class="mr-2"> Category:  </b> <span class="text-muted">  {{ service.category.title}} </span>
                 </div >
             </div>
             <div>
@@ -40,7 +40,7 @@
           <article>
             <div>
               <div class="delivery"
-                ><i class="mdi mdi-currency-eur" aria-hidden="true"></i><b class="mr-2"> Price :  </b> <span class="text-muted">  €{{service.price}}
+                ><i class="mdi mdi-currency-eur" aria-hidden="true"></i><b class="mr-2"> Price:  </b> <span class="text-muted">  €{{service.price}}
                 </span> </div >
             </div>
           </article>
