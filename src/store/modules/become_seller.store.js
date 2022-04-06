@@ -119,7 +119,7 @@ export const actions = {
     commit("setPaymentLoadingStatus", "LOADING");
     const res = await Api.get("seller/withdrawRequest");
     if (res.status === 200) {
-      commit("setWithdrawRequests", res);
+      commit("setWithdrawRequests", res.data);
     }
     commit("setPaymentLoadingStatus", "COMPLETED");
   },
