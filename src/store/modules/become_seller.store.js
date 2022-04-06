@@ -9,7 +9,8 @@ export const state = {
     deliveryDays: [],
     revisions: [],
     error: null,
-    buyerLoader:''
+    buyerLoader:'',
+    withdrawRequests: []
   }
 
 export const  mutations = {
@@ -30,6 +31,9 @@ export const  mutations = {
   },
   setBuyerOrderDetailLoader(state,loaderValue){
     state.buyerLoader=loaderValue;
+  },
+  setWithdrawRequest(state, requests) {
+    state.withdrawRequests = requests;
   }
 }
 
@@ -39,6 +43,7 @@ export const getters = {
   getLanguages: state => state.languages,
   getRevisions: state => state.revisions,
   getDeliveryDays: state => state.deliveryDays,
+  getWithdrawRequest: state => state.withdrawRequests,
 }
 
 export const  actions = {
@@ -83,4 +88,19 @@ export const  actions = {
       }
 
     },
+
+    async saveBankAccount(payload) {
+      const res = await Api.post("seller/withdrawal_account", payload);
+      if(res.status===200) {
+        useToast(res.message, 'success');
+      }
+    },
+
+    async getWithdrawRequest({commit}) {
+      const res = await Api.get("seller/withdrawal_account");
+      if(res.status===200) {
+        commit("setWithdrawRequest", res.data);
+      }
+
+    }
   }

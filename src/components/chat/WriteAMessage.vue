@@ -61,7 +61,13 @@
       v-model="newMessage.text"
       :readonly="
         !$store.getters.getSelectedConversation &&
+<<<<<<< HEAD
         !$store.getters.getNewConversationUser"
+=======
+        !$store.getters.getNewConversationUser
+      "
+      @keyup.enter="sendMsg($event)"
+>>>>>>> 3702b7380fafd7ac741b8f2dbadf2561f39679d2
     ></textarea>
     <button
      @click.prevent="sendMsg($event)"
