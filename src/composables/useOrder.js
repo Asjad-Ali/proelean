@@ -93,7 +93,7 @@ export default function useOrder() {
     });
 
 
-    const descriptionRegex = /^[a-zA-Z.,":/; ]{20,300}$/;
+    const descriptionRegex = /^[a-zA-Z.,":/;)(!@#$%&*+\-'?/ ]{20,300}$/;
     const descriptionErrors = ref({
         description: null,
         number: null,
