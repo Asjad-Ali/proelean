@@ -40,11 +40,7 @@
       <div class="app-card app-card-stat shadow-sm h-100">
         <div class="app-card-body p-3 p-lg-4">
           <h4 class="stats-type mb-1">Active Orders</h4>
-<<<<<<< HEAD
           <div class="stats-figure">{{ analytics.active_orders }}</div>
-=======
-          <div class="stats-figure">{{analytic.active_orders}} (€{{ analytic.active_orders_balance }})</div>
->>>>>>> b9de199f11ad21ebe93c074a87623da2d016c7b3
         </div>
         <!--//app-card-body-->
         <a class="app-card-link-mask" href="#"></a>

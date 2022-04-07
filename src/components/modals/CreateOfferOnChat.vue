@@ -81,7 +81,7 @@
             v-model="payload.deliveryDays"
             required
           >
-            <option selected>Select day</option>
+            <option selected value="" disabled>Select day</option>
             <option
               v-for="day in $store.getters.getDeliveryDays"
               :value="day"
@@ -91,7 +91,12 @@
             </option>
           </select>
 
-          <div class="text-left font mt-2">Revisions</div>
+          <div class="text-left font mt-2">Revisions<span class="text-danger">*</span>
+            <span class="ml-2 text-danger">{{
+              payloadErrorBag.revisions
+            }}</span>
+
+          </div>
           <select
             id="deliveryTime"
             class="form-control"
@@ -99,7 +104,7 @@
             v-model="payload.revisions"
             required
           >
-            <option selected>Select revision</option>
+            <option selected value="" disabled>Select revision</option>
             <option
               v-for="revision in $store.getters.getRevisions"
               :value="revision"
@@ -154,6 +159,7 @@ export default {
       deliveryDays: null,
       description: null,
       totalOffer: null,
+      revisions: null
     });
 
     watch(payload.value, (value) => {
@@ -162,18 +168,30 @@ export default {
       } else {
         payloadErrorBag.value.serviceId = null;
       }
+
       if (!value.deliveryDays) {
         payloadErrorBag.value.deliveryDays = "Delivery time is required";
       } else {
         payloadErrorBag.value.deliveryDays = null;
       }
+      if (!value.revisions) {
+        payloadErrorBag.value.revisions = "Revisions are required";
+      } else {
+        payloadErrorBag.value.revisions = null;
+      }
+
       if (!value.description) {
         payloadErrorBag.value.description = "Description is required";
+      } else if(value.description.length < 20){
+        payloadErrorBag.value.description = "Minimum Description is 20 characters";
       } else {
         payloadErrorBag.value.description = null;
       }
+
       if (!value.totalOffer) {
         payloadErrorBag.value.totalOffer = "Price is required";
+      } else if(value.totalOffer < 5){
+        payloadErrorBag.value.totalOffer = "Minimum Price is €5";
       } else {
         payloadErrorBag.value.totalOffer = null;
       }
