@@ -58,8 +58,8 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="withdraw in $store.getters.getWithdrawRequest"
-                    :key="withdraw.id"
+                    v-for="(withdraw,index) in $store.getters.getWithdrawRequest"
+                    :key="index"
                   >
                     <td class="cell">
                       {{ $store.getters.getAuthUser.username }}
