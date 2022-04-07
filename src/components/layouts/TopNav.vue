@@ -671,6 +671,10 @@ export default {
       }
     };
     onMounted(() => {
+      
+      if(!isBuyerMode.value) {
+        router.push("/dashboard")
+      }
       const isLoggedIn = localStorage.getItem("PROELEAN_TOKEN");
       if (isLoggedIn) {
         store.dispatch("getNotification");
