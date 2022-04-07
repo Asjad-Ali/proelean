@@ -157,6 +157,9 @@
             </router-link>
           </li>
 
+
+
+
           <!--===================== Buyer Module============== -->
           <!-- Manage Jobs -->
           <li
@@ -170,6 +173,8 @@
               show
               d-none d-lg-block
             "
+                          :active-link="$route.path ==='/buyer/jobs'"
+              @focus="$route.path ==='/buyer/jobs'"
           >
             <router-link
               to="/buyer/jobs"
@@ -177,6 +182,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Manage Jobs"
+
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -204,6 +210,8 @@
               show
               d-none d-lg-block
             "
+                                      :active-link="$route.path ==='/buyer/jobs'"
+              @focus="$route.path ==='/buyer/jobs'"
           >
             <router-link
               to="/buyer/create_job"
@@ -211,6 +219,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Create Jobs"
+              :active-class="$route.path ==='/buyer/create_job'"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -248,6 +257,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Manage order"
+              :active-class="$route.path ==='/buyer/manage_order'"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -286,6 +296,7 @@
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Favourite Services"
+              :active-class="$route.path ==='/buyer/favourite_services'"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -753,5 +764,6 @@ export default {
     padding: 0;
   }
 }
+
 </style>
 
