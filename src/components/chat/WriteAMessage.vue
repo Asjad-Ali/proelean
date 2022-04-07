@@ -44,15 +44,9 @@
       "
       @keyup.enter="sendMsg($event)"
     ></textarea>
-    <button
-     @click.prevent="sendMsg($event)"
-     :disabled="sendBtn"
-     >
-    <i
+    <i      @click.prevent="sendMsg($event)"  :disabled="sendBtn"
       class="mdi mdi-send position-absolute send-icon cursor-pointer"
-     
     ></i>
-    </button>
     <div
       class="overflow-hidden position-absolute d-flex flex-column"
       style="top: 0; left: 0px"
