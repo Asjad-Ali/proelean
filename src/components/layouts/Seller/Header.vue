@@ -93,6 +93,7 @@
                           align-items-center
                         "
                         data-v-777096b7=""
+                         @click.prevent="handleNotification(notification)"
                       >
                         <div class="col-auto" data-v-777096b7="">
                           <img
@@ -123,7 +124,7 @@
                             </div>
                         </div>
                         <!--//col-->
-                      </div>
+                        </div>
                       <!--//row-->
                       <a
                         href="/dashboard/notifications"
@@ -285,6 +286,21 @@ export default {
         store.commit("toggleUserMode");
       }
     });
+        function handleNotification(notification) {
+      switch (notification.type) {
+        case "ORDER":
+          router.push(`/order-details/${notification.content_id}`);
+          break;
+
+        case "OFFER":
+          router.push(`/buyer/view-offers/${notification.content_id}`);
+          break;
+
+        case "MESSAGE":
+          router.push("/chat");
+          break;
+      }
+    }
     const handleUserMode = () => {
       store.commit("toggleUserMode");
       if (isBuyerMode.value) {
@@ -296,6 +312,7 @@ export default {
 
     return {
       sidePanelOpened,
+      handleNotification,
       userNotification: computed(() => store.getters.getRecentNotifications),
       user: computed(() => store.getters.getAuthUser),
       imgURL: process.env.VUE_APP_URL,
