@@ -35,7 +35,7 @@
             ? `my-message`
             : `other-message`
         "
-        v-if="!message.messageOffer"
+        v-if="!message.messageOffer && message.message != 'Image'"
       >
         {{ message.message }}
       </p>

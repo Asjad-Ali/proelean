@@ -63,6 +63,7 @@ export default function useFirebaseMedia() {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                     console.log('File available at', downloadURL);
                     message.attachment = downloadURL;
+                    message.attachmentType=1;
                     store.dispatch("sendMessage", message);
                     attachment.value.media="";
                     sendBtn.value = false;

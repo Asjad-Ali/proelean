@@ -85,6 +85,7 @@ export default {
 
         const handleCustomerDetail = (e) => {
             e.preventDefault();
+            document.getElementById('accept_offer').innerText = "Loading...";
             store.dispatch('purchaseOfferedService',payload.value).then(()=>{
                 document.getElementById('accept_offer').innerText = "Offer accepted";
             })
