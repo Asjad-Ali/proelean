@@ -22,35 +22,14 @@
       <div>
         <p class="m-0">{{ chatMedia.media.size }}</p>
       </div>
+      <div id="upload-progress">
+      </div>
       <div>
         <a href="#" @click="removeMedia($event, chatMedia.media.name)"
           ><i class="mdi mdi-close-box"></i
         ></a>
       </div>
     </div>
-
-    <!-- <div class="row p-3" id="media-container">
-      <table class="table m-0" v-if="chatMedia.media.type">
-        <tr>
-          <td class="d-flex flex-row justify-content-between">
-            <i class="mdi mdi-image" v-if="chatMedia.media.type.includes('image')">
-              <span class="ml-2">{{ chatMedia.media.name }}</span></i >
-          </td>
-          <td>
-            <p>{{ chatMedia.media.size }}</p>
-          </td>
-          <td>
-            <p id="upload-progress"></p>
-          </td>
-          <td>
-            <a href="#" @click="removeMedia($event, chatMedia.media.name)"
-              ><i class="mdi mdi-close-box"></i
-            ></a>
-          </td>
-        </tr>
-      </table>
- 
-    </div> -->
   </div>
   <!-- WRITE A MESSAGE -->
   <div class="w-100 border-top border-bottom position-relative">
