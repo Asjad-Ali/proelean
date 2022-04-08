@@ -302,7 +302,7 @@
 
                                                 <!-----------  Cancel & Create Dispute  ----------->
               <!-- Button trigger modal -->
-              <button v-if="order.status_id == 1" type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button v-if="order.status_id == 1 && $store.getters.isBuyerMode" type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Cancel & Create Dispute
               </button>
 
@@ -337,10 +337,6 @@
 
 
                                 <!-----------  Cancel Request of Dispute  ----------->
-              <!-- if Seller -->
-              <button v-if="(order.status_id == 5 && !$store.getters.isBuyerMode)" type="button" class="btn btn-success mt-2" @click="seller_cancel_request()">
-                Cancel Request
-              </button>
               <!-- if Buyer -->
               <button v-if="(order.status_id == 5 && $store.getters.isBuyerMode)" type="button" class="btn btn-success mt-2" @click="buyer_cancel_request()">
                 Cancel Request
