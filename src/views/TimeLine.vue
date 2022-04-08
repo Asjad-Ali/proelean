@@ -27,6 +27,7 @@
                     class="d-flex justify-content-start my-2"
                     v-if="
                       orderTime.properties.type === 'ORDER' &&
+                      orderTime.properties.value &&
                       orderTime.properties.value.toLowerCase() === 'disputed'
                     "
                   >
