@@ -119,7 +119,7 @@ export const actions = {
 
     const offer = getters.getSelectedCustomOffer;
 
-    commit("setOfferPurchaseLoadingStatus", {status: "LOADING", offerId: offer.id})
+    commit("setOfferPurchaseLoadingStatus", { status: "LOADING", offerId: offer.id })
 
     const res = await Api.post('token', payload);
     if (res.status === 200) {
@@ -146,7 +146,7 @@ export const actions = {
 
         dispatch("withdrawOffer", offerPayload).then(() => {
           useToast(response.message, 'success');
-          commit("setOfferPurchaseLoadingStatus", {status: "COMPLETED", offerId: offer.id})
+          commit("setOfferPurchaseLoadingStatus", { status: "COMPLETED", offerId: offer.id })
         })
 
       } else {
@@ -170,7 +170,11 @@ export const actions = {
     commit('setLoader', 0);
   },
 
-  async purchaseJobOfferedService({commit}, [payload, offerId]) {
+  async purchaseJobOfferedService({ commit, getters }, [payload, offerId]) {
+
+    let placeOrderBtn = document.getElementById(offerId);
+    disabledPlaceOrderBtn(placeOrderBtn);
+
     const res = await Api.post('token', payload);
     if (res.status === 200) {
 
@@ -178,19 +182,33 @@ export const actions = {
         token: res.token,
         offer_id: offerId
       };
-      
+
       const response = await Api.post("buyer/offer_order", offerOrder);
 
-      if(response.status==201) {
+      if (response.status == 201) {
+        let remainingOffers = getters.getViewOffers.filter(offer => offer.id != offerId);
+        commit("setViewOffers", remainingOffers);
         useToast(response.message, 'success');
       } else {
+        enabledPlaceOrderBtn(placeOrderBtn);
         useToast(response.message, 'error');
       }
 
     } else {
+      enabledPlaceOrderBtn(placeOrderBtn);
       useToast(res.message, 'error');
     }
     commit('setLoader', 0);
   }
 
+}
+
+function disabledPlaceOrderBtn(placeOrderBtn) {
+  placeOrderBtn.innerText = "Loading...";
+  placeOrderBtn.disabled = true;
+}
+
+function enabledPlaceOrderBtn(placeOrderBtn) {
+  placeOrderBtn.innerText = "Place order";
+  placeOrderBtn.disabled = false;
 }

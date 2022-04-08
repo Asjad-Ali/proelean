@@ -85,6 +85,7 @@
                     data-toggle="modal"
                     data-target="#placeorder"
                     class="btn btn-sm btn-danger"
+                    :id="offer.id"
                     @click.prevent="handlePurchaseService(offer.id)"
                   >
                     Place an Order
@@ -150,6 +151,7 @@
                 data-toggle="modal"
                 data-target="#placeorder"
                 class="btn btn-sm btn-danger w-100"
+                @click.prevent="handlePurchaseService(offer.id)"
               >
                 Place an Order
               </button>

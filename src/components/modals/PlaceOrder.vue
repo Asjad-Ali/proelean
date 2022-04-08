@@ -155,12 +155,8 @@ export default {
 
     const handleCustomerDetail = (e, offerID) => {
       e.preventDefault();
-     
       store
-        .dispatch("purchaseJobOfferedService", [payload.value, offerID])
-        .then(() => {
-          
-        });
+        .dispatch("purchaseJobOfferedService", [payload.value, offerID]);
     };
     return {
       payload,
