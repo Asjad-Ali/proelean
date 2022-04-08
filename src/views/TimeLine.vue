@@ -39,7 +39,7 @@
                         Accept
                       </div>
                       <span
-                        class="bage bg-primary ml-2"
+                        class="badge bg-primary ml-2"
                         @click.prevent="rejectDispute($event)"
                       >
                         Reject
