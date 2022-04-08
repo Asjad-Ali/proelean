@@ -53,7 +53,7 @@
                     <th class="cell">Date</th>
                     <th class="cell text-center">Status</th>
                     <th class="cell">Total</th>
-                    <th class="cell"></th>
+                    <!-- <th class="cell"></th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -69,14 +69,14 @@
                       ><span class="note">2:16 PM</span>
                     </td>
                     <td class="cell text-center">
-                      <span class="badge bg-success">{{
+                      <span :class="{'badge bg-warning': withdraw.status==='PENDING'}">{{
                         withdraw.status
                       }}</span>
                     </td>
                     <td class="cell">${{ withdraw.amount }}</td>
-                    <td class="cell">
+                    <!-- <td class="cell">
                       <a class="btn-sm app-btn-secondary" href="#">View</a>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>

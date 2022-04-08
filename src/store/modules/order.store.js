@@ -60,7 +60,7 @@ export const actions = {
       useToast(res.message, 'success');
 
       if (getters.isBuyerMode) {
-        window.location.href = `/buyer/manage_order`
+        // window.location.href = `/buyer/manage_order`
         //router.push({ name: "ManageOrder" });
       } else {
         window.location.href = `/dashboard/orders`

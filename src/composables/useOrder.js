@@ -9,15 +9,16 @@ export default function useOrder() {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth()+1
     const currentYear = currentDate.getFullYear();
+    const orderId = route.params.id;
     const payload = {
-        id: route.params.id,
+        id: orderId,
         type: "SERVICE_DETAIL",
     };
 
 
     const payloadOrder = {
-        id: route.params.id,
-        orderNo: route.params.orderNo,
+        id: orderId,
+        orderNo: route.params.orderNo || orderId,
         type: "object"
       }
 
