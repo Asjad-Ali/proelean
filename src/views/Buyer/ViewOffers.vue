@@ -59,10 +59,9 @@
                 </div>
                 <div class="col-lg-3 col-md-5">
                     <div class="d-flex justify-content-end">
-                      <div></div>
-                    <!-- <button class="btn btn-sm btn-danger">
+                    <button class="btn btn-sm btn-danger">
                         Place an Order
-                    </button> -->
+                    </button>
                     <router-link :to="{name:'Chat', params:{id:offer.profile.id}}"
                             class="ml-2 btn btn-sm btn-light"
                     >
@@ -112,9 +111,9 @@
                 </div>
             </div>
             <div class="pb-2">
-                <!-- <button class="btn btn-sm btn-danger w-100">
+                <button class="btn btn-sm btn-danger w-100">
                     Place an Order
-                </button> -->
+                </button>
                 <router-link :to="{name:'Chat', params:{id:offer.profile.id}}"
                   class="mt-2 btn btn-sm btn-light text-black w-100"
                 >
