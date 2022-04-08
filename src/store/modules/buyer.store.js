@@ -170,4 +170,27 @@ export const actions = {
     commit('setLoader', 0);
   },
 
+  async purchaseJobOfferedService({commit}, [payload, offerId]) {
+    const res = await Api.post('token', payload);
+    if (res.status === 200) {
+
+      const offerOrder = {
+        token: res.token,
+        offer_id: offerId
+      };
+      
+      const response = await Api.post("buyer/offer_order", offerOrder);
+
+      if(response.status==201) {
+        useToast(response.message, 'success');
+      } else {
+        useToast(response.message, 'error');
+      }
+
+    } else {
+      useToast(res.message, 'error');
+    }
+    commit('setLoader', 0);
+  }
+
 }
