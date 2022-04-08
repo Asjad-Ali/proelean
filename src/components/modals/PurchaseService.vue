@@ -6,17 +6,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Purchase Service</h5> 
                     </div>
-                    <div class="modal-body text-center">      
-                        <!-- <div class="text-left font ">Description</div> -->
-                        <!-- <textarea
-                        type="text"
-                        class="form-control"
-                        name="description"
-                        v-model="paymentElements.description"
-                        id="description"
-                        placeholder="Describe your request"
-                        required
-                        /> -->
+                    <div class="modal-body text-center">
                         <div class="text-left font">ATM Number</div>
                         <input
                         type="number"
