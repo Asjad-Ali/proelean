@@ -504,7 +504,7 @@
               mx-2
               d-none d-lg-block
             "
-          >
+         >
             <a
               class="btn btn-icon btn-transparent-dark dropdown-toggle"
               id="navbarDropdownUserImage"
@@ -670,8 +670,10 @@ export default {
     const store = useStore();
     const router = useRouter();
     const keywords = ref(null);
-
     const isBuyerMode = computed(() => store.getters.isBuyerMode);
+
+    // const activeItem = ref()
+
 
     const handleLogout = async () => {
       const response = await Api.post("logout");
@@ -682,10 +684,6 @@ export default {
       }
     };
     onMounted(() => {
-      
-      if(!isBuyerMode.value) {
-        router.push("/dashboard")
-      }
       const isLoggedIn = localStorage.getItem("PROELEAN_TOKEN");
       if (isLoggedIn) {
         store.dispatch("getNotification");

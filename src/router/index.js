@@ -151,13 +151,17 @@ router.beforeEach((to, from, next) => {
     behavior: "smooth",
   });
 
-  var isAuthenticated = localStorage.getItem('PROELEAN_TOKEN') ? true : false;
+ if(to.name=='Home' && localStorage.getItem('USER_MODE') == 'SELLER' ){
+    next('/dashboard'); 
+ }
+
+  const isAuthenticated = localStorage.getItem('PROELEAN_TOKEN') ? true : false;
   if (['/login', '/register', '/forgot'].includes(to.path) || isAuthenticated) {
     next(); // allow to enter route
   } else {
     next('/login'); // go to '/login';
   }
-})
+})``
 
 
 export default router

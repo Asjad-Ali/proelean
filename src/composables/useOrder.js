@@ -93,7 +93,6 @@ export default function useOrder() {
     });
 
 
-    const descriptionRegex = /^[a-zA-Z.,":/;)(!@#$%&*+\-'?/ ]{20,300}$/;
     const descriptionErrors = ref({
         description: null,
         number: null,
@@ -105,7 +104,7 @@ export default function useOrder() {
     watch(formData.value, (current) => {
         if (!current.descriptionData.description) {
             descriptionErrors.value.description = "Description is required"
-        } else if (!current.descriptionData.description.match(descriptionRegex)) {
+        } else if (current.descriptionData.description.length < 20) {
             descriptionErrors.value.description = "Description's minimum 20 characters"
         } else {
             descriptionErrors.value.description = null
@@ -216,7 +215,6 @@ export default function useOrder() {
         formData,
         payload,
         payloadOrder,
-        descriptionRegex,
         descriptionErrors,
         orderDispute,
         order_dispute,

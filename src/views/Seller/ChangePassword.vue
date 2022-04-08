@@ -1,9 +1,9 @@
 <template>
   <div class="container-xl py-3">
-    <h4>My Account</h4>
-    <div class="border-bottom mb-3"></div>
     <div class="row gy-4 d-flex justify-content-center">
       <div class="col-12 col-lg-6">
+        <h4>My Account</h4>
+        <div class="border-bottom mb-3"></div>
         <div
           class="
             app-card app-card-account
@@ -57,7 +57,7 @@
             <!--//item-->
             <div class="row">
               <div class="item py-1 col-12">
-                <div class="form-group">
+                <div class="form-group mb-0">
                   <label class="mb-1"><b>Current Password </b></label>
                   <div class="position-relative icon-form-control">
                     <input
@@ -88,7 +88,7 @@
                 </div>
               </div>
               <div class="item py-1 col-12">
-                <div class="form-group">
+                <div class="form-group mb-0">
                   <label class="mb-1"><b>New Password (6 or more characters) </b></label>
                   <div class="position-relative icon-form-control">
                     <input
@@ -128,7 +128,7 @@
                 </div>
               </div>
               <div class="item py-1 col-12">
-                <div class="form-group">
+                <div class="form-group mb-4">
                   <label class="mb-1"><b>Confirm Password</b></label>
                   <div class="position-relative icon-form-control">
                     <input
@@ -171,7 +171,9 @@
           </div>
           <!--//app-card-body-->
           <div class="app-card-body pb-4 w-100 text-center">
-            <button  :disabled="btnStatus == 2" class="btn app-btn-secondary mr-2" @click="updatePassword">{{
+            <button  class="btn app-btn-secondary mr-2" 
+            :disabled="!Object.values(changePasswordError).every(value => !value) || btnStatus === 2"
+            @click="updatePassword">{{
               btnStatus === 2 ? "Loading..." : "Update Password"
             }}</button>
           </div>

@@ -151,12 +151,14 @@
 
 <script>
 import useAuth from "@/composables/useAuth";
-import { computed } from "vue";
+import { computed, onBeforeMount } from "vue";
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default {
   name: "Forgot",
   setup() {
+    const router = useRouter()
     const store = useStore()
     const {
       toggleVisibility,
@@ -177,6 +179,13 @@ export default {
       console.log(forgot.value)
       store.dispatch('changePassword',forgot.value)
    }
+
+    onBeforeMount(() => {
+      // if user already login return back to '/'
+      if (localStorage.getItem("PROELEAN_TOKEN")) {
+        router.push({ name: "Home" });
+      }
+    });
 
 
     return {
