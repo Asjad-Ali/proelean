@@ -56,8 +56,8 @@ export const actions = {
       commit("setOrders", afterSetOrder.value);
       useToast(res.message, 'success');
 
-      if (getters.isBuyerMode && (!payload.type == 9 || !payload.type == 8) ) {
-        window.location.href = `/buyer/manage_order`
+      if (getters.isBuyerMode) {
+        // window.location.href = `/buyer/manage_order`
         //router.push({ name: "ManageOrder" });
       } else {
         window.location.href = `/dashboard/orders`
