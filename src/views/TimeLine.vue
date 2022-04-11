@@ -33,13 +33,13 @@
                   >
                     <div>
                       <div
-                        class="badge bg-danger"
+                        class="badge bg-danger text-white cursor-pointer"
                         @click.prevent="acceptDispute($event)"
                       >
                         Accept
                       </div>
                       <span
-                        class="badge bg-primary ml-2"
+                        class="badge bg-primary ml-2 text-white  cursor-pointer"
                         @click.prevent="rejectDispute($event)"
                       >
                         Reject
@@ -58,10 +58,10 @@
                       Seller wants to Extend the order upto {{ orderTime.properties.value }}
                     </div>
                     <div class="mt-1" v-if="$store.getters.isBuyerMode">
-                      <div class="badge bg-danger mr-2">
+                      <div class="badge bg-danger mr-2 text-white cursor-pointer" @click.prevent="extendTime()">
                         Accept
                       </div>
-                      <div class="badge bg-primary">
+                      <div class="badge bg-primary text-white cursor-pointer" @click.prevent="extendTimeReject()">
                         Reject
                       </div>
                     </div>
@@ -103,6 +103,12 @@ export default {
     const route = useRoute();
     const orderId = route.params.id;
 
+    const payload = ref({
+        order_id:orderId,
+        accept:"ACCEPTED",
+        description:"Accept extend days for this order"
+    })
+
     onMounted(() => {
       console.log("orderNo", props.order.orderNo);
       store.dispatch("timeline", props.order.orderNo || orderId);
@@ -138,9 +144,18 @@ export default {
         store.dispatch("manageOrder", AcceptOrderCancelRequest.value);
     }
 
+    const extendTime = () => {
+        store.dispatch("extendOrderRequest", payload.value);
+    }
+
+    const extendTimeReject = () => {
+        payload.value.accept = "CANCELLED";
+        store.dispatch("extendOrderRequest", payload.value);
+    }
+
     return {
       timeline: computed(() => store.getters.getTimeline),
-      acceptDispute, rejectDispute
+      acceptDispute, rejectDispute, extendTime, extendTimeReject, payload
 
     };
   },
