@@ -418,6 +418,7 @@
               >
             </div>
           </li>
+          <!-- Chat   -->
           <li
             class="
               nav-item
