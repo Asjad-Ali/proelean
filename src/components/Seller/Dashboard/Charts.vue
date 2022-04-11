@@ -49,7 +49,7 @@
             <!--//col-->
             <div class="col-auto">
               <div class="card-header-action">
-                <a href="#">All projects</a>
+                <div>All projects</div>
               </div>
               <!--//card-header-actions-->
             </div>
