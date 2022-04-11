@@ -39,7 +39,8 @@
                     {{ $filters.timeAgo(notification.created_at) }}
                   </div>
                   <div class="text-muted ml-2">
-                    <i style="font-size:22px" data-toggle="modal" data-target="#exampleModal"
+                    <i class="mdi mdi-repeat fs-2" v-if="$store.getters.getDeleteBtnStatus == 1"></i>
+                    <i v-else style="font-size:20px" data-toggle="modal" data-target="#exampleModal"
                     @click="deleteNotification(notification.id)"
                       class="mdi mdi-delete text-danger cursor-pointer"></i>
                   </div> 
