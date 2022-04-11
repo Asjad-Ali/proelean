@@ -23,17 +23,20 @@ export const mutations = {
 
 export const actions = {
 
-  async myOrders({ commit }, payload) {
+  async myOrders({ commit, getters }, payload) {
     commit('setLoader', 1);
-    const res = await Api.get(payload);
-    if (res.status === 200) {
-      console.log("All Orders Response", res.data)
-      commit("setOrders", res.data);
-      commit('setLoader', 0);
+    if(!getters.getMyOrders.length){
+      const res = await Api.get(payload);
+      if (res.status === 200) {
+        console.log("All Orders Response", res.data)
+        commit("setOrders", res.data);
+
+      }
+      else {
+        console.log("Error All Orders");
+      }
     }
-    else {
-      console.log("Error All Orders");
-    }
+    commit('setLoader', 0);
   },
 
   async getOrderById({ commit }, id) {

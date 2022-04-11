@@ -19,7 +19,7 @@ export const state = {
   error: null,
   buyerRequests: [],
   buyerRequestsPages: [],
-  earnings: {},
+  earnings: '',
   earningsDetail:{}
 }
 
@@ -103,11 +103,11 @@ export const mutations = {
 
 export const actions = {
 
-  async userServices({ commit, state }, action) {
+  async userServices({ commit, getters }, action) {
     commit('setSellerLoader', 1);
     commit('setLoadingStatus', 'LOADING');
     commit('setServicesLoadingStatus', 'LOADING');
-    if (!state.userServices || page >= 1) {
+    if (!getters.getUserServices.length && page === 1) {
       if (action === '') {
         page = 1;
       }
@@ -256,8 +256,8 @@ export const actions = {
     }
   },
 
-  async getEarnings({ commit, state }) {
-    if(!state.earnings.length) {
+  async getEarnings({ commit, getters }) {
+    if(!getters.getSellerEarning ) {
       const res = await Api.get(`seller/getEarnings`);
       console.log(res)
       if (res.status === 200) {

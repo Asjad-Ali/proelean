@@ -84,16 +84,17 @@
                       data-v-777096b7=""
                       v-for="notification in userNotification"
                       :key="notification.index"
+                      @click="handleNotification(notification)"
                     >
                       <div
                         class="
                           row
                           gx-2
                           justify-content-between
-                          align-items-center
+                          align-items-center cursor-pointer
                         "
                         data-v-777096b7=""
-                         @click.prevent="handleNotification(notification)"
+                         
                       >
                         <div class="col-auto" data-v-777096b7="">
                           <img
@@ -126,11 +127,11 @@
                         <!--//col-->
                         </div>
                       <!--//row-->
-                      <a
+                      <!-- <a
                         href="/dashboard/notifications"
                         class="link-mask"
                         data-v-777096b7=""
-                      ></a>
+                      ></a> -->
                     </div>
                   </div>
                   <!--//dropdown-menu-content-->
@@ -286,19 +287,24 @@ export default {
         store.commit("toggleUserMode");
       }
     });
-        function handleNotification(notification) {
+      function handleNotification(notification) {
+      console.log(notification.type)
       switch (notification.type) {
-        case "ORDER":
+        case "ORDER":{
           router.push(`/order-details/${notification.content_id}`);
           break;
-
-        case "OFFER":
+        }
+        case "OFFER":{
           router.push(`/buyer/view-offers/${notification.content_id}`);
           break;
-
-        case "MESSAGE":
+        }
+        case "MESSAGE":{
           router.push("/chat");
           break;
+        }
+        default:{
+          router.push("/dashboard/notifications");
+        }
       }
     }
     const handleUserMode = () => {

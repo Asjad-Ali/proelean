@@ -75,7 +75,7 @@ export default function useChangePassword () {
         if (!current.password_confirmation) {
             changePasswordError.value.password_confirmation = "Confirm Password is required";
             } else if (current.password_confirmation != current.password ) {
-            changePasswordError.value.password_confirmation = "Confirm Password dosn't match";
+            changePasswordError.value.password_confirmation = "Confirm Password doesn't match";
             } else {
             changePasswordError.value.password_confirmation = null;
         }
@@ -83,7 +83,6 @@ export default function useChangePassword () {
 
     const updatePassword = () => {
       store.dispatch('updatePassword',changePassword.value);
-      console.log("Change Password Value",changePassword.value)
     }
 
     return{

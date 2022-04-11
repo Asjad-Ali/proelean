@@ -32,13 +32,14 @@ export default {
   setup() {
     const store = useStore();
     const sellerOrderURL = "seller/orders?status=";
-    const allOrders = ref( computed (() => store.getters.getMyOrders.filter((order) => order.status_id == 1)))
+    const allOrders = ref( computed (() => store.getters.getMyOrders.filter(order => order.status_id === 1)))
+    console.log("Active orders",allOrders.value)
     const orders = ref()
     const orderLength = ref(3)
 
     const loadOrders = () =>{
       if(orderLength.value+3 < allOrders.value.length){
-        orderLength.value+3
+        orderLength.value = orderLength.value+3
       }
       else{
         orderLength.value = allOrders.value.length

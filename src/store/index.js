@@ -65,16 +65,13 @@ export default createStore({
     },
 
 
-    async deleteNotification({ commit, getters },payload) {
-      payload
-      commit('setLoader',1);
-        const res = await Api.delete(`notifications/${payload}/delete`);
+    async deleteNotification({ commit, getters },id) {
+              const res = await Api.delete(`notifications/${id}/delete`);
         if (res.message === "Notification removed") {
-          const notifications = ref(getters.getAllNotifications.filter(notification => notification.id != payload))
+          const notifications = ref(getters.getAllNotifications.filter(notification => notification.id != id))
           commit("setAllNotification", notifications.value);
           useToast("Notification Deleted", 'success');
         }
-      commit('setLoader',0);
     },
 
     updateScreenWidthOnResize({ commit }) {
