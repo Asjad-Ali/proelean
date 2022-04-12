@@ -14,7 +14,7 @@
               <div class="col-md-6">
                 <div class="position-relative">
                   <label>
-                    Card Number <span class="text-danger">*</span>
+                    ATM Number <span class="text-danger">*</span>
                     <span
                       class="text-danger ml-1"
                       v-show="descriptionErrors.number"
