@@ -56,7 +56,7 @@ export default {
       store.dispatch('updateScreenWidthOnResize');
       const firebaseAuth= useFirebaseAuth();
       firebaseAuth.checkAuthStatus();
-      
+      localStorage.setItem("USER_MODE","BUYER")
       if(!store.getters.amILoggedInOnFirebase){
         firebaseAuth.loginAnonymously();
       }
