@@ -117,14 +117,53 @@
         >
           <span class="mr-2" v-if="user.isFreelancer">
             <a class="cursor-pointer" @click="handleUserMode">
-              Switch to Seller
+              Switch to {{ isBuyerMode ? "Seller" : "Buyer" }}
             </a>
           </span>
+
+          <!-- Buyer Requests-->
+          <li
+            v-if="!isBuyerMode"
+            class="
+              nav-item
+              dropdown
+              no-arrow no-caret
+              mr-3
+              dropdown-notifications
+              show
+              d-none d-lg-block
+            "
+            :disabled="userInfo.isFreelancer"
+          >
+            <router-link
+              to="/seller/buyer_requests"
+              class="btn btn-icon btn-transparent-dark dropdown-toggle"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Buyer Requests"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-person-lines-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"
+                />
+              </svg>
+            </router-link>
+          </li>
+
+
 
 
           <!--===================== Buyer Module============== -->
           <!-- Manage Jobs -->
           <li
+            v-if="isBuyerMode"
             class="
               nav-item
               dropdown
@@ -143,6 +182,8 @@
               title="Manage Jobs"
               :class="{focus:$route.path === '/buyer/jobs'}"
             >
+                          <!-- :focus-link="$route.path ==='/buyer/jobs'"
+              @focus="$route.path ==='/buyer/jobs'" -->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -159,6 +200,7 @@
           </li>
           <!-- Create Jobs -->
           <li
+            v-if="isBuyerMode"
             class="
               nav-item
               dropdown
@@ -235,6 +277,7 @@
           </li>
           <!-- Favourite Services -->
           <li
+            v-if="isBuyerMode"
             class="
               nav-item
               dropdown
@@ -636,7 +679,8 @@ export default {
     const handleLogout = async () => {
       const response = await Api.post("logout");
       if (response.status === 200) {
-        localStorage.clear();
+        localStorage.removeItem("PROELEAN_TOKEN");
+        localStorage.removeItem("userInfo");
         router.go();
       }
     };

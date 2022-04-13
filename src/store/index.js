@@ -24,7 +24,6 @@ export default createStore({
     allNotifications: [],
     usermode: localStorage.getItem("USER_MODE") || "BUYER",
     loader: 0,
-    deleteBtnStatus:'',
     screenWidth: window.innerWidth,
   },
   getters: {
@@ -33,7 +32,6 @@ export default createStore({
     getLoaderVal : state => state.loader,
     getScreenWidth: (state) => state.screenWidth,  
     getAllNotifications: (state) => state.allNotifications,
-    getDeleteBtnStatus: (state) => state.deleteBtnStatus,
     getRecentNotifications: (state) => state.recentNotifications = state.allNotifications.slice(0, 4),
   },
   mutations: {
@@ -50,9 +48,6 @@ export default createStore({
     },
     setLoader(state,loader){
       state.loader=loader;
-    },
-    setDeleteNotificationStatus(state,loader){
-      state.deleteBtnStatus = loader;
     }
   },
   actions: {
@@ -69,15 +64,14 @@ export default createStore({
       commit('setLoader',0);
     },
 
+
     async deleteNotification({ commit, getters },id) {
-        const res = await Api.delete(`notifications/${id}/delete`);
-        commit('setDeleteNotificationStatus',1)
+              const res = await Api.delete(`notifications/${id}/delete`);
         if (res.message === "Notification removed") {
           const notifications = ref(getters.getAllNotifications.filter(notification => notification.id != id))
           commit("setAllNotification", notifications.value);
           useToast("Notification Deleted", 'success');
         }
-        commit('setDeleteNotificationStatus',0)
     },
 
     updateScreenWidthOnResize({ commit }) {

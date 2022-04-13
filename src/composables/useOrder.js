@@ -112,6 +112,7 @@ export default function useOrder() {
         }
 
         if (!current.paymentElements.number) {
+            console.log("in condition", current.paymentElements.number)
             descriptionErrors.value.number = "Card Number is required"
         } else if (String(current.paymentElements.number).split("").length !== 16) {
             descriptionErrors.value.number = "Card Number 16 digits"
@@ -130,6 +131,7 @@ export default function useOrder() {
         }
 
         if (!current.paymentElements.exp_month) {
+            console.log("in condition", current.paymentElements.exp_month)
             descriptionErrors.value.exp_month = "expiry month is required"
         } else {
             descriptionErrors.value.exp_month = null
@@ -138,6 +140,7 @@ export default function useOrder() {
         if (!current.paymentElements.exp_year) {
             descriptionErrors.value.exp_year = "expiry year is required"
         }else if (formData.value.paymentElements.exp_month < currentMonth && current.paymentElements.exp_year <= currentYear ) {
+          console.log(formData.value.paymentElements.exp_month)
           descriptionErrors.value.exp_month = "Month is not valid"
         } else {
             descriptionErrors.value.exp_year = null

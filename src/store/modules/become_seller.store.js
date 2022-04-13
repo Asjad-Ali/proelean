@@ -11,7 +11,7 @@ export const state = {
   error: null,
   buyerLoader: '',
   withdrawRequests: [],
-  sellerBankDetail: {},
+  sellerIban: {},
   paymentLoadingStatus: '',
   preWithdrawRequest: ''
 }
@@ -38,8 +38,8 @@ export const mutations = {
   setWithdrawRequests(state, requests) {
     state.withdrawRequests = requests;
   },
-  setSellerBankAccount(state, bankDetail) {
-    state.sellerBankDetail = bankDetail;
+  setSellerBankAccount(state, iban) {
+    state.sellerIban = iban;
   },
   setPaymentLoadingStatus(state, status) {
     state.paymentLoadingStatus = status;
@@ -57,7 +57,7 @@ export const getters = {
   getDeliveryDays: state => state.deliveryDays,
   getWithdrawRequest: state => state.withdrawRequests,
   getPaymentLoadingStatus: state => state.paymentLoadingStatus,
-  getSellerBankAccount: state => state.sellerBankDetail,
+  getSellerBankAccount: state => state.sellerIban,
   getPreWithdrawRequest: state => state.preWithdrawRequest
 }
 
