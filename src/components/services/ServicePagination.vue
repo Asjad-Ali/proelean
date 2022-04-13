@@ -27,6 +27,7 @@
             class="page-link"
             href="#"
             @click.prevent="handlePagination(page.label)"
+            :class="{ disableClick: page.active }"
             v-if="page.label.length < 5">{{ page.label }}</a
           >
         </li>
