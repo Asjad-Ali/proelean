@@ -28,7 +28,7 @@
           <i class="mdi mdi-bank"></i>
           {{ accountDetails ? "Edit Bank Account" : "Add Bank Account" }}</router-link>
         </span>
-        <span class="ml-4">
+        <span class="ml-4" v-show="accountDetails">
           <button data-bs-toggle="modal" data-bs-target="#exampleModal6" class="btn app-btn-secondary my-2 m-md-0">
           <i class="mdi mdi-bank"></i>
           Withdraw</button>
