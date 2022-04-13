@@ -25,8 +25,13 @@
       <div class="col-md-3 col-12 text-right">
         <router-link to="/dashboard/bank-attachment" class="btn app-btn-secondary my-2 m-md-0">
           <i class="mdi mdi-bank"></i>
-          Bank Transfer</router-link
-        >
+          {{ accountDetails ? "Edit Bank Account" : "Add Bank Account" }}</router-link>
+        <span class="ml-4" v-show="accountDetails">
+          <button data-bs-toggle="modal" data-bs-target="#exampleModal6" class="btn app-btn-secondary my-2 m-md-0">
+          <i class="mdi mdi-bank"></i>
+          Withdraw</button>
+        </span>
+
       </div>
     </div>
     <div class="border-bottom my-3"></div>
