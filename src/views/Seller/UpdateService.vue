@@ -137,7 +137,7 @@
                           v-for="category in $store.getters.getCategories"
                           :value="category.id"
                           :key="category.id"
-                          :selected="category.id === updateGig.category_id"
+                          :selected="category.id === updateGig.category.id"
                         >
                           {{ category.title }}
                         </option>
@@ -158,7 +158,7 @@
                         <option
                           v-for="subCategory in $store.getters.getSubCategories"
                           :value="subCategory.id"
-                          :selected="subCategory.id == updateGig.sub_category_id"
+                          :selected="subCategory.id == updateGig.sub_category.id"
                           :key="subCategory.id"
                         >
                           {{ subCategory.title }}
