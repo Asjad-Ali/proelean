@@ -18,9 +18,9 @@
             v-for="notification in earlierNotification"
             :key="notification.index"
           >
-            <div @click="handleNotification(notification)"  class="cursor-pointer p-3 bg-light border-bottom osahan-post-header">
+            <div   class=" p-3 bg-light border-bottom osahan-post-header">
               <div class="row d-flex align-items-center">
-                <div class="col-auto">
+                <div  class="col-auto cursor-pointer">
                   <div class="dropdown-list-image">
                     <img
                       class="rounded-circle"
@@ -29,7 +29,7 @@
                     />
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div @click="handleNotification(notification)"  class="col-md-6 cursor-pointer">
                   <div class="font-weight-bold text-truncate text-left">
                     {{ notification.name }}
                   </div>
@@ -45,7 +45,7 @@
                   </div> 
                 </div>
               </div>
-              <div class="row">
+              <div @click="handleNotification(notification)" class="row cursor-pointer">
                 <div class="col-10 p-3">
                   <div class="text-muted" style="word-break: break-word">
                     {{ notification.body }}
