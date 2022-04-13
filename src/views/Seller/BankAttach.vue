@@ -1,8 +1,5 @@
 <template>
-  <div class="container-xl">
-    <div class="d-flex justify-content-between">
-      <h1 class="app-page-title mb-0">{{accountDetails ? 'Edit Bank Account' : 'Add Bank Account'}}</h1>
-    </div>
+  <h1 class="app-page-title">{{iban ? 'Withdraw Amount' : 'Add Bank Account'}}</h1>
   <hr class="mb-4" />
   <div v-if="loader" class="d-flex justify-content-center s-margin">
     <div class="spinner-border text-primary m-2" role="status">
@@ -10,20 +7,17 @@
     </div>
   </div>
   <div class="row g-4 settings-section" v-else>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-4">
       <h3 class="section-title">General</h3>
       <div class="section-intro">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure maiores
         ea vel eveniet dolore aut harum molestias ipsum ratione recusandae!
       </div>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-8">
       <div class="app-card app-card-settings shadow-sm p-4">
         <div class="app-card-body">
-          <form class="settings-form">
-            <div class="mb-3 text-center">
-              <h5>{{accountDetails ? 'Update Bank Account' : 'Add Bank Account'}}</h5>
-            </div>
+          <form class="settings-form" v-if="!iban">
             <div class="mb-3">
               <label for="setting-input-1" class="form-label"
                 >Bank Name
@@ -35,7 +29,7 @@
                 type="text"
                 class="form-control"
                 id="setting-input-1"
-                placeholder="e.g: Meezan bank limited"
+                placeholder="Enter your account name"
                 v-model="payload.bank_name"
                 required=""
               />
@@ -51,6 +45,7 @@
                 id="setting-input-1"
                 placeholder="12345678901234"
                 v-model="payload.iban"
+                required=""
               />
             </div>
 
@@ -65,7 +60,7 @@
                 type="text"
                 class="form-control"
                 id="setting-input-1"
-                placeholder="Enter Bank account name"
+                placeholder="e.g: Meezan bank limitied"
                 v-model="payload.bank_title"
                 required=""
               />
@@ -76,44 +71,45 @@
               :disabled="disable"
               class="btn app-btn-primary"
             >
-              {{accountDetails ? 'Update Account' : 'Add Account'}}
+              Save Changes
             </button>
           </form>
+
+          <WithdrawRequest v-else :iban="iban" />
         </div>
         <!--//app-card-body-->
       </div>
       <!--//app-card-->
     </div>
   </div>
-  </div>
 </template>
 
 <script>
+import WithdrawRequest from "@/components/WithdrawRequest.vue";
 import { ref } from "@vue/reactivity";
-import { computed, watch } from "@vue/runtime-core";
+import { computed, onBeforeMount, watch } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default {
+  components: {WithdrawRequest},
   setup() {
     const store = useStore();
     const router = useRouter();
-    const accountDetails = ref(store.getters.getSellerBankAccount)
+
+    onBeforeMount(store.dispatch("getSellerWithdrawalAccount"));
 
     const payload = ref({
-      iban: accountDetails.value.iban,
-      bank_title: accountDetails.value.bank_title,
-      bank_name: accountDetails.value.bank_name,
+      iban: "",
+      bank_title: "",
+      bank_name: "",
     });
-
 
     const addBankAC = () => {
       store.dispatch("saveBankAccount", payload.value).then(() => {
-        router.push("/dashboard/payments");
+        router.push("/payments");
       });
     };
-
-
 
     const payloadErrorBag = ref({
       iban: "",
@@ -124,25 +120,25 @@ export default {
     // validation
     watch(payload.value, (value) => {
       if (!value.iban) {
-        payloadErrorBag.value.iban = "please enter a valid IBAN";
-      } else if(value.iban.split("").length < 24){
-        payloadErrorBag.value.iban = "IBAN can not be less than 24 characters";
-      }  else if(value.iban.split("").length > 34){
-        payloadErrorBag.value.iban = "IBAN can not be more than 34 characters";
+        payloadErrorBag.value.iban = "please enter a valid iban";
       } else {
         payloadErrorBag.value.iban = "";
       }
 
       if (!value.bank_title) {
-        payloadErrorBag.value.bank_title = "please enter a valid account title";
+        payloadErrorBag.value.bank_title = "please enter a valid bank title";
       } else {
         payloadErrorBag.value.bank_title = "";
       }
-
       if (!value.bank_name) {
-        payloadErrorBag.value.bank_name = "please enter a valid bank name";
+        payloadErrorBag.value.bank_name = "please enter a valid account name";
       } else {
         payloadErrorBag.value.bank_name = "";
+      }
+      if (value.iban.length < 16) {
+        payloadErrorBag.value.iban = "Iban must be contain 16 digits";
+      } else {
+        payloadErrorBag.value.iban = "";
       }
     });
 
@@ -153,7 +149,7 @@ export default {
       disable: computed(() =>
         Object.values(payload.value).includes(null || "") ? true : false
       ),
-      accountDetails,
+      iban: computed(() => store.getters.getSellerBankAccount)
     };
   },
 };

@@ -13,7 +13,7 @@ import ServiceDetail from '@/views/Seller/ServiceDetail.vue'
 import EditProfile from '@/views/Seller/EditProfile.vue'
 import ChangePassword from '@/views/Seller/ChangePassword.vue'
 import OrderDetails from '@/views/Seller/OrderDetails.vue'
-import AddBank from '@/views/Seller/AddBank.vue'
+import BankAttach from '@/views/Seller/BankAttach.vue'
 
 
 const sellerRoutes = [
@@ -106,9 +106,9 @@ const sellerRoutes = [
         component: ChangePassword,
     },
     {
-        path: '/dashboard/add_bank',
-        name: 'AddBank',
-        component: AddBank,
+        path: '/dashboard/bank-attachment',
+        name: 'BankAttach',
+        component: BankAttach,
     },
 ];
 export default sellerRoutes;
