@@ -193,8 +193,9 @@ export default function useOrder() {
         store.dispatch("manageOrder", orderCancel.value);
       }
 
-      function buyer_cancel_request() {
+      function buyer_cancel_request(orderNo) {
         orderCancel.value.url = "buyer/manage_order";
+        orderCancel.value.order_no = orderNo;
         console.log("manage order", orderCancel.value);
         store.dispatch("manageOrder", orderCancel.value);
       }

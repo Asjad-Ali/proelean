@@ -61,8 +61,7 @@
             @click="acceptCustomOffer(message)"
             :disabled="
               message.messageOffer.status === 1 ||
-              (loading.status === 'LOADING' && loading.offerId === message.id)
-            "
+              (loading.status === 'LOADING' && loading.offerId === message.id)"
           >
             <!-- <i class="fa fa-spin" v-if="loading.status === 'LOADING' && loading.offerId === message.id"></i> -->
             {{
@@ -82,7 +81,7 @@
 <script>
 import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import AcceptServiceOffer from "@/components/modals/PurchaseService.vue";
+import AcceptServiceOffer from "@/components/modals/PlaceOrder.vue";
 
 export default {
   components: { AcceptServiceOffer },

@@ -9,7 +9,7 @@
       <div class="container-fluid" v-if="order">
         <CountDown :time="order.end_date" v-if="new Date(order.end_date) > new Date()" class="my-3"/>
         <!-- {{order}} -->
-        <div class="row my-4">
+        <div v-if="order" class="row my-4">
           <div class="col-md-8">
             <div class="app-card app-card-notification shadow-sm">
               <div class="app-card-header px-4 py-3">
@@ -338,7 +338,7 @@
 
                                 <!-----------  Cancel Request of Dispute  ----------->
               <!-- if Buyer -->
-              <button v-if="(order.status_id == 5 && $store.getters.isBuyerMode)" type="button" class="btn btn-success mt-2" @click="buyer_cancel_request()">
+              <button v-if="(order.status_id == 5 && $store.getters.isBuyerMode)" type="button" class="btn btn-success mt-2" @click="buyer_cancel_request(order.orderNo)">
                 Cancel Request
               </button>
 
@@ -350,9 +350,9 @@
             </div>
           </div>
         </div>
-      </div>
-      <div v-if="!order">
+        <div v-else>
         <h2 class="text-center my-5">No Order Available</h2>
+      </div>
       </div>
     </div>
   </div>
