@@ -8,7 +8,7 @@
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <div v-else class="box shadow-sm rounded bg-white mb-3">
+      <div  v-else class="box shadow-sm rounded bg-white mb-3">
         <div class="box-title border-bottom p-3">
           <h6 class="m-0">All Notifications</h6>
         </div>
@@ -18,7 +18,7 @@
             v-for="notification in earlierNotification"
             :key="notification.index"
           >
-            <div class="p-3 bg-light border-bottom osahan-post-header">
+            <div @click="handleNotification(notification)"  class="cursor-pointer p-3 bg-light border-bottom osahan-post-header">
               <div class="row d-flex align-items-center">
                 <div class="col-auto">
                   <div class="dropdown-list-image">
@@ -107,16 +107,40 @@
 <script>
 import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from 'vue-router';
 export default {
   setup() {
     const store = useStore();
+    const router = useRouter();
     function deleteNotification(id) {
       console.log("Deleted Successfully",id);
       store.dispatch("deleteNotification",id)
     }
 
+    function handleNotification(notification) {
+      console.log(notification.type)
+      switch (notification.type) {
+        case "ORDER":{
+          router.push(`/order-details/${notification.content_id}`);
+          break;
+        }
+        case "OFFER":{
+          router.push(`/buyer/view-offers/${notification.content_id}`);
+          break;
+        }
+        case "MESSAGE":{
+          router.push("/chat");
+          break;
+        }
+        default:{
+          router.push("/dashboard/notifications");
+        }
+      }
+    }
+
     onMounted(() => store.dispatch("getNotification"));
     return {
+      handleNotification,
       deleteNotification,
       loader: computed(() => store.getters.getLoaderVal),
       imgURL: process.env.VUE_APP_URL,
@@ -126,5 +150,8 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
+.osahan-post-header:hover{
+  background-color: rgba(224, 224, 224, 0.799) !important;
+}
 </style>

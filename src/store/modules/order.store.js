@@ -49,9 +49,10 @@ export const actions = {
 
   async manageOrder({ commit, state, getters }, payload) {
     console.log("Order no:", payload.order_no);
-    const res = await Api.formData(payload.url, payload);
+    const res = await Api.post(payload.url, payload);
     //const router = useRouter();
     if (res.status === 200) {
+      alert("alert")
       console.log("Type of Order:", res.status);
       const afterSetOrder = ref(state.orders.filter(order => order.orderNo !== payload.order_no))
       commit("setOrders", afterSetOrder.value);
