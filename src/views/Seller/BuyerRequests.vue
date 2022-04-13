@@ -130,7 +130,7 @@
                 <a class="page-link d-flex"   @click="previous($store.getters.getPages.current_page)"> <i class="mdi mdi-chevron-left"></i>Previous </a>
               </li>
               <li class="page-item" v-for="page in $store.getters.getPages.last_page" :key="page">
-                <a class="page-link" :class="{active:$store.getters.getPages.current_page == page}"  @click="loadOtherRequest(page)" >{{ page }}</a>
+                <a class="page-link"  :class="{activePagination:$store.getters.getPages.current_page == page}"  @click="loadOtherRequest(page)" >{{ page }}</a>
               </li>
               <li class="page-item" :class="{disabled:!$store.getters.getLinks.next}" >
                 <a class="page-link d-flex"  @click="next($store.getters.getPages.current_page)" >Next <i class="mdi mdi-chevron-right"></i> </a> 
@@ -314,7 +314,8 @@ export default {
 
 .activePagination{
   background-color:#2cdd9b;
-  color: black !important;
+  color: #fff !important;
+  pointer-events: none 
 }
 
 .marg{
