@@ -310,7 +310,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 .activePagination{
   background-color:#2cdd9b;

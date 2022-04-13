@@ -104,12 +104,12 @@ export default function useCreateService() {
     createService.value.delivery_time = document.getElementById("deliveryTime").value
     createService.value.revision = document.getElementById("revision").value
     console.log(createService.value)
-    store.dispatch('createService', createService.value).then(res => {
+    store.dispatch('createService', createService.value)
+    .then(res => {
       if(res.status === 201) {
         route.push({name: "SellerServices"});
       }
     })
-
   }
 
 

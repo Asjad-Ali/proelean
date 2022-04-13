@@ -11,7 +11,6 @@ export const state = {
   s_Loader: '',
   buyerRequestLoader: '',
   userSingleService: [],
-  createGigData: '',
   deleteService: '',
   loadingStatus: '',
   servicesHasNextPage: '',
@@ -68,7 +67,7 @@ export const mutations = {
     state.error = error;
   },
   setCreateGig(state, createGigD) {
-    state.createGigData = createGigD;
+    state.userServices.unshift(createGigD);
   },
   setDeleteGig(state, deletGig) {
     state.deleteService = deletGig;
@@ -179,7 +178,7 @@ export const actions = {
     const res = await Api.formData('seller/services', payload);
     if (res.status === 201) {
       useToast("Service has been Created", 'success');
-      commit("setCreateGig", res)
+      commit("setCreateGig", res.data)
       commit('setRegisterStatus', 3);
     }
     else {
