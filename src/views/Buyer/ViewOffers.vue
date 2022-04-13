@@ -7,16 +7,11 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
-    <div class="border-bottom my-2"></div>
-    <div v-if="$store.getters.getLoaderVal" class="d-flex justify-content-center s-margin">
-=======
     <div class="border-bottom my-3"></div>
     <div
       v-if="$store.getters.getLoaderVal"
       class="d-flex justify-content-center s-margin"
     >
->>>>>>> 533e0df78b83cabded997ea6402e38a224ba0cd4
       <div class="spinner-border text-primary m-5" role="status">
         <span class="sr-only">Loading...</span>
       </div>
