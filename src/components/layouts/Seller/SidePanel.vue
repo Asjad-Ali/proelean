@@ -14,13 +14,6 @@
       class="sidepanel-drop"
     ></div>
     <div class="sidepanel-inner d-flex flex-column">
-      <a
-        href="#"
-        id="sidepanel-close"
-        @click="$emit('sidPanelClose')"
-        class="sidepanel-close d-xl-none"
-        >&times;</a
-      >
 
       <div class="app-branding">
         <router-link class="app-logo" to="/dashboard"

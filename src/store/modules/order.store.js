@@ -23,9 +23,8 @@ export const mutations = {
 
 export const actions = {
 
-  async myOrders({ commit, getters }, payload) {
+  async myOrders({ commit }, payload) {
     commit('setLoader', 1);
-    if(!getters.getMyOrders.length){
       const res = await Api.get(payload);
       if (res.status === 200) {
         console.log("All Orders Response", res.data)
@@ -35,7 +34,6 @@ export const actions = {
       else {
         console.log("Error All Orders");
       }
-    }
     commit('setLoader', 0);
   },
 
