@@ -33,7 +33,7 @@ import TopNav from "./components/layouts/TopNav.vue";
 import BottomNav from "./components/layouts/BottomNav.vue";
 import Footer from "./components/layouts/Footer.vue";
 import MobileBottomNav from "./components/layouts/MobileBottomNav.vue";
-import { onMounted } from "@vue/runtime-core";
+import { onBeforeMount, onMounted } from "@vue/runtime-core";
 import useFirebaseAuth from  '@/composables/Auth/useFirebaseAuth'
 import { useStore } from 'vuex'
 
@@ -52,8 +52,8 @@ export default {
   },
   setup() {
     const store= useStore();
+    onBeforeMount(() => localStorage.setItem("USER_MODE","BUYER"))
     onMounted(() => {
-      localStorage.setItem("USER_MODE", "BUYER");
       store.dispatch('updateScreenWidthOnResize');
       const firebaseAuth= useFirebaseAuth();
       firebaseAuth.checkAuthStatus();

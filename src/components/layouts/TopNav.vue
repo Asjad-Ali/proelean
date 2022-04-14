@@ -679,9 +679,8 @@ export default {
     const handleLogout = async () => {
       const response = await Api.post("logout");
       if (response.status === 200) {
-        localStorage.removeItem("PROELEAN_TOKEN");
-        localStorage.removeItem("userInfo");
-        router.go();
+        localStorage.clear();
+         window.location.href = '/login';
       }
     };
     onMounted(() => {
