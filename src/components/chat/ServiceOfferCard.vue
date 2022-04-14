@@ -54,8 +54,9 @@
           <button
             aria-hidden="true"
             data-toggle="modal"
+            data-target="#placeorder"
             class="btn app-btn-primary btn-sm"
-            data-target="#staticBackdrop"
+
             id="accept_offer"
             v-else
             @click="acceptCustomOffer(message)"
@@ -81,7 +82,7 @@
 <script>
 import { computed, ref } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import AcceptServiceOffer from "@/components/modals/PlaceOrder.vue";
+import AcceptServiceOffer from "@/components/modals/PurchaseService.vue";
 
 export default {
   components: { AcceptServiceOffer },
