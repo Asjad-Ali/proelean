@@ -290,15 +290,15 @@ export default {
       console.log(notification.type)
       switch (notification.type) {
         case "ORDER":{
-          router.push(`/order-details/${notification.content_id}`);
+          router.push(`/dashboard/order-details/${notification.content_id}`);
           break;
         }
         case "OFFER":{
-          router.push(`/buyer/view-offers/${notification.content_id}`);
+          router.push(`/dashboard/buyer/view-offers/${notification.content_id}`);
           break;
         }
         case "MESSAGE":{
-          router.push("/chat");
+          router.push("/dashboard/chat");
           break;
         }
         default:{
