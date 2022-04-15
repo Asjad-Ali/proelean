@@ -155,6 +155,7 @@
             type="button"
             class="btn btn-danger"
             data-dismiss="modal"
+            :disabled="!Object.values(payloadErrorBag).every(value => !value)"
             @click="handleCustomerDetail($event, offerId)"
           >
             Continue
